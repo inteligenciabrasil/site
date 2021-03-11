@@ -1,43 +1,105 @@
-<!doctype html>
-<html lang="pt-br">
+<html lang="pt-br,en">
 
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="./_img/favicon.png" type="image/x-icon">
     <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1" />
-    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
     <title>.:Inteligência Brasil - Segurança, Estratégia e Tecnologia da Informação:.</title>
-    <link rel="stylesheet" href="./style.css">
-
-    <!--meta og:-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="_css/style.css" rel="stylesheet" />
+    <link href="_css/mobile.css" rel="stylesheet" media="screen and (min-width:300px) and (max-width:700px)">
+    <link href="_css/desktop-grande.css" rel="stylesheet">
     <meta property="og:title" content=".:: Inteligência Brasil ::." />
     <meta property="og:url" content="https://inteligenciabrasil.seg.br" />
     <meta property="og:site_name" content=".:: Inteligência Brasil ::." />
-    <meta property="og:image" content="https://inteligenciabrasil.seg.br/logo.png">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/_img/logo_inteligencia brasil-01.svg">
     <meta property="og:description"
         content="Segurança, Estratégia e Tecnologia da Informação - A força mais bem informada, provavelmente combate em condições mais favoráveis!" />
     <meta property="og:type" content="website" />
-    <!--end meta og:-->
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RFRRDKKXRH"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-RFRRDKKXRH');
+    
+    <script language="javascript">
+        document.write(unescape('%3C%62%6F%64%79%20%6F%6E%63%6F%6E%74%65%78%74%6D%65%6E%75%3D%22%72%65%74%75%72%6E%20%66%61%6C%73%65%3B%22%3E'));
     </script>
 </head>
 
-<body>
+<body onkeydown="return false">
+    <nav>
+        <a href="https://www.linkedin.com/company/inteligenciabrasil"><img src="_img/logo_inteligencia brasil-01.svg"></a>
+        <ul id="menu-desktop">
+            <li><a href="/">HOME</a></li>
+            <li><a href="/">BLOG</a></li>
+            <li><a href="/">TREINAMENTOS</a></li>
+            <li><a href="/">DICAS</a></li>
+            <li><a href="/">CONTATO</a></li>
+            <li><a href="/">SOBRE</a></li>
+        </ul>
+        <!--
+        <span class="covid-19"><a href="#" target="_blank" data-analytics-title="covid19">COVID‑19 informações
+                e&nbsp;próximos passos</a></span> 
+            -->
+        <ul id="menu-mobile">
+            <li><a href="/">HOME</a></li>
+            <li><a href="/">BLOG</a></li>
+            <li><a href="/">TREINAMENTOS</a></li>
+            <li><a href="/">DICAS</a></li>
+            <li><a href="/">CONTATO</a></li>
+            <li><a href="/">SOBRE</a></li>
+        </ul>
 
-    <div id="container-da-imagem">
-        <a href="https://www.linkedin.com/company/inteligenciabrasil"> <img src="./logo.png"> </a>
+        <div id="menu-btn">
+            <svg width="30" height="30">
+                <path d="M0,5 30,5" stroke="#fff" stroke-width="4" />
+                <path d="M0,15 30,15" stroke="#fff" stroke-width="4" />
+                <path d="M0,25 30,25" stroke="#fff" stroke-width="4" />
+            </svg>
+        </div>
+    </nav>
 
-    </div>
-    <p>"A força mais bem informada, provavelmente combate em condições mais favoráveis!"</p>
+    <header>
+        <div class="seletor">
+            <h1> Você e sua empresa em segurança</h1>
+        </div>
 
+    </header>
+               
+    <!---->
 
+    <footer id="global_footer">
+        <div class="g-footer">
+            <div class="g-footer-address">
+             </div>
+            <div class="g-footer-copyright">
+                <div class="g-footer-legal">
+                    <p class="seletor">Avenida Paulista 807, São Paulo, São Paulo 01311-100, BR</p>
+                    <p class="seletor"><small>Inteligencia Brasil © 2021 - todos os direitos reservados</small></p>
+
+                    <a class="g-footer-legal-link" href="#" data-analytics-title="privacy policy">Política de Privacidade</a>
+                    <a class="g-footer-legal-link" href="#" data-analytics-title="terms of use">Termos de Uso</a>
+                    <a class="g-footer-legal-link" href="#" data-analytics-title="comercial">Comercial</a>
+                    <a class="g-footer-legal-link" href="#" data-analytics-title="legal">Legal</a>
+                    <a class="g-footer-legal-link" href="#" data-analytics-title="site map">Site Map</a>
+                    <a class="g-footer-legal-link" href="#" data-analytics-title="social">Social</a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script src="_js/jquery.js"></script>
+    <script>
+        $(function () {
+            $("div#menu-btn").click(function () {
+                $("nav ul#menu-mobile").toggle();
+            });
+
+            $(window).resize(function () {
+                var largura = $(window).width();
+                if (largura >= 701) {
+                    $("nav ul#menu-mobile").hide();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
