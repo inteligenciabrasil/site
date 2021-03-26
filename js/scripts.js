@@ -192,7 +192,7 @@
         
         $.ajax({
             type: "POST",
-            url: "php/callmeform-process.php",
+            url: "https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec",
             data: "name=" + name + "&phone=" + phone + "&email=" + email + "&select=" + select + "&terms=" + terms, 
             success: function(text) {
                 if (text == "success") {
@@ -248,7 +248,7 @@
         var terms = $("#cterms").val();
         $.ajax({
             type: "POST",
-            url: "php/contactform-process.php",
+            url: "https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec",
             data: "name=" + name + "&email=" + email + "&message=" + message + "&terms=" + terms, 
             success: function(text) {
                 if (text == "success") {
@@ -306,7 +306,7 @@
         
         $.ajax({
             type: "POST",
-            url: "php/privacyform-process.php",
+            url: "https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec",
             data: "name=" + name + "&email=" + email + "&select=" + select + "&terms=" + terms, 
             success: function(text) {
                 if (text == "success") {
