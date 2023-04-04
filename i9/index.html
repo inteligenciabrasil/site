@@ -1,325 +1,52 @@
 <!DOCTYPE html>
-<html lang="pt-br,en-us">
-<!--
-                         @                                                       
-                       @@  @                                                    
-                       @@   @@@@@@@@@@@@@@@                                     
-                       @@    @@@@@@@@@@@@@ @@@@@@@                              
-                 @@@@@@@@@     (@@@@@@@@@  @@@@@@@@@@@                          
-                                   @@ @@@  @  @@@@@@@@@@@                       
-                                       @  @@  @@@@@@@@@@@@@                     
-                                @           @@ @@@@@@@@@@@@@@                   
-                               (@@@@          @@@@@@@@@@@@@@@@@                 
-                             @@  @ @@@@         @@@@@@@@@@@@@@@@                
-                            @    @@@@@(@@@       @@@@@@@@@@@@@@@@               
-                                @@@.,,**#@@      @ @@@@@@@@@@@@@@               
-                               @@@@ ,**/  @@ (      @@@@@@@@@@@@@@              
-                               @@@@ ,**//@@#@@       @@@@@@@@@@@@@              
-                                @@@@.,*****#@@@      @ @@@@@@@@@@@              
-                             @   @@@@@@,, ((#@@      @@@@@@@@@@@@               
-                               @   @ @@@@@@@@@@      @@@@@@@@@@@@               
-                                  @@         @@@@@@@@@@@@@@@@@@@                
-                                                  @@@@@@@@@@@@@                 
-                                                    @@@@@@@@@@                  
-                                          @         @@@@@@@@                    
-                                       @@@@   @     @@@@@@                      
-                                     @ @@@@@@@@   @@@@@@                        
-                                     @@@@@@@@@@@@@@@@                           
-                                 @ @@ @@@@@@@@@@                                
-                                @@@                                             
-                               @                                                
-                                                                                
-            --== OSINT GOLDEN EYES by "RL1ma and B0rb5" ==--   
-           
-            O QUE É OSINT (Open Source Intelligence) ?
-
-    O termo OSINT vem de muitas décadas atrás, de fato, as agências militares dos EUA começaram
-    usando o termo OSINT no final dos anos 1980, pois eles estavam reavaliando a natureza do
-    requisitos de informação em níveis táticos em campos de batalha. Então, em 1992, o
-    A Lei de Reorganização de Inteligência determinou os principais objetivos da coleta de informações
-        incluiu conceitos-chave como:
-        
-        * Deve ser uma inteligência objetiva livre de viés
-        * Os dados devem estar disponíveis em fontes públicas e não públicas
-
-    Embora o conceito de OSINT tenha evoluído desde então, pois não inclui as fontes não públicas, o conceito se origina dessa época.
-    Inteligência de código aberto (OSINT) são informações coletadas de fontes públicas, como
-    como os disponíveis na Internet, embora o termo não se limite estritamente ao
-    internet, mas significa todas as fontes publicamente disponíveis.
-    "OS" (de OSINT) significa Open Source. Neste caso, não está relacionado com o famoso
-    movimento de código aberto, mas para qualquer fonte publicamente disponível onde o usuário pode
-    obter as informações em sua coleta de dados de inteligência.
-    A palavra-chave por trás do conceito OSINT é informação e, mais importante,
-    informações que podem ser obtidas gratuitamente. Não importa se está localizado dentro
-    jornais, blogs, páginas da web, tweets, cartões de mídia social, imagens, podcasts ou
-    vídeos desde que sejam públicos, gratuitos e legais.
-    Com as informações certas em suas mãos, você pode obter uma grande vantagem sobre o seu
-    concorrência ou agilizar qualquer investigação de empresa/pessoa sob sua responsabilidade.
-    -->
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="open source intelligence">
-    <meta name="keywords" content="Information Security, CyberSecurity, OSINT">
-    <meta name="author" content="Brazilian Security Professional">
-    <title>.:OSINT GOLDEN EYES:.</title>
-    <!--<link href="/i9/css/style.css" rel="stylesheet">-->
-    <link rel="icon" type="image/x-icon" href="/i9/images/favicon.ico">
-    <link rel="stylesheet" href="/i9/css/font-awesome/css/font-awesome.min.css">
-
-    <style>
-        html {
-            background-color: #f6f6f6;
-        }
-
-        main {
-            padding: 4px;
-            color: gold;
-            background-color: #161f11;
-            font-family: Arial, Helvetica, sans-serif
-        }
-
-        nav {
-            background-color: #161f11;
-            margin-bottom: 1px;
-            padding: 8px 15px;
-            margin-left: -4px;
-        }
-
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 4px
-        }
-
-        nav ul li {
-            display: inline-block
-        }
-
-        nav ul li a {
-            padding: 10px 30px;
-            font-size: 0.85em;
-            text-decoration: none;
-            color: #F6F6F6
-        }
-
-        nav ul li a:hover {
-            background-color: gold;
-            color: #161f11
-        }
-
-        #article {
-            float: left;
-            margin: 30px 20px;
-            width: 600px
-        }
-
-        ul {
-            margin: 0;
-            padding: 0;
-        }
-
-        li {
-            list-style: none;
-            display: inline-block;
-        }
-
-        li a {
-            text-decoration: none;
-            color: #fff;
-            background-color: none;
-            margin-bottom: 1px;
-            padding: 5px 15px;
-            margin-left: -4px;
-
-        }
-
-        li a:hover {
-            background-color: #161f11;
-        }
-
-        body {
-            padding: 0;
-            margin: 0;
-            background-color: #ffffff;
-            display: block;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        @import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
-
-        h1 {
-            position: relative;
-            color: gold (0, 0%, 0%);
-            font-weight: bold;
-            font-family: "Anonymous Pro", monospace;
-            letter-spacing: 1px;
-            overflow: hidden;
-            border-right: 2px solid hsl(0, 0%, 0%);
-            white-space: nowrap;
-            animation: typewriter 3s steps(15) 1s 1 normal both,
-                blinkTextCursor 600ms infinite;
-        }
-
-        @keyframes typewriter {
-            from {
-                width: 0;
-            }
-
-            to {
-                width: 318px;
-            }
-        }
-
-        @keyframes blinkTextCursor {
-            from {
-                border-right-color: hsl(0, 0%, 0%);
-            }
-
-            to {
-                border-right-color: transparent;
-            }
-        }
-
-        footer {
-            clear: both;
-            color: gold;
-            font-size: 0.75em;
-            text-align: center;
-            background-color: #161f11;
-            padding: 1px
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/favicon" href="images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>.:OSINT GOLDEN EYES:. Open Source Intelligence - Passive Research on open sources information</title>
 </head>
 
 <body>
-    <!--main-->
-    <main>
-        <hgroup>
-            <img src="./images/owl-osint-golden-eyes.png" width="140" height="140" title="OSINT GOLDEN EYES" alt="OSINT GOLDEN EYES" style="float: left; margin-right: 10px; margin-bottom: 10px;">
-            <h1>OSINT GOLDEN EYES</h1>
-            <h2 title="Para saber mais sobre OSINT, veja o código fonte dessa página.">Investigação passiva em fontes abertas de informação.</h2>
-            <p title="Para saber mais sobre OSINT, veja o código fonte dessa página."><b>OSINT</b> significa <i lang="en">Open Source Intelligence</i>, é uma forma de buscar dados unificando informações de maneira inteligente utilizando diversas fontes, com isso, uma análise completa utilizando OSINT é um dos aspectos-chave na compreensão da segurança cibernética que rege a Internet atualmente.</p>
-        </hgroup>
-        <br>
-    </main>
-    <!--nav-->
-    <nav>
+
+    <nav class="navbar">
         <ul>
-            <li><a href="index.html" title="home"><i class="fa fa-home" aria-hidden="true" color="white"></i> START</a></li>
-            <li><a href="#" title="mindset"><i class="fa fa-star" aria-hidden="true" color="white"></i> MINDSET</a></li>
-            <li><a href="osint/index.html" title="idorks"><i class="fa fa-info" aria-hidden="true" color="white"></i> DORKS</a></li>
-            <li><a href="#" title="Página em contrução!"><i class="fa fa-search" aria-hidden="true" color="white"></i> SEARCH</a></li>
-            <li><a href="#" title="Página em contrução!"><i class="fa fa-map" aria-hidden="true" color="white"></i> SOCMINT</a></li>
-            <li><a href="#" title="Página em contrução!"><i class="fa fa-user-circle-o" aria-hidden="true" color="white"></i> PEOPLE</a></li>
-            <li><a href="#" title="Página em contrução!"><i class="fa fa-low-vision" aria-hidden="true" color="white"></i> 0PS3C</a></li>
-            <li><a href="about/index.html" title="Página em contrução!"><i class="fa fa-users" aria-hidden="true" color="white"></i> ABOUT</a></li>
+            <li><a href="/osint/"><i class="fa fa-info"></i> Start</a></li>
+            <li><a href="/about/"><i class="fa fa-star"></i> About</a></li>
         </ul>
-    
+        <div class="imagens">
+            <a href="#"><img src="./images/dots.png" alt=""></a>
+            <a href="#"><img src="./images/logomarca.png" alt=""></a>
+        </div>
+        
     </nav>
-    <!--end of nav-->
-    <br>
-    <!--End of main-->
-    <article>
-        <header>
-            <hgroup>
-                <h1>A importância do OSINT</h1>
-                <h5>Conheça essa técnica utilizada por muitas Instituições governamentais, empresas e pessoas em seu dia a dia.</h5>
-            </hgroup>
-        </header>
+    
+    <div class="google">
+        <img src="imagens/google.png" alt=""/>
+    </div>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus ex purus, ac laoreet metus egestas at.
-            Donec accumsan mi vitae fringilla maximus. Nam a sapien scelerisque tellus bibendum varius nec non dui.
-            Phasellus varius tellus et mauris imperdiet, a aliquam ligula tempus. Donec at condimentum sem. Morbi ac
-            velit ac urna elementum dignissim.</p>
+    <div class="search">
+        <div class="input">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Insert targe domain here" name="target" value="" autofocus required>
+            <i class="fa fa-microphone"></i>
+        </div>
+    </div>
 
-        <h3>O que é OSINT?</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus ex purus, ac laoreet metus egestas at.
-            Donec accumsan mi vitae fringilla maximus. Nam a sapien scelerisque tellus bibendum varius nec non dui.
-            Phasellus varius tellus et mauris imperdiet, a aliquam ligula tempus. Donec at condimentum sem. Morbi ac
-            velit ac urna elementum dignissim. Mauris tempus malesuada enim blandit vestibulum. Maecenas a congue elit.
-            Proin dapibus mollis leo sit amet euismod. Duis posuere scelerisque quam, eget scelerisque turpis.
-            Vestibulum non accumsan mauris. Integer vestibulum augue a efficitur tristique. Sed ut diam lacus. Nullam
-            aliquet pharetra hendrerit. Phasellus eu libero volutpat, aliquam sem nec, pellentesque dolor. Phasellus
-            consectetur nec odio faucibus fermentum.</p>
-        <h3>O que fazer com OSINT?</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus ex purus, ac laoreet metus egestas at.
-            Donec accumsan mi vitae fringilla maximus. Nam a sapien scelerisque tellus bibendum varius nec non dui.
-            Phasellus varius tellus et mauris imperdiet, a aliquam ligula tempus. Donec at condimentum sem. Morbi ac
-            velit ac urna elementum dignissim. Mauris tempus malesuada enim blandit vestibulum. Maecenas a congue elit.
-            Proin dapibus mollis leo sit amet euismod. Duis posuere scelerisque quam, eget scelerisque turpis.
-            Vestibulum non accumsan mauris. Integer vestibulum augue a efficitur tristique. Sed ut diam lacus. Nullam
-            aliquet pharetra hendrerit. Phasellus eu libero volutpat, aliquam sem nec, pellentesque dolor. Phasellus
-            consectetur nec odio faucibus fermentum.</p>
-        <h3>Como funciona?</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus ex purus, ac laoreet metus egestas at.
-            Donec accumsan mi vitae fringilla maximus. Nam a sapien scelerisque tellus bibendum varius nec non dui.
-            Phasellus varius tellus et mauris imperdiet, a aliquam ligula tempus. Donec at condimentum sem. Morbi ac
-            velit ac urna elementum dignissim. Mauris tempus malesuada enim blandit vestibulum. Maecenas a congue elit.
-            Proin dapibus mollis leo sit amet euismod. Duis posuere scelerisque quam, eget scelerisque turpis.
-            Vestibulum non accumsan mauris. Integer vestibulum augue a efficitur tristique. Sed ut diam lacus. Nullam
-            aliquet pharetra hendrerit. Phasellus eu libero volutpat, aliquam sem nec, pellentesque dolor. Phasellus
-            consectetur nec odio faucibus fermentum.</p>
-        <h3>Quais as vantagens de utilizar OSINT?</h3>
-        <h4>Redução de riscos digitais</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus ex purus, ac laoreet metus egestas at.
-            Donec accumsan mi vitae fringilla maximus. Nam a sapien scelerisque tellus bibendum varius nec non dui.
-            Phasellus varius tellus et mauris imperdiet, a aliquam ligula tempus. Donec at condimentum sem. Morbi ac
-            velit ac urna elementum dignissim. Mauris tempus malesuada enim blandit vestibulum. Maecenas a congue elit.
-            Proin dapibus mollis leo sit amet euismod. Duis posuere scelerisque quam, eget scelerisque turpis.
-            Vestibulum non accumsan mauris. Integer vestibulum augue a efficitur tristique. Sed ut diam lacus. Nullam
-            aliquet pharetra hendrerit. Phasellus eu libero volutpat, aliquam sem nec, pellentesque dolor. Phasellus
-            consectetur nec odio faucibus fermentum.</p>
-        <h4>Redução de custos</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus ex purus, ac laoreet metus egestas at.
-            Donec accumsan mi vitae fringilla maximus. Nam a sapien scelerisque tellus bibendum varius nec non dui.
-            Phasellus varius tellus et mauris imperdiet, a aliquam ligula tempus. Donec at condimentum sem. Morbi ac
-            velit ac urna elementum dignissim. Mauris tempus malesuada enim blandit vestibulum. Maecenas a congue elit.
-            Proin dapibus mollis leo sit amet euismod. Duis posuere scelerisque quam, eget scelerisque turpis.
-            Vestibulum non accumsan mauris. Integer vestibulum augue a efficitur tristique. Sed ut diam lacus. Nullam
-            aliquet pharetra hendrerit. Phasellus eu libero volutpat, aliquam sem nec, pellentesque dolor. Phasellus
-            consectetur nec odio faucibus fermentum.</p>
-        <h4>Análise de presença digital</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus ex purus, ac laoreet metus egestas at.
-            Donec accumsan mi vitae fringilla maximus. Nam a sapien scelerisque tellus bibendum varius nec non dui.
-            Phasellus varius tellus et mauris imperdiet, a aliquam ligula tempus. Donec at condimentum sem. Morbi ac
-            velit ac urna elementum dignissim. Mauris tempus malesuada enim blandit vestibulum. Maecenas a congue elit.
-            Proin dapibus mollis leo sit amet euismod. Duis posuere scelerisque quam, eget scelerisque turpis.
-            Vestibulum non accumsan mauris. Integer vestibulum augue a efficitur tristique. Sed ut diam lacus. Nullam
-            aliquet pharetra hendrerit. Phasellus eu libero volutpat, aliquam sem nec, pellentesque dolor. Phasellus
-            consectetur nec odio faucibus fermentum.</p>
-        <h4>Prevenção de ameaças</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus ex purus, ac laoreet metus egestas at.
-            Donec accumsan mi vitae fringilla maximus. Nam a sapien scelerisque tellus bibendum varius nec non dui.
-            Phasellus varius tellus et mauris imperdiet, a aliquam ligula tempus. Donec at condimentum sem. Morbi ac
-            velit ac urna elementum dignissim. Mauris tempus malesuada enim blandit vestibulum. Maecenas a congue elit.
-            Proin dapibus mollis leo sit amet euismod. Duis posuere scelerisque quam, eget scelerisque turpis.
-            Vestibulum non accumsan mauris. Integer vestibulum augue a efficitur tristique. Sed ut diam lacus. Nullam
-            aliquet pharetra hendrerit. Phasellus eu libero volutpat, aliquam sem nec, pellentesque dolor. Phasellus
-            consectetur nec odio faucibus fermentum.</p>
-        <h3>Quais ferramentas posso usar?</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus ex purus, ac laoreet metus egestas at.
-            Donec accumsan mi vitae fringilla maximus.</p>
-            <ol>
-                <li>Pollo Farcito </li><br>
-                <li>Pollo alla Zenzero </li><br>
-                <li>Vitello Dolce Bacio </li><br>
-            </ol>
-            <h5>Referências</h5>
-            <p><small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus ex purus, ac laoreet metus egestas at.
-                Donec accumsan mi vitae fringilla maximus.</small></p>
-    </article>
-    <!--footer-->
-    <footer>
-        <p><small>_____________________________<br>
-                - OSINT GOLDEN EYES &copy; 2023 -</small></p>
-    </footer>
+    <div class="buttons">
+        <button><a href="#">Search Google</a></button>
+        <button><a href="#">I'm lucky</a></button>
+    </div>
+<!--footer-->
+<br><br><br><br><br><br><br><br>
 
+<footer>
+    
+    <p> Made in <img src="./images/brasil.png"> Brazil </p>
+    <p><!--<a href="https://blog.google/intl/pt-br/produtos/cinco-novas-maneiras-de-checar-informacoes-com-a-busca-do-google/">Tips and Tricks</a>--><br><small>_____________________________<br>
+            - OSINT GOLDEN EYES &copy; 2023</small></p>
+</footer>
 </body>
-
 </html>
