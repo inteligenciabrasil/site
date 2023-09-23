@@ -1,1 +1,938 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name="description" content="CSOC - O Centro de Operações de Segurança Cibernética deve ter tudo o que precisa para montar uma defesa competente de empresas em constante mudança."><meta name="robots" content="index, follow"><meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"><meta name="keywords" content="Renato Borbolla, Offensive Security, Red Team, Pentest, Blue team, Purple Team, Segurança da Informacao, OSINT, LGPD, Cyber threat intelligence, Threat Hunting"><meta name="rating" content="general"><meta name="theme-color" content="#0D1E38" media="(prefers-color-scheme: dark)"><meta name="twitter:dnt" content="on"><meta name="format-detection" content="telephone=no"><meta name="author" content="Renato Borbolla"><meta name="copyright" content="© 2023 Inteligencia Brasil "><meta http-equiv="content-language" content="pt-br, en-US"><meta http-equiv="content-type" content="text/html; charset=UTF-8"><link rel="canonical" href="https://inteligenciabrasil.seg.br/assets/blog/strategy/assets/blog/strategy/csoc-o-centro-de-operacoes-de-seguranca-cibernetica"><link rel="icon" href="./../../../../images/renato-borbolla-offensive-security.jpg" sizes="32x32" /><link rel="icon" href="./../../../../images/renato-borbolla-offensive-security.jpg" sizes="192x192" /><link rel="apple-touch-icon" href="./../../../../images/renato-borbolla-offensive-security.jpg" /><meta name="msapplication-TileImage" content="./../../../../images/renato-borbolla-offensive-security.jpg" /><link rel="apple-touch-icon" sizes="60x60" href="./../../../../images/apple-touch-icon-iphone-60x60.png"><link rel="apple-touch-icon" sizes="76x76" href="./../../../../images/apple-touch-icon-ipad-76x76.png"><link rel="apple-touch-icon" sizes="120x120" href="./../../../../images/apple-touch-icon-iphone-retina-120x120.png"><link rel="apple-touch-icon" sizes="152x152" href="./../../../../images/apple-touch-icon-ipad-retina-152x152.png"><link rel="icon" type="image/svg+xml" href="./../../../../images/favicon.svg"><link rel="icon" type="image/png" href="./../../../../images/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"><link rel="shortcut icon" type="image/x-icon" href="./../../../../images/favicon.ico"><meta property="og:site" content="https://inteligenciabrasil.seg.br/assets/blog/strategy/assets/blog/strategy/csoc-o-centro-de-operacoes-de-seguranca-cibernetica" /><meta property="og:site_name" content="Inteligência Brasil | Cyber Security Consultancy - Segurança, Estratégia e Tecnologia da Informação" /><meta property="og:title" content="CSOC - O Centro de Operações de Segurança Cibernética deve ter tudo o que precisa para montar uma defesa competente de empresas em constante mudança." /><meta property="og:description" content="A prática de defesa contra atividades não autorizadas em redes de computadores, incluindo monitoramento, detecção, análise (como análise de tendências e padrões) e atividades de resposta e restauração....." /><meta property="og:image:type" content="image/jpg" /><meta property="og:url" content="https://inteligenciabrasil.seg.br/assets/blog/strategy/assets/blog/strategy/csoc-o-centro-de-operacoes-de-seguranca-cibernetica" /><meta property="og:type" content="article" /><meta property="og:image" content="./../../../../images/renato-borbolla-offensive-security.jpg"><meta property="og:image:type" content="image/jpg"><meta property="og:image:width" content="800"><meta property="og:image:height" content="600"><title>CSOC - O Centro de Operações de Segurança Cibernética</title><link href="./../../../../css/bootstrap.css" rel="stylesheet"><link href="./../../../../css/fontawesome-all.css" rel="stylesheet"><link href="./../../../../css/swiper.css" rel="stylesheet"><link href="./../../../../css/styles.css" rel="stylesheet"><link rel="icon" href="./../../../../images/favicon.png"><script async src="https://www.googletagmanager.com/gtag/js?id=G-TTKNK4JBXP"></script><script>window.dataLayer=window.dataLayer || []; function gtag(){ dataLayer.push(arguments)} gtag('js', new Date()); gtag('config', 'G-TTKNK4JBXP');</script><script language="javascript">document.write(unescape('%3C%62%6F%64%79%20%6F%6E%63%6F%6E%74%65%78%74%6D%65%6E%75%3D%22%72%65%74%75%72%6E%20%66%61%6C%73%65%3B%22%3E'));</script></head><body onkeydown="return false" data-spy="scroll" data-target=".fixed-top"><nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top"><a class="navbar-brand logo-image" href="./../../../../#header"><img src="./../../../../images/logo.svg" title="Logo Inteligência Brasil Digital Cyber Security " alt="Logo Inteligência Brasil" width="196" height="113"></a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button><div class="collapse navbar-collapse" id="navbarsExampleDefault"><ul class="navbar-nav ml-auto"><li class="nav-item"><a class="nav-link page-scroll" href="./../../../../#header">HOME <span class="sr-only">(current)</span></a></li><li class="nav-item"><a class="nav-link page-scroll" href="./../../../../assets/blog/">BLOG</a></li><li class="nav-item"><a class="nav-link page-scroll" href="./../../../../#services">PROJETOS</a></li><li class="nav-item"><a class="nav-link page-scroll" href="./../../../../#callMe">SERVIÇOS</a></li><li class="nav-item"><a class="nav-link page-scroll" href="./../../../../sobre">SOBRE</a></li><li class="nav-item"><a class="nav-link page-scroll" href="./../../../../#contact">CONTATO</a></li></ul><span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i><span style="visibility:hidden">Linkedin Inteligencia Brasil</span></a></span></div></nav><header id="header" class="ex-header"><div class="seletor container"><div class="row"><div class="col-md-12"><h1>Estratégia e Conhecimento</h1></div></div></div></header><div class="ex-basic-1"><div class="container"><div class="row"><div class="col-lg-12"><div class="breadcrumbs"><a href="./../../../../#header">Home</a><i class="fa fa-angle-double-right"></i><span>ESTRATÉGIA</span></div></div></div></div></div><div class="ex-basic-2"><div class="seletor container"><div class="row"><div class="col-lg-12"><div class="text-container"><style>h2{ text-align: center;} .local-home{ color: #06C;} blockquote{ font-family: Georgia, Source Serif Pro, serif; text-align: center; font-style: italic; font-weight: 400; font-size: 1.6rem; line-height: 1.5; color: rgba(0, 0, 0, .9);} .list-point ul li a{ text-decoration: none;} .font-review p a{ text-decoration: none; font-style: italic; color: #06C;} .actions-like{ font-size: 12px; width: 16px; height: 16px; line-height: 16px;} .actions-like-icon{ float: left; margin-right: 1px; height: 25px; width: 18px; background: url(../../../images/like.svg) center center no-repeat; background-size: 15px; cursor: pointer;} .actions-like-count{ margin-right: 1.2em;} .entry-tags p a{ text-decoration: none; font-style: italic; color: #666;} </style><p class="privacy-topic-text"><span class="nav-item social-icons">Renato Borbolla <span class="fa-stack"><a href="https://www.linkedin.com/in/renatobasanteborbolla/" target="_blank"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span>- <time datatime="30/01/2017">agosto 2023</time></p><h2>O Centro de Operações de Segurança Cibernética (CSOC) deve ter tudo o que precisa para montar uma defesa competente da empresa de tecnologia da informação (TI) em constante mudança.<br></h2>&nbsp;<br><blockquote>"É de suprema importância atacar a estratégia do inimigo."<br>-Sun Tzu-</blockquote>O Centro de Operações de Segurança Cibernética (CSOC) deve ter tudo o que precisa para montar uma defesa competente da empresa de tecnologia da informação (TI) em constante mudança. Isto inclui uma vasta gama de tecnologias sofisticadas de detecção e prevenção, um mar virtual de relatórios de inteligência cibernética e acesso a uma força de trabalho em rápida expansão de profissionais de TI talentosos. No entanto, a maioria dos CSOCs continua a não conseguir manter o adversário – mesmo o menos sofisticado – fora da empresa. Garantir a confidencialidade, integridade e disponibilidade da empresa moderna de tecnologia da informação (TI) é uma tarefa difícil. Ele incorpora muitas tarefas, desde engenharia de sistemas robusta e gerenciamento de configuração (CM) até políticas eficazes de segurança cibernética ou garantia de informações (IA) e treinamento abrangente da força de trabalho. Deve também incluir operações de cibersegurança, onde um grupo de pessoas é encarregado de monitorizar e defender a empresa contra todas as medidas de ataque cibernético. O que é um SOC? Um SOC é uma equipe composta principalmente por analistas de segurança organizados para detectar, analisar, responder, relatar e prevenir incidentes de segurança cibernética. A prática de defesa contra atividades não autorizadas em redes de computadores, incluindo monitoramento, detecção, análise (como análise de tendências e padrões) e atividades de resposta e restauração. Existem muitos termos que têm sido usados ​​para se referir a uma equipe de especialistas em segurança cibernética reunida para realizar CND. Eles incluem: , Equipe de Resposta a Incidentes de Segurança Informática (CSIRT) ‚ Equipe de Resposta a Incidentes Informáticos (CIRT) ‚ Centro (ou capacidade) de resposta a incidentes de computador (CIRC) ‚ Centro (ou Capacidade) de Resposta a Incidentes de Segurança de Computadores (CSIRC) ‚ Centro de Operações de Segurança (SOC) ‚ Centro de Operações de Cibersegurança (CSOC) ‚ Equipe de Resposta a Emergências Informáticas (CERT) Para que uma organização seja considerada um SOC, ela deve: 1. Fornecer meios para que os constituintes relatem suspeitas de incidentes de segurança cibernética 2. Fornecer assistência no tratamento de incidentes aos constituintes 3. Divulgar informações relacionadas com incidentes aos constituintes e partes externas. Tempo de Missão e Operações Os SOCs podem variar desde pequenas operações com cinco pessoas até grandes centros de coordenação nacionais. A declaração de missão de um SOC de médio porte normalmente inclui os seguintes elementos: 1. Prevenção de incidentes de cibersegurança através de ações proativas: a. Análise contínua de ameaças b. Varredura de rede e host em busca de vulnerabilidades c. Coordenação de implantação de contramedidas d. Consultoria em política e arquitetura de segurança. 2. Monitoramento, detecção e análise de possíveis invasões em tempo real e por meio de tendências históricas em fontes de dados relevantes para a segurança 3. Resposta a incidentes confirmados, coordenando recursos e direcionando o uso de contramedidas oportunas e apropriadas 4. Fornecer conhecimento situacional e relatórios sobre o status de segurança cibernética, incidentes e tendências no comportamento do adversário para organizações apropriadas 5. Engenharia e operação de tecnologias CND, como IDS e sistemas de coleta/análise de dados. Destas responsabilidades, talvez a mais demorada seja o consumo e a análise de grandes quantidades de dados relevantes para a segurança. Entre os muitos feeds de dados relevantes para a segurança que um SOC provavelmente consumirá, os mais proeminentes geralmente são os IDSs. IDS são sistemas colocados no host ou na rede para detectar atividades potencialmente maliciosas ou indesejadas que merecem atenção adicional por parte do analista SOC. Combinado com registros de auditoria de segurança e outros feeds de dados, um SOC típico coletará, analisará e armazenará dezenas ou centenas de milhões de eventos de segurança todos os dias. De acordo com um evento é “Qualquer ocorrência observável em um sistema e/ou rede. Os eventos às vezes fornecem indicação de que um incidente está ocorrendo” (por exemplo, um alerta gerado por um IDS ou um serviço de auditoria de segurança). Um evento nada mais é do que dados brutos. É necessária uma análise humana – o processo de avaliação do significado de uma coleção de dados relevantes para a segurança, normalmente com a ajuda de ferramentas especializadas – para estabelecer se são necessárias ações adicionais. Nível de nível: Camada 1 Camada 2 Nível 3 Gerente Social Camada 1: Analista de Alerta Obrigações Monitora continuamente a fila de alertas; faz triagem de alertas de segurança; monitora a integridade dos sensores e endpoints de segurança; coleta dados e contexto necessários para iniciar o trabalho de Nível 2. Treinamento necessário Procedimentos de triagem de alerta; detecção de intruso; rede, gerenciamento de eventos e informações de segurança (SIEM) e treinamento investigativo baseado em host; e outros treinamentos específicos de ferramentas. As certificações podem incluir SANS SEC401 : Security Essentials Bootcamp Style. Camada 2: Respondente de Incidentes Obrigações Executa análises aprofundadas de incidentes, correlacionando dados de várias fontes; determina se um sistema ou conjunto de dados crítico foi afetado; aconselha sobre remediação; fornece suporte para novos métodos analíticos para detecção de ameaças. Treinamento necessário Análise forense de rede avançada, análise forense baseada em host, procedimentos de resposta a incidentes, revisões de log, avaliação básica de malware, análise forense de rede e inteligência de ameaças. As certificações podem incluir SANS SEC501: Advanced Security Essentials – Enterprise Defender; SANS SEC503: Detecção detalhada de intrusões; SANS SEC504: Ferramentas, técnicas, explorações e tratamento de incidentes de hackers. Especialista/Caçador no Assunto Nível 3 Obrigações Possui conhecimento profundo em rede, endpoint, inteligência de ameaças, análise forense e engenharia reversa de malware, bem como no funcionamento de aplicativos específicos ou infraestrutura de TI subjacente; atua como um “caçador” de incidentes, sem esperar pela escalada de incidentes; intimamente envolvido no desenvolvimento, ajuste e implementação de análises de detecção de ameaças. Treinamento necessário Formação avançada em detecção de anomalias; treinamento específico de ferramentas para agregação e análise de dados e inteligência de ameaças. As certificações podem incluir SANS SEC503: Intrusion Detection In-Depth; SANS SEC504: Ferramentas, técnicas, explorações e tratamento de incidentes de hackers; SANS SEC561: Desenvolvimento intenso de habilidades práticas de teste de caneta; SANS FOR610: Malware de engenharia reversa: ferramentas e técnicas de análise de malware. Gerente SOC Obrigações Gerencia recursos para incluir pessoal, orçamento, programação de turnos e estratégia de tecnologia para cumprir SLAs; comunica-se com a administração; atua como responsável organizacional para incidentes críticos de negócios; fornece orientação geral para o SOC e informações para a estratégia geral de segurança Treinamento necessário Gerenciamento de projetos, treinamento em gerenciamento de resposta a incidentes, habilidades gerais de gerenciamento de pessoas. As certificações incluem CISSP, CISA, CISM ou CGEIT. O SOC normalmente aproveitará recursos internos e externos em resposta e recuperação do incidente. É importante reconhecer que um SOC nem sempre pode implementar contramedidas ao primeiro sinal de uma intrusão. Existem três razões para isso: 1. O SOC quer ter certeza de que não está bloqueando atividades benignas. 2. Uma ação de resposta poderia impactar mais os serviços missionários de um grupo constituinte do que o incidente em si. 3. Compreender a extensão e a gravidade da intrusão observando o adversário é por vezes mais eficaz do que realizar análises forenses estáticas em sistemas comprometidos, uma vez que o adversário já não está presente. Para determinar a natureza do ataque, o SOC muitas vezes deve realizar análises forenses avançadas em artefatos, como imagens de disco rígido ou captura de pacotes de sessão completa (PCAP), ou engenharia reversa de malware em amostras de malware coletadas para dar suporte a um incidente. Às vezes, as evidências forenses devem ser coletadas e analisadas de maneira legalmente sólida. Nesses casos, o SOC deve observar maior rigor e repetibilidade nos seus procedimentos do que seria necessário de outra forma. Construindo um Centro de Operações de Segurança Além dos analistas de SOC, um centro de operações de segurança exige um mestre de cerimônias para suas diversas partes móveis. O gerente do SOC frequentemente combate incêndios, dentro e fora do SOC. O gestor SOC é responsável por priorizar o trabalho e organizar os recursos com o objetivo final de detectar, investigar e mitigar incidentes que possam impactar o negócio. O gestor do SOC deve desenvolver um modelo de fluxo de trabalho e implementar procedimentos operacionais padronizados (SOPs) para o processo de tratamento de incidentes que orientam os analistas através de procedimentos de triagem e resposta. Processos A definição de processos repetíveis de triagem e investigação de incidentes padroniza as ações que um analista SOC realiza e garante que nenhuma tarefa importante seja ignorada. Ao criar um fluxo de trabalho repetível de gerenciamento de incidentes, são definidas as responsabilidades e ações dos membros da equipe, desde a criação de um alerta e avaliação inicial de Nível 1 até o escalonamento para pessoal de Nível 2 ou Nível 3. Com base no fluxo de trabalho, os recursos podem ser alocados de forma eficaz. Um dos modelos de processo de resposta a incidentes mais utilizados é o modelo DOE/CIAC, que consiste em seis etapas: preparação, identificação, contenção, erradicação, recuperação e lições aprendidas. Tecnologia Uma solução de coleta, agregação, detecção, análise e gerenciamento de dados em toda a empresa é a tecnologia central de um SOC de sucesso. Um sistema eficaz de monitoramento de segurança incorpora dados coletados do monitoramento contínuo de endpoints (PCs, laptops, dispositivos móveis e servidores), bem como redes e fontes de log e eventos . Com o benefício dos dados de rede, log e endpoint coletados antes e durante o incidente, os analistas de SOC podem passar imediatamente do uso do sistema de monitoramento de segurança como uma ferramenta de detecção para usá-lo como uma ferramenta de investigação, revisando atividades suspeitas que compõem o presente incidente e até mesmo como ferramenta para gerenciar a resposta a um incidente ou violação. A compatibilidade de tecnologias é fundamental e os silos de dados são ruins, especialmente se uma organização tiver uma solução de monitoramento de segurança existente (SIEM, endpoint, rede ou outra) e quiser incorporar os relatórios dessa ferramenta na solução de gerenciamento de incidentes. Adicionando Contexto aos Incidentes de Segurança A incorporação de informações sobre ameaças, ativos, identidade e outras informações de contexto é outra maneira pela qual uma solução eficaz de monitoramento de segurança empresarial pode ajudar no processo investigativo do analista SOC. Muitas vezes, um alerta está associado a atividades de rede ou baseadas em host e, inicialmente, pode conter apenas o endereço IP do endpoint suspeito. Para que a rede flua, o tráfego da rede, eventos de segurança, contexto de identidade/ativo, dados de endpoint, registros do sistema, ameaças, a Intel alimenta o SISTEMA DE MONITORAMENTO DE SEGURANÇA. Tecnologias compatíveis auxiliam na agregação de dados de detecção para melhorar a visibilidade do tratamento de incidentes. Ao centralizar essas diversas fontes de dados em um sistema de monitoramento de segurança, o SOC obtém informações práticas sobre possíveis anomalias indicativas de atividades de ameaça. Ação. Com base nas descobertas, intervenções automatizadas e manuais podem ser feitas para incluir aplicação de patches, modificação de firewall, quarentena ou nova imagem do sistema e revogação de credenciais. Análise. Os analistas de operações de segurança podem analisar dados de diversas fontes e interrogar e fazer a triagem de dispositivos de interesse para avaliar um incidente. Um roteiro para o analista SOC investigar o sistema em questão, o analista geralmente precisa de outras informações, como o proprietário e nome do host da máquina ou registros de origem DHCP para mapear informações de IP e host no momento do alerta. Se o sistema de monitoramento de segurança incorporar informações de ativos e de identidade, ele proporcionará uma enorme vantagem em termos de tempo e esforço do analista, sem mencionar os fatores-chave que o analista pode usar para priorizar o incidente de segurança – de modo geral, ativos de negócios de maior valor devem ser priorizados em detrimento de ativos de menor valor. -ativos de valor. Definindo Normal por meio de Linha de Base A capacidade de criar uma linha de base de atividades para usuários, aplicativos, infraestrutura, rede e outros sistemas , estabelecendo a aparência normal, é uma vantagem dos dados agregados coletados de diversas fontes empresariais. Armado com a definição de “normal”, torna-se mais fácil detectar comportamentos suspeitos – atividades que estão de alguma forma fora da norma. Um sistema de monitoramento de segurança devidamente definido e configurado envia alertas acionáveis ​​que podem ser confiáveis ​​e, muitas vezes, priorizados automaticamente antes de chegar ao analista de nível 1. um dos principais desafios na utilização de dados de registro citados pelos entrevistados é a incapacidade de discernir atividades normais de atividades suspeitas. Uma prática recomendada é usar plataformas que possam criar linhas de base monitorando a atividade da rede e do endpoint por um período de tempo para ajudar a determinar se a aparência é “normal” e, em seguida, fornecer a capacidade de definir limites de eventos como principais motivadores de alerta. Quando um comportamento inesperado ou desvio da atividade normal é detectado, a plataforma cria um alerta, indicando que uma investigação mais aprofundada é necessária. Inteligência de ameaças SOCs maduros desenvolvem continuamente a capacidade de consumir e aproveitar inteligência sobre ameaças de seus incidentes passados ​​e de fontes de compartilhamento de informações, como um fornecedor especializado de inteligência sobre ameaças, parceiros do setor, a divisão de crimes cibernéticos da aplicação da lei, organizações de compartilhamento de informações (como ISACs) ou seus fornecedores de tecnologia de monitoramento de segurança. De acordo com a pesquisa SANS Cyberthreat Intelligence (CTI) de 2015, 69% dos entrevistados relataram que sua organização implementou alguma capacidade de inteligência contra ameaças cibernéticas, com 27% indicando que suas equipes adotam totalmente o conceito de CTI e procedimentos de resposta integrados entre sistemas e funcionários. A capacidade de um sistema de monitoramento de segurança de operacionalizar a inteligência de ameaças e usá-la para ajudar a detectar padrões em endpoints, logs e dados de rede, bem como associar anomalias a alertas, incidentes ou ataques anteriores, pode aprimorar a capacidade de uma organização de detectar um sistema ou usuário comprometido antes a ele exibindo as características de uma violação. Na verdade, 55% dos entrevistados da Pesquisa CTI utilizam atualmente um sistema centralizado de gestão de segurança para agregar, analisar e operacionalizar o seu CTI. Tratamento eficiente de incidentes do SOC Para obter um tratamento eficiente de incidentes, o SOC deve evitar gargalos no processo de RI que move os incidentes do Nível 1 para o Nível 2 e, finalmente, para o Nível 3. Gargalos podem ocorrer devido a muito “ruído branco”, alertas de poucas consequências ou falsos positivos que levam à “ fadiga de alerta ” do analista. Este fenómeno é uma experiência comum entre os socorristas, segundo os resultados da Pesquisa de Resposta a Incidentes, onde 15% relataram ter respondido a mais de 20 alarmes falsos positivos originalmente classificados como incidentes . Ao escolher uma ferramenta de monitoramento de segurança empresarial, procure recursos como personalização de limites de alerta e a capacidade de combinar vários alertas em um único incidente. Além disso, quando os incidentes incluem contexto adicional, os analistas podem triá-los mais rapidamente, reduzindo as camadas de avaliação que devem ocorrer antes que um problema possa ser confirmado e rapidamente mitigado. Tipos de SOC Categorize os SOCs internos ao grupo constituinte em cinco modelos organizacionais de como a equipe é composta, 1. Equipe de segurança. Não existe detecção permanente de incidentes ou capacidade de resposta. No caso de um incidente de segurança informática, são reunidos recursos (geralmente dentro do círculo eleitoral) para lidar com o problema, reconstituir os sistemas e, em seguida, 16 desistirem. Os resultados podem variar amplamente, pois não existe uma vigilância central ou um conjunto consistente de conhecimentos especializados e os processos para tratamento de incidentes são geralmente mal definidos. Os grupos constituintes compostos por menos de 1.000 usuários ou IPs geralmente se enquadram nesta categoria. 2. SOC distribuído internamente. Um SOC permanente existe, mas é composto principalmente por indivíduos cuja posição organizacional está fora do SOC e cujo trabalho principal é relacionado a TI ou segurança, mas não necessariamente relacionado a CND. Uma pessoa ou um pequeno grupo é responsável pela coordenação das operações de segurança, mas o trabalho pesado é realizado por indivíduos oriundos de outras organizações. Os SOCs que apoiam um eleitorado de pequena a média dimensão, talvez 500 a 5.000 utilizadores ou IPs, enquadram-se frequentemente nesta categoria. 3. SOC centralizado interno. Uma equipe dedicada de profissionais de TI e segurança cibernética compreende uma capacidade permanente de CND, fornecendo serviços contínuos. Os recursos e as autoridades necessárias para sustentar a missão diária de defesa da rede existem numa entidade formalmente reconhecida, geralmente com orçamento próprio. Esta equipa reporta a um gestor do SOC que é responsável pela supervisão do programa CND para o círculo eleitoral. A maioria dos SOCs se enquadra nesta categoria, normalmente atendendo grupos que variam de 5.000 a 100.000 usuários ou endereços IP. 4. SOC interno combinado distribuído e centralizado. O SOC é composto por uma equipa central (como acontece com os SOCs centralizados internos) e por recursos de outras partes do círculo eleitoral (como acontece com os SOCs distribuídos internamente). Os indivíduos que apoiam operações CND fora do SOC principal não são reconhecidos como uma entidade SOC separada e distinta. Para grupos maiores, este modelo estabelece um equilíbrio entre ter uma equipe coerente e sincronizada e manter uma compreensão dos ativos e enclaves de TI de ponta. Os SOCs com grupos constituintes na faixa de 25.000 a 500.000 usuários/IP podem adotar essa abordagem, especialmente se seu grupo constituinte estiver distribuído geograficamente ou se servirem um ambiente de computação altamente heterogêneo. 5. Coordenação do SOC. O SOC medeia e facilita atividades CND entre vários SOCs distintos subordinados, normalmente para um grande grupo, talvez medido em milhões de usuários ou endereços IP. Um SOC coordenador geralmente fornece serviços de consultoria a um grupo constituinte que pode ser bastante diversificado. Normalmente não tem visibilidade ativa ou abrangente até ao anfitrião final e, na maioria das vezes, tem autoridade limitada sobre o seu eleitorado. Os SOCs coordenadores geralmente servem como centros de distribuição de informações cibernéticas, melhores práticas e treinamento. Eles também podem oferecer serviços de análise e perícia, quando solicitados por SOCs subordinados. Capacidades Um SOC satisfaz as necessidades de monitoramento e defesa da rede do grupo constituinte, oferecendo um conjunto de serviços. Os SOCs amadureceram e se adaptaram às crescentes demandas, a um ambiente de ameaças em constante mudança e a ferramentas que aprimoraram drasticamente o estado da arte nas operações de CND. Também desejamos articular todo o escopo do que um SOC pode fazer, independentemente de uma função específica servir ao eleitorado, ao próprio SOC ou a ambos. Como resultado, os serviços SOC formam uma lista abrangente de recursos SOC. a cadeia de gestão do SOC é responsável por escolher as capacidades que melhor se adaptam às necessidades do seu eleitorado, dadas as restrições políticas e de recursos. Análise em tempo real Intel e tendências Análise e Resposta a Incidentes Análise de Artefato Suporte ao ciclo de vida da ferramenta SOC Auditoria e ameaça interna Digitalização e Avaliação Divulgação Análise em tempo real Central de Atendimento Dicas, relatórios de incidentes e solicitações de serviços CND de constituintes recebidos por telefone, e-mail, postagens no site do SOC ou outros métodos. Isso é aproximadamente análogo a um help desk de TI tradicional, exceto pelo fato de ser específico do CND. Monitoramento e triagem em tempo real Triagem e análise rápida de feeds de dados em tempo real (como logs e alertas do sistema) para possíveis invasões. Após um limite de tempo especificado, os incidentes suspeitos são encaminhados para uma equipe de análise e resposta a incidentes para estudo mais aprofundado. Geralmente sinônimo de analistas de nível 1 do SOC, com foco em feeds de eventos em tempo real e outras visualizações de dados. Nota: Este é um dos recursos mais facilmente reconhecíveis e visíveis oferecidos por um SOC, mas não tem sentido sem uma análise de incidentes correspondente e capacidade de resposta, discutida abaixo. Intel e tendências Coleta e análise de informações cibernéticas Coleta, consumo e análise de relatórios de inteligência cibernética, relatórios de invasões cibernéticas e notícias relacionadas à segurança da informação, abrangendo novas ameaças, vulnerabilidades, produtos e pesquisas. Os materiais são inspecionados em busca de informações que exijam uma resposta do SOC ou distribuição ao grupo constituinte. A Intel pode ser obtida a partir da coordenação de SOCs, fornecedores, sites de mídia de notícias, fóruns on-line e listas de distribuição de e-mail. Distribuição cibernética da Intel Síntese, resumo e redistribuição de relatórios de inteligência cibernética, relatórios de intrusão cibernética e notícias relacionadas à segurança da informação aos membros do grupo constituinte, seja de forma rotineira (como um boletim informativo cibernético semanal ou mensal) ou de forma não rotineira (como um aviso de patch de emergência ou alerta de campanha de phishing). Cibernético Criação da Intel Autoria primária de novos relatórios de inteligência cibernética, como avisos ou destaques de ameaças, com base em pesquisas primárias realizadas pelo SOC. Por exemplo, análise de uma nova ameaça ou vulnerabilidade não vista anteriormente em outro lugar. Isso geralmente é motivado pelos próprios incidentes do SOC, análise forense, análise de malware e envolvimento de adversários. Fusão cibernética da Intel Extrair dados de informações cibernéticas e sintetizá-los em novas assinaturas, conteúdo e compreensão dos TTPs adversários, evoluindo assim as operações de monitoramento (por exemplo, novas assinaturas ou conteúdo SIEM). Tendendo Análise de longo prazo de feeds de eventos, malware coletado e dados de incidentes em busca de evidências de atividades maliciosas ou anômalas ou para entender melhor o grupo constituinte ou os TTPs do adversário. Isso pode incluir análises não estruturadas, abertas e aprofundadas em vários feeds de dados, tendências e correlação ao longo de semanas ou meses de dados de registro, análise de dados “baixa e lenta” e métodos de detecção de anomalias esotéricas. Avaliação de ameaça Estimativa holística das ameaças representadas por vários atores contra o eleitorado, seus enclaves ou linhas de negócios, dentro do domínio cibernético. Isso incluirá o aproveitamento de recursos existentes, como feeds e tendências de informações cibernéticas, juntamente com a arquitetura da empresa e o status de vulnerabilidade. Frequentemente realizado em coordenação com outras partes interessadas na segurança cibernética. Análise e Resposta a Incidentes Análise de Incidentes Análise prolongada e aprofundada de possíveis invasões e de dicas encaminhadas de outros membros do SOC. Esse recurso geralmente é executado por analistas nos níveis 2 e superiores dentro do processo de escalonamento de incidentes do SOC. Deve ser concluído num período de tempo específico, de modo a apoiar uma resposta relevante e eficaz. Esse recurso geralmente envolverá análise aproveitando vários artefatos de dados para determinar quem, o quê, quando, onde e por que uma intrusão – sua extensão, como limitar os danos e como recuperar. Um analista documentará os detalhes desta análise, geralmente com uma recomendação para ações futuras. Análise de artesanato Envolvimentos adversários cuidadosamente coordenados, por meio dos quais os membros do SOC realizam um estudo e análise sustentados e detalhados dos TTPs adversários, em um esforço para melhor compreendê-los e informar o monitoramento contínuo. Esta atividade é distinta de outras capacidades porque (1) às vezes envolve instrumentação ad hoc de redes e sistemas para focar em uma atividade de interesse, como um honeypot, e (2) um adversário poderá continuar sua atividade sem ser imediatamente cortado completamente. Esta capacidade é apoiada de perto por tendências e análises de malware e implantes e, por sua vez, pode apoiar a criação de informações cibernéticas. Coordenação de Resposta a Incidentes Trabalhe com os constituintes afetados para reunir mais informações sobre um incidente, compreender o seu significado e avaliar o impacto da missão. Mais importante ainda, esta função inclui a coordenação de ações de resposta e relatórios de incidentes. Este serviço não envolve a implementação direta de contramedidas pelo SOC. Implementação de contramedidas Implementação real de ações de resposta a um incidente para dissuadir, bloquear ou eliminar a presença ou danos do adversário. As possíveis contramedidas incluem isolamento lógico ou físico dos sistemas envolvidos, bloqueios de firewall, buracos negros de DNS, bloqueios de IP, implantação de patches e desativação de contas. Resposta a incidentes no local Trabalhe com os constituintes para responder e se recuperar de um incidente no local. Isso geralmente exigirá que os membros do SOC que já estão localizados ou que viajam para o local constituinte apliquem conhecimentos práticos na análise de danos, na erradicação de alterações deixadas por um adversário e na recuperação de sistemas para um bom estado conhecido. Este trabalho é feito em parceria com proprietários e administradores de sistemas. Resposta remota a incidentes Trabalhe com os constituintes para se recuperar remotamente de um incidente. Isso envolve o mesmo trabalho que a resposta a incidentes no local. No entanto, os membros do SOC têm comparativamente menos envolvimento prático na coleta de artefatos ou na recuperação de sistemas. O suporte remoto geralmente será feito por telefone e e-mail ou, em casos mais raros, por terminal remoto ou interfaces administrativas, como Microsoft Terminal Services ou Secure Shell (SSH). Análise de Artefato Manuseio de artefatos forenses Reunir e armazenar artefatos forenses (como discos rígidos ou mídias removíveis) relacionados a um incidente de forma que apoie seu uso em processos judiciais. Dependendo da jurisdição, isso pode envolver o manuseio de mídia enquanto se documenta a cadeia de custódia, garantindo o armazenamento seguro e apoiando cópias verificáveis ​​de evidências, bit a bit. Análise de malware e implantes Também conhecida como engenharia reversa de malware ou simplesmente “reversão”. Extrair malware (vírus, cavalos de Tróia, implantes, droppers, etc.) do tráfego de rede ou imagens de mídia e analisá-los para determinar sua natureza. Os membros do SOC normalmente procurarão o vetor de infecção inicial, o comportamento e, potencialmente, a atribuição informal para determinar a extensão de uma intrusão e para apoiar uma resposta oportuna. Isso pode incluir análise estática de código por meio de descompilação ou análise de tempo de execução/execução (por exemplo, “detonação”) ou ambas. Esta capacidade destina-se principalmente a apoiar a monitorização e resposta eficazes. Embora utilize algumas das mesmas técnicas da “análise forense” tradicional, não é necessariamente executada para apoiar processos legais. Análise de artefato forense Análise de artefatos digitais (mídia, tráfego de rede, dispositivos móveis) para determinar a extensão total e a verdade de um incidente, geralmente estabelecendo um cronograma detalhado dos eventos. Isso aproveita técnicas semelhantes a alguns aspectos da análise de malware e implantes, mas segue um processo documentado mais exaustivo. Isto é muitas vezes realizado através de processos e procedimentos tais que as suas conclusões podem apoiar ações legais contra aqueles que possam estar implicados num incidente. Suporte ao ciclo de vida da ferramenta SOC O&M de dispositivos de proteção de fronteiras Operação e manutenção (O&M) de dispositivos de proteção de fronteiras (por exemplo, firewalls, proxies Web, proxies de e-mail e filtros de conteúdo ). Inclui atualizações e CM de políticas de dispositivos, às vezes em resposta a uma ameaça ou incidente. Esta atividade é estreitamente coordenada com um NOC. O&M de infraestrutura SOC O&M de tecnologias SOC fora do escopo de ajuste de sensores. Isso inclui cuidados e alimentação de equipamentos de TI SOC: servidores, estações de trabalho, impressoras, bancos de dados relacionais, sistemas de identificação de problemas, redes de área de armazenamento (SANs) e backup em fita. Se o SOC tiver seu próprio enclave, isso provavelmente incluirá a manutenção de seus roteadores, switches, firewalls e controladores de domínio, se houver. Isso também pode incluir O&M de sistemas de monitoramento, sistemas operacionais (SOs) e hardware. O pessoal que oferece suporte a este serviço tem privilégios de “root” nos equipamentos SOC. Ajuste e manutenção de sensores Cuidado e alimentação de plataformas de sensores pertencentes e operadas pelo SOC: IDS, IPS, SIEM e assim por diante. Isso inclui atualizar os sistemas IDS/IPS e SIEM com novas assinaturas, ajustar seus conjuntos de assinaturas para manter o volume de eventos em níveis aceitáveis, minimizar falsos positivos e manter o status de integridade ativo/inativo de sensores e feeds de dados. Os membros do SOC envolvidos neste serviço devem ter um conhecimento profundo das necessidades de monitoramento do SOC para que o SOC possa acompanhar um ambiente de consistência e ameaça em constante evolução. As alterações em quaisquer dispositivos de prevenção em linha (HIPS/NIPS) são geralmente coordenadas com o NOC ou outras áreas de operações de TI. Esse recurso pode envolver scripts ad hoc significativos para movimentar dados e integrar ferramentas e feeds de dados. Criação de assinatura personalizada Criação e implementação de conteúdo de detecção original para sistemas de monitoramento (assinaturas IDS, casos de uso de SIEM, etc.) com base em ameaças atuais, vulnerabilidades, protocolos, missões ou outras especificidades do ambiente constituinte. Esta capacidade aproveita ferramentas à disposição do SOC para preencher lacunas deixadas por assinaturas fornecidas comercialmente ou pela comunidade. O SOC pode compartilhar suas assinaturas personalizadas com outros SOCs. Engenharia e implantação de ferramentas Pesquisa de mercado, avaliação de produtos, prototipagem, engenharia, integração, implantação e atualizações de equipamentos SOC, principalmente com base em software livre ou de código aberto (FOSS) ou tecnologias comerciais prontas para uso (COTS). Este serviço inclui orçamento, aquisição e recapitalização regular de sistemas SOC. O pessoal que apoia este serviço deve manter-se atento a um ambiente de ameaças em mudança, disponibilizando novas capacidades numa questão de semanas ou meses, de acordo com as exigências da missão. Pesquisa e Desenvolvimento de Ferramentas Pesquisa e desenvolvimento (P&D) de ferramentas personalizadas onde nenhum recurso comercial ou de código aberto adequado atende a uma necessidade operacional. O escopo desta atividade abrange desde o desenvolvimento de código para um problema estruturado e conhecido até a pesquisa acadêmica plurianual aplicada a um desafio mais complexo. Auditoria e ameaça interna Coleta e distribuição de dados de auditoria Coleta de vários feeds de dados relevantes para a segurança para fins de correlação e análise de incidentes. Esta arquitetura de recolha também pode ser aproveitada para apoiar a distribuição e posterior recuperação de dados de auditoria para fins de investigação ou análise a pedido, fora do âmbito da missão do SOC. Esta capacidade abrange a retenção a longo prazo de dados relevantes para a segurança para utilização por constituintes fora do SOC. Criação e gerenciamento de conteúdo de auditoria Criação e adaptação de conteúdo SIEM ou manutenção de log (LM) (correlação, painéis, relatórios, etc.) para fins de revisão de auditoria dos constituintes e detecção de uso indevido. Este serviço baseia-se na capacidade de distribuição de dados de auditoria, fornecendo não apenas um feed de dados brutos, mas também conteúdo criado para constituintes fora do SOC. Suporte para casos de ameaças internas Apoio à análise e investigação de ameaças internas em duas áreas relacionadas, mas distintas: 1. Encontrar dicas para possíveis casos de ameaças internas (por exemplo, uso indevido de recursos de TI, fraude de cartão de ponto, fraude financeira, espionagem industrial ou roubo). O SOC avisará os órgãos de investigação apropriados (aplicação da lei, Inspetor Geral [IG], etc.) sobre um caso de interesse. 2. Em nome destes órgãos de investigação, o SOC fornecerá monitoramento adicional, coleta de informações e análise em apoio a um caso de ameaça interna. Investigação de casos de ameaças internas O SOC aproveita a sua própria autoridade reguladora ou legal independente para investigar ameaças internas, para incluir monitorização concentrada ou prolongada de indivíduos específicos, sem necessitar de apoio ou autoridades de uma entidade externa. Na prática, poucos SOCs fora da comunidade responsável pela aplicação da lei têm tais autoridades, pelo que normalmente actuam sob a direcção de outra organização. Digitalização e Avaliação Mapeamento de rede Mapeamento sustentado e regular das redes constituintes para compreender o tamanho, a forma, a composição e as interfaces perimetrais do grupo constituinte, por meio de técnicas automatizadas ou manuais. Estes mapas são muitas vezes construídos em cooperação com — e distribuídos a — outros constituintes. Verificação de vulnerabilidades Interrogação de hosts de consistência quanto ao status de vulnerabilidade, geralmente com foco no nível de patch de cada sistema e na conformidade de segurança, normalmente por meio de ferramentas distribuídas e automatizadas. Tal como acontece com o mapeamento de rede, isto permite ao SOC compreender melhor o que deve defender. O SOC pode fornecer estes dados aos membros do círculo eleitoral – talvez em forma de relatório ou resumo. Esta função é executada regularmente e não faz parte de uma avaliação ou exercício específico Avaliação de vulnerabilidade Avaliação de pleno conhecimento e segurança aberta de um local, enclave ou sistema constituinte, às vezes conhecido como “Blue Teaming”. Os membros do SOC trabalham com proprietários e administradores de sistemas para examinar holisticamente a arquitetura de segurança e as vulnerabilidades de seus sistemas, por meio de verificações, exame da configuração do sistema, revisão da documentação de design do sistema e entrevistas. Esta atividade pode aproveitar ferramentas de verificação de redes e vulnerabilidades, além de tecnologias mais invasivas usadas para interrogar sistemas quanto à configuração e ao status. A partir desse exame, os membros da equipe produzem um relatório de suas descobertas, juntamente com as soluções recomendadas. Os SOCs aproveitam as avaliações de vulnerabilidade como uma oportunidade para expandir a cobertura de monitoramento e o conhecimento dos seus analistas sobre o grupo constituinte Teste de penetração Avaliação sem conhecimento ou com conhecimento limitado de uma área específica do grupo constituinte, também conhecida como “Red Teaming”. Os membros do SOC conduzem um ataque simulado contra um segmento do eleitorado para avaliar a resiliência do alvo a um ataque real. Essas operações geralmente são realizadas apenas com o conhecimento e autorização dos executivos de mais alto nível, dentro da consistência e sem aviso prévio dos proprietários do sistema. As ferramentas usadas executarão ataques por vários meios: buffer overflows, injeção de Structured Query Language (SQL) e fuzzing de entrada . As Red Teams geralmente limitam seus objetivos e recursos para modelar os de um ator específico, talvez simulando a campanha de um adversário que pode começar com um ataque de phishing. Terminada a operação, a equipe produzirá um relatório com suas constatações, da mesma forma que uma avaliação de vulnerabilidade. No entanto, como as atividades de testes de penetração têm um conjunto restrito de objetivos, elas não cobrem tantos aspectos da configuração do sistema e das melhores práticas como faria uma avaliação de vulnerabilidade. Em alguns casos, o pessoal do SOC apenas coordenará as atividades do Red-Teaming, com um terceiro designado realizando a maior parte dos testes reais para garantir que os testadores não tenham conhecimento prévio dos sistemas constituintes ou das vulnerabilidades. Divulgação Avaliação do Produto Testar os recursos de segurança de produtos pontuais adquiridos por membros do círculo eleitoral. Análogo às avaliações de vulnerabilidade em miniatura de um ou alguns hosts, esses testes permitem uma análise aprofundada dos pontos fortes e fracos de um produto específico do ponto de vista da segurança. Isto pode envolver testes “internos” de produtos, em vez de avaliação remota de sistemas de produção ou pré-produção. Consultoria de Segurança Prestar aconselhamento em cibersegurança a constituintes fora do âmbito da CND; apoiar o projeto de novos sistemas, a continuidade dos negócios e o planejamento de recuperação de desastres; política de segurança cibernética; guias de configuração segura; e outros esforços. Treinamento e Conscientização Divulgação proativa aos constituintes, apoiando treinamento geral de usuários, boletins e outros materiais educacionais que os ajudam a compreender vários problemas de segurança cibernética. Os principais objetivos são ajudar os constituintes a se protegerem de ameaças comuns, como esquemas de phishing/pharming, melhorar a segurança dos sistemas finais, aumentar a conscientização sobre os serviços do SOC e ajudar os constituintes a relatar incidentes corretamente. Consciência situacional Reempacotamento e redistribuição regulares e repetíveis do conhecimento do SOC sobre ativos, redes, ameaças, incidentes e vulnerabilidades dos constituintes para os constituintes. Esta capacidade vai além da distribuição de informações cibernéticas, melhorando a compreensão dos constituintes sobre a postura de segurança cibernética do eleitorado e de partes dele, impulsionando a tomada de decisões eficaz em todos os níveis. Essas informações podem ser entregues automaticamente por meio de um site do SOC, portal da Web ou lista de distribuição de e-mail. Redistribuição de TTPs Compartilhamento sustentado de produtos internos do SOC com outros consumidores, como SOCs parceiros ou subordinados, em um formato mais formal, refinado ou estruturado. Isso pode incluir quase tudo que o SOC desenvolve por conta própria (por exemplo, ferramentas, informações cibernéticas, assinaturas, relatórios de incidentes e outros dados brutos observáveis). O princípio do quid pro quo aplica-se frequentemente: o fluxo de informações entre SOCs é bidirecional. Relações com a mídia Comunicação direta com a mídia noticiosa. O SOC é responsável por divulgar informações sem afetar a reputação do grupo constituinte ou as atividades de resposta contínuas. Resumo À medida que você enfrenta o desafio de construir um centro de operações de segurança (SOC), sua capacidade de antecipar obstáculos comuns facilitará a inicialização, o desenvolvimento e o amadurecimento sem problemas ao longo do tempo. Embora cada organização seja única na sua atual postura de segurança, tolerância ao risco, experiência e orçamento, todas partilham os objetivos de tentar minimizar e reforçar a sua superfície de ataque e de detetar, priorizar e investigar rapidamente incidentes de segurança quando estes ocorrem. >&nbsp;<br><p class="privacy-topic-text">Referências</p><div class="font-review"><p class="privacy-topic-text"><a href="https://www.sans.org/reading-room/whitepapers/analyst/building-world-class-security-operations-center-roadmap-35907" target="_blank" rel="nofollow noopener">SANS, </a><a href="https://www.mitre.org/sites/default/files/publications/pr-13-1028-mitre-10-strategies-cyber-ops-center.pdf" target="_blank" rel="nofollow noopener">Mitre, </a><a href="http://www.mcafee.com/in/resources/white-papers/foundstone/wp-creating-maintaining-soc.pdf" target="_blank" rel="nofollow noopener">McAfee, </a><a href="https://gbhackers.com/how-to-build-and-run-a-security-operations-center/" target="_blank" rel="nofollow noopener">GBHackers. </a></p></div></div></div></div></div></div><div role="contentinfo" class="footer seletor"><div class="container"><div class="row"><div class="col-md-6"><div class="text-container about"><h2 class="white">Sobre a Inteligência Brasil</h2><p class="white"><b>Somos </b>apaixonados por tecnologia com a missão de simplificar e melhorar cada vez mais a área de segurança da informação com a visão de manter o conhecimento ao alcance de todos.</p></div></div><div class="col-md-2"><div class="text-container"><h3 class="white">Links</h3><ul class="list-unstyled li-space-lg white"><li class="media"><a class="white" href="./../../../../sitemap/">Mapa do site</a></li><li><a class="white" href="./../../../../assets/documentos/politicas/politica_de_privacidade/">Política de Privacidade</a></li><li><a class="white" href="./../../../../assets/documentos/termos/termos_e_condicoes_de_uso/">Termos & Condições</a></li><li><a class="white" href="./../../../../assets/documentos/termos/termo_de_privacidade/">LGPD & Privacidade</a></li></ul></div></div><div class="col-md-2"><div class="text-container"><h3 class="white">Utilidades</h3><ul class="list-unstyled li-space-lg"><li><a class="white" href="./../../../../assets/blog/security">Segurança</a></li><li><a class="white" href="./../../../../assets/blog/strategy">Estratégia</a></li><li><a class="white" href="./../../../../assets/blog/technology">Tecnologia</a></li><li><a class="white" href="./../../../../assets/blog/publications">Pública</a></li></ul></div></div></div></div></div><div class="seletor copyright"><div class="container"><div class="row"><div class="col-lg-12"><p class="p-small">Copyright © 2023<a href="https://Inteligenciabrasil.seg.br">Inteligência Brasil</a></p></div></div></div></div><script src="./../../../../js/jquery.min.js"></script><script src="./../../../../js/popper.min.js"></script><script src="./../../../../js/bootstrap.min.js"></script><script src="./../../../../js/jquery.easing.min.js"></script><script src="./../../../../js/swiper.min.js"></script><script src="./../../../../js/jquery.magnific-popup.js"></script><script src="./../../../../js/morphext.min.js"></script><script src="./../../../../js/isotope.pkgd.min.js"></script><script src="./../../../../js/validator.min.js"></script><script src="./../../../../js/scripts.js"></script><script data-cfasync="false" src="./../../../../js/form-submission-handler.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="description"
+        content="CSOC - O Centro de Operações de Segurança Cibernética deve ter tudo o que precisa para montar uma defesa competente de empresas em constante mudança.">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="keywords"
+        content="Renato Borbolla, Offensive Security, Red Team, Pentest, Blue team, Purple Team, Segurança da Informacao, OSINT, LGPD, Cyber threat intelligence, Threat Hunting">
+    <meta name="rating" content="general">
+    <meta name="theme-color" content="#0D1E38" media="(prefers-color-scheme: dark)">
+    <meta name="twitter:dnt" content="on">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="author" content="Renato Borbolla">
+    <meta name="copyright" content="© 2023 Inteligencia Brasil ">
+    <meta http-equiv="content-language" content="pt-br, en-US">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="canonical"
+        href="https://inteligenciabrasil.seg.br/assets/blog/strategy/assets/blog/strategy/csoc-o-centro-de-operacoes-de-seguranca-cibernetica">
+    <link rel="icon" href="./../../../../images/renato-borbolla-offensive-security.jpg" sizes="32x32" />
+    <link rel="icon" href="./../../../../images/renato-borbolla-offensive-security.jpg" sizes="192x192" />
+    <link rel="apple-touch-icon" href="./../../../../images/renato-borbolla-offensive-security.jpg" />
+    <meta name="msapplication-TileImage" content="./../../../../images/renato-borbolla-offensive-security.jpg" />
+    <link rel="apple-touch-icon" sizes="60x60" href="./../../../../images/apple-touch-icon-iphone-60x60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./../../../../images/apple-touch-icon-ipad-76x76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./../../../../images/apple-touch-icon-iphone-retina-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./../../../../images/apple-touch-icon-ipad-retina-152x152.png">
+    <link rel="icon" type="image/svg+xml" href="./../../../../images/favicon.svg">
+    <link rel="icon" type="image/png"
+        href="./../../../../images/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./../../../../images/favicon.ico">
+    <meta property="og:site"
+        content="https://inteligenciabrasil.seg.br/assets/blog/strategy/assets/blog/strategy/csoc-o-centro-de-operacoes-de-seguranca-cibernetica" />
+    <meta property="og:site_name"
+        content="Inteligência Brasil | Cyber Security Consultancy - Segurança, Estratégia e Tecnologia da Informação" />
+    <meta property="og:title"
+        content="CSOC - O Centro de Operações de Segurança Cibernética deve ter tudo o que precisa para montar uma defesa competente de empresas em constante mudança." />
+    <meta property="og:description"
+        content="A prática de defesa contra atividades não autorizadas em redes de computadores, incluindo monitoramento, detecção, análise (como análise de tendências e padrões) e atividades de resposta e restauração....." />
+    <meta property="og:image:type" content="image/jpg" />
+    <meta property="og:url"
+        content="https://inteligenciabrasil.seg.br/assets/blog/strategy/assets/blog/strategy/csoc-o-centro-de-operacoes-de-seguranca-cibernetica" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="./../../../../images/renato-borbolla-offensive-security.jpg">
+    <meta property="og:image:type" content="image/jpg">
+    <meta property="og:image:width" content="800">
+    <meta property="og:image:height" content="600">
+    <title>CSOC - O Centro de Operações de Segurança Cibernética</title>
+    <link href="./../../../../css/bootstrap.css" rel="stylesheet">
+    <link href="./../../../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="./../../../../css/swiper.css" rel="stylesheet">
+    <link href="./../../../../css/styles.css" rel="stylesheet">
+    <link rel="icon" href="./../../../../images/favicon.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTKNK4JBXP"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments) } gtag('js', new Date()); gtag('config', 'G-TTKNK4JBXP');</script>
+    <script
+        language="javascript">document.write(unescape('%3C%62%6F%64%79%20%6F%6E%63%6F%6E%74%65%78%74%6D%65%6E%75%3D%22%72%65%74%75%72%6E%20%66%61%6C%73%65%3B%22%3E'));</script>
+</head>
+
+<body onkeydown="return false" data-spy="scroll" data-target=".fixed-top">
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top"><a class="navbar-brand logo-image"
+            href="./../../../../#header"><img src="./../../../../images/logo.svg"
+                title="Logo Inteligência Brasil Digital Cyber Security " alt="Logo Inteligência Brasil" width="196"
+                height="113"></a><button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+            aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span
+                class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link page-scroll" href="./../../../../#header">HOME <span
+                            class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link page-scroll" href="./../../../../assets/blog/">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link page-scroll" href="./../../../../#services">PROJETOS</a></li>
+                <li class="nav-item"><a class="nav-link page-scroll" href="./../../../../#callMe">SERVIÇOS</a></li>
+                <li class="nav-item"><a class="nav-link page-scroll" href="./../../../../sobre">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link page-scroll" href="./../../../../#contact">CONTATO</a></li>
+            </ul><span class="nav-item social-icons"><span class="fa-stack"><a
+                        href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><span
+                            class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i><span
+                            style="visibility:hidden">Linkedin Inteligencia Brasil</span></a></span>
+        </div>
+    </nav>
+    <header id="header" class="ex-header">
+        <div class="seletor container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Estratégia e Conhecimento</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="ex-basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumbs"><a href="./../../../../#header">Home</a><i
+                            class="fa fa-angle-double-right"></i><span>ESTRATÉGIA</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ex-basic-2">
+        <div class="seletor container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-container">
+                        <style>
+                            h2 {
+                                text-align: center;
+                            }
+
+                            .local-home {
+                                color: #06C;
+                            }
+
+                            blockquote {
+                                font-family: Georgia, Source Serif Pro, serif;
+                                text-align: center;
+                                font-style: italic;
+                                font-weight: 400;
+                                font-size: 1.6rem;
+                                line-height: 1.5;
+                                color: rgba(0, 0, 0, .9);
+                            }
+
+                            .list-point ul li a {
+                                text-decoration: none;
+                            }
+
+                            .font-review p a {
+                                text-decoration: none;
+                                font-style: italic;
+                                color: #06C;
+                            }
+
+                            .actions-like {
+                                font-size: 12px;
+                                width: 16px;
+                                height: 16px;
+                                line-height: 16px;
+                            }
+
+                            .actions-like-icon {
+                                float: left;
+                                margin-right: 1px;
+                                height: 25px;
+                                width: 18px;
+                                background: url(../../../images/like.svg) center center no-repeat;
+                                background-size: 15px;
+                                cursor: pointer;
+                            }
+
+                            .actions-like-count {
+                                margin-right: 1.2em;
+                            }
+
+                            .entry-tags p a {
+                                text-decoration: none;
+                                font-style: italic;
+                                color: #666;
+                            }
+                        </style>
+                        <p class="privacy-topic-text"><span class="nav-item social-icons">Renato Borbolla <span
+                                    class="fa-stack"><a href="https://www.linkedin.com/in/renatobasanteborbolla/"
+                                        target="_blank"><span class="hexagon"></span><i
+                                            class="fab fa-linkedin-in fa-stack-1x"></i></a></span>- <time
+                                    datatime="30/01/2017">agosto 2023</time></p>
+                        <h2>Como construir e administrar um Centro de Operações de Segurança<br></h2>&nbsp;<br>
+                        <blockquote>"É de suprema importância atacar a estratégia do inimigo."<br>-Sun Tzu-</blockquote>
+                        <p class="privacy-topic-text">O Centro de Operações de Segurança Cibernética (CSOC) deve ter
+                            tudo o que precisa para montar
+                            uma defesa competente da empresa de tecnologia da informação (TI) em constante mudança.</p>
+                        <p class="privacy-topic-text"> Isto
+                            inclui uma vasta gama de tecnologias sofisticadas de detecção e prevenção, um mar virtual de
+                            relatórios de inteligência cibernética e acesso a uma força de trabalho em rápida expansão
+                            de
+                            profissionais de TI talentosos. No entanto, a maioria dos CSOCs continua a não conseguir
+                            manter
+                            o adversário – mesmo o menos sofisticado – fora da empresa.</p>
+                        <p class="privacy-topic-text">Garantir a confidencialidade,
+                            integridade e disponibilidade da empresa moderna de tecnologia da informação (TI) é uma
+                            tarefa
+                            difícil. </p>
+
+                        <p class="privacy-topic-text">Ele incorpora muitas tarefas, desde engenharia de sistemas robusta
+                            e
+                            gerenciamento de
+                            configuração (CM) até políticas eficazes de segurança cibernética ou garantia de informações
+                            (IA) e treinamento abrangente da força de trabalho. </p>
+
+                        <p class="privacy-topic-text"> também incluir operações de
+                            cibersegurança, onde um grupo de pessoas é encarregado de monitorizar e defender a empresa
+                            contra todas as medidas de ataque cibernético. </p>
+
+                        <h3>O que é um SOC?</h3>
+
+                        <p class="privacy-topic-text">Um SOC é uma equipe composta
+                            principalmente por analistas de segurança organizados para detectar, analisar, responder,
+                            relatar e prevenir incidentes de segurança cibernética.</p>
+
+                        <p class="privacy-topic-text">A prática de defesa contra atividades
+                            não autorizadas em redes de computadores, incluindo monitoramento, detecção, análise (como
+                            análise de tendências e padrões) e atividades de resposta e restauração.</p>
+
+                        <p class="privacy-topic-text">Existem muitos termos
+                            que têm sido usados ​​para se referir a uma equipe de especialistas em segurança cibernética
+                            reunida para realizar CND.</p>
+
+                        <p class="privacy-topic-text">Eles incluem:</p>
+                        <ul>
+                            <li>Equipe de Resposta a Incidentes de Segurança
+                                Informática (CSIRT);</li>
+
+                            <li>Equipe de Resposta a Incidentes Informáticos (CIRT);</li>
+
+                            <li>Centro (ou
+                                capacidade) de resposta a incidentes de computador (CIRC);</li>
+
+                            <li>Centro (ou Capacidade) de Resposta a
+                                Incidentes de Segurança de Computadores (CSIRC);</li>
+
+                            <li>Centro de Operações de Segurança (SOC);</li>
+                            <li>Centro de Operações de Cibersegurança (CSOC);</li>
+                            <li>Equipe de Resposta a Emergências Informáticas (CERT).</li>
+
+
+                        </ul>
+                        <p class="privacy-topic-text">Para que uma organização seja considerada um SOC, ela deve:</p>
+                        <ol>
+                            <li>Fornecer meios para que os constituintes relatem suspeitas de incidentes de segurança
+                                cibernética</li>
+                            <li>Fornecer assistência no tratamento de incidentes aos constituintes </li>
+                            <li>Divulgar informações relacionadas com incidentes aos constituintes e partes externas.
+                            </li>
+                        </ol>
+                        <h3>Tempo de Missão e Operações</h3>
+
+                        <p class="privacy-topic-text">Os SOCs podem variar
+                            desde pequenas operações com cinco pessoas até grandes centros de coordenação nacionais. A
+                            declaração de missão de um SOC de médio porte normalmente inclui os seguintes elementos:</p>
+                        1.
+                        Prevenção de incidentes de cibersegurança através de ações proativas:
+                        a. Análise contínua de
+                        ameaças
+                        b. Varredura de rede e host em busca de vulnerabilidades
+                        c. Coordenação de implantação
+                        de contramedidas
+                        d. Consultoria em política e arquitetura de segurança.
+
+
+                        2. Monitoramento,
+                        detecção e análise de possíveis invasões em tempo real e por meio de tendências históricas em
+                        fontes de dados relevantes para a segurança
+
+                        3. Resposta a incidentes confirmados, coordenando
+                        recursos e direcionando o uso de contramedidas oportunas e apropriadas
+
+                        4. Fornecer conhecimento
+                        situacional e relatórios sobre o status de segurança cibernética, incidentes e tendências no
+                        comportamento do adversário para organizações apropriadas
+
+                        5. Engenharia e operação de
+                        tecnologias CND, como IDS e sistemas de coleta/análise de dados.
+
+
+                        <p class="privacy-topic-text"> Destas responsabilidades,
+                            talvez a mais demorada seja o consumo e a análise de grandes quantidades de dados relevantes
+                            para a segurança. Entre os muitos feeds de dados relevantes para a segurança que um SOC
+                            provavelmente consumirá, os mais proeminentes geralmente são os IDSs.</p>
+
+
+                        <p class="privacy-topic-text">IDS são sistemas colocados
+                            no host ou na rede para detectar atividades potencialmente maliciosas ou indesejadas que
+                            merecem
+                            atenção adicional por parte do analista SOC. Combinado com registros de auditoria de
+                            segurança e
+                            outros feeds de dados, um SOC típico coletará, analisará e armazenará dezenas ou centenas de
+                            milhões de eventos de segurança todos os dias.</p>
+
+
+                        <p class="privacy-topic-text">De acordo com um evento é “Qualquer ocorrência
+                            observável em um sistema e/ou rede. Os eventos às vezes fornecem indicação de que um
+                            incidente
+                            está ocorrendo” (por exemplo, um alerta gerado por um IDS ou um serviço de auditoria de
+                            segurança). Um evento nada mais é do que dados brutos.</p>
+
+
+                        <p class="privacy-topic-text"> É necessária uma análise humana – o
+                            processo de avaliação do significado de uma coleção de dados relevantes para a segurança,
+                            normalmente com a ajuda de ferramentas especializadas – para estabelecer se são necessárias
+                            ações adicionais. </p>
+
+
+
+                        <h3>Nível de nível:</h3>
+
+
+                        Camada 1
+                        Camada 2
+                        Nível 3
+                        Gerente Social
+
+
+                        Camada 1: Analista de
+                        Alerta
+
+                        Obrigações
+
+                        <p class="privacy-topic-text">Monitora continuamente a fila de alertas; faz triagem de alertas
+                            de segurança;
+                            monitora a integridade dos sensores e endpoints de segurança; coleta dados e contexto
+                            necessários para iniciar o trabalho de Nível 2.</p>
+
+                        Treinamento necessário
+
+                        <p class="privacy-topic-text">Procedimentos de triagem
+                            de alerta; detecção de intruso; rede, gerenciamento de eventos e informações de segurança
+                            (SIEM)
+                            e treinamento investigativo baseado em host; e outros treinamentos específicos de
+                            ferramentas.
+                            As certificações podem incluir SANS SEC401 : Security Essentials Bootcamp Style.</p>
+
+
+                        Camada 2:
+                        Respondente de Incidentes
+
+                        Obrigações
+
+                        <p class="privacy-topic-text">Executa análises aprofundadas de incidentes,
+                            correlacionando dados de várias fontes; determina se um sistema ou conjunto de dados crítico
+                            foi
+                            afetado; aconselha sobre remediação; fornece suporte para novos métodos analíticos para
+                            detecção
+                            de ameaças.</p>
+
+                        Treinamento necessário
+
+                        <p class="privacy-topic-text">Análise forense de rede avançada, análise forense baseada em
+                            host, procedimentos de resposta a incidentes, revisões de log, avaliação básica de malware,
+                            análise forense de rede e inteligência de ameaças. As certificações podem incluir SANS
+                            SEC501:
+                            Advanced Security Essentials – Enterprise Defender; SANS SEC503: Detecção detalhada de
+                            intrusões; SANS SEC504: Ferramentas, técnicas, explorações e tratamento de incidentes de
+                            hackers.</p>
+
+
+
+                        Especialista/Caçador no Assunto Nível 3
+
+                        Obrigações
+                        <p class="privacy-topic-text"> Possui conhecimento profundo em
+                            rede, endpoint, inteligência de ameaças, análise forense e engenharia reversa de malware,
+                            bem
+                            como no funcionamento de aplicativos específicos ou infraestrutura de TI subjacente; atua
+                            como
+                            um “caçador” de incidentes, sem esperar pela escalada de incidentes; intimamente envolvido
+                            no
+                            desenvolvimento, ajuste e implementação de análises de detecção de ameaças.</p>
+
+                        Treinamento
+                        necessário
+
+                        <p class="privacy-topic-text">Formação avançada em detecção de anomalias; treinamento específico
+                            de ferramentas
+                            para agregação e análise de dados e inteligência de ameaças. As certificações podem incluir
+                            SANS
+                            SEC503: Intrusion Detection In-Depth; SANS SEC504: Ferramentas, técnicas, explorações e
+                            tratamento de incidentes de hackers; SANS SEC561: Desenvolvimento intenso de habilidades
+                            práticas de teste de caneta; SANS FOR610: Malware de engenharia reversa: ferramentas e
+                            técnicas
+                            de análise de malware. </p>
+
+
+                        Gerente SOC
+
+                        Obrigações
+
+                        <p class="privacy-topic-text"> Gerencia recursos para incluir pessoal, orçamento,
+                            programação de turnos e estratégia de tecnologia para cumprir SLAs; comunica-se com a
+                            administração; atua como responsável organizacional para incidentes críticos de negócios;
+                            fornece orientação geral para o SOC e informações para a estratégia geral de segurança</p>
+
+
+                        Treinamento necessário
+
+                        <p class="privacy-topic-text"> Gerenciamento de projetos, treinamento em gerenciamento de
+                            resposta a
+                            incidentes, habilidades gerais de gerenciamento de pessoas. As certificações incluem CISSP,
+                            CISA, CISM ou CGEIT. </p>
+
+                        <p class="privacy-topic-text"> O SOC normalmente aproveitará recursos internos e externos em
+                            resposta e
+                            recuperação do incidente. É importante reconhecer que um SOC nem sempre pode implementar
+                            contramedidas ao primeiro sinal de uma intrusão. Existem três razões para isso:</p>
+
+                        1. O SOC quer
+                        ter certeza de que não está bloqueando atividades benignas.
+                        2. Uma ação de resposta poderia
+                        impactar mais os serviços missionários de um grupo constituinte do que o incidente em si.
+                        3.
+                        Compreender a extensão e a gravidade da intrusão observando o adversário é por vezes mais eficaz
+                        do que realizar análises forenses estáticas em sistemas comprometidos, uma vez que o adversário
+                        já não está presente.
+
+
+                        <p class="privacy-topic-text"> Para determinar a natureza do ataque, o SOC muitas vezes deve
+                            realizar
+                            análises forenses avançadas em artefatos, como imagens de disco rígido ou captura de pacotes
+                            de
+                            sessão completa (PCAP), ou engenharia reversa de malware em amostras de malware coletadas
+                            para
+                            dar suporte a um incidente. Às vezes, as evidências forenses devem ser coletadas e
+                            analisadas de
+                            maneira legalmente sólida. Nesses casos, o SOC deve observar maior rigor e repetibilidade
+                            nos
+                            seus procedimentos do que seria necessário de outra forma. </p>
+
+
+                        <h3>Construindo um Centro de Operações de
+                            Segurança </h3>
+
+                        <p class="privacy-topic-text"> Além dos analistas de SOC, um centro de operações de segurança
+                            exige um mestre de
+                            cerimônias para suas diversas partes móveis.</p>
+
+                        O gerente do SOC frequentemente combate incêndios,
+                        dentro e fora do SOC. O gestor SOC é responsável por priorizar o trabalho e organizar os
+                        recursos com o objetivo final de detectar, investigar e mitigar incidentes que possam impactar o
+                        negócio.
+
+                        O gestor do SOC deve desenvolver um modelo de fluxo de trabalho e implementar
+                        procedimentos operacionais padronizados (SOPs) para o processo de tratamento de incidentes que
+                        orientam os analistas através de procedimentos de triagem e resposta.
+
+
+                        <h3>Processos </h3>
+
+                        A definição de
+                        processos repetíveis de triagem e investigação de incidentes padroniza as ações que um analista
+                        SOC realiza e garante que nenhuma tarefa importante seja ignorada.
+
+                        Ao criar um fluxo de trabalho
+                        repetível de gerenciamento de incidentes, são definidas as responsabilidades e ações dos membros
+                        da equipe, desde a criação de um alerta e avaliação inicial de Nível 1 até o escalonamento para
+                        pessoal de Nível 2 ou Nível 3.
+
+                        Com base no fluxo de trabalho, os recursos podem ser alocados de
+                        forma eficaz. Um dos modelos de processo de resposta a incidentes mais utilizados é o modelo
+                        DOE/CIAC, que consiste em seis etapas: preparação, identificação, contenção, erradicação,
+                        recuperação e lições aprendidas.
+
+
+                        <h3>Tecnologia</h3>
+
+                        <p class="privacy-topic-text">Uma solução de coleta, agregação, detecção, análise
+                        e gerenciamento de dados em toda a empresa é a tecnologia central de um SOC de sucesso.</p>
+                        
+                        <p class="privacy-topic-text">Um
+                        sistema eficaz de monitoramento de segurança incorpora dados coletados do monitoramento contínuo
+                        de endpoints (PCs, laptops, dispositivos móveis e servidores), bem como redes e fontes de log e
+                        eventos .</p>
+
+
+                        <p class="privacy-topic-text"> Com o benefício dos dados de rede, log e endpoint coletados antes e durante o
+                        incidente, os analistas de SOC podem passar imediatamente do uso do sistema de monitoramento de
+                        segurança como uma ferramenta de detecção para usá-lo como uma ferramenta de investigação,
+                        revisando atividades suspeitas que compõem o presente incidente e até mesmo como ferramenta para
+                        gerenciar a resposta a um incidente ou violação. </p>
+                        
+                        
+                        <p class="privacy-topic-text"> A compatibilidade de tecnologias é fundamental
+                        e os silos de dados são ruins, especialmente se uma organização tiver uma solução de
+                        monitoramento de segurança existente (SIEM, endpoint, rede ou outra) e quiser incorporar os
+                        relatórios dessa ferramenta na solução de gerenciamento de incidentes. </p>
+                        
+                        
+                        <h3>Adicionando Contexto aos
+                        Incidentes de Segurança </h3>
+                        
+                        
+                        <p class="privacy-topic-text"> A incorporação de informações sobre ameaças, ativos, identidade e outras
+                        informações de contexto é outra maneira pela qual uma solução eficaz de monitoramento de
+                        segurança empresarial pode ajudar no processo investigativo do analista SOC. </p>
+                        
+                        <p class="privacy-topic-text"> Muitas vezes, um
+                        alerta está associado a atividades de rede ou baseadas em host e, inicialmente, pode conter
+                        apenas o endereço IP do endpoint suspeito. Para que a rede flua, o tráfego da rede, eventos de
+                        segurança, contexto de identidade/ativo, dados de endpoint, registros do sistema, ameaças, a
+                        Intel alimenta o SISTEMA DE MONITORAMENTO DE SEGURANÇA.</p>
+                        <p class="privacy-topic-text"> Tecnologias compatíveis auxiliam na
+                        agregação de dados de detecção para melhorar a visibilidade do tratamento de incidentes. Ao
+                        centralizar essas diversas fontes de dados em um sistema de monitoramento de segurança, o SOC
+                        obtém informações práticas sobre possíveis anomalias indicativas de atividades de ameaça. Ação.
+                        Com base nas descobertas, intervenções automatizadas e manuais podem ser feitas para incluir
+                        aplicação de patches, modificação de firewall, quarentena ou nova imagem do sistema e revogação
+                        de credenciais. Análise. </p>
+                        
+                        <p class="privacy-topic-text"> Os analistas de operações de segurança podem analisar dados de diversas
+                        fontes e interrogar e fazer a triagem de dispositivos de interesse para avaliar um incidente.
+                        
+                        <p class="privacy-topic-text"> Um
+                        roteiro para o analista SOC investigar o sistema em questão, o analista geralmente precisa de
+                        outras informações, como o proprietário e nome do host da máquina ou registros de origem DHCP
+                        para mapear informações de IP e host no momento do alerta. 
+                        
+                        <p class="privacy-topic-text"> Se o sistema de monitoramento de
+                        segurança incorporar informações de ativos e de identidade, ele proporcionará uma enorme
+                        vantagem em termos de tempo e esforço do analista, sem mencionar os fatores-chave que o analista
+                        pode usar para priorizar o incidente de segurança – de modo geral, ativos de negócios de maior
+                        valor devem ser priorizados em detrimento de ativos de menor valor. -ativos de valor.
+                        
+                        <h3>Definindo
+                        Normal por meio de Linha de Base </h3>
+                        
+                        A capacidade de criar uma linha de base de atividades para
+                        usuários, aplicativos, infraestrutura, rede e outros sistemas , estabelecendo a aparência
+                        normal, é uma vantagem dos dados agregados coletados de diversas fontes empresariais. Armado com
+                        a definição de “normal”, torna-se mais fácil detectar comportamentos suspeitos – atividades que
+                        estão de alguma forma fora da norma. Um sistema de monitoramento de segurança devidamente
+                        definido e configurado envia alertas acionáveis ​​que podem ser confiáveis ​​e, muitas vezes,
+                        priorizados automaticamente antes de chegar ao analista de nível 1. um dos principais desafios
+                        na utilização de dados de registro citados pelos entrevistados é a incapacidade de discernir
+                        atividades normais de atividades suspeitas. Uma prática recomendada é usar plataformas que
+                        possam criar linhas de base monitorando a atividade da rede e do endpoint por um período de
+                        tempo para ajudar a determinar se a aparência é “normal” e, em seguida, fornecer a capacidade de
+                        definir limites de eventos como principais motivadores de alerta. Quando um comportamento
+                        inesperado ou desvio da atividade normal é detectado, a plataforma cria um alerta, indicando que
+                        uma investigação mais aprofundada é necessária. Inteligência de ameaças SOCs maduros desenvolvem
+                        continuamente a capacidade de consumir e aproveitar inteligência sobre ameaças de seus
+                        incidentes passados ​​e de fontes de compartilhamento de informações, como um fornecedor
+                        especializado de inteligência sobre ameaças, parceiros do setor, a divisão de crimes
+                        cibernéticos da aplicação da lei, organizações de compartilhamento de informações (como ISACs)
+                        ou seus fornecedores de tecnologia de monitoramento de segurança. De acordo com a pesquisa SANS
+                        Cyberthreat Intelligence (CTI) de 2015, 69% dos entrevistados relataram que sua organização
+                        implementou alguma capacidade de inteligência contra ameaças cibernéticas, com 27% indicando que
+                        suas equipes adotam totalmente o conceito de CTI e procedimentos de resposta integrados entre
+                        sistemas e funcionários. A capacidade de um sistema de monitoramento de segurança de
+                        operacionalizar a inteligência de ameaças e usá-la para ajudar a detectar padrões em endpoints,
+                        logs e dados de rede, bem como associar anomalias a alertas, incidentes ou ataques anteriores,
+                        pode aprimorar a capacidade de uma organização de detectar um sistema ou usuário comprometido
+                        antes a ele exibindo as características de uma violação. Na verdade, 55% dos entrevistados da
+                        Pesquisa CTI utilizam atualmente um sistema centralizado de gestão de segurança para agregar,
+                        analisar e operacionalizar o seu CTI. Tratamento eficiente de incidentes do SOC Para obter um
+                        tratamento eficiente de incidentes, o SOC deve evitar gargalos no processo de RI que move os
+                        incidentes do Nível 1 para o Nível 2 e, finalmente, para o Nível 3. Gargalos podem ocorrer
+                        devido a muito “ruído branco”, alertas de poucas consequências ou falsos positivos que levam à “
+                        fadiga de alerta ” do analista. Este fenómeno é uma experiência comum entre os socorristas,
+                        segundo os resultados da Pesquisa de Resposta a Incidentes, onde 15% relataram ter respondido a
+                        mais de 20 alarmes falsos positivos originalmente classificados como incidentes . Ao escolher
+                        uma ferramenta de monitoramento de segurança empresarial, procure recursos como personalização
+                        de limites de alerta e a capacidade de combinar vários alertas em um único incidente. Além
+                        disso, quando os incidentes incluem contexto adicional, os analistas podem triá-los mais
+                        rapidamente, reduzindo as camadas de avaliação que devem ocorrer antes que um problema possa ser
+                        confirmado e rapidamente mitigado.
+                        
+                       <h3> Tipos de SOC </h3>
+                        
+                        Categorize os SOCs internos ao grupo
+                        constituinte em cinco modelos organizacionais de como a equipe é composta, 1. Equipe de
+                        segurança. Não existe detecção permanente de incidentes ou capacidade de resposta. No caso de um
+                        incidente de segurança informática, são reunidos recursos (geralmente dentro do círculo
+                        eleitoral) para lidar com o problema, reconstituir os sistemas e, em seguida, 16 desistirem. Os
+                        resultados podem variar amplamente, pois não existe uma vigilância central ou um conjunto
+                        consistente de conhecimentos especializados e os processos para tratamento de incidentes são
+                        geralmente mal definidos. Os grupos constituintes compostos por menos de 1.000 usuários ou IPs
+                        geralmente se enquadram nesta categoria. 2. SOC distribuído internamente. Um SOC permanente
+                        existe, mas é composto principalmente por indivíduos cuja posição organizacional está fora do
+                        SOC e cujo trabalho principal é relacionado a TI ou segurança, mas não necessariamente
+                        relacionado a CND. Uma pessoa ou um pequeno grupo é responsável pela coordenação das operações
+                        de segurança, mas o trabalho pesado é realizado por indivíduos oriundos de outras organizações.
+                        Os SOCs que apoiam um eleitorado de pequena a média dimensão, talvez 500 a 5.000 utilizadores ou
+                        IPs, enquadram-se frequentemente nesta categoria. 3. SOC centralizado interno. Uma equipe
+                        dedicada de profissionais de TI e segurança cibernética compreende uma capacidade permanente de
+                        CND, fornecendo serviços contínuos. Os recursos e as autoridades necessárias para sustentar a
+                        missão diária de defesa da rede existem numa entidade formalmente reconhecida, geralmente com
+                        orçamento próprio. Esta equipa reporta a um gestor do SOC que é responsável pela supervisão do
+                        programa CND para o círculo eleitoral. A maioria dos SOCs se enquadra nesta categoria,
+                        normalmente atendendo grupos que variam de 5.000 a 100.000 usuários ou endereços IP. 4. SOC
+                        interno combinado distribuído e centralizado. O SOC é composto por uma equipa central (como
+                        acontece com os SOCs centralizados internos) e por recursos de outras partes do círculo
+                        eleitoral (como acontece com os SOCs distribuídos internamente). Os indivíduos que apoiam
+                        operações CND fora do SOC principal não são reconhecidos como uma entidade SOC separada e
+                        distinta. Para grupos maiores, este modelo estabelece um equilíbrio entre ter uma equipe
+                        coerente e sincronizada e manter uma compreensão dos ativos e enclaves de TI de ponta. Os SOCs
+                        com grupos constituintes na faixa de 25.000 a 500.000 usuários/IP podem adotar essa abordagem,
+                        especialmente se seu grupo constituinte estiver distribuído geograficamente ou se servirem um
+                        ambiente de computação altamente heterogêneo. 5. Coordenação do SOC. O SOC medeia e facilita
+                        atividades CND entre vários SOCs distintos subordinados, normalmente para um grande grupo,
+                        talvez medido em milhões de usuários ou endereços IP. Um SOC coordenador geralmente fornece
+                        serviços de consultoria a um grupo constituinte que pode ser bastante diversificado. Normalmente
+                        não tem visibilidade ativa ou abrangente até ao anfitrião final e, na maioria das vezes, tem
+                        autoridade limitada sobre o seu eleitorado. Os SOCs coordenadores geralmente servem como centros
+                        de distribuição de informações cibernéticas, melhores práticas e treinamento. Eles também podem
+                        oferecer serviços de análise e perícia, quando solicitados por SOCs subordinados. 
+                        
+                        <h3>Capacidades</h3>
+                        
+                        Um
+                        SOC satisfaz as necessidades de monitoramento e defesa da rede do grupo constituinte, oferecendo
+                        um conjunto de serviços. Os SOCs amadureceram e se adaptaram às crescentes demandas, a um
+                        ambiente de ameaças em constante mudança e a ferramentas que aprimoraram drasticamente o estado
+                        da arte nas operações de CND. Também desejamos articular todo o escopo do que um SOC pode fazer,
+                        independentemente de uma função específica servir ao eleitorado, ao próprio SOC ou a ambos. Como
+                        resultado, os serviços SOC formam uma lista abrangente de recursos SOC. a cadeia de gestão do
+                        SOC é responsável por escolher as capacidades que melhor se adaptam às necessidades do seu
+                        eleitorado, dadas as restrições políticas e de recursos. Análise em tempo real Intel e
+                        tendências Análise e Resposta a Incidentes Análise de Artefato 
+                        
+                        
+                        Suporte ao ciclo de vida da
+                        ferramenta SOC Auditoria e ameaça interna Digitalização e Avaliação Divulgação Análise em tempo
+                        real Central de Atendimento Dicas, relatórios de incidentes e solicitações de serviços CND de
+                        constituintes recebidos por telefone, e-mail, postagens no site do SOC ou outros métodos. Isso é
+                        aproximadamente análogo a um help desk de TI tradicional, exceto pelo fato de ser específico do
+                        CND. Monitoramento e triagem em tempo real Triagem e análise rápida de feeds de dados em tempo
+                        real (como logs e alertas do sistema) para possíveis invasões. Após um limite de tempo
+                        especificado, os incidentes suspeitos são encaminhados para uma equipe de análise e resposta a
+                        incidentes para estudo mais aprofundado. Geralmente sinônimo de analistas de nível 1 do SOC, com
+                        foco em feeds de eventos em tempo real e outras visualizações de dados. Nota: Este é um dos
+                        recursos mais facilmente reconhecíveis e visíveis oferecidos por um SOC, mas não tem sentido sem
+                        uma análise de incidentes correspondente e capacidade de resposta, discutida abaixo. Intel e
+                        tendências Coleta e análise de informações cibernéticas Coleta, consumo e análise de relatórios
+                        de inteligência cibernética, relatórios de invasões cibernéticas e notícias relacionadas à
+                        segurança da informação, abrangendo novas ameaças, vulnerabilidades, produtos e pesquisas. Os
+                        materiais são inspecionados em busca de informações que exijam uma resposta do SOC ou
+                        distribuição ao grupo constituinte. A Intel pode ser obtida a partir da coordenação de SOCs,
+                        fornecedores, sites de mídia de notícias, fóruns on-line e listas de distribuição de e-mail.
+                        Distribuição cibernética da Intel Síntese, resumo e redistribuição de relatórios de inteligência
+                        cibernética, relatórios de intrusão cibernética e notícias relacionadas à segurança da
+                        informação aos membros do grupo constituinte, seja de forma rotineira (como um boletim
+                        informativo cibernético semanal ou mensal) ou de forma não rotineira (como um aviso de patch de
+                        emergência ou alerta de campanha de phishing). Cibernético Criação da Intel Autoria primária de
+                        novos relatórios de inteligência cibernética, como avisos ou destaques de ameaças, com base em
+                        pesquisas primárias realizadas pelo SOC. Por exemplo, análise de uma nova ameaça ou
+                        vulnerabilidade não vista anteriormente em outro lugar. Isso geralmente é motivado pelos
+                        próprios incidentes do SOC, análise forense, análise de malware e envolvimento de adversários.
+                        Fusão cibernética da Intel Extrair dados de informações cibernéticas e sintetizá-los em novas
+                        assinaturas, conteúdo e compreensão dos TTPs adversários, evoluindo assim as operações de
+                        monitoramento (por exemplo, novas assinaturas ou conteúdo SIEM). Tendendo Análise de longo prazo
+                        de feeds de eventos, malware coletado e dados de incidentes em busca de evidências de atividades
+                        maliciosas ou anômalas ou para entender melhor o grupo constituinte ou os TTPs do adversário.
+                        Isso pode incluir análises não estruturadas, abertas e aprofundadas em vários feeds de dados,
+                        tendências e correlação ao longo de semanas ou meses de dados de registro, análise de dados
+                        “baixa e lenta” e métodos de detecção de anomalias esotéricas. Avaliação de ameaça Estimativa
+                        holística das ameaças representadas por vários atores contra o eleitorado, seus enclaves ou
+                        linhas de negócios, dentro do domínio cibernético. Isso incluirá o aproveitamento de recursos
+                        existentes, como feeds e tendências de informações cibernéticas, juntamente com a arquitetura da
+                        empresa e o status de vulnerabilidade. Frequentemente realizado em coordenação com outras partes
+                        interessadas na segurança cibernética. Análise e Resposta a Incidentes Análise de Incidentes
+                        Análise prolongada e aprofundada de possíveis invasões e de dicas encaminhadas de outros membros
+                        do SOC. Esse recurso geralmente é executado por analistas nos níveis 2 e superiores dentro do
+                        processo de escalonamento de incidentes do SOC. Deve ser concluído num período de tempo
+                        específico, de modo a apoiar uma resposta relevante e eficaz. Esse recurso geralmente envolverá
+                        análise aproveitando vários artefatos de dados para determinar quem, o quê, quando, onde e por
+                        que uma intrusão – sua extensão, como limitar os danos e como recuperar. Um analista documentará
+                        os detalhes desta análise, geralmente com uma recomendação para ações futuras. Análise de
+                        artesanato Envolvimentos adversários cuidadosamente coordenados, por meio dos quais os membros
+                        do SOC realizam um estudo e análise sustentados e detalhados dos TTPs adversários, em um esforço
+                        para melhor compreendê-los e informar o monitoramento contínuo. Esta atividade é distinta de
+                        outras capacidades porque (1) às vezes envolve instrumentação ad hoc de redes e sistemas para
+                        focar em uma atividade de interesse, como um honeypot, e (2) um adversário poderá continuar sua
+                        atividade sem ser imediatamente cortado completamente. Esta capacidade é apoiada de perto por
+                        tendências e análises de malware e implantes e, por sua vez, pode apoiar a criação de
+                        informações cibernéticas. Coordenação de Resposta a Incidentes Trabalhe com os constituintes
+                        afetados para reunir mais informações sobre um incidente, compreender o seu significado e
+                        avaliar o impacto da missão. Mais importante ainda, esta função inclui a coordenação de ações de
+                        resposta e relatórios de incidentes. Este serviço não envolve a implementação direta de
+                        contramedidas pelo SOC. Implementação de contramedidas Implementação real de ações de resposta a
+                        um incidente para dissuadir, bloquear ou eliminar a presença ou danos do adversário. As
+                        possíveis contramedidas incluem isolamento lógico ou físico dos sistemas envolvidos, bloqueios
+                        de firewall, buracos negros de DNS, bloqueios de IP, implantação de patches e desativação de
+                        contas. Resposta a incidentes no local Trabalhe com os constituintes para responder e se
+                        recuperar de um incidente no local. Isso geralmente exigirá que os membros do SOC que já estão
+                        localizados ou que viajam para o local constituinte apliquem conhecimentos práticos na análise
+                        de danos, na erradicação de alterações deixadas por um adversário e na recuperação de sistemas
+                        para um bom estado conhecido. Este trabalho é feito em parceria com proprietários e
+                        administradores de sistemas. Resposta remota a incidentes Trabalhe com os constituintes para se
+                        recuperar remotamente de um incidente. Isso envolve o mesmo trabalho que a resposta a incidentes
+                        no local. No entanto, os membros do SOC têm comparativamente menos envolvimento prático na
+                        coleta de artefatos ou na recuperação de sistemas. O suporte remoto geralmente será feito por
+                        telefone e e-mail ou, em casos mais raros, por terminal remoto ou interfaces administrativas,
+                        como Microsoft Terminal Services ou Secure Shell (SSH). Análise de Artefato Manuseio de
+                        artefatos forenses Reunir e armazenar artefatos forenses (como discos rígidos ou mídias
+                        removíveis) relacionados a um incidente de forma que apoie seu uso em processos judiciais.
+                        Dependendo da jurisdição, isso pode envolver o manuseio de mídia enquanto se documenta a cadeia
+                        de custódia, garantindo o armazenamento seguro e apoiando cópias verificáveis ​​de evidências,
+                        bit a bit. Análise de malware e implantes Também conhecida como engenharia reversa de malware ou
+                        simplesmente “reversão”. Extrair malware (vírus, cavalos de Tróia, implantes, droppers, etc.) do
+                        tráfego de rede ou imagens de mídia e analisá-los para determinar sua natureza. Os membros do
+                        SOC normalmente procurarão o vetor de infecção inicial, o comportamento e, potencialmente, a
+                        atribuição informal para determinar a extensão de uma intrusão e para apoiar uma resposta
+                        oportuna. Isso pode incluir análise estática de código por meio de descompilação ou análise de
+                        tempo de execução/execução (por exemplo, “detonação”) ou ambas. Esta capacidade destina-se
+                        principalmente a apoiar a monitorização e resposta eficazes. Embora utilize algumas das mesmas
+                        técnicas da “análise forense” tradicional, não é necessariamente executada para apoiar processos
+                        legais. Análise de artefato forense Análise de artefatos digitais (mídia, tráfego de rede,
+                        dispositivos móveis) para determinar a extensão total e a verdade de um incidente, geralmente
+                        estabelecendo um cronograma detalhado dos eventos. Isso aproveita técnicas semelhantes a alguns
+                        aspectos da análise de malware e implantes, mas segue um processo documentado mais exaustivo.
+                        Isto é muitas vezes realizado através de processos e procedimentos tais que as suas conclusões
+                        podem apoiar ações legais contra aqueles que possam estar implicados num incidente. 
+                        
+                        <h3>Suporte ao
+                        ciclo de vida da ferramenta SOC </h3>
+                         O&M de dispositivos de proteção de fronteiras Operação e
+                        manutenção (O&M) de dispositivos de proteção de fronteiras (por exemplo, firewalls, proxies Web,
+                        proxies de e-mail e filtros de conteúdo ). Inclui atualizações e CM de políticas de
+                        dispositivos, às vezes em resposta a uma ameaça ou incidente. Esta atividade é estreitamente
+                        coordenada com um NOC. O&M de infraestrutura SOC O&M de tecnologias SOC fora do escopo de ajuste
+                        de sensores. Isso inclui cuidados e alimentação de equipamentos de TI SOC: servidores, estações
+                        de trabalho, impressoras, bancos de dados relacionais, sistemas de identificação de problemas,
+                        redes de área de armazenamento (SANs) e backup em fita. Se o SOC tiver seu próprio enclave, isso
+                        provavelmente incluirá a manutenção de seus roteadores, switches, firewalls e controladores de
+                        domínio, se houver. Isso também pode incluir O&M de sistemas de monitoramento, sistemas
+                        operacionais (SOs) e hardware. O pessoal que oferece suporte a este serviço tem privilégios de
+                        “root” nos equipamentos SOC. Ajuste e manutenção de sensores Cuidado e alimentação de
+                        plataformas de sensores pertencentes e operadas pelo SOC: IDS, IPS, SIEM e assim por diante.
+                        Isso inclui atualizar os sistemas IDS/IPS e SIEM com novas assinaturas, ajustar seus conjuntos
+                        de assinaturas para manter o volume de eventos em níveis aceitáveis, minimizar falsos positivos
+                        e manter o status de integridade ativo/inativo de sensores e feeds de dados. Os membros do SOC
+                        envolvidos neste serviço devem ter um conhecimento profundo das necessidades de monitoramento do
+                        SOC para que o SOC possa acompanhar um ambiente de consistência e ameaça em constante evolução.
+                        As alterações em quaisquer dispositivos de prevenção em linha (HIPS/NIPS) são geralmente
+                        coordenadas com o NOC ou outras áreas de operações de TI. Esse recurso pode envolver scripts ad
+                        hoc significativos para movimentar dados e integrar ferramentas e feeds de dados. Criação de
+                        assinatura personalizada Criação e implementação de conteúdo de detecção original para sistemas
+                        de monitoramento (assinaturas IDS, casos de uso de SIEM, etc.) com base em ameaças atuais,
+                        vulnerabilidades, protocolos, missões ou outras especificidades do ambiente constituinte. Esta
+                        capacidade aproveita ferramentas à disposição do SOC para preencher lacunas deixadas por
+                        assinaturas fornecidas comercialmente ou pela comunidade. O SOC pode compartilhar suas
+                        assinaturas personalizadas com outros SOCs. Engenharia e implantação de ferramentas Pesquisa de
+                        mercado, avaliação de produtos, prototipagem, engenharia, integração, implantação e atualizações
+                        de equipamentos SOC, principalmente com base em software livre ou de código aberto (FOSS) ou
+                        tecnologias comerciais prontas para uso (COTS). Este serviço inclui orçamento, aquisição e
+                        recapitalização regular de sistemas SOC. O pessoal que apoia este serviço deve manter-se atento
+                        a um ambiente de ameaças em mudança, disponibilizando novas capacidades numa questão de semanas
+                        ou meses, de acordo com as exigências da missão. Pesquisa e Desenvolvimento de Ferramentas
+                        Pesquisa e desenvolvimento (P&D) de ferramentas personalizadas onde nenhum recurso comercial ou
+                        de código aberto adequado atende a uma necessidade operacional. O escopo desta atividade abrange
+                        desde o desenvolvimento de código para um problema estruturado e conhecido até a pesquisa
+                        acadêmica plurianual aplicada a um desafio mais complexo.
+                        
+                        <h3>Auditoria e ameaça interna </h3>
+                        
+                        
+                        
+                        Coleta e
+                        distribuição de dados de auditoria Coleta de vários feeds de dados relevantes para a segurança
+                        para fins de correlação e análise de incidentes. Esta arquitetura de recolha também pode ser
+                        aproveitada para apoiar a distribuição e posterior recuperação de dados de auditoria para fins
+                        de investigação ou análise a pedido, fora do âmbito da missão do SOC.
+                        
+                        Esta capacidade abrange a
+                        retenção a longo prazo de dados relevantes para a segurança para utilização por constituintes
+                        fora do SOC. 
+                        
+                        
+                        
+                        Criação e gerenciamento de conteúdo de auditoria Criação e adaptação de conteúdo
+                        SIEM ou manutenção de log (LM) (correlação, painéis, relatórios, etc.) para fins de revisão de
+                        auditoria dos constituintes e detecção de uso indevido. Este serviço baseia-se na capacidade de
+                        distribuição de dados de auditoria, fornecendo não apenas um feed de dados brutos, mas também
+                        conteúdo criado para constituintes fora do SOC. Suporte para casos de ameaças internas Apoio à
+                        análise e investigação de ameaças internas em duas áreas relacionadas, mas distintas: 1.
+                        Encontrar dicas para possíveis casos de ameaças internas (por exemplo, uso indevido de recursos
+                        de TI, fraude de cartão de ponto, fraude financeira, espionagem industrial ou roubo). O SOC
+                        avisará os órgãos de investigação apropriados (aplicação da lei, Inspetor Geral [IG], etc.)
+                        sobre um caso de interesse. 2. Em nome destes órgãos de investigação, o SOC fornecerá
+                        monitoramento adicional, coleta de informações e análise em apoio a um caso de ameaça interna.
+                        Investigação de casos de ameaças internas O SOC aproveita a sua própria autoridade reguladora ou
+                        legal independente para investigar ameaças internas, para incluir monitorização concentrada ou
+                        prolongada de indivíduos específicos, sem necessitar de apoio ou autoridades de uma entidade
+                        externa. Na prática, poucos SOCs fora da comunidade responsável pela aplicação da lei têm tais
+                        autoridades, pelo que normalmente actuam sob a direcção de outra organização. Digitalização e
+                        Avaliação Mapeamento de rede Mapeamento sustentado e regular das redes constituintes para
+                        compreender o tamanho, a forma, a composição e as interfaces perimetrais do grupo constituinte,
+                        por meio de técnicas automatizadas ou manuais. Estes mapas são muitas vezes construídos em
+                        cooperação com — e distribuídos a — outros constituintes. Verificação de vulnerabilidades
+                        Interrogação de hosts de consistência quanto ao status de vulnerabilidade, geralmente com foco
+                        no nível de patch de cada sistema e na conformidade de segurança, normalmente por meio de
+                        ferramentas distribuídas e automatizadas. Tal como acontece com o mapeamento de rede, isto
+                        permite ao SOC compreender melhor o que deve defender. O SOC pode fornecer estes dados aos
+                        membros do círculo eleitoral – talvez em forma de relatório ou resumo. Esta função é executada
+                        regularmente e não faz parte de uma avaliação ou exercício específico Avaliação de
+                        vulnerabilidade Avaliação de pleno conhecimento e segurança aberta de um local, enclave ou
+                        sistema constituinte, às vezes conhecido como “Blue Teaming”. Os membros do SOC trabalham com
+                        proprietários e administradores de sistemas para examinar holisticamente a arquitetura de
+                        segurança e as vulnerabilidades de seus sistemas, por meio de verificações, exame da
+                        configuração do sistema, revisão da documentação de design do sistema e entrevistas. Esta
+                        atividade pode aproveitar ferramentas de verificação de redes e vulnerabilidades, além de
+                        tecnologias mais invasivas usadas para interrogar sistemas quanto à configuração e ao status. A
+                        partir desse exame, os membros da equipe produzem um relatório de suas descobertas, juntamente
+                        com as soluções recomendadas. Os SOCs aproveitam as avaliações de vulnerabilidade como uma
+                        oportunidade para expandir a cobertura de monitoramento e o conhecimento dos seus analistas
+                        sobre o grupo constituinte Teste de penetração Avaliação sem conhecimento ou com conhecimento
+                        limitado de uma área específica do grupo constituinte, também conhecida como “Red Teaming”. Os
+                        membros do SOC conduzem um ataque simulado contra um segmento do eleitorado para avaliar a
+                        resiliência do alvo a um ataque real. Essas operações geralmente são realizadas apenas com o
+                        conhecimento e autorização dos executivos de mais alto nível, dentro da consistência e sem aviso
+                        prévio dos proprietários do sistema. As ferramentas usadas executarão ataques por vários meios:
+                        buffer overflows, injeção de Structured Query Language (SQL) e fuzzing de entrada . As Red Teams
+                        geralmente limitam seus objetivos e recursos para modelar os de um ator específico, talvez
+                        simulando a campanha de um adversário que pode começar com um ataque de phishing. Terminada a
+                        operação, a equipe produzirá um relatório com suas constatações, da mesma forma que uma
+                        avaliação de vulnerabilidade. No entanto, como as atividades de testes de penetração têm um
+                        conjunto restrito de objetivos, elas não cobrem tantos aspectos da configuração do sistema e das
+                        melhores práticas como faria uma avaliação de vulnerabilidade. Em alguns casos, o pessoal do SOC
+                        apenas coordenará as atividades do Red-Teaming, com um terceiro designado realizando a maior
+                        parte dos testes reais para garantir que os testadores não tenham conhecimento prévio dos
+                        sistemas constituintes ou das vulnerabilidades. 
+                        
+                        <h3>Divulgação</h3>
+                        
+                        Avaliação do Produto Testar os
+                        recursos de segurança de produtos pontuais adquiridos por membros do círculo eleitoral. Análogo
+                        às avaliações de vulnerabilidade em miniatura de um ou alguns hosts, esses testes permitem uma
+                        análise aprofundada dos pontos fortes e fracos de um produto específico do ponto de vista da
+                        segurança. Isto pode envolver testes “internos” de produtos, em vez de avaliação remota de
+                        sistemas de produção ou pré-produção. Consultoria de Segurança Prestar aconselhamento em
+                        cibersegurança a constituintes fora do âmbito da CND; apoiar o projeto de novos sistemas, a
+                        continuidade dos negócios e o planejamento de recuperação de desastres; política de segurança
+                        cibernética; guias de configuração segura; e outros esforços. Treinamento e Conscientização
+                        Divulgação proativa aos constituintes, apoiando treinamento geral de usuários, boletins e outros
+                        materiais educacionais que os ajudam a compreender vários problemas de segurança cibernética. Os
+                        principais objetivos são ajudar os constituintes a se protegerem de ameaças comuns, como
+                        esquemas de phishing/pharming, melhorar a segurança dos sistemas finais, aumentar a
+                        conscientização sobre os serviços do SOC e ajudar os constituintes a relatar incidentes
+                        corretamente. Consciência situacional Reempacotamento e redistribuição regulares e repetíveis do
+                        conhecimento do SOC sobre ativos, redes, ameaças, incidentes e vulnerabilidades dos
+                        constituintes para os constituintes. Esta capacidade vai além da distribuição de informações
+                        cibernéticas, melhorando a compreensão dos constituintes sobre a postura de segurança
+                        cibernética do eleitorado e de partes dele, impulsionando a tomada de decisões eficaz em todos
+                        os níveis. Essas informações podem ser entregues automaticamente por meio de um site do SOC,
+                        portal da Web ou lista de distribuição de e-mail. Redistribuição de TTPs Compartilhamento
+                        sustentado de produtos internos do SOC com outros consumidores, como SOCs parceiros ou
+                        subordinados, em um formato mais formal, refinado ou estruturado. Isso pode incluir quase tudo
+                        que o SOC desenvolve por conta própria (por exemplo, ferramentas, informações cibernéticas,
+                        assinaturas, relatórios de incidentes e outros dados brutos observáveis). O princípio do quid
+                        pro quo aplica-se frequentemente: o fluxo de informações entre SOCs é bidirecional. Relações com
+                        a mídia Comunicação direta com a mídia noticiosa. O SOC é responsável por divulgar informações
+                        sem afetar a reputação do grupo constituinte ou as atividades de resposta contínuas.
+                        
+                        <h3>Resumo</h3>
+                        
+                        <p class="privacy-topic-text"> À
+                        medida que você enfrenta o desafio de construir um centro de operações de segurança (SOC), sua
+                        capacidade de antecipar obstáculos comuns facilitará a inicialização, o desenvolvimento e o
+                        amadurecimento sem problemas ao longo do tempo. Embora cada organização seja única na sua atual
+                        postura de segurança, tolerância ao risco, experiência e orçamento, todas partilham os objetivos
+                        de tentar minimizar e reforçar a sua superfície de ataque e de detetar, priorizar e investigar
+                        rapidamente incidentes de segurança quando estes ocorrem.</p>&nbsp;<br>
+                        <p class="privacy-topic-text">Referências</p>
+                        <div class="font-review">
+                            <p class="privacy-topic-text"><a
+                                    href="https://www.sans.org/reading-room/whitepapers/analyst/building-world-class-security-operations-center-roadmap-35907"
+                                    target="_blank" rel="nofollow noopener">SANS, </a><a
+                                    href="https://www.mitre.org/sites/default/files/publications/pr-13-1028-mitre-10-strategies-cyber-ops-center.pdf"
+                                    target="_blank" rel="nofollow noopener">Mitre, </a><a
+                                    href="http://www.mcafee.com/in/resources/white-papers/foundstone/wp-creating-maintaining-soc.pdf"
+                                    target="_blank" rel="nofollow noopener">McAfee, </a><a
+                                    href="https://gbhackers.com/how-to-build-and-run-a-security-operations-center/"
+                                    target="_blank" rel="nofollow noopener">GBHackers. </a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div role="contentinfo" class="footer seletor">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-container about">
+                        <h2 class="white">Sobre a Inteligência Brasil</h2>
+                        <p class="white"><b>Somos </b>apaixonados por tecnologia com a missão de simplificar e melhorar
+                            cada vez mais a área de segurança da informação com a visão de manter o conhecimento ao
+                            alcance de todos.</p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="text-container">
+                        <h3 class="white">Links</h3>
+                        <ul class="list-unstyled li-space-lg white">
+                            <li class="media"><a class="white" href="./../../../../sitemap/">Mapa do site</a></li>
+                            <li><a class="white"
+                                    href="./../../../../assets/documentos/politicas/politica_de_privacidade/">Política
+                                    de Privacidade</a></li>
+                            <li><a class="white"
+                                    href="./../../../../assets/documentos/termos/termos_e_condicoes_de_uso/">Termos &
+                                    Condições</a></li>
+                            <li><a class="white"
+                                    href="./../../../../assets/documentos/termos/termo_de_privacidade/">LGPD &
+                                    Privacidade</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="text-container">
+                        <h3 class="white">Utilidades</h3>
+                        <ul class="list-unstyled li-space-lg">
+                            <li><a class="white" href="./../../../../assets/blog/security">Segurança</a></li>
+                            <li><a class="white" href="./../../../../assets/blog/strategy">Estratégia</a></li>
+                            <li><a class="white" href="./../../../../assets/blog/technology">Tecnologia</a></li>
+                            <li><a class="white" href="./../../../../assets/blog/publications">Pública</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="seletor copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="p-small">Copyright © 2023<a href="https://Inteligenciabrasil.seg.br">Inteligência
+                            Brasil</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./../../../../js/jquery.min.js"></script>
+    <script src="./../../../../js/popper.min.js"></script>
+    <script src="./../../../../js/bootstrap.min.js"></script>
+    <script src="./../../../../js/jquery.easing.min.js"></script>
+    <script src="./../../../../js/swiper.min.js"></script>
+    <script src="./../../../../js/jquery.magnific-popup.js"></script>
+    <script src="./../../../../js/morphext.min.js"></script>
+    <script src="./../../../../js/isotope.pkgd.min.js"></script>
+    <script src="./../../../../js/validator.min.js"></script>
+    <script src="./../../../../js/scripts.js"></script>
+    <script data-cfasync="false" src="./../../../../js/form-submission-handler.js"></script>
+</body>
+
+</html>
