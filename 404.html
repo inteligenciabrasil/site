@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Pagina nao encontrada - Inteligencia Brasil">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="icon" type="image/svg+xml" href="./img/favicon.svg">
+    <title>404 - Pagina nao encontrada | Inteligencia Brasil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="./css/fontawesome-all.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0D1E38;
+            --bg-secondary: #0a1628;
+            --bg-card: #0f2035;
+            --accent-primary: #60A5FA;
+            --accent-green: #34D399;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --border-radius: 12px;
+            --border-radius-pill: 9999px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error-container {
+            max-width: 600px;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
+        }
+
+        .error-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .error-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: #FFFFFF;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--border-radius-pill);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+            color: #FFFFFF;
+        }
+
+        .btn-contact {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: transparent;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            color: var(--accent-primary);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--border-radius-pill);
+            transition: all 0.3s ease;
+        }
+
+        .btn-contact:hover {
+            background: rgba(96, 165, 250, 0.1);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .logo {
+            margin-bottom: 2rem;
+            width: 180px;
+            filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.3));
+        }
+
+        .countdown {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .countdown span {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        @media (max-width: 576px) {
+            .error-code {
+                font-size: 5rem;
+            }
+            .error-title {
+                font-size: 1.25rem;
+            }
+            .error-message {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <img src="./img/logo-white.png" alt="Inteligencia Brasil" class="logo">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Pagina nao encontrada</h1>
+        <p class="error-message">
+            A pagina que voce esta procurando nao existe ou foi movida.
+            Verifique o endereco ou retorne a pagina inicial.
+        </p>
+        <div class="error-links">
+            <a href="./" class="btn-home">
+                <i class="fas fa-home"></i> Voltar ao Inicio
+            </a>
+            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" class="btn-contact">
+                <i class="fab fa-whatsapp"></i> Falar Conosco
+            </a>
+        </div>
+        <p class="countdown">
+            Redirecionando em <span id="timer">10</span> segundos...
+        </p>
+    </div>
+
+    <script>
+        var seconds = 10;
+        var timer = document.getElementById('timer');
+        var countdown = setInterval(function() {
+            seconds--;
+            timer.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                window.location.href = './';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
