@@ -107,6 +107,77 @@
                     0 0 70px #2563EB;
             }
         }
+
+        /* Mobile Menu Animation */
+        @media (max-width: 767.98px) {
+            .navbar-collapse {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-out, opacity 0.3s ease;
+                opacity: 0;
+            }
+            .navbar-collapse.collapsing {
+                max-height: 0;
+                opacity: 0;
+                transition: max-height 0.4s ease-out, opacity 0.3s ease;
+            }
+            .navbar-collapse.show {
+                max-height: 500px;
+                opacity: 1;
+                transition: max-height 0.5s ease-in, opacity 0.4s ease;
+            }
+            .navbar-nav .nav-item {
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            .navbar-collapse.show .navbar-nav .nav-item {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .navbar-collapse.show .navbar-nav .nav-item:nth-child(1) { transition-delay: 0.1s; }
+            .navbar-collapse.show .navbar-nav .nav-item:nth-child(2) { transition-delay: 0.15s; }
+            .navbar-collapse.show .navbar-nav .nav-item:nth-child(3) { transition-delay: 0.2s; }
+            .navbar-collapse.show .navbar-nav .nav-item:nth-child(4) { transition-delay: 0.25s; }
+            .navbar-collapse.show .navbar-nav .nav-item:nth-child(5) { transition-delay: 0.3s; }
+            .navbar-collapse.show .social-icons {
+                opacity: 1;
+                transition-delay: 0.35s;
+            }
+            .social-icons {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            /* Hamburger Animation */
+            .navbar-toggler {
+                position: relative;
+                transition: transform 0.3s ease;
+            }
+            .navbar-toggler:not(.collapsed) {
+                transform: rotate(180deg);
+            }
+            .navbar-toggler-awesome {
+                transition: transform 0.3s ease, opacity 0.2s ease;
+            }
+        }
+
+        /* Navbar Minimal - Para páginas secundárias (esconde logo da navbar) */
+        .navbar-minimal .navbar-brand {
+            display: none !important;
+        }
+        .navbar-minimal .navbar-toggler {
+            margin-left: 0;
+        }
+        @media (min-width: 768px) {
+            .navbar-minimal .navbar-brand {
+                display: none !important;
+            }
+            .navbar-minimal .navbar-nav {
+                margin-left: 0;
+            }
+        }
+
     </style>
 </head>
 
@@ -127,7 +198,7 @@
         <a class="navbar-brand logo-image" href="./">
             <img src="./img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196" height="113">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-awesome fas fa-bars"></span>
             <span class="navbar-toggler-awesome fas fa-times"></span>
         </button>
@@ -160,7 +231,7 @@
                         <i class="fas fa-shield-alt"></i> SERVIÇO ESPECIALIZADO
                     </div>
                     <h1 class="hero-title">
-                        Protegemos sua empresa com <br><span class="text-gradient" id="js-rotating">Segurança da Informação, Compliance LGPD, Gestão de Riscos, Defesa Cibernética, Segurança Digital</span>
+                        Protegemos sua empresa com <br><span class="text-gradient" id="js-rotating">Segurança da Informação, Compliance LGPD, Gestão de Riscos, Defesa Cibernética, Segurança Digital, Análise de Vulnerabilidades, Investigação Digital, Teste de Intrusão, Gestão de Vulnerabilidades, Monitoramento de Marca, Application Security, Cloud Computing Security, Governança Cibernética </span>
                     </h1>
                     <p class="hero-subtitle">
                         Transformamos a segurança em vantagem competitiva. Abordagem estratégica e personalizada para proteger os ativos mais valiosos da sua organização.
@@ -188,7 +259,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-5 d-none d-lg-block">
+                <div class="col-lg-5 col-12">
                     <div class="hero-visual">
                         <div class="security-icon-container">
                             <div class="icon-ring ring-1"></div>
@@ -634,12 +705,15 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="email">E-mail *</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                           maxlength="100" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="telefone">Telefone *</label>
                                     <input type="tel" class="form-control" id="telefone" name="telefone"
-                                           pattern="^\(?\d{2,3}\)?\s?\d{8,9}$"
+                                           pattern="^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$"
+                                           maxlength="15"
                                            placeholder="(11) 99999-9999" required>
                                 </div>
                             </div>
@@ -796,6 +870,15 @@
             }
         });
 
+        // Select placeholder color control
+        $('#servico').addClass('placeholder-selected').on('change', function() {
+            if ($(this).val()) {
+                $(this).removeClass('placeholder-selected');
+            } else {
+                $(this).addClass('placeholder-selected');
+            }
+        });
+
         // FAQ Accordion
         $('.faq-question').on('click', function() {
             var $item = $(this).closest('.faq-item');
@@ -877,6 +960,7 @@
                     var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
                     if (result === 'success' || result === 'ok' || response === 'success') {
                         form[0].reset();
+                        $('#servico').addClass('placeholder-selected');
                         msgDiv.removeClass('alert-danger').addClass('alert-success')
                               .text('Mensagem enviada com sucesso! Entraremos em contato em breve.')
                               .parent().fadeIn();

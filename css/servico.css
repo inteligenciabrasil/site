@@ -238,9 +238,10 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'DM Sans', sans-serif;
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--accent-primary);
+    color: #FFFFFF;
     line-height: 1;
     margin-bottom: 0.25rem;
+    text-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
 }
 
 .stat-label {
@@ -626,7 +627,8 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'DM Sans', sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(96, 165, 250, 0.4);
 }
 
 .data-text {
@@ -745,8 +747,8 @@ h1, h2, h3, h4, h5, h6 {
 .service-icon {
     width: 70px;
     height: 70px;
-    background: var(--accent-subtle);
-    border: 1px solid rgba(96, 165, 250, 0.15);
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+    border: 1px solid rgba(96, 165, 250, 0.2);
     border-radius: var(--border-radius);
     display: flex;
     justify-content: center;
@@ -756,12 +758,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .service-card:hover .service-icon {
-    border-color: rgba(96, 165, 250, 0.3);
+    background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+    border-color: transparent;
+    box-shadow: 0 8px 25px rgba(96, 165, 250, 0.3);
+}
+
+.service-card:hover .service-icon i {
+    color: #FFFFFF;
 }
 
 .service-icon i {
     font-size: 1.75rem;
-    color: var(--accent-primary);
+    color: #60A5FA;
+    transition: var(--transition);
 }
 
 .service-card h3 {
@@ -868,9 +877,10 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'DM Sans', sans-serif;
     font-size: 3.5rem;
     font-weight: 700;
-    color: rgba(96, 165, 250, 0.1);
+    color: rgba(255, 255, 255, 0.15);
     line-height: 1;
     margin-bottom: -15px;
+    text-shadow: 0 0 30px rgba(96, 165, 250, 0.3);
 }
 
 .timeline-content {
@@ -889,17 +899,18 @@ h1, h2, h3, h4, h5, h6 {
 .timeline-icon {
     width: 70px;
     height: 70px;
-    background: var(--accent-primary);
+    background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto 1.5rem;
+    box-shadow: 0 8px 25px rgba(96, 165, 250, 0.3);
 }
 
 .timeline-icon i {
-    font-size: 1.5rem;
-    color: var(--text-dark);
+    font-size: 1.75rem;
+    color: #FFFFFF;
 }
 
 .timeline-content h3 {
@@ -1331,6 +1342,24 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-muted);
 }
 
+/* Cor do placeholder do select */
+.contact-form select.form-control {
+    color: var(--text-primary);
+}
+
+.contact-form select.form-control.placeholder-selected {
+    color: var(--text-muted);
+}
+
+.contact-form select.form-control option {
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+}
+
+.contact-form select.form-control option:disabled {
+    color: var(--text-muted);
+}
+
 .contact-form .form-control:focus {
     border-color: var(--accent-primary);
     box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
@@ -1708,8 +1737,40 @@ h1, h2, h3, h4, h5, h6 {
         margin-top: 1rem;
     }
 
+    /* Logo animado responsivo no mobile */
+    .hero-visual {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
     .security-icon-container {
-        display: none;
+        width: 280px;
+        height: 280px;
+        margin: 0 auto;
+    }
+
+    .ring-1 { width: 160px; height: 160px; }
+    .ring-2 { width: 210px; height: 210px; }
+    .ring-3 { width: 260px; height: 260px; }
+
+    .icon-center.logo-center {
+        width: 120px;
+        height: 120px;
+    }
+
+    .ring-1::before,
+    .ring-2::before,
+    .ring-3::before {
+        width: 8px;
+        height: 8px;
+        top: -4px;
+    }
+
+    .ring-1::after,
+    .ring-2::after {
+        width: 5px;
+        height: 5px;
+        bottom: -2.5px;
     }
 }
 
@@ -1740,6 +1801,36 @@ h1, h2, h3, h4, h5, h6 {
 
     .stat-item {
         text-align: center;
+    }
+
+    /* Logo ainda menor em telas muito pequenas */
+    .security-icon-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    .ring-1 { width: 130px; height: 130px; }
+    .ring-2 { width: 170px; height: 170px; }
+    .ring-3 { width: 210px; height: 210px; }
+
+    .icon-center.logo-center {
+        width: 100px;
+        height: 100px;
+    }
+
+    .ring-1::before,
+    .ring-2::before,
+    .ring-3::before {
+        width: 6px;
+        height: 6px;
+        top: -3px;
+    }
+
+    .ring-1::after,
+    .ring-2::after {
+        width: 4px;
+        height: 4px;
+        bottom: -2px;
     }
 }
 
