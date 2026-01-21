@@ -1,28 +1,32 @@
-# Robots.txt - Inteligencia Brasil
-# Atualizado em 2026-01-20
+# Robots.txt para Inteligência Brasil
+# https://inteligenciabrasil.seg.br
 
-# Regras globais para todos os user-agents
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /private/
 
-# Permitir acesso aos recursos estaticos
+# Arquivos e diretórios permitidos
+Allow: /index.html
+Allow: /politica-de-privacidade.html
 Allow: /css/
 Allow: /js/
 Allow: /img/
-Allow: /webfonts/
 
-# Googlebot
-User-agent: Googlebot
-Allow: /
+# Bloquear arquivos sensíveis
+Disallow: /*.pdf$
+Disallow: /Solucoes_Parceria_Estrategica_Comercial_15012024.pdf
 
-# Bingbot
-User-agent: Bingbot
-Allow: /
-
-# Localizacao do Sitemap
+# Sitemap
 Sitemap: https://inteligenciabrasil.seg.br/sitemap.xml
 
-# Host principal
-Host: https://inteligenciabrasil.seg.br
+# Crawl-delay para ser gentil com o servidor
+Crawl-delay: 10
+
+# Regras específicas para Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 5
+
+# Regras específicas para Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 10
