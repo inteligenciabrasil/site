@@ -154,31 +154,51 @@
     <!-- Preconnect to external origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
 
     <!-- Preload critical resources -->
-    <link rel="preload" href="./css/servico.css" as="style">
-    <link rel="preload" href="./img/logo.svg" as="image">
-    <link rel="preload" href="./js/jquery.min.js" as="script">
+    <link rel="preload" href="./img/logo.svg" as="image" type="image/svg+xml">
 
-    <!-- Critical CSS -->
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <link href="./css/styles.css" rel="stylesheet">
-    <link href="./css/servico.css" rel="stylesheet">
+    <!-- Critical CSS - inline for faster FCP -->
+    <style>
+        :root{--bg-primary:#0A1628;--text-primary:#F1F5F9;--accent-primary:#60A5FA}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Fira Sans',system-ui,-apple-system,sans-serif;background:var(--bg-primary);color:var(--text-primary)}
+        .spinner-wrapper{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:#0D1E38;display:flex;align-items:center;justify-content:center;transition:opacity .3s ease}
+        .spinner{width:60px;height:20px;text-align:center}.spinner>div{width:12px;height:12px;background:#60A5FA;border-radius:100%;display:inline-block;animation:bounce 1.4s infinite ease-in-out both}
+        .spinner .bounce1{animation-delay:-.32s}.spinner .bounce2{animation-delay:-.16s}
+        @keyframes bounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
+        .navbar-custom{position:fixed;top:0;width:100%;z-index:1000;background:rgba(13,30,56,.95);padding:.5rem 1rem}
+        .navbar-brand img{max-height:100px;width:auto}
+        .hero-servico{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#0A1628 0%,#1E3A5F 100%);padding-top:80px}
+        .skip-link{position:absolute;top:-40px;left:0;background:#60A5FA;color:#0A1628;padding:8px 16px;z-index:10000;font-weight:600;text-decoration:none;border-radius:0 0 4px 0}
+        .skip-link:focus{top:0}
+    </style>
 
-    <!-- Fonts with display swap -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Non-critical CSS - load async -->
+    <link rel="stylesheet" href="./css/bootstrap.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="./css/styles.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="./css/servico.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="./css/fontawesome-all.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="./css/bootstrap.css" rel="stylesheet">
+        <link href="./css/styles.css" rel="stylesheet">
+        <link href="./css/servico.css" rel="stylesheet">
+        <link href="./css/fontawesome-all.css" rel="stylesheet">
+    </noscript>
 
-    <!-- Non-critical CSS - defer loading -->
-    <link rel="preload" href="./css/fontawesome-all.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="./css/fontawesome-all.css" rel="stylesheet"></noscript>
+    <!-- Fonts - reduced weights, async loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
 </head>
 
 <body oncontextmenu="return false;">
+    <!-- Skip to main content - accessibility -->
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
 
@@ -290,8 +310,11 @@
         </div>
     </header>
 
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+
     <!-- Trusted By Section -->
-    <section class="trusted-section">
+    <section class="trusted-section" aria-label="Metodologias utilizadas">
         <div class="container">
             <p class="trusted-text">Metodologias e frameworks que utilizamos</p>
             <div class="trusted-logos">
@@ -315,13 +338,13 @@
     </section>
 
     <!-- Overview Section -->
-    <section id="overview" class="overview-section">
+    <section id="overview" class="overview-section" aria-labelledby="overview-title">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="overview-content">
                         <span class="section-tag"><i class="fas fa-circle"></i> SOBRE O SERVIÇO</span>
-                        <h2>Por que investir em <strong>Segurança da Informação?</strong></h2>
+                        <h2 id="overview-title">Por que investir em <strong>Segurança da Informação?</strong></h2>
                         <p class="lead-text">
                             Em um cenário onde ataques cibernéticos crescem exponencialmente, proteger suas informações
                             não é mais opcional — é uma necessidade estratégica para a sobrevivência do negócio.
@@ -383,11 +406,11 @@
     </section>
 
     <!-- Services Section -->
-    <section id="servicos" class="services-section">
+    <section id="servicos" class="services-section" aria-labelledby="servicos-title">
         <div class="container">
             <div class="section-header text-center">
                 <span class="section-tag"><i class="fas fa-circle"></i> NOSSOS SERVIÇOS</span>
-                <h2>Soluções Completas em <strong>Segurança da Informação</strong></h2>
+                <h2 id="servicos-title">Soluções Completas em <strong>Segurança da Informação</strong></h2>
                 <p>Uma abordagem holística para proteger sua organização em todas as frentes</p>
             </div>
 
@@ -619,11 +642,11 @@
     </section>
 
     <!-- Methodology Section -->
-    <section id="metodologia" class="methodology-section">
+    <section id="metodologia" class="methodology-section" aria-labelledby="metodologia-title">
         <div class="container">
             <div class="section-header text-center">
                 <span class="section-tag"><i class="fas fa-circle"></i> NOSSA ABORDAGEM</span>
-                <h2>Metodologia de <strong>Trabalho</strong></h2>
+                <h2 id="metodologia-title">Metodologia de <strong>Trabalho</strong></h2>
                 <p>Um processo estruturado que garante resultados consistentes e mensuráveis</p>
             </div>
 
@@ -688,12 +711,12 @@
     </section>
 
     <!-- Differentials Section -->
-    <section id="diferenciais" class="differentials-section">
+    <section id="diferenciais" class="differentials-section" aria-labelledby="diferenciais-title">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
                     <span class="section-tag"><i class="fas fa-circle"></i> POR QUE NÓS</span>
-                    <h2>Diferenciais da <strong>Inteligência Brasil</strong></h2>
+                    <h2 id="diferenciais-title">Diferenciais da <strong>Inteligência Brasil</strong></h2>
                     <p class="lead-text">
                         Mais do que consultores, somos parceiros estratégicos comprometidos com a proteção e o
                         crescimento do seu negócio.
@@ -735,11 +758,11 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="faq-section">
+    <section id="faq" class="faq-section" aria-labelledby="faq-title">
         <div class="container">
             <div class="section-header text-center">
                 <span class="section-tag"><i class="fas fa-circle"></i> DÚVIDAS FREQUENTES</span>
-                <h2>Perguntas <strong>Frequentes</strong></h2>
+                <h2 id="faq-title">Perguntas <strong>Frequentes</strong></h2>
             </div>
 
             <div class="faq-container">
@@ -831,13 +854,13 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contato" class="contact-section">
+    <section id="contato" class="contact-section" aria-labelledby="contato-title">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
                     <div class="contact-info">
                         <span class="section-tag"><i class="fas fa-circle"></i> FALE CONOSCO</span>
-                        <h2>Vamos conversar sobre seu <strong>projeto?</strong></h2>
+                        <h2 id="contato-title">Vamos conversar sobre seu <strong>projeto?</strong></h2>
                         <p>Preencha o formulário ou entre em contato diretamente pelos canais abaixo. Respondemos em até
                             24 horas úteis.</p>
 
@@ -936,8 +959,11 @@
         </div>
     </section>
 
+    </main>
+    <!-- End Main Content -->
+
     <!-- Footer -->
-    <footer class="footer-section">
+    <footer class="footer-section" role="contentinfo">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -1023,14 +1049,22 @@
     <script src="./js/morphext.min.js"></script>
     <script src="./js/validator.min.js"></script>
     <script>
-        // Spinner
-        $(window).on('load', function () {
-            $('.spinner-wrapper').fadeOut(300);
-        });
-        setTimeout(function () {
+        // Spinner - vanilla JS for faster execution
+        (function() {
             var spinner = document.querySelector('.spinner-wrapper');
-            if (spinner) spinner.style.display = 'none';
-        }, 3000);
+            if (!spinner) return;
+
+            // Hide on load
+            window.addEventListener('load', function() {
+                spinner.style.opacity = '0';
+                setTimeout(function() { spinner.style.display = 'none'; }, 300);
+            });
+
+            // Fallback timeout
+            setTimeout(function() {
+                if (spinner) spinner.style.display = 'none';
+            }, 3000);
+        })();
 
         // Coleta de IP do visitante para o formulário
         (function () {
@@ -1101,12 +1135,15 @@
             });
         })();
 
-        // Animated Headline - Morphext
-        $('#js-rotating').Morphext({
-            animation: 'fadeIn',
-            separator: ',',
-            speed: 3000,
-            complete: function () { }
+        // jQuery-dependent code - wait for DOM ready
+        $(document).ready(function() {
+            // Animated Headline - Morphext
+            $('#js-rotating').Morphext({
+                animation: 'fadeIn',
+                separator: ',',
+                speed: 3000,
+                complete: function () { }
+            });
         });
 
         // Smooth scroll
