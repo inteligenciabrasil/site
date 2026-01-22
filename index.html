@@ -49,9 +49,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon-iphone-6-plus-180x180.png">
     <link rel="apple-touch-icon" sizes="192x192" href="./img/apple-touch-icon-192x192.png">
     <link rel="apple-touch-icon" sizes="512x512" href="./img/apple-touch-icon-512x512.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Inteligência Brasil">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-title" content="Inteligência Brasil">
 
     <title>Segurança da Informação | Inteligência Brasil - Consultoria em Cibersegurança São Paulo</title>
 
@@ -151,54 +151,209 @@
         }
     }
     </script>
-    <!-- Preconnect to external origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com">
-
-    <!-- Preload critical resources -->
-    <link rel="preload" href="./img/logo.svg" as="image" type="image/svg+xml">
-
-    <!-- Critical CSS - inline for faster FCP -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/fontawesome-all.css" rel="stylesheet">
+    <link href="./css/styles.css" rel="stylesheet">
+    <link href="./css/servico.css" rel="stylesheet">
     <style>
-        :root{--bg-primary:#0A1628;--text-primary:#F1F5F9;--accent-primary:#60A5FA}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Fira Sans',system-ui,-apple-system,sans-serif;background:var(--bg-primary);color:var(--text-primary)}
-        .spinner-wrapper{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:#0D1E38;display:flex;align-items:center;justify-content:center;transition:opacity .3s ease}
-        .spinner{width:60px;height:20px;text-align:center}.spinner>div{width:12px;height:12px;background:#60A5FA;border-radius:100%;display:inline-block;animation:bounce 1.4s infinite ease-in-out both}
-        .spinner .bounce1{animation-delay:-.32s}.spinner .bounce2{animation-delay:-.16s}
-        @keyframes bounce{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
-        .navbar-custom{position:fixed;top:0;width:100%;z-index:1000;background:rgba(13,30,56,.95);padding:.5rem 1rem}
-        .navbar-brand img{max-height:100px;width:auto}
-        .hero-servico{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#0A1628 0%,#1E3A5F 100%);padding-top:80px}
-        .skip-link{position:absolute;top:-40px;left:0;background:#60A5FA;color:#0A1628;padding:8px 16px;z-index:10000;font-weight:600;text-decoration:none;border-radius:0 0 4px 0}
-        .skip-link:focus{top:0}
+        /* Navy Blue Theme Navbar Override */
+        .navbar-custom {
+            background: rgba(13, 30, 56, 0.95) !important;
+            border-bottom: 1px solid rgba(96, 165, 250, 0.1);
+            backdrop-filter: blur(20px);
+        }
+
+        .navbar-custom.top-nav-collapse {
+            background: rgba(10, 22, 40, 0.98) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-custom .nav-link {
+            color: #F1F5F9 !important;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #60A5FA !important;
+        }
+
+        .navbar-custom .dropdown-menu {
+            background: #0f2035 !important;
+            border: 1px solid rgba(96, 165, 250, 0.15);
+        }
+
+        .navbar-custom .dropdown-item {
+            color: #94A3B8 !important;
+        }
+
+        .navbar-custom .dropdown-item:hover {
+            background: rgba(96, 165, 250, 0.1) !important;
+            color: #60A5FA !important;
+        }
+
+        .navbar-custom .dropdown-items-divide-hr {
+            background: rgba(96, 165, 250, 0.1) !important;
+        }
+
+        .navbar-custom .hexagon {
+            border-color: rgba(96, 165, 250, 0.3) !important;
+        }
+
+        .navbar-custom .social-icons i {
+            color: #60A5FA !important;
+        }
+
+        /* Spinner Navy */
+        .spinner-wrapper {
+            background: #0D1E38 !important;
+        }
+
+        .spinner>div {
+            background: #60A5FA !important;
+        }
+
+        /* Morphext animation styling with Neon Effect */
+        #js-rotating,
+        #js-rotating>.animated,
+        #js-rotating.text-gradient,
+        .hero-title .text-gradient#js-rotating {
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: #FFFFFF !important;
+            background-clip: unset !important;
+            color: #FFFFFF !important;
+            text-shadow:
+                0 0 5px #60A5FA,
+                0 0 10px #60A5FA,
+                0 0 20px #3B82F6,
+                0 0 40px #3B82F6,
+                0 0 60px #2563EB;
+            animation: neon-pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes neon-pulse {
+            0% {
+                text-shadow:
+                    0 0 5px #60A5FA,
+                    0 0 10px #60A5FA,
+                    0 0 20px #3B82F6,
+                    0 0 40px #3B82F6;
+            }
+
+            100% {
+                text-shadow:
+                    0 0 5px #60A5FA,
+                    0 0 15px #60A5FA,
+                    0 0 30px #3B82F6,
+                    0 0 50px #3B82F6,
+                    0 0 70px #2563EB;
+            }
+        }
+
+        /* Mobile Menu Animation */
+        @media (max-width: 767.98px) {
+            .navbar-collapse {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-out, opacity 0.3s ease;
+                opacity: 0;
+            }
+
+            .navbar-collapse.collapsing {
+                max-height: 0;
+                opacity: 0;
+                transition: max-height 0.4s ease-out, opacity 0.3s ease;
+            }
+
+            .navbar-collapse.show {
+                max-height: 500px;
+                opacity: 1;
+                transition: max-height 0.5s ease-in, opacity 0.4s ease;
+            }
+
+            .navbar-nav .nav-item {
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            .navbar-collapse.show .navbar-nav .nav-item {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .navbar-collapse.show .navbar-nav .nav-item:nth-child(1) {
+                transition-delay: 0.1s;
+            }
+
+            .navbar-collapse.show .navbar-nav .nav-item:nth-child(2) {
+                transition-delay: 0.15s;
+            }
+
+            .navbar-collapse.show .navbar-nav .nav-item:nth-child(3) {
+                transition-delay: 0.2s;
+            }
+
+            .navbar-collapse.show .navbar-nav .nav-item:nth-child(4) {
+                transition-delay: 0.25s;
+            }
+
+            .navbar-collapse.show .navbar-nav .nav-item:nth-child(5) {
+                transition-delay: 0.3s;
+            }
+
+            .navbar-collapse.show .social-icons {
+                opacity: 1;
+                transition-delay: 0.35s;
+            }
+
+            .social-icons {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            /* Hamburger Animation */
+            .navbar-toggler {
+                position: relative;
+                transition: transform 0.3s ease;
+            }
+
+            .navbar-toggler:not(.collapsed) {
+                transform: rotate(180deg);
+            }
+
+            .navbar-toggler-awesome {
+                transition: transform 0.3s ease, opacity 0.2s ease;
+            }
+        }
+
+        /* Navbar Minimal - Para páginas secundárias (esconde logo da navbar) */
+        .navbar-minimal .navbar-brand {
+            display: none !important;
+        }
+
+        .navbar-minimal .navbar-toggler {
+            margin-left: 0;
+        }
+
+        @media (min-width: 768px) {
+            .navbar-minimal .navbar-brand {
+                display: none !important;
+            }
+
+            .navbar-minimal .navbar-nav {
+                margin-left: 0;
+            }
+        }
     </style>
-
-    <!-- Non-critical CSS - load async -->
-    <link rel="stylesheet" href="./css/bootstrap.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="./css/styles.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="./css/servico.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="./css/fontawesome-all.css" media="print" onload="this.media='all'">
-    <noscript>
-        <link href="./css/bootstrap.css" rel="stylesheet">
-        <link href="./css/styles.css" rel="stylesheet">
-        <link href="./css/servico.css" rel="stylesheet">
-        <link href="./css/fontawesome-all.css" rel="stylesheet">
-    </noscript>
-
-    <!-- Fonts - reduced weights, async loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
 </head>
 
 <body oncontextmenu="return false;">
-    <!-- Skip to main content - accessibility -->
-    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
-
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
 
@@ -215,7 +370,7 @@
     <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
         <a class="navbar-brand logo-image" href="./">
             <img src="./img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196"
-                height="113" fetchpriority="high">
+                height="113">
         </a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
             data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
@@ -294,7 +449,11 @@
                             <div class="icon-ring ring-2"></div>
                             <div class="icon-ring ring-3"></div>
                             <div class="icon-center logo-center">
-                                <img src="./img/logo-white.png" alt="Inteligência Brasil" class="hero-logo-animated" width="180" height="104" fetchpriority="high">
+                                <picture>
+                                    <source media="(max-width: 767px)" srcset="./img/logo-white-140x140.png" width="140" height="140">
+                                    <source media="(min-width: 768px)" srcset="./img/logo-white-196x196.png" width="196" height="196">
+                                    <img src="./img/logo-white-196x196.png" alt="Inteligência Brasil" class="hero-logo-animated" width="196" height="196" fetchpriority="high">
+                                </picture>
                             </div>
                         </div>
                     </div>
@@ -310,11 +469,8 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main id="main-content" role="main">
-
     <!-- Trusted By Section -->
-    <section class="trusted-section" aria-label="Metodologias utilizadas">
+    <section class="trusted-section">
         <div class="container">
             <p class="trusted-text">Metodologias e frameworks que utilizamos</p>
             <div class="trusted-logos">
@@ -338,13 +494,13 @@
     </section>
 
     <!-- Overview Section -->
-    <section id="overview" class="overview-section" aria-labelledby="overview-title">
+    <section id="overview" class="overview-section">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="overview-content">
                         <span class="section-tag"><i class="fas fa-circle"></i> SOBRE O SERVIÇO</span>
-                        <h2 id="overview-title">Por que investir em <strong>Segurança da Informação?</strong></h2>
+                        <h2>Por que investir em <strong>Segurança da Informação?</strong></h2>
                         <p class="lead-text">
                             Em um cenário onde ataques cibernéticos crescem exponencialmente, proteger suas informações
                             não é mais opcional — é uma necessidade estratégica para a sobrevivência do negócio.
@@ -406,11 +562,11 @@
     </section>
 
     <!-- Services Section -->
-    <section id="servicos" class="services-section" aria-labelledby="servicos-title">
+    <section id="servicos" class="services-section">
         <div class="container">
             <div class="section-header text-center">
                 <span class="section-tag"><i class="fas fa-circle"></i> NOSSOS SERVIÇOS</span>
-                <h2 id="servicos-title">Soluções Completas em <strong>Segurança da Informação</strong></h2>
+                <h2>Soluções Completas em <strong>Segurança da Informação</strong></h2>
                 <p>Uma abordagem holística para proteger sua organização em todas as frentes</p>
             </div>
 
@@ -642,11 +798,11 @@
     </section>
 
     <!-- Methodology Section -->
-    <section id="metodologia" class="methodology-section" aria-labelledby="metodologia-title">
+    <section id="metodologia" class="methodology-section">
         <div class="container">
             <div class="section-header text-center">
                 <span class="section-tag"><i class="fas fa-circle"></i> NOSSA ABORDAGEM</span>
-                <h2 id="metodologia-title">Metodologia de <strong>Trabalho</strong></h2>
+                <h2>Metodologia de <strong>Trabalho</strong></h2>
                 <p>Um processo estruturado que garante resultados consistentes e mensuráveis</p>
             </div>
 
@@ -711,12 +867,12 @@
     </section>
 
     <!-- Differentials Section -->
-    <section id="diferenciais" class="differentials-section" aria-labelledby="diferenciais-title">
+    <section id="diferenciais" class="differentials-section">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
                     <span class="section-tag"><i class="fas fa-circle"></i> POR QUE NÓS</span>
-                    <h2 id="diferenciais-title">Diferenciais da <strong>Inteligência Brasil</strong></h2>
+                    <h2>Diferenciais da <strong>Inteligência Brasil</strong></h2>
                     <p class="lead-text">
                         Mais do que consultores, somos parceiros estratégicos comprometidos com a proteção e o
                         crescimento do seu negócio.
@@ -758,11 +914,11 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="faq-section" aria-labelledby="faq-title">
+    <section id="faq" class="faq-section">
         <div class="container">
             <div class="section-header text-center">
                 <span class="section-tag"><i class="fas fa-circle"></i> DÚVIDAS FREQUENTES</span>
-                <h2 id="faq-title">Perguntas <strong>Frequentes</strong></h2>
+                <h2>Perguntas <strong>Frequentes</strong></h2>
             </div>
 
             <div class="faq-container">
@@ -773,7 +929,7 @@
                     </button>
                     <div class="faq-answer">
                         <p>O prazo varia conforme a complexidade e maturidade atual da organização. Um diagnóstico
-                            inicial leva de 2 a 4 semanas. A implementação de um programa completo pode variar de 3 a 12
+                            inicial leva de 1 a 4 semanas. A implementação de um programa completo pode variar de 3 a 12
                             meses, dependendo do escopo. Trabalhamos com entregas incrementais para que você comece a
                             ver resultados desde o primeiro mês.</p>
                     </div>
@@ -854,13 +1010,13 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contato" class="contact-section" aria-labelledby="contato-title">
+    <section id="contato" class="contact-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
                     <div class="contact-info">
                         <span class="section-tag"><i class="fas fa-circle"></i> FALE CONOSCO</span>
-                        <h2 id="contato-title">Vamos conversar sobre seu <strong>projeto?</strong></h2>
+                        <h2>Vamos conversar sobre seu <strong>projeto?</strong></h2>
                         <p>Preencha o formulário ou entre em contato diretamente pelos canais abaixo. Respondemos em até
                             24 horas úteis.</p>
 
@@ -941,9 +1097,7 @@
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input" id="termos" name="termos" required>
                                 <label class="form-check-label" for="termos">
-                                    Li e aceito a <a href="politica-de-privacidade.html" target="_blank">Política de Privacidade</a>
-                                    e os <a href="documentos/termos/termo_de_privacidade/" target="_blank">Termos de Uso</a>,
-                                    e autorizo o contato para fins comerciais.
+                                    Li e aceito os termos de uso e autorizo o contato para fins comerciais.
                                 </label>
                             </div>
                             <button type="submit" class="btn-submit">
@@ -959,16 +1113,13 @@
         </div>
     </section>
 
-    </main>
-    <!-- End Main Content -->
-
     <!-- Footer -->
-    <footer class="footer-section" role="contentinfo">
+    <footer class="footer-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-about">
-                        <img src="./img/logo-white.png" alt="Inteligência Brasil" class="footer-logo" width="160" height="92" loading="lazy">
+                        <img src="./img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
                         <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação, com as
                             melhores práticas para redução de riscos digitais corporativos.</p>
                         <div class="footer-social">
@@ -1049,22 +1200,14 @@
     <script src="./js/morphext.min.js"></script>
     <script src="./js/validator.min.js"></script>
     <script>
-        // Spinner - vanilla JS for faster execution
-        (function() {
+        // Spinner
+        $(window).on('load', function () {
+            $('.spinner-wrapper').fadeOut(300);
+        });
+        setTimeout(function () {
             var spinner = document.querySelector('.spinner-wrapper');
-            if (!spinner) return;
-
-            // Hide on load
-            window.addEventListener('load', function() {
-                spinner.style.opacity = '0';
-                setTimeout(function() { spinner.style.display = 'none'; }, 300);
-            });
-
-            // Fallback timeout
-            setTimeout(function() {
-                if (spinner) spinner.style.display = 'none';
-            }, 3000);
-        })();
+            if (spinner) spinner.style.display = 'none';
+        }, 3000);
 
         // Coleta de IP do visitante para o formulário
         (function () {
@@ -1135,15 +1278,12 @@
             });
         })();
 
-        // jQuery-dependent code - wait for DOM ready
-        $(document).ready(function() {
-            // Animated Headline - Morphext
-            $('#js-rotating').Morphext({
-                animation: 'fadeIn',
-                separator: ',',
-                speed: 3000,
-                complete: function () { }
-            });
+        // Animated Headline - Morphext
+        $('#js-rotating').Morphext({
+            animation: 'fadeIn',
+            separator: ',',
+            speed: 3000,
+            complete: function () { }
         });
 
         // Smooth scroll
@@ -1215,104 +1355,22 @@
 
             // Collect form data
             var formData = {
-                name: $('#nome').val().trim(),
-                email: $('#email').val().trim().toLowerCase(),
+                name: $('#nome').val(),
+                email: $('#email').val(),
                 phone: $('#telefone').val().replace(/\D/g, ''),
-                empresa: $('#empresa').val().trim(),
+                empresa: $('#empresa').val(),
                 servico: $('#servico').val(),
-                message: $('#mensagem').val().trim(),
+                message: $('#mensagem').val(),
                 terms: 'Aceito',
                 origem: 'Página Home',
                 ip: $('#ip').val() || ''
             };
 
-            // Validate name - minimum 3 characters and no numbers
-            if (formData.name.length < 3 || /\d/.test(formData.name)) {
-                msgDiv.removeClass('alert-success').addClass('alert-danger')
-                    .text('Nome inválido: deve ter pelo menos 3 caracteres e não conter números.')
-                    .parent().fadeIn();
-                setTimeout(function () { msgDiv.parent().fadeOut(); }, 5000);
-                return false;
-            }
-
-            // Validate email with robust regex
-            var emailPattern = /^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?\.[a-zA-Z]{2,}$/;
-            if (!emailPattern.test(formData.email)) {
-                msgDiv.removeClass('alert-success').addClass('alert-danger')
-                    .text('E-mail inválido: verifique o formato do e-mail informado.')
-                    .parent().fadeIn();
-                setTimeout(function () { msgDiv.parent().fadeOut(); }, 5000);
-                return false;
-            }
-
-            // Block disposable/temporary email domains
-            var blockedDomains = ['tempmail', 'guerrillamail', 'mailinator', 'throwaway', '10minutemail', 'fakeinbox', 'trashmail', 'yopmail'];
-            var emailDomain = formData.email.split('@')[1];
-            for (var i = 0; i < blockedDomains.length; i++) {
-                if (emailDomain.indexOf(blockedDomains[i]) !== -1) {
-                    msgDiv.removeClass('alert-success').addClass('alert-danger')
-                        .text('E-mail inválido: não são aceitos e-mails temporários.')
-                        .parent().fadeIn();
-                    setTimeout(function () { msgDiv.parent().fadeOut(); }, 5000);
-                    return false;
-                }
-            }
-
-            // Validate phone - Brazilian format (10-11 digits)
-            if (formData.phone.length < 10 || formData.phone.length > 11) {
-                msgDiv.removeClass('alert-success').addClass('alert-danger')
-                    .text('Telefone inválido: informe DDD + número (10 ou 11 dígitos).')
-                    .parent().fadeIn();
-                setTimeout(function () { msgDiv.parent().fadeOut(); }, 5000);
-                return false;
-            }
-
-            // Validate phone - check for repeated digits (all same)
-            var phoneRepeatedPattern = /^(.)\1+$/;
-            if (phoneRepeatedPattern.test(formData.phone)) {
+            // Validate phone - check for repeated digits
+            var phonePattern = /^(.)\1+$/;
+            if (phonePattern.test(formData.phone)) {
                 msgDiv.removeClass('alert-success').addClass('alert-danger')
                     .text('Telefone inválido: números não podem ser todos iguais.')
-                    .parent().fadeIn();
-                setTimeout(function () { msgDiv.parent().fadeOut(); }, 5000);
-                return false;
-            }
-
-            // Validate phone - check for 5+ consecutive repeated digits (e.g., 112222222, 00999999999)
-            var consecutiveRepeatedPattern = /(.)\1{4,}/;
-            if (consecutiveRepeatedPattern.test(formData.phone)) {
-                msgDiv.removeClass('alert-success').addClass('alert-danger')
-                    .text('Telefone inválido: número contém dígitos repetidos em excesso.')
-                    .parent().fadeIn();
-                setTimeout(function () { msgDiv.parent().fadeOut(); }, 5000);
-                return false;
-            }
-
-            // Validate phone - cannot start with 00
-            if (formData.phone.substring(0, 2) === '00') {
-                msgDiv.removeClass('alert-success').addClass('alert-danger')
-                    .text('Telefone inválido: DDD não pode começar com 00.')
-                    .parent().fadeIn();
-                setTimeout(function () { msgDiv.parent().fadeOut(); }, 5000);
-                return false;
-            }
-
-            // Validate phone - check for sequential digits
-            var sequentialPatterns = ['0123456789', '9876543210', '1234567890', '0987654321'];
-            for (var j = 0; j < sequentialPatterns.length; j++) {
-                if (sequentialPatterns[j].indexOf(formData.phone) !== -1) {
-                    msgDiv.removeClass('alert-success').addClass('alert-danger')
-                        .text('Telefone inválido: números não podem ser sequenciais.')
-                        .parent().fadeIn();
-                    setTimeout(function () { msgDiv.parent().fadeOut(); }, 5000);
-                    return false;
-                }
-            }
-
-            // Validate phone - check DDD (valid Brazilian area codes: 11-99)
-            var ddd = parseInt(formData.phone.substring(0, 2));
-            if (ddd < 11 || ddd > 99) {
-                msgDiv.removeClass('alert-success').addClass('alert-danger')
-                    .text('Telefone inválido: DDD não reconhecido.')
                     .parent().fadeIn();
                 setTimeout(function () { msgDiv.parent().fadeOut(); }, 5000);
                 return false;
