@@ -151,206 +151,31 @@
         }
     }
     </script>
+    <!-- Preconnect to external origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="./css/servico.css" as="style">
+    <link rel="preload" href="./img/logo.svg" as="image">
+    <link rel="preload" href="./js/jquery.min.js" as="script">
+
+    <!-- Critical CSS -->
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/styles.css" rel="stylesheet">
+    <link href="./css/servico.css" rel="stylesheet">
+
+    <!-- Fonts with display swap -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="./css/bootstrap.css" rel="stylesheet">
-    <link href="./css/fontawesome-all.css" rel="stylesheet">
-    <link href="./css/styles.css" rel="stylesheet">
-    <link href="./css/servico.css" rel="stylesheet">
-    <style>
-        /* Navy Blue Theme Navbar Override */
-        .navbar-custom {
-            background: rgba(13, 30, 56, 0.95) !important;
-            border-bottom: 1px solid rgba(96, 165, 250, 0.1);
-            backdrop-filter: blur(20px);
-        }
 
-        .navbar-custom.top-nav-collapse {
-            background: rgba(10, 22, 40, 0.98) !important;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .navbar-custom .nav-link {
-            color: #F1F5F9 !important;
-        }
-
-        .navbar-custom .nav-link:hover {
-            color: #60A5FA !important;
-        }
-
-        .navbar-custom .dropdown-menu {
-            background: #0f2035 !important;
-            border: 1px solid rgba(96, 165, 250, 0.15);
-        }
-
-        .navbar-custom .dropdown-item {
-            color: #94A3B8 !important;
-        }
-
-        .navbar-custom .dropdown-item:hover {
-            background: rgba(96, 165, 250, 0.1) !important;
-            color: #60A5FA !important;
-        }
-
-        .navbar-custom .dropdown-items-divide-hr {
-            background: rgba(96, 165, 250, 0.1) !important;
-        }
-
-        .navbar-custom .hexagon {
-            border-color: rgba(96, 165, 250, 0.3) !important;
-        }
-
-        .navbar-custom .social-icons i {
-            color: #60A5FA !important;
-        }
-
-        /* Spinner Navy */
-        .spinner-wrapper {
-            background: #0D1E38 !important;
-        }
-
-        .spinner>div {
-            background: #60A5FA !important;
-        }
-
-        /* Morphext animation styling with Neon Effect */
-        #js-rotating,
-        #js-rotating>.animated,
-        #js-rotating.text-gradient,
-        .hero-title .text-gradient#js-rotating {
-            background: none !important;
-            -webkit-background-clip: unset !important;
-            -webkit-text-fill-color: #FFFFFF !important;
-            background-clip: unset !important;
-            color: #FFFFFF !important;
-            text-shadow:
-                0 0 5px #60A5FA,
-                0 0 10px #60A5FA,
-                0 0 20px #3B82F6,
-                0 0 40px #3B82F6,
-                0 0 60px #2563EB;
-            animation: neon-pulse 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes neon-pulse {
-            0% {
-                text-shadow:
-                    0 0 5px #60A5FA,
-                    0 0 10px #60A5FA,
-                    0 0 20px #3B82F6,
-                    0 0 40px #3B82F6;
-            }
-
-            100% {
-                text-shadow:
-                    0 0 5px #60A5FA,
-                    0 0 15px #60A5FA,
-                    0 0 30px #3B82F6,
-                    0 0 50px #3B82F6,
-                    0 0 70px #2563EB;
-            }
-        }
-
-        /* Mobile Menu Animation */
-        @media (max-width: 767.98px) {
-            .navbar-collapse {
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.4s ease-out, opacity 0.3s ease;
-                opacity: 0;
-            }
-
-            .navbar-collapse.collapsing {
-                max-height: 0;
-                opacity: 0;
-                transition: max-height 0.4s ease-out, opacity 0.3s ease;
-            }
-
-            .navbar-collapse.show {
-                max-height: 500px;
-                opacity: 1;
-                transition: max-height 0.5s ease-in, opacity 0.4s ease;
-            }
-
-            .navbar-nav .nav-item {
-                opacity: 0;
-                transform: translateY(-10px);
-                transition: opacity 0.3s ease, transform 0.3s ease;
-            }
-
-            .navbar-collapse.show .navbar-nav .nav-item {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            .navbar-collapse.show .navbar-nav .nav-item:nth-child(1) {
-                transition-delay: 0.1s;
-            }
-
-            .navbar-collapse.show .navbar-nav .nav-item:nth-child(2) {
-                transition-delay: 0.15s;
-            }
-
-            .navbar-collapse.show .navbar-nav .nav-item:nth-child(3) {
-                transition-delay: 0.2s;
-            }
-
-            .navbar-collapse.show .navbar-nav .nav-item:nth-child(4) {
-                transition-delay: 0.25s;
-            }
-
-            .navbar-collapse.show .navbar-nav .nav-item:nth-child(5) {
-                transition-delay: 0.3s;
-            }
-
-            .navbar-collapse.show .social-icons {
-                opacity: 1;
-                transition-delay: 0.35s;
-            }
-
-            .social-icons {
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            }
-
-            /* Hamburger Animation */
-            .navbar-toggler {
-                position: relative;
-                transition: transform 0.3s ease;
-            }
-
-            .navbar-toggler:not(.collapsed) {
-                transform: rotate(180deg);
-            }
-
-            .navbar-toggler-awesome {
-                transition: transform 0.3s ease, opacity 0.2s ease;
-            }
-        }
-
-        /* Navbar Minimal - Para páginas secundárias (esconde logo da navbar) */
-        .navbar-minimal .navbar-brand {
-            display: none !important;
-        }
-
-        .navbar-minimal .navbar-toggler {
-            margin-left: 0;
-        }
-
-        @media (min-width: 768px) {
-            .navbar-minimal .navbar-brand {
-                display: none !important;
-            }
-
-            .navbar-minimal .navbar-nav {
-                margin-left: 0;
-            }
-        }
-    </style>
+    <!-- Non-critical CSS - defer loading -->
+    <link rel="preload" href="./css/fontawesome-all.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="./css/fontawesome-all.css" rel="stylesheet"></noscript>
 </head>
 
 <body oncontextmenu="return false;">
@@ -370,7 +195,7 @@
     <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
         <a class="navbar-brand logo-image" href="./">
             <img src="./img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196"
-                height="113">
+                height="113" fetchpriority="high">
         </a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
             data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
@@ -449,7 +274,7 @@
                             <div class="icon-ring ring-2"></div>
                             <div class="icon-ring ring-3"></div>
                             <div class="icon-center logo-center">
-                                <img src="./img/logo-white.png" alt="Inteligência Brasil" class="hero-logo-animated">
+                                <img src="./img/logo-white.png" alt="Inteligência Brasil" class="hero-logo-animated" width="180" height="104" fetchpriority="high">
                             </div>
                         </div>
                     </div>
@@ -1117,7 +942,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-about">
-                        <img src="./img/logo-white.png" alt="Inteligência Brasil" class="footer-logo">
+                        <img src="./img/logo-white.png" alt="Inteligência Brasil" class="footer-logo" width="160" height="92" loading="lazy">
                         <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação, com as
                             melhores práticas para redução de riscos digitais corporativos.</p>
                         <div class="footer-social">
