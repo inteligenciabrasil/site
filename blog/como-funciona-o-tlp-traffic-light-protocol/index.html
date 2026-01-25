@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Entenda o Traffic Light Protocol (TLP) e como ele classifica informações para compartilhamento seguro. Conheça TLP:RED, TLP:AMBER, TLP:GREEN e TLP:CLEAR.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="TLP, Traffic Light Protocol, classificação de dados, compartilhamento seguro, FIRST, segurança da informação, DLP, cibersegurança">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/como-funciona-o-tlp-traffic-light-protocol/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Como Funciona o Traffic Light Protocol (TLP)">
+    <meta property="og:description" content="Entenda o TLP e como ele classifica informações para compartilhamento seguro nas organizações.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/como-funciona-o-tlp-traffic-light-protocol/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2024-04-10T10:00:00-03:00">
+    <meta property="article:modified_time" content="2026-01-25T10:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Segurança">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Traffic Light Protocol (TLP) - Guia Completo">
+    <meta name="twitter:description" content="Como classificar e compartilhar informações de forma segura com o TLP.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Como Funciona o Traffic Light Protocol (TLP) | Blog Inteligência Brasil</title>
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Como Funciona o Traffic Light Protocol (TLP)",
+        "description": "Entenda o Traffic Light Protocol (TLP) e como ele classifica informações para compartilhamento seguro.",
+        "image": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png",
+        "author": {
+            "@type": "Person",
+            "name": "Roberto Lima",
+            "url": "https://www.linkedin.com/in/roberto-lima/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Inteligência Brasil",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"
+            }
+        },
+        "datePublished": "2024-04-10",
+        "dateModified": "2026-01-25",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inteligenciabrasil.seg.br/blog/como-funciona-o-tlp-traffic-light-protocol/"
+        }
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "TLP", "item": "https://inteligenciabrasil.seg.br/blog/como-funciona-o-tlp-traffic-light-protocol/" }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>
+        body { background: #0a1628; }
+        .navbar-custom { background: rgba(13, 30, 56, 0.95) !important; border-bottom: 1px solid rgba(96, 165, 250, 0.1); backdrop-filter: blur(20px); }
+        .navbar-custom.top-nav-collapse { background: rgba(10, 22, 40, 0.98) !important; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); }
+        .navbar-custom .nav-link { color: #F1F5F9 !important; }
+        .navbar-custom .nav-link:hover { color: #60A5FA !important; }
+        .article-header { background: linear-gradient(135deg, #0D1E38 0%, #1a3a5c 50%, #0D1E38 100%); padding: 140px 0 60px; position: relative; }
+        .article-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; }
+        .article-header .container { position: relative; z-index: 1; }
+        .article-header h1 { color: #F1F5F9; font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+        .article-category { display: inline-block; background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .article-meta { display: flex; flex-wrap: wrap; gap: 20px; color: #94A3B8; font-size: 0.95rem; }
+        .article-meta span { display: flex; align-items: center; gap: 8px; }
+        .article-meta a { color: #60A5FA; text-decoration: none; }
+        .breadcrumb-nav { background: rgba(13, 30, 56, 0.8); padding: 15px 0; border-bottom: 1px solid rgba(96, 165, 250, 0.1); }
+        .breadcrumb { background: transparent; margin: 0; padding: 0; }
+        .breadcrumb-item, .breadcrumb-item a { color: #94A3B8; font-size: 0.9rem; }
+        .breadcrumb-item a:hover { color: #60A5FA; }
+        .breadcrumb-item.active { color: #F1F5F9; }
+        .article-content { background: #0a1628; padding: 60px 0; }
+        .article-body { max-width: 800px; margin: 0 auto; }
+        .article-body h2 { color: #F1F5F9; font-size: 1.8rem; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(96, 165, 250, 0.3); }
+        .article-body h3 { color: #F1F5F9; font-size: 1.4rem; margin: 30px 0 15px; }
+        .article-body p { color: #CBD5E1; font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
+        .article-body a { color: #60A5FA; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+        .article-body a:hover { border-bottom-color: #60A5FA; }
+        .article-body strong { color: #60A5FA; }
+        .article-body ul, .article-body ol { color: #CBD5E1; margin-bottom: 20px; padding-left: 25px; }
+        .article-body li { margin-bottom: 10px; line-height: 1.7; }
+        .toc { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin-bottom: 40px; }
+        .toc h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .toc h4 i { color: #60A5FA; }
+        .toc ul { list-style: none; padding: 0; margin: 0; }
+        .toc li { margin-bottom: 8px; }
+        .toc a { color: #94A3B8; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+        .toc a:hover { color: #60A5FA; }
+
+        /* TLP Badges */
+        .tlp-badge { display: inline-block; font-family: 'Fira Sans', sans-serif; font-weight: 600; padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; letter-spacing: 1px; margin: 5px 0; }
+        .tlp-red { background: #000; color: #FF2B2B; border: 2px solid #FF2B2B; }
+        .tlp-amber { background: #000; color: #FFC000; border: 2px solid #FFC000; }
+        .tlp-green { background: #000; color: #33FF00; border: 2px solid #33FF00; }
+        .tlp-clear { background: #000; color: #FFFFFF; border: 2px solid #FFFFFF; }
+
+        .tlp-section { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border-radius: 12px; padding: 25px; margin: 25px 0; }
+        .tlp-section h3 { margin-top: 0; display: flex; align-items: center; gap: 15px; }
+
+        .highlight-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 12px; padding: 25px; margin: 30px 0; }
+        .highlight-box p { margin: 0; color: #CBD5E1; }
+        .references { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin: 40px 0; }
+        .references h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .references h4 i { color: #60A5FA; }
+        .references ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+        .references a { display: inline-block; background: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.2); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; color: #94A3B8; text-decoration: none; transition: all 0.3s ease; }
+        .references a:hover { background: rgba(96, 165, 250, 0.2); color: #60A5FA; border-color: #60A5FA; }
+        .share-buttons { display: flex; gap: 15px; margin: 40px 0; flex-wrap: wrap; }
+        .share-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.3s ease; }
+        .share-btn.linkedin { background: #0077B5; color: #fff; }
+        .share-btn.twitter { background: #1DA1F2; color: #fff; }
+        .share-btn.whatsapp { background: #25D366; color: #fff; }
+        .share-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .author-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 30px; margin: 50px 0; display: flex; gap: 25px; align-items: center; }
+        .author-box img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+        .author-info h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 5px; }
+        .author-info h4 a { color: inherit; text-decoration: none; }
+        .author-info h4 a:hover { color: #60A5FA; }
+        .author-info p { color: #94A3B8; font-size: 0.95rem; margin: 0; }
+        .footer-section { background: #0D1E38; padding: 60px 0 30px; border-top: 1px solid rgba(96, 165, 250, 0.1); }
+        .footer-about p, .footer-contact p, .footer-links a { color: #94A3B8; }
+        .footer-links h4, .footer-contact h4 { color: #F1F5F9; }
+        .footer-bottom { border-top: 1px solid rgba(96, 165, 250, 0.1); padding-top: 20px; margin-top: 40px; color: #64748B; }
+        .footer-bottom a { color: #94A3B8; }
+        .footer-social a { color: #60A5FA; }
+        @media (max-width: 768px) {
+            .article-header h1 { font-size: 1.8rem; }
+            .author-box { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../">
+            <img src="../../img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196" height="113">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack">
+                    <a href="https://www.linkedin.com/company/inteligenciabrasil" title="Linkedin Inteligência Brasil" target="_blank" rel="noopener">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                    </a>
+                </span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Segurança</span>
+            <h1>Como Funciona o Traffic Light Protocol (TLP)</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Abril 2024</span>
+                <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                <span><i class="far fa-user"></i> <a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page">TLP</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h4><i class="fas fa-list"></i> Neste artigo</h4>
+                    <ul>
+                        <li><a href="#introducao">Introdução</a></li>
+                        <li><a href="#oque">O que é o TLP</a></li>
+                        <li><a href="#objetivo">Objetivo do TLP</a></li>
+                        <li><a href="#classificacoes">As Quatro Classificações</a></li>
+                        <li><a href="#aplicacoes">Aplicações Práticas</a></li>
+                        <li><a href="#beneficios">Benefícios do TLP</a></li>
+                        <li><a href="#conclusao">Conclusão</a></li>
+                    </ul>
+                </div>
+
+                <p style="text-align: center; margin-bottom: 30px;"><span class="tlp-badge tlp-clear">TLP:CLEAR</span></p>
+
+                <h2 id="introducao">Introdução</h2>
+
+                <p>
+                    A classificação de dados é crucial para implementar uma eficaz política ou programa de Prevenção de Perda de Dados
+                    (DLP - <em>Data Loss Prevention</em>). Com isso, apresentamos o protocolo de segurança e compartilhamento
+                    <strong>TLP (Traffic Light Protocol)</strong>, desenvolvido pelo FIRST.
+                </p>
+
+                <p>
+                    <a href="https://www.first.org/" target="_blank" rel="nofollow noopener">FIRST</a> (<em>Forum of Incident Response
+                    and Security Teams</em>) é uma organização global que reúne equipes de resposta a incidentes de segurança de
+                    diversos setores, como governo, empresas e educação. A missão do FIRST é promover a cooperação, a rápida reação
+                    a incidentes e o compartilhamento de informações entre seus membros.
+                </p>
+
+                <h2 id="oque">TLP - Traffic Light Protocol</h2>
+
+                <p>
+                    O <strong>Traffic Light Protocol (TLP)</strong> foi desenvolvido para facilitar o compartilhamento seguro de
+                    informações sensíveis. Utilizado por profissionais de segurança e equipes de resposta a incidentes, o TLP
+                    define claramente como as informações podem ser disseminadas, garantindo que elas alcancem apenas as partes
+                    autorizadas.
+                </p>
+
+                <h2 id="objetivo">Objetivo do TLP</h2>
+
+                <p>
+                    O TLP visa melhorar a colaboração e a resposta a incidentes através de diretrizes simples que indicam os
+                    limites de compartilhamento de informações. Ele não substitui sistemas de classificação formal ou regras
+                    de criptografia, mas oferece um esquema intuitivo para facilitar a comunicação segura.
+                </p>
+
+                <h2 id="classificacoes">As Quatro Classificações do TLP</h2>
+
+                <div class="tlp-section" style="border-left: 4px solid #FF2B2B;">
+                    <h3><span class="tlp-badge tlp-red">TLP:RED</span></h3>
+                    <p>
+                        É a categoria <strong>mais restritiva</strong> do Traffic Light Protocol. Indica que as informações são
+                        extremamente sensíveis e devem ser mantidas estritamente confidenciais.
+                    </p>
+                    <ul>
+                        <li><strong>Uso:</strong> Informação restrita apenas aos destinatários designados.</li>
+                        <li><strong>Compartilhamento:</strong> Não pode ser compartilhada com ninguém fora do grupo especificado,
+                        nem mesmo dentro da organização.</li>
+                    </ul>
+                </div>
+
+                <div class="tlp-section" style="border-left: 4px solid #FFC000;">
+                    <h3><span class="tlp-badge tlp-amber">TLP:AMBER</span></h3>
+                    <p>
+                        Permite o compartilhamento de informações <strong>com restrições</strong>. Essas informações são sensíveis,
+                        mas podem ser disseminadas internamente e, em alguns casos, com clientes que precisam saber.
+                    </p>
+                    <ul>
+                        <li><strong>Uso:</strong> Informação que pode ser compartilhada dentro da organização e com clientes essenciais.</li>
+                        <li><strong>Compartilhamento:</strong> Limitado a quem realmente precisa saber. Existem variações como
+                        <span class="tlp-badge tlp-amber" style="font-size: 0.75rem; padding: 4px 8px;">TLP:AMBER+STRICT</span>
+                        que restringem apenas dentro da organização.</li>
+                    </ul>
+                </div>
+
+                <div class="tlp-section" style="border-left: 4px solid #33FF00;">
+                    <h3><span class="tlp-badge tlp-green">TLP:GREEN</span></h3>
+                    <p>
+                        Permite o compartilhamento de informações <strong>dentro de uma comunidade específica</strong>. Útil para
+                        conscientização e melhoria da segurança, mas não deve ser compartilhada publicamente.
+                    </p>
+                    <ul>
+                        <li><strong>Uso:</strong> Informação útil para uma comunidade específica.</li>
+                        <li><strong>Compartilhamento:</strong> Pode ser compartilhada com pares e organizações parceiras dentro
+                        de uma comunidade definida, mas não publicamente.</li>
+                    </ul>
+                </div>
+
+                <div class="tlp-section" style="border-left: 4px solid #FFFFFF;">
+                    <h3><span class="tlp-badge tlp-clear">TLP:CLEAR</span></h3>
+                    <p>
+                        É a categoria <strong>mais aberta</strong> do TLP. Informações podem ser compartilhadas livremente e
+                        publicamente, sem restrições.
+                    </p>
+                    <ul>
+                        <li><strong>Uso:</strong> Informação que não possui restrições de compartilhamento.</li>
+                        <li><strong>Compartilhamento:</strong> Pode ser disseminada livremente, incluindo divulgação pública.</li>
+                    </ul>
+                </div>
+
+                <h2 id="aplicacoes">Aplicações Práticas</h2>
+
+                <ul>
+                    <li><strong>Mensagens e Emails:</strong> As marcações TLP devem ser claras e colocadas na linha de assunto
+                    e no corpo da mensagem para indicar como a informação deve ser tratada.</li>
+                    <li><strong>Documentos:</strong> Devem incluir a marcação TLP no cabeçalho e rodapé de cada página, com
+                    fontes de tamanho adequado para garantir a legibilidade.</li>
+                    <li><strong>Sistemas Automatizados:</strong> Devem seguir as diretrizes do TLP, embora a implementação
+                    específica seja deixada a critério dos desenvolvedores.</li>
+                </ul>
+
+                <h2 id="beneficios">Benefícios do TLP</h2>
+
+                <p>
+                    O TLP oferece um método direto e eficaz para gerenciar a disseminação de informações sensíveis, promovendo
+                    a confiança e a colaboração entre organizações e dentro de comunidades específicas. Sua simplicidade facilita
+                    a adoção e a aplicação correta, garantindo que informações críticas cheguem apenas a quem realmente precisa saber.
+                </p>
+
+                <h2 id="conclusao">Conclusão</h2>
+
+                <p>
+                    O Traffic Light Protocol é uma ferramenta essencial para a segurança da informação, proporcionando um meio
+                    claro e eficaz para controlar o compartilhamento de dados sensíveis. Sua aplicação ajuda a proteger contra
+                    riscos e a manter a integridade das operações das organizações envolvidas.
+                </p>
+
+                <div class="highlight-box">
+                    <p>
+                        <strong>Precisa implementar o TLP na sua organização?</strong> Nossa equipe oferece consultoria completa
+                        para implementação de protocolos de classificação da informação, adaptando às necessidades específicas
+                        da sua empresa.
+                    </p>
+                </div>
+
+                <!-- References -->
+                <div class="references">
+                    <h4><i class="fas fa-book"></i> Referências</h4>
+                    <ul>
+                        <li><a href="https://www.first.org/tlp/" target="_blank" rel="nofollow noopener">FIRST TLP</a></li>
+                        <li><a href="https://cert.br/tlp" target="_blank" rel="nofollow noopener">CERT.br TLP</a></li>
+                        <li><a href="https://www.cisa.gov/news-events/news/traffic-light-protocol-tlp-definitions-and-usage" target="_blank" rel="nofollow noopener">CISA TLP</a></li>
+                    </ul>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons">
+                    <span style="color: #94A3B8; margin-right: 10px;">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/como-funciona-o-tlp-traffic-light-protocol/" target="_blank" class="share-btn linkedin">
+                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/como-funciona-o-tlp-traffic-light-protocol/&text=Como Funciona o Traffic Light Protocol (TLP)" target="_blank" class="share-btn twitter">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="https://wa.me/?text=Traffic Light Protocol (TLP) - Guia Completo https://inteligenciabrasil.seg.br/blog/como-funciona-o-tlp-traffic-light-protocol/" target="_blank" class="share-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+
+                <!-- Author Box -->
+                <div class="author-box">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="80" height="80">
+                    </picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></h4>
+                        <p>Especialista em Segurança da Informação e Governança de Dados na Inteligência Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- CTA Section -->
+    <section class="cta-section" style="background: linear-gradient(135deg, #1a3a5c 0%, #0D1E38 100%); padding: 80px 0; border-top: 1px solid rgba(96, 165, 250, 0.2);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 style="color: #F1F5F9; font-size: 2rem; margin-bottom: 20px;">Implemente o TLP na sua empresa</h3>
+                    <p style="color: #94A3B8; font-size: 1.1rem; margin-bottom: 30px;">Nossa equipe pode ajudar a implementar protocolos de classificação de dados e políticas de compartilhamento seguro de informações na sua organização.</p>
+                    <a href="../../#contato" class="btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; padding: 15px 40px; border-radius: 8px; font-weight: 600; font-size: 1.1rem; text-decoration: none; display: inline-block;">Solicitar Consultoria</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" style="background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); padding: 60px 0; border-top: 1px solid rgba(96, 165, 250, 0.1);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="100" height="100">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="100" height="100" style="margin-bottom: 20px; background: transparent;">
+                    </picture>
+                    <h3 style="color: #F1F5F9; margin-bottom: 15px;">Fique por dentro das novidades</h3>
+                    <p style="color: #94A3B8; margin-bottom: 30px;">Receba conteúdos exclusivos sobre segurança da informação e governança de dados.</p>
+                    <form id="newsletter-form" class="newsletter-form" style="max-width: 500px; margin: 0 auto;">
+                        <div class="input-group" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 5px;">
+                            <input type="email" id="newsletter-email" name="email" class="form-control" placeholder="Seu melhor e-mail corporativo" required style="background: transparent; border: none; color: #F1F5F9; padding: 15px 20px;" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; padding: 15px 30px; border-radius: 6px; font-weight: 600;">Inscrever</button>
+                            </div>
+                        </div>
+                        <p id="newsletter-message" style="margin-top: 15px; font-size: 0.9rem;"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Blog</h4>
+                        <ul>
+                            <li><a href="../ciclo-ooda-observar-orientar-decidir-agir/">Ciclo OODA</a></li>
+                            <li><a href="./">TLP Protocol</a></li>
+                            <li><a href="../lockpicking-nenhuma-fechadura-esta-segura-com-isso/">Lockpicking</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Serviços</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.easing.min.js"></script>
+    <script>
+        $(window).on('scroll load', function () {
+            if ($('.navbar').offset().top > 20) {
+                $('.navbar-custom').addClass('top-nav-collapse');
+            } else {
+                $('.navbar-custom').removeClass('top-nav-collapse');
+            }
+        });
+
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            var target = $(this.getAttribute('href'));
+            if (target.length) {
+                $('html, body').animate({ scrollTop: target.offset().top - 100 }, 500, 'easeInOutExpo');
+            }
+        });
+
+        const blockedPublicDomains = ['gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'protonmail.com', 'proton.me', 'zoho.com', 'yandex.com', 'mail.com', 'gmx.com', 'gmx.net', 'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com', 'r7.com'];
+        const blockedTempDomains = ['tempmail.com', 'temp-mail.org', 'guerrillamail.com', 'guerrillamail.org', '10minutemail.com', 'mailinator.com', 'throwaway.email', 'fakeinbox.com', 'sharklasers.com', 'spam4.me', 'grr.la', 'dispostable.com', 'maildrop.cc', 'yopmail.com', 'mohmal.com', 'getnada.com', 'tempail.com', 'emailondeck.com', 'mintemail.com'];
+
+        function isBlockedEmail(email) {
+            const domain = email.split('@')[1]?.toLowerCase();
+            if (!domain) return true;
+            return blockedPublicDomains.includes(domain) || blockedTempDomains.includes(domain);
+        }
+
+        document.getElementById('newsletter-form')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletter-email');
+            const messageEl = document.getElementById('newsletter-message');
+            const email = emailInput.value.trim();
+
+            if (isBlockedEmail(email)) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Por favor, utilize um e-mail corporativo.';
+                return;
+            }
+
+            try {
+                let userIP = '';
+                try {
+                    const ipResponse = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await ipResponse.json();
+                    userIP = ipData.ip;
+                } catch (e) { userIP = 'unknown'; }
+
+                await fetch('https://script.google.com/macros/s/AKfycbxhe2brHBkOdTwMblSCWEMJ-PfHrNnxN5JrEXdlp6MIEq7RgT8e2dJfVMBVSjPmO9a-/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ email: email, ip: userIP, source: 'blog-tlp' })
+                });
+
+                messageEl.style.color = '#22c55e';
+                messageEl.textContent = 'Inscrição realizada com sucesso!';
+                emailInput.value = '';
+            } catch (error) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Erro ao processar. Tente novamente.';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Entenda o que e APT (Advanced Persistent Threat) - Ameaca Persistente Avancada. Conheca as caracteristicas, ciclo de ataque, grupos famosos como APT28 e APT29, e estrategias de protecao.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="APT, Advanced Persistent Threat, Ameaca Persistente Avancada, APT28, APT29, Lazarus Group, SolarWinds, ciberseguranca, threat intelligence, MITRE ATT&CK">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/ameaca-persistente-avancada-o-que-e-apt/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Ameaca Persistente Avancada: O que e APT?">
+    <meta property="og:description" content="Guia completo sobre APT - Advanced Persistent Threat. Entenda como funcionam os ataques mais sofisticados do mundo.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/ameaca-persistente-avancada-o-que-e-apt/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2023-09-15T10:00:00-03:00">
+    <meta property="article:modified_time" content="2026-01-25T10:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Ciberseguranca">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="APT - Advanced Persistent Threat - Guia Completo">
+    <meta name="twitter:description" content="Entenda o que sao Ameacas Persistentes Avancadas e como se proteger.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Ameaca Persistente Avancada: O que e APT? | Blog Inteligencia Brasil</title>
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Ameaca Persistente Avancada: O que e APT?",
+        "description": "Guia completo sobre APT (Advanced Persistent Threat). Entenda as caracteristicas, ciclo de ataque, grupos famosos e estrategias de protecao.",
+        "image": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png",
+        "author": {
+            "@type": "Person",
+            "name": "Roberto Lima",
+            "url": "https://www.linkedin.com/in/roberto-lima/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Inteligencia Brasil",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"
+            }
+        },
+        "datePublished": "2023-09-15",
+        "dateModified": "2026-01-25",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inteligenciabrasil.seg.br/blog/ameaca-persistente-avancada-o-que-e-apt/"
+        }
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "APT", "item": "https://inteligenciabrasil.seg.br/blog/ameaca-persistente-avancada-o-que-e-apt/" }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>
+        body { background: #0a1628; }
+        .navbar-custom { background: rgba(13, 30, 56, 0.95) !important; border-bottom: 1px solid rgba(96, 165, 250, 0.1); backdrop-filter: blur(20px); }
+        .navbar-custom.top-nav-collapse { background: rgba(10, 22, 40, 0.98) !important; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); }
+        .navbar-custom .nav-link { color: #F1F5F9 !important; }
+        .navbar-custom .nav-link:hover { color: #60A5FA !important; }
+        .article-header { background: linear-gradient(135deg, #0D1E38 0%, #1a3a5c 50%, #0D1E38 100%); padding: 140px 0 60px; position: relative; }
+        .article-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; }
+        .article-header .container { position: relative; z-index: 1; }
+        .article-header h1 { color: #F1F5F9; font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+        .article-category { display: inline-block; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .article-meta { display: flex; flex-wrap: wrap; gap: 20px; color: #94A3B8; font-size: 0.95rem; }
+        .article-meta span { display: flex; align-items: center; gap: 8px; }
+        .article-meta a { color: #60A5FA; text-decoration: none; }
+        .breadcrumb-nav { background: rgba(13, 30, 56, 0.8); padding: 15px 0; border-bottom: 1px solid rgba(96, 165, 250, 0.1); }
+        .breadcrumb { background: transparent; margin: 0; padding: 0; }
+        .breadcrumb-item, .breadcrumb-item a { color: #94A3B8; font-size: 0.9rem; }
+        .breadcrumb-item a:hover { color: #60A5FA; }
+        .breadcrumb-item.active { color: #F1F5F9; }
+        .article-content { background: #0a1628; padding: 60px 0; }
+        .article-body { max-width: 800px; margin: 0 auto; }
+        .article-body h2 { color: #F1F5F9; font-size: 1.8rem; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(96, 165, 250, 0.3); }
+        .article-body h3 { color: #F1F5F9; font-size: 1.4rem; margin: 30px 0 15px; }
+        .article-body h4 { color: #F1F5F9; font-size: 1.2rem; margin: 25px 0 12px; }
+        .article-body p { color: #CBD5E1; font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
+        .article-body a { color: #60A5FA; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+        .article-body a:hover { border-bottom-color: #60A5FA; }
+        .article-body strong { color: #60A5FA; }
+        .article-body ul, .article-body ol { color: #CBD5E1; margin-bottom: 20px; padding-left: 25px; }
+        .article-body li { margin-bottom: 10px; line-height: 1.7; }
+        .toc { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin-bottom: 40px; }
+        .toc h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .toc h4 i { color: #60A5FA; }
+        .toc ul { list-style: none; padding: 0; margin: 0; }
+        .toc li { margin-bottom: 8px; }
+        .toc a { color: #94A3B8; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+        .toc a:hover { color: #60A5FA; }
+
+        /* APT Lifecycle Steps */
+        .lifecycle-container { display: flex; flex-direction: column; gap: 15px; margin: 30px 0; }
+        .lifecycle-step { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 20px; position: relative; padding-left: 70px; }
+        .lifecycle-step::before { content: attr(data-step); position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; font-size: 1.1rem; }
+        .lifecycle-step h4 { color: #F1F5F9; margin: 0 0 8px 0; font-size: 1.1rem; }
+        .lifecycle-step p { color: #CBD5E1; margin: 0; font-size: 0.95rem; line-height: 1.6; }
+
+        /* APT Group Boxes */
+        .apt-group-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border-radius: 12px; padding: 25px; margin: 20px 0; border-left: 4px solid #ef4444; }
+        .apt-group-box h4 { color: #ef4444; margin: 0 0 5px 0; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        .apt-group-box .aka { color: #94A3B8; font-size: 0.9rem; font-style: italic; margin-bottom: 12px; }
+        .apt-group-box p { color: #CBD5E1; margin: 0; font-size: 0.95rem; line-height: 1.6; }
+        .apt-group-box .origin { display: inline-block; background: rgba(239, 68, 68, 0.2); color: #ef4444; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; margin-top: 10px; }
+
+        /* Attack Example Box */
+        .attack-example { background: linear-gradient(145deg, #1a0a0a 0%, #0D1E38 100%); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 12px; padding: 25px; margin: 25px 0; }
+        .attack-example h4 { color: #ef4444; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px; }
+        .attack-example h4 i { color: #ef4444; }
+        .attack-example p { color: #CBD5E1; margin-bottom: 10px; }
+        .attack-example ul { margin: 0; padding-left: 20px; }
+        .attack-example li { color: #CBD5E1; margin-bottom: 5px; }
+
+        .highlight-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 12px; padding: 25px; margin: 30px 0; }
+        .highlight-box p { margin: 0; color: #CBD5E1; }
+        .warning-box { background: linear-gradient(145deg, #1a0f05 0%, #0D1E38 100%); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 12px; padding: 25px; margin: 30px 0; }
+        .warning-box h4 { color: #ef4444; margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px; }
+        .warning-box p { margin: 0; color: #CBD5E1; }
+        .references { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin: 40px 0; }
+        .references h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .references h4 i { color: #60A5FA; }
+        .references ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+        .references a { display: inline-block; background: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.2); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; color: #94A3B8; text-decoration: none; transition: all 0.3s ease; }
+        .references a:hover { background: rgba(96, 165, 250, 0.2); color: #60A5FA; border-color: #60A5FA; }
+        .share-buttons { display: flex; gap: 15px; margin: 40px 0; flex-wrap: wrap; }
+        .share-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.3s ease; }
+        .share-btn.linkedin { background: #0077B5; color: #fff; }
+        .share-btn.twitter { background: #1DA1F2; color: #fff; }
+        .share-btn.whatsapp { background: #25D366; color: #fff; }
+        .share-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .author-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 30px; margin: 50px 0; display: flex; gap: 25px; align-items: center; }
+        .author-box img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+        .author-info h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 5px; }
+        .author-info h4 a { color: inherit; text-decoration: none; }
+        .author-info h4 a:hover { color: #60A5FA; }
+        .author-info p { color: #94A3B8; font-size: 0.95rem; margin: 0; }
+        .footer-section { background: #0D1E38; padding: 60px 0 30px; border-top: 1px solid rgba(96, 165, 250, 0.1); }
+        .footer-about p, .footer-contact p, .footer-links a { color: #94A3B8; }
+        .footer-links h4, .footer-contact h4 { color: #F1F5F9; }
+        .footer-bottom { border-top: 1px solid rgba(96, 165, 250, 0.1); padding-top: 20px; margin-top: 40px; color: #64748B; }
+        .footer-bottom a { color: #94A3B8; }
+        .footer-social a { color: #60A5FA; }
+        @media (max-width: 768px) {
+            .article-header h1 { font-size: 1.8rem; }
+            .author-box { flex-direction: column; text-align: center; }
+            .lifecycle-step { padding-left: 20px; padding-top: 60px; }
+            .lifecycle-step::before { left: 50%; top: 15px; transform: translateX(-50%); }
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../">
+            <img src="../../img/logo.svg" title="Logo Inteligencia Brasil" alt="Logo Inteligencia Brasil" width="196" height="113">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack">
+                    <a href="https://www.linkedin.com/company/inteligenciabrasil" title="Linkedin Inteligencia Brasil" target="_blank" rel="noopener">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                    </a>
+                </span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ciberseguranca</span>
+            <h1>Ameaca Persistente Avancada: O que e APT?</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Setembro 2023</span>
+                <span><i class="far fa-clock"></i> 15 min de leitura</span>
+                <span><i class="far fa-user"></i> <a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page">APT</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h4><i class="fas fa-list"></i> Neste artigo</h4>
+                    <ul>
+                        <li><a href="#introducao">Introducao</a></li>
+                        <li><a href="#definicao">O que e APT?</a></li>
+                        <li><a href="#caracteristicas">Caracteristicas das APTs</a></li>
+                        <li><a href="#ciclo-ataque">Ciclo de Ataque (Kill Chain)</a></li>
+                        <li><a href="#grupos-famosos">Grupos APT Famosos</a></li>
+                        <li><a href="#ataques-notaveis">Ataques Notaveis</a></li>
+                        <li><a href="#protecao">Como se Proteger</a></li>
+                        <li><a href="#deteccao">Deteccao e Resposta</a></li>
+                        <li><a href="#conclusao">Conclusao</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introducao">Introducao</h2>
+
+                <p>
+                    As <strong>Ameacas Persistentes Avancadas (APTs)</strong> representam um dos maiores desafios de seguranca cibernetica
+                    da atualidade. Diferente de ataques convencionais que buscam resultados imediatos, as APTs sao campanhas de longo prazo,
+                    altamente sofisticadas e direcionadas, conduzidas por adversarios com recursos significativos.
+                </p>
+
+                <p>
+                    Neste artigo, exploraremos em profundidade o que sao as APTs, como operam, quais sao os grupos mais notaveis,
+                    exemplos de ataques historicos e, principalmente, como organizacoes podem se proteger contra essas ameacas avancadas.
+                </p>
+
+                <h2 id="definicao">O que e APT?</h2>
+
+                <p>
+                    <strong>APT</strong> e um acronimo em ingles para <em>Advanced Persistent Threat</em>, traduzido como
+                    <strong>Ameaca Persistente Avancada</strong>. O termo foi criado em 2006 por analistas da Forca Aerea dos
+                    Estados Unidos (USAF) para descrever atividades de intrusao sofisticadas contra alvos civis, permitindo que
+                    equipes militares discutissem as caracteristicas dos ataques sem revelar identidades classificadas.
+                </p>
+
+                <div class="highlight-box">
+                    <p>
+                        <strong>Definicao oficial do NIST:</strong> Uma APT e um adversario que possui niveis sofisticados de expertise
+                        e recursos significativos, permitindo criar oportunidades para atingir seus objetivos usando multiplos vetores
+                        de ataque, incluindo ciberneticos, fisicos e de decepcao.
+                    </p>
+                </div>
+
+                <p>
+                    O invasor APT e um adversario altamente qualificado, bem financiado e motivado, capaz de explorar multiplos
+                    vetores de ataque para atingir seus objetivos, que geralmente envolvem espionagem, roubo de propriedade intelectual
+                    ou sabotagem de infraestruturas criticas.
+                </p>
+
+                <h2 id="caracteristicas">Caracteristicas das APTs</h2>
+
+                <p>
+                    O acronimo APT descreve tres caracteristicas fundamentais que diferenciam essas ameacas de ataques convencionais:
+                </p>
+
+                <h3>Avancado (Advanced)</h3>
+                <p>
+                    O adversario possui capacidades tecnicas sofisticadas, sendo capaz de desenvolver exploits personalizados,
+                    malware exclusivo e ferramentas de intrusao customizadas. Eles dominam tecnicas de evasao de deteccao e
+                    frequentemente exploram vulnerabilidades zero-day.
+                </p>
+                <ul>
+                    <li>Desenvolvimento de malware personalizado</li>
+                    <li>Exploracao de vulnerabilidades zero-day</li>
+                    <li>Tecnicas avancadas de evasao</li>
+                    <li>Engenharia social sofisticada</li>
+                </ul>
+
+                <h3>Persistente (Persistent)</h3>
+                <p>
+                    O atacante esta comprometido com objetivos especificos de longo prazo. Diferente de ataques oportunistas,
+                    as APTs podem durar meses ou anos, mantendo acesso continuo aos sistemas comprometidos enquanto extraem
+                    informacoes ou aguardam o momento ideal para agir.
+                </p>
+                <ul>
+                    <li>Campanhas de longo prazo (meses a anos)</li>
+                    <li>Manutencao de acesso persistente</li>
+                    <li>Objetivos estrategicos definidos</li>
+                    <li>Adaptacao continua as defesas</li>
+                </ul>
+
+                <h3>Ameaca (Threat)</h3>
+                <p>
+                    O adversario e organizado, financiado e motivado. Geralmente sao grupos patrocinados por estados-nacao
+                    ou organizacoes criminosas com recursos substanciais, operando com estrutura hierarquica e divisao de tarefas.
+                </p>
+                <ul>
+                    <li>Patrocinio estatal ou corporativo</li>
+                    <li>Recursos financeiros significativos</li>
+                    <li>Equipes especializadas</li>
+                    <li>Motivacao politica, economica ou militar</li>
+                </ul>
+
+                <h2 id="ciclo-ataque">Ciclo de Ataque APT (Kill Chain)</h2>
+
+                <p>
+                    As APTs seguem um ciclo de ataque metodico e bem planejado. Compreender cada fase e essencial para
+                    implementar defesas eficazes. Abaixo esta o ciclo de vida tipico de um ataque APT:
+                </p>
+
+                <div class="lifecycle-container">
+                    <div class="lifecycle-step" data-step="1">
+                        <h4>Reconhecimento (Reconnaissance)</h4>
+                        <p>Coleta de informacoes sobre o alvo atraves de OSINT, engenharia social, varreduras de rede e pesquisa sobre funcionarios, sistemas e vulnerabilidades.</p>
+                    </div>
+                    <div class="lifecycle-step" data-step="2">
+                        <h4>Armamento (Weaponization)</h4>
+                        <p>Desenvolvimento ou aquisicao de ferramentas de ataque, incluindo malware personalizado, exploits e documentos maliciosos.</p>
+                    </div>
+                    <div class="lifecycle-step" data-step="3">
+                        <h4>Entrega (Delivery)</h4>
+                        <p>Transmissao do payload malicioso ao alvo via spear-phishing, watering hole attacks, dispositivos USB ou comprometimento de supply chain.</p>
+                    </div>
+                    <div class="lifecycle-step" data-step="4">
+                        <h4>Exploracao (Exploitation)</h4>
+                        <p>Execucao do codigo malicioso explorando vulnerabilidades de software, configuracoes incorretas ou falhas humanas.</p>
+                    </div>
+                    <div class="lifecycle-step" data-step="5">
+                        <h4>Instalacao (Installation)</h4>
+                        <p>Implantacao de backdoors, RATs (Remote Access Trojans) e mecanismos de persistencia para manter acesso.</p>
+                    </div>
+                    <div class="lifecycle-step" data-step="6">
+                        <h4>Comando e Controle (C2)</h4>
+                        <p>Estabelecimento de canal de comunicacao com a infraestrutura do atacante para receber comandos e exfiltrar dados.</p>
+                    </div>
+                    <div class="lifecycle-step" data-step="7">
+                        <h4>Acoes no Objetivo (Actions on Objectives)</h4>
+                        <p>Execucao dos objetivos finais: exfiltracao de dados, espionagem, sabotagem ou preparacao para futuros ataques.</p>
+                    </div>
+                </div>
+
+                <h2 id="grupos-famosos">Grupos APT Famosos</h2>
+
+                <p>
+                    Varios grupos APT ganharam notoriedade por suas campanhas sofisticadas. Abaixo estao alguns dos mais conhecidos,
+                    catalogados pelo MITRE ATT&CK Framework:
+                </p>
+
+                <div class="apt-group-box">
+                    <h4><i class="fas fa-user-secret"></i> APT28 (Fancy Bear)</h4>
+                    <div class="aka">Aliases: Sofacy, Sednit, Pawn Storm, STRONTIUM</div>
+                    <p>
+                        Grupo associado a inteligencia militar russa (GRU). Conhecido por ataques contra governos, militares e
+                        organizacoes de midia. Responsavel pelo hack do Comite Nacional Democrata (DNC) em 2016 e ataques contra
+                        a OTAN e governos europeus.
+                    </p>
+                    <span class="origin">Russia - GRU</span>
+                </div>
+
+                <div class="apt-group-box">
+                    <h4><i class="fas fa-user-secret"></i> APT29 (Cozy Bear)</h4>
+                    <div class="aka">Aliases: The Dukes, NOBELIUM, Midnight Blizzard</div>
+                    <p>
+                        Vinculado ao Servico de Inteligencia Estrangeira russo (SVR). Especializado em espionagem contra governos,
+                        think tanks e empresas de tecnologia. Responsavel pelo ataque SolarWinds em 2020, uma das maiores brechas
+                        de supply chain ja registradas.
+                    </p>
+                    <span class="origin">Russia - SVR</span>
+                </div>
+
+                <div class="apt-group-box">
+                    <h4><i class="fas fa-user-secret"></i> Lazarus Group</h4>
+                    <div class="aka">Aliases: Hidden Cobra, Guardians of Peace, APT38</div>
+                    <p>
+                        Grupo norte-coreano responsavel por ataques financeiros de alto impacto. Conhecido pelo ataque a Sony Pictures (2014),
+                        roubo do Bangladesh Bank ($81 milhoes) e ataques massivos com ransomware WannaCry. Foca em roubo financeiro
+                        para financiar o regime.
+                    </p>
+                    <span class="origin">Coreia do Norte</span>
+                </div>
+
+                <div class="apt-group-box">
+                    <h4><i class="fas fa-user-secret"></i> APT41 (Double Dragon)</h4>
+                    <div class="aka">Aliases: Winnti, Barium, Wicked Panda</div>
+                    <p>
+                        Grupo chines unico por combinar espionagem patrocinada pelo estado com crimes ciberneticos motivados financeiramente.
+                        Ataca setores de saude, telecomunicacoes, tecnologia e videogames. Conhecido por ataques a supply chain de software.
+                    </p>
+                    <span class="origin">China</span>
+                </div>
+
+                <div class="apt-group-box">
+                    <h4><i class="fas fa-user-secret"></i> APT1 (Comment Crew)</h4>
+                    <div class="aka">Aliases: Unit 61398, Comment Panda</div>
+                    <p>
+                        Unidade do Exercito de Libertacao Popular chines (PLA). Primeiro grupo APT publicamente atribuido a um governo
+                        pela Mandiant em 2013. Responsavel por espionagem industrial massiva contra empresas americanas em setores
+                        estrategicos.
+                    </p>
+                    <span class="origin">China - PLA</span>
+                </div>
+
+                <h2 id="ataques-notaveis">Ataques APT Notaveis</h2>
+
+                <p>
+                    Alguns ataques APT marcaram a historia da ciberseguranca pela sua sofisticacao e impacto:
+                </p>
+
+                <div class="attack-example">
+                    <h4><i class="fas fa-exclamation-triangle"></i> SolarWinds (2020)</h4>
+                    <p>
+                        <strong>Atribuicao:</strong> APT29 (Cozy Bear)<br>
+                        Um dos ataques de supply chain mais sofisticados ja documentados. Os atacantes comprometeram o processo de
+                        build do software Orion da SolarWinds, inserindo um backdoor que foi distribuido para mais de 18.000 organizacoes,
+                        incluindo agencias governamentais americanas e empresas Fortune 500.
+                    </p>
+                    <ul>
+                        <li>Duracao: Aproximadamente 14 meses antes da deteccao</li>
+                        <li>Vitimas: Microsoft, Intel, Cisco, agencias federais dos EUA</li>
+                        <li>Impacto: Acesso a informacoes classificadas e propriedade intelectual</li>
+                    </ul>
+                </div>
+
+                <div class="attack-example">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Stuxnet (2010)</h4>
+                    <p>
+                        <strong>Atribuicao:</strong> EUA e Israel (nao confirmado oficialmente)<br>
+                        Primeiro malware conhecido a causar danos fisicos a infraestrutura industrial. Atacou as centrifugas de
+                        enriquecimento de uranio do Ira, destruindo aproximadamente 1.000 centrifugas e atrasando o programa nuclear iraniano.
+                    </p>
+                    <ul>
+                        <li>Complexidade: Utilizou 4 vulnerabilidades zero-day</li>
+                        <li>Alvo: Sistemas SCADA Siemens</li>
+                        <li>Impacto: Demonstrou o potencial de cyber warfare</li>
+                    </ul>
+                </div>
+
+                <div class="attack-example">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Operation Aurora (2009)</h4>
+                    <p>
+                        <strong>Atribuicao:</strong> China (APT17/Elderwood)<br>
+                        Serie de ataques contra empresas de tecnologia americanas, incluindo Google, Adobe, Juniper Networks e outras.
+                        O Google revelou publicamente o ataque, marcando um ponto de inflexao na conscientizacao sobre APTs.
+                    </p>
+                    <ul>
+                        <li>Metodo: Spear-phishing e exploits zero-day no Internet Explorer</li>
+                        <li>Objetivo: Roubo de propriedade intelectual e acesso a contas Gmail de dissidentes</li>
+                        <li>Consequencia: Google encerrou operacoes de busca na China</li>
+                    </ul>
+                </div>
+
+                <h2 id="protecao">Como se Proteger contra APTs</h2>
+
+                <p>
+                    Proteger-se contra APTs requer uma abordagem de defesa em profundidade, combinando tecnologia, processos e pessoas:
+                </p>
+
+                <h3>Estrategia de Defesa em Camadas</h3>
+
+                <ul>
+                    <li><strong>Segmentacao de rede:</strong> Isole sistemas criticos e implemente Zero Trust Architecture</li>
+                    <li><strong>Gestao de privilegios:</strong> Aplique o principio do menor privilegio e monitore contas privilegiadas</li>
+                    <li><strong>Patch management:</strong> Mantenha sistemas atualizados, priorizando vulnerabilidades exploradas ativamente</li>
+                    <li><strong>Autenticacao multifator (MFA):</strong> Implemente MFA em todos os acessos criticos</li>
+                    <li><strong>Criptografia:</strong> Proteja dados em transito e em repouso</li>
+                </ul>
+
+                <h3>Controles Tecnicos</h3>
+
+                <ul>
+                    <li><strong>EDR/XDR:</strong> Solucoes de deteccao e resposta em endpoints</li>
+                    <li><strong>SIEM:</strong> Correlacao de eventos e deteccao de anomalias</li>
+                    <li><strong>Email Security:</strong> Protecao contra phishing e malware</li>
+                    <li><strong>Network Detection:</strong> Monitoramento de trafego para detectar C2</li>
+                    <li><strong>Threat Intelligence:</strong> Indicadores de comprometimento (IOCs) atualizados</li>
+                </ul>
+
+                <h3>Fator Humano</h3>
+
+                <ul>
+                    <li><strong>Conscientizacao:</strong> Treinamentos regulares sobre phishing e engenharia social</li>
+                    <li><strong>Exercicios de phishing:</strong> Simulacoes para testar e educar colaboradores</li>
+                    <li><strong>Cultura de seguranca:</strong> Incentivar reporte de incidentes sem punicao</li>
+                </ul>
+
+                <h2 id="deteccao">Deteccao e Resposta</h2>
+
+                <p>
+                    Detectar APTs e desafiador devido a sua natureza furtiva. Porem, existem indicadores e estrategias que podem ajudar:
+                </p>
+
+                <h3>Indicadores de Comprometimento (IOCs)</h3>
+
+                <ul>
+                    <li>Atividade incomum em horarios atipicos</li>
+                    <li>Grandes volumes de dados sendo transferidos</li>
+                    <li>Conexoes para IPs/dominios suspeitos</li>
+                    <li>Criacao de contas de usuario nao autorizadas</li>
+                    <li>Modificacoes em arquivos de sistema</li>
+                    <li>Presenca de ferramentas de hacking conhecidas</li>
+                </ul>
+
+                <h3>Indicadores de Ataque (IOAs)</h3>
+
+                <ul>
+                    <li>Movimentacao lateral na rede</li>
+                    <li>Escalacao de privilegios</li>
+                    <li>Acesso a credenciais (credential dumping)</li>
+                    <li>Execucao de PowerShell suspeito</li>
+                    <li>Comunicacao C2 caracteristica</li>
+                </ul>
+
+                <h3>Resposta a Incidentes</h3>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Importante</h4>
+                    <p>
+                        Ao detectar uma possivel APT, <strong>nao alerte o adversario</strong>. APTs monitoram ativamente os sistemas
+                        comprometidos. Uma resposta precipitada pode fazer o atacante destruir evidencias ou ativar payloads destrutivos.
+                        Envolva especialistas em resposta a incidentes imediatamente.
+                    </p>
+                </div>
+
+                <ul>
+                    <li><strong>Contencao:</strong> Isole sistemas comprometidos sem desliga-los</li>
+                    <li><strong>Preservacao de evidencias:</strong> Colete logs, memoria e imagens forenses</li>
+                    <li><strong>Analise:</strong> Determine escopo, vetor de entrada e dados comprometidos</li>
+                    <li><strong>Erradicacao:</strong> Remova malware e feche vetores de acesso</li>
+                    <li><strong>Recuperacao:</strong> Restaure sistemas de backups confiave e monitorados</li>
+                    <li><strong>Licoes aprendidas:</strong> Documente e melhore defesas</li>
+                </ul>
+
+                <h2 id="conclusao">Conclusao</h2>
+
+                <p>
+                    As Ameacas Persistentes Avancadas representam o auge da sofisticacao em ataques ciberneticos. Conduzidas por
+                    adversarios altamente capacitados e bem financiados, essas campanhas exigem uma postura de seguranca igualmente
+                    madura e proativa das organizacoes.
+                </p>
+
+                <p>
+                    A defesa contra APTs nao se resume a tecnologia. Requer uma combinacao de controles tecnicos robustos, processos
+                    bem definidos, equipes treinadas e, principalmente, uma cultura organizacional que priorize a seguranca. O conhecimento
+                    sobre como essas ameacas operam e o primeiro passo para uma defesa eficaz.
+                </p>
+
+                <div class="highlight-box">
+                    <p>
+                        <strong>Precisa avaliar sua postura de seguranca contra APTs?</strong> Nossa equipe oferece servicos de
+                        Threat Assessment, Threat Hunting e consultoria em seguranca ofensiva e defensiva para ajudar sua organizacao
+                        a se proteger contra as ameacas mais avancadas.
+                    </p>
+                </div>
+
+                <!-- References -->
+                <div class="references">
+                    <h4><i class="fas fa-book"></i> Referencias</h4>
+                    <ul>
+                        <li><a href="https://attack.mitre.org/groups/" target="_blank" rel="nofollow noopener">MITRE ATT&CK Groups</a></li>
+                        <li><a href="https://attack.mitre.org/groups/G0007/" target="_blank" rel="nofollow noopener">APT28 - MITRE</a></li>
+                        <li><a href="https://attack.mitre.org/groups/G0016/" target="_blank" rel="nofollow noopener">APT29 - MITRE</a></li>
+                        <li><a href="https://csrc.nist.gov/glossary/term/advanced_persistent_threat" target="_blank" rel="nofollow noopener">NIST APT Definition</a></li>
+                        <li><a href="https://www.mandiant.com/resources/apt1-exposing-one-of-chinas-cyber-espionage-units" target="_blank" rel="nofollow noopener">Mandiant APT1 Report</a></li>
+                        <li><a href="https://www.cisa.gov/topics/cyber-threats-and-advisories/advanced-persistent-threats" target="_blank" rel="nofollow noopener">CISA APT Resources</a></li>
+                    </ul>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons">
+                    <span style="color: #94A3B8; margin-right: 10px;">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/ameaca-persistente-avancada-o-que-e-apt/" target="_blank" class="share-btn linkedin">
+                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/ameaca-persistente-avancada-o-que-e-apt/&text=Ameaca Persistente Avancada: O que e APT?" target="_blank" class="share-btn twitter">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="https://wa.me/?text=APT - Ameaca Persistente Avancada - Guia Completo https://inteligenciabrasil.seg.br/blog/ameaca-persistente-avancada-o-que-e-apt/" target="_blank" class="share-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+
+                <!-- Author Box -->
+                <div class="author-box">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80">
+                    </picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></h4>
+                        <p>Especialista em Seguranca da Informacao e Inteligencia de Ameacas na Inteligencia Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- CTA Section -->
+    <section class="cta-section" style="background: linear-gradient(135deg, #1a3a5c 0%, #0D1E38 100%); padding: 80px 0; border-top: 1px solid rgba(96, 165, 250, 0.2);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 style="color: #F1F5F9; font-size: 2rem; margin-bottom: 20px;">Proteja sua organizacao contra APTs</h3>
+                    <p style="color: #94A3B8; font-size: 1.1rem; margin-bottom: 30px;">Nossa equipe oferece servicos especializados em Threat Intelligence, Threat Hunting e Security Assessment para identificar e mitigar ameacas avancadas antes que causem danos.</p>
+                    <a href="../../#contato" class="btn" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; padding: 15px 40px; border-radius: 8px; font-weight: 600; font-size: 1.1rem; text-decoration: none; display: inline-block;">Solicitar Avaliacao</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" style="background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); padding: 60px 0; border-top: 1px solid rgba(96, 165, 250, 0.1);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="100" height="100">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="100" height="100" style="margin-bottom: 20px; background: transparent;">
+                    </picture>
+                    <h3 style="color: #F1F5F9; margin-bottom: 15px;">Fique por dentro das novidades</h3>
+                    <p style="color: #94A3B8; margin-bottom: 30px;">Receba conteudos exclusivos sobre seguranca da informacao, threat intelligence e ciberseguranca.</p>
+                    <form id="newsletter-form" class="newsletter-form" style="max-width: 500px; margin: 0 auto;">
+                        <div class="input-group" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 5px;">
+                            <input type="email" id="newsletter-email" name="email" class="form-control" placeholder="Seu melhor e-mail corporativo" required style="background: transparent; border: none; color: #F1F5F9; padding: 15px 20px;" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; padding: 15px 30px; border-radius: 6px; font-weight: 600;">Inscrever</button>
+                            </div>
+                        </div>
+                        <p id="newsletter-message" style="margin-top: 15px; font-size: 0.9rem;"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Blog</h4>
+                        <ul>
+                            <li><a href="../ciclo-ooda-observar-orientar-decidir-agir/">Ciclo OODA</a></li>
+                            <li><a href="../como-funciona-o-tlp-traffic-light-protocol/">TLP Protocol</a></li>
+                            <li><a href="./">APT</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.easing.min.js"></script>
+    <script>
+        $(window).on('scroll load', function () {
+            if ($('.navbar').offset().top > 20) {
+                $('.navbar-custom').addClass('top-nav-collapse');
+            } else {
+                $('.navbar-custom').removeClass('top-nav-collapse');
+            }
+        });
+
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            var target = $(this.getAttribute('href'));
+            if (target.length) {
+                $('html, body').animate({ scrollTop: target.offset().top - 100 }, 500, 'easeInOutExpo');
+            }
+        });
+
+        const blockedPublicDomains = ['gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'protonmail.com', 'proton.me', 'zoho.com', 'yandex.com', 'mail.com', 'gmx.com', 'gmx.net', 'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com', 'r7.com'];
+        const blockedTempDomains = ['tempmail.com', 'temp-mail.org', 'guerrillamail.com', 'guerrillamail.org', '10minutemail.com', 'mailinator.com', 'throwaway.email', 'fakeinbox.com', 'sharklasers.com', 'spam4.me', 'grr.la', 'dispostable.com', 'maildrop.cc', 'yopmail.com', 'mohmal.com', 'getnada.com', 'tempail.com', 'emailondeck.com', 'mintemail.com'];
+
+        function isBlockedEmail(email) {
+            const domain = email.split('@')[1]?.toLowerCase();
+            if (!domain) return true;
+            return blockedPublicDomains.includes(domain) || blockedTempDomains.includes(domain);
+        }
+
+        document.getElementById('newsletter-form')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletter-email');
+            const messageEl = document.getElementById('newsletter-message');
+            const email = emailInput.value.trim();
+
+            if (isBlockedEmail(email)) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Por favor, utilize um e-mail corporativo.';
+                return;
+            }
+
+            try {
+                let userIP = '';
+                try {
+                    const ipResponse = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await ipResponse.json();
+                    userIP = ipData.ip;
+                } catch (e) { userIP = 'unknown'; }
+
+                await fetch('https://script.google.com/macros/s/AKfycbxhe2brHBkOdTwMblSCWEMJ-PfHrNnxN5JrEXdlp6MIEq7RgT8e2dJfVMBVSjPmO9a-/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ email: email, ip: userIP, source: 'blog-apt' })
+                });
+
+                messageEl.style.color = '#22c55e';
+                messageEl.textContent = 'Inscricao realizada com sucesso!';
+                emailInput.value = '';
+            } catch (error) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Erro ao processar. Tente novamente.';
+            }
+        });
+    </script>
+</body>
+
+</html>

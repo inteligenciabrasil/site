@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Entenda os fundamentos da Segurança da Informação: a Tríade CID (Confidencialidade, Integridade e Disponibilidade) e pilares adicionais como Autenticidade, Não-Repúdio, Legalidade e Privacidade.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="segurança da informação, CID, confidencialidade, integridade, disponibilidade, autenticidade, não-repúdio, cibersegurança, pilares da segurança">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Segurança da Informação e seus Fundamentos">
+    <meta property="og:description" content="Entenda a Tríade CID e os pilares fundamentais da Segurança da Informação.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2023-06-15T10:00:00-03:00">
+    <meta property="article:modified_time" content="2026-01-25T10:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Segurança">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Segurança da Informação e seus Fundamentos">
+    <meta name="twitter:description" content="Entenda a Tríade CID e os pilares fundamentais da Segurança da Informação.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Segurança da Informação e seus Fundamentos | Blog Inteligência Brasil</title>
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Segurança da Informação e seus Fundamentos",
+        "description": "Entenda os fundamentos da Segurança da Informação: a Tríade CID (Confidencialidade, Integridade e Disponibilidade) e pilares adicionais.",
+        "image": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png",
+        "author": {
+            "@type": "Person",
+            "name": "Roberto Lima",
+            "url": "https://www.linkedin.com/in/roberto-lima/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Inteligência Brasil",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"
+            }
+        },
+        "datePublished": "2023-06-15",
+        "dateModified": "2026-01-25",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/"
+        }
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Fundamentos de Segurança", "item": "https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/" }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>
+        body { background: #0a1628; }
+        .navbar-custom { background: rgba(13, 30, 56, 0.95) !important; border-bottom: 1px solid rgba(96, 165, 250, 0.1); backdrop-filter: blur(20px); }
+        .navbar-custom.top-nav-collapse { background: rgba(10, 22, 40, 0.98) !important; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); }
+        .navbar-custom .nav-link { color: #F1F5F9 !important; }
+        .navbar-custom .nav-link:hover { color: #60A5FA !important; }
+        .article-header { background: linear-gradient(135deg, #0D1E38 0%, #1a3a5c 50%, #0D1E38 100%); padding: 140px 0 60px; position: relative; }
+        .article-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; }
+        .article-header .container { position: relative; z-index: 1; }
+        .article-header h1 { color: #F1F5F9; font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+        .article-category { display: inline-block; background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .article-meta { display: flex; flex-wrap: wrap; gap: 20px; color: #94A3B8; font-size: 0.95rem; }
+        .article-meta span { display: flex; align-items: center; gap: 8px; }
+        .article-meta a { color: #60A5FA; text-decoration: none; }
+        .breadcrumb-nav { background: rgba(13, 30, 56, 0.8); padding: 15px 0; border-bottom: 1px solid rgba(96, 165, 250, 0.1); }
+        .breadcrumb { background: transparent; margin: 0; padding: 0; }
+        .breadcrumb-item, .breadcrumb-item a { color: #94A3B8; font-size: 0.9rem; }
+        .breadcrumb-item a:hover { color: #60A5FA; }
+        .breadcrumb-item.active { color: #F1F5F9; }
+        .article-content { background: #0a1628; padding: 60px 0; }
+        .article-body { max-width: 800px; margin: 0 auto; }
+        .article-body h2 { color: #F1F5F9; font-size: 1.8rem; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(96, 165, 250, 0.3); }
+        .article-body h3 { color: #F1F5F9; font-size: 1.4rem; margin: 30px 0 15px; }
+        .article-body p { color: #CBD5E1; font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
+        .article-body a { color: #60A5FA; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+        .article-body a:hover { border-bottom-color: #60A5FA; }
+        .article-body strong { color: #60A5FA; }
+        .article-body ul, .article-body ol { color: #CBD5E1; margin-bottom: 20px; padding-left: 25px; }
+        .article-body li { margin-bottom: 10px; line-height: 1.7; }
+        .toc { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin-bottom: 40px; }
+        .toc h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .toc h4 i { color: #60A5FA; }
+        .toc ul { list-style: none; padding: 0; margin: 0; }
+        .toc li { margin-bottom: 8px; }
+        .toc a { color: #94A3B8; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+        .toc a:hover { color: #60A5FA; }
+
+        /* Pillar Cards */
+        .pillar-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin: 30px 0; }
+        .pillar-card { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; text-align: center; transition: all 0.3s ease; }
+        .pillar-card:hover { transform: translateY(-5px); border-color: rgba(96, 165, 250, 0.4); box-shadow: 0 10px 40px rgba(96, 165, 250, 0.1); }
+        .pillar-card .icon { width: 70px; height: 70px; margin: 0 auto 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+        .pillar-card.confidentiality .icon { background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.1) 100%); color: #EF4444; }
+        .pillar-card.integrity .icon { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(34, 197, 94, 0.1) 100%); color: #22C55E; }
+        .pillar-card.availability .icon { background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%); color: #3B82F6; }
+        .pillar-card h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 10px; }
+        .pillar-card p { color: #94A3B8; font-size: 0.9rem; margin: 0; line-height: 1.6; }
+
+        .pillar-section { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border-radius: 12px; padding: 25px; margin: 25px 0; }
+        .pillar-section h3 { margin-top: 0; display: flex; align-items: center; gap: 15px; }
+        .pillar-section.confidentiality { border-left: 4px solid #EF4444; }
+        .pillar-section.integrity { border-left: 4px solid #22C55E; }
+        .pillar-section.availability { border-left: 4px solid #3B82F6; }
+        .pillar-section.additional { border-left: 4px solid #A855F7; }
+
+        .pillar-badge { display: inline-flex; align-items: center; gap: 8px; font-family: 'Fira Sans', sans-serif; font-weight: 600; padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; letter-spacing: 1px; }
+        .pillar-badge.confidentiality { background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 2px solid #EF4444; }
+        .pillar-badge.integrity { background: rgba(34, 197, 94, 0.1); color: #22C55E; border: 2px solid #22C55E; }
+        .pillar-badge.availability { background: rgba(59, 130, 246, 0.1); color: #3B82F6; border: 2px solid #3B82F6; }
+        .pillar-badge.additional { background: rgba(168, 85, 247, 0.1); color: #A855F7; border: 2px solid #A855F7; }
+
+        .highlight-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 12px; padding: 25px; margin: 30px 0; }
+        .highlight-box p { margin: 0; color: #CBD5E1; }
+        .quote-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border-left: 4px solid #60A5FA; border-radius: 0 12px 12px 0; padding: 25px; margin: 30px 0; font-style: italic; }
+        .quote-box p { color: #94A3B8; margin: 0; font-size: 1.2rem; line-height: 1.6; }
+        .quote-box cite { display: block; margin-top: 15px; color: #60A5FA; font-size: 0.95rem; font-style: normal; }
+        .references { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin: 40px 0; }
+        .references h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .references h4 i { color: #60A5FA; }
+        .references ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+        .references a { display: inline-block; background: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.2); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; color: #94A3B8; text-decoration: none; transition: all 0.3s ease; }
+        .references a:hover { background: rgba(96, 165, 250, 0.2); color: #60A5FA; border-color: #60A5FA; }
+        .share-buttons { display: flex; gap: 15px; margin: 40px 0; flex-wrap: wrap; }
+        .share-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.3s ease; }
+        .share-btn.linkedin { background: #0077B5; color: #fff; }
+        .share-btn.twitter { background: #1DA1F2; color: #fff; }
+        .share-btn.whatsapp { background: #25D366; color: #fff; }
+        .share-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .author-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 30px; margin: 50px 0; display: flex; gap: 25px; align-items: center; }
+        .author-box img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+        .author-info h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 5px; }
+        .author-info h4 a { color: inherit; text-decoration: none; }
+        .author-info h4 a:hover { color: #60A5FA; }
+        .author-info p { color: #94A3B8; font-size: 0.95rem; margin: 0; }
+        .footer-section { background: #0D1E38; padding: 60px 0 30px; border-top: 1px solid rgba(96, 165, 250, 0.1); }
+        .footer-about p, .footer-contact p, .footer-links a { color: #94A3B8; }
+        .footer-links h4, .footer-contact h4 { color: #F1F5F9; }
+        .footer-bottom { border-top: 1px solid rgba(96, 165, 250, 0.1); padding-top: 20px; margin-top: 40px; color: #64748B; }
+        .footer-bottom a { color: #94A3B8; }
+        .footer-social a { color: #60A5FA; }
+        @media (max-width: 768px) {
+            .article-header h1 { font-size: 1.8rem; }
+            .author-box { flex-direction: column; text-align: center; }
+            .pillar-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../">
+            <img src="../../img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196" height="113">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack">
+                    <a href="https://www.linkedin.com/company/inteligenciabrasil" title="Linkedin Inteligência Brasil" target="_blank" rel="noopener">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                    </a>
+                </span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Segurança</span>
+            <h1>Segurança da Informação e seus Fundamentos</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Junho 2023</span>
+                <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                <span><i class="far fa-user"></i> <a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Fundamentos de Segurança</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h4><i class="fas fa-list"></i> Neste artigo</h4>
+                    <ul>
+                        <li><a href="#introducao">Introducao</a></li>
+                        <li><a href="#triade-cid">A Triade CID</a></li>
+                        <li><a href="#confidencialidade">Confidencialidade</a></li>
+                        <li><a href="#integridade">Integridade</a></li>
+                        <li><a href="#disponibilidade">Disponibilidade</a></li>
+                        <li><a href="#pilares-adicionais">Pilares Adicionais</a></li>
+                        <li><a href="#conclusao">Conclusao</a></li>
+                    </ul>
+                </div>
+
+                <div class="quote-box">
+                    <p>"A inteligência foi dada ao homem pra duvidar"</p>
+                    <cite>- E. Verhaeren</cite>
+                </div>
+
+                <h2 id="introducao">Introducao</h2>
+
+                <p>
+                    Atualmente no cenário de Tecnologia da Informação a área de segurança está em alta, pois o acesso
+                    à informação está cada vez mais difundido, com muitos adeptos aos ataques via internet. Com essa
+                    linha de pensamento as empresas estão cada vez mais preocupadas em proteger suas informações.
+                </p>
+
+                <p>
+                    Uma passagem rápida pela história da segurança da informação nos traz alguns pontos de um estudo
+                    efetuado por <strong>John McCumber</strong>, um dos primeiros especialistas em segurança cibernética,
+                    desenvolvendo uma estrutura comumente usada chamada <strong>Cubo McCumber</strong> ou popularmente
+                    conhecida como cubo de segurança cibernética.
+                </p>
+
+                <p>
+                    Esse modelo estabelece a relação entre três dimensões fundamentais: os <strong>estados das informações</strong>
+                    (transmissão, armazenamento e processamento), as <strong>contramedidas</strong> (tecnologia, políticas
+                    e pessoas) e os <strong>princípios de segurança</strong> (confidencialidade, integridade e disponibilidade).
+                </p>
+
+                <h2 id="triade-cid">A Triade CID</h2>
+
+                <p>
+                    A <strong>Tríade CID</strong> (ou CIA Triad em inglês) representa os três pilares fundamentais da
+                    segurança da informação. Esses princípios são a base para qualquer programa de segurança cibernética
+                    e permitem que especialistas utilizem como referência em suas tomadas de decisão.
+                </p>
+
+                <div class="pillar-cards">
+                    <div class="pillar-card confidentiality">
+                        <div class="icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h4>Confidencialidade</h4>
+                        <p>Garantir que a informação seja acessível apenas por pessoas autorizadas</p>
+                    </div>
+                    <div class="pillar-card integrity">
+                        <div class="icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Integridade</h4>
+                        <p>Assegurar que os dados permaneçam precisos e não sejam alterados indevidamente</p>
+                    </div>
+                    <div class="pillar-card availability">
+                        <div class="icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h4>Disponibilidade</h4>
+                        <p>Manter sistemas e dados acessíveis sempre que necessário</p>
+                    </div>
+                </div>
+
+                <h2 id="confidencialidade">Confidencialidade</h2>
+
+                <div class="pillar-section confidentiality">
+                    <h3><span class="pillar-badge confidentiality"><i class="fas fa-user-shield"></i> CONFIDENCIALIDADE</span></h3>
+                    <p>
+                        A <strong>Confidencialidade</strong> impede a divulgação de informações para pessoas, recursos
+                        ou processos não autorizados. É o princípio que garante que apenas quem tem permissão pode
+                        acessar determinados dados.
+                    </p>
+                </div>
+
+                <h3>Exemplos de Ameaças à Confidencialidade</h3>
+                <ul>
+                    <li><strong>Engenharia Social:</strong> Técnicas de manipulação para obter informações sensíveis</li>
+                    <li><strong>Ataques de Phishing:</strong> E-mails falsos que visam roubar credenciais</li>
+                    <li><strong>Vazamento de Dados:</strong> Exposição não autorizada de informações confidenciais</li>
+                    <li><strong>Espionagem Industrial:</strong> Acesso não autorizado a segredos comerciais</li>
+                    <li><strong>Shoulder Surfing:</strong> Observação não autorizada de telas ou teclados</li>
+                </ul>
+
+                <h3>Mecanismos de Protecao</h3>
+                <ul>
+                    <li><strong>Criptografia:</strong> Transformação de dados em formato ilegível para não autorizados</li>
+                    <li><strong>Controle de Acesso:</strong> Definição de quem pode acessar quais recursos</li>
+                    <li><strong>Autenticação Multifator (MFA):</strong> Verificação de identidade por múltiplos métodos</li>
+                    <li><strong>Classificação de Dados:</strong> Categorização de informações por nível de sensibilidade</li>
+                    <li><strong>Treinamento de Funcionários:</strong> Conscientização sobre práticas de proteção de dados</li>
+                </ul>
+
+                <div class="quote-box">
+                    <p>"Para conhecer o seu inimigo você deve tornar-se seu inimigo"</p>
+                    <cite>- Sun Tzu, A Arte da Guerra</cite>
+                </div>
+
+                <h2 id="integridade">Integridade</h2>
+
+                <div class="pillar-section integrity">
+                    <h3><span class="pillar-badge integrity"><i class="fas fa-shield-alt"></i> INTEGRIDADE</span></h3>
+                    <p>
+                        A <strong>Integridade</strong> é a precisão, a consistência e a confiabilidade dos dados
+                        durante todo seu ciclo de vida. Garante que a informação não seja alterada de forma
+                        não autorizada ou acidental.
+                    </p>
+                </div>
+
+                <h3>Exemplos de Ameaças à Integridade</h3>
+                <ul>
+                    <li><strong>Malware:</strong> Software malicioso que pode corromper ou modificar arquivos</li>
+                    <li><strong>Ataques Man-in-the-Middle:</strong> Interceptação e alteração de comunicações</li>
+                    <li><strong>Erros Humanos:</strong> Modificações acidentais em dados críticos</li>
+                    <li><strong>Falhas de Hardware:</strong> Corrupção de dados por problemas físicos</li>
+                    <li><strong>SQL Injection:</strong> Manipulação de bancos de dados através de entradas maliciosas</li>
+                </ul>
+
+                <h3>Mecanismos de Protecao</h3>
+                <ul>
+                    <li><strong>Hashing:</strong> Função hash (MD5, SHA-256) para verificar integridade de arquivos</li>
+                    <li><strong>Assinaturas Digitais:</strong> Garantia de autoria e integridade de documentos</li>
+                    <li><strong>Controle de Versão:</strong> Rastreamento de alterações em arquivos e códigos</li>
+                    <li><strong>Checksums:</strong> Verificação matemática de integridade de dados transferidos</li>
+                    <li><strong>Backups Regulares:</strong> Cópias de segurança para recuperação de dados íntegros</li>
+                    <li><strong>Logs de Auditoria:</strong> Registro de todas as modificações realizadas</li>
+                </ul>
+
+                <h2 id="disponibilidade">Disponibilidade</h2>
+
+                <div class="pillar-section availability">
+                    <h3><span class="pillar-badge availability"><i class="fas fa-server"></i> DISPONIBILIDADE</span></h3>
+                    <p>
+                        A <strong>Disponibilidade</strong> garante que os sistemas de informação estejam disponíveis
+                        sempre que necessário. Falhas de sistemas ou ataques cibernéticos podem impedir o acesso
+                        aos sistemas, ferindo esse princípio fundamental.
+                    </p>
+                </div>
+
+                <h3>Exemplos de Ameaças à Disponibilidade</h3>
+                <ul>
+                    <li><strong>Ataques DDoS:</strong> Sobrecarga de servidores com tráfego malicioso</li>
+                    <li><strong>Ransomware:</strong> Sequestro de dados que impede acesso aos sistemas</li>
+                    <li><strong>Falhas de Hardware:</strong> Quebra de equipamentos críticos</li>
+                    <li><strong>Desastres Naturais:</strong> Incêndios, inundações, terremotos</li>
+                    <li><strong>Falhas de Energia:</strong> Interrupções no fornecimento elétrico</li>
+                    <li><strong>Erros de Configuração:</strong> Configurações incorretas que derrubam serviços</li>
+                </ul>
+
+                <h3>Mecanismos de Protecao</h3>
+                <ul>
+                    <li><strong>Redundância:</strong> Sistemas duplicados para failover automático</li>
+                    <li><strong>Balanceamento de Carga:</strong> Distribuição de tráfego entre múltiplos servidores</li>
+                    <li><strong>Backups e Disaster Recovery:</strong> Planos de recuperação de desastres</li>
+                    <li><strong>UPS e Geradores:</strong> Fornecimento ininterrupto de energia</li>
+                    <li><strong>Monitoramento 24/7:</strong> Vigilância contínua da infraestrutura</li>
+                    <li><strong>SLA (Service Level Agreement):</strong> Acordos de nível de serviço com fornecedores</li>
+                </ul>
+
+                <h2 id="pilares-adicionais">Pilares Adicionais</h2>
+
+                <p>
+                    Além da tríade CID, a segurança da informação moderna considera outros princípios importantes
+                    que complementam a proteção de dados e sistemas.
+                </p>
+
+                <div class="pillar-section additional">
+                    <h3><span class="pillar-badge additional"><i class="fas fa-fingerprint"></i> AUTENTICIDADE</span></h3>
+                    <p>
+                        A <strong>Autenticidade</strong> garante que uma informação ou usuário é genuíno e não foi
+                        falsificado. Confirma que a origem da informação é legítima e que a identidade de usuários
+                        e sistemas pode ser verificada.
+                    </p>
+                    <ul>
+                        <li><strong>Mecanismos:</strong> Certificados digitais, tokens de autenticação, biometria</li>
+                    </ul>
+                </div>
+
+                <div class="pillar-section additional">
+                    <h3><span class="pillar-badge additional"><i class="fas fa-file-signature"></i> NAO-REPUDIO</span></h3>
+                    <p>
+                        O <strong>Não-Repúdio</strong> (ou irretratabilidade) garante que uma ação ou transação não
+                        pode ser negada posteriormente. O autor de uma ação não pode negar ter realizado aquela
+                        operação, sendo essencial para transações legais e financeiras.
+                    </p>
+                    <ul>
+                        <li><strong>Mecanismos:</strong> Assinaturas digitais, logs de auditoria, carimbos de tempo</li>
+                    </ul>
+                </div>
+
+                <div class="pillar-section additional">
+                    <h3><span class="pillar-badge additional"><i class="fas fa-balance-scale"></i> LEGALIDADE</span></h3>
+                    <p>
+                        A <strong>Legalidade</strong> assegura que todas as ações relacionadas à informação estejam
+                        em conformidade com leis e regulamentações vigentes, como a LGPD no Brasil, GDPR na Europa
+                        e outras normas setoriais.
+                    </p>
+                    <ul>
+                        <li><strong>Mecanismos:</strong> Políticas de compliance, auditorias regulares, DPO (Data Protection Officer)</li>
+                    </ul>
+                </div>
+
+                <div class="pillar-section additional">
+                    <h3><span class="pillar-badge additional"><i class="fas fa-user-secret"></i> PRIVACIDADE</span></h3>
+                    <p>
+                        A <strong>Privacidade</strong> garante que dados pessoais sejam coletados, processados e
+                        armazenados de acordo com o consentimento do titular e em conformidade com as leis de
+                        proteção de dados.
+                    </p>
+                    <ul>
+                        <li><strong>Mecanismos:</strong> Anonimização, pseudonimização, consentimento informado, políticas de privacidade</li>
+                    </ul>
+                </div>
+
+                <h2 id="conclusao">Conclusao</h2>
+
+                <p>
+                    A segurança da informação é um campo em constante evolução que exige atenção contínua aos
+                    fundamentos apresentados. A <strong>Tríade CID</strong> - Confidencialidade, Integridade e
+                    Disponibilidade - forma a base de qualquer estratégia de proteção de dados, enquanto os
+                    pilares adicionais como Autenticidade, Não-Repúdio, Legalidade e Privacidade complementam
+                    uma abordagem completa de segurança.
+                </p>
+
+                <p>
+                    Compreender esses princípios é essencial para profissionais de TI e segurança, bem como para
+                    gestores que precisam tomar decisões sobre proteção de ativos informacionais. A aplicação
+                    correta desses conceitos pode significar a diferença entre uma organização resiliente e
+                    uma vulnerável a ataques cibernéticos.
+                </p>
+
+                <div class="highlight-box">
+                    <p>
+                        <strong>Precisa implementar uma estratégia de segurança da informação?</strong> Nossa equipe
+                        oferece consultoria completa para avaliar riscos, implementar controles e estabelecer uma
+                        cultura de segurança na sua organização.
+                    </p>
+                </div>
+
+                <!-- References -->
+                <div class="references">
+                    <h4><i class="fas fa-book"></i> Referências</h4>
+                    <ul>
+                        <li><a href="https://www.nist.gov/cyberframework" target="_blank" rel="nofollow noopener">NIST Cybersecurity Framework</a></li>
+                        <li><a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank" rel="nofollow noopener">ISO/IEC 27001</a></li>
+                        <li><a href="https://csrc.nist.gov/glossary" target="_blank" rel="nofollow noopener">NIST Glossary</a></li>
+                        <li><a href="https://www.gov.br/lgpd" target="_blank" rel="nofollow noopener">LGPD Brasil</a></li>
+                    </ul>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons">
+                    <span style="color: #94A3B8; margin-right: 10px;">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/" target="_blank" class="share-btn linkedin">
+                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/&text=Segurança da Informação e seus Fundamentos - Tríade CID" target="_blank" class="share-btn twitter">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="https://wa.me/?text=Segurança da Informação e seus Fundamentos https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/" target="_blank" class="share-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+
+                <!-- Author Box -->
+                <div class="author-box">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="80" height="80">
+                    </picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></h4>
+                        <p>Especialista em Segurança da Informação e Governança de Dados na Inteligência Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- CTA Section -->
+    <section class="cta-section" style="background: linear-gradient(135deg, #1a3a5c 0%, #0D1E38 100%); padding: 80px 0; border-top: 1px solid rgba(96, 165, 250, 0.2);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 style="color: #F1F5F9; font-size: 2rem; margin-bottom: 20px;">Proteja sua empresa com os fundamentos certos</h3>
+                    <p style="color: #94A3B8; font-size: 1.1rem; margin-bottom: 30px;">Nossa equipe pode ajudar a implementar uma estratégia de segurança da informação baseada nos princípios da Tríade CID e nas melhores práticas do mercado.</p>
+                    <a href="../../#contato" class="btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; padding: 15px 40px; border-radius: 8px; font-weight: 600; font-size: 1.1rem; text-decoration: none; display: inline-block;">Solicitar Consultoria</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" style="background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); padding: 60px 0; border-top: 1px solid rgba(96, 165, 250, 0.1);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="100" height="100">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="100" height="100" style="margin-bottom: 20px; background: transparent;">
+                    </picture>
+                    <h3 style="color: #F1F5F9; margin-bottom: 15px;">Fique por dentro das novidades</h3>
+                    <p style="color: #94A3B8; margin-bottom: 30px;">Receba conteúdos exclusivos sobre segurança da informação e governança de dados.</p>
+                    <form id="newsletter-form" class="newsletter-form" style="max-width: 500px; margin: 0 auto;">
+                        <div class="input-group" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 5px;">
+                            <input type="email" id="newsletter-email" name="email" class="form-control" placeholder="Seu melhor e-mail corporativo" required style="background: transparent; border: none; color: #F1F5F9; padding: 15px 20px;" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; padding: 15px 30px; border-radius: 6px; font-weight: 600;">Inscrever</button>
+                            </div>
+                        </div>
+                        <p id="newsletter-message" style="margin-top: 15px; font-size: 0.9rem;"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Blog</h4>
+                        <ul>
+                            <li><a href="../ciclo-ooda-observar-orientar-decidir-agir/">Ciclo OODA</a></li>
+                            <li><a href="../como-funciona-o-tlp-traffic-light-protocol/">TLP Protocol</a></li>
+                            <li><a href="../lockpicking-nenhuma-fechadura-esta-segura-com-isso/">Lockpicking</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Serviços</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.easing.min.js"></script>
+    <script>
+        $(window).on('scroll load', function () {
+            if ($('.navbar').offset().top > 20) {
+                $('.navbar-custom').addClass('top-nav-collapse');
+            } else {
+                $('.navbar-custom').removeClass('top-nav-collapse');
+            }
+        });
+
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            var target = $(this.getAttribute('href'));
+            if (target.length) {
+                $('html, body').animate({ scrollTop: target.offset().top - 100 }, 500, 'easeInOutExpo');
+            }
+        });
+
+        const blockedPublicDomains = ['gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'protonmail.com', 'proton.me', 'zoho.com', 'yandex.com', 'mail.com', 'gmx.com', 'gmx.net', 'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com', 'r7.com'];
+        const blockedTempDomains = ['tempmail.com', 'temp-mail.org', 'guerrillamail.com', 'guerrillamail.org', '10minutemail.com', 'mailinator.com', 'throwaway.email', 'fakeinbox.com', 'sharklasers.com', 'spam4.me', 'grr.la', 'dispostable.com', 'maildrop.cc', 'yopmail.com', 'mohmal.com', 'getnada.com', 'tempail.com', 'emailondeck.com', 'mintemail.com'];
+
+        function isBlockedEmail(email) {
+            const domain = email.split('@')[1]?.toLowerCase();
+            if (!domain) return true;
+            return blockedPublicDomains.includes(domain) || blockedTempDomains.includes(domain);
+        }
+
+        document.getElementById('newsletter-form')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletter-email');
+            const messageEl = document.getElementById('newsletter-message');
+            const email = emailInput.value.trim();
+
+            if (isBlockedEmail(email)) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Por favor, utilize um e-mail corporativo.';
+                return;
+            }
+
+            try {
+                let userIP = '';
+                try {
+                    const ipResponse = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await ipResponse.json();
+                    userIP = ipData.ip;
+                } catch (e) { userIP = 'unknown'; }
+
+                await fetch('https://script.google.com/macros/s/AKfycbxhe2brHBkOdTwMblSCWEMJ-PfHrNnxN5JrEXdlp6MIEq7RgT8e2dJfVMBVSjPmO9a-/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ email: email, ip: userIP, source: 'blog-fundamentos-seguranca' })
+                });
+
+                messageEl.style.color = '#22c55e';
+                messageEl.textContent = 'Inscrição realizada com sucesso!';
+                emailInput.value = '';
+            } catch (error) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Erro ao processar. Tente novamente.';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Entenda o que são metadados, como eles são coletados e por que suas informações estão em toda parte. Aprenda a proteger sua privacidade digital.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="metadados, privacidade digital, proteção de dados, LGPD, segurança da informação, dados pessoais, privacidade online">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/porque-tudo-tem-minhas-informacoes-em-excesso/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Por que tudo tem minhas informações em excesso? - Metadados">
+    <meta property="og:description" content="Entenda o que são metadados e por que suas informações estão em toda parte na internet.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/porque-tudo-tem-minhas-informacoes-em-excesso/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2023-08-01T10:00:00-03:00">
+    <meta property="article:modified_time" content="2026-01-25T10:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Privacidade">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Metadados: Por que tudo tem minhas informações?">
+    <meta name="twitter:description" content="Entenda metadados e como proteger sua privacidade digital.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Por que tudo tem minhas informações em excesso? | Blog Inteligência Brasil</title>
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Por que tudo tem minhas informações em excesso?",
+        "description": "Entenda o que são metadados, como eles são coletados e por que suas informações estão em toda parte.",
+        "image": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png",
+        "author": { "@type": "Person", "name": "Roberto Lima", "url": "https://www.linkedin.com/in/roberto-lima/" },
+        "publisher": { "@type": "Organization", "name": "Inteligência Brasil", "logo": { "@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png" } },
+        "datePublished": "2023-08-01",
+        "dateModified": "2026-01-25",
+        "mainEntityOfPage": { "@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/porque-tudo-tem-minhas-informacoes-em-excesso/" }
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Metadados", "item": "https://inteligenciabrasil.seg.br/blog/porque-tudo-tem-minhas-informacoes-em-excesso/" }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>
+        body { background: #0a1628; }
+        .navbar-custom { background: rgba(13, 30, 56, 0.95) !important; border-bottom: 1px solid rgba(96, 165, 250, 0.1); backdrop-filter: blur(20px); }
+        .navbar-custom.top-nav-collapse { background: rgba(10, 22, 40, 0.98) !important; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); }
+        .navbar-custom .nav-link { color: #F1F5F9 !important; }
+        .navbar-custom .nav-link:hover { color: #60A5FA !important; }
+        .article-header { background: linear-gradient(135deg, #0D1E38 0%, #1a3a5c 50%, #0D1E38 100%); padding: 140px 0 60px; position: relative; }
+        .article-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; }
+        .article-header .container { position: relative; z-index: 1; }
+        .article-header h1 { color: #F1F5F9; font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+        .article-category { display: inline-block; background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .article-meta { display: flex; flex-wrap: wrap; gap: 20px; color: #94A3B8; font-size: 0.95rem; }
+        .article-meta span { display: flex; align-items: center; gap: 8px; }
+        .article-meta a { color: #60A5FA; text-decoration: none; }
+        .breadcrumb-nav { background: rgba(13, 30, 56, 0.8); padding: 15px 0; border-bottom: 1px solid rgba(96, 165, 250, 0.1); }
+        .breadcrumb { background: transparent; margin: 0; padding: 0; }
+        .breadcrumb-item, .breadcrumb-item a { color: #94A3B8; font-size: 0.9rem; }
+        .breadcrumb-item a:hover { color: #60A5FA; }
+        .breadcrumb-item.active { color: #F1F5F9; }
+        .article-content { background: #0a1628; padding: 60px 0; }
+        .article-body { max-width: 800px; margin: 0 auto; }
+        .article-body h2 { color: #F1F5F9; font-size: 1.8rem; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(96, 165, 250, 0.3); }
+        .article-body h3 { color: #F1F5F9; font-size: 1.4rem; margin: 30px 0 15px; }
+        .article-body p { color: #CBD5E1; font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
+        .article-body a { color: #60A5FA; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+        .article-body a:hover { border-bottom-color: #60A5FA; }
+        .article-body strong { color: #60A5FA; }
+        .article-body ul, .article-body ol { color: #CBD5E1; margin-bottom: 20px; padding-left: 25px; }
+        .article-body li { margin-bottom: 10px; line-height: 1.7; }
+        .article-body blockquote { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border-left: 4px solid #a855f7; padding: 25px 30px; margin: 30px 0; border-radius: 0 12px 12px 0; }
+        .article-body blockquote p { color: #F1F5F9; font-size: 1.2rem; font-style: italic; margin: 0; }
+        .article-body blockquote cite { color: #94A3B8; font-size: 0.9rem; display: block; margin-top: 10px; }
+        .highlight-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 12px; padding: 25px; margin: 30px 0; }
+        .highlight-box p { margin: 0; color: #CBD5E1; }
+        .toc { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin-bottom: 40px; }
+        .toc h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .toc h4 i { color: #60A5FA; }
+        .toc ul { list-style: none; padding: 0; margin: 0; }
+        .toc li { margin-bottom: 8px; }
+        .toc a { color: #94A3B8; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+        .toc a:hover { color: #60A5FA; }
+        .metadata-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 30px 0; }
+        .metadata-card { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 20px; }
+        .metadata-card h4 { color: #a855f7; font-size: 1rem; margin-bottom: 10px; }
+        .metadata-card p { color: #94A3B8; font-size: 0.9rem; margin: 0; }
+        .data-list { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 25px; margin: 30px 0; }
+        .data-list h4 { color: #ef4444; margin-bottom: 15px; }
+        .data-list ul { margin: 0; }
+        .references { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin: 40px 0; }
+        .references h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .references h4 i { color: #60A5FA; }
+        .references ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+        .references a { display: inline-block; background: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.2); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; color: #94A3B8; text-decoration: none; transition: all 0.3s ease; }
+        .references a:hover { background: rgba(96, 165, 250, 0.2); color: #60A5FA; border-color: #60A5FA; }
+        .share-buttons { display: flex; gap: 15px; margin: 40px 0; flex-wrap: wrap; }
+        .share-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.3s ease; }
+        .share-btn.linkedin { background: #0077B5; color: #fff; }
+        .share-btn.twitter { background: #1DA1F2; color: #fff; }
+        .share-btn.whatsapp { background: #25D366; color: #fff; }
+        .share-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .author-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 30px; margin: 50px 0; display: flex; gap: 25px; align-items: center; }
+        .author-box img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+        .author-info h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 5px; }
+        .author-info h4 a { color: inherit; text-decoration: none; }
+        .author-info h4 a:hover { color: #60A5FA; }
+        .author-info p { color: #94A3B8; font-size: 0.95rem; margin: 0; }
+        .footer-section { background: #0D1E38; padding: 60px 0 30px; border-top: 1px solid rgba(96, 165, 250, 0.1); }
+        .footer-about p, .footer-contact p, .footer-links a { color: #94A3B8; }
+        .footer-links h4, .footer-contact h4 { color: #F1F5F9; }
+        .footer-bottom { border-top: 1px solid rgba(96, 165, 250, 0.1); padding-top: 20px; margin-top: 40px; color: #64748B; }
+        .footer-bottom a { color: #94A3B8; }
+        .footer-social a { color: #60A5FA; }
+        @media (max-width: 768px) {
+            .article-header h1 { font-size: 1.8rem; }
+            .author-box { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" title="Linkedin Inteligência Brasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Privacidade</span>
+            <h1>Por que tudo tem minhas informações em excesso?</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Agosto 2023</span>
+                <span><i class="far fa-clock"></i> 6 min de leitura</span>
+                <span><i class="far fa-user"></i> <a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Metadados</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h4><i class="fas fa-list"></i> Neste artigo</h4>
+                    <ul>
+                        <li><a href="#oque">O que são metadados?</a></li>
+                        <li><a href="#tipos">Tipos de metadados</a></li>
+                        <li><a href="#coleta">O que é coletado sobre você</a></li>
+                        <li><a href="#importancia">Importância e riscos</a></li>
+                        <li><a href="#protecao">Como se proteger</a></li>
+                    </ul>
+                </div>
+
+                <blockquote>
+                    <p>"A inteligência foi dada ao homem pra duvidar"</p>
+                    <cite>— E. Verhaeren</cite>
+                </blockquote>
+
+                <p>A resposta para isso são os <strong>Metadados</strong>!</p>
+
+                <h2 id="oque">Mas o que são metadados?</h2>
+
+                <p>
+                    Metadados servem como referências de informação possibilitando a organização dos dados de forma simples.
+                    Analisando a palavra em sua essência temos o prefixo <em>"Meta"</em> de origem grega que significa "além de".
+                </p>
+
+                <p>
+                    Desta forma os metadados são <strong>informações que acrescem aos dados</strong> facilitando sua organização.
+                    Os metadados podem ser criados, modificados ou até mesmo excluídos.
+                </p>
+
+                <p>
+                    Não é de hoje que classificamos as informações para facilitar nossas pesquisas, com diversos tipos de níveis
+                    e padrões. Destacamos 3 tipos principais de padrões de metadados:
+                </p>
+
+                <h2 id="tipos">Tipos de Metadados</h2>
+
+                <div class="metadata-types">
+                    <div class="metadata-card">
+                        <h4><i class="fas fa-cube"></i> Simples</h4>
+                        <p>Não estruturados, semântica reduzida. Exemplo: Meta tags HTML.</p>
+                    </div>
+                    <div class="metadata-card">
+                        <h4><i class="fas fa-layer-group"></i> Estruturados</h4>
+                        <p>Baseado em normas, descrição de recursos. Exemplo: Domínio Web.</p>
+                    </div>
+                    <div class="metadata-card">
+                        <h4><i class="fas fa-sitemap"></i> Ricos</h4>
+                        <p>Baseado em normas complexas e específicas com códigos próprios.</p>
+                    </div>
+                </div>
+
+                <p>
+                    Você já parou pra pensar se não houvesse rótulo nos produtos? Ou um arquivo sem nome em meio a milhões
+                    de outros com a mesma forma ou tamanho?
+                </p>
+
+                <p>
+                    Como exemplo simples usaremos objetos de nosso cotidiano como caixas e arquivos, cada uma com sua etiqueta
+                    com as informações indicando localização, cor, número, entre outros dados. Passando para o mundo da gestão
+                    de documentos, as informações seriam algo como tipo de documento, data, assunto, autor entre outras
+                    informações que fossem necessárias.
+                </p>
+
+                <div class="highlight-box">
+                    <p>
+                        <strong>Exemplo prático:</strong> Ao tirar uma foto, além da imagem, são gravados metadados como
+                        modelo da câmera, padronização utilizada, tipo e tamanho do arquivo. Se o aparelho tiver GPS,
+                        a localização exata também é inserida.
+                    </p>
+                </div>
+
+                <h2 id="coleta">O que é coletado sobre você</h2>
+
+                <p>
+                    Ao fazer login em sites de redes sociais ou de compras, várias informações são registradas além daquelas
+                    que você escreve diretamente nos sites.
+                </p>
+
+                <blockquote>
+                    <p>"Dados são o novo petróleo!"</p>
+                    <cite>— Clive Humby</cite>
+                </blockquote>
+
+                <div class="data-list">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Dados comumente coletados</h4>
+                    <ul>
+                        <li>Endereços de e-mail e nomes de usuários</li>
+                        <li>Números de telefone</li>
+                        <li>Dados bancários</li>
+                        <li>Dados de localização (GPS)</li>
+                        <li>Data e hora de ligações, arquivos e fotos</li>
+                        <li>Informações do dispositivo utilizado</li>
+                        <li>Endereço IP de acesso</li>
+                        <li>Nome e versão do navegador</li>
+                        <li>Horário de entrada e saída</li>
+                        <li>Histórico de cliques durante a navegação</li>
+                    </ul>
+                </div>
+
+                <h2 id="importancia">Importância e Riscos</h2>
+
+                <p>
+                    A importância dos metadados para a web semântica está basicamente ligada à facilidade de recuperação dos
+                    dados, uma vez que estes terão um significado e um valor bem definidos.
+                </p>
+
+                <p>Nesse sentido, surgem questões importantes:</p>
+
+                <ul>
+                    <li>E quem não quiser enviar mais informações que o necessário?</li>
+                    <li>E a minha segurança com todas essas informações recolhidas sem minha permissão?</li>
+                    <li>Como evitar receber tanto marketing ou remarketing durante minhas atividades?</li>
+                </ul>
+
+                <h2 id="protecao">Como se proteger</h2>
+
+                <p>
+                    Devemos nos precaver deletando essas informações e nos proporcionar um mínimo de segurança quanto às
+                    questões apresentadas neste artigo.
+                </p>
+
+                <div class="highlight-box">
+                    <p>
+                        <strong>Dica:</strong> Você pode remover metadados de documentos do Office através do
+                        <a href="https://support.office.com/en-us/article/remove-hidden-data-and-personal-information-by-inspecting-documents-presentations-or-workbooks-356b7b5d-77af-44fe-a07f-9aa4d085966f" target="_blank" rel="nofollow noopener">
+                        suporte da Microsoft</a>.
+                    </p>
+                </div>
+
+                <!-- References -->
+                <div class="references">
+                    <h4><i class="fas fa-book"></i> Referências</h4>
+                    <ul>
+                        <li><a href="https://support.office.com/en-us/article/remove-hidden-data-and-personal-information-by-inspecting-documents-presentations-or-workbooks-356b7b5d-77af-44fe-a07f-9aa4d085966f" target="_blank" rel="nofollow noopener">Microsoft Support</a></li>
+                        <li><a href="https://www.metadados.pt/oquesaometadados" target="_blank" rel="nofollow noopener">Metadados.pt</a></li>
+                        <li><a href="http://dublincore.org/metadata-basics/" target="_blank" rel="nofollow noopener">Dublin Core</a></li>
+                        <li><a href="https://www.theguardian.com/world/interactive/2013/nov/01/snowden-nsa-files-surveillance-revelations-decoded" target="_blank" rel="nofollow noopener">The Guardian - NSA Files</a></li>
+                    </ul>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons">
+                    <span style="color: #94A3B8; margin-right: 10px;">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/porque-tudo-tem-minhas-informacoes-em-excesso/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/porque-tudo-tem-minhas-informacoes-em-excesso/&text=Por que tudo tem minhas informações em excesso? - Metadados" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Por que tudo tem minhas informações? Entenda os metadados https://inteligenciabrasil.seg.br/blog/porque-tudo-tem-minhas-informacoes-em-excesso/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <!-- Author Box -->
+                <div class="author-box">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="80" height="80">
+                    </picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></h4>
+                        <p>Especialista em Segurança da Informação e Privacidade de Dados na Inteligência Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- CTA Section -->
+    <section class="cta-section" style="background: linear-gradient(135deg, #1a3a5c 0%, #0D1E38 100%); padding: 80px 0; border-top: 1px solid rgba(96, 165, 250, 0.2);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 style="color: #F1F5F9; font-size: 2rem; margin-bottom: 20px;">Preocupado com a privacidade dos seus dados?</h3>
+                    <p style="color: #94A3B8; font-size: 1.1rem; margin-bottom: 30px;">Nossa equipe pode ajudar sua empresa a implementar políticas de proteção de dados e adequação à LGPD, garantindo a segurança das informações sensíveis.</p>
+                    <a href="../../#contato" class="btn" style="background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); color: white; padding: 15px 40px; border-radius: 8px; font-weight: 600; font-size: 1.1rem; text-decoration: none; display: inline-block;">Fale Conosco</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" style="background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); padding: 60px 0; border-top: 1px solid rgba(96, 165, 250, 0.1);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="100" height="100">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="100" height="100" style="margin-bottom: 20px; background: transparent;">
+                    </picture>
+                    <h3 style="color: #F1F5F9; margin-bottom: 15px;">Fique por dentro das novidades</h3>
+                    <p style="color: #94A3B8; margin-bottom: 30px;">Receba conteúdos exclusivos sobre privacidade e proteção de dados.</p>
+                    <form id="newsletter-form" class="newsletter-form" style="max-width: 500px; margin: 0 auto;">
+                        <div class="input-group" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 5px;">
+                            <input type="email" id="newsletter-email" name="email" class="form-control" placeholder="Seu melhor e-mail corporativo" required style="background: transparent; border: none; color: #F1F5F9; padding: 15px 20px;" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; padding: 15px 30px; border-radius: 6px; font-weight: 600;">Inscrever</button>
+                            </div>
+                        </div>
+                        <p id="newsletter-message" style="margin-top: 15px; font-size: 0.9rem;"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Blog</h4>
+                        <ul>
+                            <li><a href="../ciclo-ooda-observar-orientar-decidir-agir/">Ciclo OODA</a></li>
+                            <li><a href="../como-funciona-o-tlp-traffic-light-protocol/">TLP Protocol</a></li>
+                            <li><a href="./">Metadados</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Serviços</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.easing.min.js"></script>
+    <script>
+        $(window).on('scroll load', function () {
+            if ($('.navbar').offset().top > 20) { $('.navbar-custom').addClass('top-nav-collapse'); }
+            else { $('.navbar-custom').removeClass('top-nav-collapse'); }
+        });
+
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            var target = $(this.getAttribute('href'));
+            if (target.length) { $('html, body').animate({ scrollTop: target.offset().top - 100 }, 500, 'easeInOutExpo'); }
+        });
+
+        const blockedPublicDomains = ['gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'protonmail.com', 'proton.me', 'zoho.com', 'yandex.com', 'mail.com', 'gmx.com', 'gmx.net', 'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com', 'r7.com'];
+        const blockedTempDomains = ['tempmail.com', 'temp-mail.org', 'guerrillamail.com', 'guerrillamail.org', '10minutemail.com', 'mailinator.com', 'throwaway.email', 'fakeinbox.com', 'sharklasers.com', 'spam4.me', 'grr.la', 'dispostable.com', 'maildrop.cc', 'yopmail.com', 'mohmal.com', 'getnada.com', 'tempail.com', 'emailondeck.com', 'mintemail.com'];
+
+        function isBlockedEmail(email) {
+            const domain = email.split('@')[1]?.toLowerCase();
+            if (!domain) return true;
+            return blockedPublicDomains.includes(domain) || blockedTempDomains.includes(domain);
+        }
+
+        document.getElementById('newsletter-form')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletter-email');
+            const messageEl = document.getElementById('newsletter-message');
+            const email = emailInput.value.trim();
+
+            if (isBlockedEmail(email)) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Por favor, utilize um e-mail corporativo.';
+                return;
+            }
+
+            try {
+                let userIP = '';
+                try {
+                    const ipResponse = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await ipResponse.json();
+                    userIP = ipData.ip;
+                } catch (e) { userIP = 'unknown'; }
+
+                await fetch('https://script.google.com/macros/s/AKfycbxhe2brHBkOdTwMblSCWEMJ-PfHrNnxN5JrEXdlp6MIEq7RgT8e2dJfVMBVSjPmO9a-/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ email: email, ip: userIP, source: 'blog-metadados' })
+                });
+
+                messageEl.style.color = '#22c55e';
+                messageEl.textContent = 'Inscrição realizada com sucesso!';
+                emailInput.value = '';
+            } catch (error) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Erro ao processar. Tente novamente.';
+            }
+        });
+    </script>
+</body>
+
+</html>
