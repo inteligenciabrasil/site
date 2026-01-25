@@ -165,6 +165,55 @@
         }
     }
     </script>
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Qual o prazo médio para implementação de um programa de Segurança da Informação?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O prazo varia conforme a complexidade e maturidade atual da organização. Um diagnóstico inicial leva de 1 a 4 semanas. A implementação de um programa completo pode variar de 3 a 12 meses, dependendo do escopo. Trabalhamos com entregas incrementais para que você comece a ver resultados desde o primeiro mês."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Minha empresa é pequena. Preciso me preocupar com Segurança da Informação?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim! Empresas menores são frequentemente alvos de ataques justamente por terem menos proteção. Além disso, a LGPD se aplica a organizações de todos os portes. Oferecemos pacotes adequados para PMEs, com investimento proporcional ao tamanho e risco do negócio."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual a diferença entre Segurança da Informação e Cibersegurança?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Segurança da Informação é um conceito mais amplo que abrange a proteção de informações em qualquer formato (digital, físico, verbal). Cibersegurança foca especificamente na proteção de sistemas, redes e dados no ambiente digital. Nossos serviços cobrem ambos os aspectos de forma integrada."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Vocês oferecem serviços de resposta a incidentes?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim, oferecemos serviços de Resposta a Incidentes tanto de forma reativa (quando um incidente ocorre) quanto proativa (preparação e planejamento). Também disponibilizamos contratos de retainer para resposta emergencial com SLA garantido."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como é calculado o investimento em Segurança da Informação?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O investimento é calculado com base no escopo do projeto, complexidade do ambiente, prazos e recursos necessários. Oferecemos diferentes modalidades: projetos fechados, contratos recorrentes (managed services) e consultoria por hora. Entre em contato para uma proposta personalizada sem compromisso."
+                }
+            }
+        ]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap"
@@ -362,6 +411,198 @@
 
             .navbar-minimal .navbar-nav {
                 margin-left: 0;
+            }
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, #0D1E38 0%, #1a3a5c 50%, #0D1E38 100%);
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .newsletter-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-content {
+            margin-bottom: 30px;
+        }
+
+        .newsletter-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .newsletter-icon img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 20px rgba(96, 165, 250, 0.4));
+        }
+
+        .newsletter-icon i {
+            font-size: 28px;
+            color: #fff;
+        }
+
+        .newsletter-content h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #F1F5F9;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-content p {
+            color: #94A3B8;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input-group {
+            display: flex;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            border-radius: 50px;
+            padding: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input-group:focus-within {
+            border-color: #60A5FA;
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.2);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 20px;
+            color: #F1F5F9;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .newsletter-input::placeholder {
+            color: #64748B;
+        }
+
+        .newsletter-btn {
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 28px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(96, 165, 250, 0.4);
+        }
+
+        .newsletter-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .newsletter-btn i {
+            font-size: 0.9rem;
+        }
+
+        .newsletter-message {
+            margin-top: 15px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .newsletter-message.success {
+            display: block;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22C55E;
+        }
+
+        .newsletter-message.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #EF4444;
+        }
+
+        .newsletter-disclaimer {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #64748B;
+        }
+
+        .newsletter-disclaimer i {
+            margin-right: 5px;
+            color: #60A5FA;
+        }
+
+        @media (max-width: 576px) {
+            .newsletter-section {
+                padding: 50px 20px;
+            }
+
+            .newsletter-content h3 {
+                font-size: 1.4rem;
+            }
+
+            .newsletter-input-group {
+                flex-direction: column;
+                border-radius: 12px;
+                padding: 10px;
+            }
+
+            .newsletter-input {
+                text-align: center;
+                padding: 12px 15px;
+            }
+
+            .newsletter-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+            }
+
+            .newsletter-btn .btn-text {
+                display: inline;
             }
         }
     </style>
@@ -1082,7 +1323,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="email">E-mail *</label>
                                     <input type="email" class="form-control" id="email" name="email"
-                                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" maxlength="100"
+                                        pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" maxlength="100"
                                         required>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -1127,6 +1368,41 @@
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-wrapper">
+                <div class="newsletter-content">
+                    <div class="newsletter-icon">
+                        <picture>
+                            <source type="image/webp" srcset="./img/logo-white-140x140.webp" width="120" height="120">
+                            <img src="./img/logo-white-140x140.png" alt="Inteligência Brasil" width="120" height="120" loading="lazy">
+                        </picture>
+                    </div>
+                    <h3>Receba conteúdos exclusivos sobre Segurança da Informação</h3>
+                    <p>Assine nossa newsletter e fique por dentro das últimas tendências, ameaças e melhores práticas em cibersegurança.</p>
+                </div>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="hidden" name="ip" id="newsletterIp">
+                    <div class="newsletter-input-group">
+                        <input type="email" id="newsletterEmail" name="email" class="newsletter-input"
+                               placeholder="Seu e-mail corporativo"
+                               pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                               maxlength="100" required>
+                        <button type="submit" class="newsletter-btn">
+                            <span class="btn-text">Assinar</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-disclaimer">
+                        <i class="fas fa-lock"></i> Seu e-mail está seguro. Não enviamos spam e você pode cancelar a qualquer momento.
+                    </p>
+                </form>
             </div>
         </div>
     </section>
@@ -1491,6 +1767,186 @@
         $(document).ready(function () {
             initCounters();
         });
+
+        // Newsletter Form Submission with Email Validation
+        (function() {
+            const newsletterForm = document.getElementById('newsletterForm');
+            if (!newsletterForm) return;
+
+            const newsletterIpInput = document.getElementById('newsletterIp');
+
+            // Função para buscar IP
+            function withTimeout(promise, ms) {
+                return Promise.race([
+                    promise,
+                    new Promise(function(_, reject) { setTimeout(function() { reject(new Error("timeout")); }, ms); })
+                ]);
+            }
+
+            async function fetchNewsletterIp() {
+                const endpoints = [
+                    "https://api.ipify.org?format=json",
+                    "https://api64.ipify.org?format=json",
+                    "https://ipinfo.io/json"
+                ];
+
+                for (const url of endpoints) {
+                    try {
+                        const res = await withTimeout(fetch(url, { cache: "no-store" }), 2500);
+                        if (!res.ok) continue;
+
+                        const data = await res.json();
+                        const ip = data.ip || data.ip_address;
+                        if (ip && typeof ip === "string") return ip.trim();
+                    } catch (e) {
+                        // tenta o proximo endpoint
+                    }
+                }
+                return "";
+            }
+
+            // Tenta preencher IP ao carregar
+            fetchNewsletterIp().then(function(ip) {
+                if (newsletterIpInput) newsletterIpInput.value = ip;
+            });
+
+            // Lista de domínios públicos (e-mails pessoais) bloqueados
+            const publicDomains = [
+                'gmail.com', 'gmail.com.br', 'googlemail.com',
+                'outlook.com', 'outlook.com.br', 'hotmail.com', 'hotmail.com.br', 'live.com', 'live.com.br', 'msn.com',
+                'yahoo.com', 'yahoo.com.br', 'ymail.com', 'rocketmail.com',
+                'icloud.com', 'me.com', 'mac.com',
+                'aol.com', 'aol.com.br',
+                'protonmail.com', 'protonmail.ch', 'proton.me',
+                'zoho.com', 'zohomail.com',
+                'mail.com', 'email.com',
+                'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com',
+                'r7.com', 'zipmail.com.br', 'oi.com.br', 'pop.com.br'
+            ];
+
+            // Lista de domínios de e-mail temporários bloqueados
+            const tempDomains = [
+                'tempmail.com', 'temp-mail.org', 'tempmail.net', 'temp-mail.io',
+                'guerrillamail.com', 'guerrillamail.org', 'guerrillamail.net', 'guerrillamail.biz', 'guerrillamailblock.com',
+                '10minutemail.com', '10minutemail.net', '10minmail.com',
+                'mailinator.com', 'mailinator.net', 'mailinator2.com',
+                'throwaway.email', 'throwawaymail.com',
+                'fakeinbox.com', 'fakemailgenerator.com',
+                'getnada.com', 'nada.email',
+                'dispostable.com', 'disposablemail.com',
+                'maildrop.cc', 'mailnesia.com',
+                'yopmail.com', 'yopmail.fr', 'yopmail.net',
+                'trashmail.com', 'trashmail.net', 'trash-mail.com',
+                'sharklasers.com', 'spam4.me', 'grr.la', 'guerrillamail.info',
+                'mohmal.com', 'tempail.com', 'emailondeck.com',
+                'mintemail.com', 'spamgourmet.com', 'mytemp.email',
+                'burnermail.io', 'mailsac.com', 'inboxkitten.com',
+                'tempinbox.com', 'tmpmail.org', 'tmpmail.net',
+                'getairmail.com', 'discard.email', 'discardmail.com',
+                'spamex.com', 'mailcatch.com', 'mailscrap.com',
+                'tempr.email', 'fakemail.net', 'emailfake.com',
+                'crazymailing.com', 'tempsky.com', 'tempmailaddress.com'
+            ];
+
+            function validateNewsletterEmail(email) {
+                const emailLower = email.toLowerCase().trim();
+                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+                // Verifica formato básico
+                if (!emailRegex.test(emailLower)) {
+                    return { valid: false, message: 'Por favor, informe um e-mail válido.' };
+                }
+
+                // Extrai o domínio
+                const domain = emailLower.split('@')[1];
+
+                // Verifica se é domínio público
+                if (publicDomains.includes(domain)) {
+                    return { valid: false, message: 'Por favor, utilize seu e-mail corporativo. E-mails pessoais (Gmail, Outlook, etc.) não são aceitos.' };
+                }
+
+                // Verifica se é domínio temporário
+                if (tempDomains.includes(domain) || tempDomains.some(function(d) { return domain.includes(d); })) {
+                    return { valid: false, message: 'E-mails temporários não são permitidos. Por favor, use seu e-mail corporativo.' };
+                }
+
+                // Verifica padrões suspeitos de domínios temporários
+                var suspiciousPatterns = [
+                    /temp/i, /fake/i, /trash/i, /spam/i, /disposable/i,
+                    /throwaway/i, /mailinator/i, /guerrilla/i, /10min/i,
+                    /burner/i, /noreply/i, /no-reply/i
+                ];
+
+                if (suspiciousPatterns.some(function(pattern) { return pattern.test(domain); })) {
+                    return { valid: false, message: 'Este domínio de e-mail não é permitido. Por favor, use seu e-mail corporativo.' };
+                }
+
+                return { valid: true };
+            }
+
+            function showNewsletterMessage(message, type) {
+                var msgDiv = document.getElementById('newsletterMessage');
+                msgDiv.textContent = message;
+                msgDiv.className = 'newsletter-message ' + type;
+                msgDiv.style.display = 'block';
+
+                if (type === 'success') {
+                    setTimeout(function() {
+                        msgDiv.style.display = 'none';
+                    }, 5000);
+                }
+            }
+
+            newsletterForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                var emailInput = document.getElementById('newsletterEmail');
+                var submitBtn = newsletterForm.querySelector('.newsletter-btn');
+                var originalText = submitBtn.innerHTML;
+                var email = emailInput.value.trim();
+
+                // Validação de e-mail
+                var emailValidation = validateNewsletterEmail(email);
+                if (!emailValidation.valid) {
+                    showNewsletterMessage(emailValidation.message, 'error');
+                    return;
+                }
+
+                // Desabilita botão e mostra loading
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+                // Garante que o IP foi coletado
+                var ip = newsletterIpInput ? newsletterIpInput.value : '';
+                if (!ip) {
+                    ip = await fetchNewsletterIp();
+                    if (newsletterIpInput) newsletterIpInput.value = ip;
+                }
+
+                // Envia para o Google Apps Script
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec',
+                    data: 'email=' + encodeURIComponent(email) + '&origem=Newsletter Home&servico=Newsletter&ip=' + encodeURIComponent(ip),
+                    success: function(response) {
+                        var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
+                        if (result === 'success' || result === 'ok' || response === 'success') {
+                            newsletterForm.reset();
+                            showNewsletterMessage('Inscrição realizada com sucesso! Você receberá nossos conteúdos em breve.', 'success');
+                        } else {
+                            showNewsletterMessage('Erro ao realizar inscrição. Tente novamente.', 'error');
+                        }
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    },
+                    error: function() {
+                        showNewsletterMessage('Erro de conexão. Verifique sua internet e tente novamente.', 'error');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalText;
+                    }
+                });
+            });
+        })();
     </script>
 </body>
 
