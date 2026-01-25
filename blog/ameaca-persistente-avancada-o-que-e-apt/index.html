@@ -175,11 +175,58 @@
         .footer-bottom { border-top: 1px solid rgba(96, 165, 250, 0.1); padding-top: 20px; margin-top: 40px; color: #64748B; }
         .footer-bottom a { color: #94A3B8; }
         .footer-social a { color: #60A5FA; }
+        /* Newsletter Styles */
+        .newsletter-input-group {
+            display: flex;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            border-radius: 50px;
+            padding: 6px;
+            transition: all 0.3s ease;
+        }
+        .newsletter-input-group:focus-within {
+            border-color: #60A5FA;
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.2);
+        }
+        .newsletter-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 20px;
+            color: #F1F5F9;
+            font-size: 1rem;
+            outline: none;
+        }
+        .newsletter-input::placeholder { color: #64748B; }
+        .newsletter-btn {
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 28px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(96, 165, 250, 0.4);
+        }
+
         @media (max-width: 768px) {
             .article-header h1 { font-size: 1.8rem; }
             .author-box { flex-direction: column; text-align: center; }
             .lifecycle-step { padding-left: 20px; padding-top: 60px; }
             .lifecycle-step::before { left: 50%; top: 15px; transform: translateX(-50%); }
+            .newsletter-input-group { flex-direction: column; border-radius: 12px; padding: 10px; }
+            .newsletter-input { text-align: center; }
+            .newsletter-btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -655,11 +702,12 @@
                     <h3 style="color: #F1F5F9; margin-bottom: 15px;">Fique por dentro das novidades</h3>
                     <p style="color: #94A3B8; margin-bottom: 30px;">Receba conteudos exclusivos sobre seguranca da informacao, threat intelligence e ciberseguranca.</p>
                     <form id="newsletter-form" class="newsletter-form" style="max-width: 500px; margin: 0 auto;">
-                        <div class="input-group" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 5px;">
-                            <input type="email" id="newsletter-email" name="email" class="form-control" placeholder="Seu melhor e-mail corporativo" required style="background: transparent; border: none; color: #F1F5F9; padding: 15px 20px;" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; padding: 15px 30px; border-radius: 6px; font-weight: 600;">Inscrever</button>
-                            </div>
+                        <div class="newsletter-input-group" style="display: flex; gap: 10px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 50px; padding: 6px; transition: all 0.3s ease;">
+                            <input type="email" id="newsletter-email" name="email" class="newsletter-input" placeholder="Seu melhor e-mail corporativo" required style="flex: 1; background: transparent; border: none; padding: 12px 20px; color: #F1F5F9; font-size: 1rem; outline: none;" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+                            <button type="submit" class="newsletter-btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); border: none; border-radius: 50px; padding: 12px 28px; color: #fff; font-weight: 600; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; white-space: nowrap;">
+                                <span>Inscrever</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
                         </div>
                         <p id="newsletter-message" style="margin-top: 15px; font-size: 0.9rem;"></p>
                     </form>
