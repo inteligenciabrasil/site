@@ -384,6 +384,105 @@
         .breadcrumb-item + .breadcrumb-item::before {
             color: #64748B;
         }
+
+        /* Search Bar */
+        .blog-search {
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .search-input-group {
+            display: flex;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            border-radius: 50px;
+            padding: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input-group:focus-within {
+            border-color: #60A5FA;
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.2);
+        }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 20px;
+            color: #F1F5F9;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #64748B;
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(96, 165, 250, 0.4);
+        }
+
+        .search-results-info {
+            text-align: center;
+            color: #94A3B8;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .search-results-info .highlight {
+            color: #60A5FA;
+            font-weight: 600;
+        }
+
+        .blog-card.hidden {
+            display: none;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #94A3B8;
+            display: none;
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            color: rgba(96, 165, 250, 0.3);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .clear-search {
+            background: transparent;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            border-radius: 50px;
+            padding: 8px 16px;
+            color: #60A5FA;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .clear-search:hover {
+            background: rgba(96, 165, 250, 0.1);
+        }
     </style>
 </head>
 
@@ -439,6 +538,17 @@
     <!-- Blog Content -->
     <section class="blog-content">
         <div class="container">
+            <!-- Search Bar -->
+            <div class="blog-search">
+                <div class="search-input-group">
+                    <input type="text" class="search-input" id="blogSearch" placeholder="Pesquisar artigos..." autocomplete="off">
+                    <button class="search-btn" onclick="searchBlog()">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </div>
+            </div>
+            <div class="search-results-info" id="searchResultsInfo"></div>
+
             <!-- Filter Tags -->
             <div class="blog-filters">
                 <span class="filter-tag active">Todos</span>
@@ -469,6 +579,52 @@
                             Descubra como a ciberguerra e a guerrilha cibernetica moldam a seguranca global. Exploracao profunda das ameacas digitais, exemplos como Stuxnet e estrategias de defesa modernas.
                         </p>
                         <a href="./cyberwar-a-nova-fronteira-do-conflito-global-atraves-da-guerra-cibernetica/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - MITRE ATT&CK -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Ciberseguranca</span>
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./mitre-attaque-enterprise-comprehensive-adversary-tactics-and-techniques/">MITRE ATT&CK Enterprise: Guia Completo</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Conheca o framework MITRE ATT&CK, as 14 taticas, centenas de tecnicas e como usar para mapear comportamentos de adversarios e fortalecer sua seguranca.
+                        </p>
+                        <a href="./mitre-attaque-enterprise-comprehensive-adversary-tactics-and-techniques/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Monitoramento Seguranca -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Governanca</span>
+                        <i class="fas fa-eye-slash"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./o-que-quase-ninguem-monitora-em-seguranca-da-informacao/">O que Quase Ninguem Monitora em Seguranca da Informacao</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Descubra os riscos silenciosos que se acumulam nas organizacoes e que raramente aparecem em relatorios tradicionais, mas frequentemente estao presentes nos incidentes mais relevantes.
+                        </p>
+                        <a href="./o-que-quase-ninguem-monitora-em-seguranca-da-informacao/" class="blog-card-link">
                             Ler artigo completo <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -658,6 +814,14 @@
                     </div>
                 </article>
             </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults">
+                <i class="fas fa-search"></i>
+                <h3>Nenhum resultado encontrado</h3>
+                <p>Tente buscar por outros termos ou navegue pelos filtros de categoria.</p>
+                <button class="clear-search" onclick="clearSearch()">Limpar busca</button>
+            </div>
         </div>
     </section>
 
@@ -684,9 +848,9 @@
                         <h4>Blog</h4>
                         <ul>
                             <li><a href="./ciclo-ooda-observar-orientar-decidir-agir/">Ciclo OODA</a></li>
-                            <li><a href="#">MITRE ATT&CK</a></li>
-                            <li><a href="#">LGPD</a></li>
-                            <li><a href="#">Zero Trust</a></li>
+                            <li><a href="./mitre-attaque-enterprise-comprehensive-adversary-tactics-and-techniques/">MITRE ATT&CK</a></li>
+                            <li><a href="./ameaca-persistente-avancada-o-que-e-apt/">APT</a></li>
+                            <li><a href="./como-funciona-o-tlp-traffic-light-protocol/">TLP Protocol</a></li>
                         </ul>
                     </div>
                 </div>
@@ -744,6 +908,72 @@
         $('.filter-tag').on('click', function() {
             $('.filter-tag').removeClass('active');
             $(this).addClass('active');
+            clearSearch();
+        });
+
+        // Search functionality
+        function searchBlog() {
+            const searchTerm = document.getElementById('blogSearch').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.blog-card');
+            const blogGrid = document.querySelector('.blog-grid');
+            const noResults = document.getElementById('noResults');
+            const resultsInfo = document.getElementById('searchResultsInfo');
+            let visibleCount = 0;
+
+            if (searchTerm === '') {
+                clearSearch();
+                return;
+            }
+
+            cards.forEach(card => {
+                const title = card.querySelector('.blog-card-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.blog-card-excerpt').textContent.toLowerCase();
+                const category = card.querySelector('.blog-card-category').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || excerpt.includes(searchTerm) || category.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            if (visibleCount === 0) {
+                blogGrid.style.display = 'none';
+                noResults.style.display = 'block';
+                resultsInfo.style.display = 'none';
+            } else {
+                blogGrid.style.display = 'grid';
+                noResults.style.display = 'none';
+                resultsInfo.style.display = 'block';
+                resultsInfo.innerHTML = 'Exibindo <span class="highlight">' + visibleCount + '</span> resultado(s) para "<span class="highlight">' + searchTerm + '</span>" <button class="clear-search" onclick="clearSearch()" style="margin-left: 15px;">Limpar</button>';
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('blogSearch').value = '';
+            document.querySelectorAll('.blog-card').forEach(card => {
+                card.classList.remove('hidden');
+            });
+            document.querySelector('.blog-grid').style.display = 'grid';
+            document.getElementById('noResults').style.display = 'none';
+            document.getElementById('searchResultsInfo').style.display = 'none';
+        }
+
+        // Search on Enter key
+        document.getElementById('blogSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchBlog();
+            }
+        });
+
+        // Real-time search as user types
+        document.getElementById('blogSearch').addEventListener('input', function() {
+            if (this.value.length >= 2) {
+                searchBlog();
+            } else if (this.value.length === 0) {
+                clearSearch();
+            }
         });
     </script>
 </body>

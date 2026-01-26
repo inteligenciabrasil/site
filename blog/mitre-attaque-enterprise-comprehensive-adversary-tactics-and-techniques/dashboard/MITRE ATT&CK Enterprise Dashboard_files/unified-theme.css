@@ -1,0 +1,1016 @@
+/* =============================================================================
+   UNIFIED CYBERSECURITY THEME - unified-theme.css
+   Adaptado para Inteligencia Brasil
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   FONTS
+   ----------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* -----------------------------------------------------------------------------
+   CSS CUSTOM PROPERTIES (Inteligencia Brasil Theme)
+   ----------------------------------------------------------------------------- */
+:root {
+    --cyber-dark: #0a1628;
+    --cyber-darker: #0D1E38;
+    --cyber-card: #0f2035;
+    --cyber-border: rgba(96, 165, 250, 0.2);
+    --cyber-hover: #1a3a5c;
+    --cyber-cyan: #60A5FA;
+    --cyber-purple: #8b5cf6;
+    --cyber-pink: #ec4899;
+    --cyber-wine: #BE185D;
+    --cyber-green: #10b981;
+    --cyber-orange: #f59e0b;
+    --cyber-red: #ef4444;
+    --cyber-yellow: #eab308;
+    --cyber-blue: #3B82F6;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+}
+
+/* -----------------------------------------------------------------------------
+   BASE STYLES
+   ----------------------------------------------------------------------------- */
+* {
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0a1628, #0D1E38, #0a1628);
+    min-height: 100vh;
+    color: var(--text-primary);
+    font-family: 'Fira Sans', system-ui, sans-serif;
+}
+
+/* -----------------------------------------------------------------------------
+   SCROLLBARS
+   ----------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--cyber-card);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #60A5FA, #3B82F6);
+    border-radius: 4px;
+}
+
+.scrollbar-dark::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollbar-dark::-webkit-scrollbar-track {
+    background: var(--cyber-card);
+}
+
+.scrollbar-dark::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #60A5FA, #3B82F6);
+    border-radius: 4px;
+}
+
+/* -----------------------------------------------------------------------------
+   CARDS - Inteligencia Brasil Style
+   ----------------------------------------------------------------------------- */
+.cyber-card {
+    background: linear-gradient(145deg, rgba(13, 30, 56, 0.95), rgba(10, 22, 40, 0.98));
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.cyber-card:hover {
+    border-color: rgba(96, 165, 250, 0.4);
+    box-shadow: 0 8px 30px rgba(96, 165, 250, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+.card-glow {
+    position: relative;
+}
+
+.card-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.2), transparent 50%, rgba(59, 130, 246, 0.2));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-glow:hover::before {
+    opacity: 1;
+}
+
+.metric-card {
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+}
+
+.dashboard-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.chart-container {
+    background: linear-gradient(145deg, rgba(13, 30, 56, 0.9), rgba(10, 22, 40, 0.95));
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* -----------------------------------------------------------------------------
+   STAT GRADIENT CARDS (numbered variants)
+   ----------------------------------------------------------------------------- */
+.stat-gradient-1 {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.05));
+    border-left: 3px solid var(--cyber-red);
+}
+
+.stat-gradient-2 {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(96, 165, 250, 0.05));
+    border-left: 3px solid var(--cyber-cyan);
+}
+
+.stat-gradient-3 {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.05));
+    border-left: 3px solid var(--cyber-purple);
+}
+
+.stat-gradient-4 {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+    border-left: 3px solid var(--cyber-green);
+}
+
+.stat-gradient-5 {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+    border-left: 3px solid var(--cyber-orange);
+}
+
+.stat-gradient-6 {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(236, 72, 153, 0.05));
+    border-left: 3px solid var(--cyber-pink);
+}
+
+.stat-gradient-7 {
+    background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(234, 179, 8, 0.05));
+    border-left: 3px solid var(--cyber-yellow);
+}
+
+/* -----------------------------------------------------------------------------
+   BORDERS & DECORATIVE ELEMENTS
+   ----------------------------------------------------------------------------- */
+.cyber-border {
+    position: relative;
+}
+
+.cyber-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #60A5FA, #3B82F6, #1D4ED8);
+}
+
+.gradient-border {
+    background: linear-gradient(135deg, #0a0a0f, #111118);
+    position: relative;
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.5), rgba(59, 130, 246, 0.5));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    border-radius: inherit;
+}
+
+.icon-container {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(59, 130, 246, 0.1));
+}
+
+.hero-glow {
+    background: radial-gradient(ellipse at center, rgba(96, 165, 250, 0.15) 0%, transparent 70%);
+}
+
+.grid-bg {
+    background-image: 
+        linear-gradient(rgba(96, 165, 250, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(96, 165, 250, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+/* -----------------------------------------------------------------------------
+   TABS
+   ----------------------------------------------------------------------------- */
+/* Style 1: Gradient background on active (default) */
+.tab-btn {
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
+}
+
+.tab-btn:not(.active):hover {
+    background: var(--cyber-hover);
+}
+
+/* Style 2: Underline animation (use .tab-btn-underline) */
+.tab-btn-underline {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.tab-btn-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyber-cyan), var(--cyber-purple));
+    transition: all 0.3s;
+    transform: translateX(-50%);
+}
+
+.tab-btn-underline:hover::after,
+.tab-btn-underline.active::after {
+    width: 100%;
+}
+
+.tab-btn-underline.active {
+    color: var(--cyber-cyan);
+    background: rgba(96, 165, 250, 0.1);
+}
+
+/* Style 3: Border highlight (use .tab-active class) */
+.tab-active {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
+    border-color: var(--cyber-cyan);
+}
+
+/* -----------------------------------------------------------------------------
+   TABLES
+   ----------------------------------------------------------------------------- */
+.data-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.data-table th {
+    background: linear-gradient(180deg, rgba(96, 165, 250, 0.1), rgba(96, 165, 250, 0.05)) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--cyber-border) !important;
+    border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+.data-table td {
+    background: var(--cyber-card) !important;
+    color: var(--text-secondary) !important;
+    border-color: var(--cyber-border) !important;
+}
+
+.data-table tr:hover td,
+.data-table tbody tr:hover {
+    background: var(--cyber-hover) !important;
+}
+
+.data-row:hover {
+    background: rgba(96, 165, 250, 0.05);
+}
+
+/* Simple-DataTables styling */
+.dataTable-wrapper .dataTable-search input,
+.dataTable-wrapper .dataTable-selector {
+    background: var(--cyber-dark);
+    border: 1px solid var(--cyber-border);
+    color: var(--text-primary);
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+.dataTable-wrapper .dataTable-pagination a {
+    background: var(--cyber-card);
+    border: 1px solid var(--cyber-border);
+    color: var(--text-secondary);
+}
+
+.dataTable-wrapper .dataTable-pagination a.active,
+.dataTable-wrapper .dataTable-pagination a:hover {
+    background: linear-gradient(135deg, var(--cyber-cyan), var(--cyber-purple));
+    border-color: var(--cyber-cyan);
+    color: white;
+}
+
+/* -----------------------------------------------------------------------------
+   FORMS & INPUTS
+   ----------------------------------------------------------------------------- */
+.search-input {
+    background: rgba(17, 17, 24, 0.8);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    transition: all 0.3s;
+}
+
+.search-input:focus {
+    border-color: var(--cyber-cyan);
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.2);
+    outline: none;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2300d4ff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+}
+
+/* -----------------------------------------------------------------------------
+   MODALS
+   ----------------------------------------------------------------------------- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 24px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: linear-gradient(145deg, var(--cyber-card), var(--cyber-dark));
+    border: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+/* -----------------------------------------------------------------------------
+   ALERTS & BANNERS
+   ----------------------------------------------------------------------------- */
+.alert-banner {
+    background: linear-gradient(90deg, rgba(239, 68, 68, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* -----------------------------------------------------------------------------
+   BADGES
+   ----------------------------------------------------------------------------- */
+.badge {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* -----------------------------------------------------------------------------
+   NAVIGATION
+   ----------------------------------------------------------------------------- */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyber-cyan), var(--cyber-purple));
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* -----------------------------------------------------------------------------
+   MITRE ATT&CK SPECIFIC
+   ----------------------------------------------------------------------------- */
+.tactic-header {
+    background: linear-gradient(180deg, rgba(96, 165, 250, 0.25), rgba(59, 130, 246, 0.1));
+    border-bottom: 2px solid #60A5FA;
+}
+
+/* Technique Pills - Standard (Blue Theme) */
+.technique-pill {
+    background: linear-gradient(135deg, rgba(13, 30, 56, 0.9), rgba(15, 32, 53, 0.95));
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-left: 3px solid #3B82F6;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.technique-pill:hover {
+    background: linear-gradient(135deg, rgba(26, 58, 92, 0.95), rgba(20, 45, 75, 0.98));
+    border-color: rgba(96, 165, 250, 0.5);
+    box-shadow: 0 4px 15px rgba(96, 165, 250, 0.2);
+    transform: translateX(2px);
+}
+
+/* Technique Pills - Has Atomic Tests (Wine/Red Theme) */
+.technique-pill.has-atomic {
+    background: linear-gradient(135deg, rgba(50, 20, 25, 0.9), rgba(45, 18, 22, 0.95));
+    border: 1px solid rgba(190, 24, 93, 0.3);
+    border-left: 3px solid #BE185D;
+    box-shadow: 0 2px 8px rgba(190, 24, 93, 0.1);
+}
+
+.technique-pill.has-atomic:hover {
+    background: linear-gradient(135deg, rgba(65, 25, 32, 0.95), rgba(58, 22, 28, 0.98));
+    border-color: rgba(190, 24, 93, 0.6);
+    box-shadow: 0 4px 15px rgba(190, 24, 93, 0.25);
+}
+
+.matrix-cell {
+    transition: all 0.2s;
+}
+
+.matrix-cell:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+/* -----------------------------------------------------------------------------
+   ANIMATIONS
+   ----------------------------------------------------------------------------- */
+/* Blink / Live indicator */
+.live-indicator {
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Pulse dot */
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--cyber-green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.status-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 1; 
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 0.5; 
+        transform: scale(1.2); 
+    }
+}
+
+/* Float animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Scan line */
+@keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+}
+
+.scan-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.5), transparent);
+    animation: scan 3s linear infinite;
+}
+
+/* Glow animation */
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px rgba(96, 165, 250, 0.2),
+                    0 0 10px rgba(96, 165, 250, 0.1);
+    }
+    to {
+        box-shadow: 0 0 10px rgba(96, 165, 250, 0.4),
+                    0 0 20px rgba(96, 165, 250, 0.2);
+    }
+}
+
+.animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* -----------------------------------------------------------------------------
+   UTILITY CLASSES
+   ----------------------------------------------------------------------------- */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Responsive grid for stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+   CHART.JS DARK THEME OVERRIDES
+   ----------------------------------------------------------------------------- */
+.chart-container canvas {
+    filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.1));
+}
+
+/* -----------------------------------------------------------------------------
+   LEGEND INDICATORS - Inteligencia Brasil Style
+   ----------------------------------------------------------------------------- */
+/* Standard Technique Indicator (Blue) */
+.legend-standard,
+.indicator-standard {
+    background: linear-gradient(135deg, #3B82F6, #60A5FA);
+    border: 1px solid rgba(96, 165, 250, 0.5);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+/* Has Atomic Tests Indicator (Wine/Rose) */
+.legend-atomic,
+.indicator-atomic {
+    background: linear-gradient(135deg, #BE185D, #DB2777);
+    border: 1px solid rgba(190, 24, 93, 0.5);
+    box-shadow: 0 2px 8px rgba(190, 24, 93, 0.3);
+}
+
+/* Legend Container */
+.matrix-legend {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(13, 30, 56, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(96, 165, 250, 0.15);
+}
+
+.matrix-legend .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.matrix-legend .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+/* Technique Count Badges */
+.technique-count {
+    background: rgba(96, 165, 250, 0.15);
+    color: #60A5FA;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.technique-count.has-atomic {
+    background: rgba(190, 24, 93, 0.15);
+    color: #DB2777;
+}
+
+/* =============================================================================
+   INTELIGENCIA BRASIL - CUSTOM LAYOUT
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   ASYMMETRIC STATS LAYOUT
+   ----------------------------------------------------------------------------- */
+.stats-asymmetric {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.stat-featured {
+    background: linear-gradient(145deg, rgba(13, 30, 56, 0.95), rgba(10, 22, 40, 0.98));
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-featured::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #60A5FA, #3B82F6, #1D4ED8);
+}
+
+.stat-featured .stat-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: rgba(96, 165, 250, 0.15);
+    color: #60A5FA;
+}
+
+.stat-featured .stat-value {
+    font-size: 4rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-featured .stat-label {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.stats-grid-compact {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.stat-compact {
+    background: linear-gradient(145deg, rgba(13, 30, 56, 0.9), rgba(10, 22, 40, 0.95));
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.stat-compact:hover {
+    border-color: rgba(96, 165, 250, 0.4);
+    transform: translateY(-2px);
+}
+
+.stat-compact .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.stat-compact .stat-info {
+    flex: 1;
+}
+
+.stat-compact .stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+}
+
+.stat-compact .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 1024px) {
+    .stats-asymmetric {
+        grid-template-columns: 1fr;
+    }
+    .stats-grid-compact {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .stats-grid-compact {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+   SIDEBAR NAVIGATION
+   ----------------------------------------------------------------------------- */
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1.5rem;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.sidebar-nav {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    background: linear-gradient(180deg, rgba(13, 30, 56, 0.95), rgba(10, 22, 40, 0.98));
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 1rem;
+    padding: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+.sidebar-nav .nav-item:hover {
+    background: rgba(96, 165, 250, 0.1);
+    color: #60A5FA;
+}
+
+.sidebar-nav .nav-item.active {
+    background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
+}
+
+.sidebar-nav .nav-item i {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-nav .nav-item span {
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+    .sidebar-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        flex-direction: row;
+        justify-content: space-around;
+        border-radius: 1rem 1rem 0 0;
+        z-index: 1000;
+        padding: 0.5rem;
+    }
+    .sidebar-nav .nav-item {
+        padding: 0.5rem;
+    }
+    .sidebar-nav .nav-item span {
+        display: none;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+   COLLAPSIBLE FILTERS
+   ----------------------------------------------------------------------------- */
+.filters-panel {
+    background: linear-gradient(145deg, rgba(13, 30, 56, 0.9), rgba(10, 22, 40, 0.95));
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.filters-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(96, 165, 250, 0.1);
+    transition: background 0.2s ease;
+}
+
+.filters-header:hover {
+    background: rgba(96, 165, 250, 0.05);
+}
+
+.filters-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.filters-header .toggle-icon {
+    transition: transform 0.3s ease;
+    color: var(--text-muted);
+}
+
+.filters-panel.collapsed .toggle-icon {
+    transform: rotate(-180deg);
+}
+
+.filters-panel.collapsed .filters-content {
+    display: none;
+}
+
+.filters-content {
+    padding: 1.5rem;
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr) auto auto;
+    gap: 1rem;
+    align-items: center;
+}
+
+@media (max-width: 1200px) {
+    .filters-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .filters-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* -----------------------------------------------------------------------------
+   SECTION DIVIDERS
+   ----------------------------------------------------------------------------- */
+.section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.section-divider::before,
+.section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.3), transparent);
+}
+
+.section-divider .divider-text {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+/* -----------------------------------------------------------------------------
+   CONTENT PANELS
+   ----------------------------------------------------------------------------- */
+.content-panel {
+    background: linear-gradient(145deg, rgba(13, 30, 56, 0.9), rgba(10, 22, 40, 0.95));
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 1rem;
+    padding: 1.5rem;
+}
+
+/* -----------------------------------------------------------------------------
+   TEXT COLOR UTILITIES
+   ----------------------------------------------------------------------------- */
+.text-cyber-cyan {
+    color: var(--cyber-cyan) !important;
+}
+
+.text-cyber-purple {
+    color: var(--cyber-cyan) !important; /* Unified with site theme */
+}
+
+.text-cyber-green {
+    color: var(--cyber-green) !important;
+}
+
+.text-cyber-wine {
+    color: #BE185D !important;
+}
+
+/* Background utilities */
+.bg-cyber-green\/20,
+.bg-cyber-green\/20.text-cyber-green {
+    background: rgba(96, 165, 250, 0.15) !important;
+}
+
+.text-cyber-green {
+    color: #60A5FA !important;
+}
+
+/* Badge styling for atomic indicators */
+.bg-cyber-green\/20.text-cyber-green,
+[class*="bg-cyber-green"][class*="text-cyber-green"] {
+    background: rgba(96, 165, 250, 0.15) !important;
+    color: #60A5FA !important;
+    border: 1px solid rgba(96, 165, 250, 0.25);
+}
+
+.text-cyber-blue {
+    color: var(--cyber-blue) !important;
+}
