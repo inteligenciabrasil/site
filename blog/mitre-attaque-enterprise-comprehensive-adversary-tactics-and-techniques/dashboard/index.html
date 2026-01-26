@@ -518,6 +518,38 @@ tailwind.config = {
     <div id="detailModal" class="fixed inset-0 z-50 hidden"><div class="modal-overlay absolute inset-0" onclick="closeModal()"></div><div class="relative flex items-center justify-center min-h-screen p-4"><div class="modal-content relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl"><div class="sticky top-0 bg-cyber-darker/95 backdrop-blur-sm border-b border-cyber-border px-6 py-4 flex justify-between"><div><h3 id="modalTitle" class="text-xl font-bold text-white"></h3><p id="modalSubtitle" class="text-sm text-gray-500"></p></div><button onclick="closeModal()" class="w-10 h-10 rounded-lg bg-cyber-card border border-cyber-border flex items-center justify-center text-gray-400 hover:text-white"><i class="fas fa-times"></i></button></div><div id="modalContent" class="p-6"></div></div></div></div>
     </div><!-- end dashboard-content -->
 
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-wrapper">
+                <div class="newsletter-content">
+                    <div class="newsletter-icon">
+                        <img src="../../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="100" height="100" style="margin-bottom: 20px; background: transparent;">
+                    </div>
+                    <h3>Receba atualizacoes sobre Threat Intelligence</h3>
+                    <p>Assine nossa newsletter e fique por dentro das ultimas taticas, tecnicas e procedimentos (TTPs) utilizados por adversarios.</p>
+                </div>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="hidden" name="ip" id="newsletterIp">
+                    <div class="newsletter-input-group">
+                        <input type="email" id="newsletterEmail" name="email" class="newsletter-input"
+                               placeholder="Seu e-mail corporativo"
+                               pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                               maxlength="100" required>
+                        <button type="submit" class="newsletter-btn">
+                            <span class="btn-text">Assinar</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-disclaimer">
+                        <i class="fas fa-lock"></i> Seu e-mail esta seguro. Nao enviamos spam e voce pode cancelar a qualquer momento.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer-section">
         <div class="container">
@@ -24501,6 +24533,141 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.ke
             $('.navbar-custom').removeClass('top-nav-collapse');
         }
     });
+</script>
+
+<!-- Newsletter Script -->
+<script>
+(function() {
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (!newsletterForm) return;
+
+    const newsletterIpInput = document.getElementById('newsletterIp');
+
+    function withTimeout(promise, ms) {
+        return Promise.race([
+            promise,
+            new Promise(function(_, reject) { setTimeout(function() { reject(new Error("timeout")); }, ms); })
+        ]);
+    }
+
+    async function fetchNewsletterIp() {
+        const endpoints = [
+            "https://api.ipify.org?format=json",
+            "https://api64.ipify.org?format=json",
+            "https://ipinfo.io/json"
+        ];
+        for (const url of endpoints) {
+            try {
+                const res = await withTimeout(fetch(url, { cache: "no-store" }), 2500);
+                if (!res.ok) continue;
+                const data = await res.json();
+                const ip = data.ip || data.ip_address;
+                if (ip && typeof ip === "string") return ip.trim();
+            } catch (e) {}
+        }
+        return "";
+    }
+
+    fetchNewsletterIp().then(function(ip) {
+        if (newsletterIpInput) newsletterIpInput.value = ip;
+    });
+
+    const publicDomains = [
+        'gmail.com', 'gmail.com.br', 'googlemail.com',
+        'outlook.com', 'outlook.com.br', 'hotmail.com', 'hotmail.com.br', 'live.com', 'live.com.br', 'msn.com',
+        'yahoo.com', 'yahoo.com.br', 'ymail.com', 'rocketmail.com',
+        'icloud.com', 'me.com', 'mac.com',
+        'aol.com', 'aol.com.br',
+        'protonmail.com', 'protonmail.ch', 'proton.me',
+        'zoho.com', 'zohomail.com',
+        'mail.com', 'email.com',
+        'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com',
+        'r7.com', 'zipmail.com.br', 'oi.com.br', 'pop.com.br'
+    ];
+
+    const tempDomains = [
+        'tempmail.com', 'temp-mail.org', 'guerrillamail.com', 'mailinator.com',
+        '10minutemail.com', 'throwaway.email', 'fakeinbox.com', 'trashmail.com',
+        'dispostable.com', 'yopmail.com', 'sharklasers.com', 'getairmail.com'
+    ];
+
+    function validateNewsletterEmail(email) {
+        const emailLower = email.toLowerCase().trim();
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailRegex.test(emailLower)) {
+            return { valid: false, message: 'Por favor, informe um e-mail valido.' };
+        }
+
+        const domain = emailLower.split('@')[1];
+
+        if (publicDomains.includes(domain)) {
+            return { valid: false, message: 'Por favor, utilize seu e-mail corporativo. E-mails pessoais nao sao aceitos.' };
+        }
+
+        if (tempDomains.includes(domain) || tempDomains.some(function(d) { return domain.includes(d); })) {
+            return { valid: false, message: 'E-mails temporarios nao sao permitidos.' };
+        }
+
+        return { valid: true };
+    }
+
+    function showNewsletterMessage(message, type) {
+        var msgDiv = document.getElementById('newsletterMessage');
+        msgDiv.textContent = message;
+        msgDiv.className = 'newsletter-message ' + type;
+        msgDiv.style.display = 'block';
+        if (type === 'success') {
+            setTimeout(function() { msgDiv.style.display = 'none'; }, 5000);
+        }
+    }
+
+    newsletterForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        var emailInput = document.getElementById('newsletterEmail');
+        var submitBtn = newsletterForm.querySelector('.newsletter-btn');
+        var originalText = submitBtn.innerHTML;
+        var email = emailInput.value.trim();
+
+        var emailValidation = validateNewsletterEmail(email);
+        if (!emailValidation.valid) {
+            showNewsletterMessage(emailValidation.message, 'error');
+            return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+        var ip = newsletterIpInput ? newsletterIpInput.value : '';
+        if (!ip) {
+            ip = await fetchNewsletterIp();
+            if (newsletterIpInput) newsletterIpInput.value = ip;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: 'https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec',
+            data: 'email=' + encodeURIComponent(email) + '&origem=MITRE ATT%26CK Dashboard&servico=Newsletter&ip=' + encodeURIComponent(ip),
+            success: function(response) {
+                var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
+                if (result === 'success' || result === 'ok' || response === 'success') {
+                    newsletterForm.reset();
+                    showNewsletterMessage('Inscricao realizada com sucesso! Voce recebera nossos conteudos em breve.', 'success');
+                } else {
+                    showNewsletterMessage('Erro ao realizar inscricao. Tente novamente.', 'error');
+                }
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            },
+            error: function() {
+                showNewsletterMessage('Erro de conexao. Verifique sua internet e tente novamente.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+    });
+})();
 </script>
 </body>
 </html>
