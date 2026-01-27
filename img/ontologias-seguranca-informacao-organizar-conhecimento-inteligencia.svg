@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="50%" style="stop-color:#0D1E38"/>
+      <stop offset="100%" style="stop-color:#0a1628"/>
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#60A5FA"/>
+      <stop offset="100%" style="stop-color:#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="nodeGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a5f"/>
+      <stop offset="100%" style="stop-color:#0D1E38"/>
+    </linearGradient>
+    <linearGradient id="nodeGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:0.1"/>
+    </linearGradient>
+    <!-- Glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Pattern for grid -->
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(96,165,250,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Decorative circles in background -->
+  <circle cx="150" cy="100" r="200" fill="rgba(96,165,250,0.03)"/>
+  <circle cx="1050" cy="530" r="250" fill="rgba(245,158,11,0.03)"/>
+
+  <!-- Ontology Network Visualization -->
+  <g transform="translate(650, 315)">
+    <!-- Connection lines -->
+    <line x1="0" y1="0" x2="-180" y2="-120" stroke="rgba(96,165,250,0.4)" stroke-width="2" stroke-dasharray="5,5"/>
+    <line x1="0" y1="0" x2="180" y2="-100" stroke="rgba(96,165,250,0.4)" stroke-width="2" stroke-dasharray="5,5"/>
+    <line x1="0" y1="0" x2="-150" y2="130" stroke="rgba(96,165,250,0.4)" stroke-width="2" stroke-dasharray="5,5"/>
+    <line x1="0" y1="0" x2="170" y2="110" stroke="rgba(96,165,250,0.4)" stroke-width="2" stroke-dasharray="5,5"/>
+    <line x1="0" y1="0" x2="0" y2="-170" stroke="rgba(96,165,250,0.4)" stroke-width="2" stroke-dasharray="5,5"/>
+
+    <!-- Secondary connections -->
+    <line x1="-180" y1="-120" x2="0" y2="-170" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
+    <line x1="180" y1="-100" x2="0" y2="-170" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
+    <line x1="-150" y1="130" x2="170" y2="110" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
+    <line x1="-180" y1="-120" x2="-150" y2="130" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
+    <line x1="180" y1="-100" x2="170" y2="110" stroke="rgba(96,165,250,0.2)" stroke-width="1"/>
+
+    <!-- Central node - Main concept -->
+    <circle cx="0" cy="0" r="55" fill="url(#nodeGradient1)" stroke="url(#accentGradient)" stroke-width="3" filter="url(#glow)"/>
+    <text x="0" y="-8" fill="#60A5FA" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">ONTOLOGIA</text>
+    <text x="0" y="8" fill="#94A3B8" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">Conhecimento</text>
+    <text x="0" y="20" fill="#94A3B8" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">Estruturado</text>
+
+    <!-- Node 1 - MITRE ATT&CK -->
+    <circle cx="-180" cy="-120" r="42" fill="url(#nodeGradient1)" stroke="#ef4444" stroke-width="2"/>
+    <text x="-180" y="-125" fill="#ef4444" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">MITRE</text>
+    <text x="-180" y="-110" fill="#94A3B8" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">ATT&amp;CK</text>
+
+    <!-- Node 2 - STIX -->
+    <circle cx="180" cy="-100" r="42" fill="url(#nodeGradient1)" stroke="#60A5FA" stroke-width="2"/>
+    <text x="180" y="-105" fill="#60A5FA" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">STIX</text>
+    <text x="180" y="-90" fill="#94A3B8" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">TAXII</text>
+
+    <!-- Node 3 - Threat Intel -->
+    <circle cx="-150" cy="130" r="42" fill="url(#nodeGradient1)" stroke="#10b981" stroke-width="2"/>
+    <text x="-150" y="125" fill="#10b981" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">THREAT</text>
+    <text x="-150" y="140" fill="#94A3B8" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">INTEL</text>
+
+    <!-- Node 4 - SOC/SIEM -->
+    <circle cx="170" cy="110" r="42" fill="url(#nodeGradient1)" stroke="#f59e0b" stroke-width="2"/>
+    <text x="170" y="105" fill="#f59e0b" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">SOC</text>
+    <text x="170" y="120" fill="#94A3B8" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">SIEM</text>
+
+    <!-- Node 5 - CVE/CWE -->
+    <circle cx="0" cy="-170" r="42" fill="url(#nodeGradient1)" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="0" y="-175" fill="#8b5cf6" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">CVE</text>
+    <text x="0" y="-160" fill="#94A3B8" font-family="Arial, sans-serif" font-size="9" text-anchor="middle">CWE</text>
+  </g>
+
+  <!-- Text Content -->
+  <g transform="translate(80, 180)">
+    <!-- Category tag -->
+    <rect x="0" y="0" width="100" height="28" rx="14" fill="url(#nodeGradient2)" stroke="rgba(245,158,11,0.5)" stroke-width="1"/>
+    <text x="50" y="19" fill="#f59e0b" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">ESTRATEGIA</text>
+
+    <!-- Title -->
+    <text x="0" y="70" fill="#F1F5F9" font-family="Arial, sans-serif" font-size="36" font-weight="bold">Ontologias na</text>
+    <text x="0" y="115" fill="#F1F5F9" font-family="Arial, sans-serif" font-size="36" font-weight="bold">Seguranca da</text>
+    <text x="0" y="160" fill="#60A5FA" font-family="Arial, sans-serif" font-size="36" font-weight="bold">Informacao</text>
+
+    <!-- Subtitle -->
+    <text x="0" y="210" fill="#94A3B8" font-family="Arial, sans-serif" font-size="16">Como organizar conhecimento</text>
+    <text x="0" y="235" fill="#94A3B8" font-family="Arial, sans-serif" font-size="16">e fortalecer a inteligencia</text>
+  </g>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="620" width="1200" height="10" fill="url(#accentGradient)"/>
+
+  <!-- Logo area -->
+  <g transform="translate(80, 530)">
+    <circle cx="25" cy="25" r="22" fill="url(#nodeGradient1)" stroke="rgba(96,165,250,0.3)" stroke-width="1"/>
+    <text x="25" y="22" fill="#60A5FA" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">IB</text>
+    <text x="25" y="35" fill="#64748B" font-family="Arial, sans-serif" font-size="6" text-anchor="middle">BRASIL</text>
+    <text x="65" y="30" fill="#94A3B8" font-family="Arial, sans-serif" font-size="13">inteligenciabrasil.seg.br</text>
+  </g>
+
+  <!-- Small decorative nodes -->
+  <circle cx="450" cy="80" r="4" fill="#60A5FA" opacity="0.5"/>
+  <circle cx="520" cy="120" r="3" fill="#f59e0b" opacity="0.4"/>
+  <circle cx="400" cy="550" r="5" fill="#10b981" opacity="0.3"/>
+  <circle cx="1100" cy="150" r="4" fill="#8b5cf6" opacity="0.4"/>
+  <circle cx="1050" cy="200" r="3" fill="#ef4444" opacity="0.3"/>
+</svg>
