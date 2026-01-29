@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo sobre CSOC - Centro de Operacoes de Seguranca Cibernetica. Aprenda sobre estrutura, niveis de analistas, capacidades, tipos de SOC e como construir um centro de operacoes eficaz.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="CSOC, SOC, centro de operacoes de seguranca, seguranca cibernetica, analista de seguranca, resposta a incidentes, threat intelligence, monitoramento de seguranca, SIEM, deteccao de ameacas">
+    <meta name="revisit-after" content="7 days">
+    <meta name="rating" content="general">
+    <meta name="language" content="Portuguese">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/csoc-o-centro-de-operacoes-de-seguranca-cibernetica/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="CSOC - Centro de Operacoes de Seguranca Cibernetica: Guia Completo">
+    <meta property="og:description" content="Aprenda como construir e operar um Centro de Operacoes de Seguranca Cibernetica eficaz, incluindo estrutura de equipes, processos e tecnologias.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/csoc-o-centro-de-operacoes-de-seguranca-cibernetica/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2023-08-15T10:00:00-03:00">
+    <meta property="article:modified_time" content="2026-01-29T10:00:00-03:00">
+    <meta property="article:author" content="Inteligencia Brasil">
+    <meta property="article:section" content="Ciberseguranca">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CSOC - Centro de Operacoes de Seguranca Cibernetica">
+    <meta name="twitter:description" content="Guia completo sobre como construir e operar um SOC eficaz para defesa cibernetica.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
+    <meta name="twitter:site" content="@inteligenciabr">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>CSOC - Centro de Operacoes de Seguranca Cibernetica: Guia Completo | Blog Inteligencia Brasil</title>
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "CSOC - Centro de Operacoes de Seguranca Cibernetica: Guia Completo",
+        "description": "Guia completo sobre CSOC - Centro de Operacoes de Seguranca Cibernetica. Aprenda sobre estrutura, niveis de analistas, capacidades, tipos de SOC e como construir um centro de operacoes eficaz.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.png",
+        "author": {
+            "@type": "Organization",
+            "name": "Inteligencia Brasil",
+            "url": "https://inteligenciabrasil.seg.br"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Inteligencia Brasil",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"
+            }
+        },
+        "datePublished": "2023-08-15",
+        "dateModified": "2026-01-29",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inteligenciabrasil.seg.br/blog/csoc-o-centro-de-operacoes-de-seguranca-cibernetica/"
+        }
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "CSOC", "item": "https://inteligenciabrasil.seg.br/blog/csoc-o-centro-de-operacoes-de-seguranca-cibernetica/" }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>
+        body { background: #0a1628; }
+        .navbar-custom { background: rgba(13, 30, 56, 0.95) !important; border-bottom: 1px solid rgba(96, 165, 250, 0.1); backdrop-filter: blur(20px); }
+        .navbar-custom.top-nav-collapse { background: rgba(10, 22, 40, 0.98) !important; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); }
+        .navbar-custom .nav-link { color: #F1F5F9 !important; }
+        .navbar-custom .nav-link:hover { color: #60A5FA !important; }
+        .article-header { background: linear-gradient(135deg, #0D1E38 0%, #1a3a5c 50%, #0D1E38 100%); padding: 140px 0 60px; position: relative; }
+        .article-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; }
+        .article-header .container { position: relative; z-index: 1; }
+        .article-header h1 { color: #F1F5F9; font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+        .article-category { display: inline-block; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .article-meta { display: flex; flex-wrap: wrap; gap: 20px; color: #94A3B8; font-size: 0.95rem; }
+        .article-meta span { display: flex; align-items: center; gap: 8px; }
+        .breadcrumb-nav { background: rgba(13, 30, 56, 0.8); padding: 15px 0; border-bottom: 1px solid rgba(96, 165, 250, 0.1); }
+        .breadcrumb { background: transparent; margin: 0; padding: 0; }
+        .breadcrumb-item, .breadcrumb-item a { color: #94A3B8; font-size: 0.9rem; }
+        .breadcrumb-item a:hover { color: #60A5FA; }
+        .breadcrumb-item.active { color: #F1F5F9; }
+        .article-content { background: #0a1628; padding: 60px 0; }
+        .article-body { max-width: 800px; margin: 0 auto; }
+        .article-body h2 { color: #F1F5F9; font-size: 1.8rem; margin: 40px 0 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(96, 165, 250, 0.3); }
+        .article-body h3 { color: #F1F5F9; font-size: 1.4rem; margin: 30px 0 15px; }
+        .article-body h4 { color: #F1F5F9; font-size: 1.2rem; margin: 25px 0 12px; }
+        .article-body p { color: #CBD5E1; font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
+        .article-body a { color: #60A5FA; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+        .article-body a:hover { border-bottom-color: #60A5FA; }
+        .article-body strong { color: #60A5FA; }
+        .article-body ul, .article-body ol { color: #CBD5E1; margin-bottom: 20px; padding-left: 25px; }
+        .article-body li { margin-bottom: 10px; line-height: 1.7; }
+        .toc { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin-bottom: 40px; }
+        .toc h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .toc h4 i { color: #60A5FA; }
+        .toc ul { list-style: none; padding: 0; margin: 0; }
+        .toc li { margin-bottom: 8px; }
+        .toc a { color: #94A3B8; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+        .toc a:hover { color: #60A5FA; }
+        .concept-card { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border-radius: 12px; padding: 25px; margin: 25px 0; border-left: 4px solid #60A5FA; }
+        .concept-card h3 { margin-top: 0; color: #F1F5F9; }
+        .concept-card p { margin-bottom: 15px; }
+        .highlight-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 12px; padding: 25px; margin: 30px 0; }
+        .highlight-box p { margin: 0; color: #CBD5E1; }
+        .blockquote-box { background: linear-gradient(145deg, rgba(96, 165, 250, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 12px; padding: 25px; margin: 30px 0; text-align: center; }
+        .blockquote-box p { color: #94A3B8; font-style: italic; font-size: 1.2rem; margin: 0; }
+        .references { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin: 40px 0; }
+        .references h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .references h4 i { color: #60A5FA; }
+        .references ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+        .references a { display: inline-block; background: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.2); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; color: #94A3B8; text-decoration: none; transition: all 0.3s ease; }
+        .references a:hover { background: rgba(96, 165, 250, 0.2); color: #60A5FA; border-color: #60A5FA; }
+        .share-buttons { display: flex; gap: 15px; margin: 40px 0; flex-wrap: wrap; }
+        .share-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.3s ease; }
+        .share-btn.linkedin { background: #0077B5; color: #fff; }
+        .share-btn.twitter { background: #1DA1F2; color: #fff; }
+        .share-btn.whatsapp { background: #25D366; color: #fff; }
+        .share-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .author-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 30px; margin: 50px 0; display: flex; gap: 25px; align-items: center; }
+        .author-box img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+        .author-info h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 5px; }
+        .author-info h4 a { color: inherit; text-decoration: none; }
+        .author-info h4 a:hover { color: #60A5FA; }
+        .author-info p { color: #94A3B8; font-size: 0.95rem; margin: 0; }
+        .footer-section { background: #0D1E38; padding: 60px 0 30px; border-top: 1px solid rgba(96, 165, 250, 0.1); }
+        .footer-about p, .footer-contact p, .footer-links a { color: #94A3B8; }
+        .footer-links h4, .footer-contact h4 { color: #F1F5F9; }
+        .footer-bottom { border-top: 1px solid rgba(96, 165, 250, 0.1); padding-top: 20px; margin-top: 40px; color: #64748B; }
+        .footer-bottom a { color: #94A3B8; }
+        .footer-social a { color: #60A5FA; }
+        .newsletter-section { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); padding: 60px 0; border-top: 1px solid rgba(96, 165, 250, 0.1); }
+        .newsletter-input-group { display: flex; gap: 10px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 50px; padding: 6px; transition: all 0.3s ease; }
+        .newsletter-input-group:focus-within { border-color: #60A5FA; box-shadow: 0 0 20px rgba(96, 165, 250, 0.2); }
+        .newsletter-input { flex: 1; background: transparent; border: none; padding: 12px 20px; color: #F1F5F9; font-size: 1rem; outline: none; }
+        .newsletter-input::placeholder { color: #64748B; }
+        .newsletter-btn { background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); border: none; border-radius: 50px; padding: 12px 28px; color: #fff; font-weight: 600; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; white-space: nowrap; }
+        .newsletter-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(96, 165, 250, 0.4); }
+        .tier-card { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 20px; margin: 15px 0; }
+        .tier-card h4 { color: #60A5FA; margin-top: 0; }
+        @media (max-width: 768px) {
+            .article-header h1 { font-size: 1.8rem; }
+            .author-box { flex-direction: column; text-align: center; }
+            .newsletter-input-group { flex-direction: column; border-radius: 12px; padding: 10px; }
+            .newsletter-input { text-align: center; }
+            .newsletter-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../">
+            <img src="../../img/logo.svg" title="Logo Inteligencia Brasil" alt="Logo Inteligencia Brasil" width="196" height="113">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack">
+                    <a href="https://www.linkedin.com/company/inteligenciabrasil" title="Linkedin Inteligencia Brasil" target="_blank" rel="noopener">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                    </a>
+                </span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ciberseguranca</span>
+            <h1>CSOC - Centro de Operacoes de Seguranca Cibernetica: Guia Completo</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page">CSOC</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h4><i class="fas fa-list"></i> Neste artigo</h4>
+                    <ul>
+                        <li><a href="#introducao">O que e um SOC/CSOC</a></li>
+                        <li><a href="#missao">Missao e operacoes</a></li>
+                        <li><a href="#niveis">Niveis de analistas (Tier 1, 2, 3 e SOC Manager)</a></li>
+                        <li><a href="#construindo">Construindo um SOC</a></li>
+                        <li><a href="#tipos">Tipos de SOC</a></li>
+                        <li><a href="#capacidades">Capacidades do SOC</a></li>
+                        <li><a href="#threat-intelligence">Inteligencia de ameacas</a></li>
+                        <li><a href="#conclusao">Conclusao</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introducao">O que e um SOC/CSOC</h2>
+
+                <p>
+                    O <strong>Centro de Operacoes de Seguranca Cibernetica (CSOC)</strong>, tambem conhecido simplesmente como SOC (Security Operations Center), e uma unidade centralizada que lida com questoes de seguranca em nivel organizacional e tecnico. E composto principalmente por analistas de seguranca organizados para detectar, analisar, responder, relatar e prevenir incidentes de seguranca cibernetica.
+                </p>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-shield-alt" style="color: #60A5FA; margin-right: 10px;"></i> Definicao</h3>
+                    <p>
+                        Um <strong>SOC</strong> e uma equipe de especialistas em seguranca cibernetica dedicada a pratica de defesa contra atividades nao autorizadas em redes de computadores, incluindo monitoramento, deteccao, analise (como analise de tendencias e padroes) e atividades de resposta e restauracao.
+                    </p>
+                </div>
+
+                <div class="blockquote-box">
+                    <p>"E de suprema importancia atacar a estrategia do inimigo."<br>- Sun Tzu</p>
+                </div>
+
+                <p>
+                    O CSOC deve ter tudo o que precisa para montar uma defesa competente da empresa de tecnologia da informacao (TI) em constante mudanca. Isto inclui uma vasta gama de tecnologias sofisticadas de deteccao e prevencao, um mar virtual de relatorios de inteligencia cibernetica e acesso a uma forca de trabalho em rapida expansao de profissionais de TI talentosos.
+                </p>
+
+                <p>
+                    Existem varios termos usados para se referir a uma equipe de especialistas em seguranca cibernetica reunida para realizar CND (Computer Network Defense):
+                </p>
+
+                <ul>
+                    <li><strong>CSIRT:</strong> Equipe de Resposta a Incidentes de Seguranca Informatica</li>
+                    <li><strong>CIRT:</strong> Equipe de Resposta a Incidentes Informaticos</li>
+                    <li><strong>CIRC:</strong> Centro de Resposta a Incidentes de Computador</li>
+                    <li><strong>SOC:</strong> Centro de Operacoes de Seguranca</li>
+                    <li><strong>CSOC:</strong> Centro de Operacoes de Ciberseguranca</li>
+                    <li><strong>CERT:</strong> Equipe de Resposta a Emergencias Informaticas</li>
+                </ul>
+
+                <h2 id="missao">Missao e Operacoes</h2>
+
+                <p>
+                    Os SOCs podem variar desde pequenas operacoes com cinco pessoas ate grandes centros de coordenacao nacionais. A declaracao de missao de um SOC de medio porte normalmente inclui os seguintes elementos:
+                </p>
+
+                <ol>
+                    <li><strong>Prevencao de incidentes de ciberseguranca</strong> atraves de acoes proativas:
+                        <ul>
+                            <li>Analise continua de ameacas</li>
+                            <li>Varredura de rede e host em busca de vulnerabilidades</li>
+                            <li>Coordenacao de implantacao de contramedidas</li>
+                            <li>Consultoria em politica e arquitetura de seguranca</li>
+                        </ul>
+                    </li>
+                    <li><strong>Monitoramento, deteccao e analise</strong> de possiveis invasoes em tempo real e por meio de tendencias historicas em fontes de dados relevantes para a seguranca</li>
+                    <li><strong>Resposta a incidentes confirmados</strong>, coordenando recursos e direcionando o uso de contramedidas oportunas e apropriadas</li>
+                    <li><strong>Fornecer conhecimento situacional</strong> e relatorios sobre o status de seguranca cibernetica, incidentes e tendencias no comportamento do adversario</li>
+                    <li><strong>Engenharia e operacao de tecnologias CND</strong>, como IDS e sistemas de coleta/analise de dados</li>
+                </ol>
+
+                <div class="highlight-box">
+                    <p><strong>Importante:</strong> Destas responsabilidades, talvez a mais demorada seja o consumo e a analise de grandes quantidades de dados relevantes para a seguranca. Um SOC tipico coletara, analisara e armazenara dezenas ou centenas de milhoes de eventos de seguranca todos os dias.</p>
+                </div>
+
+                <h2 id="niveis">Niveis de Analistas do SOC</h2>
+
+                <p>
+                    A estrutura de um SOC e tipicamente organizada em niveis (tiers), cada um com responsabilidades e requisitos de treinamento especificos:
+                </p>
+
+                <div class="tier-card">
+                    <h4><i class="fas fa-user" style="margin-right: 10px;"></i> Tier 1 - Analista de Alerta</h4>
+                    <p><strong>Obrigacoes:</strong></p>
+                    <ul>
+                        <li>Monitora continuamente a fila de alertas</li>
+                        <li>Faz triagem de alertas de seguranca</li>
+                        <li>Monitora a integridade dos sensores e endpoints de seguranca</li>
+                        <li>Coleta dados e contexto necessarios para iniciar o trabalho de Nivel 2</li>
+                    </ul>
+                    <p><strong>Treinamento necessario:</strong> Procedimentos de triagem de alerta, deteccao de intrusao, rede, SIEM e treinamento investigativo baseado em host. Certificacoes como SANS SEC401: Security Essentials Bootcamp Style.</p>
+                </div>
+
+                <div class="tier-card">
+                    <h4><i class="fas fa-user-shield" style="margin-right: 10px;"></i> Tier 2 - Respondente de Incidentes</h4>
+                    <p><strong>Obrigacoes:</strong></p>
+                    <ul>
+                        <li>Executa analises aprofundadas de incidentes, correlacionando dados de varias fontes</li>
+                        <li>Determina se um sistema ou conjunto de dados critico foi afetado</li>
+                        <li>Aconselha sobre remediacao</li>
+                        <li>Fornece suporte para novos metodos analiticos para deteccao de ameacas</li>
+                    </ul>
+                    <p><strong>Treinamento necessario:</strong> Analise forense de rede avancada, analise forense baseada em host, procedimentos de resposta a incidentes, revisoes de log, avaliacao basica de malware. Certificacoes como SANS SEC501, SEC503 e SEC504.</p>
+                </div>
+
+                <div class="tier-card">
+                    <h4><i class="fas fa-user-secret" style="margin-right: 10px;"></i> Tier 3 - Especialista/Cacador (Hunter)</h4>
+                    <p><strong>Obrigacoes:</strong></p>
+                    <ul>
+                        <li>Possui conhecimento profundo em rede, endpoint, inteligencia de ameacas, analise forense e engenharia reversa de malware</li>
+                        <li>Atua como um "cacador" de incidentes, sem esperar pela escalacao de incidentes</li>
+                        <li>Intimamente envolvido no desenvolvimento, ajuste e implementacao de analiticas de deteccao de ameacas</li>
+                        <li>Compreende o funcionamento de aplicacoes especificas e infraestrutura de TI subjacente</li>
+                    </ul>
+                    <p><strong>Treinamento necessario:</strong> Formacao avancada em deteccao de anomalias, treinamento especifico de ferramentas para agregacao e analise de dados. Certificacoes como SANS SEC503, SEC504, SEC561 e FOR610.</p>
+                </div>
+
+                <div class="tier-card">
+                    <h4><i class="fas fa-users-cog" style="margin-right: 10px;"></i> SOC Manager</h4>
+                    <p><strong>Obrigacoes:</strong></p>
+                    <ul>
+                        <li>Gerencia recursos incluindo pessoal, orcamento, programacao de turnos e estrategia de tecnologia</li>
+                        <li>Comunica-se com a administracao executiva</li>
+                        <li>Atua como responsavel organizacional para incidentes criticos de negocios</li>
+                        <li>Fornece orientacao geral para o SOC e informacoes para a estrategia geral de seguranca</li>
+                    </ul>
+                    <p><strong>Treinamento necessario:</strong> Gerenciamento de projetos, treinamento em gerenciamento de resposta a incidentes, gerenciamento de pessoas. Certificacoes como CISSP, CISA, CISM ou CGEIT.</p>
+                </div>
+
+                <h2 id="construindo">Construindo um Centro de Operacoes de Seguranca</h2>
+
+                <p>
+                    Alem dos analistas de SOC, um centro de operacoes de seguranca exige um mestre de cerimonias para suas diversas partes moveis. A construcao de um SOC eficaz depende de tres pilares fundamentais:
+                </p>
+
+                <h3><i class="fas fa-users" style="color: #60A5FA; margin-right: 10px;"></i> Pessoas</h3>
+
+                <p>
+                    O gestor do SOC e responsavel por priorizar o trabalho e organizar os recursos com o objetivo final de detectar, investigar e mitigar incidentes que possam impactar o negocio. E essencial ter profissionais qualificados em todos os niveis, com programas de treinamento continuo e planos de carreira bem definidos.
+                </p>
+
+                <h3><i class="fas fa-cogs" style="color: #60A5FA; margin-right: 10px;"></i> Processos</h3>
+
+                <p>
+                    A definicao de processos repetíveis de triagem e investigacao de incidentes padroniza as acoes que um analista SOC realiza e garante que nenhuma tarefa importante seja ignorada. Elementos essenciais incluem:
+                </p>
+
+                <ul>
+                    <li>Procedimentos operacionais padronizados (SOPs) para tratamento de incidentes</li>
+                    <li>Fluxo de trabalho repetivel de gerenciamento de incidentes</li>
+                    <li>Definicao clara de responsabilidades e acoes dos membros da equipe</li>
+                    <li>Modelo DOE/CIAC com seis etapas: preparacao, identificacao, contencao, erradicacao, recuperacao e licoes aprendidas</li>
+                </ul>
+
+                <h3><i class="fas fa-laptop-code" style="color: #60A5FA; margin-right: 10px;"></i> Tecnologia</h3>
+
+                <p>
+                    Uma solucao de coleta, agregacao, deteccao, analise e gerenciamento de dados em toda a empresa e a tecnologia central de um SOC de sucesso. Um sistema eficaz de monitoramento de seguranca incorpora:
+                </p>
+
+                <ul>
+                    <li>Dados de monitoramento continuo de endpoints (PCs, laptops, dispositivos moveis e servidores)</li>
+                    <li>Dados de redes e fontes de log e eventos</li>
+                    <li>Sistemas SIEM para correlacao e analise</li>
+                    <li>Ferramentas de deteccao e prevencao de intrusao (IDS/IPS)</li>
+                    <li>Plataformas de resposta a incidentes</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <p><strong>Dica:</strong> A compatibilidade de tecnologias e fundamental e os silos de dados sao prejudiciais. Busque solucoes que permitam integracao e visibilidade unificada de todos os dados de seguranca.</p>
+                </div>
+
+                <h2 id="tipos">Tipos de SOC</h2>
+
+                <p>
+                    Os SOCs podem ser categorizados em cinco modelos organizacionais principais, dependendo de como a equipe e composta e opera:
+                </p>
+
+                <div class="concept-card">
+                    <h3>1. Equipe de Seguranca (Security Team)</h3>
+                    <p>
+                        Nao existe deteccao permanente de incidentes ou capacidade de resposta. No caso de um incidente, sao reunidos recursos para lidar com o problema, reconstituir os sistemas e entao se dispersam. Grupos constituintes compostos por menos de 1.000 usuarios geralmente se enquadram nesta categoria.
+                    </p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>2. SOC Distribuido Interno</h3>
+                    <p>
+                        Um SOC permanente existe, mas e composto principalmente por individuos cuja posicao organizacional esta fora do SOC e cujo trabalho principal e relacionado a TI ou seguranca, mas nao necessariamente relacionado a CND. SOCs que apoiam um eleitorado de pequena a media dimensao (500 a 5.000 usuarios) frequentemente se enquadram nesta categoria.
+                    </p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>3. SOC Centralizado Interno</h3>
+                    <p>
+                        Uma equipe dedicada de profissionais de TI e seguranca cibernetica compreende uma capacidade permanente de CND, fornecendo servicos continuos. Os recursos e autoridades necessarias existem numa entidade formalmente reconhecida, geralmente com orcamento proprio. A maioria dos SOCs se enquadra nesta categoria (5.000 a 100.000 usuarios).
+                    </p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>4. SOC Combinado (Distribuido + Centralizado)</h3>
+                    <p>
+                        O SOC e composto por uma equipe central e por recursos de outras partes do circulo eleitoral. Este modelo estabelece um equilibrio entre ter uma equipe coerente e sincronizada e manter uma compreensao dos ativos de TI de ponta. SOCs com grupos de 25.000 a 500.000 usuarios podem adotar essa abordagem.
+                    </p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>5. SOC de Coordenacao</h3>
+                    <p>
+                        O SOC medeia e facilita atividades CND entre varios SOCs distintos subordinados, normalmente para um grande grupo (milhoes de usuarios). Geralmente fornece servicos de consultoria, serve como centro de distribuicao de informacoes ciberneticas, melhores praticas e treinamento, e pode oferecer servicos de analise e pericia quando solicitados.
+                    </p>
+                </div>
+
+                <h2 id="capacidades">Capacidades do SOC</h2>
+
+                <p>
+                    Um SOC satisfaz as necessidades de monitoramento e defesa da rede do grupo constituinte oferecendo um conjunto abrangente de servicos e capacidades:
+                </p>
+
+                <h3><i class="fas fa-clock" style="color: #60A5FA; margin-right: 10px;"></i> 1. Analise em Tempo Real</h3>
+                <ul>
+                    <li><strong>Central de Atendimento:</strong> Recebimento de dicas, relatorios de incidentes e solicitacoes de servicos CND</li>
+                    <li><strong>Monitoramento e Triagem:</strong> Triagem e analise rapida de feeds de dados em tempo real para possiveis invasoes</li>
+                </ul>
+
+                <h3><i class="fas fa-brain" style="color: #60A5FA; margin-right: 10px;"></i> 2. Intel e Tendencias</h3>
+                <ul>
+                    <li><strong>Coleta e Analise de Informacoes Ciberneticas:</strong> Consumo e analise de relatorios de inteligencia, noticias de seguranca e novas ameacas</li>
+                    <li><strong>Distribuicao Cibernetica:</strong> Sintese e redistribuicao de relatorios aos membros do grupo constituinte</li>
+                    <li><strong>Criacao de Intel:</strong> Autoria de novos relatorios de inteligencia com base em pesquisas primarias</li>
+                    <li><strong>Fusao Cibernetica:</strong> Extracao de dados para criar novas assinaturas e compreensao dos TTPs adversarios</li>
+                </ul>
+
+                <h3><i class="fas fa-search" style="color: #60A5FA; margin-right: 10px;"></i> 3. Analise e Resposta a Incidentes</h3>
+                <ul>
+                    <li><strong>Analise de Incidentes:</strong> Analise prolongada e aprofundada de possiveis invasoes</li>
+                    <li><strong>Analise de Artesanato:</strong> Estudo dos TTPs adversarios atraves de engajamentos cuidadosamente coordenados</li>
+                    <li><strong>Coordenacao de Resposta:</strong> Trabalho com constituintes afetados para reunir informacoes e coordenar acoes</li>
+                    <li><strong>Implementacao de Contramedidas:</strong> Implementacao de acoes de resposta (isolamento, bloqueios, patches)</li>
+                </ul>
+
+                <h3><i class="fas fa-microscope" style="color: #60A5FA; margin-right: 10px;"></i> 4. Analise de Artefatos</h3>
+                <ul>
+                    <li><strong>Manuseio de Artefatos Forenses:</strong> Coleta e armazenamento de evidencias de forma legal</li>
+                    <li><strong>Analise de Malware:</strong> Engenharia reversa de malware para determinar sua natureza e comportamento</li>
+                    <li><strong>Analise Forense:</strong> Analise de artefatos digitais para determinar a extensao total de um incidente</li>
+                </ul>
+
+                <h3><i class="fas fa-tools" style="color: #60A5FA; margin-right: 10px;"></i> 5. Suporte ao Ciclo de Vida de Ferramentas</h3>
+                <ul>
+                    <li>Operacao e manutencao de dispositivos de protecao de fronteiras</li>
+                    <li>Ajuste e manutencao de sensores (IDS, IPS, SIEM)</li>
+                    <li>Criacao de assinaturas personalizadas</li>
+                    <li>Engenharia e implantacao de ferramentas</li>
+                    <li>Pesquisa e desenvolvimento de ferramentas customizadas</li>
+                </ul>
+
+                <h3><i class="fas fa-user-lock" style="color: #60A5FA; margin-right: 10px;"></i> 6. Auditoria e Ameaca Interna</h3>
+                <ul>
+                    <li>Coleta e distribuicao de dados de auditoria</li>
+                    <li>Criacao e gerenciamento de conteudo de auditoria</li>
+                    <li>Suporte e investigacao de casos de ameacas internas</li>
+                </ul>
+
+                <h3><i class="fas fa-radar" style="color: #60A5FA; margin-right: 10px;"></i> 7. Varredura e Avaliacao</h3>
+                <ul>
+                    <li><strong>Mapeamento de Rede:</strong> Compreensao do tamanho, forma e composicao das redes</li>
+                    <li><strong>Verificacao de Vulnerabilidades:</strong> Interrogacao de hosts quanto ao status de vulnerabilidade</li>
+                    <li><strong>Avaliacao de Vulnerabilidade (Blue Team):</strong> Avaliacao de seguranca aberta de sistemas</li>
+                    <li><strong>Teste de Penetracao (Red Team):</strong> Simulacao de ataques para avaliar resiliencia</li>
+                </ul>
+
+                <h3><i class="fas fa-bullhorn" style="color: #60A5FA; margin-right: 10px;"></i> 8. Divulgacao (Outreach)</h3>
+                <ul>
+                    <li>Avaliacao de produtos de seguranca</li>
+                    <li>Consultoria de seguranca</li>
+                    <li>Treinamento e conscientizacao</li>
+                    <li>Consciencia situacional</li>
+                    <li>Compartilhamento de TTPs com SOCs parceiros</li>
+                </ul>
+
+                <h2 id="threat-intelligence">Inteligencia de Ameacas</h2>
+
+                <p>
+                    SOCs maduros desenvolvem continuamente a capacidade de consumir e aproveitar <strong>inteligencia sobre ameacas</strong> de seus incidentes passados e de fontes de compartilhamento de informacoes. A integracao de threat intelligence e fundamental para:
+                </p>
+
+                <ul>
+                    <li>Detectar padroes em endpoints, logs e dados de rede</li>
+                    <li>Associar anomalias a alertas, incidentes ou ataques anteriores</li>
+                    <li>Detectar sistemas ou usuarios comprometidos antes que exibam caracteristicas de uma violacao</li>
+                    <li>Entender melhor os TTPs (Taticas, Tecnicas e Procedimentos) dos adversarios</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <p><strong>Fontes de Threat Intelligence:</strong> Fornecedores especializados, parceiros do setor, divisao de crimes ciberneticos da aplicacao da lei, organizacoes de compartilhamento de informacoes (ISACs), fornecedores de tecnologia de monitoramento de seguranca.</p>
+                </div>
+
+                <h3>Adicionando Contexto aos Incidentes</h3>
+
+                <p>
+                    A incorporacao de informacoes sobre ameacas, ativos, identidade e outras informacoes de contexto e outra maneira pela qual uma solucao eficaz de monitoramento de seguranca pode ajudar no processo investigativo do analista SOC. Com dados contextuais, o analista pode:
+                </p>
+
+                <ul>
+                    <li>Mapear enderecos IP para proprietarios e nomes de host</li>
+                    <li>Priorizar incidentes com base no valor dos ativos de negocios</li>
+                    <li>Reduzir o tempo de investigacao significativamente</li>
+                    <li>Tomar decisoes mais informadas sobre resposta</li>
+                </ul>
+
+                <h3>Definindo o Normal atraves de Linha de Base</h3>
+
+                <p>
+                    A capacidade de criar uma <strong>linha de base de atividades</strong> para usuarios, aplicacoes, infraestrutura e rede, estabelecendo a aparencia "normal", e uma vantagem critica. Armado com a definicao de "normal", torna-se mais facil detectar comportamentos suspeitos e atividades que estao de alguma forma fora da norma.
+                </p>
+
+                <h2 id="conclusao">Conclusao</h2>
+
+                <p>
+                    A medida que voce enfrenta o desafio de construir um Centro de Operacoes de Seguranca (SOC), sua capacidade de antecipar obstaculos comuns facilitara a inicializacao, o desenvolvimento e o amadurecimento ao longo do tempo.
+                </p>
+
+                <p>
+                    Embora cada organizacao seja unica na sua atual postura de seguranca, tolerancia ao risco, experiencia e orcamento, todas compartilham os objetivos de tentar minimizar e reforcar sua superficie de ataque e de detectar, priorizar e investigar rapidamente incidentes de seguranca quando estes ocorrem.
+                </p>
+
+                <p>
+                    O sucesso de um CSOC depende do equilibrio adequado entre <strong>pessoas qualificadas</strong>, <strong>processos bem definidos</strong> e <strong>tecnologia apropriada</strong>. Investir nestes tres pilares, aliado a uma integracao robusta de inteligencia de ameacas, posicionara sua organizacao para uma defesa cibernetica eficaz e resiliente.
+                </p>
+
+                <div class="highlight-box" style="border-color: rgba(96, 165, 250, 0.5); background: linear-gradient(145deg, rgba(96, 165, 250, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);">
+                    <p style="text-align: center;"><strong style="color: #F1F5F9;">Se a sua empresa precisa de apoio para estruturar ou otimizar seu Centro de Operacoes de Seguranca, podemos auxiliar com essa demanda. Fale conosco.</strong></p>
+                </div>
+
+                <!-- References -->
+                <div class="references">
+                    <h4><i class="fas fa-book"></i> Referencias</h4>
+                    <ul>
+                        <li><a href="https://www.sans.org/reading-room/whitepapers/analyst/building-world-class-security-operations-center-roadmap-35907" target="_blank" rel="nofollow noopener">SANS - Building a World-Class SOC</a></li>
+                        <li><a href="https://www.mitre.org/sites/default/files/publications/pr-13-1028-mitre-10-strategies-cyber-ops-center.pdf" target="_blank" rel="nofollow noopener">MITRE - 10 Strategies for Cyber Ops Center</a></li>
+                        <li><a href="http://www.mcafee.com/in/resources/white-papers/foundstone/wp-creating-maintaining-soc.pdf" target="_blank" rel="nofollow noopener">McAfee - Creating and Maintaining a SOC</a></li>
+                        <li><a href="https://gbhackers.com/how-to-build-and-run-a-security-operations-center/" target="_blank" rel="nofollow noopener">GBHackers - How to Build and Run a SOC</a></li>
+                    </ul>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons">
+                    <span style="color: #94A3B8; margin-right: 10px;">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/csoc-o-centro-de-operacoes-de-seguranca-cibernetica/" target="_blank" class="share-btn linkedin">
+                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/csoc-o-centro-de-operacoes-de-seguranca-cibernetica/&text=CSOC - Centro de Operacoes de Seguranca Cibernetica: Guia Completo" target="_blank" class="share-btn twitter">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="https://wa.me/?text=CSOC - Centro de Operacoes de Seguranca Cibernetica: Guia Completo https://inteligenciabrasil.seg.br/blog/csoc-o-centro-de-operacoes-de-seguranca-cibernetica/" target="_blank" class="share-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+
+                <!-- Author Box -->
+                <div class="author-box">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80">
+                    </picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em Seguranca da Informacao, Inteligencia de Ameacas e Estrategia de Ciberseguranca.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="100" height="100">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="100" height="100" style="margin-bottom: 20px; background: transparent;">
+                    </picture>
+                    <h3 style="color: #F1F5F9; margin-bottom: 15px;">Fique por dentro das novidades</h3>
+                    <p style="color: #94A3B8; margin-bottom: 30px;">Receba conteudos exclusivos sobre seguranca da informacao, threat intelligence e estrategias de ciberseguranca.</p>
+                    <form id="newsletter-form" class="newsletter-form" style="max-width: 500px; margin: 0 auto;">
+                        <div class="newsletter-input-group">
+                            <input type="email" id="newsletter-email" name="email" class="newsletter-input" placeholder="Seu melhor e-mail corporativo" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+                            <button type="submit" class="newsletter-btn">
+                                <span>Inscrever</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <p id="newsletter-message" style="margin-top: 15px; font-size: 0.9rem;"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Blog</h4>
+                        <ul>
+                            <li><a href="../mitre-attaque-enterprise-comprehensive-adversary-tactics-and-techniques/">MITRE ATT&CK</a></li>
+                            <li><a href="../ciclo-ooda-observar-orientar-decidir-agir/">Ciclo OODA</a></li>
+                            <li><a href="../como-funciona-o-tlp-traffic-light-protocol/">TLP Protocol</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.easing.min.js"></script>
+    <script>
+        $(window).on('scroll load', function () {
+            if ($('.navbar').offset().top > 20) {
+                $('.navbar-custom').addClass('top-nav-collapse');
+            } else {
+                $('.navbar-custom').removeClass('top-nav-collapse');
+            }
+        });
+
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            var target = $(this.getAttribute('href'));
+            if (target.length) {
+                $('html, body').animate({ scrollTop: target.offset().top - 100 }, 500, 'easeInOutExpo');
+            }
+        });
+
+        const blockedPublicDomains = ['gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'protonmail.com', 'proton.me', 'zoho.com', 'yandex.com', 'mail.com', 'gmx.com', 'gmx.net', 'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com', 'r7.com'];
+        const blockedTempDomains = ['tempmail.com', 'temp-mail.org', 'guerrillamail.com', 'guerrillamail.org', '10minutemail.com', 'mailinator.com', 'throwaway.email', 'fakeinbox.com', 'sharklasers.com', 'spam4.me', 'grr.la', 'dispostable.com', 'maildrop.cc', 'yopmail.com', 'mohmal.com', 'getnada.com', 'tempail.com', 'emailondeck.com', 'mintemail.com'];
+
+        function isBlockedEmail(email) {
+            const domain = email.split('@')[1]?.toLowerCase();
+            if (!domain) return true;
+            return blockedPublicDomains.includes(domain) || blockedTempDomains.includes(domain);
+        }
+
+        document.getElementById('newsletter-form')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletter-email');
+            const messageEl = document.getElementById('newsletter-message');
+            const email = emailInput.value.trim();
+
+            if (isBlockedEmail(email)) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Por favor, utilize um e-mail corporativo.';
+                return;
+            }
+
+            try {
+                let userIP = '';
+                try {
+                    const ipResponse = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await ipResponse.json();
+                    userIP = ipData.ip;
+                } catch (e) { userIP = 'unknown'; }
+
+                await fetch('https://script.google.com/macros/s/AKfycbxhe2brHBkOdTwMblSCWEMJ-PfHrNnxN5JrEXdlp6MIEq7RgT8e2dJfVMBVSjPmO9a-/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ email: email, ip: userIP, source: 'blog-csoc' })
+                });
+
+                messageEl.style.color = '#22c55e';
+                messageEl.textContent = 'Inscricao realizada com sucesso!';
+                emailInput.value = '';
+            } catch (error) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Erro ao processar. Tente novamente.';
+            }
+        });
+    </script>
+</body>
+
+</html>
