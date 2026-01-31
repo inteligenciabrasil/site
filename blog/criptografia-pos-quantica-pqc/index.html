@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guia completo sobre Criptografia Pós-Quântica (PQC): entenda a ameaça quântica, os algoritmos do NIST (Kyber, Dilithium), e como preparar sua organização para a era pós-quântica.">
+    <meta name="keywords" content="criptografia pós-quântica, PQC, post-quantum cryptography, computação quântica, NIST, Kyber, Dilithium, CRYSTALS, harvest now decrypt later">
+    <meta name="author" content="Roberto Silva">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Criptografia Pós-Quântica: Guia Completo para Preparação">
+    <meta property="og:description" content="Como se preparar para a era pós-quântica: entenda a ameaça, conheça os novos algoritmos NIST e planeje a migração criptográfica.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://rsfrancisco.dev/blog/criptografia-pos-quantica-pqc/">
+    <meta property="og:image" content="https://rsfrancisco.dev/assets/blog/post-quantum-cryptography.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Roberto Silva - Consultoria em Cibersegurança">
+    <meta property="article:published_time" content="2026-01-31">
+    <meta property="article:author" content="Roberto Silva">
+    <meta property="article:section" content="Cibersegurança">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Criptografia Pós-Quântica: Guia Completo para Preparação">
+    <meta name="twitter:description" content="Como se preparar para a era pós-quântica e proteger dados contra computadores quânticos.">
+    <meta name="twitter:image" content="https://rsfrancisco.dev/assets/blog/post-quantum-cryptography.webp">
+
+    <link rel="canonical" href="https://rsfrancisco.dev/blog/criptografia-pos-quantica-pqc/">
+
+    <title>Criptografia Pós-Quântica: Guia Completo para Preparação | Roberto Silva</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Criptografia Pós-Quântica: Guia Completo para Preparação",
+        "description": "Como se preparar para a era pós-quântica: entenda a ameaça, conheça os novos algoritmos NIST e planeje a migração criptográfica.",
+        "image": "https://rsfrancisco.dev/assets/blog/post-quantum-cryptography.webp",
+        "author": {
+            "@type": "Person",
+            "name": "Roberto Silva",
+            "url": "https://rsfrancisco.dev"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Roberto Silva - Consultoria em Cibersegurança",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://rsfrancisco.dev/assets/logo.webp"
+            }
+        },
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://rsfrancisco.dev/blog/criptografia-pos-quantica-pqc/"
+        },
+        "articleSection": "Cibersegurança",
+        "keywords": ["Post-Quantum Cryptography", "PQC", "Quantum Computing", "NIST", "Kyber", "Dilithium"]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que é criptografia pós-quântica?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Criptografia pós-quântica (PQC) são algoritmos criptográficos projetados para serem seguros contra ataques de computadores quânticos. Computadores quânticos poderão quebrar RSA e ECC (usados hoje para TLS, assinaturas digitais, etc.) usando o algoritmo de Shor. PQC usa problemas matemáticos diferentes (lattices, hashes, códigos) que resistem a ataques quânticos."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quando computadores quânticos serão uma ameaça real?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Estimativas variam, mas computadores quânticos capazes de quebrar RSA-2048 (chamados de CRQC - Cryptographically Relevant Quantum Computer) são esperados entre 2030-2040. Porém, a ameaça 'harvest now, decrypt later' já é real: adversários podem capturar dados criptografados hoje para descriptografar quando tiverem capacidade quântica."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais algoritmos o NIST padronizou para PQC?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Em 2024, o NIST finalizou três padrões: ML-KEM (baseado em Kyber) para key encapsulation/troca de chaves, ML-DSA (baseado em Dilithium) para assinaturas digitais, e SLH-DSA (baseado em SPHINCS+) para assinaturas baseadas em hash. Um quarto algoritmo de assinatura (FN-DSA/Falcon) está em processo de padronização."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que é 'harvest now, decrypt later'?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "É a estratégia de capturar comunicações criptografadas hoje para descriptografá-las no futuro quando computadores quânticos estiverem disponíveis. Dados com valor de longo prazo (segredos de estado, propriedade intelectual, dados de saúde) estão em risco. Por isso, a migração para PQC deve começar antes de computadores quânticos existirem."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Por onde começar a preparação para PQC?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Comece com um inventário criptográfico: mapeie todos os usos de criptografia na organização (TLS, VPN, PKI, assinaturas, armazenamento). Depois, classifique dados por tempo de sensibilidade. Priorize sistemas com dados de longo prazo para migração. Implemente crypto agility para facilitar troca de algoritmos. Monitore evolução dos padrões e ferramentas."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://rsfrancisco.dev/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://rsfrancisco.dev/blog/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Criptografia Pós-Quântica",
+                "item": "https://rsfrancisco.dev/blog/criptografia-pos-quantica-pqc/"
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/blog.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="../../">Roberto Silva</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../">Home</a></li>
+                <li><a href="../../#servicos">Serviços</a></li>
+                <li><a href="../../#sobre">Sobre</a></li>
+                <li><a href="../">Blog</a></li>
+                <li><a href="../../#contato">Contato</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main class="blog-post">
+        <article>
+            <header class="post-header">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="../../">Home</a></li>
+                        <li><a href="../">Blog</a></li>
+                        <li aria-current="page">Criptografia Pós-Quântica</li>
+                    </ol>
+                </nav>
+
+                <h1>Criptografia Pós-Quântica: Guia Completo para Preparação</h1>
+
+                <div class="post-meta">
+                    <span class="date">
+                        <i class="far fa-calendar-alt"></i>
+                        31 de Janeiro de 2026
+                    </span>
+                    <span class="read-time">
+                        <i class="far fa-clock"></i>
+                        22 min de leitura
+                    </span>
+                    <span class="category">
+                        <i class="far fa-folder"></i>
+                        Criptografia
+                    </span>
+                </div>
+            </header>
+
+            <div class="post-content">
+                <div class="toc">
+                    <h2>Índice</h2>
+                    <ul>
+                        <li><a href="#introducao">Introdução</a></li>
+                        <li><a href="#ameaca-quantica">A Ameaça Quântica</a></li>
+                        <li><a href="#harvest-now">Harvest Now, Decrypt Later</a></li>
+                        <li><a href="#algoritmos-nist">Algoritmos Padronizados pelo NIST</a></li>
+                        <li><a href="#impacto">O que será Afetado</a></li>
+                        <li><a href="#preparacao">Estratégia de Preparação</a></li>
+                        <li><a href="#crypto-agility">Crypto Agility</a></li>
+                        <li><a href="#timeline">Timeline e Recomendações</a></li>
+                        <li><a href="#faq">Perguntas Frequentes</a></li>
+                        <li><a href="#conclusao">Conclusão</a></li>
+                    </ul>
+                </div>
+
+                <section id="introducao">
+                    <h2>Introdução</h2>
+                    <p>A criptografia que protege nossas comunicações, transações bancárias e segredos governamentais está sob ameaça existencial. <strong>Computadores quânticos</strong>, quando suficientemente poderosos, serão capazes de quebrar RSA, ECC e outros algoritmos que formam a espinha dorsal da segurança digital moderna.</p>
+
+                    <p>Não é questão de "se", mas "quando". E a ameaça já é real hoje: adversários sofisticados podem estar capturando comunicações criptografadas agora para descriptografar no futuro - a estratégia conhecida como <strong>"Harvest Now, Decrypt Later"</strong>.</p>
+
+                    <p>A resposta é a <strong>Criptografia Pós-Quântica (PQC)</strong>: novos algoritmos baseados em problemas matemáticos que resistem a ataques quânticos. Em 2024, o NIST finalizou os primeiros padrões, iniciando a maior transição criptográfica da história.</p>
+
+                    <p>Este guia explica a ameaça quântica, os novos algoritmos, e como preparar sua organização para a era pós-quântica.</p>
+                </section>
+
+                <section id="ameaca-quantica">
+                    <h2>A Ameaça Quântica</h2>
+
+                    <h3>Por que Computadores Quânticos são Diferentes</h3>
+                    <p>Computadores clássicos processam informação em bits (0 ou 1). Computadores quânticos usam qubits que podem estar em superposição (0 e 1 simultaneamente) e podem ser entrelaçados (correlacionados de formas impossíveis classicamente).</p>
+
+                    <p>Isso permite que algoritmos quânticos resolvam certos problemas exponencialmente mais rápido que computadores clássicos.</p>
+
+                    <h3>Algoritmo de Shor</h3>
+                    <p>O algoritmo de Shor, desenvolvido em 1994, pode fatorar números inteiros e calcular logaritmos discretos em tempo polinomial. Isso significa que RSA e ECC podem ser quebrados em tempo viável com um computador quântico suficientemente grande.</p>
+
+                    <div class="code-block">
+                        <h4>Impacto do Algoritmo de Shor</h4>
+                        <pre>
+╔═══════════════════════════════════════════════════════════════╗
+║              IMPACTO DA COMPUTAÇÃO QUÂNTICA                   ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  ALGORITMOS VULNERÁVEIS (DEVEM SER SUBSTITUÍDOS):             ║
+║  ┌───────────────────────────────────────────────────────┐   ║
+║  │ RSA (todas as variantes)                               │   ║
+║  │ • Usado em: TLS, PKI, assinaturas, key exchange        │   ║
+║  │ • Quebrado por: Shor (fatoração)                       │   ║
+║  │                                                         │   ║
+║  │ ECC (ECDSA, ECDH, EdDSA)                                │   ║
+║  │ • Usado em: TLS, Bitcoin, assinaturas de código        │   ║
+║  │ • Quebrado por: Shor (logaritmo discreto)              │   ║
+║  │                                                         │   ║
+║  │ DSA, DH (Diffie-Hellman)                                │   ║
+║  │ • Usado em: Key exchange legacy, SSH                   │   ║
+║  │ • Quebrado por: Shor                                    │   ║
+║  └───────────────────────────────────────────────────────┘   ║
+║                                                               ║
+║  ALGORITMOS ENFRAQUECIDOS (DOBRAR TAMANHO DE CHAVE):          ║
+║  ┌───────────────────────────────────────────────────────┐   ║
+║  │ AES-128 → precisa AES-256                              │   ║
+║  │ SHA-256 → precisa SHA-384 ou SHA-512                   │   ║
+║  │ (Grover's Algorithm reduz segurança pela metade)       │   ║
+║  └───────────────────────────────────────────────────────┘   ║
+║                                                               ║
+║  ALGORITMOS SEGUROS (AJUSTE MÍNIMO):                          ║
+║  ┌───────────────────────────────────────────────────────┐   ║
+║  │ AES-256 - OK com margem de segurança                   │   ║
+║  │ SHA-384/512 - OK com margem                            │   ║
+║  │ HMAC - OK com hash adequado                            │   ║
+║  └───────────────────────────────────────────────────────┘   ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+                        </pre>
+                    </div>
+
+                    <h3>Timeline: Quando?</h3>
+                    <p>Computadores quânticos atuais (2026) têm centenas a milhares de qubits "ruidosos". Para quebrar RSA-2048, estima-se que seriam necessários milhões de qubits lógicos (com correção de erro).</p>
+
+                    <div class="info-box">
+                        <h4>Estimativas de Timeline</h4>
+                        <ul>
+                            <li><strong>Otimistas:</strong> CRQC (Cryptographically Relevant Quantum Computer) por volta de 2030</li>
+                            <li><strong>Conservadores:</strong> 2035-2040</li>
+                            <li><strong>Pessimistas:</strong> 2040+, se ever</li>
+                            <li><strong>Consenso:</strong> Planejar como se fosse 2030, agir agora devido a "harvest now, decrypt later"</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="harvest-now">
+                    <h2>Harvest Now, Decrypt Later</h2>
+
+                    <h3>A Ameaça Já é Real</h3>
+                    <p>Mesmo que computadores quânticos capazes ainda não existam, adversários podem estar capturando tráfego criptografado hoje para descriptografar no futuro. Dados com valor de longo prazo estão em risco imediato:</p>
+
+                    <div class="code-block">
+                        <h4>Dados em Risco</h4>
+                        <pre>
+╔═══════════════════════════════════════════════════════════════╗
+║                HARVEST NOW, DECRYPT LATER                     ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  HOJE (2026)                         FUTURO (2035?)           ║
+║  ┌──────────────────────┐            ┌──────────────────────┐ ║
+║  │ Adversário captura   │            │ Adversário decrypta  │ ║
+║  │ tráfego TLS de:      │     →      │ e obtém:             │ ║
+║  │                      │            │                      │ ║
+║  │ • Comunicações       │            │ • Segredos de estado │ ║
+║  │   governamentais     │            │ • Inteligência       │ ║
+║  │ • Dados de saúde     │            │ • Registros médicos  │ ║
+║  │ • Propriedade        │            │ • Trade secrets      │ ║
+║  │   intelectual        │            │ • Estratégias        │ ║
+║  │ • Transações         │            │ • Chaves de longo    │ ║
+║  │   financeiras        │            │   prazo              │ ║
+║  │ • Credenciais        │            │                      │ ║
+║  └──────────────────────┘            └──────────────────────┘ ║
+║                                                               ║
+║  QUEM ESTÁ FAZENDO ISSO?                                      ║
+║  • Estados-nação com capacidade de interceptação em escala    ║
+║  • Adversários planejando para o longo prazo                  ║
+║  • Storage é barato - capturar tudo custa pouco               ║
+║                                                               ║
+║  IMPLICAÇÃO:                                                  ║
+║  Dados sensíveis de longo prazo já deveriam estar protegidos  ║
+║  com PQC híbrido                                              ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+                        </pre>
+                    </div>
+
+                    <h3>Cálculo de Urgência</h3>
+                    <p>Para determinar quando começar a migração, considere:</p>
+                    <ul>
+                        <li><strong>X</strong> = Anos até CRQC (estimativa: 5-15 anos)</li>
+                        <li><strong>Y</strong> = Anos que dados precisam ficar secretos (0-50+ anos)</li>
+                        <li><strong>Z</strong> = Anos para completar migração (2-10 anos)</li>
+                    </ul>
+                    <p>Se <strong>Y + Z > X</strong>, você precisa começar agora.</p>
+                </section>
+
+                <section id="algoritmos-nist">
+                    <h2>Algoritmos Padronizados pelo NIST</h2>
+
+                    <p>Em agosto de 2024, o NIST finalizou os primeiros padrões de criptografia pós-quântica após um processo de seleção que começou em 2016.</p>
+
+                    <h3>Padrões Finalizados</h3>
+
+                    <div class="code-block">
+                        <h4>Algoritmos NIST PQC</h4>
+                        <pre>
+╔═══════════════════════════════════════════════════════════════╗
+║                   PADRÕES NIST PQC (2024)                     ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  ML-KEM (FIPS 203) - baseado em CRYSTALS-Kyber                ║
+║  ┌─────────────────────────────────────────────────────────┐  ║
+║  │ Uso: Key Encapsulation Mechanism (troca de chaves)      │  ║
+║  │ Substitui: RSA-KEM, ECDH                                │  ║
+║  │ Base: Problemas de lattice (Module Learning with Errors)│  ║
+║  │ Níveis: ML-KEM-512, ML-KEM-768, ML-KEM-1024             │  ║
+║  │ Performance: Muito rápido, chaves maiores que ECC       │  ║
+║  │ Aplicações: TLS, VPN, troca de chaves em geral          │  ║
+║  └─────────────────────────────────────────────────────────┘  ║
+║                                                               ║
+║  ML-DSA (FIPS 204) - baseado em CRYSTALS-Dilithium            ║
+║  ┌─────────────────────────────────────────────────────────┐  ║
+║  │ Uso: Assinaturas digitais                               │  ║
+║  │ Substitui: RSA signatures, ECDSA, EdDSA                 │  ║
+║  │ Base: Problemas de lattice (Module LWE + SIS)           │  ║
+║  │ Níveis: ML-DSA-44, ML-DSA-65, ML-DSA-87                 │  ║
+║  │ Performance: Rápido, assinaturas ~2.5KB                 │  ║
+║  │ Aplicações: PKI, code signing, documentos               │  ║
+║  └─────────────────────────────────────────────────────────┘  ║
+║                                                               ║
+║  SLH-DSA (FIPS 205) - baseado em SPHINCS+                     ║
+║  ┌─────────────────────────────────────────────────────────┐  ║
+║  │ Uso: Assinaturas digitais (alternativa conservadora)    │  ║
+║  │ Base: Hash-based signatures (stateless)                 │  ║
+║  │ Vantagem: Segurança baseada apenas em hash functions    │  ║
+║  │ Desvantagem: Assinaturas grandes (~8-50KB)              │  ║
+║  │ Aplicações: Raízes de PKI, firmware signing             │  ║
+║  └─────────────────────────────────────────────────────────┘  ║
+║                                                               ║
+║  (Em padronização) FN-DSA - baseado em Falcon                 ║
+║  ┌─────────────────────────────────────────────────────────┐  ║
+║  │ Uso: Assinaturas digitais compactas                     │  ║
+║  │ Vantagem: Assinaturas menores que Dilithium             │  ║
+║  │ Desafio: Implementação mais complexa                    │  ║
+║  └─────────────────────────────────────────────────────────┘  ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+                        </pre>
+                    </div>
+
+                    <h3>Comparação de Tamanhos</h3>
+
+                    <div class="info-box">
+                        <h4>Tamanhos de Chave e Assinatura</h4>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Algoritmo</th>
+                                    <th>Chave Pública</th>
+                                    <th>Chave Privada</th>
+                                    <th>Assinatura/Ciphertext</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>RSA-2048</td>
+                                    <td>256 bytes</td>
+                                    <td>~1.2 KB</td>
+                                    <td>256 bytes</td>
+                                </tr>
+                                <tr>
+                                    <td>ECDSA P-256</td>
+                                    <td>64 bytes</td>
+                                    <td>32 bytes</td>
+                                    <td>64 bytes</td>
+                                </tr>
+                                <tr>
+                                    <td>ML-KEM-768</td>
+                                    <td>1,184 bytes</td>
+                                    <td>2,400 bytes</td>
+                                    <td>1,088 bytes</td>
+                                </tr>
+                                <tr>
+                                    <td>ML-DSA-65</td>
+                                    <td>1,952 bytes</td>
+                                    <td>4,032 bytes</td>
+                                    <td>3,309 bytes</td>
+                                </tr>
+                                <tr>
+                                    <td>SLH-DSA-128f</td>
+                                    <td>32 bytes</td>
+                                    <td>64 bytes</td>
+                                    <td>17,088 bytes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="impacto">
+                    <h2>O que será Afetado</h2>
+
+                    <h3>Protocolos e Sistemas</h3>
+
+                    <h4>TLS/HTTPS</h4>
+                    <ul>
+                        <li>Key exchange (ECDHE) → ML-KEM</li>
+                        <li>Certificados (RSA/ECDSA) → ML-DSA ou SLH-DSA</li>
+                        <li>Chrome e outros browsers já testam PQC híbrido</li>
+                    </ul>
+
+                    <h4>PKI e Certificados</h4>
+                    <ul>
+                        <li>Certificados de CA raiz precisam migrar</li>
+                        <li>Certificados end-entity precisam migrar</li>
+                        <li>HSMs precisam suportar novos algoritmos</li>
+                    </ul>
+
+                    <h4>VPN</h4>
+                    <ul>
+                        <li>IPsec IKE → PQC key exchange</li>
+                        <li>WireGuard, OpenVPN → Atualizações necessárias</li>
+                    </ul>
+
+                    <h4>Email e Assinaturas</h4>
+                    <ul>
+                        <li>S/MIME → Novos algoritmos</li>
+                        <li>PGP/GPG → Suporte a PQC em desenvolvimento</li>
+                        <li>Assinaturas de documentos → ML-DSA</li>
+                    </ul>
+
+                    <h4>Code Signing e Firmware</h4>
+                    <ul>
+                        <li>Assinaturas de software → ML-DSA ou SLH-DSA</li>
+                        <li>Secure boot → Atualização de firmware</li>
+                        <li>Atualizações OTA → Novo esquema de assinatura</li>
+                    </ul>
+
+                    <h4>Blockchain e Cripto</h4>
+                    <ul>
+                        <li>Bitcoin, Ethereum usam ECDSA → Vulnerável</li>
+                        <li>Carteiras antigas expostas quando CRQC existir</li>
+                        <li>Hard forks ou migrações necessárias</li>
+                    </ul>
+                </section>
+
+                <section id="preparacao">
+                    <h2>Estratégia de Preparação</h2>
+
+                    <h3>Fase 1: Inventário Criptográfico</h3>
+                    <p>Você não pode migrar o que não conhece. Mapeie todos os usos de criptografia:</p>
+
+                    <div class="code-block">
+                        <h4>Inventário Criptográfico</h4>
+                        <pre>
+# O que inventariar:
+
+## Infraestrutura
+- Certificados TLS (todos os domínios, internos e externos)
+- VPNs (site-to-site, client)
+- SSH keys
+- HSMs e suas capacidades
+
+## Aplicações
+- APIs usando HTTPS
+- Integrações com terceiros
+- Aplicações legadas com crypto hardcoded
+- Mobile apps com crypto embarcado
+
+## Dados
+- Dados criptografados em repouso (qual algoritmo?)
+- Key management systems
+- Backups criptografados
+
+## Identidade
+- PKI interna (CAs, certificados de usuário)
+- Assinaturas de código
+- Tokens/JWT com assinaturas RSA/ECDSA
+
+## IoT e Embedded
+- Firmware updates (assinatura)
+- Secure boot
+- Dispositivos com ciclo de vida longo
+                        </pre>
+                    </div>
+
+                    <h3>Fase 2: Classificação de Risco</h3>
+                    <p>Priorize baseado em:</p>
+                    <ul>
+                        <li><strong>Tempo de sensibilidade dos dados</strong> - Dados que precisam ficar secretos por 10+ anos são prioridade</li>
+                        <li><strong>Exposição a interceptação</strong> - Internet-facing vs interno</li>
+                        <li><strong>Criticidade do sistema</strong> - Impacto de comprometimento</li>
+                        <li><strong>Dificuldade de migração</strong> - Sistemas legados, hardware, IoT</li>
+                    </ul>
+
+                    <h3>Fase 3: Crypto Agility</h3>
+                    <p>Antes de migrar para algoritmos específicos, prepare sistemas para trocar algoritmos facilmente.</p>
+
+                    <h3>Fase 4: Migração Híbrida</h3>
+                    <p>Migração inicial deve ser híbrida - combinando algoritmo clássico + PQC:</p>
+                    <ul>
+                        <li>Proteção contra ataques quânticos E clássicos</li>
+                        <li>Fallback se problemas forem descobertos em PQC</li>
+                        <li>Interoperabilidade durante transição</li>
+                    </ul>
+
+                    <h3>Fase 5: Migração Completa</h3>
+                    <p>Quando algoritmos PQC estiverem maduros e testados, migrar para PQC puro.</p>
+                </section>
+
+                <section id="crypto-agility">
+                    <h2>Crypto Agility</h2>
+
+                    <p>Crypto agility é a capacidade de trocar algoritmos criptográficos sem reescrever sistemas. É essencial não só para PQC, mas para qualquer vulnerabilidade futura.</p>
+
+                    <h3>Princípios</h3>
+
+                    <div class="info-box">
+                        <h4>Implementando Crypto Agility</h4>
+                        <ul>
+                            <li><strong>Abstração</strong> - Não hardcode algoritmos; use abstrações que permitam troca</li>
+                            <li><strong>Configuração</strong> - Algoritmos devem ser configuráveis, não compilados</li>
+                            <li><strong>Versionamento</strong> - Identificar versão de crypto em dados persistidos</li>
+                            <li><strong>Negociação</strong> - Protocolos devem negociar algoritmos dinamicamente</li>
+                            <li><strong>Testing</strong> - Testes devem ser agnósticos a algoritmo específico</li>
+                        </ul>
+                    </div>
+
+                    <h3>Exemplo em Código</h3>
+
+                    <div class="code-block">
+                        <h4>Abstração de Algoritmos</h4>
+                        <pre>
+# Ruim: Algoritmo hardcoded
+from cryptography.hazmat.primitives.asymmetric import rsa
+key = rsa.generate_private_key(...)
+
+# Bom: Abstração que permite troca
+class KeyGenerator:
+    def __init__(self, algorithm="RSA"):
+        self.algorithm = algorithm
+
+    def generate(self):
+        if self.algorithm == "RSA":
+            return self._generate_rsa()
+        elif self.algorithm == "ML-KEM":
+            return self._generate_ml_kem()
+        # Fácil adicionar novos algoritmos
+
+# Melhor ainda: Configuração externa
+key_gen = KeyGenerator(config.get("key_algorithm"))
+                        </pre>
+                    </div>
+                </section>
+
+                <section id="timeline">
+                    <h2>Timeline e Recomendações</h2>
+
+                    <div class="code-block">
+                        <h4>Roadmap de Migração PQC</h4>
+                        <pre>
+╔═══════════════════════════════════════════════════════════════╗
+║                  ROADMAP DE MIGRAÇÃO PQC                      ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  2024-2025: PREPARAÇÃO                                        ║
+║  ├─ Inventário criptográfico completo                        ║
+║  ├─ Avaliação de crypto agility                              ║
+║  ├─ Identificar sistemas de longo prazo                      ║
+║  ├─ Começar pilotos com TLS híbrido                          ║
+║  └─ Atualizar procurement para exigir PQC readiness          ║
+║                                                               ║
+║  2025-2027: MIGRAÇÃO INICIAL                                  ║
+║  ├─ TLS híbrido em sistemas críticos                         ║
+║  ├─ Atualizar PKI para suportar PQC                          ║
+║  ├─ VPN com PQC para dados sensíveis                         ║
+║  ├─ Testar ML-KEM e ML-DSA em produção                       ║
+║  └─ Migrar dados de longo prazo para proteção híbrida        ║
+║                                                               ║
+║  2027-2030: MIGRAÇÃO AMPLA                                    ║
+║  ├─ PQC híbrido como padrão                                  ║
+║  ├─ Deprecar sistemas sem suporte PQC                        ║
+║  ├─ Substituir hardware legacy (HSMs, etc.)                  ║
+║  └─ Completar migração de PKI                                ║
+║                                                               ║
+║  2030+: PQC PURO                                              ║
+║  ├─ Remover algoritmos clássicos onde possível               ║
+║  ├─ PQC como único algoritmo para novos sistemas             ║
+║  └─ Continuar suporte híbrido para legados                   ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+                        </pre>
+                    </div>
+
+                    <h3>Ações Imediatas</h3>
+
+                    <div class="info-box">
+                        <h4>O que Fazer Agora</h4>
+                        <ol>
+                            <li><strong>Iniciar inventário criptográfico</strong> - Sem isso, migração é impossível</li>
+                            <li><strong>Classificar dados por tempo de sensibilidade</strong> - Priorizar dados de longo prazo</li>
+                            <li><strong>Avaliar crypto agility</strong> - Quão difícil é trocar algoritmos?</li>
+                            <li><strong>Atualizar políticas de procurement</strong> - Novos sistemas devem suportar PQC</li>
+                            <li><strong>Educar liderança</strong> - PQC precisa de investimento e tempo</li>
+                            <li><strong>Testar TLS híbrido</strong> - Chrome, Firefox já suportam</li>
+                            <li><strong>Planejar orçamento</strong> - Migração levará anos e recursos</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="faq" class="faq-section">
+                    <h2>Perguntas Frequentes</h2>
+
+                    <div class="faq-item">
+                        <h3>O que é criptografia pós-quântica?</h3>
+                        <p>Criptografia pós-quântica (PQC) são algoritmos criptográficos projetados para serem seguros contra ataques de computadores quânticos. Computadores quânticos poderão quebrar RSA e ECC (usados hoje para TLS, assinaturas digitais, etc.) usando o algoritmo de Shor. PQC usa problemas matemáticos diferentes (lattices, hashes, códigos) que resistem a ataques quânticos.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Quando computadores quânticos serão uma ameaça real?</h3>
+                        <p>Estimativas variam, mas computadores quânticos capazes de quebrar RSA-2048 (chamados de CRQC - Cryptographically Relevant Quantum Computer) são esperados entre 2030-2040. Porém, a ameaça "harvest now, decrypt later" já é real: adversários podem capturar dados criptografados hoje para descriptografar quando tiverem capacidade quântica.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Quais algoritmos o NIST padronizou para PQC?</h3>
+                        <p>Em 2024, o NIST finalizou três padrões: ML-KEM (baseado em Kyber) para key encapsulation/troca de chaves, ML-DSA (baseado em Dilithium) para assinaturas digitais, e SLH-DSA (baseado em SPHINCS+) para assinaturas baseadas em hash. Um quarto algoritmo de assinatura (FN-DSA/Falcon) está em processo de padronização.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>O que é "harvest now, decrypt later"?</h3>
+                        <p>É a estratégia de capturar comunicações criptografadas hoje para descriptografá-las no futuro quando computadores quânticos estiverem disponíveis. Dados com valor de longo prazo (segredos de estado, propriedade intelectual, dados de saúde) estão em risco. Por isso, a migração para PQC deve começar antes de computadores quânticos existirem.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Por onde começar a preparação para PQC?</h3>
+                        <p>Comece com um inventário criptográfico: mapeie todos os usos de criptografia na organização (TLS, VPN, PKI, assinaturas, armazenamento). Depois, classifique dados por tempo de sensibilidade. Priorize sistemas com dados de longo prazo para migração. Implemente crypto agility para facilitar troca de algoritmos. Monitore evolução dos padrões e ferramentas.</p>
+                    </div>
+                </section>
+
+                <section id="conclusao">
+                    <h2>Conclusão</h2>
+
+                    <p>A transição para criptografia pós-quântica é a maior migração criptográfica da história da computação. Enquanto a ameaça de computadores quânticos capazes de quebrar RSA pode parecer distante, a estratégia "harvest now, decrypt later" significa que dados sensíveis de longo prazo já estão em risco hoje.</p>
+
+                    <p>Com os padrões NIST finalizados em 2024, o caminho está definido. Organizações precisam começar agora: inventariar seus usos de criptografia, avaliar crypto agility, e iniciar pilotos com algoritmos híbridos. A migração levará anos - não há tempo a perder.</p>
+
+                    <p>A boa notícia é que os novos algoritmos são performáticos e já estão sendo implementados em bibliotecas e produtos. A má notícia é que sistemas legados, hardware antigo, e protocolos desatualizados criarão desafios significativos. Quanto antes começar, mais suave será a transição.</p>
+
+                    <div class="cta-box">
+                        <h3>Prepare-se para a Era Pós-Quântica</h3>
+                        <p>Precisa de ajuda para realizar inventário criptográfico, avaliar readiness de PQC ou planejar sua migração? Entre em contato para uma consultoria especializada.</p>
+                        <a href="../../#contato" class="btn btn-primary">Solicitar Avaliação</a>
+                    </div>
+                </section>
+            </div>
+
+            <footer class="post-footer">
+                <div class="post-tags">
+                    <span class="tag">PQC</span>
+                    <span class="tag">Criptografia</span>
+                    <span class="tag">Quantum Computing</span>
+                    <span class="tag">NIST</span>
+                    <span class="tag">ML-KEM</span>
+                </div>
+
+                <div class="post-share">
+                    <span>Compartilhar:</span>
+                    <a href="https://twitter.com/intent/tweet?url=https://rsfrancisco.dev/blog/criptografia-pos-quantica-pqc/&text=Criptografia Pós-Quântica: Guia Completo para Preparação" target="_blank" rel="noopener" aria-label="Compartilhar no Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://rsfrancisco.dev/blog/criptografia-pos-quantica-pqc/" target="_blank" rel="noopener" aria-label="Compartilhar no LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+
+                <div class="post-nav">
+                    <a href="../cspm-dspm-sspm-posture-management/" class="prev-post">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>CSPM, DSPM e SSPM: Posture Management</span>
+                    </a>
+                    <a href="../" class="next-post">
+                        <span>Voltar ao Blog</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <p>&copy; 2025 Roberto Silva. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <a href="../../privacy/">Política de Privacidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="PAM (Privileged Access Management): guia completo de gestao de acessos privilegiados, cofre de senhas, sessoes privilegiadas, JIT access, principais solucoes e implementacao.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="PAM, Privileged Access Management, gestao acessos privilegiados, cofre de senhas, password vault, sessao privilegiada, CyberArk, BeyondTrust, Delinea, just-in-time access, zero standing privileges">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/pam-gestao-acessos-privilegiados/">
+
+    <meta property="og:title" content="PAM: Guia Completo de Gestao de Acessos Privilegiados">
+    <meta property="og:description" content="Como implementar PAM: cofre de senhas, sessoes privilegiadas e controle de acessos.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/pam-gestao-acessos-privilegiados/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-31T19:00:00-03:00">
+    <meta property="article:section" content="Identity">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PAM: Gestao de Acessos Privilegiados">
+    <meta name="twitter:description" content="Guia completo de PAM: cofre de senhas, sessoes e controle de privilegios.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>PAM: Guia Completo de Gestao de Acessos Privilegiados | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "PAM: Guia Completo de Gestao de Acessos Privilegiados",
+        "description": "Como implementar PAM: cofre de senhas, sessoes privilegiadas e controle de acessos.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.png",
+        "author": {"@type": "Organization", "name": "Inteligencia Brasil"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"}},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/pam-gestao-acessos-privilegiados/"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Qual a diferenca entre PAM e IAM?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "IAM (Identity and Access Management) gerencia identidades e acessos de todos os usuarios. PAM e um subconjunto focado especificamente em contas privilegiadas (admins, service accounts, root). PAM adiciona controles extras como cofre de senhas, gravacao de sessoes e elevacao just-in-time que nao existem em IAM tradicional."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que e just-in-time (JIT) access?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "JIT access concede privilegios apenas quando necessario, pelo tempo minimo necessario. Em vez de admins terem acesso permanente, eles solicitam acesso, recebem aprovacao (automatica ou manual), e o privilegio e revogado automaticamente apos uso ou timeout. Reduz drasticamente a superficie de ataque."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais os principais fornecedores de PAM?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Lideres de mercado: CyberArk (mais completo, enterprise), BeyondTrust (forte em endpoints), Delinea (ex-Thycotic + Centrify, bom custo-beneficio), HashiCorp Vault (secrets management, DevOps), Microsoft Entra PIM (integrado ao Azure AD). Escolha depende do tamanho e ambiente."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "PAM"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>
+        body{background:#0a1628}.navbar-custom{background:rgba(13,30,56,.95)!important;border-bottom:1px solid rgba(96,165,250,.1);backdrop-filter:blur(20px)}.navbar-custom.top-nav-collapse{background:rgba(10,22,40,.98)!important}.navbar-custom .nav-link{color:#F1F5F9!important}.navbar-custom .nav-link:hover{color:#60A5FA!important}.article-header{background:linear-gradient(135deg,#0D1E38 0%,#1a3a5c 50%,#0D1E38 100%);padding:140px 0 60px;position:relative}.article-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}.article-header h1{color:#F1F5F9;font-size:2.5rem;font-weight:700;margin-bottom:20px;line-height:1.3}.article-category{display:inline-block;background:linear-gradient(135deg,#3B82F6 0%,#1D4ED8 100%);color:#fff;padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px}.article-meta{display:flex;flex-wrap:wrap;gap:20px;color:#94A3B8;font-size:.95rem}.article-meta span{display:flex;align-items:center;gap:8px}.breadcrumb-nav{background:rgba(13,30,56,.8);padding:15px 0;border-bottom:1px solid rgba(96,165,250,.1)}.breadcrumb{background:0 0;margin:0;padding:0}.breadcrumb-item,.breadcrumb-item a{color:#94A3B8;font-size:.9rem}.breadcrumb-item a:hover{color:#60A5FA}.breadcrumb-item.active{color:#F1F5F9}.article-content{background:#0a1628;padding:60px 0}.article-body{max-width:800px;margin:0 auto}.article-body h2{color:#F1F5F9;font-size:1.8rem;margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid rgba(96,165,250,.3)}.article-body h3{color:#F1F5F9;font-size:1.4rem;margin:30px 0 15px}.article-body h4{color:#60A5FA;font-size:1.15rem;margin:25px 0 12px}.article-body p{color:#CBD5E1;font-size:1.1rem;line-height:1.8;margin-bottom:20px}.article-body a{color:#60A5FA;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s}.article-body a:hover{border-bottom-color:#60A5FA}.article-body strong{color:#60A5FA}.article-body ul,.article-body ol{color:#CBD5E1;margin-bottom:20px;padding-left:25px}.article-body li{margin-bottom:10px;line-height:1.7}.toc{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:25px;margin-bottom:40px}.toc h4{color:#F1F5F9;font-size:1.1rem;margin-bottom:15px;display:flex;align-items:center;gap:10px}.toc ul{list-style:none;padding:0;margin:0}.toc li{margin-bottom:8px}.toc a{color:#94A3B8;text-decoration:none;font-size:.95rem}.toc a:hover{color:#60A5FA}.concept-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border-radius:12px;padding:25px;margin:25px 0;border-left:4px solid #60A5FA}.stat-highlight{background:linear-gradient(145deg,rgba(59,130,246,.1) 0%,rgba(29,78,216,.05) 100%);border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:20px;margin:25px 0;text-align:center}.stat-highlight .number{font-size:2.5rem;font-weight:700;color:#3B82F6}.stat-highlight .label{color:#94A3B8;font-size:.95rem}.pillar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:25px 0}.pillar-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:25px;text-align:center}.pillar-card i{font-size:2.5rem;color:#60A5FA;margin-bottom:15px}.pillar-card h4{color:#F1F5F9;margin-bottom:10px}.pillar-card p{color:#94A3B8;font-size:.9rem;margin:0}.vendor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin:25px 0}.vendor-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:8px;padding:20px}.vendor-card h5{color:#F1F5F9;margin-bottom:8px;font-size:1rem}.vendor-card p{color:#94A3B8;font-size:.9rem;margin:0}.vendor-card .tag{display:inline-block;background:rgba(96,165,250,.2);color:#60A5FA;padding:2px 8px;border-radius:4px;font-size:.75rem;margin-top:8px}.warning-box{background:linear-gradient(145deg,rgba(245,158,11,.1) 0%,rgba(217,119,6,.05) 100%);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:25px;margin:25px 0}.warning-box h4{color:#f59e0b;margin-top:0}.tip-box{background:linear-gradient(145deg,rgba(16,185,129,.1) 0%,rgba(5,150,105,.05) 100%);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:25px;margin:25px 0}.tip-box h4{color:#10B981;margin-top:0}.faq-section{margin:40px 0}.faq-item{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;margin-bottom:15px;overflow:hidden}.faq-question{padding:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:#F1F5F9;font-weight:600}.faq-question:hover{background:rgba(96,165,250,.05)}.faq-answer{padding:0 20px 20px;color:#CBD5E1;display:none}.faq-item.active .faq-answer{display:block}.faq-item.active .faq-icon{transform:rotate(180deg)}.faq-icon{transition:transform .3s;color:#60A5FA}.cta-box{background:linear-gradient(145deg,rgba(96,165,250,.1) 0%,rgba(59,130,246,.05) 100%);border:1px solid rgba(96,165,250,.3);border-radius:12px;padding:30px;margin:40px 0;text-align:center}.cta-box h3{color:#F1F5F9;margin-bottom:15px}.cta-box p{color:#94A3B8;margin-bottom:20px}.cta-btn{display:inline-block;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 100%);color:#fff;padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:600;transition:all .3s}.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(96,165,250,.4);color:#fff}.author-box{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:30px;margin:50px 0;display:flex;gap:25px;align-items:center}.author-box img{width:80px;height:80px;border-radius:50%}.author-info h4{color:#F1F5F9;margin-bottom:5px}.author-info p{color:#94A3B8;font-size:.95rem;margin:0}.share-buttons{display:flex;gap:15px;margin:40px 0;flex-wrap:wrap}.share-btn{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:.9rem;font-weight:500;text-decoration:none;transition:all .3s}.share-btn.linkedin{background:#0077B5;color:#fff}.share-btn.twitter{background:#1DA1F2;color:#fff}.share-btn.whatsapp{background:#25D366;color:#fff}.share-btn:hover{transform:translateY(-2px);opacity:.9}.footer-section{background:#0D1E38;padding:60px 0 30px;border-top:1px solid rgba(96,165,250,.1)}.footer-about p,.footer-contact p,.footer-links a{color:#94A3B8}.footer-links h4,.footer-contact h4{color:#F1F5F9}.footer-bottom{border-top:1px solid rgba(96,165,250,.1);padding-top:20px;margin-top:40px;color:#64748B}.footer-bottom a{color:#94A3B8}.footer-social a{color:#60A5FA}@media (max-width:768px){.article-header h1{font-size:1.8rem}.author-box{flex-direction:column;text-align:center}.pillar-grid,.vendor-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Identity</span>
+            <h1>PAM: Guia Completo de Gestao de Acessos Privilegiados</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">PAM</li>
+            </ol>
+        </div>
+    </nav>
+
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h4><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h4>
+                    <ul>
+                        <li><a href="#oque">O que e PAM</a></li>
+                        <li><a href="#importancia">Por que PAM e critico</a></li>
+                        <li><a href="#pilares">Pilares do PAM</a></li>
+                        <li><a href="#jit">Just-in-Time Access</a></li>
+                        <li><a href="#fornecedores">Principais solucoes</a></li>
+                        <li><a href="#implementacao">Guia de implementacao</a></li>
+                        <li><a href="#casos-uso">Casos de uso</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                        <li><a href="#conclusao">Conclusao</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="oque">O que e PAM</h2>
+
+                <p>
+                    <strong>PAM (Privileged Access Management)</strong> e o conjunto de estrategias, tecnologias e praticas para controlar, monitorar e auditar acessos privilegiados em uma organizacao. Contas privilegiadas - administradores, root, service accounts - sao os alvos mais valiosos para atacantes porque fornecem acesso irrestrito a sistemas criticos.
+                </p>
+
+                <div class="stat-highlight">
+                    <div class="number">80%</div>
+                    <div class="label">dos breaches envolvem credenciais privilegiadas comprometidas (Forrester)</div>
+                </div>
+
+                <p>
+                    PAM vai alem de simplesmente armazenar senhas em um cofre. Uma solucao completa controla quem pode acessar o que, quando, por quanto tempo, e registra tudo que foi feito durante a sessao privilegiada.
+                </p>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-key" style="color:#60A5FA;margin-right:10px"></i> Tipos de contas privilegiadas</h4>
+                    <ul>
+                        <li><strong>Administradores locais:</strong> Local admin em workstations/servers</li>
+                        <li><strong>Administradores de dominio:</strong> Domain Admins, Enterprise Admins no <a href="../active-directory-security-protecao-ataques/">Active Directory</a></li>
+                        <li><strong>Root/superuser:</strong> Acesso irrestrito em Linux/Unix</li>
+                        <li><strong>Service accounts:</strong> Contas usadas por aplicacoes para acessar recursos</li>
+                        <li><strong>Contas de emergencia:</strong> Break-glass accounts para recuperacao</li>
+                        <li><strong>Credenciais de aplicacao:</strong> API keys, connection strings, secrets</li>
+                        <li><strong>Contas cloud:</strong> IAM admins em AWS/Azure/GCP</li>
+                    </ul>
+                </div>
+
+                <h2 id="importancia">Por que PAM e Critico</h2>
+
+                <h3>Vetor de ataque preferido</h3>
+
+                <p>
+                    Atacantes buscam contas privilegiadas porque uma unica credencial comprometida pode dar acesso a toda a infraestrutura. Tecnicas como Kerberoasting, Pass-the-Hash e credential dumping visam especificamente essas contas.
+                </p>
+
+                <h3>Compliance e regulamentacao</h3>
+
+                <ul>
+                    <li><strong>PCI-DSS:</strong> Requisito 7 - restringir acesso privilegiado</li>
+                    <li><strong>SOX:</strong> Controles sobre acessos a sistemas financeiros</li>
+                    <li><strong>LGPD:</strong> Protecao de dados exige controle de acessos</li>
+                    <li><strong>ISO 27001:</strong> Controle A.9 - gestao de acessos</li>
+                    <li><strong>NIST:</strong> PR.AC - Identity Management and Access Control</li>
+                </ul>
+
+                <h3>Insider threats</h3>
+
+                <p>
+                    Administradores com acesso irrestrito e permanente representam risco mesmo sem intencao maliciosa. Erros acontecem, e contas podem ser comprometidas. PAM limita o blast radius.
+                </p>
+
+                <h2 id="pilares">Pilares do PAM</h2>
+
+                <div class="pillar-grid">
+                    <div class="pillar-card">
+                        <i class="fas fa-vault"></i>
+                        <h4>Password Vault</h4>
+                        <p>Cofre seguro para armazenar credenciais privilegiadas com rotacao automatica e checkout controlado.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <i class="fas fa-desktop"></i>
+                        <h4>Session Management</h4>
+                        <p>Proxy de sessoes privilegiadas com gravacao, monitoramento em tempo real e auditoria completa.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Just-in-Time Access</h4>
+                        <p>Privilegios concedidos sob demanda, pelo tempo minimo necessario, com aprovacao e revogacao automatica.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <i class="fas fa-search"></i>
+                        <h4>Discovery</h4>
+                        <p>Descoberta automatica de contas privilegiadas, service accounts e credenciais embedded em codigo.</p>
+                    </div>
+                </div>
+
+                <h3>Password Vault (Cofre de Senhas)</h3>
+
+                <ul>
+                    <li><strong>Armazenamento criptografado:</strong> Senhas nunca em texto claro</li>
+                    <li><strong>Checkout/checkin:</strong> Usuario solicita senha, usa, devolve</li>
+                    <li><strong>Rotacao automatica:</strong> Senhas trocadas apos cada uso ou periodicamente</li>
+                    <li><strong>Geracao de senhas:</strong> Senhas complexas geradas automaticamente</li>
+                    <li><strong>Dual control:</strong> Aprovacao de segundo usuario para acesso sensivel</li>
+                </ul>
+
+                <h3>Session Management</h3>
+
+                <ul>
+                    <li><strong>Session proxy:</strong> Usuario conecta ao PAM, PAM conecta ao alvo</li>
+                    <li><strong>Gravacao:</strong> Video e keystroke logging de toda sessao</li>
+                    <li><strong>Live monitoring:</strong> Supervisor pode observar sessoes em tempo real</li>
+                    <li><strong>Session termination:</strong> Encerrar sessao suspeita imediatamente</li>
+                    <li><strong>Command filtering:</strong> Bloquear comandos perigosos (rm -rf, DROP DATABASE)</li>
+                </ul>
+
+                <h2 id="jit">Just-in-Time (JIT) Access</h2>
+
+                <p>
+                    <strong>JIT access</strong> e o modelo moderno de PAM alinhado com <a href="../zero-trust-architecture-guia-completo/">Zero Trust</a>. Em vez de privilegios permanentes (standing privileges), usuarios solicitam acesso quando precisam.
+                </p>
+
+                <h3>Como funciona</h3>
+
+                <ol>
+                    <li><strong>Solicitacao:</strong> Usuario solicita acesso a recurso especifico</li>
+                    <li><strong>Aprovacao:</strong> Automatica (baseada em politica) ou manual (gestor)</li>
+                    <li><strong>Concessao:</strong> Privilegio ativado por tempo limitado (ex: 4 horas)</li>
+                    <li><strong>Uso:</strong> Usuario realiza tarefa com sessao monitorada</li>
+                    <li><strong>Revogacao:</strong> Privilegio removido automaticamente apos timeout ou logout</li>
+                </ol>
+
+                <h3>Zero Standing Privileges (ZSP)</h3>
+
+                <p>
+                    O objetivo final e <strong>Zero Standing Privileges</strong>: nenhum usuario tem privilegios permanentes. Todos os acessos privilegiados sao JIT. Isso elimina o risco de credenciais privilegiadas comprometidas porque elas simplesmente nao existem ate serem necessarias.
+                </p>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-lightbulb" style="margin-right:10px"></i> Beneficios do JIT</h4>
+                    <ul>
+                        <li>Reduz superficie de ataque - menos credenciais ativas</li>
+                        <li>Auditoria clara - quem pediu, por que, quando</li>
+                        <li>Compliance facilitado - privilegios documentados</li>
+                        <li>Limita blast radius - acesso por tempo limitado</li>
+                    </ul>
+                </div>
+
+                <h2 id="fornecedores">Principais Solucoes de PAM</h2>
+
+                <div class="vendor-grid">
+                    <div class="vendor-card">
+                        <h5><i class="fas fa-shield-alt" style="color:#60A5FA;margin-right:8px"></i> CyberArk</h5>
+                        <p>Lider de mercado, solucao mais completa. Enterprise-grade com todos os pilares.</p>
+                        <span class="tag">Enterprise</span>
+                    </div>
+                    <div class="vendor-card">
+                        <h5><i class="fas fa-lock" style="color:#60A5FA;margin-right:8px"></i> BeyondTrust</h5>
+                        <p>Forte em endpoint privilege management (EPM) e remote access.</p>
+                        <span class="tag">Enterprise</span>
+                    </div>
+                    <div class="vendor-card">
+                        <h5><i class="fas fa-key" style="color:#60A5FA;margin-right:8px"></i> Delinea</h5>
+                        <p>Ex-Thycotic + Centrify. Bom custo-beneficio, interface amigavel.</p>
+                        <span class="tag">Mid-Market</span>
+                    </div>
+                    <div class="vendor-card">
+                        <h5><i class="fas fa-cube" style="color:#60A5FA;margin-right:8px"></i> HashiCorp Vault</h5>
+                        <p>Foco em secrets management para DevOps. Dynamic secrets, API-first.</p>
+                        <span class="tag">DevOps</span>
+                    </div>
+                    <div class="vendor-card">
+                        <h5><i class="fab fa-microsoft" style="color:#60A5FA;margin-right:8px"></i> Microsoft Entra PIM</h5>
+                        <p>JIT para roles do Azure AD. Incluido em Azure AD P2.</p>
+                        <span class="tag">Cloud</span>
+                    </div>
+                    <div class="vendor-card">
+                        <h5><i class="fab fa-aws" style="color:#60A5FA;margin-right:8px"></i> AWS IAM + Secrets Manager</h5>
+                        <p>Nativo AWS para roles temporarias e secrets management.</p>
+                        <span class="tag">Cloud</span>
+                    </div>
+                </div>
+
+                <h2 id="implementacao">Guia de Implementacao de PAM</h2>
+
+                <h3>Fase 1: Discovery e inventario</h3>
+                <ul>
+                    <li>Descobrir todas as contas privilegiadas (AD, local, cloud, service accounts)</li>
+                    <li>Identificar credenciais embedded em scripts e aplicacoes</li>
+                    <li>Mapear quem tem acesso a que</li>
+                    <li>Classificar por criticidade</li>
+                </ul>
+
+                <h3>Fase 2: Quick wins - Cofre de senhas</h3>
+                <ul>
+                    <li>Implementar cofre para credenciais mais criticas (Domain Admins, root)</li>
+                    <li>Habilitar rotacao automatica</li>
+                    <li>Eliminar senhas compartilhadas</li>
+                    <li>Remover credenciais de planilhas e documentos</li>
+                </ul>
+
+                <h3>Fase 3: Session management</h3>
+                <ul>
+                    <li>Configurar proxy de sessoes para servidores criticos</li>
+                    <li>Habilitar gravacao de sessoes</li>
+                    <li>Implementar monitoramento para equipe de seguranca</li>
+                    <li>Definir politicas de command filtering</li>
+                </ul>
+
+                <h3>Fase 4: Just-in-Time</h3>
+                <ul>
+                    <li>Migrar de standing privileges para JIT</li>
+                    <li>Configurar workflows de aprovacao</li>
+                    <li>Definir timeouts por tipo de acesso</li>
+                    <li>Treinar usuarios no novo processo</li>
+                </ul>
+
+                <h3>Fase 5: Service accounts e secrets</h3>
+                <ul>
+                    <li>Migrar service accounts para gestao pelo PAM</li>
+                    <li>Implementar secrets injection em aplicacoes</li>
+                    <li>Eliminar credenciais hardcoded</li>
+                    <li>Integrar com pipelines CI/CD</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Erros comuns</h4>
+                    <ul>
+                        <li><strong>Escopo muito amplo:</strong> Comecar pequeno, expandir gradualmente</li>
+                        <li><strong>Ignorar service accounts:</strong> Sao as mais numerosas e esquecidas</li>
+                        <li><strong>Falta de buy-in:</strong> Admins resistem se nao entenderem o valor</li>
+                        <li><strong>Break-glass mal planejado:</strong> Acesso de emergencia deve existir e ser testado</li>
+                    </ul>
+                </div>
+
+                <h2 id="casos-uso">Casos de Uso</h2>
+
+                <h3>Acesso de terceiros</h3>
+                <p>
+                    Fornecedores que precisam acessar sistemas para manutencao recebem credenciais temporarias via PAM, com sessoes gravadas e acesso limitado ao escopo do trabalho.
+                </p>
+
+                <h3>DevOps e CI/CD</h3>
+                <p>
+                    Pipelines de deploy recebem credenciais dinamicas do HashiCorp Vault ou similar. Secrets nunca ficam em codigo ou variaveis de ambiente estaticas.
+                </p>
+
+                <h3>Auditoria e compliance</h3>
+                <p>
+                    Auditores podem revisar gravacoes de sessoes privilegiadas, logs de acesso e relatorios de quem acessou o que. Evidencias claras para SOX, PCI-DSS, ISO 27001.
+                </p>
+
+                <h3>Resposta a incidentes</h3>
+                <p>
+                    Durante um incidente, equipe de IR pode revogar todos os acessos privilegiados instantaneamente e forcar re-autenticacao via PAM.
+                </p>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>PAM atrapalha a produtividade dos admins?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Inicialmente pode haver friccao, mas solucoes modernas sao projetadas para minimizar impacto. Single sign-on para o PAM, aprovacoes automaticas para acessos rotineiros, e sessoes transparentes via proxy. O tradeoff de seguranca vale o pequeno overhead.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>E se o PAM ficar indisponivel?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Solucoes enterprise tem alta disponibilidade (cluster, DR). Alem disso, contas break-glass (emergencia) devem existir fora do PAM, guardadas em cofre fisico ou processo manual documentado, para situacoes extremas.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quanto custa implementar PAM?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Varia muito. CyberArk enterprise pode custar centenas de milhares de reais. Delinea e BeyondTrust sao mais acessiveis. Microsoft Entra PIM esta incluido no Azure AD P2. Para PMEs, solucoes como Keeper ou 1Password Business oferecem funcionalidades basicas de PAM.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="conclusao">Conclusao</h2>
+
+                <p>
+                    PAM e um dos controles de seguranca com maior impacto na reducao de risco. Contas privilegiadas sao o objetivo final de quase todo ataque, e controla-las adequadamente pode ser a diferenca entre um incidente contido e um breach catastrofico.
+                </p>
+
+                <p>
+                    A jornada para Zero Standing Privileges e gradual. Comece com o cofre de senhas para credenciais mais criticas, expanda para session management, e evolua para JIT access. Cada passo reduz significativamente a superficie de ataque.
+                </p>
+
+                <p>
+                    Lembre-se que PAM nao e apenas tecnologia - requer mudanca de cultura. Administradores acostumados com acesso irrestrito precisam entender o valor da restricao. Comunique claramente os beneficios e envolva as equipes no desenho das politicas.
+                </p>
+
+                <div class="cta-box">
+                    <h3>Precisa de Ajuda com PAM?</h3>
+                    <p>Oferecemos assessment de acessos privilegiados, selecao de solucao e implementacao de PAM.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/pam-gestao-acessos-privilegiados/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/pam-gestao-acessos-privilegiados/&text=PAM: Guia de Gestao de Acessos Privilegiados" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=PAM Gestao de Acessos https://inteligenciabrasil.seg.br/blog/pam-gestao-acessos-privilegiados/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em Identity Security, PAM e Controle de Acessos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
+                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../active-directory-security-protecao-ataques/">AD Security</a></li>
+                            <li><a href="../zero-trust-architecture-guia-completo/">Zero Trust</a></li>
+                            <li><a href="../iso-27001-guia-implementacao/">ISO 27001</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.easing.min.js"></script>
+    <script>
+        $(window).on('scroll load',function(){$('.navbar').offset().top>20?$('.navbar-custom').addClass('top-nav-collapse'):$('.navbar-custom').removeClass('top-nav-collapse')});
+        $('a[href^="#"]').on('click',function(e){e.preventDefault();var t=$(this.getAttribute('href'));t.length&&$('html, body').animate({scrollTop:t.offset().top-100},500,'easeInOutExpo')});
+        document.querySelectorAll('.faq-question').forEach(function(q){q.addEventListener('click',function(){this.parentElement.classList.toggle('active')})});
+    </script>
+</body>
+</html>
