@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo de seguranca do Active Directory: ataques comuns (Kerberoasting, Pass-the-Hash, DCSync), hardening, ferramentas de auditoria e melhores praticas de protecao.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="active directory security, AD security, kerberoasting, pass-the-hash, golden ticket, DCSync, bloodhound, hardening AD, seguranca windows, domain controller">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/active-directory-security-protecao-ataques/">
+
+    <meta property="og:title" content="Active Directory Security: Protecao contra Ataques">
+    <meta property="og:description" content="Como proteger o Active Directory: ataques comuns, hardening, ferramentas de auditoria e melhores praticas.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/active-directory-security-protecao-ataques/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-31T10:00:00-03:00">
+    <meta property="article:section" content="Ciberseguranca">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Active Directory Security: Protecao contra Ataques">
+    <meta name="twitter:description" content="Guia completo para proteger o AD contra ataques modernos.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Active Directory Security: Protecao contra Ataques | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Active Directory Security: Protecao contra Ataques",
+        "description": "Guia completo de seguranca do Active Directory: ataques comuns, hardening, ferramentas de auditoria e melhores praticas.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.png",
+        "author": {"@type": "Organization", "name": "Inteligencia Brasil"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"}},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Por que o Active Directory e o principal alvo de atacantes?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O AD e o sistema de identidade central na maioria das empresas. Comprometer o AD significa controlar todas as contas, grupos e permissoes. Atacantes buscam Domain Admin para ter controle total do ambiente. Mais de 90% dos ataques de ransomware em ambientes corporativos envolvem comprometimento do AD."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que e Kerberoasting e como me proteger?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Kerberoasting explora o protocolo Kerberos para obter hashes de senhas de service accounts. Qualquer usuario autenticado pode solicitar tickets de servico e tentar quebrar offline. Protecao: usar senhas longas (+25 caracteres) em service accounts, implementar gMSA (Group Managed Service Accounts), e monitorar solicitacoes anomalas de tickets."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual ferramenta usar para auditar seguranca do AD?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "PingCastle e a ferramenta mais recomendada para assessment rapido - gratuita e gera relatorio com score e recomendacoes. BloodHound mapeia caminhos de ataque visualmente. Purple Knight (Semperis) oferece avaliacao mais profunda. Para monitoramento continuo, Microsoft Defender for Identity detecta ataques em tempo real."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Active Directory Security"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>
+        body{background:#0a1628}.navbar-custom{background:rgba(13,30,56,.95)!important;border-bottom:1px solid rgba(96,165,250,.1);backdrop-filter:blur(20px)}.navbar-custom.top-nav-collapse{background:rgba(10,22,40,.98)!important;box-shadow:0 4px 30px rgba(0,0,0,.3)}.navbar-custom .nav-link{color:#F1F5F9!important}.navbar-custom .nav-link:hover{color:#60A5FA!important}.article-header{background:linear-gradient(135deg,#0D1E38 0%,#1a3a5c 50%,#0D1E38 100%);padding:140px 0 60px;position:relative}.article-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}.article-header h1{color:#F1F5F9;font-size:2.5rem;font-weight:700;margin-bottom:20px;line-height:1.3}.article-category{display:inline-block;background:linear-gradient(135deg,#3B82F6 0%,#1D4ED8 100%);color:#fff;padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px}.article-meta{display:flex;flex-wrap:wrap;gap:20px;color:#94A3B8;font-size:.95rem}.article-meta span{display:flex;align-items:center;gap:8px}.breadcrumb-nav{background:rgba(13,30,56,.8);padding:15px 0;border-bottom:1px solid rgba(96,165,250,.1)}.breadcrumb{background:0 0;margin:0;padding:0}.breadcrumb-item,.breadcrumb-item a{color:#94A3B8;font-size:.9rem}.breadcrumb-item a:hover{color:#60A5FA}.breadcrumb-item.active{color:#F1F5F9}.article-content{background:#0a1628;padding:60px 0}.article-body{max-width:800px;margin:0 auto}.article-body h2{color:#F1F5F9;font-size:1.8rem;margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid rgba(96,165,250,.3)}.article-body h3{color:#F1F5F9;font-size:1.4rem;margin:30px 0 15px}.article-body h4{color:#60A5FA;font-size:1.15rem;margin:25px 0 12px}.article-body p{color:#CBD5E1;font-size:1.1rem;line-height:1.8;margin-bottom:20px}.article-body a{color:#60A5FA;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s}.article-body a:hover{border-bottom-color:#60A5FA}.article-body strong{color:#60A5FA}.article-body ul,.article-body ol{color:#CBD5E1;margin-bottom:20px;padding-left:25px}.article-body li{margin-bottom:10px;line-height:1.7}.toc{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:25px;margin-bottom:40px}.toc h4{color:#F1F5F9;font-size:1.1rem;margin-bottom:15px;display:flex;align-items:center;gap:10px}.toc ul{list-style:none;padding:0;margin:0}.toc li{margin-bottom:8px}.toc a{color:#94A3B8;text-decoration:none;font-size:.95rem}.toc a:hover{color:#60A5FA}.attack-card{background:linear-gradient(145deg,rgba(239,68,68,.1) 0%,rgba(220,38,38,.05) 100%);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:25px;margin:20px 0}.attack-card h4{color:#ef4444;margin-top:0;display:flex;align-items:center;gap:10px}.defense-card{background:linear-gradient(145deg,rgba(16,185,129,.1) 0%,rgba(5,150,105,.05) 100%);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:25px;margin:20px 0}.defense-card h4{color:#10B981;margin-top:0;display:flex;align-items:center;gap:10px}.concept-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border-radius:12px;padding:25px;margin:25px 0;border-left:4px solid #60A5FA}.stat-highlight{background:linear-gradient(145deg,rgba(239,68,68,.1) 0%,rgba(220,38,38,.05) 100%);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:20px;margin:25px 0;text-align:center}.stat-highlight .number{font-size:2.5rem;font-weight:700;color:#ef4444}.stat-highlight .label{color:#94A3B8;font-size:.95rem}.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;margin:25px 0}.tool-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:8px;padding:15px}.tool-card h5{color:#F1F5F9;margin-bottom:8px;font-size:1rem}.tool-card p{color:#94A3B8;font-size:.9rem;margin:0}.tool-card .tag{display:inline-block;background:rgba(96,165,250,.2);color:#60A5FA;padding:2px 8px;border-radius:4px;font-size:.75rem;margin-top:8px}.checklist{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:25px;margin:25px 0}.checklist h4{color:#10B981;margin-top:0}.checklist ul{list-style:none;padding:0;margin:0}.checklist li{padding:8px 0;padding-left:30px;position:relative;color:#CBD5E1}.checklist li::before{content:'\f00c';font-family:'Font Awesome 5 Free';font-weight:900;position:absolute;left:0;color:#10B981}.faq-section{margin:40px 0}.faq-item{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;margin-bottom:15px;overflow:hidden}.faq-question{padding:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:#F1F5F9;font-weight:600}.faq-question:hover{background:rgba(96,165,250,.05)}.faq-answer{padding:0 20px 20px;color:#CBD5E1;display:none}.faq-item.active .faq-answer{display:block}.faq-item.active .faq-icon{transform:rotate(180deg)}.faq-icon{transition:transform .3s;color:#60A5FA}.author-box{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:30px;margin:50px 0;display:flex;gap:25px;align-items:center}.author-box img{width:80px;height:80px;border-radius:50%}.author-info h4{color:#F1F5F9;margin-bottom:5px}.author-info p{color:#94A3B8;font-size:.95rem;margin:0}.share-buttons{display:flex;gap:15px;margin:40px 0;flex-wrap:wrap}.share-btn{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:.9rem;font-weight:500;text-decoration:none;transition:all .3s}.share-btn.linkedin{background:#0077B5;color:#fff}.share-btn.twitter{background:#1DA1F2;color:#fff}.share-btn.whatsapp{background:#25D366;color:#fff}.share-btn:hover{transform:translateY(-2px);opacity:.9}.cta-box{background:linear-gradient(145deg,rgba(96,165,250,.1) 0%,rgba(59,130,246,.05) 100%);border:1px solid rgba(96,165,250,.3);border-radius:12px;padding:30px;margin:40px 0;text-align:center}.cta-box h3{color:#F1F5F9;margin-bottom:15px}.cta-box p{color:#94A3B8;margin-bottom:20px}.cta-btn{display:inline-block;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 100%);color:#fff;padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:600;transition:all .3s}.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(96,165,250,.4);color:#fff}.footer-section{background:#0D1E38;padding:60px 0 30px;border-top:1px solid rgba(96,165,250,.1)}.footer-about p,.footer-contact p,.footer-links a{color:#94A3B8}.footer-links h4,.footer-contact h4{color:#F1F5F9}.footer-bottom{border-top:1px solid rgba(96,165,250,.1);padding-top:20px;margin-top:40px;color:#64748B}.footer-bottom a{color:#94A3B8}.footer-social a{color:#60A5FA}@media (max-width:768px){.article-header h1{font-size:1.8rem}.author-box{flex-direction:column;text-align:center}.tool-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ciberseguranca</span>
+            <h1>Active Directory Security: Protecao contra Ataques</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 25 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Active Directory Security</li>
+            </ol>
+        </div>
+    </nav>
+
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h4><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h4>
+                    <ul>
+                        <li><a href="#importancia">Por que proteger o AD</a></li>
+                        <li><a href="#ataques">Principais ataques ao AD</a></li>
+                        <li><a href="#hardening">Hardening do Active Directory</a></li>
+                        <li><a href="#tiering">Modelo de Tiering</a></li>
+                        <li><a href="#ferramentas">Ferramentas de auditoria</a></li>
+                        <li><a href="#monitoramento">Monitoramento e deteccao</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="importancia">Por que Proteger o Active Directory</h2>
+
+                <p>
+                    O <strong>Active Directory (AD)</strong> e o sistema de identidade e diretorio mais utilizado em ambientes corporativos Windows. Ele centraliza autenticacao, autorizacao, politicas de grupo e gestao de recursos. Por isso, e o alvo numero um de atacantes em praticamente todos os incidentes corporativos.
+                </p>
+
+                <div class="stat-highlight">
+                    <div class="number">95%</div>
+                    <div class="label">dos ataques de ransomware em ambientes corporativos envolvem comprometimento do Active Directory, segundo Mandiant M-Trends 2025</div>
+                </div>
+
+                <p>
+                    Comprometer o AD significa obter acesso a <strong>Domain Admin</strong> - controle total sobre todas as contas, servidores e estacoes de trabalho do dominio. Atacantes podem criar backdoors persistentes, exfiltrar qualquer dado e criptografar todo o ambiente em um ataque de <a href="../ransomware-como-funciona-proteger-empresa/">ransomware</a>.
+                </p>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-crown" style="color:#f59e0b;margin-right:10px"></i> As "Joias da Coroa" do AD</h4>
+                    <ul>
+                        <li><strong>Domain Admins:</strong> Controle total do dominio</li>
+                        <li><strong>Enterprise Admins:</strong> Controle de toda a floresta</li>
+                        <li><strong>KRBTGT account:</strong> Chave mestre do Kerberos (Golden Ticket)</li>
+                        <li><strong>Domain Controllers:</strong> Servidores que hospedam o AD</li>
+                        <li><strong>NTDS.dit:</strong> Banco de dados com todos os hashes</li>
+                    </ul>
+                </div>
+
+                <h2 id="ataques">Principais Ataques ao Active Directory</h2>
+
+                <p>
+                    Conhecer os ataques e essencial para defesa. Esses sao os mais utilizados por atacantes e <a href="../red-team-blue-team-purple-team/">Red Teams</a>:
+                </p>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones"></i> Kerberoasting</h4>
+                    <p><strong>O que e:</strong> Qualquer usuario autenticado pode solicitar tickets de servico (TGS) para contas com SPN (Service Principal Name). O ticket e criptografado com o hash da senha da service account, permitindo ataque de forca bruta offline.</p>
+                    <p><strong>Impacto:</strong> Obtencao de credenciais de service accounts, frequentemente com privilegios elevados.</p>
+                    <p><strong>Deteccao:</strong> Event ID 4769 com encryption type 0x17 (RC4), volume anomalo de requisicoes TGS.</p>
+                </div>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones"></i> AS-REP Roasting</h4>
+                    <p><strong>O que e:</strong> Contas com "Do not require Kerberos preauthentication" podem ter seu AS-REP (resposta de autenticacao) solicitado sem senha. O hash pode ser quebrado offline.</p>
+                    <p><strong>Impacto:</strong> Comprometimento de contas mal configuradas.</p>
+                    <p><strong>Deteccao:</strong> Event ID 4768 com Pre-Authentication Type 0.</p>
+                </div>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones"></i> Pass-the-Hash (PtH)</h4>
+                    <p><strong>O que e:</strong> NTLM permite autenticacao usando apenas o hash da senha, sem precisar da senha em texto claro. Atacantes extraem hashes da memoria (Mimikatz) e os reutilizam.</p>
+                    <p><strong>Impacto:</strong> Movimentacao lateral sem conhecer senhas.</p>
+                    <p><strong>Deteccao:</strong> Event ID 4624 com Logon Type 3 e NtLmSsP, anomalias de comportamento.</p>
+                </div>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones"></i> Pass-the-Ticket (PtT)</h4>
+                    <p><strong>O que e:</strong> Similar ao PtH, mas com tickets Kerberos (TGT ou TGS). Tickets sao extraidos da memoria e injetados em outra sessao.</p>
+                    <p><strong>Impacto:</strong> Impersonificacao de usuarios, movimentacao lateral.</p>
+                    <p><strong>Deteccao:</strong> Anomalias em uso de tickets, eventos Kerberos.</p>
+                </div>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones"></i> Golden Ticket</h4>
+                    <p><strong>O que e:</strong> Com o hash do KRBTGT, atacantes podem forjar qualquer TGT (Ticket Granting Ticket), criando tickets para qualquer usuario, inclusive Domain Admin, com validade de anos.</p>
+                    <p><strong>Impacto:</strong> Persistencia total no dominio, dificil de remediar.</p>
+                    <p><strong>Deteccao:</strong> TGTs com lifetime anomalo, eventos de uso de TGT sem AS-REQ correspondente.</p>
+                </div>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones"></i> DCSync</h4>
+                    <p><strong>O que e:</strong> Atacante com permissoes de replicacao (Replicating Directory Changes) pode solicitar ao DC os hashes de qualquer conta, simulando ser outro Domain Controller.</p>
+                    <p><strong>Impacto:</strong> Obtencao de todos os hashes do dominio, incluindo KRBTGT.</p>
+                    <p><strong>Deteccao:</strong> Event ID 4662 com propriedades de replicacao, origem nao sendo DC.</p>
+                </div>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones"></i> Silver Ticket</h4>
+                    <p><strong>O que e:</strong> Com o hash de uma service account, atacantes podem forjar TGS para o servico especifico, sem passar pelo KDC.</p>
+                    <p><strong>Impacto:</strong> Acesso persistente ao servico alvo.</p>
+                    <p><strong>Deteccao:</strong> Dificil - nao passa pelo DC. Requer monitoramento no servico alvo.</p>
+                </div>
+
+                <h2 id="hardening">Hardening do Active Directory</h2>
+
+                <div class="checklist">
+                    <h4><i class="fas fa-shield-alt"></i> Controles Essenciais</h4>
+                    <ul>
+                        <li><strong>Senhas de service accounts:</strong> Minimo 25+ caracteres ou usar gMSA</li>
+                        <li><strong>LAPS (Local Admin Password Solution):</strong> Senhas unicas por maquina</li>
+                        <li><strong>Desabilitar NTLM:</strong> Onde possivel, forcar Kerberos</li>
+                        <li><strong>Protected Users group:</strong> Adicionar contas privilegiadas</li>
+                        <li><strong>Credential Guard:</strong> Isolar credenciais em virtualizacao</li>
+                        <li><strong>Desabilitar pré-autenticação desnecessária:</strong> Previne AS-REP Roasting</li>
+                        <li><strong>Restringir delegação:</strong> Evitar unconstrained delegation</li>
+                        <li><strong>Rotacao do KRBTGT:</strong> A cada 180 dias no minimo (2x seguidas)</li>
+                    </ul>
+                </div>
+
+                <h3>Politicas de Grupo (GPO) Recomendadas</h3>
+
+                <ul>
+                    <li>Bloquear armazenamento de credenciais em memoria (WDigest)</li>
+                    <li>Habilitar auditoria avancada de eventos de seguranca</li>
+                    <li>Restringir logon de contas privilegiadas a sistemas especificos</li>
+                    <li>Configurar AppLocker/WDAC para bloquear ferramentas de ataque</li>
+                    <li>Desabilitar PowerShell v2 e habilitar logging</li>
+                    <li>Configurar Windows Firewall em todos os hosts</li>
+                </ul>
+
+                <h2 id="tiering">Modelo de Tiering Administrativo</h2>
+
+                <p>
+                    O modelo de tiering e a abordagem recomendada pela Microsoft para proteger credenciais privilegiadas. Ele segmenta o ambiente em niveis (tiers) com isolamento estrito.
+                </p>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-layer-group" style="color:#60A5FA;margin-right:10px"></i> Estrutura de Tiers</h4>
+                    <ul>
+                        <li><strong>Tier 0:</strong> Domain Controllers, AD, PKI, SCCM - joias da coroa</li>
+                        <li><strong>Tier 1:</strong> Servidores de aplicacao, bancos de dados, file servers</li>
+                        <li><strong>Tier 2:</strong> Workstations, laptops, dispositivos de usuarios</li>
+                    </ul>
+                    <p style="margin-top:15px;color:#f59e0b"><strong>Regra de ouro:</strong> Credenciais de um tier NUNCA devem ser usadas em tier inferior. Admin de Tier 0 nunca loga em workstation.</p>
+                </div>
+
+                <h3>Privileged Access Workstations (PAW)</h3>
+
+                <p>
+                    Estacoes dedicadas e hardened para administracao de recursos de Tier 0 e Tier 1. Isoladas da navegacao web, email e outras atividades de alto risco. Essencial para proteger credenciais de Domain Admin.
+                </p>
+
+                <h2 id="ferramentas">Ferramentas de Auditoria do AD</h2>
+
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <h5><i class="fas fa-chess-rook" style="color:#60A5FA;margin-right:8px"></i> PingCastle</h5>
+                        <p>Assessment rapido com score de risco, identifica vulnerabilidades e gera relatorio executivo. Gratuito para uso interno.</p>
+                        <span class="tag">Gratuito</span>
+                    </div>
+                    <div class="tool-card">
+                        <h5><i class="fas fa-project-diagram" style="color:#60A5FA;margin-right:8px"></i> BloodHound</h5>
+                        <p>Mapeia caminhos de ataque visualmente usando teoria de grafos. Identifica rotas para Domain Admin. Open source.</p>
+                        <span class="tag">Open Source</span>
+                    </div>
+                    <div class="tool-card">
+                        <h5><i class="fas fa-shield-alt" style="color:#60A5FA;margin-right:8px"></i> Purple Knight</h5>
+                        <p>Ferramenta da Semperis com assessment profundo de seguranca do AD. Verifica mais de 100 indicadores.</p>
+                        <span class="tag">Gratuito</span>
+                    </div>
+                    <div class="tool-card">
+                        <h5><i class="fas fa-search" style="color:#60A5FA;margin-right:8px"></i> ADRecon</h5>
+                        <p>Coleta informacoes detalhadas do AD para analise. Gera relatorios em Excel/HTML. PowerShell.</p>
+                        <span class="tag">Open Source</span>
+                    </div>
+                    <div class="tool-card">
+                        <h5><i class="fas fa-user-secret" style="color:#60A5FA;margin-right:8px"></i> Mimikatz</h5>
+                        <p>Ferramenta ofensiva que extrai credenciais da memoria. Use para testar suas defesas (Red Team).</p>
+                        <span class="tag">Pentest</span>
+                    </div>
+                    <div class="tool-card">
+                        <h5><i class="fas fa-eye" style="color:#60A5FA;margin-right:8px"></i> Defender for Identity</h5>
+                        <p>Solucao Microsoft de deteccao de ataques ao AD em tempo real. Cloud-based, integra com Sentinel.</p>
+                        <span class="tag">Comercial</span>
+                    </div>
+                </div>
+
+                <h2 id="monitoramento">Monitoramento e Deteccao</h2>
+
+                <h3>Event IDs Criticos para Monitorar</h3>
+
+                <ul>
+                    <li><strong>4624:</strong> Logon bem-sucedido (monitore Logon Type 3, 10)</li>
+                    <li><strong>4625:</strong> Falha de logon (brute force, password spray)</li>
+                    <li><strong>4648:</strong> Logon com credenciais explicitas</li>
+                    <li><strong>4662:</strong> Operacao em objeto AD (DCSync detection)</li>
+                    <li><strong>4672:</strong> Privilegios especiais atribuidos (admin logon)</li>
+                    <li><strong>4768:</strong> TGT request (AS-REP Roasting)</li>
+                    <li><strong>4769:</strong> TGS request (Kerberoasting)</li>
+                    <li><strong>4771:</strong> Falha de pre-autenticacao Kerberos</li>
+                    <li><strong>4776:</strong> NTLM authentication (Pass-the-Hash)</li>
+                    <li><strong>5136:</strong> Modificacao de objeto AD</li>
+                    <li><strong>5141:</strong> Objeto AD deletado</li>
+                </ul>
+
+                <p>
+                    Para <a href="../a-importancia-do-threat-hunting-para-organizacao/">threat hunting</a> eficaz no AD, correlacione esses eventos no seu <a href="../siem-implementacao-casos-uso/">SIEM</a> e crie alertas para padroes anomalos.
+                </p>
+
+                <div class="defense-card">
+                    <h4><i class="fas fa-shield-alt"></i> Deteccoes Recomendadas</h4>
+                    <ul>
+                        <li>Volume anomalo de requisicoes TGS (Kerberoasting)</li>
+                        <li>Logon de Domain Admin em workstation (violacao de tiering)</li>
+                        <li>Modificacao de grupos privilegiados</li>
+                        <li>Criacao de contas com privilegios</li>
+                        <li>Replicacao de diretorio de origem nao-DC (DCSync)</li>
+                        <li>Uso de ferramentas conhecidas (Mimikatz, Rubeus)</li>
+                    </ul>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Precisa de Assessment de Seguranca do AD?</h3>
+                    <p>Oferecemos auditoria completa do Active Directory com PingCastle, BloodHound e testes manuais.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Assessment</a>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Com que frequencia devo resetar a senha do KRBTGT?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Recomendacao: a cada 180 dias no minimo. IMPORTANTE: reset deve ser feito DUAS vezes (com intervalo de 10-12h entre eles) para invalidar tickets antigos. Em caso de suspeita de comprometimento, reset imediato (2x). Isso invalida todos os Golden Tickets existentes.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O que e gMSA e por que devo usar?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Group Managed Service Accounts (gMSA) sao contas de servico gerenciadas automaticamente pelo AD. A senha (240+ caracteres) e rotacionada automaticamente a cada 30 dias sem intervencao manual. Elimina risco de Kerberoasting com senhas fracas. Use para todos os servicos que suportam.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Devo migrar para Azure AD e abandonar AD on-premises?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Azure AD (agora Entra ID) e AD on-premises servem propositos diferentes. A maioria das organizacoes usa modelo hibrido. Azure AD e excelente para aplicacoes cloud e <a href="../zero-trust-architecture-guia-completo/">Zero Trust</a>. AD on-premises ainda e necessario para muitos workloads tradicionais. Avalie caso a caso - a tendencia e cloud-first, mas migracao completa requer planejamento.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/active-directory-security-protecao-ataques/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/active-directory-security-protecao-ataques/&text=Active Directory Security: Protecao contra Ataques" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Active Directory Security https://inteligenciabrasil.seg.br/blog/active-directory-security-protecao-ataques/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em Seguranca de Infraestrutura, Active Directory e Red Team.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
+                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../red-team-blue-team-purple-team/">Red Team vs Blue Team</a></li>
+                            <li><a href="../tipos-de-pentest-guia-completo/">Tipos de Pentest</a></li>
+                            <li><a href="../ransomware-como-funciona-proteger-empresa/">Ransomware</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.easing.min.js"></script>
+    <script>
+        $(window).on('scroll load',function(){$('.navbar').offset().top>20?$('.navbar-custom').addClass('top-nav-collapse'):$('.navbar-custom').removeClass('top-nav-collapse')});
+        $('a[href^="#"]').on('click',function(e){e.preventDefault();var t=$(this.getAttribute('href'));t.length&&$('html, body').animate({scrollTop:t.offset().top-100},500,'easeInOutExpo')});
+        document.querySelectorAll('.faq-question').forEach(function(q){q.addEventListener('click',function(){this.parentElement.classList.toggle('active')})});
+    </script>
+</body>
+</html>

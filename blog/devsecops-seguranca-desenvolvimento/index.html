@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo de DevSecOps: como integrar seguranca no ciclo de desenvolvimento. SAST, DAST, SCA, secrets management, pipeline seguro e shift-left security.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="DevSecOps, seguranca desenvolvimento, SAST, DAST, SCA, IAST, shift-left, pipeline seguro, CI/CD security, SDLC seguro, secrets management">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/devsecops-seguranca-desenvolvimento/">
+
+    <meta property="og:title" content="DevSecOps: Seguranca Integrada ao Desenvolvimento">
+    <meta property="og:description" content="Como implementar DevSecOps: ferramentas, praticas e pipeline seguro para desenvolvimento agil.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/devsecops-seguranca-desenvolvimento/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="article:published_time" content="2026-01-31T10:00:00-03:00">
+    <meta property="article:section" content="Desenvolvimento">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <title>DevSecOps: Seguranca no Desenvolvimento | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"DevSecOps: Seguranca Integrada ao Desenvolvimento","description":"Guia completo de DevSecOps: SAST, DAST, SCA, secrets management e pipeline seguro.","author":{"@type":"Organization","name":"Inteligencia Brasil"},"datePublished":"2026-01-31"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual a diferenca entre SAST, DAST e SCA?","acceptedAnswer":{"@type":"Answer","text":"SAST (Static) analisa codigo-fonte sem executar, encontra bugs e vulnerabilidades no codigo. DAST (Dynamic) testa aplicacao em execucao, simulando ataques. SCA (Software Composition Analysis) identifica vulnerabilidades em dependencias/bibliotecas terceiras. Idealmente, use os tres em conjunto."}},{"@type":"Question","name":"DevSecOps atrasa o desenvolvimento?","acceptedAnswer":{"@type":"Answer","text":"Inicialmente pode haver fricao, mas a longo prazo acelera. Encontrar vulnerabilidades em producao custa 30x mais que em desenvolvimento. Automacao no pipeline adiciona minutos mas evita semanas de retrabalho. O segredo e automacao e integracao suave no fluxo existente."}}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>
+        body{background:#0a1628}.navbar-custom{background:rgba(13,30,56,.95)!important;border-bottom:1px solid rgba(96,165,250,.1);backdrop-filter:blur(20px)}.navbar-custom.top-nav-collapse{background:rgba(10,22,40,.98)!important}.navbar-custom .nav-link{color:#F1F5F9!important}.navbar-custom .nav-link:hover{color:#60A5FA!important}.article-header{background:linear-gradient(135deg,#0D1E38 0%,#1a3a5c 50%,#0D1E38 100%);padding:140px 0 60px}.article-header h1{color:#F1F5F9;font-size:2.5rem;font-weight:700;margin-bottom:20px}.article-category{display:inline-block;background:linear-gradient(135deg,#22C55E 0%,#16A34A 100%);color:#fff;padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px;text-transform:uppercase}.article-meta{display:flex;flex-wrap:wrap;gap:20px;color:#94A3B8}.breadcrumb-nav{background:rgba(13,30,56,.8);padding:15px 0}.breadcrumb{background:0 0;margin:0;padding:0}.breadcrumb-item a{color:#94A3B8}.breadcrumb-item.active{color:#F1F5F9}.article-content{background:#0a1628;padding:60px 0}.article-body{max-width:800px;margin:0 auto}.article-body h2{color:#F1F5F9;font-size:1.8rem;margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid rgba(96,165,250,.3)}.article-body h3{color:#F1F5F9;font-size:1.4rem;margin:30px 0 15px}.article-body h4{color:#60A5FA;font-size:1.15rem;margin:25px 0 12px}.article-body p{color:#CBD5E1;font-size:1.1rem;line-height:1.8;margin-bottom:20px}.article-body a{color:#60A5FA}.article-body strong{color:#60A5FA}.article-body ul,.article-body ol{color:#CBD5E1;margin-bottom:20px;padding-left:25px}.article-body li{margin-bottom:10px}.toc{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:25px;margin-bottom:40px}.toc h4{color:#F1F5F9;margin-bottom:15px}.toc ul{list-style:none;padding:0}.toc a{color:#94A3B8}.stat-highlight{background:linear-gradient(145deg,rgba(34,197,94,.1) 0%,rgba(22,163,74,.05) 100%);border:1px solid rgba(34,197,94,.3);border-radius:12px;padding:20px;margin:25px 0;text-align:center}.stat-highlight .number{font-size:2.5rem;font-weight:700;color:#22C55E}.stat-highlight .label{color:#94A3B8}.tool-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:25px;margin:20px 0}.tool-card h4{color:#22C55E;margin-top:0}.pipeline-step{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:25px;margin:20px 0;position:relative}.pipeline-step::before{content:attr(data-step);position:absolute;top:-12px;left:20px;background:linear-gradient(135deg,#22C55E 0%,#16A34A 100%);color:#fff;padding:4px 14px;border-radius:20px;font-size:.85rem;font-weight:600}.comparison-table{width:100%;border-collapse:collapse;margin:25px 0;background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border-radius:12px;overflow:hidden}.comparison-table th{background:rgba(96,165,250,.2);color:#F1F5F9;padding:15px;text-align:left}.comparison-table td{padding:15px;border-bottom:1px solid rgba(96,165,250,.1);color:#CBD5E1}.comparison-table tr:last-child td{border-bottom:none}.faq-section{margin:40px 0}.faq-item{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;margin-bottom:15px}.faq-question{padding:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:#F1F5F9;font-weight:600}.faq-answer{padding:0 20px 20px;color:#CBD5E1;display:none}.faq-item.active .faq-answer{display:block}.faq-item.active .faq-icon{transform:rotate(180deg)}.faq-icon{transition:transform .3s;color:#60A5FA}.author-box{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:30px;margin:50px 0;display:flex;gap:25px;align-items:center}.author-box img{width:80px;height:80px;border-radius:50%}.author-info h4{color:#F1F5F9;margin-bottom:5px}.author-info p{color:#94A3B8;margin:0}.share-buttons{display:flex;gap:15px;margin:40px 0}.share-btn{padding:10px 20px;border-radius:8px;font-weight:500;text-decoration:none}.share-btn.linkedin{background:#0077B5;color:#fff}.share-btn.whatsapp{background:#25D366;color:#fff}.cta-box{background:linear-gradient(145deg,rgba(96,165,250,.1) 0%,rgba(59,130,246,.05) 100%);border:1px solid rgba(96,165,250,.3);border-radius:12px;padding:30px;margin:40px 0;text-align:center}.cta-box h3{color:#F1F5F9;margin-bottom:15px}.cta-btn{display:inline-block;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 100%);color:#fff;padding:12px 30px;border-radius:8px;font-weight:600}.footer-section{background:#0D1E38;padding:60px 0 30px;border-top:1px solid rgba(96,165,250,.1)}.footer-about p,.footer-links a{color:#94A3B8}.footer-links h4{color:#F1F5F9}.footer-bottom{border-top:1px solid rgba(96,165,250,.1);padding-top:20px;margin-top:40px;color:#64748B}.footer-social a{color:#60A5FA}@media(max-width:768px){.article-header h1{font-size:1.8rem}.author-box{flex-direction:column;text-align:center}}
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo" width="196" height="113"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Desenvolvimento</span>
+            <h1>DevSecOps: Seguranca Integrada ao Desenvolvimento</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 20 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">DevSecOps</li></ol></div></nav>
+
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h4><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h4>
+                    <ul>
+                        <li><a href="#oque">O que e DevSecOps</a></li>
+                        <li><a href="#shiftleft">Shift-Left Security</a></li>
+                        <li><a href="#ferramentas">Ferramentas por tipo</a></li>
+                        <li><a href="#pipeline">Pipeline seguro</a></li>
+                        <li><a href="#secrets">Secrets Management</a></li>
+                        <li><a href="#metricas">Metricas de DevSecOps</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="oque">O que e DevSecOps</h2>
+
+                <p><strong>DevSecOps</strong> e a pratica de integrar seguranca em todas as fases do ciclo de desenvolvimento de software (SDLC), em vez de trata-la como uma etapa final. A seguranca se torna responsabilidade compartilhada entre desenvolvimento, operacoes e security - nao apenas do time de seguranca.</p>
+
+                <div class="stat-highlight">
+                    <div class="number">30x</div>
+                    <div class="label">mais barato corrigir vulnerabilidade em desenvolvimento vs producao (IBM Systems Sciences Institute)</div>
+                </div>
+
+                <p>No modelo tradicional, seguranca era testada apenas antes do deploy - criando gargalos e retrabalho. DevSecOps automatiza verificacoes de seguranca no pipeline CI/CD, fornecendo feedback rapido aos desenvolvedores.</p>
+
+                <h2 id="shiftleft">Shift-Left Security</h2>
+
+                <p><strong>Shift-left</strong> significa mover atividades de seguranca para o inicio do ciclo de desenvolvimento - quanto mais cedo encontrar problemas, mais barato e facil corrigir.</p>
+
+                <h3>Atividades por fase</h3>
+                <ul>
+                    <li><strong>Planejamento:</strong> Threat modeling, requisitos de seguranca</li>
+                    <li><strong>Codificacao:</strong> IDE plugins, pre-commit hooks, secure coding guidelines</li>
+                    <li><strong>Build:</strong> SAST, SCA, secrets scanning</li>
+                    <li><strong>Teste:</strong> DAST, IAST, <a href="../tipos-de-pentest-guia-completo/">pentest</a></li>
+                    <li><strong>Deploy:</strong> IaC scanning, container scanning</li>
+                    <li><strong>Operacao:</strong> RASP, WAF, monitoramento continuo</li>
+                </ul>
+
+                <h2 id="ferramentas">Ferramentas por Tipo de Teste</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Tipo</th><th>O que faz</th><th>Quando usar</th><th>Exemplos</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>SAST</strong></td><td>Analisa codigo-fonte sem executar</td><td>Durante build/PR</td><td>SonarQube, Checkmarx, Semgrep, CodeQL</td></tr>
+                        <tr><td><strong>DAST</strong></td><td>Testa aplicacao em execucao</td><td>Ambiente de staging</td><td>OWASP ZAP, Burp Suite, Nuclei</td></tr>
+                        <tr><td><strong>SCA</strong></td><td>Analisa dependencias/bibliotecas</td><td>Durante build</td><td>Snyk, Dependabot, OWASP Dependency-Check</td></tr>
+                        <tr><td><strong>IAST</strong></td><td>Agente em runtime + analise</td><td>Testes funcionais</td><td>Contrast Security, Hdiv</td></tr>
+                        <tr><td><strong>Secrets</strong></td><td>Detecta credenciais em codigo</td><td>Pre-commit, CI</td><td>GitLeaks, TruffleHog, detect-secrets</td></tr>
+                        <tr><td><strong>IaC</strong></td><td>Analisa Terraform, CloudFormation</td><td>Durante PR/build</td><td>Checkov, tfsec, Terrascan</td></tr>
+                        <tr><td><strong>Container</strong></td><td>Vulnerabilidades em imagens</td><td>Build, registry</td><td>Trivy, Grype, Snyk Container</td></tr>
+                    </tbody>
+                </table>
+
+                <h2 id="pipeline">Pipeline Seguro CI/CD</h2>
+
+                <p>Um pipeline DevSecOps tipico integra multiplas verificacoes automatizadas:</p>
+
+                <div class="pipeline-step" data-step="1. Commit">
+                    <h4>Pre-commit Hooks</h4>
+                    <ul>
+                        <li>Secrets scanning (GitLeaks)</li>
+                        <li>Linting basico de seguranca</li>
+                        <li>Validacao de formato/sintaxe</li>
+                    </ul>
+                    <p><strong>Objetivo:</strong> Bloquear problemas obvios antes de entrar no repositorio.</p>
+                </div>
+
+                <div class="pipeline-step" data-step="2. Build">
+                    <h4>Analise Estatica</h4>
+                    <ul>
+                        <li>SAST (SonarQube, Semgrep)</li>
+                        <li>SCA - dependencias (Snyk, Dependabot)</li>
+                        <li>Secrets scanning (TruffleHog)</li>
+                        <li>IaC scanning (Checkov)</li>
+                    </ul>
+                    <p><strong>Objetivo:</strong> Identificar vulnerabilidades no codigo e dependencias.</p>
+                </div>
+
+                <div class="pipeline-step" data-step="3. Test">
+                    <h4>Analise Dinamica</h4>
+                    <ul>
+                        <li>DAST (OWASP ZAP automatizado)</li>
+                        <li>Container scanning (Trivy)</li>
+                        <li>Testes de seguranca automatizados</li>
+                    </ul>
+                    <p><strong>Objetivo:</strong> Testar aplicacao em execucao.</p>
+                </div>
+
+                <div class="pipeline-step" data-step="4. Deploy">
+                    <h4>Gate de Seguranca</h4>
+                    <ul>
+                        <li>Verificar se todas as checagens passaram</li>
+                        <li>Validar politicas de deploy</li>
+                        <li>Aprovacao para ambientes criticos</li>
+                    </ul>
+                    <p><strong>Objetivo:</strong> Garantir que apenas codigo seguro va para producao.</p>
+                </div>
+
+                <h2 id="secrets">Secrets Management</h2>
+
+                <p>Credenciais em codigo sao uma das principais causas de breaches. Estrategias:</p>
+
+                <ul>
+                    <li><strong>Nunca commitar secrets:</strong> Use .gitignore, pre-commit hooks</li>
+                    <li><strong>Secrets managers:</strong> HashiCorp Vault, AWS Secrets Manager, Azure Key Vault</li>
+                    <li><strong>Environment variables:</strong> Injetadas em runtime, nao em codigo</li>
+                    <li><strong>Rotacao automatica:</strong> Secrets devem ter vida curta</li>
+                    <li><strong>Deteccao:</strong> Scan continuo de repositorios por secrets expostos</li>
+                </ul>
+
+                <h2 id="metricas">Metricas de DevSecOps</h2>
+
+                <ul>
+                    <li><strong>MTTR (Mean Time to Remediate):</strong> Tempo medio para corrigir vulnerabilidades</li>
+                    <li><strong>Vulnerabilidades por release:</strong> Tendencia ao longo do tempo</li>
+                    <li><strong>Cobertura de scanning:</strong> % de repos/apps com SAST/SCA</li>
+                    <li><strong>Taxa de falsos positivos:</strong> Qualidade das ferramentas</li>
+                    <li><strong>Escape rate:</strong> Vulnerabilidades que chegam a producao</li>
+                    <li><strong>Lead time para seguranca:</strong> Impacto no tempo de deploy</li>
+                </ul>
+
+                <div class="cta-box">
+                    <h3>Precisa Implementar DevSecOps?</h3>
+                    <p>Ajudamos a integrar seguranca no seu pipeline CI/CD e treinar desenvolvedores.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Por onde comecar com DevSecOps?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Comece com quick wins: SCA para dependencias (Snyk/Dependabot e facil de integrar), secrets scanning em pre-commit (GitLeaks), e SAST basico (Semgrep). Depois expanda para DAST e container scanning. Nao tente tudo de uma vez - adocao gradual e mais sustentavel.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como lidar com falsos positivos?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Falsos positivos desmotivam desenvolvedores. Estrategias: tune as ferramentas para seu contexto, comece com regras de alta confianca, implemente processo de triagem, permita supress individual com justificativa, e meca/reduza taxa de FP ao longo do tempo. Qualidade > quantidade de findings.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>DevSecOps substitui pentest?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Nao. DevSecOps automatiza verificacoes conhecidas - <a href="../tipos-de-pentest-guia-completo/">pentest</a> encontra vulnerabilidades de logica, falhas de design e problemas que ferramentas automatizadas nao detectam. Idealmente, DevSecOps reduz a quantidade de issues que chegam ao pentest, permitindo que pentesters foquem em problemas mais complexos.</p></div>
+                    </div>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/devsecops-seguranca-desenvolvimento/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://wa.me/?text=DevSecOps https://inteligenciabrasil.seg.br/blog/devsecops-seguranca-desenvolvimento/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80">
+                    <div class="author-info">
+                        <h4>Inteligencia Brasil</h4>
+                        <p>Consultoria especializada em DevSecOps, Seguranca de Aplicacoes e Pipeline Seguro.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140"><p>Consultoria em Seguranca e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Relacionados</h4><ul><li><a href="../seguranca-apis-owasp-top-10/">Seguranca APIs</a></li><li><a href="../kubernetes-container-security/">Container Security</a></li><li><a href="../seguranca-cloud-aws-azure-gcp/">Cloud Security</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 Inteligencia Brasil.</p></div>
+        </div>
+    </footer>
+
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script>$(window).on('scroll load',function(){$('.navbar').offset().top>20?$('.navbar-custom').addClass('top-nav-collapse'):$('.navbar-custom').removeClass('top-nav-collapse')});document.querySelectorAll('.faq-question').forEach(function(q){q.addEventListener('click',function(){this.parentElement.classList.toggle('active')})});</script>
+</body>
+</html>

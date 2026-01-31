@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo de seguranca de APIs: OWASP API Security Top 10, vulnerabilidades comuns (BOLA, Broken Auth), autenticacao, rate limiting e melhores praticas.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="keywords" content="API security, OWASP API Top 10, BOLA, broken authentication, rate limiting, JWT security, OAuth, API gateway, seguranca API REST, GraphQL security">
+    <meta name="author" content="Inteligencia Brasil">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/seguranca-apis-owasp-top-10/">
+    <meta property="og:title" content="Seguranca de APIs: OWASP API Security Top 10">
+    <meta property="og:description" content="Vulnerabilidades mais criticas em APIs e como proteger suas aplicacoes.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/seguranca-apis-owasp-top-10/">
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <title>Seguranca de APIs: OWASP API Security Top 10 | Inteligencia Brasil</title>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Seguranca de APIs: OWASP API Security Top 10","author":{"@type":"Organization","name":"Inteligencia Brasil"},"datePublished":"2026-01-31"}</script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>body{background:#0a1628}.navbar-custom{background:rgba(13,30,56,.95)!important;border-bottom:1px solid rgba(96,165,250,.1);backdrop-filter:blur(20px)}.navbar-custom.top-nav-collapse{background:rgba(10,22,40,.98)!important}.navbar-custom .nav-link{color:#F1F5F9!important}.navbar-custom .nav-link:hover{color:#60A5FA!important}.article-header{background:linear-gradient(135deg,#0D1E38 0%,#1a3a5c 50%,#0D1E38 100%);padding:140px 0 60px}.article-header h1{color:#F1F5F9;font-size:2.5rem;font-weight:700;margin-bottom:20px}.article-category{display:inline-block;background:linear-gradient(135deg,#F59E0B 0%,#D97706 100%);color:#fff;padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px;text-transform:uppercase}.article-meta{display:flex;flex-wrap:wrap;gap:20px;color:#94A3B8}.breadcrumb-nav{background:rgba(13,30,56,.8);padding:15px 0}.breadcrumb{background:0 0;margin:0;padding:0}.breadcrumb-item a{color:#94A3B8}.breadcrumb-item.active{color:#F1F5F9}.article-content{background:#0a1628;padding:60px 0}.article-body{max-width:800px;margin:0 auto}.article-body h2{color:#F1F5F9;font-size:1.8rem;margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid rgba(96,165,250,.3)}.article-body h3{color:#F1F5F9;font-size:1.4rem;margin:30px 0 15px}.article-body p{color:#CBD5E1;font-size:1.1rem;line-height:1.8;margin-bottom:20px}.article-body a{color:#60A5FA}.article-body strong{color:#60A5FA}.article-body ul{color:#CBD5E1;margin-bottom:20px;padding-left:25px}.article-body li{margin-bottom:10px}.toc{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:25px;margin-bottom:40px}.toc h4{color:#F1F5F9;margin-bottom:15px}.toc ul{list-style:none;padding:0}.toc a{color:#94A3B8}.vuln-card{background:linear-gradient(145deg,rgba(239,68,68,.1) 0%,rgba(220,38,38,.05) 100%);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:25px;margin:20px 0}.vuln-card h4{color:#ef4444;margin-top:0}.vuln-card .rank{display:inline-block;background:#ef4444;color:#fff;padding:2px 10px;border-radius:4px;font-size:.85rem;font-weight:600;margin-bottom:10px}.stat-highlight{background:linear-gradient(145deg,rgba(245,158,11,.1) 0%,rgba(217,119,6,.05) 100%);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:20px;margin:25px 0;text-align:center}.stat-highlight .number{font-size:2.5rem;font-weight:700;color:#F59E0B}.stat-highlight .label{color:#94A3B8}.checklist{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:25px;margin:25px 0}.checklist h4{color:#10B981;margin-top:0}.checklist ul{list-style:none;padding:0}.checklist li{padding:8px 0;padding-left:30px;position:relative}.checklist li::before{content:'\f00c';font-family:'Font Awesome 5 Free';font-weight:900;position:absolute;left:0;color:#10B981}.author-box{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:30px;margin:50px 0;display:flex;gap:25px;align-items:center}.author-box img{width:80px;height:80px;border-radius:50%}.author-info h4{color:#F1F5F9;margin-bottom:5px}.author-info p{color:#94A3B8;margin:0}.share-buttons{display:flex;gap:15px;margin:40px 0}.share-btn{padding:10px 20px;border-radius:8px;font-weight:500;text-decoration:none}.share-btn.linkedin{background:#0077B5;color:#fff}.cta-box{background:linear-gradient(145deg,rgba(96,165,250,.1) 0%,rgba(59,130,246,.05) 100%);border:1px solid rgba(96,165,250,.3);border-radius:12px;padding:30px;margin:40px 0;text-align:center}.cta-box h3{color:#F1F5F9;margin-bottom:15px}.cta-btn{display:inline-block;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 100%);color:#fff;padding:12px 30px;border-radius:8px;font-weight:600}.footer-section{background:#0D1E38;padding:60px 0 30px;border-top:1px solid rgba(96,165,250,.1)}.footer-about p,.footer-links a{color:#94A3B8}.footer-links h4{color:#F1F5F9}.footer-bottom{border-top:1px solid rgba(96,165,250,.1);padding-top:20px;margin-top:40px;color:#64748B}@media(max-width:768px){.article-header h1{font-size:1.8rem}.author-box{flex-direction:column;text-align:center}}</style>
+</head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top"><a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo" width="196" height="113"></a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button><div class="collapse navbar-collapse" id="navbarsExampleDefault"><ul class="navbar-nav ml-auto"><li class="nav-item"><a class="nav-link" href="../../">HOME</a></li><li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li><li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li><li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li></ul></div></nav>
+
+    <header class="article-header"><div class="container"><span class="article-category">Aplicacoes</span><h1>Seguranca de APIs: OWASP API Security Top 10</h1><div class="article-meta"><span><i class="far fa-calendar"></i> Janeiro 2026</span><span><i class="far fa-clock"></i> 18 min de leitura</span></div></div></header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">Seguranca APIs</li></ol></div></nav>
+
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc"><h4><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h4><ul><li><a href="#importancia">Por que APIs sao alvo</a></li><li><a href="#top10">OWASP API Security Top 10</a></li><li><a href="#autenticacao">Autenticacao e autorizacao</a></li><li><a href="#protecao">Melhores praticas</a></li><li><a href="#conclusao">Conclusao</a></li></ul></div>
+
+                <h2 id="importancia">Por que APIs sao Alvo de Ataques</h2>
+                <p>APIs sao a espinha dorsal das aplicacoes modernas - conectam frontends, mobile apps, parceiros e servicos. Essa onipresenca as torna alvos atrativos: <strong>APIs frequentemente expõem dados e funcionalidades diretamente</strong>, com menos camadas de protecao que interfaces web tradicionais.</p>
+
+                <div class="stat-highlight"><div class="number">91%</div><div class="label">das organizacoes tiveram incidente de seguranca em API em 2024 (Salt Security)</div></div>
+
+                <h2 id="top10">OWASP API Security Top 10 (2023)</h2>
+
+                <div class="vuln-card"><span class="rank">API1</span><h4>Broken Object Level Authorization (BOLA)</h4><p>A vulnerabilidade mais comum. APIs expõem endpoints com IDs de objetos sem verificar se o usuario tem autorizacao para acessar aquele objeto especifico. Atacante altera ID na requisicao para acessar dados de outros usuarios.</p><p><strong>Mitigacao:</strong> Validar autorizacao para cada objeto, nao confiar apenas em autenticacao.</p></div>
+
+                <div class="vuln-card"><span class="rank">API2</span><h4>Broken Authentication</h4><p>Falhas na implementacao de autenticacao: tokens fracos, falta de rate limiting em login, credenciais em URL, tokens que nao expiram.</p><p><strong>Mitigacao:</strong> OAuth 2.0/OIDC bem implementado, MFA, tokens de curta duracao, rate limiting.</p></div>
+
+                <div class="vuln-card"><span class="rank">API3</span><h4>Broken Object Property Level Authorization</h4><p>API retorna mais propriedades do objeto do que o usuario deveria ver, ou permite modificar propriedades que nao deveria (mass assignment).</p><p><strong>Mitigacao:</strong> Definir explicitamente quais campos retornar/aceitar por endpoint e role.</p></div>
+
+                <div class="vuln-card"><span class="rank">API4</span><h4>Unrestricted Resource Consumption</h4><p>Falta de limites permite consumo excessivo de recursos: requests ilimitados, uploads grandes, queries complexas que causam DoS.</p><p><strong>Mitigacao:</strong> Rate limiting, quotas, limites de tamanho, timeouts, paginacao.</p></div>
+
+                <div class="vuln-card"><span class="rank">API5</span><h4>Broken Function Level Authorization</h4><p>Falha na verificacao de autorizacao para funcoes administrativas. Usuario comum acessa endpoints de admin apenas alterando a URL.</p><p><strong>Mitigacao:</strong> Verificar autorizacao em cada funcao, nao apenas autenticacao. RBAC bem implementado.</p></div>
+
+                <h3>Outras vulnerabilidades do Top 10</h3>
+                <ul>
+                    <li><strong>API6 - Unrestricted Access to Sensitive Business Flows:</strong> Automacao maliciosa de fluxos de negocio</li>
+                    <li><strong>API7 - Server Side Request Forgery (SSRF):</strong> API faz requests para URLs controladas pelo atacante</li>
+                    <li><strong>API8 - Security Misconfiguration:</strong> Headers de seguranca ausentes, verbose errors, CORS permissivo</li>
+                    <li><strong>API9 - Improper Inventory Management:</strong> APIs antigas/shadow nao documentadas permanecem expostas</li>
+                    <li><strong>API10 - Unsafe Consumption of APIs:</strong> Confiar cegamente em dados de APIs de terceiros</li>
+                </ul>
+
+                <h2 id="autenticacao">Autenticacao e Autorizacao</h2>
+                <h3>Padroes recomendados</h3>
+                <ul>
+                    <li><strong>OAuth 2.0 + OIDC:</strong> Padrao para autorizacao delegada e autenticacao</li>
+                    <li><strong>JWT:</strong> Para tokens stateless, com validacao correta de assinatura e claims</li>
+                    <li><strong>API Keys:</strong> Apenas para identificacao, nao como unico fator de autenticacao</li>
+                    <li><strong>mTLS:</strong> Para comunicacao entre servicos (service mesh)</li>
+                </ul>
+
+                <h2 id="protecao">Melhores Praticas de Protecao</h2>
+                <div class="checklist"><h4><i class="fas fa-shield-alt"></i> Checklist de Seguranca de APIs</h4><ul><li>Autenticacao forte em todos os endpoints (OAuth 2.0/OIDC)</li><li>Autorizacao verificada por objeto E por funcao</li><li>Rate limiting e throttling implementados</li><li>Validacao de input em todos os parametros</li><li>HTTPS obrigatorio, TLS 1.2+</li><li>Headers de seguranca configurados</li><li>Logging de todas as requisicoes para auditoria</li><li>Versionamento de API com deprecacao de versoes antigas</li><li>Documentacao atualizada (OpenAPI/Swagger)</li><li><a href="../tipos-de-pentest-guia-completo/">Pentest</a> periodico de APIs</li></ul></div>
+
+                <h2 id="conclusao">Conclusao</h2>
+                <p>A seguranca de APIs e um dos pilares criticos da ciberseguranca moderna. Com a proliferacao de arquiteturas baseadas em microsservicos e a exposicao crescente de funcionalidades via API, proteger esses endpoints se tornou tao importante quanto proteger aplicacoes web tradicionais.</p>
+                <p>O <strong>OWASP API Security Top 10</strong> fornece um roteiro claro das vulnerabilidades mais criticas. A maioria dos problemas - como BOLA, broken authentication e misconfiguration - pode ser evitada com boas praticas de desenvolvimento e revisao de codigo. Investir em <a href="../devsecops-seguranca-desenvolvimento/">DevSecOps</a> com ferramentas de analise estatica e dinamica, combinado com <a href="../tipos-de-pentest-guia-completo/">pentest</a> periodico de APIs, e a estrategia mais eficaz para manter suas APIs seguras.</p>
+                <p>Lembre-se: APIs sao contratos de confianca entre sistemas. Protege-las e proteger seu negocio e seus clientes.</p>
+
+                <div class="cta-box"><h3>Precisa de Pentest de APIs?</h3><p>Realizamos testes de seguranca em APIs REST, GraphQL e SOAP seguindo OWASP API Security.</p><a href="../../#contato" class="cta-btn">Solicitar Proposta</a></div>
+
+                <div class="share-buttons"><span style="color:#94A3B8">Compartilhe:</span><a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/seguranca-apis-owasp-top-10/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a></div>
+
+                <div class="author-box"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"><div class="author-info"><h4>Inteligencia Brasil</h4><p>Consultoria especializada em Seguranca de Aplicacoes e APIs.</p></div></div>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer-section"><div class="container"><div class="row"><div class="col-lg-4"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140"><p>Consultoria em Seguranca e Tecnologia.</p></div></div><div class="col-lg-2"><div class="footer-links"><h4>Relacionados</h4><ul><li><a href="../devsecops-seguranca-desenvolvimento/">DevSecOps</a></li><li><a href="../pentest-frameworks-e-metodologias/">Pentest</a></li></ul></div></div><div class="col-lg-2"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li></ul></div></div></div><div class="footer-bottom"><p>&copy; 2026 Inteligencia Brasil.</p></div></div></footer>
+
+    <script src="../../js/jquery.min.js"></script><script src="../../js/bootstrap.min.js"></script>
+    <script>$(window).on('scroll load',function(){$('.navbar').offset().top>20?$('.navbar-custom').addClass('top-nav-collapse'):$('.navbar-custom').removeClass('top-nav-collapse')});</script>
+</body>
+</html>
