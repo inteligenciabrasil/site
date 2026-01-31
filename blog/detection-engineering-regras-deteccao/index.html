@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Detection Engineering: guia completo sobre como criar, testar e manter regras de deteccao eficazes usando SIGMA rules, MITRE ATT&CK e metodologias modernas de engenharia de deteccao.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="detection engineering, SIGMA rules, MITRE ATT&CK, regras deteccao, SIEM, detection as code, threat detection, SOC, engenharia deteccao">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/detection-engineering-regras-deteccao/">
+
+    <meta property="og:title" content="Detection Engineering: Guia Completo de Regras de Deteccao">
+    <meta property="og:description" content="Como criar e manter regras de deteccao eficazes com SIGMA e MITRE ATT&CK.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/detection-engineering-regras-deteccao/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-31T20:00:00-03:00">
+    <meta property="article:section" content="SOC">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Detection Engineering">
+    <meta name="twitter:description" content="Engenharia de deteccao com SIGMA rules e MITRE ATT&CK.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Detection Engineering: Guia Completo de Regras de Deteccao | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Detection Engineering: Guia Completo de Regras de Deteccao",
+        "description": "Como criar e manter regras de deteccao eficazes com SIGMA e MITRE ATT&CK.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.png",
+        "author": {"@type": "Organization", "name": "Inteligencia Brasil"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"}},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/detection-engineering-regras-deteccao/"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que e Detection Engineering?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Detection Engineering e a disciplina de criar, testar, implantar e manter regras de deteccao de ameacas de forma sistematica e escalavel. Aplica principios de engenharia de software (versionamento, testes, CI/CD) ao desenvolvimento de conteudo de deteccao para SIEM, EDR e outras ferramentas de seguranca."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que sao SIGMA rules?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "SIGMA e um formato generico e aberto para descrever regras de deteccao. Regras escritas em SIGMA podem ser convertidas para multiplas plataformas (Splunk, Elastic, Microsoft Sentinel, QRadar, etc.) usando conversores. Isso permite compartilhar deteccoes entre a comunidade e evitar vendor lock-in."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como medir a eficacia de regras de deteccao?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Metricas incluem: taxa de falsos positivos (alertas incorretos / total de alertas), taxa de deteccao (ameacas detectadas / total de ameacas no periodo), cobertura MITRE ATT&CK (% de tecnicas cobertas), tempo medio de deteccao (MTTD), e operational relevance (alertas que levaram a acoes). Testes com red team e BAS validam eficacia real."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Detection Engineering"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>
+        body{background:#0a1628}.navbar-custom{background:rgba(13,30,56,.95)!important;border-bottom:1px solid rgba(96,165,250,.1);backdrop-filter:blur(20px)}.navbar-custom.top-nav-collapse{background:rgba(10,22,40,.98)!important}.navbar-custom .nav-link{color:#F1F5F9!important}.navbar-custom .nav-link:hover{color:#60A5FA!important}.article-header{background:linear-gradient(135deg,#0D1E38 0%,#1a3a5c 50%,#0D1E38 100%);padding:140px 0 60px;position:relative}.article-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}.article-header h1{color:#F1F5F9;font-size:2.5rem;font-weight:700;margin-bottom:20px;line-height:1.3}.article-category{display:inline-block;background:linear-gradient(135deg,#3B82F6 0%,#1D4ED8 100%);color:#fff;padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px}.article-meta{display:flex;flex-wrap:wrap;gap:20px;color:#94A3B8;font-size:.95rem}.article-meta span{display:flex;align-items:center;gap:8px}.breadcrumb-nav{background:rgba(13,30,56,.8);padding:15px 0;border-bottom:1px solid rgba(96,165,250,.1)}.breadcrumb{background:0 0;margin:0;padding:0}.breadcrumb-item,.breadcrumb-item a{color:#94A3B8;font-size:.9rem}.breadcrumb-item a:hover{color:#60A5FA}.breadcrumb-item.active{color:#F1F5F9}.article-content{background:#0a1628;padding:60px 0}.article-body{max-width:800px;margin:0 auto}.article-body h2{color:#F1F5F9;font-size:1.8rem;margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid rgba(96,165,250,.3)}.article-body h3{color:#F1F5F9;font-size:1.4rem;margin:30px 0 15px}.article-body h4{color:#60A5FA;font-size:1.15rem;margin:25px 0 12px}.article-body p{color:#CBD5E1;font-size:1.1rem;line-height:1.8;margin-bottom:20px}.article-body a{color:#60A5FA;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s}.article-body a:hover{border-bottom-color:#60A5FA}.article-body strong{color:#60A5FA}.article-body ul,.article-body ol{color:#CBD5E1;margin-bottom:20px;padding-left:25px}.article-body li{margin-bottom:10px;line-height:1.7}.toc{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:25px;margin-bottom:40px}.toc h4{color:#F1F5F9;font-size:1.1rem;margin-bottom:15px;display:flex;align-items:center;gap:10px}.toc ul{list-style:none;padding:0;margin:0}.toc li{margin-bottom:8px}.toc a{color:#94A3B8;text-decoration:none;font-size:.95rem}.toc a:hover{color:#60A5FA}.concept-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border-radius:12px;padding:25px;margin:25px 0;border-left:4px solid #60A5FA}.stat-highlight{background:linear-gradient(145deg,rgba(59,130,246,.1) 0%,rgba(29,78,216,.05) 100%);border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:20px;margin:25px 0;text-align:center}.stat-highlight .number{font-size:2.5rem;font-weight:700;color:#3B82F6}.stat-highlight .label{color:#94A3B8;font-size:.95rem}.code-block{background:#0D1E38;border:1px solid rgba(96,165,250,.2);border-radius:8px;padding:20px;margin:20px 0;overflow-x:auto}.code-block pre{color:#60A5FA;font-family:'Fira Code',monospace;font-size:.85rem;margin:0;white-space:pre-wrap}.warning-box{background:linear-gradient(145deg,rgba(245,158,11,.1) 0%,rgba(217,119,6,.05) 100%);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:25px;margin:25px 0}.warning-box h4{color:#f59e0b;margin-top:0}.tip-box{background:linear-gradient(145deg,rgba(16,185,129,.1) 0%,rgba(5,150,105,.05) 100%);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:25px;margin:25px 0}.tip-box h4{color:#10B981;margin-top:0}.faq-section{margin:40px 0}.faq-item{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;margin-bottom:15px;overflow:hidden}.faq-question{padding:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:#F1F5F9;font-weight:600}.faq-question:hover{background:rgba(96,165,250,.05)}.faq-answer{padding:0 20px 20px;color:#CBD5E1;display:none}.faq-item.active .faq-answer{display:block}.faq-item.active .faq-icon{transform:rotate(180deg)}.faq-icon{transition:transform .3s;color:#60A5FA}.cta-box{background:linear-gradient(145deg,rgba(96,165,250,.1) 0%,rgba(59,130,246,.05) 100%);border:1px solid rgba(96,165,250,.3);border-radius:12px;padding:30px;margin:40px 0;text-align:center}.cta-box h3{color:#F1F5F9;margin-bottom:15px}.cta-box p{color:#94A3B8;margin-bottom:20px}.cta-btn{display:inline-block;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 100%);color:#fff;padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:600;transition:all .3s}.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(96,165,250,.4);color:#fff}.footer-section{background:#0D1E38;padding:60px 0 30px;border-top:1px solid rgba(96,165,250,.1)}.footer-about p,.footer-contact p,.footer-links a{color:#94A3B8}.footer-links h4,.footer-contact h4{color:#F1F5F9}.footer-bottom{border-top:1px solid rgba(96,165,250,.1);padding-top:20px;margin-top:40px;color:#64748B}.footer-bottom a{color:#94A3B8}.footer-social a{color:#60A5FA}@media (max-width:768px){.article-header h1{font-size:1.8rem}}
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">SOC</span>
+            <h1>Detection Engineering: Guia Completo de Regras de Deteccao</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Detection Engineering</li>
+            </ol>
+        </div>
+    </nav>
+
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h4><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h4>
+                    <ul>
+                        <li><a href="#oque">O que e Detection Engineering</a></li>
+                        <li><a href="#sigma">SIGMA Rules</a></li>
+                        <li><a href="#mitre">Usando MITRE ATT&CK</a></li>
+                        <li><a href="#ciclo">Ciclo de vida de regras</a></li>
+                        <li><a href="#detection-as-code">Detection as Code</a></li>
+                        <li><a href="#metricas">Metricas e melhoria continua</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="oque">O que e Detection Engineering</h2>
+
+                <p>
+                    <strong>Detection Engineering</strong> e a disciplina de criar, testar, implantar e manter logica de deteccao de ameacas de forma sistematica e escalavel. Aplica principios de engenharia de software - versionamento, code review, testes automatizados, CI/CD - ao desenvolvimento de regras de deteccao para SIEM, EDR e outras ferramentas de seguranca.
+                </p>
+
+                <div class="stat-highlight">
+                    <div class="number">3%</div>
+                    <div class="label">das regras de SIEM sao responsaveis por 90% dos alertas uteis em SOCs tipicos</div>
+                </div>
+
+                <p>
+                    Tradicionalmente, regras de deteccao eram criadas de forma ad-hoc, sem processo formal, documentacao ou testes. O resultado: acumulo de regras desatualizadas, altas taxas de falsos positivos, e gaps de cobertura desconhecidos. Detection Engineering traz rigor a esse processo.
+                </p>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-cogs" style="color:#60A5FA;margin-right:10px"></i> Detection Engineering vs tradicional</h4>
+                    <p><strong>Tradicional:</strong> "Vamos criar uma regra para detectar isso" → cria no SIEM → deploya → esquece</p>
+                    <p><strong>Engineering:</strong> Threat model → escreve regra em formato padrao → testa com dados simulados → code review → merge → CI/CD deploya → monitora performance → itera</p>
+                </div>
+
+                <h2 id="sigma">SIGMA Rules</h2>
+
+                <p>
+                    <strong>SIGMA</strong> e um formato generico e aberto para descrever regras de deteccao. E o "YARA para logs" - permite escrever regras uma vez e converte-las para multiplas plataformas.
+                </p>
+
+                <h3>Por que SIGMA?</h3>
+                <ul>
+                    <li><strong>Portabilidade:</strong> Mesma regra funciona em Splunk, Elastic, Sentinel, QRadar</li>
+                    <li><strong>Comunidade:</strong> Repositorio publico com 3000+ regras contribuidas</li>
+                    <li><strong>Padrao:</strong> Formato YAML legivel e versionavel</li>
+                    <li><strong>Integracao:</strong> Suportado por ferramentas de threat intel e TIPs</li>
+                </ul>
+
+                <h3>Estrutura de uma regra SIGMA</h3>
+                <div class="code-block">
+                    <pre>title: Suspicious PowerShell Download Cradle
+id: 3b6ab547-8ec2-4991-b9d2-2b06702a48d7
+status: experimental
+description: Detects PowerShell download cradles commonly used by malware
+references:
+    - https://attack.mitre.org/techniques/T1059/001/
+author: Inteligencia Brasil
+date: 2026/01/31
+modified: 2026/01/31
+tags:
+    - attack.execution
+    - attack.t1059.001
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_img:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+    selection_commands:
+        CommandLine|contains:
+            - 'IEX'
+            - 'Invoke-Expression'
+            - 'Invoke-WebRequest'
+            - 'Net.WebClient'
+            - 'DownloadString'
+            - 'DownloadFile'
+    condition: selection_img and selection_commands
+falsepositives:
+    - Legitimate administrative scripts
+    - Software deployment tools
+level: medium</pre>
+                </div>
+
+                <h3>Conversao para plataformas</h3>
+                <div class="code-block">
+                    <pre># Instalar sigma-cli
+pip install sigma-cli
+
+# Converter para Splunk
+sigma convert -t splunk -p sysmon rule.yml
+
+# Converter para Elastic
+sigma convert -t elasticsearch rule.yml
+
+# Converter para Microsoft Sentinel
+sigma convert -t microsoft365defender rule.yml</pre>
+                </div>
+
+                <h3>SIGMA Rule Repository</h3>
+                <p>
+                    O repositorio SigmaHQ/sigma no GitHub contem milhares de regras prontas para uso:
+                </p>
+                <ul>
+                    <li><strong>rules/windows/:</strong> Regras para eventos Windows, Sysmon, etc.</li>
+                    <li><strong>rules/linux/:</strong> Deteccoes para sistemas Linux</li>
+                    <li><strong>rules/cloud/:</strong> AWS, Azure, GCP</li>
+                    <li><strong>rules/network/:</strong> Zeek, Suricata</li>
+                    <li><strong>rules/application/:</strong> Web apps, databases</li>
+                </ul>
+
+                <h2 id="mitre">Usando MITRE ATT&CK</h2>
+
+                <p>
+                    MITRE ATT&CK fornece a taxonomia para organizar e medir cobertura de deteccao.
+                </p>
+
+                <h3>Mapeamento de regras</h3>
+                <p>
+                    Cada regra deve ser mapeada para tecnicas ATT&CK relevantes. Isso permite:
+                </p>
+                <ul>
+                    <li><strong>Medir cobertura:</strong> Visualizar quais tecnicas tem deteccao</li>
+                    <li><strong>Identificar gaps:</strong> Tecnicas sem cobertura sao prioridade</li>
+                    <li><strong>Priorizar desenvolvimento:</strong> Focar em tecnicas mais usadas por threat actors relevantes</li>
+                    <li><strong>Comunicar:</strong> Linguagem comum com red team, threat intel, lideranca</li>
+                </ul>
+
+                <h3>ATT&CK Navigator</h3>
+                <p>
+                    Ferramenta visual para mapear e visualizar cobertura:
+                </p>
+                <ul>
+                    <li>Criar layer com tecnicas cobertas (verde), parcialmente cobertas (amarelo), sem cobertura (vermelho)</li>
+                    <li>Comparar cobertura atual vs threat profile de adversarios relevantes</li>
+                    <li>Exportar para reports executivos</li>
+                </ul>
+
+                <h3>Priorizacao baseada em threat intel</h3>
+                <ol>
+                    <li>Identificar threat actors relevantes para seu setor/regiao</li>
+                    <li>Mapear TTPs usadas por esses atores</li>
+                    <li>Priorizar desenvolvimento de deteccoes para essas TTPs</li>
+                    <li>Validar com red team/purple team</li>
+                </ol>
+
+                <h2 id="ciclo">Ciclo de Vida de Regras</h2>
+
+                <h3>1. Ideacao</h3>
+                <ul>
+                    <li>Threat intel sobre novas tecnicas</li>
+                    <li>Gap analysis de cobertura ATT&CK</li>
+                    <li>Post-mortem de incidentes</li>
+                    <li>Requests do SOC ou IR team</li>
+                    <li>Red team findings</li>
+                </ul>
+
+                <h3>2. Desenvolvimento</h3>
+                <ul>
+                    <li>Escrever regra em formato SIGMA</li>
+                    <li>Documentar: descricao, referencias, falsos positivos esperados</li>
+                    <li>Definir severidade e tags ATT&CK</li>
+                    <li>Criar testes unitarios</li>
+                </ul>
+
+                <h3>3. Teste</h3>
+                <ul>
+                    <li><strong>Unit tests:</strong> Regra detecta evento sintetico esperado?</li>
+                    <li><strong>Backtest:</strong> Rodar contra logs historicos - quantos hits? Falsos positivos?</li>
+                    <li><strong>Attack simulation:</strong> Atomic Red Team, Caldera para gerar atividade real</li>
+                    <li><strong>Tuning:</strong> Ajustar para reduzir FPs antes de producao</li>
+                </ul>
+
+                <h3>4. Revisao</h3>
+                <ul>
+                    <li>Code review por outro detection engineer</li>
+                    <li>Verificar logica, performance, documentacao</li>
+                    <li>Aprovar merge para branch principal</li>
+                </ul>
+
+                <h3>5. Deploy</h3>
+                <ul>
+                    <li>CI/CD converte SIGMA para formato do SIEM</li>
+                    <li>Deploy automatico ou com aprovacao</li>
+                    <li>Periodo de observacao com severidade reduzida</li>
+                </ul>
+
+                <h3>6. Monitoramento</h3>
+                <ul>
+                    <li>Metricas de performance: volume de alertas, FP rate</li>
+                    <li>Feedback do SOC sobre qualidade</li>
+                    <li>Decay detection: regra parou de disparar? (pode indicar evasao)</li>
+                </ul>
+
+                <h3>7. Manutencao</h3>
+                <ul>
+                    <li>Tuning continuo baseado em feedback</li>
+                    <li>Atualizacao quando tecnica evolui</li>
+                    <li>Deprecacao de regras obsoletas</li>
+                </ul>
+
+                <h2 id="detection-as-code">Detection as Code</h2>
+
+                <p>
+                    Detection as Code aplica praticas de engenharia de software ao conteudo de deteccao:
+                </p>
+
+                <h3>Repositorio Git</h3>
+                <ul>
+                    <li>Todas as regras versionadas em Git</li>
+                    <li>Historico de mudancas auditavel</li>
+                    <li>Branches para desenvolvimento, staging, producao</li>
+                    <li>Pull requests para revisao</li>
+                </ul>
+
+                <h3>CI/CD Pipeline</h3>
+                <div class="code-block">
+                    <pre># Exemplo GitHub Actions
+name: Detection CI/CD
+on:
+  push:
+    paths: 'rules/**'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Validate SIGMA syntax
+        run: sigma check rules/
+      - name: Run unit tests
+        run: python test_rules.py
+      - name: Convert to Splunk
+        run: sigma convert -t splunk rules/ -o output/
+      - name: Deploy to SIEM
+        run: ./deploy_rules.sh
+        if: github.ref == 'refs/heads/main'</pre>
+                </div>
+
+                <h3>Testes automatizados</h3>
+                <ul>
+                    <li><strong>Syntax validation:</strong> SIGMA valida estrutura da regra</li>
+                    <li><strong>Unit tests:</strong> Eventos de teste que devem/nao devem disparar</li>
+                    <li><strong>Backtest automation:</strong> Rodar novas regras contra logs historicos</li>
+                    <li><strong>Performance tests:</strong> Medir impacto em recursos do SIEM</li>
+                </ul>
+
+                <h3>Ferramentas uteis</h3>
+                <ul>
+                    <li><strong>sigma-cli:</strong> CLI oficial para validacao e conversao</li>
+                    <li><strong>Uncoder.io:</strong> Conversor web para multiplas plataformas</li>
+                    <li><strong>DeTT&CT:</strong> Ferramenta para mapear e visualizar cobertura ATT&CK</li>
+                    <li><strong>Atomic Red Team:</strong> Biblioteca de testes para validar deteccoes</li>
+                    <li><strong>Chainsaw:</strong> Ferramenta para testar regras contra logs Windows</li>
+                </ul>
+
+                <h2 id="metricas">Metricas e Melhoria Continua</h2>
+
+                <h3>Metricas de qualidade</h3>
+                <ul>
+                    <li><strong>True Positive Rate:</strong> Alertas que eram ameacas reais</li>
+                    <li><strong>False Positive Rate:</strong> Alertas incorretos / total de alertas</li>
+                    <li><strong>Mean Time to Detect (MTTD):</strong> Tempo entre atividade e alerta</li>
+                    <li><strong>Detection Coverage:</strong> % de tecnicas ATT&CK com deteccao</li>
+                </ul>
+
+                <h3>Metricas operacionais</h3>
+                <ul>
+                    <li><strong>Alertas por regra:</strong> Identificar regras muito barulhentas</li>
+                    <li><strong>Regras nunca disparadas:</strong> Podem indicar problema ou ameaca inexistente</li>
+                    <li><strong>Tempo de tuning:</strong> Quanto tempo para estabilizar nova regra</li>
+                    <li><strong>Feedback do SOC:</strong> NPS ou rating das regras pelos analistas</li>
+                </ul>
+
+                <h3>Validacao continua</h3>
+                <ul>
+                    <li><strong>Purple team exercises:</strong> Validar que deteccoes funcionam contra ataques reais</li>
+                    <li><strong>BAS (Breach and Attack Simulation):</strong> Testes automatizados continuos</li>
+                    <li><strong>Atomic tests:</strong> Executar tecnicas especificas para validar regras</li>
+                </ul>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-lightbulb"></i> Detection Coverage vs Depth</h4>
+                    <p>Nao basta ter uma regra por tecnica (coverage). Avalie a profundidade: a regra detecta todas as variantes da tecnica? Atacantes frequentemente modificam TTPs ligeiramente para evadir deteccoes superficiais.</p>
+                </div>
+
+                <section class="faq-section" id="faq">
+                    <h2>Perguntas Frequentes</h2>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O que e Detection Engineering?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Detection Engineering e a disciplina de criar, testar, implantar e manter regras de deteccao de ameacas de forma sistematica e escalavel. Aplica principios de engenharia de software (versionamento, testes, CI/CD) ao desenvolvimento de conteudo de deteccao para SIEM, EDR e outras ferramentas de seguranca.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O que sao SIGMA rules?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>SIGMA e um formato generico e aberto para descrever regras de deteccao. Regras escritas em SIGMA podem ser convertidas para multiplas plataformas (Splunk, Elastic, Microsoft Sentinel, QRadar, etc.) usando conversores. Isso permite compartilhar deteccoes entre a comunidade e evitar vendor lock-in.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Como medir a eficacia de regras de deteccao?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Metricas incluem: taxa de falsos positivos (alertas incorretos / total de alertas), taxa de deteccao (ameacas detectadas / total de ameacas no periodo), cobertura MITRE ATT&CK (% de tecnicas cobertas), tempo medio de deteccao (MTTD), e operational relevance (alertas que levaram a acoes). Testes com red team e BAS validam eficacia real.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Por onde comecar com Detection Engineering?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Comece organizando regras existentes em repositorio Git. Adote SIGMA como formato padrao para novas regras. Implemente validacao basica no CI. Mapeie cobertura atual contra MITRE ATT&CK para identificar gaps. Estabeleca metricas de qualidade (FP rate, alertas por regra). Evolua para testes automatizados e purple team validation.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <h2>Conclusao</h2>
+
+                <p>
+                    Detection Engineering transforma a criacao de regras de deteccao de arte em ciencia. Ao aplicar principios de engenharia - versionamento, testes, CI/CD, metricas - organizacoes conseguem manter conteudo de deteccao de alta qualidade de forma escalavel.
+                </p>
+
+                <p>
+                    A adocao de SIGMA como formato padrao liberta as regras de vendor lock-in e permite aproveitar o conhecimento da comunidade. O mapeamento para MITRE ATT&CK fornece linguagem comum e visibilidade sobre gaps de cobertura.
+                </p>
+
+                <p>
+                    O resultado e um SOC mais eficaz: menos falsos positivos, mais ameacas detectadas, e capacidade de evoluir a deteccao continuamente conforme o cenario de ameacas muda.
+                </p>
+
+                <div class="cta-box">
+                    <h3>Evolua sua Capacidade de Deteccao</h3>
+                    <p>Precisa de ajuda para implementar Detection Engineering no seu SOC ou melhorar sua cobertura de deteccao? Entre em contato para uma consultoria especializada.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-about">
+                        <h4 style="color:#F1F5F9">Inteligencia Brasil</h4>
+                        <p>Consultoria especializada em ciberseguranca, gestao de riscos e conformidade para empresas brasileiras.</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul style="list-style:none;padding:0">
+                            <li><a href="../siem-implementacao-casos-uso/">SIEM</a></li>
+                            <li><a href="../xdr-extended-detection-response/">XDR</a></li>
+                            <li><a href="../soar-automacao-orquestracao/">SOAR</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul style="list-style:none;padding:0">
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.easing.min.js"></script>
+    <script>
+        $(window).on('scroll load',function(){$('.navbar').offset().top>20?$('.navbar-custom').addClass('top-nav-collapse'):$('.navbar-custom').removeClass('top-nav-collapse')});
+        $('a[href^="#"]').on('click',function(e){e.preventDefault();var t=$(this.getAttribute('href'));t.length&&$('html, body').animate({scrollTop:t.offset().top-100},500,'easeInOutExpo')});
+        document.querySelectorAll('.faq-question').forEach(function(q){q.addEventListener('click',function(){this.parentElement.classList.toggle('active')})});
+    </script>
+</body>
+</html>

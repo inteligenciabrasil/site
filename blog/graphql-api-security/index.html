@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Seguranca de APIs GraphQL: vulnerabilidades comuns, ataques de introspeccao, batching, DoS por query complexa, e melhores praticas de protecao. Guia completo para desenvolvedores e security teams.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="GraphQL security, seguranca GraphQL, API security, introspection attack, query batching, DoS GraphQL, rate limiting GraphQL, authorization GraphQL, OWASP API">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/graphql-api-security/">
+
+    <meta property="og:title" content="Seguranca de APIs GraphQL: Guia Completo de Vulnerabilidades e Protecao">
+    <meta property="og:description" content="Vulnerabilidades em GraphQL e como proteger suas APIs contra ataques.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/graphql-api-security/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-31T19:00:00-03:00">
+    <meta property="article:section" content="AppSec">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Seguranca de APIs GraphQL">
+    <meta name="twitter:description" content="Guia completo de vulnerabilidades e protecao para APIs GraphQL.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Seguranca de APIs GraphQL: Vulnerabilidades e Protecao | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Seguranca de APIs GraphQL: Guia Completo de Vulnerabilidades e Protecao",
+        "description": "Vulnerabilidades em GraphQL, ataques comuns e melhores praticas de seguranca.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.png",
+        "author": {"@type": "Organization", "name": "Inteligencia Brasil"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"}},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/graphql-api-security/"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "GraphQL e mais seguro que REST?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Nao necessariamente. GraphQL tem vulnerabilidades especificas (introspection, batching, deep queries) que REST nao tem. Porem, quando bem implementado com controles adequados, GraphQL pode ser tao seguro quanto REST. A diferenca esta na superficie de ataque e nos controles necessarios."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Devo desabilitar introspection em producao?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim, desabilitar introspection em producao e uma pratica recomendada. Introspection expoe todo o schema da API, facilitando reconhecimento por atacantes. Em desenvolvimento e staging, mantenha habilitado para debugging. Em producao, desabilite e documente a API separadamente."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como implementar rate limiting em GraphQL?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Rate limiting em GraphQL deve considerar complexidade da query, nao apenas requisicoes por segundo. Use query cost analysis para calcular custo de cada query baseado em profundidade, campos e resolvers. Limite por custo total, nao por numero de requests. Bibliotecas como graphql-cost-analysis e graphql-query-complexity ajudam."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "GraphQL Security"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>
+        body{background:#0a1628}.navbar-custom{background:rgba(13,30,56,.95)!important;border-bottom:1px solid rgba(96,165,250,.1);backdrop-filter:blur(20px)}.navbar-custom.top-nav-collapse{background:rgba(10,22,40,.98)!important}.navbar-custom .nav-link{color:#F1F5F9!important}.navbar-custom .nav-link:hover{color:#60A5FA!important}.article-header{background:linear-gradient(135deg,#0D1E38 0%,#1a3a5c 50%,#0D1E38 100%);padding:140px 0 60px;position:relative}.article-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}.article-header h1{color:#F1F5F9;font-size:2.5rem;font-weight:700;margin-bottom:20px;line-height:1.3}.article-category{display:inline-block;background:linear-gradient(135deg,#3B82F6 0%,#1D4ED8 100%);color:#fff;padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px}.article-meta{display:flex;flex-wrap:wrap;gap:20px;color:#94A3B8;font-size:.95rem}.article-meta span{display:flex;align-items:center;gap:8px}.breadcrumb-nav{background:rgba(13,30,56,.8);padding:15px 0;border-bottom:1px solid rgba(96,165,250,.1)}.breadcrumb{background:0 0;margin:0;padding:0}.breadcrumb-item,.breadcrumb-item a{color:#94A3B8;font-size:.9rem}.breadcrumb-item a:hover{color:#60A5FA}.breadcrumb-item.active{color:#F1F5F9}.article-content{background:#0a1628;padding:60px 0}.article-body{max-width:800px;margin:0 auto}.article-body h2{color:#F1F5F9;font-size:1.8rem;margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid rgba(96,165,250,.3)}.article-body h3{color:#F1F5F9;font-size:1.4rem;margin:30px 0 15px}.article-body h4{color:#60A5FA;font-size:1.15rem;margin:25px 0 12px}.article-body p{color:#CBD5E1;font-size:1.1rem;line-height:1.8;margin-bottom:20px}.article-body a{color:#60A5FA;text-decoration:none;border-bottom:1px solid transparent;transition:border-color .3s}.article-body a:hover{border-bottom-color:#60A5FA}.article-body strong{color:#60A5FA}.article-body ul,.article-body ol{color:#CBD5E1;margin-bottom:20px;padding-left:25px}.article-body li{margin-bottom:10px;line-height:1.7}.toc{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:25px;margin-bottom:40px}.toc h4{color:#F1F5F9;font-size:1.1rem;margin-bottom:15px;display:flex;align-items:center;gap:10px}.toc ul{list-style:none;padding:0;margin:0}.toc li{margin-bottom:8px}.toc a{color:#94A3B8;text-decoration:none;font-size:.95rem}.toc a:hover{color:#60A5FA}.concept-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border-radius:12px;padding:25px;margin:25px 0;border-left:4px solid #60A5FA}.stat-highlight{background:linear-gradient(145deg,rgba(59,130,246,.1) 0%,rgba(29,78,216,.05) 100%);border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:20px;margin:25px 0;text-align:center}.stat-highlight .number{font-size:2.5rem;font-weight:700;color:#3B82F6}.stat-highlight .label{color:#94A3B8;font-size:.95rem}.code-block{background:#0d1117;border:1px solid rgba(96,165,250,.2);border-radius:8px;padding:20px;margin:20px 0;overflow-x:auto;font-family:'Fira Code',monospace;font-size:.9rem;color:#e6edf3}.code-block .comment{color:#8b949e}.code-block .keyword{color:#ff7b72}.code-block .string{color:#a5d6ff}.code-block .function{color:#d2a8ff}.warning-box{background:linear-gradient(145deg,rgba(245,158,11,.1) 0%,rgba(217,119,6,.05) 100%);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:25px;margin:25px 0}.warning-box h4{color:#f59e0b;margin-top:0}.tip-box{background:linear-gradient(145deg,rgba(16,185,129,.1) 0%,rgba(5,150,105,.05) 100%);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:25px;margin:25px 0}.tip-box h4{color:#10B981;margin-top:0}.danger-box{background:linear-gradient(145deg,rgba(239,68,68,.1) 0%,rgba(220,38,38,.05) 100%);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:25px;margin:25px 0}.danger-box h4{color:#ef4444;margin-top:0}.attack-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:25px;margin:25px 0}.attack-card h4{color:#ef4444;margin-top:0}.faq-section{margin:40px 0}.faq-item{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;margin-bottom:15px;overflow:hidden}.faq-question{padding:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:#F1F5F9;font-weight:600}.faq-question:hover{background:rgba(96,165,250,.05)}.faq-answer{padding:0 20px 20px;color:#CBD5E1;display:none}.faq-item.active .faq-answer{display:block}.faq-item.active .faq-icon{transform:rotate(180deg)}.faq-icon{transition:transform .3s;color:#60A5FA}.cta-box{background:linear-gradient(145deg,rgba(96,165,250,.1) 0%,rgba(59,130,246,.05) 100%);border:1px solid rgba(96,165,250,.3);border-radius:12px;padding:30px;margin:40px 0;text-align:center}.cta-box h3{color:#F1F5F9;margin-bottom:15px}.cta-box p{color:#94A3B8;margin-bottom:20px}.cta-btn{display:inline-block;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 100%);color:#fff;padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:600;transition:all .3s}.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(96,165,250,.4);color:#fff}.author-box{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:30px;margin:50px 0;display:flex;gap:25px;align-items:center}.author-box img{width:80px;height:80px;border-radius:50%}.author-info h4{color:#F1F5F9;margin-bottom:5px}.author-info p{color:#94A3B8;font-size:.95rem;margin:0}.share-buttons{display:flex;gap:15px;margin:40px 0;flex-wrap:wrap}.share-btn{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:.9rem;font-weight:500;text-decoration:none;transition:all .3s}.share-btn.linkedin{background:#0077B5;color:#fff}.share-btn.twitter{background:#1DA1F2;color:#fff}.share-btn.whatsapp{background:#25D366;color:#fff}.share-btn:hover{transform:translateY(-2px);opacity:.9}.footer-section{background:#0D1E38;padding:60px 0 30px;border-top:1px solid rgba(96,165,250,.1)}.footer-about p,.footer-contact p,.footer-links a{color:#94A3B8}.footer-links h4,.footer-contact h4{color:#F1F5F9}.footer-bottom{border-top:1px solid rgba(96,165,250,.1);padding-top:20px;margin-top:40px;color:#64748B}.footer-bottom a{color:#94A3B8}.footer-social a{color:#60A5FA}@media (max-width:768px){.article-header h1{font-size:1.8rem}.author-box{flex-direction:column;text-align:center}}
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">AppSec</span>
+            <h1>Seguranca de APIs GraphQL: Vulnerabilidades e Protecao</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">GraphQL Security</li>
+            </ol>
+        </div>
+    </nav>
+
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h4><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h4>
+                    <ul>
+                        <li><a href="#introducao">Por que GraphQL requer atencao especial</a></li>
+                        <li><a href="#vulnerabilidades">Vulnerabilidades especificas de GraphQL</a></li>
+                        <li><a href="#introspection">Ataques de Introspection</a></li>
+                        <li><a href="#batching">Query Batching e Brute Force</a></li>
+                        <li><a href="#dos">DoS por Query Complexity</a></li>
+                        <li><a href="#authorization">Falhas de Authorization</a></li>
+                        <li><a href="#injection">Injection Attacks</a></li>
+                        <li><a href="#protecao">Melhores Praticas de Protecao</a></li>
+                        <li><a href="#ferramentas">Ferramentas de Seguranca</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introducao">Por que GraphQL Requer Atencao Especial</h2>
+
+                <p>
+                    <strong>GraphQL</strong> revolucionou o desenvolvimento de APIs ao permitir que clientes solicitem exatamente os dados necessarios em uma unica requisicao. Porem, essa flexibilidade introduz vetores de ataque unicos que nao existem em APIs REST tradicionais.
+                </p>
+
+                <div class="stat-highlight">
+                    <div class="number">68%</div>
+                    <div class="label">das APIs GraphQL em producao tem pelo menos uma vulnerabilidade critica (Salt Security, 2025)</div>
+                </div>
+
+                <p>
+                    Enquanto REST tem endpoints fixos com respostas predefinidas, GraphQL expoe um schema flexivel onde o cliente controla a estrutura da query. Isso inverte o modelo de seguranca tradicional e exige controles especificos.
+                </p>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-exclamation-circle" style="color:#60A5FA;margin-right:10px"></i> Diferencas de seguranca REST vs GraphQL</h4>
+                    <ul>
+                        <li><strong>REST:</strong> Endpoints fixos, facil aplicar rate limiting por rota, WAF tradicional funciona bem</li>
+                        <li><strong>GraphQL:</strong> Unico endpoint, queries dinamicas, WAF tradicional nao entende o payload</li>
+                        <li><strong>REST:</strong> Over-fetching e under-fetching controlados pelo servidor</li>
+                        <li><strong>GraphQL:</strong> Cliente define a query, pode solicitar grafos profundos e complexos</li>
+                        <li><strong>REST:</strong> Autorizacao por endpoint e metodo HTTP</li>
+                        <li><strong>GraphQL:</strong> Autorizacao deve ser por campo e tipo no schema</li>
+                    </ul>
+                </div>
+
+                <h2 id="vulnerabilidades">Vulnerabilidades Especificas de GraphQL</h2>
+
+                <p>
+                    O OWASP API Security Top 10 cobre vulnerabilidades gerais de API, mas GraphQL tem vetores adicionais que merecem atencao especifica:
+                </p>
+
+                <h3>Categorias de vulnerabilidades</h3>
+
+                <ul>
+                    <li><strong>Information Disclosure:</strong> Introspection, error messages verbosos, field suggestions</li>
+                    <li><strong>Denial of Service:</strong> Deep queries, circular fragments, batching abuse</li>
+                    <li><strong>Broken Authorization:</strong> IDOR em mutations, field-level permissions faltando</li>
+                    <li><strong>Injection:</strong> SQL injection via argumentos, NoSQL injection</li>
+                    <li><strong>Authentication Bypass:</strong> Mutations sensiveis sem autenticacao</li>
+                </ul>
+
+                <h2 id="introspection">Ataques de Introspection</h2>
+
+                <p>
+                    <strong>Introspection</strong> e um recurso do GraphQL que permite consultar o schema da API programaticamente. E extremamente util em desenvolvimento, mas em producao expoe toda a superficie de ataque.
+                </p>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones" style="margin-right:10px"></i> Ataque: Schema Enumeration</h4>
+                    <p>Atacante usa introspection para descobrir todos os tipos, campos, mutations e queries disponiveis.</p>
+                    <div class="code-block">
+                        <span class="comment"># Query de introspection padrao</span><br>
+                        {<br>
+                        &nbsp;&nbsp;__schema {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;types {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fields {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type { name }<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;mutationType {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fields { name }<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+
+                <p>
+                    Com o schema completo, o atacante identifica:
+                </p>
+
+                <ul>
+                    <li>Campos sensiveis (ssn, creditCard, password, internalId)</li>
+                    <li>Mutations administrativas (deleteUser, changeRole, resetPassword)</li>
+                    <li>Relacionamentos entre tipos para escalar acesso</li>
+                    <li>Campos deprecated que podem ter menos protecao</li>
+                </ul>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-shield-alt" style="margin-right:10px"></i> Protecao: Desabilitar Introspection em Producao</h4>
+                    <div class="code-block">
+                        <span class="comment">// Apollo Server</span><br>
+                        <span class="keyword">const</span> server = <span class="keyword">new</span> <span class="function">ApolloServer</span>({<br>
+                        &nbsp;&nbsp;typeDefs,<br>
+                        &nbsp;&nbsp;resolvers,<br>
+                        &nbsp;&nbsp;introspection: process.env.NODE_ENV !== <span class="string">'production'</span><br>
+                        });
+                    </div>
+                </div>
+
+                <h2 id="batching">Query Batching e Brute Force</h2>
+
+                <p>
+                    GraphQL permite enviar multiplas queries ou mutations em uma unica requisicao HTTP. Isso pode ser abusado para bypass de rate limiting e ataques de brute force.
+                </p>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones" style="margin-right:10px"></i> Ataque: Authentication Brute Force via Batching</h4>
+                    <p>Em vez de 1000 requisicoes HTTP, atacante envia 1 requisicao com 1000 mutations de login.</p>
+                    <div class="code-block">
+                        <span class="comment"># Uma requisicao HTTP, 1000 tentativas de login</span><br>
+                        [<br>
+                        &nbsp;&nbsp;{"query": "mutation { login(user:\"admin\", pass:\"123456\") { token }}"},<br>
+                        &nbsp;&nbsp;{"query": "mutation { login(user:\"admin\", pass:\"password\") { token }}"},<br>
+                        &nbsp;&nbsp;{"query": "mutation { login(user:\"admin\", pass:\"admin123\") { token }}"},<br>
+                        &nbsp;&nbsp;<span class="comment">// ... mais 997 tentativas</span><br>
+                        ]
+                    </div>
+                </div>
+
+                <h3>Alias Batching</h3>
+
+                <p>
+                    Mesmo sem array batching, aliases permitem executar a mesma operacao multiplas vezes:
+                </p>
+
+                <div class="code-block">
+                    <span class="comment"># Brute force com aliases em uma query</span><br>
+                    query {<br>
+                    &nbsp;&nbsp;attempt1: login(user: "admin", pass: "123456") { token }<br>
+                    &nbsp;&nbsp;attempt2: login(user: "admin", pass: "password") { token }<br>
+                    &nbsp;&nbsp;attempt3: login(user: "admin", pass: "admin123") { token }<br>
+                    &nbsp;&nbsp;<span class="comment"># ...</span><br>
+                    }
+                </div>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-shield-alt" style="margin-right:10px"></i> Protecao contra Batching</h4>
+                    <ul>
+                        <li>Limitar numero de queries por requisicao batch</li>
+                        <li>Limitar numero de aliases por query</li>
+                        <li>Rate limiting por operacao, nao por requisicao HTTP</li>
+                        <li>Detectar e bloquear padroes de batching suspeitos</li>
+                    </ul>
+                </div>
+
+                <h2 id="dos">DoS por Query Complexity</h2>
+
+                <p>
+                    A flexibilidade de GraphQL permite construir queries extremamente profundas ou circulares que consomem recursos massivos do servidor.
+                </p>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones" style="margin-right:10px"></i> Ataque: Deep Query DoS</h4>
+                    <p>Query que explora relacionamentos para criar carga exponencial.</p>
+                    <div class="code-block">
+                        query DeepDoS {<br>
+                        &nbsp;&nbsp;users {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;posts {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comments {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;posts {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comments {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;posts { <span class="comment"># continua...</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+
+                <h3>Query Cost Analysis</h3>
+
+                <p>
+                    A solucao e calcular o "custo" de cada query antes de executa-la e rejeitar queries que excedam um limite.
+                </p>
+
+                <div class="code-block">
+                    <span class="comment">// Exemplo de calculo de custo</span><br>
+                    <span class="keyword">const</span> costMap = {<br>
+                    &nbsp;&nbsp;User: 1,<br>
+                    &nbsp;&nbsp;Post: 2,<br>
+                    &nbsp;&nbsp;Comment: 1,<br>
+                    &nbsp;&nbsp;posts: { multiplier: 10 }, <span class="comment">// assume 10 posts por user</span><br>
+                    &nbsp;&nbsp;comments: { multiplier: 20 } <span class="comment">// assume 20 comments por post</span><br>
+                    };<br><br>
+                    <span class="comment">// Query acima: 1 * 10 * 20 * 1 * 10 * 20 * ... = REJEITADA</span>
+                </div>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-shield-alt" style="margin-right:10px"></i> Controles de Complexidade</h4>
+                    <ul>
+                        <li><strong>Max depth:</strong> Limitar profundidade maxima da query (ex: 7 niveis)</li>
+                        <li><strong>Query cost:</strong> Calcular custo total e limitar (ex: 1000 pontos)</li>
+                        <li><strong>Timeout:</strong> Abortar queries que excedem tempo limite</li>
+                        <li><strong>Pagination obrigatoria:</strong> Forcar limit/offset em listas</li>
+                    </ul>
+                </div>
+
+                <h2 id="authorization">Falhas de Authorization</h2>
+
+                <p>
+                    Em REST, autorizacao e tipicamente por endpoint. Em GraphQL, deve ser implementada no nivel de campo e resolver, o que e frequentemente esquecido.
+                </p>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones" style="margin-right:10px"></i> Ataque: IDOR via GraphQL</h4>
+                    <p>Usuario comum acessa dados de outros usuarios atraves de IDs previsiveveis.</p>
+                    <div class="code-block">
+                        <span class="comment"># Usuario logado com ID 123 acessa dados do usuario 456</span><br>
+                        query {<br>
+                        &nbsp;&nbsp;user(id: "456") {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;email<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ssn<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;creditCards {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cvv<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+
+                <h3>Field-Level Authorization</h3>
+
+                <p>
+                    Cada campo sensivel deve verificar permissoes no resolver:
+                </p>
+
+                <div class="code-block">
+                    <span class="keyword">const</span> resolvers = {<br>
+                    &nbsp;&nbsp;User: {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;ssn: (parent, args, context) => {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Apenas o proprio usuario ou admin</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> (context.user.id !== parent.id && !context.user.isAdmin) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw new</span> <span class="function">ForbiddenError</span>(<span class="string">'Not authorized'</span>);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> parent.ssn;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;}<br>
+                    };
+                </div>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Erro comum: Autorizacao apenas no Query Root</h4>
+                    <p>Verificar autorizacao apenas no resolver principal nao e suficiente. Atacantes podem acessar dados sensiveis atraves de relacionamentos:</p>
+                    <div class="code-block">
+                        <span class="comment"># Bypass: acessar SSN via relacionamento</span><br>
+                        query {<br>
+                        &nbsp;&nbsp;posts(userId: "456") { <span class="comment"># publico</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;author {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ssn <span class="comment"># deveria ser protegido!</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+
+                <h2 id="injection">Injection Attacks</h2>
+
+                <p>
+                    Argumentos de queries GraphQL podem ser vetores de injection se nao forem tratados adequadamente nos resolvers.
+                </p>
+
+                <div class="attack-card">
+                    <h4><i class="fas fa-skull-crossbones" style="margin-right:10px"></i> Ataque: SQL Injection via GraphQL</h4>
+                    <div class="code-block">
+                        query {<br>
+                        &nbsp;&nbsp;users(filter: "name = 'admin' OR 1=1--") {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;id<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;email<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;password_hash <span class="comment"># expoe todos os usuarios</span><br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+
+                <p>
+                    GraphQL nao previne injection automaticamente. Resolvers que constroem queries dinamicas sao vulneraveis.
+                </p>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-shield-alt" style="margin-right:10px"></i> Protecao contra Injection</h4>
+                    <ul>
+                        <li>Usar parametrizacao/prepared statements em todos os resolvers</li>
+                        <li>Validar e sanitizar inputs com schema validation</li>
+                        <li>Usar ORMs que escapam inputs automaticamente</li>
+                        <li>Implementar allowlist de campos ordenave/filteraveis</li>
+                    </ul>
+                </div>
+
+                <h2 id="protecao">Melhores Praticas de Protecao</h2>
+
+                <h3>1. Configuracao segura do servidor</h3>
+
+                <div class="code-block">
+                    <span class="comment">// Apollo Server com configuracao segura</span><br>
+                    <span class="keyword">const</span> server = <span class="keyword">new</span> <span class="function">ApolloServer</span>({<br>
+                    &nbsp;&nbsp;typeDefs,<br>
+                    &nbsp;&nbsp;resolvers,<br>
+                    &nbsp;&nbsp;introspection: <span class="keyword">false</span>, <span class="comment">// desabilitar em producao</span><br>
+                    &nbsp;&nbsp;playground: <span class="keyword">false</span>, <span class="comment">// desabilitar playground</span><br>
+                    &nbsp;&nbsp;debug: <span class="keyword">false</span>, <span class="comment">// nao expor stack traces</span><br>
+                    &nbsp;&nbsp;validationRules: [<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">depthLimit</span>(7), <span class="comment">// max depth</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">costLimit</span>({ maxCost: 1000 })<br>
+                    &nbsp;&nbsp;],<br>
+                    &nbsp;&nbsp;formatError: (err) => ({<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;message: err.message <span class="comment">// nao expor detalhes internos</span><br>
+                    &nbsp;&nbsp;})<br>
+                    });
+                </div>
+
+                <h3>2. Checklist de seguranca GraphQL</h3>
+
+                <ul>
+                    <li><strong>Introspection:</strong> Desabilitado em producao</li>
+                    <li><strong>Field suggestions:</strong> Desabilitado (expoe nomes de campos)</li>
+                    <li><strong>Query depth:</strong> Limitado (max 7-10 niveis)</li>
+                    <li><strong>Query cost:</strong> Calculado e limitado</li>
+                    <li><strong>Batching:</strong> Limitado ou desabilitado</li>
+                    <li><strong>Timeout:</strong> Configurado para queries</li>
+                    <li><strong>Rate limiting:</strong> Por operacao, nao por requisicao</li>
+                    <li><strong>Authentication:</strong> Verificada antes de resolver queries</li>
+                    <li><strong>Authorization:</strong> Implementada por campo</li>
+                    <li><strong>Input validation:</strong> Em todos os argumentos</li>
+                    <li><strong>Error handling:</strong> Mensagens genericas, sem stack traces</li>
+                    <li><strong>Logging:</strong> Queries, mutations e erros auditados</li>
+                </ul>
+
+                <h3>3. Persisted Queries</h3>
+
+                <p>
+                    Em vez de aceitar queries arbitrarias, aceite apenas queries pre-registradas identificadas por hash.
+                </p>
+
+                <div class="code-block">
+                    <span class="comment">// Cliente envia hash em vez da query completa</span><br>
+                    POST /graphql<br>
+                    {<br>
+                    &nbsp;&nbsp;"extensions": {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;"persistedQuery": {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"sha256Hash": "abc123..."<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                    &nbsp;&nbsp;}<br>
+                    }<br><br>
+                    <span class="comment">// Servidor executa query correspondente ao hash</span>
+                </div>
+
+                <p>
+                    Isso elimina inteiramente ataques de DoS por query complexity e injection, pois queries maliciosas nunca seriam registradas.
+                </p>
+
+                <h2 id="ferramentas">Ferramentas de Seguranca para GraphQL</h2>
+
+                <h3>Analise estatica e teste</h3>
+
+                <ul>
+                    <li><strong>GraphQL Cop:</strong> Auditoria automatizada de endpoints GraphQL</li>
+                    <li><strong>InQL (Burp Extension):</strong> Scanner GraphQL para pentest</li>
+                    <li><strong>graphql-shield:</strong> Middleware de permissoes para Node.js</li>
+                    <li><strong>graphql-armor:</strong> Plugin de seguranca com multiplas protecoes</li>
+                </ul>
+
+                <h3>WAF e API Gateway</h3>
+
+                <ul>
+                    <li><strong>AWS AppSync:</strong> GraphQL gerenciado com controles nativos</li>
+                    <li><strong>Apollo Router:</strong> Gateway com rate limiting e cost analysis</li>
+                    <li><strong>Inigo:</strong> GraphQL-native security e observability</li>
+                </ul>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>WAF tradicional protege GraphQL?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Parcialmente. WAFs tradicionais podem detectar payloads maliciosos genericos (SQLi, XSS) nos argumentos, mas nao entendem a semantica GraphQL. Ataques como deep queries, batching abuse e introspection passam despercebidos. Use WAF GraphQL-aware ou controles no servidor.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Como fazer rate limiting efetivo em GraphQL?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Rate limiting tradicional por IP/requisicao nao funciona bem devido ao batching. Implemente: (1) limite por operacao executada, (2) limite por custo total de query, (3) limite por usuario autenticado, (4) limite de queries batch por requisicao.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Persisted queries eliminam todos os riscos?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Persisted queries eliminam ataques de DoS por query complexity e injection de queries maliciosas. Porem, vulnerabilidades de autorizacao (IDOR), injection em argumentos e outros problemas de logica de negocio permanecem. E uma camada importante, mas nao suficiente sozinha.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="conclusao">Conclusao</h2>
+
+                <p>
+                    APIs GraphQL oferecem flexibilidade poderosa, mas essa flexibilidade vem com responsabilidade de seguranca aumentada. A superficie de ataque e diferente de REST, e controles tradicionais nao sao suficientes.
+                </p>
+
+                <p>
+                    Priorize: desabilitar introspection em producao, implementar query cost analysis, autorizacao field-level, e considerar persisted queries para ambientes de alta seguranca. Teste suas APIs GraphQL com ferramentas especificas como GraphQL Cop e InQL.
+                </p>
+
+                <p>
+                    A seguranca de GraphQL e uma area em evolucao. Mantenha-se atualizado com as recomendacoes do <a href="https://owasp.org" target="_blank" rel="noopener">OWASP</a> e considere GraphQL security como parte do seu programa de <a href="../sbom-software-bill-of-materials/">seguranca de software</a>.
+                </p>
+
+                <div class="cta-box">
+                    <h3>Precisa Avaliar a Seguranca das suas APIs GraphQL?</h3>
+                    <p>Oferecemos pentest especializado em GraphQL, code review e implementacao de controles de seguranca.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/graphql-api-security/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/graphql-api-security/&text=Seguranca de APIs GraphQL" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Seguranca de APIs GraphQL https://inteligenciabrasil.seg.br/blog/graphql-api-security/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em Application Security e Seguranca de APIs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
+                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../sbom-software-bill-of-materials/">SBOM</a></li>
+                            <li><a href="../seguranca-llm-genai-prompt-injection/">LLM Security</a></li>
+                            <li><a href="../detection-engineering-regras-deteccao/">Detection Engineering</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.easing.min.js"></script>
+    <script>
+        $(window).on('scroll load',function(){$('.navbar').offset().top>20?$('.navbar-custom').addClass('top-nav-collapse'):$('.navbar-custom').removeClass('top-nav-collapse')});
+        $('a[href^="#"]').on('click',function(e){e.preventDefault();var t=$(this.getAttribute('href'));t.length&&$('html, body').animate({scrollTop:t.offset().top-100},500,'easeInOutExpo')});
+        document.querySelectorAll('.faq-question').forEach(function(q){q.addEventListener('click',function(){this.parentElement.classList.toggle('active')})});
+    </script>
+</body>
+</html>

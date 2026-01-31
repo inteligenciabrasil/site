@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Purple Teaming na Pratica: como conduzir exercicios colaborativos entre red team e blue team para melhorar deteccao, validar controles e acelerar a maturidade de seguranca.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="purple team, purple teaming, red team, blue team, exercicios seguranca, validacao controles, MITRE ATT&CK, atomic red team, adversary simulation">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/purple-teaming-pratica/">
+
+    <meta property="og:title" content="Purple Teaming na Pratica: Guia Completo">
+    <meta property="og:description" content="Como conduzir exercicios de purple team para melhorar deteccao e defesa.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/purple-teaming-pratica/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-31T20:00:00-03:00">
+    <meta property="article:section" content="Offensive Security">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Purple Teaming na Pratica">
+    <meta name="twitter:description" content="Exercicios colaborativos de seguranca ofensiva e defensiva.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Purple Teaming na Pratica: Guia Completo | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Purple Teaming na Pratica: Guia Completo",
+        "description": "Como conduzir exercicios de purple team para melhorar deteccao e defesa.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.png",
+        "author": {"@type": "Organization", "name": "Inteligencia Brasil"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"}},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/purple-teaming-pratica/"}
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que e Purple Teaming?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Purple Teaming e uma abordagem colaborativa onde red team (atacantes) e blue team (defensores) trabalham juntos em tempo real. Diferente de red team tradicional onde o objetivo e passar despercebido, no purple team o red executa tecnicas e o blue observa, ajustando deteccoes imediatamente. O foco e maximizar aprendizado e melhoria de controles."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual a diferenca entre Purple Team e Red Team?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Red Team tradicional opera em modo adversarial - tenta comprometer a organizacao sem ser detectado, simulando atacante real. Purple Team e colaborativo - red e blue trabalham juntos, compartilhando informacoes em tempo real. Red Team testa se voce detecta; Purple Team ensina como detectar. Ambos tem valor; Purple Team e mais eficiente para melhorar deteccoes rapidamente."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais ferramentas usar para Purple Teaming?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ferramentas populares incluem: Atomic Red Team (biblioteca de testes por tecnica ATT&CK), MITRE Caldera (plataforma de adversary emulation), Infection Monkey (simulacao de propagacao), AttackIQ/SafeBreach (BAS comercial), e Cobalt Strike/Sliver para emulacao de C2. Para tracking, use ATT&CK Navigator para visualizar cobertura."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <style>
+        body{background:#0a1628}.navbar-custom{background:rgba(13,30,56,.95)!important;border-bottom:1px solid rgba(96,165,250,.1);backdrop-filter:blur(20px)}.navbar-custom.top-nav-collapse{background:rgba(10,22,40,.98)!important}.navbar-custom .nav-link{color:#F1F5F9!important}.navbar-custom .nav-link:hover{color:#60A5FA!important}.article-header{background:linear-gradient(135deg,#0D1E38 0%,#1a3a5c 50%,#0D1E38 100%);padding:140px 0 60px;position:relative}.article-header h1{color:#F1F5F9;font-size:2.5rem;font-weight:700;margin-bottom:20px;line-height:1.3}.article-category{display:inline-block;background:linear-gradient(135deg,#8B5CF6 0%,#6D28D9 100%);color:#fff;padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px}.article-meta{display:flex;flex-wrap:wrap;gap:20px;color:#94A3B8;font-size:.95rem}.breadcrumb-nav{background:rgba(13,30,56,.8);padding:15px 0;border-bottom:1px solid rgba(96,165,250,.1)}.breadcrumb{background:0 0;margin:0;padding:0}.breadcrumb-item,.breadcrumb-item a{color:#94A3B8;font-size:.9rem}.breadcrumb-item a:hover{color:#60A5FA}.breadcrumb-item.active{color:#F1F5F9}.article-content{background:#0a1628;padding:60px 0}.article-body{max-width:800px;margin:0 auto}.article-body h2{color:#F1F5F9;font-size:1.8rem;margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid rgba(139,92,246,.3)}.article-body h3{color:#F1F5F9;font-size:1.4rem;margin:30px 0 15px}.article-body p{color:#CBD5E1;font-size:1.1rem;line-height:1.8;margin-bottom:20px}.article-body strong{color:#A78BFA}.article-body ul,.article-body ol{color:#CBD5E1;margin-bottom:20px;padding-left:25px}.article-body li{margin-bottom:10px;line-height:1.7}.toc{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(139,92,246,.2);border-radius:12px;padding:25px;margin-bottom:40px}.toc h4{color:#F1F5F9;font-size:1.1rem;margin-bottom:15px}.toc ul{list-style:none;padding:0;margin:0}.toc li{margin-bottom:8px}.toc a{color:#94A3B8;text-decoration:none;font-size:.95rem}.toc a:hover{color:#A78BFA}.concept-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border-radius:12px;padding:25px;margin:25px 0;border-left:4px solid #8B5CF6}.red-card{background:linear-gradient(145deg,rgba(239,68,68,.1) 0%,rgba(185,28,28,.05) 100%);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:20px;margin:15px 0}.red-card h4{color:#EF4444;margin-top:0}.blue-card{background:linear-gradient(145deg,rgba(59,130,246,.1) 0%,rgba(29,78,216,.05) 100%);border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:20px;margin:15px 0}.blue-card h4{color:#3B82F6;margin-top:0}.purple-card{background:linear-gradient(145deg,rgba(139,92,246,.1) 0%,rgba(109,40,217,.05) 100%);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:20px;margin:15px 0}.purple-card h4{color:#8B5CF6;margin-top:0}.comparison-table{width:100%;border-collapse:collapse;margin:25px 0}.comparison-table th,.comparison-table td{padding:12px 15px;text-align:left;border:1px solid rgba(139,92,246,.2)}.comparison-table th{background:rgba(139,92,246,.1);color:#F1F5F9;font-weight:600}.comparison-table td{color:#CBD5E1}.faq-section{margin:40px 0}.faq-item{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(139,92,246,.2);border-radius:12px;margin-bottom:15px;overflow:hidden}.faq-question{padding:20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:#F1F5F9;font-weight:600}.faq-question:hover{background:rgba(139,92,246,.05)}.faq-answer{padding:0 20px 20px;color:#CBD5E1;display:none}.faq-item.active .faq-answer{display:block}.faq-item.active .faq-icon{transform:rotate(180deg)}.faq-icon{transition:transform .3s;color:#8B5CF6}.cta-box{background:linear-gradient(145deg,rgba(139,92,246,.1) 0%,rgba(109,40,217,.05) 100%);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:30px;margin:40px 0;text-align:center}.cta-box h3{color:#F1F5F9;margin-bottom:15px}.cta-box p{color:#94A3B8;margin-bottom:20px}.cta-btn{display:inline-block;background:linear-gradient(135deg,#8B5CF6 0%,#6D28D9 100%);color:#fff;padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:600;transition:all .3s}.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(139,92,246,.4);color:#fff}.footer-section{background:#0D1E38;padding:60px 0 30px;border-top:1px solid rgba(96,165,250,.1)}.footer-about p,.footer-contact p,.footer-links a{color:#94A3B8}.footer-links h4,.footer-contact h4{color:#F1F5F9}.footer-bottom{border-top:1px solid rgba(96,165,250,.1);padding-top:20px;margin-top:40px;color:#64748B}@media (max-width:768px){.article-header h1{font-size:1.8rem}}
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Offensive Security</span>
+            <h1>Purple Teaming na Pratica: Guia Completo</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Purple Teaming</li>
+            </ol>
+        </div>
+    </nav>
+
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h4><i class="fas fa-list" style="color:#8B5CF6"></i> Neste artigo</h4>
+                    <ul>
+                        <li><a href="#oque">O que e Purple Teaming</a></li>
+                        <li><a href="#diferenca">Purple vs Red vs Blue</a></li>
+                        <li><a href="#beneficios">Beneficios</a></li>
+                        <li><a href="#metodologia">Metodologia de exercicio</a></li>
+                        <li><a href="#ferramentas">Ferramentas</a></li>
+                        <li><a href="#metricas">Metricas de sucesso</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="oque">O que e Purple Teaming</h2>
+
+                <p>
+                    <strong>Purple Teaming</strong> e uma abordagem colaborativa de testes de seguranca onde atacantes (red team) e defensores (blue team) trabalham juntos em tempo real. O nome vem da combinacao das cores: vermelho (red) + azul (blue) = roxo (purple).
+                </p>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-users" style="color:#8B5CF6;margin-right:10px"></i> A essencia do Purple Team</h4>
+                    <p>Em vez de red team tentar passar despercebido e blue team tentar detectar, ambos os times compartilham informacoes em tempo real. Red executa uma tecnica, blue observa o que acontece nos logs/alertas, e juntos ajustam deteccoes imediatamente.</p>
+                </div>
+
+                <p>
+                    O objetivo nao e "ganhar" (red comprometer ou blue detectar), mas maximizar o aprendizado e a melhoria dos controles de seguranca.
+                </p>
+
+                <h2 id="diferenca">Purple vs Red vs Blue</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th style="color:#EF4444">Red Team</th>
+                            <th style="color:#3B82F6">Blue Team</th>
+                            <th style="color:#8B5CF6">Purple Team</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Objetivo</strong></td>
+                            <td>Comprometer alvos</td>
+                            <td>Detectar e responder</td>
+                            <td>Melhorar deteccao</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Modo</strong></td>
+                            <td>Adversarial</td>
+                            <td>Defensivo</td>
+                            <td>Colaborativo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compartilha info?</strong></td>
+                            <td>Nao (stealth)</td>
+                            <td>N/A</td>
+                            <td>Sim, em tempo real</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Duracao tipica</strong></td>
+                            <td>Semanas</td>
+                            <td>Continuo</td>
+                            <td>Dias (por exercicio)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Output</strong></td>
+                            <td>Relatorio de comprometimento</td>
+                            <td>Alertas e resposta</td>
+                            <td>Deteccoes melhoradas</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="red-card">
+                    <h4><i class="fas fa-skull-crossbones"></i> Quando usar Red Team</h4>
+                    <p>Para testar se a organizacao detecta um atacante real operando em modo stealth. Valida postura geral de seguranca. Util quando blue team ja esta maduro e quer teste "realista".</p>
+                </div>
+
+                <div class="blue-card">
+                    <h4><i class="fas fa-shield-alt"></i> Quando usar Blue Team puro</h4>
+                    <p>Operacoes do dia-a-dia: monitoramento, resposta a incidentes, threat hunting. Blue team e a defesa continua; red/purple sao exercicios pontuais.</p>
+                </div>
+
+                <div class="purple-card">
+                    <h4><i class="fas fa-hands-helping"></i> Quando usar Purple Team</h4>
+                    <p>Para melhorar rapidamente capacidades de deteccao. Quando blue team precisa aprender como ataques aparecem nos logs. Quando ha gaps conhecidos de cobertura ATT&CK. Mais eficiente que red team para desenvolver deteccoes.</p>
+                </div>
+
+                <h2 id="beneficios">Beneficios do Purple Teaming</h2>
+
+                <h3>1. Aprendizado acelerado</h3>
+                <p>Blue team ve exatamente como cada tecnica aparece nos logs, em tempo real. Nao precisa esperar semanas pelo relatorio do red team.</p>
+
+                <h3>2. Feedback loop imediato</h3>
+                <p>Se uma tecnica nao foi detectada, a regra pode ser criada ou ajustada na hora. O ciclo de melhoria e de minutos, nao semanas.</p>
+
+                <h3>3. Eficiencia</h3>
+                <p>Em um dia de purple team, e possivel testar e melhorar deteccao de dezenas de tecnicas. Red team tradicional pode levar semanas para o mesmo resultado.</p>
+
+                <h3>4. Conhecimento compartilhado</h3>
+                <p>Red team entende as limitacoes reais de deteccao. Blue team entende como atacantes pensam e operam. Ambos melhoram.</p>
+
+                <h3>5. Documentacao</h3>
+                <p>Cada exercicio gera documentacao de tecnicas testadas, artefatos gerados, deteccoes que funcionaram/falharam.</p>
+
+                <h2 id="metodologia">Metodologia de Exercicio</h2>
+
+                <h3>Fase 1: Planejamento</h3>
+                <ul>
+                    <li>Definir escopo: quais tecnicas ATT&CK testar?</li>
+                    <li>Priorizar baseado em: threat intel, gaps de cobertura, riscos do negocio</li>
+                    <li>Preparar ambiente: maquinas de teste, usuarios, acessos</li>
+                    <li>Definir participantes: red team, blue team, facilitador</li>
+                    <li>Agendar: sessoes de 2-4 horas funcionam bem</li>
+                </ul>
+
+                <h3>Fase 2: Execucao</h3>
+                <p>Para cada tecnica:</p>
+                <ol>
+                    <li><strong>Red anuncia:</strong> "Vou executar T1059.001 - PowerShell"</li>
+                    <li><strong>Blue prepara:</strong> Abre SIEM, dashboards relevantes</li>
+                    <li><strong>Red executa:</strong> Roda a tecnica no ambiente de teste</li>
+                    <li><strong>Blue observa:</strong> O que apareceu? Houve alerta? Quais logs?</li>
+                    <li><strong>Discussao:</strong> Por que detectou/nao detectou? O que melhorar?</li>
+                    <li><strong>Acao:</strong> Criar/ajustar deteccao se necessario</li>
+                    <li><strong>Re-teste:</strong> Red executa novamente para validar nova deteccao</li>
+                    <li><strong>Documentar:</strong> Resultado, artefatos, deteccoes criadas</li>
+                </ol>
+
+                <h3>Fase 3: Pos-exercicio</h3>
+                <ul>
+                    <li>Consolidar documentacao</li>
+                    <li>Atualizar matriz de cobertura ATT&CK</li>
+                    <li>Criar tickets para melhorias que requerem mais trabalho</li>
+                    <li>Compartilhar learnings com time amplo</li>
+                    <li>Planejar proximo exercicio baseado em gaps identificados</li>
+                </ul>
+
+                <h2 id="ferramentas">Ferramentas para Purple Teaming</h2>
+
+                <h3>Execucao de tecnicas</h3>
+                <ul>
+                    <li><strong>Atomic Red Team:</strong> Biblioteca de testes atomicos por tecnica ATT&CK. Perfeito para purple team - testes pequenos e focados.</li>
+                    <li><strong>MITRE Caldera:</strong> Plataforma de adversary emulation automatizada</li>
+                    <li><strong>Infection Monkey:</strong> Simulacao de propagacao e movimentacao lateral</li>
+                    <li><strong>Sliver/Cobalt Strike:</strong> C2 frameworks para emulacao realista</li>
+                </ul>
+
+                <h3>Tracking e documentacao</h3>
+                <ul>
+                    <li><strong>ATT&CK Navigator:</strong> Visualizar cobertura de tecnicas</li>
+                    <li><strong>Vectr:</strong> Plataforma para tracking de purple team exercises</li>
+                    <li><strong>PlexTrac:</strong> Documentacao de testes e findings</li>
+                </ul>
+
+                <h3>Exemplo: Atomic Red Team</h3>
+                <p>Executar teste para T1059.001 (PowerShell):</p>
+                <div class="concept-card" style="font-family:monospace;font-size:.9rem">
+                    # Instalar<br>
+                    Install-Module -Name AtomicRedTeam<br><br>
+                    # Listar testes para uma tecnica<br>
+                    Invoke-AtomicTest T1059.001 -ShowDetails<br><br>
+                    # Executar teste especifico<br>
+                    Invoke-AtomicTest T1059.001 -TestNumbers 1
+                </div>
+
+                <h2 id="metricas">Metricas de Sucesso</h2>
+
+                <h3>Metricas de cobertura</h3>
+                <ul>
+                    <li><strong>Tecnicas testadas:</strong> Numero de tecnicas ATT&CK exercitadas</li>
+                    <li><strong>Detection rate:</strong> % de tecnicas detectadas antes vs depois</li>
+                    <li><strong>Cobertura ATT&CK:</strong> % de tecnicas relevantes com deteccao</li>
+                </ul>
+
+                <h3>Metricas de melhoria</h3>
+                <ul>
+                    <li><strong>Deteccoes criadas:</strong> Novas regras resultantes do exercicio</li>
+                    <li><strong>Deteccoes melhoradas:</strong> Regras existentes ajustadas</li>
+                    <li><strong>Tempo para deteccao:</strong> MTTD antes vs depois</li>
+                </ul>
+
+                <h3>Metricas de processo</h3>
+                <ul>
+                    <li><strong>Exercicios realizados:</strong> Frequencia de purple team</li>
+                    <li><strong>Participacao:</strong> Engajamento de red e blue</li>
+                    <li><strong>Follow-up:</strong> % de acoes completadas pos-exercicio</li>
+                </ul>
+
+                <section class="faq-section" id="faq">
+                    <h2>Perguntas Frequentes</h2>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O que e Purple Teaming?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Purple Teaming e uma abordagem colaborativa onde red team (atacantes) e blue team (defensores) trabalham juntos em tempo real. Diferente de red team tradicional onde o objetivo e passar despercebido, no purple team o red executa tecnicas e o blue observa, ajustando deteccoes imediatamente.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Qual a diferenca entre Purple Team e Red Team?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Red Team tradicional opera em modo adversarial - tenta comprometer sem ser detectado. Purple Team e colaborativo - red e blue trabalham juntos, compartilhando informacoes em tempo real. Red Team testa se voce detecta; Purple Team ensina como detectar.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Preciso de red team interno para purple teaming?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nao necessariamente. Purple team pode ser feito com: consultorias externas de red team, ferramentas automatizadas (Atomic Red Team, Caldera), ou ate mesmo o proprio blue team executando tecnicas documentadas. O importante e ter alguem executando e alguem observando a deteccao.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <h2>Conclusao</h2>
+
+                <p>
+                    Purple Teaming e a forma mais eficiente de melhorar capacidades de deteccao. Ao combinar a expertise ofensiva do red team com o conhecimento defensivo do blue team em um exercicio colaborativo, organizacoes aceleram dramaticamente sua maturidade de seguranca.
+                </p>
+
+                <p>
+                    Comece simples: selecione 5-10 tecnicas prioritarias, use Atomic Red Team para executar, e trabalhe junto com o SOC para melhorar deteccoes. Um dia de purple team pode gerar mais melhorias de deteccao que semanas de operacao normal.
+                </p>
+
+                <div class="cta-box">
+                    <h3>Realize Purple Team na sua Organizacao</h3>
+                    <p>Precisa de ajuda para conduzir exercicios de purple team ou desenvolver capacidades internas? Entre em contato para uma consultoria especializada.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-about">
+                        <h4 style="color:#F1F5F9">Inteligencia Brasil</h4>
+                        <p>Consultoria especializada em ciberseguranca, gestao de riscos e conformidade para empresas brasileiras.</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul style="list-style:none;padding:0">
+                            <li><a href="../red-team-blue-team-purple-team/">Red vs Blue Team</a></li>
+                            <li><a href="../detection-engineering-regras-deteccao/">Detection Engineering</a></li>
+                            <li><a href="../pentest-frameworks-e-metodologias/">Pentest</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul style="list-style:none;padding:0">
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.easing.min.js"></script>
+    <script>
+        $(window).on('scroll load',function(){$('.navbar').offset().top>20?$('.navbar-custom').addClass('top-nav-collapse'):$('.navbar-custom').removeClass('top-nav-collapse')});
+        document.querySelectorAll('.faq-question').forEach(function(q){q.addEventListener('click',function(){this.parentElement.classList.toggle('active')})});
+    </script>
+</body>
+</html>
