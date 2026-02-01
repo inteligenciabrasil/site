@@ -5,27 +5,27 @@
     <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Guia pratico de Resposta a Incidentes de seguranca: fases do processo, construcao de CSIRT, playbooks, ferramentas e metricas. Framework NIST e SANS aplicados.">
+    <meta name="description" content="Guia prático de Resposta a Incidentes de segurança: fases do processo, construção de CSIRT, playbooks, ferramentas e métricas. Framework NIST e SANS aplicados.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="keywords" content="resposta a incidentes, incident response, CSIRT, plano de resposta, NIST incident response, SANS incident handling, playbook seguranca, forense digital, ciberseguranca">
+    <meta name="keywords" content="resposta a incidentes, incident response, CSIRT, plano de resposta, NIST incident response, SANS incident handling, playbook segurança, forense digital, cibersegurança">
     <meta name="author" content="Inteligencia Brasil">
     <meta name="theme-color" content="#0D1E38">
     <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/resposta-incidentes-guia-pratico/">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Resposta a Incidentes: Guia Pratico para Organizacoes">
+    <meta property="og:title" content="Resposta a Incidentes: Guia Prático para Organizações">
     <meta property="og:description" content="Como construir capacidade de resposta a incidentes: fases, equipe, playbooks e ferramentas essenciais.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/resposta-incidentes-guia-pratico/">
     <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
     <meta property="og:locale" content="pt_BR">
-    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="og:site_name" content="Inteligência Brasil">
     <meta property="article:published_time" content="2026-01-30T10:00:00-03:00">
-    <meta property="article:section" content="Ciberseguranca">
+    <meta property="article:section" content="Cibersegurança">
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Resposta a Incidentes: Guia Pratico">
+    <meta name="twitter:title" content="Resposta a Incidentes: Guia Prático">
     <meta name="twitter:description" content="Framework completo para construir capacidade de incident response.">
     <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
 
@@ -33,18 +33,18 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
 
-    <title>Resposta a Incidentes: Guia Pratico para Organizacoes | Inteligencia Brasil</title>
+    <title>Resposta a Incidentes: Guia Prático para Organizações | Inteligência Brasil</title>
 
     <!-- Schema.org Article -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Resposta a Incidentes: Guia Pratico para Organizacoes",
-        "description": "Guia pratico de Resposta a Incidentes de seguranca: fases do processo, construcao de CSIRT, playbooks, ferramentas e metricas.",
+        "headline": "Resposta a Incidentes: Guia Prático para Organizações",
+        "description": "Guia prático de Resposta a Incidentes de segurança: fases do processo, construção de CSIRT, playbooks, ferramentas e métricas.",
         "image": "https://inteligenciabrasil.seg.br/img/og-image.png",
-        "author": { "@type": "Organization", "name": "Inteligencia Brasil" },
-        "publisher": { "@type": "Organization", "name": "Inteligencia Brasil", "logo": { "@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png" } },
+        "author": { "@type": "Organization", "name": "Inteligência Brasil" },
+        "publisher": { "@type": "Organization", "name": "Inteligência Brasil", "logo": { "@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png" } },
         "datePublished": "2026-01-30",
         "dateModified": "2026-01-30"
     }
@@ -58,10 +58,10 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Qual a diferenca entre CSIRT e SOC?",
+                "name": "Qual a diferença entre CSIRT e SOC?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "SOC (Security Operations Center) foca em monitoramento continuo e deteccao de ameacas. CSIRT (Computer Security Incident Response Team) e acionado quando ha um incidente confirmado, liderando investigacao, contencao e recuperacao. Organizacoes maiores tem ambos; menores podem combinar funcoes ou terceirizar."
+                    "text": "SOC (Security Operations Center) foca em monitoramento contínuo e detecção de ameaças. CSIRT (Computer Security Incident Response Team) é acionado quando há um incidente confirmado, liderando investigação, contenção e recuperação. Organizações maiores têm ambos; menores podem combinar funções ou terceirizar."
                 }
             },
             {
@@ -69,15 +69,15 @@
                 "name": "Preciso de um plano de resposta a incidentes por escrito?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim. Um plano documentado garante resposta consistente mesmo sob pressao, atende requisitos regulatorios (LGPD, PCI DSS, ISO 27001), define responsabilidades claras e serve como base para treinamento. Sem plano, a resposta e improvisada e geralmente mais lenta e custosa."
+                    "text": "Sim. Um plano documentado garante resposta consistente mesmo sob pressão, atende requisitos regulatórios (LGPD, PCI DSS, ISO 27001), define responsabilidades claras e serve como base para treinamento. Sem plano, a resposta é improvisada e geralmente mais lenta e custosa."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Quais as metricas mais importantes de incident response?",
+                "name": "Quais as métricas mais importantes de incident response?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "MTTD (Mean Time to Detect): tempo medio para identificar um incidente. MTTR (Mean Time to Respond/Recover): tempo para conter e recuperar. Outras metricas incluem numero de incidentes por severidade, incidentes recorrentes, e custo medio por incidente. Benchmark: MTTD < 24h, MTTR < 72h para incidentes criticos."
+                    "text": "MTTD (Mean Time to Detect): tempo médio para identificar um incidente. MTTR (Mean Time to Respond/Recover): tempo para conter e recuperar. Outras métricas incluem número de incidentes por severidade, incidentes recorrentes, e custo médio por incidente. Benchmark: MTTD < 24h, MTTR < 72h para incidentes críticos."
                 }
             }
         ]
@@ -214,11 +214,11 @@
     <header class="article-header">
         <div class="container">
             <span class="article-category">Governanca</span>
-            <h1>Resposta a Incidentes: Guia Pratico para Organizacoes</h1>
+            <h1>Resposta a Incidentes: Guia Prático para Organizações</h1>
             <div class="article-meta">
                 <span><i class="far fa-calendar"></i> Janeiro 2026</span>
                 <span><i class="far fa-clock"></i> 20 min de leitura</span>
-                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+                <span><i class="far fa-building"></i> Inteligência Brasil</span>
             </div>
         </div>
     </header>
@@ -241,45 +241,45 @@
                 <div class="toc">
                     <h4><i class="fas fa-list" style="color: #60A5FA;"></i> Neste artigo</h4>
                     <ul>
-                        <li><a href="#introducao">O que e Resposta a Incidentes</a></li>
+                        <li><a href="#introducao">O que é Resposta a Incidentes</a></li>
                         <li><a href="#frameworks">Frameworks: NIST vs SANS</a></li>
                         <li><a href="#fases">As 6 Fases do Processo</a></li>
                         <li><a href="#csirt">Construindo um CSIRT</a></li>
                         <li><a href="#playbooks">Playbooks e Procedimentos</a></li>
                         <li><a href="#ferramentas">Ferramentas Essenciais</a></li>
-                        <li><a href="#metricas">Metricas e KPIs</a></li>
+                        <li><a href="#metricas">Métricas e KPIs</a></li>
                         <li><a href="#faq">Perguntas Frequentes</a></li>
                     </ul>
                 </div>
 
-                <h2 id="introducao">O que e Resposta a Incidentes</h2>
+                <h2 id="introducao">O que é Resposta a Incidentes</h2>
 
                 <p>
-                    <strong>Resposta a Incidentes (Incident Response)</strong> e o processo estruturado de preparacao, deteccao, contencao, erradicacao, recuperacao e analise pos-incidente de eventos de seguranca. Uma capacidade madura de IR e o que separa organizacoes que se recuperam rapidamente daquelas que sofrem danos prolongados.
+                    <strong>Resposta a Incidentes (Incident Response)</strong> é o processo estruturado de preparação, detecção, contenção, erradicação, recuperação e análise pós-incidente de eventos de segurança. Uma capacidade madura de IR é o que separa organizações que se recuperam rapidamente daquelas que sofrem danos prolongados.
                 </p>
 
                 <div class="stat-highlight">
                     <div class="number">US$ 1.49M</div>
-                    <div class="label">e a economia media em custos de breach para organizacoes com plano de IR testado, segundo IBM Cost of a Data Breach 2025. Isso representa 35% de reducao no custo total.</div>
+                    <div class="label">é a economia média em custos de breach para organizações com plano de IR testado, segundo IBM Cost of a Data Breach 2025. Isso representa 35% de redução no custo total.</div>
                 </div>
 
                 <p>
-                    Um incidente de seguranca e qualquer evento que comprometa ou ameace comprometer a confidencialidade, integridade ou disponibilidade de ativos de informacao. Exemplos incluem: malware/ransomware, acesso nao autorizado, vazamento de dados, phishing bem-sucedido, DDoS, e comprometimento de credenciais.
+                    Um incidente de segurança é qualquer evento que comprometa ou ameace comprometer a confidencialidade, integridade ou disponibilidade de ativos de informação. Exemplos incluem: malware/ransomware, acesso não autorizado, vazamento de dados, phishing bem-sucedido, DDoS, e comprometimento de credenciais.
                 </p>
 
                 <div class="concept-card">
                     <h4><i class="fas fa-exclamation-circle" style="color: #60A5FA; margin-right: 10px;"></i> Evento vs Incidente vs Breach</h4>
                     <ul>
-                        <li><strong>Evento:</strong> Qualquer ocorrencia observavel (login, alerta de firewall)</li>
-                        <li><strong>Incidente:</strong> Evento que viola politica de seguranca ou ameaca ativos</li>
-                        <li><strong>Breach:</strong> Incidente confirmado com acesso/exposicao de dados sensiveis</li>
+                        <li><strong>Evento:</strong> Qualquer ocorrência observável (login, alerta de firewall)</li>
+                        <li><strong>Incidente:</strong> Evento que viola política de segurança ou ameaça ativos</li>
+                        <li><strong>Breach:</strong> Incidente confirmado com acesso/exposição de dados sensíveis</li>
                     </ul>
                 </div>
 
                 <h2 id="frameworks">Frameworks: NIST vs SANS</h2>
 
                 <p>
-                    Dois frameworks dominam a pratica de resposta a incidentes: <strong>NIST SP 800-61</strong> (Computer Security Incident Handling Guide) e <strong>SANS Incident Handler's Handbook</strong>. Ambos sao amplamente aceitos e complementares.
+                    Dois frameworks dominam a prática de resposta a incidentes: <strong>NIST SP 800-61</strong> (Computer Security Incident Handling Guide) e <strong>SANS Incident Handler's Handbook</strong>. Ambos são amplamente aceitos e complementares.
                 </p>
 
                 <table class="comparison-table">
@@ -291,114 +291,114 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1. Preparacao</td>
-                            <td>1. Preparacao</td>
+                            <td>1. Preparação</td>
+                            <td>1. Preparação</td>
                         </tr>
                         <tr>
-                            <td>2. Deteccao e Analise</td>
-                            <td>2. Identificacao</td>
+                            <td>2. Detecção e Análise</td>
+                            <td>2. Identificação</td>
                         </tr>
                         <tr>
-                            <td rowspan="2">3. Contencao, Erradicacao e Recuperacao</td>
-                            <td>3. Contencao</td>
+                            <td rowspan="2">3. Contenção, Erradicação e Recuperação</td>
+                            <td>3. Contenção</td>
                         </tr>
                         <tr>
-                            <td>4. Erradicacao</td>
+                            <td>4. Erradicação</td>
                         </tr>
                         <tr>
-                            <td rowspan="2">4. Atividade Pos-Incidente</td>
-                            <td>5. Recuperacao</td>
+                            <td rowspan="2">4. Atividade Pós-Incidente</td>
+                            <td>5. Recuperação</td>
                         </tr>
                         <tr>
-                            <td>6. Licoes Aprendidas</td>
+                            <td>6. Lições Aprendidas</td>
                         </tr>
                     </tbody>
                 </table>
 
                 <p>
-                    Na pratica, o modelo SANS de 6 fases e mais detalhado e preferido para operacoes taticas. Vamos explorar cada fase.
+                    Na prática, o modelo SANS de 6 fases é mais detalhado e preferido para operações táticas. Vamos explorar cada fase.
                 </p>
 
                 <h2 id="fases">As 6 Fases do Processo de Resposta a Incidentes</h2>
 
                 <div class="phase-card" data-phase="Fase 1">
-                    <h4>Preparacao</h4>
+                    <h4>Preparação</h4>
                     <p>A fase mais importante e frequentemente negligenciada. Inclui:</p>
                     <ul>
                         <li>Desenvolver e documentar o plano de resposta a incidentes</li>
                         <li>Formar e treinar o time de resposta (CSIRT)</li>
-                        <li>Implementar ferramentas de deteccao e resposta</li>
-                        <li>Criar playbooks para cenarios comuns</li>
-                        <li>Estabelecer canais de comunicacao de crise</li>
-                        <li>Definir SLAs e niveis de severidade</li>
-                        <li>Realizar exercicios tabletop e simulacoes</li>
-                        <li>Manter relacionamento com parceiros externos (forense, juridico, PR)</li>
+                        <li>Implementar ferramentas de detecção e resposta</li>
+                        <li>Criar playbooks para cenários comuns</li>
+                        <li>Estabelecer canais de comunicação de crise</li>
+                        <li>Definir SLAs e níveis de severidade</li>
+                        <li>Realizar exercícios tabletop e simulações</li>
+                        <li>Manter relacionamento com parceiros externos (forense, jurídico, PR)</li>
                     </ul>
                 </div>
 
                 <div class="phase-card" data-phase="Fase 2">
-                    <h4>Identificacao</h4>
-                    <p>Detectar e confirmar que um incidente esta ocorrendo:</p>
+                    <h4>Identificação</h4>
+                    <p>Detectar e confirmar que um incidente está ocorrendo:</p>
                     <ul>
-                        <li>Monitoramento continuo (SIEM, EDR, NDR)</li>
+                        <li>Monitoramento contínuo (SIEM, EDR, NDR)</li>
                         <li>Triagem de alertas para separar falsos positivos</li>
-                        <li>Correlacao de eventos de multiplas fontes</li>
-                        <li>Determinacao de escopo inicial (quais sistemas afetados)</li>
-                        <li>Classificacao de severidade e priorizacao</li>
-                        <li>Documentacao inicial do incidente</li>
-                        <li>Notificacao das partes apropriadas</li>
+                        <li>Correlação de eventos de múltiplas fontes</li>
+                        <li>Determinação de escopo inicial (quais sistemas afetados)</li>
+                        <li>Classificação de severidade e priorização</li>
+                        <li>Documentação inicial do incidente</li>
+                        <li>Notificação das partes apropriadas</li>
                     </ul>
                 </div>
 
                 <div class="phase-card" data-phase="Fase 3">
-                    <h4>Contencao</h4>
-                    <p>Limitar o dano e impedir propagacao:</p>
+                    <h4>Contenção</h4>
+                    <p>Limitar o dano e impedir propagação:</p>
                     <ul>
-                        <li><strong>Contencao de curto prazo:</strong> Isolar sistemas, bloquear IPs/dominios, desabilitar contas</li>
-                        <li><strong>Contencao de longo prazo:</strong> Aplicar patches, modificar regras de firewall, segmentar rede</li>
-                        <li>Preservar evidencias antes de alteracoes</li>
+                        <li><strong>Contenção de curto prazo:</strong> Isolar sistemas, bloquear IPs/domínios, desabilitar contas</li>
+                        <li><strong>Contenção de longo prazo:</strong> Aplicar patches, modificar regras de firewall, segmentar rede</li>
+                        <li>Preservar evidências antes de alterações</li>
                         <li>Criar imagens forenses de sistemas comprometidos</li>
-                        <li>Balancear entre contencao e continuidade de negocios</li>
-                        <li>Comunicacao com stakeholders sobre impacto</li>
+                        <li>Balancear entre contenção e continuidade de negócios</li>
+                        <li>Comunicação com stakeholders sobre impacto</li>
                     </ul>
                 </div>
 
                 <div class="phase-card" data-phase="Fase 4">
-                    <h4>Erradicacao</h4>
-                    <p>Remover completamente a ameaca do ambiente:</p>
+                    <h4>Erradicação</h4>
+                    <p>Remover completamente a ameaça do ambiente:</p>
                     <ul>
                         <li>Identificar e remover malware de todos os sistemas</li>
-                        <li>Eliminar mecanismos de persistencia (backdoors, scheduled tasks)</li>
+                        <li>Eliminar mecanismos de persistência (backdoors, scheduled tasks)</li>
                         <li>Fechar vulnerabilidades exploradas</li>
                         <li>Reset de credenciais comprometidas</li>
-                        <li>Verificar que nao ha indicadores de comprometimento remanescentes</li>
-                        <li>Validar que a causa raiz foi enderecada</li>
+                        <li>Verificar que não há indicadores de comprometimento remanescentes</li>
+                        <li>Validar que a causa raiz foi endereçada</li>
                     </ul>
                 </div>
 
                 <div class="phase-card" data-phase="Fase 5">
-                    <h4>Recuperacao</h4>
-                    <p>Restaurar operacoes normais de forma segura:</p>
+                    <h4>Recuperação</h4>
+                    <p>Restaurar operações normais de forma segura:</p>
                     <ul>
-                        <li>Restaurar sistemas a partir de backups limpos (quando necessario)</li>
-                        <li>Reimplantar sistemas comprometidos com configuracao segura</li>
-                        <li>Validar integridade antes de retornar a producao</li>
-                        <li>Monitoramento intensivo pos-recuperacao</li>
-                        <li>Retorno gradual a operacao normal</li>
-                        <li>Comunicacao de restabelecimento aos usuarios</li>
+                        <li>Restaurar sistemas a partir de backups limpos (quando necessário)</li>
+                        <li>Reimplantar sistemas comprometidos com configuração segura</li>
+                        <li>Validar integridade antes de retornar à produção</li>
+                        <li>Monitoramento intensivo pós-recuperação</li>
+                        <li>Retorno gradual à operação normal</li>
+                        <li>Comunicação de restabelecimento aos usuários</li>
                     </ul>
                 </div>
 
                 <div class="phase-card" data-phase="Fase 6">
-                    <h4>Licoes Aprendidas</h4>
+                    <h4>Lições Aprendidas</h4>
                     <p>Melhorar para o futuro - fase frequentemente pulada mas essencial:</p>
                     <ul>
-                        <li>Realizar reuniao post-mortem com todos os envolvidos</li>
+                        <li>Realizar reunião post-mortem com todos os envolvidos</li>
                         <li>Documentar timeline completa do incidente</li>
                         <li>Identificar o que funcionou e o que pode melhorar</li>
                         <li>Atualizar playbooks e procedimentos</li>
-                        <li>Ajustar deteccoes para pegar incidentes similares mais cedo</li>
-                        <li>Reportar metricas para lideranca</li>
+                        <li>Ajustar detecções para pegar incidentes similares mais cedo</li>
+                        <li>Reportar métricas para liderança</li>
                         <li>Implementar melhorias identificadas</li>
                     </ul>
                 </div>
@@ -406,61 +406,61 @@
                 <h2 id="csirt">Construindo um CSIRT</h2>
 
                 <p>
-                    Um <strong>CSIRT (Computer Security Incident Response Team)</strong> e a equipe responsavel por coordenar a resposta a incidentes. O tamanho e estrutura variam conforme a organizacao.
+                    Um <strong>CSIRT (Computer Security Incident Response Team)</strong> é a equipe responsável por coordenar a resposta a incidentes. O tamanho e estrutura variam conforme a organização.
                 </p>
 
-                <h3>Papeis essenciais em um CSIRT</h3>
+                <h3>Papéis essenciais em um CSIRT</h3>
                 <ul>
-                    <li><strong>Incident Commander:</strong> Lidera a resposta, toma decisoes, coordena equipes</li>
-                    <li><strong>Analista de Seguranca:</strong> Investiga tecnicamente, analisa malware, faz forense</li>
-                    <li><strong>Engenheiro de Seguranca:</strong> Implementa contencao, aplica remediacoes</li>
-                    <li><strong>Comunicacao:</strong> Interface com stakeholders internos e externos</li>
-                    <li><strong>Juridico:</strong> Orienta sobre obrigacoes legais, preservacao de evidencias</li>
+                    <li><strong>Incident Commander:</strong> Lidera a resposta, toma decisões, coordena equipes</li>
+                    <li><strong>Analista de Segurança:</strong> Investiga tecnicamente, analisa malware, faz forense</li>
+                    <li><strong>Engenheiro de Segurança:</strong> Implementa contenção, aplica remediações</li>
+                    <li><strong>Comunicação:</strong> Interface com stakeholders internos e externos</li>
+                    <li><strong>Jurídico:</strong> Orienta sobre obrigações legais, preservação de evidências</li>
                     <li><strong>Representante de TI:</strong> Conhecimento de infraestrutura e sistemas</li>
-                    <li><strong>Representante de Negocios:</strong> Avalia impacto nas operacoes</li>
+                    <li><strong>Representante de Negócios:</strong> Avalia impacto nas operações</li>
                 </ul>
 
                 <div class="highlight-box">
-                    <p><strong>CSIRT vs SOC:</strong> O <a href="../csoc-o-centro-de-operacoes-de-seguranca-cibernetica/">SOC</a> foca em monitoramento continuo e deteccao. O CSIRT e acionado quando ha incidente confirmado. Em organizacoes menores, as funcoes podem ser combinadas. Em maiores, SOC escala para CSIRT conforme severidade.</p>
+                    <p><strong>CSIRT vs SOC:</strong> O <a href="../csoc-o-centro-de-operacoes-de-seguranca-cibernetica/">SOC</a> foca em monitoramento contínuo e detecção. O CSIRT é acionado quando há incidente confirmado. Em organizações menores, as funções podem ser combinadas. Em maiores, SOC escala para CSIRT conforme severidade.</p>
                 </div>
 
                 <h3>Modelos de CSIRT</h3>
                 <ul>
-                    <li><strong>Interno dedicado:</strong> Equipe full-time de IR (grandes organizacoes)</li>
-                    <li><strong>Interno virtual:</strong> Membros de diferentes areas acionados quando necessario</li>
-                    <li><strong>Hibrido:</strong> Nucleo interno + parceiro externo para suporte</li>
+                    <li><strong>Interno dedicado:</strong> Equipe full-time de IR (grandes organizações)</li>
+                    <li><strong>Interno virtual:</strong> Membros de diferentes áreas acionados quando necessário</li>
+                    <li><strong>Híbrido:</strong> Núcleo interno + parceiro externo para suporte</li>
                     <li><strong>Terceirizado:</strong> Retainer com fornecedor de IR (comum para PMEs)</li>
                 </ul>
 
                 <h2 id="playbooks">Playbooks e Procedimentos</h2>
 
                 <p>
-                    Playbooks sao procedimentos padronizados para tipos especificos de incidentes. Eles garantem resposta consistente, reduzem tempo de decisao e permitem que analistas menos experientes atuem efetivamente.
+                    Playbooks são procedimentos padronizados para tipos específicos de incidentes. Eles garantem resposta consistente, reduzem tempo de decisão e permitem que analistas menos experientes atuem efetivamente.
                 </p>
 
                 <h3>Estrutura de um Playbook</h3>
                 <ul>
                     <li><strong>Scope:</strong> Qual tipo de incidente este playbook cobre</li>
                     <li><strong>Triggers:</strong> O que indica que este playbook deve ser usado</li>
-                    <li><strong>Acoes de Contencao:</strong> Passos imediatos para limitar dano</li>
-                    <li><strong>Investigacao:</strong> O que coletar, onde procurar, como analisar</li>
-                    <li><strong>Erradicacao:</strong> Como remover a ameaca</li>
-                    <li><strong>Recuperacao:</strong> Passos para restaurar normalidade</li>
-                    <li><strong>Comunicacao:</strong> Quem notificar, quando, com que informacoes</li>
-                    <li><strong>Escalacao:</strong> Criterios e contatos para escalacao</li>
+                    <li><strong>Ações de Contenção:</strong> Passos imediatos para limitar dano</li>
+                    <li><strong>Investigação:</strong> O que coletar, onde procurar, como analisar</li>
+                    <li><strong>Erradicação:</strong> Como remover a ameaça</li>
+                    <li><strong>Recuperação:</strong> Passos para restaurar normalidade</li>
+                    <li><strong>Comunicação:</strong> Quem notificar, quando, com que informações</li>
+                    <li><strong>Escalação:</strong> Critérios e contatos para escalação</li>
                 </ul>
 
                 <div class="playbook-example">
                     <h4><i class="fas fa-file-alt"></i> Exemplo: Playbook Phishing</h4>
-                    <p><strong>Trigger:</strong> Usuario reporta e-mail suspeito ou alerta de email gateway</p>
+                    <p><strong>Trigger:</strong> Usuário reporta e-mail suspeito ou alerta de email gateway</p>
                     <ol>
-                        <li>Verificar se usuario clicou em link ou abriu anexo</li>
-                        <li>Se sim: isolar endpoint, coletar artefatos, verificar execucao</li>
+                        <li>Verificar se usuário clicou em link ou abriu anexo</li>
+                        <li>Se sim: isolar endpoint, coletar artefatos, verificar execução</li>
                         <li>Extrair IOCs do email (URLs, hashes, remetente)</li>
-                        <li>Buscar outros destinatarios da mesma campanha</li>
+                        <li>Buscar outros destinatários da mesma campanha</li>
                         <li>Bloquear IOCs em email gateway e proxy</li>
                         <li>Se houve comprometimento: escalar para playbook de malware</li>
-                        <li>Se nao houve: documentar e fechar como tentativa bloqueada</li>
+                        <li>Se não houve: documentar e fechar como tentativa bloqueada</li>
                     </ol>
                 </div>
 
@@ -468,9 +468,9 @@
                 <ul>
                     <li>Phishing/Engenharia Social</li>
                     <li><a href="../ransomware-como-funciona-proteger-empresa/">Ransomware</a></li>
-                    <li>Malware Generico</li>
+                    <li>Malware Genérico</li>
                     <li>Vazamento de Dados</li>
-                    <li>Acesso Nao Autorizado</li>
+                    <li>Acesso Não Autorizado</li>
                     <li>Comprometimento de Conta</li>
                     <li>DDoS</li>
                     <li>Insider Threat</li>
@@ -481,65 +481,65 @@
                 <div class="tool-grid">
                     <div class="tool-card">
                         <h5><i class="fas fa-search" style="color: #60A5FA; margin-right: 8px;"></i> SIEM</h5>
-                        <p>Splunk, Microsoft Sentinel, Elastic SIEM, QRadar - agregacao e correlacao de logs</p>
+                        <p>Splunk, Microsoft Sentinel, Elastic SIEM, QRadar - agregação e correlação de logs</p>
                     </div>
                     <div class="tool-card">
                         <h5><i class="fas fa-desktop" style="color: #60A5FA; margin-right: 8px;"></i> EDR</h5>
-                        <p>CrowdStrike, SentinelOne, Defender - deteccao, investigacao e resposta em endpoint</p>
+                        <p>CrowdStrike, SentinelOne, Defender - detecção, investigação e resposta em endpoint</p>
                     </div>
                     <div class="tool-card">
                         <h5><i class="fas fa-robot" style="color: #60A5FA; margin-right: 8px;"></i> SOAR</h5>
-                        <p>Phantom, XSOAR, Swimlane - automacao e orquestracao de resposta</p>
+                        <p>Phantom, XSOAR, Swimlane - automação e orquestração de resposta</p>
                     </div>
                     <div class="tool-card">
                         <h5><i class="fas fa-memory" style="color: #60A5FA; margin-right: 8px;"></i> Forense</h5>
-                        <p>Volatility (memoria), Autopsy/FTK (disco), Velociraptor (coleta remota)</p>
+                        <p>Volatility (memória), Autopsy/FTK (disco), Velociraptor (coleta remota)</p>
                     </div>
                     <div class="tool-card">
                         <h5><i class="fas fa-network-wired" style="color: #60A5FA; margin-right: 8px;"></i> Network</h5>
-                        <p>Wireshark, Zeek, NetworkMiner - analise de trafego e captura de pacotes</p>
+                        <p>Wireshark, Zeek, NetworkMiner - análise de tráfego e captura de pacotes</p>
                     </div>
                     <div class="tool-card">
                         <h5><i class="fas fa-bug" style="color: #60A5FA; margin-right: 8px;"></i> Malware Analysis</h5>
-                        <p>Any.run, Joe Sandbox, VirusTotal, YARA - analise de artefatos maliciosos</p>
+                        <p>Any.run, Joe Sandbox, VirusTotal, YARA - análise de artefatos maliciosos</p>
                     </div>
                     <div class="tool-card">
                         <h5><i class="fas fa-ticket-alt" style="color: #60A5FA; margin-right: 8px;"></i> Ticketing</h5>
-                        <p>TheHive, RTIR, ServiceNow - gestao de casos e documentacao</p>
+                        <p>TheHive, RTIR, ServiceNow - gestão de casos e documentação</p>
                     </div>
                     <div class="tool-card">
                         <h5><i class="fas fa-brain" style="color: #60A5FA; margin-right: 8px;"></i> Threat Intel</h5>
-                        <p>MISP, OpenCTI, ThreatConnect - IOCs e inteligencia de ameacas</p>
+                        <p>MISP, OpenCTI, ThreatConnect - IOCs e inteligência de ameaças</p>
                     </div>
                 </div>
 
-                <h2 id="metricas">Metricas e KPIs de Resposta a Incidentes</h2>
+                <h2 id="metricas">Métricas e KPIs de Resposta a Incidentes</h2>
 
                 <p>
-                    Metricas permitem medir eficacia, identificar gaps e demonstrar valor para a lideranca.
+                    Métricas permitem medir eficácia, identificar gaps e demonstrar valor para a liderança.
                 </p>
 
-                <h3>Metricas Principais</h3>
+                <h3>Métricas Principais</h3>
                 <ul>
-                    <li><strong>MTTD (Mean Time to Detect):</strong> Tempo medio entre inicio do incidente e deteccao. Benchmark: &lt; 24h</li>
-                    <li><strong>MTTA (Mean Time to Acknowledge):</strong> Tempo entre deteccao e inicio da investigacao. Benchmark: &lt; 15min (criticos)</li>
-                    <li><strong>MTTC (Mean Time to Contain):</strong> Tempo para implementar contencao inicial. Benchmark: &lt; 4h (criticos)</li>
-                    <li><strong>MTTR (Mean Time to Recover):</strong> Tempo total ate recuperacao completa. Benchmark: &lt; 72h (criticos)</li>
+                    <li><strong>MTTD (Mean Time to Detect):</strong> Tempo médio entre início do incidente e detecção. Benchmark: &lt; 24h</li>
+                    <li><strong>MTTA (Mean Time to Acknowledge):</strong> Tempo entre detecção e início da investigação. Benchmark: &lt; 15min (críticos)</li>
+                    <li><strong>MTTC (Mean Time to Contain):</strong> Tempo para implementar contenção inicial. Benchmark: &lt; 4h (críticos)</li>
+                    <li><strong>MTTR (Mean Time to Recover):</strong> Tempo total até recuperação completa. Benchmark: &lt; 72h (críticos)</li>
                 </ul>
 
-                <h3>Outras Metricas Importantes</h3>
+                <h3>Outras Métricas Importantes</h3>
                 <ul>
-                    <li>Numero de incidentes por severidade (tendencia)</li>
+                    <li>Número de incidentes por severidade (tendência)</li>
                     <li>Incidentes por tipo/categoria</li>
                     <li>Taxa de incidentes recorrentes (mesma causa raiz)</li>
-                    <li>Custo medio por incidente</li>
+                    <li>Custo médio por incidente</li>
                     <li>Percentual de incidentes resolvidos dentro do SLA</li>
-                    <li>Eficacia de playbooks (tempo com vs sem playbook)</li>
+                    <li>Eficácia de playbooks (tempo com vs sem playbook)</li>
                 </ul>
 
                 <div class="cta-box">
                     <h3>Precisa de Capacidade de Resposta a Incidentes?</h3>
-                    <p>Oferecemos servicos de IR retainer, desenvolvimento de planos e playbooks, e exercicios tabletop.</p>
+                    <p>Oferecemos serviços de IR retainer, desenvolvimento de planos e playbooks, e exercícios tabletop.</p>
                     <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
                 </div>
 
@@ -548,11 +548,11 @@
                 <div class="faq-section">
                     <div class="faq-item">
                         <div class="faq-question">
-                            <span>Qual a diferenca entre CSIRT, CERT e SOC?</span>
+                            <span>Qual a diferença entre CSIRT, CERT e SOC?</span>
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p><strong>SOC</strong> (Security Operations Center): Foca em monitoramento continuo e deteccao de ameacas. <strong>CSIRT</strong> (Computer Security Incident Response Team): Equipe acionada para responder a incidentes confirmados. <strong>CERT</strong> (Computer Emergency Response Team): Termo historico, geralmente usado para equipes nacionais ou setoriais (ex: CERT.br). Na pratica, CSIRT e CERT sao usados de forma intercambiavel.</p>
+                            <p><strong>SOC</strong> (Security Operations Center): Foca em monitoramento contínuo e detecção de ameaças. <strong>CSIRT</strong> (Computer Security Incident Response Team): Equipe acionada para responder a incidentes confirmados. <strong>CERT</strong> (Computer Emergency Response Team): Termo histórico, geralmente usado para equipes nacionais ou setoriais (ex: CERT.br). Na prática, CSIRT e CERT são usados de forma intercambiável.</p>
                         </div>
                     </div>
 
@@ -562,17 +562,17 @@
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Segundo a LGPD, incidentes que possam acarretar risco ou dano relevante aos titulares de dados pessoais devem ser comunicados a ANPD e aos titulares afetados em prazo razoavel. Avalie: houve acesso a dados pessoais? Ha risco aos titulares? Documente a decisao e justificativa. Em caso de duvida, consulte assessoria juridica.</p>
+                            <p>Segundo a LGPD, incidentes que possam acarretar risco ou dano relevante aos titulares de dados pessoais devem ser comunicados à ANPD e aos titulares afetados em prazo razoável. Avalie: houve acesso a dados pessoais? Há risco aos titulares? Documente a decisão e justificativa. Em caso de dúvida, consulte assessoria jurídica.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question">
-                            <span>Com que frequencia devo testar meu plano de IR?</span>
+                            <span>Com que frequência devo testar meu plano de IR?</span>
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Recomenda-se: exercicios tabletop trimestrais, simulacoes tecnicas semestrais, e revisao completa do plano anualmente ou apos incidentes significativos. Exercicios regulares revelam gaps, treinam a equipe e mantêm o plano atualizado. Um plano nunca testado e apenas documentacao teorica.</p>
+                            <p>Recomenda-se: exercícios tabletop trimestrais, simulações técnicas semestrais, e revisão completa do plano anualmente ou após incidentes significativos. Exercícios regulares revelam gaps, treinam a equipe e mantêm o plano atualizado. Um plano nunca testado é apenas documentação teórica.</p>
                         </div>
                     </div>
 
@@ -582,7 +582,7 @@
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Para a maioria das organizacoes, sim. Retainers garantem acesso rapido a especialistas quando necessario, SLAs de resposta definidos, expertise que seria custoso manter internamente, e frequentemente incluem horas de preparacao (revisao de planos, exercicios). Custo tipico: R$ 5.000-20.000/mes dependendo do SLA.</p>
+                            <p>Para a maioria das organizações, sim. Retainers garantem acesso rápido a especialistas quando necessário, SLAs de resposta definidos, expertise que seria custoso manter internamente, e frequentemente incluem horas de preparação (revisão de planos, exercícios). Custo típico: R$ 5.000-20.000/mês dependendo do SLA.</p>
                         </div>
                     </div>
                 </div>
@@ -603,7 +603,7 @@
                     </picture>
                     <div class="author-info">
                         <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
-                        <p>Consultoria especializada em Resposta a Incidentes, Forense Digital e Gestao de Crises Ciberneticas.</p>
+                        <p>Consultoria especializada em Resposta a Incidentes, Forense Digital e Gestão de Crises Cibernéticas.</p>
                     </div>
                 </div>
             </div>
@@ -620,7 +620,7 @@
                             <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
                             <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy">
                         </picture>
-                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao.</p>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
                         <div class="footer-social">
                             <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                             <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -640,7 +640,7 @@
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <div class="footer-links">
-                        <h4>Navegacao</h4>
+                        <h4>Navegação</h4>
                         <ul>
                             <li><a href="../../">Home</a></li>
                             <li><a href="../../#servicos">Servicos</a></li>
@@ -652,7 +652,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-contact">
                         <h4>Contato</h4>
-                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
                         <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
                         <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
                     </div>
@@ -660,9 +660,9 @@
             </div>
             <div class="footer-bottom">
                 <div class="row align-items-center">
-                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6"><p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados.</p></div>
                     <div class="col-md-6 text-md-right">
-                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
                         <span class="separator">|</span>
                         <a href="../../#contato">Contato</a>
                     </div>

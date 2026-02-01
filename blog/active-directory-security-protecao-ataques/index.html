@@ -5,15 +5,15 @@
     <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Guia completo de seguranca do Active Directory: ataques comuns (Kerberoasting, Pass-the-Hash, DCSync), hardening, ferramentas de auditoria e melhores praticas de protecao.">
+    <meta name="description" content="Guia completo de segurança do Active Directory: ataques comuns (Kerberoasting, Pass-the-Hash, DCSync), hardening, ferramentas de auditoria e melhores práticas de proteção.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="keywords" content="active directory security, AD security, kerberoasting, pass-the-hash, golden ticket, DCSync, bloodhound, hardening AD, seguranca windows, domain controller">
     <meta name="author" content="Inteligencia Brasil">
     <meta name="theme-color" content="#0D1E38">
     <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/active-directory-security-protecao-ataques/">
 
-    <meta property="og:title" content="Active Directory Security: Protecao contra Ataques">
-    <meta property="og:description" content="Como proteger o Active Directory: ataques comuns, hardening, ferramentas de auditoria e melhores praticas.">
+    <meta property="og:title" content="Active Directory Security: Proteção contra Ataques">
+    <meta property="og:description" content="Como proteger o Active Directory: ataques comuns, hardening, ferramentas de auditoria e melhores práticas.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/active-directory-security-protecao-ataques/">
     <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
@@ -23,7 +23,7 @@
     <meta property="article:section" content="Ciberseguranca">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Active Directory Security: Protecao contra Ataques">
+    <meta name="twitter:title" content="Active Directory Security: Proteção contra Ataques">
     <meta name="twitter:description" content="Guia completo para proteger o AD contra ataques modernos.">
     <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.png">
 
@@ -31,14 +31,14 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
 
-    <title>Active Directory Security: Protecao contra Ataques | Inteligencia Brasil</title>
+    <title>Active Directory Security: Proteção contra Ataques | Inteligência Brasil</title>
 
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Active Directory Security: Protecao contra Ataques",
-        "description": "Guia completo de seguranca do Active Directory: ataques comuns, hardening, ferramentas de auditoria e melhores praticas.",
+        "headline": "Active Directory Security: Proteção contra Ataques",
+        "description": "Guia completo de segurança do Active Directory: ataques comuns, hardening, ferramentas de auditoria e melhores práticas.",
         "image": "https://inteligenciabrasil.seg.br/img/og-image.png",
         "author": {"@type": "Organization", "name": "Inteligencia Brasil"},
         "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"}},
@@ -57,23 +57,23 @@
                 "name": "Por que o Active Directory e o principal alvo de atacantes?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "O AD e o sistema de identidade central na maioria das empresas. Comprometer o AD significa controlar todas as contas, grupos e permissoes. Atacantes buscam Domain Admin para ter controle total do ambiente. Mais de 90% dos ataques de ransomware em ambientes corporativos envolvem comprometimento do AD."
+                    "text": "O AD é o sistema de identidade central na maioria das empresas. Comprometer o AD significa controlar todas as contas, grupos e permissões. Atacantes buscam Domain Admin para ter controle total do ambiente. Mais de 90% dos ataques de ransomware em ambientes corporativos envolvem comprometimento do AD."
                 }
             },
             {
                 "@type": "Question",
-                "name": "O que e Kerberoasting e como me proteger?",
+                "name": "O que é Kerberoasting e como me proteger?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Kerberoasting explora o protocolo Kerberos para obter hashes de senhas de service accounts. Qualquer usuario autenticado pode solicitar tickets de servico e tentar quebrar offline. Protecao: usar senhas longas (+25 caracteres) em service accounts, implementar gMSA (Group Managed Service Accounts), e monitorar solicitacoes anomalas de tickets."
+                    "text": "Kerberoasting explora o protocolo Kerberos para obter hashes de senhas de service accounts. Qualquer usuário autenticado pode solicitar tickets de serviço e tentar quebrar offline. Proteção: usar senhas longas (+25 caracteres) em service accounts, implementar gMSA (Group Managed Service Accounts), e monitorar solicitações anômalas de tickets."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Qual ferramenta usar para auditar seguranca do AD?",
+                "name": "Qual ferramenta usar para auditar segurança do AD?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "PingCastle e a ferramenta mais recomendada para assessment rapido - gratuita e gera relatorio com score e recomendacoes. BloodHound mapeia caminhos de ataque visualmente. Purple Knight (Semperis) oferece avaliacao mais profunda. Para monitoramento continuo, Microsoft Defender for Identity detecta ataques em tempo real."
+                    "text": "PingCastle é a ferramenta mais recomendada para assessment rápido - gratuita e gera relatório com score e recomendações. BloodHound mapeia caminhos de ataque visualmente. Purple Knight (Semperis) oferece avaliação mais profunda. Para monitoramento contínuo, Microsoft Defender for Identity detecta ataques em tempo real."
                 }
             }
         ]
@@ -123,7 +123,7 @@
     <header class="article-header">
         <div class="container">
             <span class="article-category">Ciberseguranca</span>
-            <h1>Active Directory Security: Protecao contra Ataques</h1>
+            <h1>Active Directory Security: Proteção contra Ataques</h1>
             <div class="article-meta">
                 <span><i class="far fa-calendar"></i> Janeiro 2026</span>
                 <span><i class="far fa-clock"></i> 25 min de leitura</span>
@@ -153,7 +153,7 @@
                         <li><a href="#hardening">Hardening do Active Directory</a></li>
                         <li><a href="#tiering">Modelo de Tiering</a></li>
                         <li><a href="#ferramentas">Ferramentas de auditoria</a></li>
-                        <li><a href="#monitoramento">Monitoramento e deteccao</a></li>
+                        <li><a href="#monitoramento">Monitoramento e detecção</a></li>
                         <li><a href="#faq">Perguntas frequentes</a></li>
                     </ul>
                 </div>
@@ -161,7 +161,7 @@
                 <h2 id="importancia">Por que Proteger o Active Directory</h2>
 
                 <p>
-                    O <strong>Active Directory (AD)</strong> e o sistema de identidade e diretorio mais utilizado em ambientes corporativos Windows. Ele centraliza autenticacao, autorizacao, politicas de grupo e gestao de recursos. Por isso, e o alvo numero um de atacantes em praticamente todos os incidentes corporativos.
+                    O <strong>Active Directory (AD)</strong> é o sistema de identidade e diretório mais utilizado em ambientes corporativos Windows. Ele centraliza autenticação, autorização, políticas de grupo e gestão de recursos. Por isso, é o alvo número um de atacantes em praticamente todos os incidentes corporativos.
                 </p>
 
                 <div class="stat-highlight">
@@ -170,13 +170,13 @@
                 </div>
 
                 <p>
-                    Comprometer o AD significa obter acesso a <strong>Domain Admin</strong> - controle total sobre todas as contas, servidores e estacoes de trabalho do dominio. Atacantes podem criar backdoors persistentes, exfiltrar qualquer dado e criptografar todo o ambiente em um ataque de <a href="../ransomware-como-funciona-proteger-empresa/">ransomware</a>.
+                    Comprometer o AD significa obter acesso a <strong>Domain Admin</strong> - controle total sobre todas as contas, servidores e estações de trabalho do domínio. Atacantes podem criar backdoors persistentes, exfiltrar qualquer dado e criptografar todo o ambiente em um ataque de <a href="../ransomware-como-funciona-proteger-empresa/">ransomware</a>.
                 </p>
 
                 <div class="concept-card">
                     <h4><i class="fas fa-crown" style="color:#f59e0b;margin-right:10px"></i> As "Joias da Coroa" do AD</h4>
                     <ul>
-                        <li><strong>Domain Admins:</strong> Controle total do dominio</li>
+                        <li><strong>Domain Admins:</strong> Controle total do domínio</li>
                         <li><strong>Enterprise Admins:</strong> Controle de toda a floresta</li>
                         <li><strong>KRBTGT account:</strong> Chave mestre do Kerberos (Golden Ticket)</li>
                         <li><strong>Domain Controllers:</strong> Servidores que hospedam o AD</li>
@@ -187,56 +187,56 @@
                 <h2 id="ataques">Principais Ataques ao Active Directory</h2>
 
                 <p>
-                    Conhecer os ataques e essencial para defesa. Esses sao os mais utilizados por atacantes e <a href="../red-team-blue-team-purple-team/">Red Teams</a>:
+                    Conhecer os ataques é essencial para defesa. Esses são os mais utilizados por atacantes e <a href="../red-team-blue-team-purple-team/">Red Teams</a>:
                 </p>
 
                 <div class="attack-card">
                     <h4><i class="fas fa-skull-crossbones"></i> Kerberoasting</h4>
-                    <p><strong>O que e:</strong> Qualquer usuario autenticado pode solicitar tickets de servico (TGS) para contas com SPN (Service Principal Name). O ticket e criptografado com o hash da senha da service account, permitindo ataque de forca bruta offline.</p>
-                    <p><strong>Impacto:</strong> Obtencao de credenciais de service accounts, frequentemente com privilegios elevados.</p>
-                    <p><strong>Deteccao:</strong> Event ID 4769 com encryption type 0x17 (RC4), volume anomalo de requisicoes TGS.</p>
+                    <p><strong>O que é:</strong> Qualquer usuário autenticado pode solicitar tickets de serviço (TGS) para contas com SPN (Service Principal Name). O ticket é criptografado com o hash da senha da service account, permitindo ataque de força bruta offline.</p>
+                    <p><strong>Impacto:</strong> Obtenção de credenciais de service accounts, frequentemente com privilégios elevados.</p>
+                    <p><strong>Detecção:</strong> Event ID 4769 com encryption type 0x17 (RC4), volume anômalo de requisições TGS.</p>
                 </div>
 
                 <div class="attack-card">
                     <h4><i class="fas fa-skull-crossbones"></i> AS-REP Roasting</h4>
-                    <p><strong>O que e:</strong> Contas com "Do not require Kerberos preauthentication" podem ter seu AS-REP (resposta de autenticacao) solicitado sem senha. O hash pode ser quebrado offline.</p>
+                    <p><strong>O que é:</strong> Contas com "Do not require Kerberos preauthentication" podem ter seu AS-REP (resposta de autenticação) solicitado sem senha. O hash pode ser quebrado offline.</p>
                     <p><strong>Impacto:</strong> Comprometimento de contas mal configuradas.</p>
-                    <p><strong>Deteccao:</strong> Event ID 4768 com Pre-Authentication Type 0.</p>
+                    <p><strong>Detecção:</strong> Event ID 4768 com Pre-Authentication Type 0.</p>
                 </div>
 
                 <div class="attack-card">
                     <h4><i class="fas fa-skull-crossbones"></i> Pass-the-Hash (PtH)</h4>
-                    <p><strong>O que e:</strong> NTLM permite autenticacao usando apenas o hash da senha, sem precisar da senha em texto claro. Atacantes extraem hashes da memoria (Mimikatz) e os reutilizam.</p>
-                    <p><strong>Impacto:</strong> Movimentacao lateral sem conhecer senhas.</p>
-                    <p><strong>Deteccao:</strong> Event ID 4624 com Logon Type 3 e NtLmSsP, anomalias de comportamento.</p>
+                    <p><strong>O que é:</strong> NTLM permite autenticação usando apenas o hash da senha, sem precisar da senha em texto claro. Atacantes extraem hashes da memória (Mimikatz) e os reutilizam.</p>
+                    <p><strong>Impacto:</strong> Movimentação lateral sem conhecer senhas.</p>
+                    <p><strong>Detecção:</strong> Event ID 4624 com Logon Type 3 e NtLmSsP, anomalias de comportamento.</p>
                 </div>
 
                 <div class="attack-card">
                     <h4><i class="fas fa-skull-crossbones"></i> Pass-the-Ticket (PtT)</h4>
-                    <p><strong>O que e:</strong> Similar ao PtH, mas com tickets Kerberos (TGT ou TGS). Tickets sao extraidos da memoria e injetados em outra sessao.</p>
-                    <p><strong>Impacto:</strong> Impersonificacao de usuarios, movimentacao lateral.</p>
-                    <p><strong>Deteccao:</strong> Anomalias em uso de tickets, eventos Kerberos.</p>
+                    <p><strong>O que é:</strong> Similar ao PtH, mas com tickets Kerberos (TGT ou TGS). Tickets são extraídos da memória e injetados em outra sessão.</p>
+                    <p><strong>Impacto:</strong> Impersonificação de usuários, movimentação lateral.</p>
+                    <p><strong>Detecção:</strong> Anomalias em uso de tickets, eventos Kerberos.</p>
                 </div>
 
                 <div class="attack-card">
                     <h4><i class="fas fa-skull-crossbones"></i> Golden Ticket</h4>
-                    <p><strong>O que e:</strong> Com o hash do KRBTGT, atacantes podem forjar qualquer TGT (Ticket Granting Ticket), criando tickets para qualquer usuario, inclusive Domain Admin, com validade de anos.</p>
-                    <p><strong>Impacto:</strong> Persistencia total no dominio, dificil de remediar.</p>
-                    <p><strong>Deteccao:</strong> TGTs com lifetime anomalo, eventos de uso de TGT sem AS-REQ correspondente.</p>
+                    <p><strong>O que é:</strong> Com o hash do KRBTGT, atacantes podem forjar qualquer TGT (Ticket Granting Ticket), criando tickets para qualquer usuário, inclusive Domain Admin, com validade de anos.</p>
+                    <p><strong>Impacto:</strong> Persistência total no domínio, difícil de remediar.</p>
+                    <p><strong>Detecção:</strong> TGTs com lifetime anômalo, eventos de uso de TGT sem AS-REQ correspondente.</p>
                 </div>
 
                 <div class="attack-card">
                     <h4><i class="fas fa-skull-crossbones"></i> DCSync</h4>
-                    <p><strong>O que e:</strong> Atacante com permissoes de replicacao (Replicating Directory Changes) pode solicitar ao DC os hashes de qualquer conta, simulando ser outro Domain Controller.</p>
-                    <p><strong>Impacto:</strong> Obtencao de todos os hashes do dominio, incluindo KRBTGT.</p>
-                    <p><strong>Deteccao:</strong> Event ID 4662 com propriedades de replicacao, origem nao sendo DC.</p>
+                    <p><strong>O que é:</strong> Atacante com permissões de replicação (Replicating Directory Changes) pode solicitar ao DC os hashes de qualquer conta, simulando ser outro Domain Controller.</p>
+                    <p><strong>Impacto:</strong> Obtenção de todos os hashes do domínio, incluindo KRBTGT.</p>
+                    <p><strong>Detecção:</strong> Event ID 4662 com propriedades de replicação, origem não sendo DC.</p>
                 </div>
 
                 <div class="attack-card">
                     <h4><i class="fas fa-skull-crossbones"></i> Silver Ticket</h4>
-                    <p><strong>O que e:</strong> Com o hash de uma service account, atacantes podem forjar TGS para o servico especifico, sem passar pelo KDC.</p>
-                    <p><strong>Impacto:</strong> Acesso persistente ao servico alvo.</p>
-                    <p><strong>Deteccao:</strong> Dificil - nao passa pelo DC. Requer monitoramento no servico alvo.</p>
+                    <p><strong>O que é:</strong> Com o hash de uma service account, atacantes podem forjar TGS para o serviço específico, sem passar pelo KDC.</p>
+                    <p><strong>Impacto:</strong> Acesso persistente ao serviço alvo.</p>
+                    <p><strong>Detecção:</strong> Difícil - não passa pelo DC. Requer monitoramento no serviço alvo.</p>
                 </div>
 
                 <h2 id="hardening">Hardening do Active Directory</h2>
@@ -244,23 +244,23 @@
                 <div class="checklist">
                     <h4><i class="fas fa-shield-alt"></i> Controles Essenciais</h4>
                     <ul>
-                        <li><strong>Senhas de service accounts:</strong> Minimo 25+ caracteres ou usar gMSA</li>
-                        <li><strong>LAPS (Local Admin Password Solution):</strong> Senhas unicas por maquina</li>
-                        <li><strong>Desabilitar NTLM:</strong> Onde possivel, forcar Kerberos</li>
+                        <li><strong>Senhas de service accounts:</strong> Mínimo 25+ caracteres ou usar gMSA</li>
+                        <li><strong>LAPS (Local Admin Password Solution):</strong> Senhas únicas por máquina</li>
+                        <li><strong>Desabilitar NTLM:</strong> Onde possível, forçar Kerberos</li>
                         <li><strong>Protected Users group:</strong> Adicionar contas privilegiadas</li>
                         <li><strong>Credential Guard:</strong> Isolar credenciais em virtualizacao</li>
                         <li><strong>Desabilitar pré-autenticação desnecessária:</strong> Previne AS-REP Roasting</li>
                         <li><strong>Restringir delegação:</strong> Evitar unconstrained delegation</li>
-                        <li><strong>Rotacao do KRBTGT:</strong> A cada 180 dias no minimo (2x seguidas)</li>
+                        <li><strong>Rotação do KRBTGT:</strong> A cada 180 dias no mínimo (2x seguidas)</li>
                     </ul>
                 </div>
 
-                <h3>Politicas de Grupo (GPO) Recomendadas</h3>
+                <h3>Políticas de Grupo (GPO) Recomendadas</h3>
 
                 <ul>
-                    <li>Bloquear armazenamento de credenciais em memoria (WDigest)</li>
-                    <li>Habilitar auditoria avancada de eventos de seguranca</li>
-                    <li>Restringir logon de contas privilegiadas a sistemas especificos</li>
+                    <li>Bloquear armazenamento de credenciais em memória (WDigest)</li>
+                    <li>Habilitar auditoria avançada de eventos de segurança</li>
+                    <li>Restringir logon de contas privilegiadas a sistemas específicos</li>
                     <li>Configurar AppLocker/WDAC para bloquear ferramentas de ataque</li>
                     <li>Desabilitar PowerShell v2 e habilitar logging</li>
                     <li>Configurar Windows Firewall em todos os hosts</li>
@@ -269,15 +269,15 @@
                 <h2 id="tiering">Modelo de Tiering Administrativo</h2>
 
                 <p>
-                    O modelo de tiering e a abordagem recomendada pela Microsoft para proteger credenciais privilegiadas. Ele segmenta o ambiente em niveis (tiers) com isolamento estrito.
+                    O modelo de tiering é a abordagem recomendada pela Microsoft para proteger credenciais privilegiadas. Ele segmenta o ambiente em níveis (tiers) com isolamento estrito.
                 </p>
 
                 <div class="concept-card">
                     <h4><i class="fas fa-layer-group" style="color:#60A5FA;margin-right:10px"></i> Estrutura de Tiers</h4>
                     <ul>
                         <li><strong>Tier 0:</strong> Domain Controllers, AD, PKI, SCCM - joias da coroa</li>
-                        <li><strong>Tier 1:</strong> Servidores de aplicacao, bancos de dados, file servers</li>
-                        <li><strong>Tier 2:</strong> Workstations, laptops, dispositivos de usuarios</li>
+                        <li><strong>Tier 1:</strong> Servidores de aplicação, bancos de dados, file servers</li>
+                        <li><strong>Tier 2:</strong> Workstations, laptops, dispositivos de usuários</li>
                     </ul>
                     <p style="margin-top:15px;color:#f59e0b"><strong>Regra de ouro:</strong> Credenciais de um tier NUNCA devem ser usadas em tier inferior. Admin de Tier 0 nunca loga em workstation.</p>
                 </div>
@@ -285,7 +285,7 @@
                 <h3>Privileged Access Workstations (PAW)</h3>
 
                 <p>
-                    Estacoes dedicadas e hardened para administracao de recursos de Tier 0 e Tier 1. Isoladas da navegacao web, email e outras atividades de alto risco. Essencial para proteger credenciais de Domain Admin.
+                    Estações dedicadas e hardened para administração de recursos de Tier 0 e Tier 1. Isoladas da navegação web, email e outras atividades de alto risco. Essencial para proteger credenciais de Domain Admin.
                 </p>
 
                 <h2 id="ferramentas">Ferramentas de Auditoria do AD</h2>
@@ -293,7 +293,7 @@
                 <div class="tool-grid">
                     <div class="tool-card">
                         <h5><i class="fas fa-chess-rook" style="color:#60A5FA;margin-right:8px"></i> PingCastle</h5>
-                        <p>Assessment rapido com score de risco, identifica vulnerabilidades e gera relatorio executivo. Gratuito para uso interno.</p>
+                        <p>Assessment rápido com score de risco, identifica vulnerabilidades e gera relatório executivo. Gratuito para uso interno.</p>
                         <span class="tag">Gratuito</span>
                     </div>
                     <div class="tool-card">
@@ -303,62 +303,62 @@
                     </div>
                     <div class="tool-card">
                         <h5><i class="fas fa-shield-alt" style="color:#60A5FA;margin-right:8px"></i> Purple Knight</h5>
-                        <p>Ferramenta da Semperis com assessment profundo de seguranca do AD. Verifica mais de 100 indicadores.</p>
+                        <p>Ferramenta da Semperis com assessment profundo de segurança do AD. Verifica mais de 100 indicadores.</p>
                         <span class="tag">Gratuito</span>
                     </div>
                     <div class="tool-card">
                         <h5><i class="fas fa-search" style="color:#60A5FA;margin-right:8px"></i> ADRecon</h5>
-                        <p>Coleta informacoes detalhadas do AD para analise. Gera relatorios em Excel/HTML. PowerShell.</p>
+                        <p>Coleta informações detalhadas do AD para análise. Gera relatórios em Excel/HTML. PowerShell.</p>
                         <span class="tag">Open Source</span>
                     </div>
                     <div class="tool-card">
                         <h5><i class="fas fa-user-secret" style="color:#60A5FA;margin-right:8px"></i> Mimikatz</h5>
-                        <p>Ferramenta ofensiva que extrai credenciais da memoria. Use para testar suas defesas (Red Team).</p>
+                        <p>Ferramenta ofensiva que extrai credenciais da memória. Use para testar suas defesas (Red Team).</p>
                         <span class="tag">Pentest</span>
                     </div>
                     <div class="tool-card">
                         <h5><i class="fas fa-eye" style="color:#60A5FA;margin-right:8px"></i> Defender for Identity</h5>
-                        <p>Solucao Microsoft de deteccao de ataques ao AD em tempo real. Cloud-based, integra com Sentinel.</p>
+                        <p>Solução Microsoft de detecção de ataques ao AD em tempo real. Cloud-based, integra com Sentinel.</p>
                         <span class="tag">Comercial</span>
                     </div>
                 </div>
 
-                <h2 id="monitoramento">Monitoramento e Deteccao</h2>
+                <h2 id="monitoramento">Monitoramento e Detecção</h2>
 
-                <h3>Event IDs Criticos para Monitorar</h3>
+                <h3>Event IDs Críticos para Monitorar</h3>
 
                 <ul>
                     <li><strong>4624:</strong> Logon bem-sucedido (monitore Logon Type 3, 10)</li>
                     <li><strong>4625:</strong> Falha de logon (brute force, password spray)</li>
                     <li><strong>4648:</strong> Logon com credenciais explicitas</li>
-                    <li><strong>4662:</strong> Operacao em objeto AD (DCSync detection)</li>
-                    <li><strong>4672:</strong> Privilegios especiais atribuidos (admin logon)</li>
+                    <li><strong>4662:</strong> Operação em objeto AD (DCSync detection)</li>
+                    <li><strong>4672:</strong> Privilégios especiais atribuídos (admin logon)</li>
                     <li><strong>4768:</strong> TGT request (AS-REP Roasting)</li>
                     <li><strong>4769:</strong> TGS request (Kerberoasting)</li>
-                    <li><strong>4771:</strong> Falha de pre-autenticacao Kerberos</li>
+                    <li><strong>4771:</strong> Falha de pré-autenticação Kerberos</li>
                     <li><strong>4776:</strong> NTLM authentication (Pass-the-Hash)</li>
-                    <li><strong>5136:</strong> Modificacao de objeto AD</li>
+                    <li><strong>5136:</strong> Modificação de objeto AD</li>
                     <li><strong>5141:</strong> Objeto AD deletado</li>
                 </ul>
 
                 <p>
-                    Para <a href="../a-importancia-do-threat-hunting-para-organizacao/">threat hunting</a> eficaz no AD, correlacione esses eventos no seu <a href="../siem-implementacao-casos-uso/">SIEM</a> e crie alertas para padroes anomalos.
+                    Para <a href="../a-importancia-do-threat-hunting-para-organizacao/">threat hunting</a> eficaz no AD, correlacione esses eventos no seu <a href="../siem-implementacao-casos-uso/">SIEM</a> e crie alertas para padrões anômalos.
                 </p>
 
                 <div class="defense-card">
-                    <h4><i class="fas fa-shield-alt"></i> Deteccoes Recomendadas</h4>
+                    <h4><i class="fas fa-shield-alt"></i> Detecções Recomendadas</h4>
                     <ul>
-                        <li>Volume anomalo de requisicoes TGS (Kerberoasting)</li>
-                        <li>Logon de Domain Admin em workstation (violacao de tiering)</li>
-                        <li>Modificacao de grupos privilegiados</li>
-                        <li>Criacao de contas com privilegios</li>
-                        <li>Replicacao de diretorio de origem nao-DC (DCSync)</li>
+                        <li>Volume anômalo de requisições TGS (Kerberoasting)</li>
+                        <li>Logon de Domain Admin em workstation (violação de tiering)</li>
+                        <li>Modificação de grupos privilegiados</li>
+                        <li>Criação de contas com privilégios</li>
+                        <li>Replicação de diretório de origem não-DC (DCSync)</li>
                         <li>Uso de ferramentas conhecidas (Mimikatz, Rubeus)</li>
                     </ul>
                 </div>
 
                 <div class="cta-box">
-                    <h3>Precisa de Assessment de Seguranca do AD?</h3>
+                    <h3>Precisa de Assessment de Segurança do AD?</h3>
                     <p>Oferecemos auditoria completa do Active Directory com PingCastle, BloodHound e testes manuais.</p>
                     <a href="../../#contato" class="cta-btn">Solicitar Assessment</a>
                 </div>
@@ -368,21 +368,21 @@
                 <div class="faq-section">
                     <div class="faq-item">
                         <div class="faq-question">
-                            <span>Com que frequencia devo resetar a senha do KRBTGT?</span>
+                            <span>Com que frequência devo resetar a senha do KRBTGT?</span>
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Recomendacao: a cada 180 dias no minimo. IMPORTANTE: reset deve ser feito DUAS vezes (com intervalo de 10-12h entre eles) para invalidar tickets antigos. Em caso de suspeita de comprometimento, reset imediato (2x). Isso invalida todos os Golden Tickets existentes.</p>
+                            <p>Recomendação: a cada 180 dias no mínimo. IMPORTANTE: reset deve ser feito DUAS vezes (com intervalo de 10-12h entre eles) para invalidar tickets antigos. Em caso de suspeita de comprometimento, reset imediato (2x). Isso invalida todos os Golden Tickets existentes.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question">
-                            <span>O que e gMSA e por que devo usar?</span>
+                            <span>O que é gMSA e por que devo usar?</span>
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Group Managed Service Accounts (gMSA) sao contas de servico gerenciadas automaticamente pelo AD. A senha (240+ caracteres) e rotacionada automaticamente a cada 30 dias sem intervencao manual. Elimina risco de Kerberoasting com senhas fracas. Use para todos os servicos que suportam.</p>
+                            <p>Group Managed Service Accounts (gMSA) são contas de serviço gerenciadas automaticamente pelo AD. A senha (240+ caracteres) é rotacionada automaticamente a cada 30 dias sem intervenção manual. Elimina risco de Kerberoasting com senhas fracas. Use para todos os serviços que suportam.</p>
                         </div>
                     </div>
 
@@ -392,7 +392,7 @@
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Azure AD (agora Entra ID) e AD on-premises servem propositos diferentes. A maioria das organizacoes usa modelo hibrido. Azure AD e excelente para aplicacoes cloud e <a href="../zero-trust-architecture-guia-completo/">Zero Trust</a>. AD on-premises ainda e necessario para muitos workloads tradicionais. Avalie caso a caso - a tendencia e cloud-first, mas migracao completa requer planejamento.</p>
+                            <p>Azure AD (agora Entra ID) e AD on-premises servem propósitos diferentes. A maioria das organizações usa modelo híbrido. Azure AD é excelente para aplicações cloud e <a href="../zero-trust-architecture-guia-completo/">Zero Trust</a>. AD on-premises ainda é necessário para muitos workloads tradicionais. Avalie caso a caso - a tendência é cloud-first, mas migração completa requer planejamento.</p>
                         </div>
                     </div>
                 </div>
@@ -408,7 +408,7 @@
                     <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
                     <div class="author-info">
                         <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
-                        <p>Consultoria especializada em Seguranca de Infraestrutura, Active Directory e Red Team.</p>
+                        <p>Consultoria especializada em Segurança de Infraestrutura, Active Directory e Red Team.</p>
                     </div>
                 </div>
             </div>
@@ -421,7 +421,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-about">
                         <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
-                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao.</p>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
                         <div class="footer-social">
                             <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                             <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
