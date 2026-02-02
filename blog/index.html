@@ -483,6 +483,197 @@
         .clear-search:hover {
             background: rgba(96, 165, 250, 0.1);
         }
+         /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, #0D1E38 0%, #1a3a5c 50%, #0D1E38 100%);
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .newsletter-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-content {
+            margin-bottom: 30px;
+        }
+
+        .newsletter-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .newsletter-icon img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 20px rgba(96, 165, 250, 0.4));
+        }
+
+        .newsletter-icon i {
+            font-size: 28px;
+            color: #fff;
+        }
+
+        .newsletter-content h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #F1F5F9;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-content p {
+            color: #94A3B8;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input-group {
+            display: flex;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            border-radius: 50px;
+            padding: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input-group:focus-within {
+            border-color: #60A5FA;
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.2);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 20px;
+            color: #F1F5F9;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .newsletter-input::placeholder {
+            color: #64748B;
+        }
+
+        .newsletter-btn {
+            background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 28px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(96, 165, 250, 0.4);
+        }
+
+        .newsletter-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .newsletter-btn i {
+            font-size: 0.9rem;
+        }
+
+        .newsletter-message {
+            margin-top: 15px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .newsletter-message.success {
+            display: block;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22C55E;
+        }
+
+        .newsletter-message.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #EF4444;
+        }
+
+        .newsletter-disclaimer {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #64748B;
+        }
+
+        .newsletter-disclaimer i {
+            margin-right: 5px;
+            color: #60A5FA;
+        }
+
+        @media (max-width: 576px) {
+            .newsletter-section {
+                padding: 50px 20px;
+            }
+
+            .newsletter-content h3 {
+                font-size: 1.4rem;
+            }
+
+            .newsletter-input-group {
+                flex-direction: column;
+                border-radius: 12px;
+                padding: 10px;
+            }
+
+            .newsletter-input {
+                text-align: center;
+                padding: 12px 15px;
+            }
+
+            .newsletter-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+            }
+
+            .newsletter-btn .btn-text {
+                display: inline;
+            }
+        }
     </style>
 </head>
 
@@ -2279,12 +2470,12 @@
                             <span><i class="far fa-clock"></i> 15 min de leitura</span>
                         </div>
                         <h2 class="blog-card-title">
-                            <a href="./a-importância-do-threat-hunting-para-organizacao/">A Importância do Threat Hunting para Organizações</a>
+                            <a href="./a-importancia-do-threat-hunting-para-organizacao/">A Importância do Threat Hunting para Organizações</a>
                         </h2>
                         <p class="blog-card-excerpt">
                             Descubra como a caca proativa de ameacas pode identificar invasores antes que causem danos e fortalecer a postura de seguranca da sua organizacao.
                         </p>
-                        <a href="./a-importância-do-threat-hunting-para-organizacao/" class="blog-card-link">
+                        <a href="./a-importancia-do-threat-hunting-para-organizacao/" class="blog-card-link">
                             Ler artigo completo <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -2324,32 +2515,71 @@
         </div>
     </section>
 
-    <!-- Footer -->
+<!-- Newsletter Section -->
+    <section id="newsletter" class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-wrapper">
+                <div class="newsletter-content">
+                    <div class="newsletter-icon">
+                        <picture>
+                            <source type="image/webp" srcset="./../img/logo-white-140x140.webp" width="120" height="120">
+                            <img src="./../img/logo-white-140x140.png" alt="Inteligência Brasil" width="120" height="120" loading="lazy">
+                        </picture>
+                    </div>
+                    <h3>Receba conteúdos exclusivos sobre Segurança da Informação</h3>
+                    <p>Assine nossa newsletter e fique por dentro das últimas tendências, ameaças e melhores práticas em cibersegurança.</p>
+                </div>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="hidden" name="ip" id="newsletterIp">
+                    <div class="newsletter-input-group">
+                        <input type="email" id="newsletterEmail" name="email" class="newsletter-input"
+                               placeholder="Seu e-mail corporativo"
+                               pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                               maxlength="100" required>
+                        <button type="submit" class="newsletter-btn">
+                            <span class="btn-text">Assinar</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-disclaimer">
+                        <i class="fas fa-lock"></i> Seu e-mail está seguro. Não enviamos spam e você pode cancelar a qualquer momento.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer -->
     <footer class="footer-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-about">
                         <picture>
-                            <source type="image/webp" srcset="../img/logo-white-140x140.webp" width="140" height="140">
-                            <img src="../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                            <source type="image/webp" srcset="./../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="./../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
                         </picture>
-                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação, com as
+                            melhores práticas para redução de riscos digitais corporativos.</p>
                         <div class="footer-social">
-                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"
+                                aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"
+                                aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i
+                                    class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <div class="footer-links">
-                        <h4>Blog</h4>
+                        <h4>Servicos</h4>
                         <ul>
-                            <li><a href="./ciclo-ooda-observar-orientar-decidir-agir/">Ciclo OODA</a></li>
-                            <li><a href="./mitre-attaque-enterprise-comprehensive-adversary-tactics-and-techniques/">MITRE ATT&CK</a></li>
-                            <li><a href="./ameaca-persistente-avancada-o-que-e-apt/">APT</a></li>
-                            <li><a href="./como-funciona-o-tlp-traffic-light-protocol/">TLP Protocol</a></li>
+                            <li><a href="./../#servicos">Seguranca da Informacao</a></li>
+                            <li><a href="./../#servicos">Red Team / Pentest</a></li>
+                            <li><a href="./../#servicos">Blue Team / Defesa</a></li>
+                            <li><a href="./../#servicos">Resposta a Incidentes</a></li>
                         </ul>
                     </div>
                 </div>
@@ -2357,17 +2587,17 @@
                     <div class="footer-links">
                         <h4>Navegacao</h4>
                         <ul>
-                            <li><a href="../">Home</a></li>
-                            <li><a href="../#servicos">Servicos</a></li>
-                            <li><a href="../#metodologia">Metodologia</a></li>
-                            <li><a href="../#contato">Contato</a></li>
+                            <li><a href="./../#overview">Sobre o Servico</a></li>
+                            <li><a href="./../#metodologia">Metodologia</a></li>
+                            <li><a href="./../#diferenciais">Diferenciais</a></li>
+                            <li><a href="./../#contato">Contato</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-contact">
                         <h4>Contato</h4>
-                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
                         <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
                         <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
                     </div>
@@ -2379,9 +2609,11 @@
                         <p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p>
                     </div>
                     <div class="col-md-6 text-md-right">
-                        <a href="../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <a href="./../politica-de-privacidade.html">Política de Privacidade</a>
                         <span class="separator">|</span>
-                        <a href="../#contato">Contato</a>
+                        <a href="./../#contato">Contato</a>
+                        <span class="separator">|</span>
+                        <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank">LinkedIn</a>
                     </div>
                 </div>
             </div>
