@@ -37,12 +37,55 @@
     }
     </script>
 
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que e Security Chaos Engineering?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Security Chaos Engineering aplica os principios de Chaos Engineering ao dominio de seguranca, injetando falhas controladas para testar se controles de seguranca, deteccoes e processos de resposta funcionam quando realmente necessario. A ideia e provar que seus controles funcionam, nao apenas assumir."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que sao Security GameDays?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "GameDays sao exercicios estruturados onde equipes se reunem para executar cenarios de seguranca e observar resultados em tempo real. Incluem planejamento previo, execucao de cenarios como simulacao de ransomware ou lateral movement, e retrospectiva para identificar melhorias nos controles."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais ferramentas sao usadas em Security Chaos Engineering?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "As principais ferramentas incluem Atomic Red Team e MITRE Caldera para simulacao de ataques baseados no ATT&CK, Infection Monkey para simulacao de propagacao, Gremlin e LitmusChaos para chaos engineering geral, e plataformas BAS como AttackIQ e SafeBreach para validacao continua."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como comecar com Security Chaos Engineering?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Comece simples: gere um alerta falso no SIEM e meça quanto tempo o SOC leva para investigar. Obtenha aprovacao da lideranca, defina escopo inicial em ambiente de teste, estabeleca metricas de baseline e crie processo de aprovacao. Gradualmente expanda para GameDays regulares e automacao."
+                }
+            }
+        ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="../../css/bootstrap.css" rel="stylesheet">
     <link href="../../css/fontawesome-all.css" rel="stylesheet">
     <link href="../../css/styles.css" rel="stylesheet">
+    <link href="../../css/servico.css" rel="stylesheet">
     <style>
         body{background:#0a1628}.navbar-custom{background:rgba(13,30,56,.95)!important;border-bottom:1px solid rgba(96,165,250,.1);backdrop-filter:blur(20px)}.navbar-custom.top-nav-collapse{background:rgba(10,22,40,.98)!important}.navbar-custom .nav-link{color:#F1F5F9!important}.navbar-custom .nav-link:hover{color:#60A5FA!important}.article-header{background:linear-gradient(135deg,#0D1E38 0%,#1a3a5c 50%,#0D1E38 100%);padding:140px 0 60px}.article-header h1{color:#F1F5F9;font-size:2.5rem;font-weight:700;margin-bottom:20px}.article-category{display:inline-block;background:linear-gradient(135deg,#EF4444 0%,#DC2626 100%);color:#fff;padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px;text-transform:uppercase}.article-meta{display:flex;flex-wrap:wrap;gap:20px;color:#94A3B8;font-size:.95rem}.breadcrumb-nav{background:rgba(13,30,56,.8);padding:15px 0;border-bottom:1px solid rgba(96,165,250,.1)}.breadcrumb{background:0 0;margin:0;padding:0}.breadcrumb-item,.breadcrumb-item a{color:#94A3B8;font-size:.9rem}.breadcrumb-item.active{color:#F1F5F9}.article-content{background:#0a1628;padding:60px 0}.article-body{max-width:800px;margin:0 auto}.article-body h2{color:#F1F5F9;font-size:1.8rem;margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid rgba(239,68,68,.3)}.article-body h3{color:#F1F5F9;font-size:1.4rem;margin:30px 0 15px}.article-body p{color:#CBD5E1;font-size:1.1rem;line-height:1.8;margin-bottom:20px}.article-body strong{color:#EF4444}.article-body ul,.article-body ol{color:#CBD5E1;margin-bottom:20px;padding-left:25px}.article-body li{margin-bottom:10px;line-height:1.7}.toc{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:25px;margin-bottom:40px}.toc h4{color:#F1F5F9}.toc ul{list-style:none;padding:0;margin:0}.toc li{margin-bottom:8px}.toc a{color:#94A3B8;text-decoration:none;font-size:.95rem}.toc a:hover{color:#EF4444}.concept-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border-radius:12px;padding:25px;margin:25px 0;border-left:4px solid #EF4444}.chaos-scenario{background:linear-gradient(145deg,rgba(239,68,68,.1) 0%,rgba(185,28,28,.05) 100%);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:20px;margin:15px 0}.chaos-scenario h4{color:#EF4444;margin-top:0}.tip-box{background:linear-gradient(145deg,rgba(16,185,129,.1) 0%,rgba(5,150,105,.05) 100%);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:25px;margin:25px 0}.tip-box h4{color:#10B981;margin-top:0}.warning-box{background:linear-gradient(145deg,rgba(245,158,11,.1) 0%,rgba(217,119,6,.05) 100%);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:25px;margin:25px 0}.warning-box h4{color:#f59e0b;margin-top:0}.cta-box{background:linear-gradient(145deg,rgba(239,68,68,.1) 0%,rgba(185,28,28,.05) 100%);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:30px;margin:40px 0;text-align:center}.cta-box h3{color:#F1F5F9;margin-bottom:15px}.cta-box p{color:#94A3B8;margin-bottom:20px}.cta-btn{display:inline-block;background:linear-gradient(135deg,#EF4444 0%,#DC2626 100%);color:#fff;padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:600;transition:all .3s}.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(239,68,68,.4);color:#fff}.footer-section{background:#0D1E38;padding:60px 0 30px;border-top:1px solid rgba(96,165,250,.1)}.footer-about p,.footer-contact p,.footer-links a{color:#94A3B8}.footer-links h4,.footer-contact h4{color:#F1F5F9}.footer-bottom{border-top:1px solid rgba(96,165,250,.1);padding-top:20px;margin-top:40px;color:#64748B}@media (max-width:768px){.article-header h1{font-size:1.8rem}}
     </style>
@@ -90,7 +133,7 @@
         <div class="container">
             <div class="article-body">
                 <div class="toc">
-                    <h4><i class="fas fa-list" style="color:#EF4444"></i> Neste artigo</h4>
+                    <h2><i class="fas fa-list" style="color:#EF4444"></i> Neste artigo</h2>
                     <ul>
                         <li><a href="#oque">O que é Security Chaos Engineering</a></li>
                         <li><a href="#princípios">Princípios fundamentais</a></li>
@@ -108,7 +151,7 @@
                 </p>
 
                 <div class="concept-card">
-                    <h4><i class="fas fa-bomb" style="color:#EF4444;margin-right:10px"></i> A filosofia</h4>
+                    <h3><i class="fas fa-bomb" style="color:#EF4444;margin-right:10px"></i> A filosofia</h3>
                     <p>Em vez de assumir que seus controles funcionam, <strong>prove</strong> que funcionam injetando eventos de segurança controlados. Se seu SIEM diz que detecta lateral movement, injete lateral movement e veja se detecta. Se seu runbook de ransomware diz que recupera em 4 horas, simule ransomware e cronometre.</p>
                 </div>
 
@@ -146,7 +189,7 @@
                 <h2 id="experimentos">Tipos de Experimentos</h2>
 
                 <div class="chaos-scenario">
-                    <h4><i class="fas fa-search"></i> Detecção</h4>
+                    <h3><i class="fas fa-search"></i> Detecção</h3>
                     <p><strong>Hipótese:</strong> "SIEM detecta brute force em menos de 5 minutos"</p>
                     <p><strong>Experimento:</strong> Simular 100 tentativas de login falho em 1 minuto</p>
                     <p><strong>Validação:</strong> Alerta foi gerado? Em quanto tempo? Para o usuário certo?</p>
@@ -366,7 +409,17 @@
             </div>
         </div>
     </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
 
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/popper.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>

@@ -129,6 +129,7 @@
     <link href="../../css/bootstrap.css" rel="stylesheet">
     <link href="../../css/fontawesome-all.css" rel="stylesheet">
     <link href="../../css/styles.css" rel="stylesheet">
+    <link href="../../css/servico.css" rel="stylesheet">
     <style>
         body { background: #0a1628; }
         .navbar-custom { background: rgba(13, 30, 56, 0.95) !important; border-bottom: 1px solid rgba(96, 165, 250, 0.1); backdrop-filter: blur(20px); }
@@ -160,8 +161,8 @@
         .article-body ul, .article-body ol { color: #CBD5E1; margin-bottom: 20px; padding-left: 25px; }
         .article-body li { margin-bottom: 10px; line-height: 1.7; }
         .toc { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin-bottom: 40px; }
-        .toc h2 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-weight: 600; border: none; padding: 0; }
-        .toc h2 i { color: #60A5FA; }
+        .toc .toc-title { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-weight: 600; }
+        .toc .toc-title i { color: #60A5FA; }
         .toc ul { list-style: none; padding: 0; margin: 0; }
         .toc li { margin-bottom: 8px; }
         .toc a { color: #94A3B8; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
@@ -235,6 +236,23 @@
         .faq-item h3 { color: #60A5FA; margin-top: 0; margin-bottom: 15px; font-size: 1.2rem; }
         .faq-item p { margin: 0; }
 
+        /* Newsletter Section */
+        .newsletter-section { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); padding: 60px 0; border-top: 1px solid rgba(96, 165, 250, 0.15); border-bottom: 1px solid rgba(96, 165, 250, 0.15); }
+        .newsletter-section h2 { color: #F1F5F9; font-size: 1.8rem; margin-bottom: 15px; text-align: center; border: none; padding: 0; }
+        .newsletter-section p { color: #94A3B8; text-align: center; margin-bottom: 30px; font-size: 1.05rem; }
+        .newsletter-form { max-width: 500px; margin: 0 auto; }
+        .newsletter-form .form-group { margin-bottom: 15px; }
+        .newsletter-form input { width: 100%; padding: 14px 18px; background: rgba(96, 165, 250, 0.05); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 8px; color: #F1F5F9; font-size: 1rem; transition: all 0.3s ease; }
+        .newsletter-form input:focus { outline: none; border-color: #60A5FA; background: rgba(96, 165, 250, 0.1); }
+        .newsletter-form input::placeholder { color: #64748B; }
+        .newsletter-form button { width: 100%; padding: 14px 30px; background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); border: none; border-radius: 8px; color: white; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .newsletter-form button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(96, 165, 250, 0.3); }
+        .newsletter-form .form-note { font-size: 0.85rem; color: #64748B; text-align: center; margin-top: 15px; }
+        .newsletter-form .form-note a { color: #60A5FA; }
+        .newsletter-benefits { display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; flex-wrap: wrap; }
+        .newsletter-benefits span { display: flex; align-items: center; gap: 8px; color: #94A3B8; font-size: 0.9rem; }
+        .newsletter-benefits i { color: #22C55E; }
+
         .footer-section { background: #0D1E38; padding: 60px 0 30px; border-top: 1px solid rgba(96, 165, 250, 0.1); }
         .footer-about p, .footer-contact p, .footer-links a { color: #94A3B8; }
         .footer-links h4, .footer-contact h4 { color: #F1F5F9; }
@@ -243,6 +261,15 @@
         .footer-social { display: flex; gap: 15px; margin-top: 20px; }
         .footer-social a { width: 40px; height: 40px; background: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #60A5FA; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none; }
         .footer-social a:hover { background: #60A5FA; border-color: #60A5FA; color: #0D1E38; transform: translateY(-3px); }
+
+        /* WhatsApp Float */
+        .whatsapp-float { position: fixed; bottom: 90px; right: 24px; z-index: 999; }
+        .whatsapp-float a { width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 1.75rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); transition: all 0.3s ease; text-decoration: none; }
+        .whatsapp-float a:hover { transform: scale(1.1); }
+
+        /* Back to Top */
+        .back-to-top { position: fixed; bottom: 24px; right: 24px; width: 50px; height: 50px; background: rgba(13, 30, 56, 0.9); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; display: none; justify-content: center; align-items: center; color: #60A5FA; font-size: 1rem; text-decoration: none; z-index: 998; transition: all 0.3s ease; }
+        .back-to-top:hover { background: #60A5FA; color: #0D1E38; }
 
         @media (max-width: 768px) {
             .article-header h1 { font-size: 1.8rem; }
@@ -286,7 +313,7 @@
     <header class="article-header">
         <div class="container">
             <span class="article-category">Segurança da Informação</span>
-            <h1>Segurança da Informação nas Empresas: Riscos, Ameaças e Como se Proteger em 2026</h1>
+            <h1>Segurança da Informação nas Empresas em 2026</h1>
             <div class="article-meta">
                 <span><i class="far fa-calendar"></i> Fevereiro 2026</span>
                 <span><i class="far fa-clock"></i> 15 min de leitura</span>
@@ -306,6 +333,9 @@
         </div>
     </nav>
 
+    <!-- Main Content -->
+    <main id="main-content">
+
     <!-- Article Content -->
     <article class="article-content">
         <div class="container">
@@ -317,7 +347,7 @@
 
                 <!-- Table of Contents -->
                 <nav class="toc" aria-label="Índice do artigo">
-                    <h2><i class="fas fa-list-ul"></i> Índice</h2>
+                    <p class="toc-title"><i class="fas fa-list-ul"></i> Índice</p>
                     <ul>
                         <li><a href="#o-que-e-seguranca-da-informacao">O que é Segurança da Informação e por que ela é crítica</a></li>
                         <li><a href="#principais-ameacas">Principais ameaças digitais enfrentadas pelas empresas</a></li>
@@ -566,14 +596,43 @@
         </div>
     </article>
 
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2>Receba conteudos exclusivos sobre Seguranca da Informacao</h2>
+            <p>Insights, tendencias e boas praticas direto no seu e-mail. Sem spam, apenas conteudo relevante.</p>
+            <div class="newsletter-benefits">
+                <span><i class="fas fa-check-circle"></i> Artigos exclusivos</span>
+                <span><i class="fas fa-check-circle"></i> Alertas de ameacas</span>
+                <span><i class="fas fa-check-circle"></i> Dicas praticas</span>
+            </div>
+            <form class="newsletter-form" id="newsletterForm" action="https://formsubmit.co/contato@inteligenciabrasil.seg.br" method="POST">
+                <input type="hidden" name="_subject" value="Nova inscricao Newsletter - Blog">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://inteligenciabrasil.seg.br/blog/seguranca-informacao-empresas-riscos-ameacas-2026/?newsletter=success">
+                <div class="form-group">
+                    <input type="text" name="nome" placeholder="Seu nome" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Seu melhor e-mail" required>
+                </div>
+                <button type="submit"><i class="fas fa-paper-plane"></i> Quero Receber</button>
+                <p class="form-note">Ao se inscrever, voce concorda com nossa <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>.</p>
+            </form>
+        </div>
+    </section>
+
+    </main>
+
     <!-- CTA Section -->
     <section class="cta-section" style="background: linear-gradient(135deg, #1a3a5c 0%, #0D1E38 100%); padding: 80px 0; border-top: 1px solid rgba(96, 165, 250, 0.2);">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <h2 style="color: #F1F5F9; font-size: 2rem; margin-bottom: 20px;">Quer entender quais riscos realmente afetam o seu negócio?</h2>
-                    <p style="color: #94A3B8; font-size: 1.1rem; margin-bottom: 30px;">Fale com um especialista da Inteligência Brasil e tenha uma visão clara e técnica do seu cenário atual de segurança.</p>
-                    <a href="../../#contato" class="btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; padding: 15px 40px; border-radius: 8px; font-weight: 600; font-size: 1.1rem; text-decoration: none; display: inline-block;">Solicitar Avaliação</a>
+                    <h3 style="color: #F1F5F9; font-size: 2rem; margin-bottom: 20px;">Quer entender quais riscos realmente afetam o seu negocio?</h3>
+                    <p style="color: #94A3B8; font-size: 1.1rem; margin-bottom: 30px;">Fale com um especialista da Inteligencia Brasil e tenha uma visao clara e tecnica do seu cenario atual de seguranca.</p>
+                    <a href="../../#contato" class="btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; padding: 15px 40px; border-radius: 8px; font-weight: 600; font-size: 1.1rem; text-decoration: none; display: inline-block;">Solicitar Avaliacao</a>
                 </div>
             </div>
         </div>
@@ -645,12 +704,42 @@
         </div>
     </footer>
 
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
     <!-- Scripts -->
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/popper.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <script src="../../js/jquery.easing.min.js"></script>
     <script>
+        // Back to Top
+        (function() {
+            var backToTop = document.querySelector('.back-to-top');
+            if (backToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTop.style.display = 'flex';
+                    } else {
+                        backToTop.style.display = 'none';
+                    }
+                });
+                backToTop.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        })();
+
         $(window).on('scroll load', function () {
             if ($('.navbar').offset().top > 20) {
                 $('.navbar-custom').addClass('top-nav-collapse');

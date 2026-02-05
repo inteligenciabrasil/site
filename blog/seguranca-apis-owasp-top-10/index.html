@@ -16,10 +16,54 @@
     <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
     <title>Seguranca de APIs: OWASP API Security Top 10 | Inteligencia Brasil</title>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Seguranca de APIs: OWASP API Security Top 10","author":{"@type":"Organization","name":"Inteligencia Brasil"},"datePublished":"2026-01-31"}</script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que e o OWASP API Security Top 10?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O OWASP API Security Top 10 e uma lista das dez vulnerabilidades mais criticas em APIs, atualizada periodicamente pela OWASP. Inclui falhas como BOLA (Broken Object Level Authorization), Broken Authentication, falhas de autorizacao e configuracoes incorretas que afetam a seguranca de APIs REST, GraphQL e SOAP."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que e BOLA e por que e a vulnerabilidade mais comum em APIs?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "BOLA (Broken Object Level Authorization) ocorre quando APIs expõem endpoints com IDs de objetos sem verificar se o usuario tem autorizacao para acessar aquele objeto especifico. E a vulnerabilidade mais comum porque desenvolvedores frequentemente confiam apenas na autenticacao, sem validar autorizacao por objeto."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais sao as melhores praticas para proteger APIs?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "As melhores praticas incluem: implementar OAuth 2.0/OIDC para autenticacao, verificar autorizacao por objeto e funcao, aplicar rate limiting e throttling, validar todos os inputs, usar HTTPS com TLS 1.2+, configurar headers de seguranca, manter logs de auditoria e realizar pentests periodicos."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual a diferenca entre autenticacao e autorizacao em APIs?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Autenticacao verifica a identidade do usuario (quem voce e), geralmente via tokens JWT ou OAuth. Autorizacao verifica o que o usuario autenticado pode fazer (o que voce pode acessar). Muitas vulnerabilidades de API ocorrem por validar apenas autenticacao sem verificar autorizacao adequadamente."
+                }
+            }
+        ]
+    }
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="../../css/bootstrap.css" rel="stylesheet">
     <link href="../../css/fontawesome-all.css" rel="stylesheet">
     <link href="../../css/styles.css" rel="stylesheet">
+    <link href="../../css/servico.css" rel="stylesheet">
     <style>body{background:#0a1628}.navbar-custom{background:rgba(13,30,56,.95)!important;border-bottom:1px solid rgba(96,165,250,.1);backdrop-filter:blur(20px)}.navbar-custom.top-nav-collapse{background:rgba(10,22,40,.98)!important}.navbar-custom .nav-link{color:#F1F5F9!important}.navbar-custom .nav-link:hover{color:#60A5FA!important}.article-header{background:linear-gradient(135deg,#0D1E38 0%,#1a3a5c 50%,#0D1E38 100%);padding:140px 0 60px}.article-header h1{color:#F1F5F9;font-size:2.5rem;font-weight:700;margin-bottom:20px}.article-category{display:inline-block;background:linear-gradient(135deg,#F59E0B 0%,#D97706 100%);color:#fff;padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px;text-transform:uppercase}.article-meta{display:flex;flex-wrap:wrap;gap:20px;color:#94A3B8}.breadcrumb-nav{background:rgba(13,30,56,.8);padding:15px 0}.breadcrumb{background:0 0;margin:0;padding:0}.breadcrumb-item a{color:#94A3B8}.breadcrumb-item.active{color:#F1F5F9}.article-content{background:#0a1628;padding:60px 0}.article-body{max-width:800px;margin:0 auto}.article-body h2{color:#F1F5F9;font-size:1.8rem;margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid rgba(96,165,250,.3)}.article-body h3{color:#F1F5F9;font-size:1.4rem;margin:30px 0 15px}.article-body p{color:#CBD5E1;font-size:1.1rem;line-height:1.8;margin-bottom:20px}.article-body a{color:#60A5FA}.article-body strong{color:#60A5FA}.article-body ul{color:#CBD5E1;margin-bottom:20px;padding-left:25px}.article-body li{margin-bottom:10px}.toc{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:25px;margin-bottom:40px}.toc h4{color:#F1F5F9;margin-bottom:15px}.toc ul{list-style:none;padding:0}.toc a{color:#94A3B8}.vuln-card{background:linear-gradient(145deg,rgba(239,68,68,.1) 0%,rgba(220,38,38,.05) 100%);border:1px solid rgba(239,68,68,.3);border-radius:12px;padding:25px;margin:20px 0}.vuln-card h4{color:#ef4444;margin-top:0}.vuln-card .rank{display:inline-block;background:#ef4444;color:#fff;padding:2px 10px;border-radius:4px;font-size:.85rem;font-weight:600;margin-bottom:10px}.stat-highlight{background:linear-gradient(145deg,rgba(245,158,11,.1) 0%,rgba(217,119,6,.05) 100%);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:20px;margin:25px 0;text-align:center}.stat-highlight .number{font-size:2.5rem;font-weight:700;color:#F59E0B}.stat-highlight .label{color:#94A3B8}.checklist{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:25px;margin:25px 0}.checklist h4{color:#10B981;margin-top:0}.checklist ul{list-style:none;padding:0}.checklist li{padding:8px 0;padding-left:30px;position:relative}.checklist li::before{content:'\f00c';font-family:'Font Awesome 5 Free';font-weight:900;position:absolute;left:0;color:#10B981}.author-box{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:30px;margin:50px 0;display:flex;gap:25px;align-items:center}.author-box img{width:80px;height:80px;border-radius:50%}.author-info h4{color:#F1F5F9;margin-bottom:5px}.author-info p{color:#94A3B8;margin:0}.share-buttons{display:flex;gap:15px;margin:40px 0}.share-btn{padding:10px 20px;border-radius:8px;font-weight:500;text-decoration:none}.share-btn.linkedin{background:#0077B5;color:#fff}.cta-box{background:linear-gradient(145deg,rgba(96,165,250,.1) 0%,rgba(59,130,246,.05) 100%);border:1px solid rgba(96,165,250,.3);border-radius:12px;padding:30px;margin:40px 0;text-align:center}.cta-box h3{color:#F1F5F9;margin-bottom:15px}.cta-btn{display:inline-block;background:linear-gradient(135deg,#60A5FA 0%,#3B82F6 100%);color:#fff;padding:12px 30px;border-radius:8px;font-weight:600}.footer-section{background:#0D1E38;padding:60px 0 30px;border-top:1px solid rgba(96,165,250,.1)}.footer-about p,.footer-links a{color:#94A3B8}.footer-links h4{color:#F1F5F9}.footer-bottom{border-top:1px solid rgba(96,165,250,.1);padding-top:20px;margin-top:40px;color:#64748B}@media(max-width:768px){.article-header h1{font-size:1.8rem}.author-box{flex-direction:column;text-align:center}}</style>
 </head>
 <body>
@@ -42,7 +86,7 @@
 
                 <h2 id="top10">OWASP API Security Top 10 (2023)</h2>
 
-                <div class="vuln-card"><span class="rank">API1</span><h4>Broken Object Level Authorization (BOLA)</h4><p>A vulnerabilidade mais comum. APIs expõem endpoints com IDs de objetos sem verificar se o usuario tem autorizacao para acessar aquele objeto especifico. Atacante altera ID na requisicao para acessar dados de outros usuarios.</p><p><strong>Mitigacao:</strong> Validar autorizacao para cada objeto, nao confiar apenas em autenticacao.</p></div>
+                <div class="vuln-card"><span class="rank">API1</span><h3>Broken Object Level Authorization (BOLA)</h3><p>A vulnerabilidade mais comum. APIs expõem endpoints com IDs de objetos sem verificar se o usuario tem autorizacao para acessar aquele objeto especifico. Atacante altera ID na requisicao para acessar dados de outros usuarios.</p><p><strong>Mitigacao:</strong> Validar autorizacao para cada objeto, nao confiar apenas em autenticacao.</p></div>
 
                 <div class="vuln-card"><span class="rank">API2</span><h4>Broken Authentication</h4><p>Falhas na implementacao de autenticacao: tokens fracos, falta de rate limiting em login, credenciais em URL, tokens que nao expiram.</p><p><strong>Mitigacao:</strong> OAuth 2.0/OIDC bem implementado, MFA, tokens de curta duracao, rate limiting.</p></div>
 
@@ -71,7 +115,7 @@
                 </ul>
 
                 <h2 id="protecao">Melhores Praticas de Protecao</h2>
-                <div class="checklist"><h4><i class="fas fa-shield-alt"></i> Checklist de Seguranca de APIs</h4><ul><li>Autenticacao forte em todos os endpoints (OAuth 2.0/OIDC)</li><li>Autorizacao verificada por objeto E por funcao</li><li>Rate limiting e throttling implementados</li><li>Validacao de input em todos os parametros</li><li>HTTPS obrigatorio, TLS 1.2+</li><li>Headers de seguranca configurados</li><li>Logging de todas as requisicoes para auditoria</li><li>Versionamento de API com deprecacao de versoes antigas</li><li>Documentacao atualizada (OpenAPI/Swagger)</li><li><a href="../tipos-de-pentest-guia-completo/">Pentest</a> periodico de APIs</li></ul></div>
+                <div class="checklist"><h3><i class="fas fa-shield-alt"></i> Checklist de Seguranca de APIs</h3><ul><li>Autenticacao forte em todos os endpoints (OAuth 2.0/OIDC)</li><li>Autorizacao verificada por objeto E por funcao</li><li>Rate limiting e throttling implementados</li><li>Validacao de input em todos os parametros</li><li>HTTPS obrigatorio, TLS 1.2+</li><li>Headers de seguranca configurados</li><li>Logging de todas as requisicoes para auditoria</li><li>Versionamento de API com deprecacao de versoes antigas</li><li>Documentacao atualizada (OpenAPI/Swagger)</li><li><a href="../tipos-de-pentest-guia-completo/">Pentest</a> periodico de APIs</li></ul></div>
 
                 <h2 id="conclusao">Conclusao</h2>
                 <p>A seguranca de APIs e um dos pilares críticos da ciberseguranca moderna. Com a proliferacao de arquiteturas baseadas em microsserviços e a exposicao crescente de funcionalidades via API, proteger esses endpoints se tornou tao importante quanto proteger aplicacoes web tradicionais.</p>
@@ -87,8 +131,35 @@
         </div>
     </article>
 
-    <footer class="footer-section"><div class="container"><div class="row"><div class="col-lg-4"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140"><p>Consultoria em Seguranca e Tecnologia.</p></div></div><div class="col-lg-2"><div class="footer-links"><h4>Relacionados</h4><ul><li><a href="../devsecops-seguranca-desenvolvimento/">DevSecOps</a></li><li><a href="../pentest-frameworks-e-metodologias/">Pentest</a></li></ul></div></div><div class="col-lg-2"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li></ul></div></div></div><div class="footer-bottom"><p>&copy; 2026 Inteligencia Brasil.</p></div></div></footer>
+    <footer class="footer-section"><div class="container"><div class="row"><div class="col-lg-4"><div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140"
+                                height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo"
+                                width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao, com as
+                            melhores praticas para reducao de riscos digitais corporativos.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"
+                                aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"
+                                aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i
+                                    class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div></div><div class="col-lg-2"><div class="footer-links"><h4>Relacionados</h4><ul><li><a href="../devsecops-seguranca-desenvolvimento/">DevSecOps</a></li><li><a href="../pentest-frameworks-e-metodologias/">Pentest</a></li></ul></div></div><div class="col-lg-2"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li></ul></div></div></div><div class="footer-bottom"><p>&copy; 2026 Inteligencia Brasil.</p></div></div></footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
 
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
     <script src="../../js/jquery.min.js"></script><script src="../../js/bootstrap.min.js"></script>
     <script>$(window).on('scroll load',function(){$('.navbar').offset().top>20?$('.navbar-custom').addClass('top-nav-collapse'):$('.navbar-custom').removeClass('top-nav-collapse')});</script>
 </body>

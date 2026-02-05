@@ -111,6 +111,7 @@
     <link href="../../css/bootstrap.css" rel="stylesheet">
     <link href="../../css/fontawesome-all.css" rel="stylesheet">
     <link href="../../css/styles.css" rel="stylesheet">
+    <link href="../../css/servico.css" rel="stylesheet">
     <style>
         body { background: #0a1628; }
         .navbar-custom { background: rgba(13, 30, 56, 0.95) !important; border-bottom: 1px solid rgba(96, 165, 250, 0.1); backdrop-filter: blur(20px); }
@@ -252,7 +253,7 @@
         <div class="container">
             <div class="article-body">
                 <div class="toc">
-                    <h4><i class="fas fa-list" style="color: #60A5FA;"></i> Neste artigo</h4>
+                    <h2><i class="fas fa-list" style="color: #60A5FA;"></i> Neste artigo</h2>
                     <ul>
                         <li><a href="#oque">O que e ransomware</a></li>
                         <li><a href="#estatisticas">Estatisticas e impacto no Brasil</a></li>
@@ -272,7 +273,7 @@
                 </p>
 
                 <div class="warning-box">
-                    <h4><i class="fas fa-exclamation-triangle"></i> Dupla e Tripla Extorsao</h4>
+                    <h3><i class="fas fa-exclamation-triangle"></i> Dupla e Tripla Extorsao</h3>
                     <p>Ransomware moderno nao apenas criptografa dados. Na <strong>dupla extorsao</strong>, dados sao roubados antes da criptografia e ameaca-se vazar publicamente. Na <strong>tripla extorsao</strong>, adiciona-se ataques DDoS ou contato direto com clientes/parceiros da vitima para aumentar a pressao.</p>
                 </div>
 
@@ -308,12 +309,12 @@
                 <h2 id="como-funciona">Como Funciona um Ataque de Ransomware</h2>
 
                 <p>
-                    Um ataque de ransomware moderno segue multiplas fases, frequentemente mapeadas no framework <a href="../mitre-attaque-enterprise-comprehensive-adversary-tactics-and-techniques/">MITRE ATT&CK</a>. O tempo entre acesso inicial e criptografia pode variar de horas a meses, dependendo do grupo.
+                    Um ataque de ransomware moderno segue multiplas fases, frequentemente mapeadas no framework <a href="../mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/">MITRE ATT&CK</a>. O tempo entre acesso inicial e criptografia pode variar de horas a meses, dependendo do grupo.
                 </p>
 
                 <div class="timeline">
                     <div class="timeline-item">
-                        <h4>1. Acesso Inicial</h4>
+                        <h3>1. Acesso Inicial</h3>
                         <p>Atacantes ganham acesso via phishing, vulnerabilidades expostas (RDP, VPN) ou credenciais vazadas. Grupos tambem compram acesso de "Initial Access Brokers".</p>
                     </div>
                     <div class="timeline-item">
@@ -341,7 +342,7 @@
                 <h2 id="grupos">Principais Grupos de Ransomware (2025-2026)</h2>
 
                 <div class="group-card">
-                    <h4><i class="fas fa-skull" style="color: #ef4444;"></i> LockBit 3.0 <span class="tag">RaaS</span></h4>
+                    <h3><i class="fas fa-skull" style="color: #ef4444;"></i> LockBit 3.0 <span class="tag">RaaS</span></h3>
                     <p>Um dos grupos mais ativos globalmente, opera modelo Ransomware-as-a-Service (RaaS). Conhecido por velocidade de criptografia e programa de bug bounty proprio. Alvos incluem governo, saude e manufatura.</p>
                 </div>
 
@@ -393,7 +394,7 @@
                 <h2 id="protecao">Estrategias de Protecao contra Ransomware</h2>
 
                 <div class="checklist">
-                    <h4><i class="fas fa-shield-alt"></i> Controles Essenciais (Must-Have)</h4>
+                    <h3><i class="fas fa-shield-alt"></i> Controles Essenciais (Must-Have)</h3>
                     <ul>
                         <li><strong>Backup 3-2-1 testado:</strong> 3 copias, 2 midias, 1 offsite/air-gapped. Teste restauracao regularmente</li>
                         <li><strong>EDR em todos os endpoints:</strong> CrowdStrike, SentinelOne, Defender for Endpoint</li>
@@ -539,7 +540,7 @@
                         <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80">
                     </picture>
                     <div class="author-info">
-                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <h3><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h3>
                         <p>Consultoria especializada em Seguranca da Informacao, Resposta a Incidentes e Inteligencia de Ameacas.</p>
                     </div>
                 </div>
@@ -607,13 +608,42 @@
             </div>
         </div>
     </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
 
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/popper.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <script src="../../js/jquery.easing.min.js"></script>
     <script>
-        $(window).on('scroll load', function() {
+
+        // Back to Top
+        (function() {
+            var backToTop = document.querySelector('.back-to-top');
+            if (backToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTop.style.display = 'flex';
+                    } else {
+                        backToTop.style.display = 'none';
+                    }
+                });
+                backToTop.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        })();
+
+                $(window).on('scroll load', function() {
             if ($('.navbar').offset().top > 20) { $('.navbar-custom').addClass('top-nav-collapse'); }
             else { $('.navbar-custom').removeClass('top-nav-collapse'); }
         });

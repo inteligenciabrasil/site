@@ -80,12 +80,55 @@
     }
     </script>
 
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Por que empresas com boas ferramentas de seguranca ainda sofrem incidentes?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A resposta nao esta na ausencia de controles, mas na falta de monitoramento continuo sobre riscos silenciosos que se acumulam ao longo do tempo. Muitos ambientes estao seguros no papel, mas opacos na operacao. O erro comum e confundir implementacao com governanca, configuracao inicial com acompanhamento continuo, e ferramentas com visibilidade real de risco."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais sao os riscos silenciosos mais ignorados em seguranca da informacao?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Os principais riscos ignorados incluem: eventos de seguranca que nao viram informacao estrategica (excesso de ruido sem correlacao), acessos legitimos que nao deveriam mais existir (funcionarios desligados, terceiros com credenciais ativas), backups tratados como garantia sem testes de restauracao, privilegios excessivos acumulados ao longo do tempo, e sistemas legados sem atualizacoes ou responsavel definido."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual o indicador mais importante para a diretoria acompanhar em seguranca?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O indicador mais importante e o Tempo Medio de Deteccao de Incidentes (MTTD). Quanto maior o tempo de deteccao, maior o prejuizo, independentemente da tecnologia instalada. Segundo o Verizon DBIR 2025, 68% dos vazamentos levam meses para serem detectados. Este indicador influencia diretamente o tamanho do impacto, custo de recuperacao, exposicao legal e dano reputacional."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como a diretoria deve abordar seguranca da informacao?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A diretoria deve tratar seguranca como tema de governanca, nao apenas de TI. Perguntas essenciais incluem: onde estao os maiores riscos digitais acumulados, quanto tempo levariamos para detectar um incidente, qual o impacto financeiro de 24h a 72h de indisponibilidade, se backups foram testados em cenario real, quem e responsavel pelos sistemas criticos mais antigos, e quais acessos permanecem ativos por conveniencia."
+                }
+            }
+        ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="../../css/bootstrap.css" rel="stylesheet">
     <link href="../../css/fontawesome-all.css" rel="stylesheet">
     <link href="../../css/styles.css" rel="stylesheet">
+    <link href="../../css/servico.css" rel="stylesheet">
     <style>
         body { background: #0a1628; }
         .navbar-custom { background: rgba(13, 30, 56, 0.95) !important; border-bottom: 1px solid rgba(96, 165, 250, 0.1); backdrop-filter: blur(20px); }
@@ -96,6 +139,7 @@
         .article-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2360A5FA' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); pointer-events: none; }
         .article-header .container { position: relative; z-index: 1; }
         .article-header h1 { color: #F1F5F9; font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+        .article-header h2 { color: #F1F5F9; font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
         .article-category { display: inline-block; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
         .article-meta { display: flex; flex-wrap: wrap; gap: 20px; color: #94A3B8; font-size: 0.95rem; }
         .article-meta span { display: flex; align-items: center; gap: 8px; }
@@ -116,8 +160,8 @@
         .article-body ul, .article-body ol { color: #CBD5E1; margin-bottom: 20px; padding-left: 25px; }
         .article-body li { margin-bottom: 10px; line-height: 1.7; }
         .toc { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin-bottom: 40px; }
-        .toc h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .toc h4 i { color: #60A5FA; }
+        .toc h2 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .toc h2 i { color: #60A5FA; }
         .toc ul { list-style: none; padding: 0; margin: 0; }
         .toc li { margin-bottom: 8px; }
         .toc a { color: #94A3B8; text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
@@ -135,20 +179,20 @@
 
         /* Question Box */
         .question-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 12px; padding: 25px; margin: 30px 0; }
-        .question-box h4 { color: #F1F5F9; margin-bottom: 15px; }
+        .question-box h3 { color: #60A5FA; margin-bottom: 15px; }
         .question-box ul { margin-bottom: 0; }
         .question-box li { color: #60A5FA; }
 
         /* Metric Box */
         .metric-box { background: linear-gradient(135deg, #1a3a5c 0%, #0D1E38 100%); border-radius: 12px; padding: 30px; margin: 30px 0; text-align: center; border: 1px solid rgba(96, 165, 250, 0.2); }
-        .metric-box h4 { color: #60A5FA; font-size: 1.5rem; margin-bottom: 10px; }
+        .metric-box h3 { color: #60A5FA; font-size: 1.5rem; margin-bottom: 10px; }
         .metric-box p { color: #94A3B8; margin: 0; }
 
         .highlight-box { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 12px; padding: 25px; margin: 30px 0; }
         .highlight-box p { margin: 0; color: #CBD5E1; }
         .references { background: linear-gradient(145deg, #0f2035 0%, #0D1E38 100%); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 25px; margin: 40px 0; }
-        .references h4 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .references h4 i { color: #60A5FA; }
+        .references h3 { color: #F1F5F9; font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .references h3 i { color: #60A5FA; }
         .references ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
         .references a { display: inline-block; background: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.2); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; color: #94A3B8; text-decoration: none; transition: all 0.3s ease; }
         .references a:hover { background: rgba(96, 165, 250, 0.2); color: #60A5FA; border-color: #60A5FA; }
@@ -259,7 +303,7 @@
     <header class="article-header">
         <div class="container">
             <span class="article-category">Governança</span>
-            <h1>O que quase ninguém monitora em Segurança da Informação - e que vira incidente depois</h1>
+            <h1>O que quase ninguém monitora em Segurança da Informação</h1><h2> - e que vira incidente depois</h2>
             <div class="article-meta">
                 <span><i class="far fa-calendar"></i> Janeiro 2026</span>
                 <span><i class="far fa-clock"></i> 15 min de leitura</span>
@@ -284,7 +328,7 @@
         <div class="container">
             <div class="article-body">
                 <div class="toc">
-                    <h4><i class="fas fa-list"></i> Neste artigo</h4>
+                    <h2><i class="fas fa-list"></i> Neste artigo</h2>
                     <ul>
                         <li><a href="#introducao">Por que empresas bem estruturadas ainda sofrem incidentes</a></li>
                         <li><a href="#ilusao">A ilusão do ambiente controlado</a></li>
@@ -446,7 +490,7 @@
                 <p>Em vez de perguntar apenas "estamos seguros?", a alta gestão deveria questionar:</p>
 
                 <div class="question-box">
-                    <h4><i class="fas fa-clipboard-check" style="color: #60A5FA; margin-right: 10px;"></i> Checklist Executivo</h4>
+                    <h3><i class="fas fa-clipboard-check" style="color: #60A5FA; margin-right: 10px;"></i> Checklist Executivo</h3>
                     <ul>
                         <li>Onde estão hoje nossos maiores riscos digitais acumulados?</li>
                         <li>Quanto tempo levaríamos para detectar um incidente relevante?</li>
@@ -464,7 +508,7 @@
                 <p>Se a diretoria precisasse acompanhar apenas um indicador, ele deveria ser:</p>
 
                 <div class="metric-box">
-                    <h4><i class="fas fa-clock"></i> Tempo Médio de Detecção de Incidentes (MTTD)</h4>
+                    <h3><i class="fas fa-clock"></i> Tempo Médio de Detecção de Incidentes (MTTD)</h3>
                     <p>Quanto maior o tempo de detecção, maior o prejuízo - independentemente da tecnologia instalada.</p>
                 </div>
 
@@ -527,7 +571,7 @@
 
                 <!-- References -->
                 <div class="references">
-                    <h4><i class="fas fa-book"></i> Referências</h4>
+                    <h3><i class="fas fa-book"></i> Referências</h3>
                     <ul>
                         <li><a href="https://www.ibm.com/reports/data-breach" target="_blank" rel="nofollow noopener">IBM Cost of Data Breach Report</a></li>
                         <li><a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" rel="nofollow noopener">Verizon DBIR</a></li>

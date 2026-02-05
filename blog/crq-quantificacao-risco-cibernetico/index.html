@@ -38,12 +38,55 @@
     }
     </script>
 
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que e CRQ (Cyber Risk Quantification)?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "CRQ (Cyber Risk Quantification) e a pratica de expressar riscos ciberneticos em termos financeiros - reais, dolares, euros - em vez de escalas qualitativas como alto, medio ou baixo. O objetivo e responder perguntas como quanto podemos perder com um ataque de ransomware em valores monetarios com niveis de confianca."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que e a metodologia FAIR para quantificacao de risco?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "FAIR (Factor Analysis of Information Risk) e o padrao mais usado para CRQ. E um modelo de decomposicao que quebra o risco em fatores mensuraveis: Frequencia de Eventos de Perda (LEF) multiplicada pela Magnitude da Perda (LM). Permite calcular o risco anual em valores financeiros."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Por que quantificar riscos ciberneticos em valores financeiros?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A quantificacao financeira permite comunicacao eficaz com executivos e boards que entendem dinheiro, possibilita calcular ROI de controles de seguranca, permite priorizacao baseada em dados em vez de gut feeling, e ajuda a negociar premios e coberturas adequadas de seguro cibernetico."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que e simulacao Monte Carlo na analise de risco cibernetico?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Simulacao Monte Carlo usa distribuicoes de probabilidade em vez de valores pontuais, simulando milhares de cenarios para obter uma distribuicao de resultados possiveis. Isso permite capturar a incerteza nos inputs e fazer afirmacoes como ha 90% de confianca que a perda sera menor que X reais."
+                }
+            }
+        ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="../../css/bootstrap.css" rel="stylesheet">
     <link href="../../css/fontawesome-all.css" rel="stylesheet">
     <link href="../../css/styles.css" rel="stylesheet">
+    <link href="../../css/servico.css" rel="stylesheet">
     <style>
         body{background:#0a1628}.navbar-custom{background:rgba(13,30,56,.95)!important;border-bottom:1px solid rgba(96,165,250,.1);backdrop-filter:blur(20px)}.navbar-custom.top-nav-collapse{background:rgba(10,22,40,.98)!important}.navbar-custom .nav-link{color:#F1F5F9!important}.navbar-custom .nav-link:hover{color:#60A5FA!important}.article-header{background:linear-gradient(135deg,#0D1E38 0%,#1a3a5c 50%,#0D1E38 100%);padding:140px 0 60px}.article-header h1{color:#F1F5F9;font-size:2.5rem;font-weight:700;margin-bottom:20px}.article-category{display:inline-block;background:linear-gradient(135deg,#F59E0B 0%,#D97706 100%);color:#fff;padding:6px 16px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px;text-transform:uppercase}.article-meta{display:flex;flex-wrap:wrap;gap:20px;color:#94A3B8;font-size:.95rem}.breadcrumb-nav{background:rgba(13,30,56,.8);padding:15px 0;border-bottom:1px solid rgba(96,165,250,.1)}.breadcrumb{background:0 0;margin:0;padding:0}.breadcrumb-item,.breadcrumb-item a{color:#94A3B8;font-size:.9rem}.breadcrumb-item.active{color:#F1F5F9}.article-content{background:#0a1628;padding:60px 0}.article-body{max-width:800px;margin:0 auto}.article-body h2{color:#F1F5F9;font-size:1.8rem;margin:40px 0 20px;padding-bottom:10px;border-bottom:2px solid rgba(245,158,11,.3)}.article-body h3{color:#F1F5F9;font-size:1.4rem;margin:30px 0 15px}.article-body p{color:#CBD5E1;font-size:1.1rem;line-height:1.8;margin-bottom:20px}.article-body strong{color:#F59E0B}.article-body ul,.article-body ol{color:#CBD5E1;margin-bottom:20px;padding-left:25px}.article-body li{margin-bottom:10px;line-height:1.7}.toc{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:25px;margin-bottom:40px}.toc h4{color:#F1F5F9}.toc ul{list-style:none;padding:0;margin:0}.toc li{margin-bottom:8px}.toc a{color:#94A3B8;text-decoration:none;font-size:.95rem}.toc a:hover{color:#F59E0B}.concept-card{background:linear-gradient(145deg,#0f2035 0%,#0D1E38 100%);border-radius:12px;padding:25px;margin:25px 0;border-left:4px solid #F59E0B}.formula-box{background:#0D1E38;border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:20px;margin:20px 0;text-align:center;font-family:monospace;font-size:1.2rem;color:#F59E0B}.stat-highlight{background:linear-gradient(145deg,rgba(245,158,11,.1) 0%,rgba(217,119,6,.05) 100%);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:20px;margin:25px 0;text-align:center}.stat-highlight .number{font-size:2.5rem;font-weight:700;color:#F59E0B}.stat-highlight .label{color:#94A3B8;font-size:.95rem}.tip-box{background:linear-gradient(145deg,rgba(16,185,129,.1) 0%,rgba(5,150,105,.05) 100%);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:25px;margin:25px 0}.tip-box h4{color:#10B981;margin-top:0}.cta-box{background:linear-gradient(145deg,rgba(245,158,11,.1) 0%,rgba(217,119,6,.05) 100%);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:30px;margin:40px 0;text-align:center}.cta-box h3{color:#F1F5F9;margin-bottom:15px}.cta-box p{color:#94A3B8;margin-bottom:20px}.cta-btn{display:inline-block;background:linear-gradient(135deg,#F59E0B 0%,#D97706 100%);color:#fff;padding:12px 30px;border-radius:8px;text-decoration:none;font-weight:600;transition:all .3s}.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(245,158,11,.4);color:#fff}.footer-section{background:#0D1E38;padding:60px 0 30px;border-top:1px solid rgba(96,165,250,.1)}.footer-about p,.footer-contact p,.footer-links a{color:#94A3B8}.footer-links h4,.footer-contact h4{color:#F1F5F9}.footer-bottom{border-top:1px solid rgba(96,165,250,.1);padding-top:20px;margin-top:40px;color:#64748B}@média (max-width:768px){.article-header h1{font-size:1.8rem}}
     </style>
@@ -91,7 +134,7 @@
         <div class="container">
             <div class="article-body">
                 <div class="toc">
-                    <h4><i class="fas fa-list" style="color:#F59E0B"></i> Neste artigo</h4>
+                    <h2><i class="fas fa-list" style="color:#F59E0B"></i> Neste artigo</h2>
                     <ul>
                         <li><a href="#oque">O que é CRQ</a></li>
                         <li><a href="#porque">Por que quantificar risco</a></li>
@@ -114,7 +157,7 @@
                 </div>
 
                 <div class="concept-card">
-                    <h4><i class="fas fa-chart-line" style="color:#F59E0B;margin-right:10px"></i> A mudança de paradigma</h4>
+                    <h3><i class="fas fa-chart-line" style="color:#F59E0B;margin-right:10px"></i> A mudança de paradigma</h3>
                     <p><strong>Qualitativo:</strong> "Risco alto de ransomware. Recomendo investir em backup."</p>
                     <p><strong>Quantitativo:</strong> "Estimamos 15% de probabilidade de ransomware em 12 meses, com perda esperada de R$ 2.3M. Investimento de R$ 400k em backup reduziria perda esperada para R$ 800k - ROI de 275%."</p>
                 </div>
@@ -337,7 +380,17 @@
             </div>
         </div>
     </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
 
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/popper.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
