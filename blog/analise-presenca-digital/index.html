@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Análise e presença digital: investigação OSINT, SOCMINT e DFIR para mapear pegadas digitais, perfis falsos, vazamentos e credenciais expostas com cadeia de custódia e conformidade legal.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="análise presença digital, investigação digital, OSINT, SOCMINT, DFIR, pegadas digitais, perfis falsos, vazamentos dados, credenciais expostas, monitoramento VIP, PEP, dark web, deep web, cadeia de custódia, preservação evidências">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/analise-presenca-digital/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Qual Proteção Digital Faz Sentido para Você">
+    <meta property="og:description" content="Guia completo de análise de presença digital: investigação OSINT, SOCMINT e DFIR para proteção de pessoas e empresas.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/analise-presenca-digital/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2026-02-06T10:00:00-03:00">
+    <meta property="article:modified_time" content="2026-02-06T10:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Inteligencia">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Qual Proteção Digital Faz Sentido para Você">
+    <meta name="twitter:description" content="Análise de presença digital com OSINT, SOCMINT e DFIR: mapeamento, conformidade e proteção.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Qual Proteção Digital Faz Sentido para Você | Blog Inteligência Brasil</title>
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Qual Proteção Digital Faz Sentido para Você",
+        "description": "Guia completo de análise de presença digital: investigação OSINT, SOCMINT e DFIR para proteção de pessoas e empresas.",
+        "image": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png",
+        "author": {
+            "@type": "Person",
+            "name": "Roberto Lima",
+            "url": "https://www.linkedin.com/in/roberto-lima/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Inteligência Brasil",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.png"
+            }
+        },
+        "datePublished": "2026-02-06",
+        "dateModified": "2026-02-06",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inteligenciabrasil.seg.br/blog/analise-presenca-digital/"
+        },
+        "keywords": "análise presença digital, OSINT, SOCMINT, DFIR, pegadas digitais, perfis falsos, vazamentos, credenciais expostas, monitoramento VIP, PEP"
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Análise de Presença Digital", "item": "https://inteligenciabrasil.seg.br/blog/analise-presenca-digital/" }
+        ]
+    }
+    </script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que é análise de presença digital?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Análise de presença digital é o processo de mapear, identificar e avaliar todas as pegadas que uma pessoa ou organização deixa na internet — perfis em redes sociais, menções públicas, registros em bases de dados vazadas, domínios associados e credenciais expostas. O objetivo é entender o nível de exposição e reduzir riscos de fraude, impersonação e ataques direcionados."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual a diferença entre OSINT, SOCMINT e DFIR?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "OSINT (Open Source Intelligence) coleta informações de fontes públicas abertas como sites, registros e documentos. SOCMINT (Social Media Intelligence) foca especificamente em redes sociais e plataformas de comunicação. DFIR (Digital Forensics and Incident Response) atua na resposta a incidentes com preservação forense de evidências. Cada disciplina tem escopo, ferramentas e requisitos legais distintos."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Monitoramento de presença digital é legal?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim, desde que respeite a LGPD, o Marco Civil da Internet e as normas de privacidade aplicáveis. A coleta deve ser restrita a fontes públicas ou autorizadas, com finalidade legítima documentada — proteção corporativa, compliance ou instrução processual. Dados pessoais sensíveis exigem base legal específica e o processo deve preservar cadeia de custódia para eventual uso como prova."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como proteger VIPs e PEPs com análise digital?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O monitoramento contínuo de VIPs e PEPs (Pessoas Expostas Politicamente) inclui rastrear menções públicas, detectar perfis falsos que usem nome ou imagem da pessoa, identificar vazamentos de dados pessoais, monitorar dark web e fóruns por credenciais comprometidas, e alertar sobre tentativas de impersonação. Isso permite ação preventiva antes que a exposição se converta em dano reputacional ou financeiro."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que fazer quando credenciais são encontradas em vazamentos?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ao identificar credenciais expostas, o primeiro passo é forçar a troca imediata de senha nos serviços afetados. Em seguida, verificar se a mesma senha foi reutilizada em outros sistemas, ativar autenticação multifator (MFA) onde disponível, investigar se houve acesso não autorizado com as credenciais vazadas, e documentar o incidente para compliance e eventual notificação à ANPD conforme exigido pela LGPD."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <link href="../../css/servico.css" rel="stylesheet">
+    <link href="../../css/blog-article.css" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../">
+            <img src="../../img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196" height="113">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack">
+                    <a href="https://www.linkedin.com/company/inteligenciabrasil" title="LinkedIn Inteligência Brasil" target="_blank" rel="noopener">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                    </a>
+                </span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Inteligencia</span>
+            <h1>Qual Proteção Digital Faz Sentido para Você</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Fevereiro 2026</span>
+                <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                <span><i class="far fa-user"></i> <a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Análise de Presença Digital</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+
+                <!-- Table of Contents -->
+                <nav class="toc" aria-label="Índice do artigo">
+                    <p class="toc-title"><i class="fas fa-list-ul"></i> Índice</p>
+                    <ul>
+                        <li><a href="#investigacao-monitoramento">O que entra na investigação e no monitoramento contínuo</a></li>
+                        <li><a href="#mapear-presenca">Como mapear presença digital sem perder rastreabilidade</a></li>
+                        <li><a href="#regras-conformidade">Regras, segurança e conformidade na coleta</a></li>
+                        <li><a href="#base-tecnica">Base técnica e desempenho das verificações</a></li>
+                        <li><a href="#comparativo">Comparativo e decisão final</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </nav>
+
+                <div class="quote-box">
+                    <p>"Na era digital, sua reputação é tão vulnerável quanto seus sistemas. Quem não monitora a própria presença online entrega a narrativa para quem monitora."</p>
+                </div>
+
+                <p>
+                    Executivos, figuras públicas e organizações deixam rastros digitais em cada interação online — um cadastro em plataforma, uma menção em rede social, um domínio registrado, uma credencial vazada em um breach. Esses fragmentos, quando reunidos, formam um mapa detalhado de exposição que atacantes, fraudadores e concorrentes podem explorar antes que a vítima sequer perceba.
+                </p>
+
+                <p>
+                    Análise de presença digital é o processo sistemático de identificar, catalogar e avaliar essas pegadas para transformar exposição passiva em proteção ativa. Este artigo cobre as disciplinas envolvidas, os métodos de mapeamento, os requisitos legais e a comparação técnica entre as abordagens disponíveis. Se você ainda não conhece os <a href="../seguranca-da-informacao-e-seus-fundamentos/">fundamentos da segurança da informação</a>, recomendamos começar por lá.
+                </p>
+
+                <!-- ==================== SEÇÃO 1 ==================== -->
+                <h2 id="investigacao-monitoramento">O que entra na investigação e no monitoramento contínuo</h2>
+
+                <h3>Investigação digital</h3>
+                <p>
+                    A investigação digital é o ponto de partida: uma varredura estruturada que identifica o estado atual da presença online de um indivíduo ou organização. Diferente de uma busca casual, a investigação segue metodologia reproduzível, documenta fontes e preserva evidências para uso posterior — seja para defesa jurídica, compliance ou decisão executiva.
+                </p>
+                <ul>
+                    <li><strong>Escopo definido:</strong> Nome completo, variações, CPF/CNPJ, domínios, emails, telefones e handles de redes sociais</li>
+                    <li><strong>Fontes estruturadas:</strong> Registros públicos (WHOIS, Receita Federal, juntas comerciais, cartórios digitais)</li>
+                    <li><strong>Fontes não estruturadas:</strong> Buscadores, fóruns, pastebins, repositórios de código, marketplaces</li>
+                    <li><strong>Resultado:</strong> Relatório de exposição com classificação de risco por achado</li>
+                </ul>
+
+                <h3>Análise de presença digital</h3>
+                <p>
+                    Enquanto a investigação é pontual, a análise de presença digital avalia o contexto e o impacto de cada achado. Um perfil no LinkedIn não é risco por si só — mas se contém informações que facilitam <a href="../phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">spear phishing</a> (cargo exato, projetos, tecnologias usadas), o risco muda.
+                </p>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-crosshairs" style="color:#60A5FA;margin-right:10px"></i> Superfície de exposição pessoal</h4>
+                    <p>A análise mapeia a superfície de exposição pessoal da mesma forma que um <a href="../asm-attack-surface-management/">ASM (Attack Surface Management)</a> mapeia ativos de infraestrutura. A diferença é que o alvo são pessoas, não servidores — e o vetor de ataque é engenharia social, não exploit técnico.</p>
+                </div>
+
+                <h3>Monitoramento de VIPs e PEPs</h3>
+                <p>
+                    VIPs corporativos (CEOs, CFOs, membros do conselho) e PEPs (Pessoas Expostas Politicamente) são alvos preferenciais de fraudes, extorsão e ataques reputacionais. O monitoramento contínuo vai além da investigação inicial e complementa estratégias de <a href="../como-contratar-monitoramento-ameacas-ciberneticas/">monitoramento de ameaças cibernéticas</a>:
+                </p>
+                <ul>
+                    <li><strong>Alertas de menção:</strong> Detecção em tempo real de menções em redes sociais, notícias e fóruns</li>
+                    <li><strong>Detecção de impersonação:</strong> Perfis falsos usando nome, foto ou cargo do VIP</li>
+                    <li><strong>Monitoramento de vazamentos:</strong> Credenciais do VIP em bases de dados comprometidas</li>
+                    <li><strong>Acompanhamento de domínios:</strong> Registros de domínios semelhantes (typosquatting) que podem ser usados em phishing</li>
+                </ul>
+
+                <h3>Rastreio e atribuição</h3>
+                <p>
+                    Quando uma ameaça é identificada — um perfil falso, uma campanha de difamação, um vazamento direcionado — o rastreio busca identificar a origem. A atribuição conecta evidências técnicas (IPs, metadados, padrões de escrita, horários de atividade) a um ator ou grupo responsável. Esse processo exige rigor metodológico porque atribuição incorreta pode gerar consequências jurídicas e reputacionais severas. Técnicas de <a href="../threat-intelligence-operacional/">threat intelligence operacional</a> são essenciais nessa etapa.
+                </p>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Atribuição não é certeza</h4>
+                    <p>Atribuição em ambiente digital trabalha com graus de confiança, não com provas absolutas. Atacantes usam proxies, VPNs, infraestrutura compartilhada e técnicas de false flag. Toda atribuição deve declarar explicitamente o nível de confiança e as evidências que a sustentam.</p>
+                </div>
+
+                <!-- CTA Mid-Content -->
+                <div class="cta-mid">
+                    <p><strong>Não espere um incidente para descobrir o que já está exposto.</strong></p>
+                    <p>Mapeie sua presença digital e antecipe riscos antes que se tornem crises.</p>
+                    <a href="../../#contato" class="cta-link">Fale com um Especialista</a>
+                </div>
+
+                <!-- ==================== SEÇÃO 2 ==================== -->
+                <h2 id="mapear-presenca">Como mapear presença digital sem perder rastreabilidade</h2>
+
+                <h3>Pegadas digitais</h3>
+                <p>
+                    Pegadas digitais dividem-se em ativas (criadas intencionalmente pelo usuário) e passivas (geradas automaticamente por sistemas). Ambas são relevantes para o mapeamento e impactam diretamente a <a href="../como-proteger-dados-pessoais-sites-aplicacoes/">proteção de dados pessoais</a>:
+                </p>
+
+                <div class="pillar-cards">
+                    <div class="pillar-card">
+                        <div class="icon"><i class="fas fa-shoe-prints"></i></div>
+                        <h3>Pegadas Ativas</h3>
+                        <p>Posts em redes sociais, comentários em fóruns, cadastros em plataformas, publicações, domínios registrados e repositórios de código</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="icon"><i class="fas fa-ghost"></i></div>
+                        <h3>Pegadas Passivas</h3>
+                        <p>Registros DNS, metadados em documentos, headers de email, logs de acesso a sites, cookies de rastreamento e geolocalização em fotos</p>
+                    </div>
+                </div>
+
+                <h4>Metodologia de coleta</h4>
+                <p>
+                    A coleta deve seguir uma sequência que maximize os achados sem comprometer a rastreabilidade:
+                </p>
+                <ol>
+                    <li><strong>Definir selectores:</strong> Identificadores únicos do alvo (nome, email, telefone, username)</li>
+                    <li><strong>Pivotagem:</strong> Usar cada achado como ponto de partida para descobrir novos dados</li>
+                    <li><strong>Correlação:</strong> Cruzar informações de fontes diferentes para confirmar vínculos</li>
+                    <li><strong>Documentação:</strong> Registrar cada passo com timestamp, URL e hash da evidência</li>
+                </ol>
+
+                <h3>Menções públicas</h3>
+                <p>
+                    Menções em notícias, blogs, redes sociais e fóruns constroem (ou destroem) reputação. O monitoramento contínuo identifica:
+                </p>
+                <ul>
+                    <li><strong>Sentimento:</strong> Menções positivas, neutras ou negativas</li>
+                    <li><strong>Alcance:</strong> Plataformas de alto impacto vs. fóruns de nicho</li>
+                    <li><strong>Contexto:</strong> Menções associadas a controvérsias, processos judiciais ou escândalos</li>
+                    <li><strong>Propagação:</strong> Velocidade e padrão de compartilhamento de conteúdo negativo</li>
+                </ul>
+
+                <h3>Perfis falsos e impersonação</h3>
+                <p>
+                    Perfis falsos são criados para aplicar <a href="../golpes-virtuais/">golpes financeiros</a>, disseminar desinformação ou prejudicar a reputação do alvo. A detecção envolve:
+                </p>
+                <ul>
+                    <li><strong>Busca por nome e variações:</strong> Incluindo transliterações e abreviações</li>
+                    <li><strong>Busca reversa de imagem:</strong> Identificar uso não autorizado de fotos do alvo</li>
+                    <li><strong>Análise de perfil:</strong> Data de criação, atividade, rede de conexões, padrão de postagem</li>
+                    <li><strong>Comparação de conteúdo:</strong> Uso de cargos, biografias e informações copiadas do perfil legítimo</li>
+                </ul>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-lightbulb"></i> Ação rápida contra impersonação</h4>
+                    <p>Ao identificar um perfil falso, documente imediatamente com screenshots, hashes e timestamps antes de reportar à plataforma. A remoção pode levar dias, mas a evidência preservada é essencial para eventual ação judicial ou notificação ao CERT.</p>
+                </div>
+
+                <h3>Vazamentos e credenciais expostas</h3>
+                <p>
+                    Bases de dados comprometidas são disponibilizadas em fóruns, dark web e Telegram diariamente. O uso de <a href="../gerenciadores-senhas-seguros-gratuitos/">gerenciadores de senhas</a> e <a href="../passwordless-passkeys-fido2/">autenticação passwordless</a> reduz o impacto, mas o monitoramento continua essencial:
+                </p>
+                <ul>
+                    <li><strong>Credenciais corporativas:</strong> Emails @empresa em bases vazadas (combolists, stealer logs)</li>
+                    <li><strong>Credenciais pessoais:</strong> Emails pessoais de executivos em breaches</li>
+                    <li><strong>Dados sensíveis:</strong> CPF, RG, endereço, dados bancários em dumps</li>
+                    <li><strong>Stealer logs:</strong> Cookies de sessão, tokens e senhas capturados por infostealers</li>
+                </ul>
+
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="number">26 bi</div>
+                        <div class="label">Registros vazados globalmente em 2024</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">82%</div>
+                        <div class="label">dos breaches envolvem credenciais roubadas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">6 meses</div>
+                        <div class="label">Tempo médio para detectar um vazamento</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">R$ 6.75M</div>
+                        <div class="label">Custo médio de um data breach no Brasil</div>
+                    </div>
+                </div>
+
+                <!-- ==================== SEÇÃO 3 ==================== -->
+                <h2 id="regras-conformidade">Regras, segurança e conformidade na coleta</h2>
+
+                <h3>Preservação de evidências</h3>
+                <p>
+                    Qualquer achado que possa ser usado em processo judicial, compliance ou investigação interna precisa ser preservado de forma que garanta autenticidade e integridade. Os mesmos princípios se aplicam na <a href="../resposta-incidentes-guia-pratico/">resposta a incidentes</a>:
+                </p>
+                <ul>
+                    <li><strong>Screenshot com metadados:</strong> Data, hora, URL completa e resolução de tela</li>
+                    <li><strong>Hash criptográfico:</strong> SHA-256 do arquivo de evidência no momento da captura</li>
+                    <li><strong>Ata notarial digital:</strong> Para evidências que exigem fé pública</li>
+                    <li><strong>Ferramentas especializadas:</strong> HTTrack, Hunchly, Wayback Machine para preservação de páginas</li>
+                </ul>
+
+                <h3>Cadeia de custódia</h3>
+                <p>
+                    A cadeia de custódia documenta quem acessou, manipulou ou transferiu a evidência digital em cada etapa. Sem ela, a prova pode ser impugnada:
+                </p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>1. Coleta</h3>
+                        <p>Registrar quem coletou, quando, de qual fonte, com qual ferramenta e armazenar hash original</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>2. Armazenamento</h3>
+                        <p>Repositório com controle de acesso, logs de auditoria e backup redundante com verificação de integridade</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>3. Análise</h3>
+                        <p>Trabalhar em cópia forense, nunca no original. Documentar cada operação realizada sobre a evidência</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>4. Transferência</h3>
+                        <p>Registrar cada transferência entre analistas, departamentos ou para autoridades com recibo assinado</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>5. Apresentação</h3>
+                        <p>Demonstrar integridade via hash, logs de acesso e documentação completa do processo</p>
+                    </div>
+                </div>
+
+                <h3>Privacidade e autorização</h3>
+                <p>
+                    A coleta de informações pessoais, mesmo de fontes públicas, deve respeitar a legislação vigente. A <a href="../lgpd-implementacao-tecnica/">implementação técnica da LGPD</a> define as bases legais aplicáveis:
+                </p>
+                <ul>
+                    <li><strong>LGPD (Lei 13.709/2018):</strong> Base legal para tratamento de dados pessoais — legítimo interesse, consentimento ou cumprimento de obrigação legal</li>
+                    <li><strong>Marco Civil da Internet (Lei 12.965/2014):</strong> Proteção de registros, dados pessoais e comunicações privadas</li>
+                    <li><strong>Código Penal (Art. 154-A):</strong> Invasão de dispositivo informático alheio é crime — a coleta deve se limitar a fontes públicas ou autorizadas</li>
+                    <li><strong>GDPR:</strong> Para alvos ou dados com nexo europeu, regras adicionais de consentimento e transparência</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-gavel"></i> Limites legais da investigação</h4>
+                    <p>Acessar perfis privados, usar credenciais vazadas para login, interceptar comunicações ou criar perfis falsos para interagir com o alvo são práticas ilegais, mesmo com finalidade de proteção. A investigação legítima opera exclusivamente sobre informações acessíveis sem autenticação ou com autorização formal documentada.</p>
+                </div>
+
+                <h3>Uso corporativo e objetivo jurídico</h3>
+                <p>
+                    Empresas utilizam análise de presença digital em cenários específicos que definem o escopo e as limitações da coleta. A <a href="../cyber-due-diligence-ma/">cyber due diligence em processos de M&A</a> é um dos casos mais comuns:
+                </p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Cenário</th>
+                            <th>Objetivo</th>
+                            <th>Base Legal</th>
+                            <th>Escopo Permitido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Due diligence</strong></td>
+                            <td>Avaliar risco de parceiros, fornecedores ou M&A</td>
+                            <td>Legítimo interesse</td>
+                            <td>Fontes públicas, registros comerciais, mídia</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Proteção executiva</strong></td>
+                            <td>Monitorar ameaças a VIPs e PEPs</td>
+                            <td>Legítimo interesse + consentimento</td>
+                            <td>Menções públicas, perfis falsos, vazamentos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Investigação interna</strong></td>
+                            <td>Apurar fraude, vazamento ou má conduta</td>
+                            <td>Exercício regular de direito</td>
+                            <td>Dados corporativos + fontes públicas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Instrução processual</strong></td>
+                            <td>Coletar evidências para ação judicial</td>
+                            <td>Exercício regular de direito</td>
+                            <td>Fontes públicas com preservação forense</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compliance KYC/AML</strong></td>
+                            <td>Verificar identidade e antecedentes</td>
+                            <td>Obrigação legal</td>
+                            <td>Bases regulatórias, listas restritivas, PEP</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- ==================== SEÇÃO 4 ==================== -->
+                <h2 id="base-tecnica">Base técnica e desempenho das verificações</h2>
+
+                <h3>OSINT — Open Source Intelligence</h3>
+                <p>
+                    OSINT coleta e analisa informações de fontes abertas — qualquer dado acessível sem autenticação ou pagamento restritivo. É a base de toda análise de presença digital e se integra diretamente ao trabalho de <a href="../a-importancia-do-threat-hunting-para-organizacao/">threat hunting</a>.
+                </p>
+                <ul>
+                    <li><strong>Fontes:</strong> Buscadores (Google, Bing, Yandex), registros públicos, WHOIS, DNS, certificados SSL, arquivos web, documentos indexados</li>
+                    <li><strong>Ferramentas:</strong> Maltego, SpiderFoot, theHarvester, Shodan, Censys, Recon-ng</li>
+                    <li><strong>Vantagem:</strong> Ampla cobertura, baixo custo, legal por definição (fontes públicas)</li>
+                    <li><strong>Limitação:</strong> Não acessa conteúdo privado, autenticado ou cifrado</li>
+                </ul>
+
+                <h4>Técnicas comuns de OSINT</h4>
+                <ul>
+                    <li><strong>Google Dorking:</strong> Operadores avançados para localizar informações expostas (filetype:, site:, inurl:)</li>
+                    <li><strong>Enumeração de subdomínios:</strong> Mapear infraestrutura via certificate transparency e brute force</li>
+                    <li><strong>Metadata extraction:</strong> EXIF em imagens, propriedades de documentos Office/PDF</li>
+                    <li><strong>Email enumeration:</strong> Hunter.io, Phonebook.cz, validação SMTP</li>
+                </ul>
+
+                <h3>SOCMINT — Social Media Intelligence</h3>
+                <p>
+                    SOCMINT é uma especialização de OSINT focada em redes sociais e plataformas de comunicação. A análise vai além do conteúdo publicado:
+                </p>
+                <ul>
+                    <li><strong>Análise de rede:</strong> Conexões, seguidores, grupos e comunidades do alvo</li>
+                    <li><strong>Análise temporal:</strong> Horários de postagem, frequência e padrões de atividade</li>
+                    <li><strong>Análise de conteúdo:</strong> Temas recorrentes, opiniões, informações pessoais reveladas</li>
+                    <li><strong>Geolocalização:</strong> Check-ins, fotos com metadados, referências a locais</li>
+                </ul>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-network-wired" style="color:#60A5FA;margin-right:10px"></i> SOCMINT vai além de "ler posts"</h4>
+                    <p>A análise de redes sociais inclui mapeamento de grafos de relacionamento, identificação de contas coordenadas (sockpuppets), detecção de bots e análise de campanhas de desinformação. Ferramentas como Gephi e Graphistry permitem visualizar redes de influência e identificar clusters de contas suspeitas.</p>
+                </div>
+
+                <h3>DFIR — Digital Forensics and Incident Response</h3>
+                <p>
+                    DFIR entra quando há um incidente confirmado ou suspeito. A diferença fundamental em relação a OSINT e SOCMINT é que DFIR trabalha com evidências forenses e <a href="../resposta-incidentes-guia-pratico/">resposta ativa a incidentes</a>:
+                </p>
+                <ul>
+                    <li><strong>Aquisição forense:</strong> Cópia bit-a-bit de dispositivos, dumps de memória, captura de tráfego</li>
+                    <li><strong>Análise de artefatos:</strong> Logs de sistema, registros de navegador, arquivos deletados, timeline de eventos</li>
+                    <li><strong>Resposta ao incidente:</strong> Contenção, erradicação, recuperação e lições aprendidas</li>
+                    <li><strong>Cadeia de custódia:</strong> Rigor forense para admissibilidade judicial</li>
+                </ul>
+
+                <h4>Quando DFIR se conecta à presença digital</h4>
+                <p>
+                    DFIR e análise de presença digital se cruzam quando:
+                </p>
+                <ul>
+                    <li>Credenciais vazadas foram usadas para acesso não autorizado — é preciso investigar o impacto</li>
+                    <li>Um perfil falso foi usado para engenharia social contra funcionários</li>
+                    <li>Dados corporativos aparecem em fóruns ou dark web — é preciso rastrear a origem do vazamento com apoio de <a href="../dlp-prevencao-perda-dados/">DLP</a></li>
+                    <li>Um executivo é vítima de doxxing e as informações expostas precisam ser catalogadas e preservadas</li>
+                </ul>
+
+                <h3>Dark web e deep web</h3>
+                <p>
+                    A distinção é relevante para definir escopo e ferramentas:
+                </p>
+
+                <div class="pillar-cards">
+                    <div class="pillar-card">
+                        <div class="icon"><i class="fas fa-water"></i></div>
+                        <h3>Deep Web</h3>
+                        <p>Conteúdo não indexado por buscadores: bases de dados, intranets, conteúdo atrás de login. Representa ~90% da internet. Acesso legal com credenciais válidas.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="icon"><i class="fas fa-user-secret"></i></div>
+                        <h3>Dark Web</h3>
+                        <p>Redes overlay (Tor, I2P) com anonimato intencional. Fóruns de venda de dados, marketplaces de credenciais, leak sites de ransomware. Monitoramento legal, compra de dados ilegal.</p>
+                    </div>
+                </div>
+
+                <h4>O que monitorar na dark web</h4>
+                <ul>
+                    <li><strong>Leak sites de ransomware:</strong> Verificar se dados da organização foram publicados por grupos como LockBit, BlackCat ou Cl0p — entender <a href="../ransomware-como-funciona-proteger-empresa/">como funciona o ransomware</a> ajuda na preparação</li>
+                    <li><strong>Fóruns de venda:</strong> Credenciais corporativas, acessos RDP/VPN, dados de clientes</li>
+                    <li><strong>Canais de Telegram:</strong> Combolists, stealer logs, dados vazados antes de serem listados em fóruns</li>
+                    <li><strong>Paste sites:</strong> Dados sensíveis publicados anonimamente (Pastebin, Ghostbin, PrivateBin)</li>
+                </ul>
+
+                <!-- ==================== SEÇÃO 5 ==================== -->
+                <h2 id="comparativo">Comparativo e decisão final</h2>
+
+                <h3>OSINT vs SOCMINT vs DFIR</h3>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Critério</th>
+                            <th>OSINT</th>
+                            <th>SOCMINT</th>
+                            <th>DFIR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Escopo</strong></td>
+                            <td>Fontes públicas abertas (web, registros, DNS)</td>
+                            <td>Redes sociais e plataformas de comunicação</td>
+                            <td>Dispositivos, sistemas e evidências forenses</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Momento de uso</strong></td>
+                            <td>Proativo e contínuo</td>
+                            <td>Proativo e contínuo</td>
+                            <td>Reativo (pós-incidente)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Custo</strong></td>
+                            <td>Baixo a médio</td>
+                            <td>Baixo a médio</td>
+                            <td>Alto</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tempo de execução</strong></td>
+                            <td>Horas a dias (varredura), contínuo (monitoramento)</td>
+                            <td>Horas a dias (análise), contínuo (monitoramento)</td>
+                            <td>Dias a semanas (investigação forense completa)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Profundidade</strong></td>
+                            <td>Ampla, superficial a moderada</td>
+                            <td>Moderada, focada em contexto social</td>
+                            <td>Profunda, com rigor forense</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Risco legal</strong></td>
+                            <td>Baixo (fontes públicas)</td>
+                            <td>Médio (limites de scraping e termos de uso)</td>
+                            <td>Baixo (com autorização formal)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ferramentas</strong></td>
+                            <td>Maltego, SpiderFoot, Shodan</td>
+                            <td>Gephi, Social Searcher, Twint</td>
+                            <td>EnCase, FTK, Autopsy, Volatility</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Manutenção</strong></td>
+                            <td>Atualização de fontes e ferramentas</td>
+                            <td>Adaptação a mudanças de API e políticas</td>
+                            <td>Treinamento contínuo e certificações</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Custo, tempo, profundidade, risco e manutenção</h3>
+
+                <p>
+                    A escolha entre OSINT, SOCMINT e DFIR não é excludente — são camadas complementares. A decisão depende do cenário:
+                </p>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-balance-scale" style="color:#60A5FA;margin-right:10px"></i> Como decidir</h4>
+                    <ul>
+                        <li><strong>Prevenção contínua:</strong> OSINT + SOCMINT — monitoramento permanente de exposição e ameaças</li>
+                        <li><strong>Investigação pontual:</strong> OSINT profundo — mapeamento completo de presença para due diligence ou proteção executiva</li>
+                        <li><strong>Resposta a incidente:</strong> DFIR + OSINT — investigação forense com enriquecimento de contexto via fontes abertas</li>
+                        <li><strong>Proteção completa:</strong> OSINT + SOCMINT + DFIR — as três disciplinas operando em conjunto com processos integrados</li>
+                    </ul>
+                </div>
+
+                <h4>Fatores de decisão por perfil</h4>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Perfil</th>
+                            <th>Recomendação</th>
+                            <th>Prioridade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>PME sem equipe de segurança</strong></td>
+                            <td>OSINT automatizado + monitoramento de vazamentos</td>
+                            <td>Credenciais expostas e domínios</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Empresa com SOC</strong></td>
+                            <td>OSINT + SOCMINT contínuo integrado ao <a href="../siem-implementacao-casos-uso/">SIEM</a></td>
+                            <td>Threat intel e monitoramento de marca</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Executivo / VIP</strong></td>
+                            <td>OSINT + SOCMINT + monitoramento dark web</td>
+                            <td>Impersonação, vazamentos pessoais e doxxing</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pós-incidente</strong></td>
+                            <td>DFIR + OSINT para rastreio e atribuição</td>
+                            <td>Contenção, preservação e remediação</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Conclusão</h2>
+
+                <p>
+                    Proteção digital começa com visibilidade. Sem saber o que está exposto, não há como proteger. A análise de presença digital fornece essa visibilidade — identificando pegadas, avaliando riscos e priorizando ações antes que a exposição se transforme em incidente.
+                </p>
+
+                <p>
+                    OSINT, SOCMINT e DFIR são disciplinas complementares, não concorrentes. A combinação certa depende do perfil de risco, da maturidade da organização e do cenário — prevenção contínua exige monitoramento constante; resposta a incidentes exige profundidade forense. O denominador comum é metodologia: coleta documentada, evidências preservadas e conformidade legal em cada etapa.
+                </p>
+
+                <p>
+                    A pergunta não é se você precisa de análise de presença digital — é qual nível de proteção faz sentido para a sua exposição atual.
+                </p>
+
+                <!-- FAQ Section -->
+                <h2 id="faq">Perguntas frequentes</h2>
+
+                <div class="faq-item">
+                    <h3>O que é análise de presença digital?</h3>
+                    <p>Análise de presença digital é o processo de mapear, identificar e avaliar todas as pegadas que uma pessoa ou organização deixa na internet — perfis em redes sociais, menções públicas, registros em bases de dados vazadas, domínios associados e credenciais expostas. O objetivo é entender o nível de exposição e reduzir riscos de fraude, impersonação e ataques direcionados.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Qual a diferença entre OSINT, SOCMINT e DFIR?</h3>
+                    <p>OSINT (Open Source Intelligence) coleta informações de fontes públicas abertas como sites, registros e documentos. SOCMINT (Social Media Intelligence) foca especificamente em redes sociais e plataformas de comunicação. DFIR (Digital Forensics and Incident Response) atua na resposta a incidentes com preservação forense de evidências. Cada disciplina tem escopo, ferramentas e requisitos legais distintos.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Monitoramento de presença digital é legal?</h3>
+                    <p>Sim, desde que respeite a LGPD, o Marco Civil da Internet e as normas de privacidade aplicáveis. A coleta deve ser restrita a fontes públicas ou autorizadas, com finalidade legítima documentada — proteção corporativa, compliance ou instrução processual. Dados pessoais sensíveis exigem base legal específica e o processo deve preservar cadeia de custódia para eventual uso como prova.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Como proteger VIPs e PEPs com análise digital?</h3>
+                    <p>O monitoramento contínuo de VIPs e PEPs (Pessoas Expostas Politicamente) inclui rastrear menções públicas, detectar perfis falsos que usem nome ou imagem da pessoa, identificar vazamentos de dados pessoais, monitorar dark web e fóruns por credenciais comprometidas, e alertar sobre tentativas de impersonação. Isso permite ação preventiva antes que a exposição se converta em dano reputacional ou financeiro.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>O que fazer quando credenciais são encontradas em vazamentos?</h3>
+                    <p>Ao identificar credenciais expostas, o primeiro passo é forçar a troca imediata de senha nos serviços afetados. Em seguida, verificar se a mesma senha foi reutilizada em outros sistemas, ativar autenticação multifator (MFA) onde disponível, investigar se houve acesso não autorizado com as credenciais vazadas, e documentar o incidente para compliance e eventual notificação à ANPD conforme exigido pela LGPD.</p>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons">
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/analise-presenca-digital/" target="_blank" rel="noopener" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/analise-presenca-digital/&text=Qual Proteção Digital Faz Sentido para Você - Análise de Presença Digital" target="_blank" rel="noopener" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Qual Proteção Digital Faz Sentido para Você - Análise de Presença Digital https://inteligenciabrasil.seg.br/blog/analise-presenca-digital/" target="_blank" rel="noopener" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <!-- Author Box -->
+                <div class="author-box">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="80" height="80">
+                    </picture>
+                    <div class="author-info">
+                        <h3><a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></h3>
+                        <p>Especialista em Segurança da Informação e Governança de Dados na Inteligência Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="100" height="100">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="100" height="100">
+                    </picture>
+                    <h3 style="color: #F1F5F9; margin-bottom: 15px;">Receba pesquisas e alertas sobre exposição digital</h3>
+                    <p>Assine e receba análises exclusivas sobre vazamentos, ameaças a executivos, OSINT e monitoramento de presença digital.</p>
+                    <form id="newsletter-form" class="newsletter-form">
+                        <div class="newsletter-input-group">
+                            <input type="email" id="newsletter-email" name="email" class="newsletter-input"
+                                   placeholder="Seu e-mail corporativo"
+                                   pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                                   maxlength="100" required>
+                            <button type="submit" class="newsletter-btn">
+                                <span>Inscrever</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <p id="newsletter-message"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 style="color: #F1F5F9; font-size: 2rem; margin-bottom: 20px;">Quer mapear sua exposição digital e proteger sua reputação?</h3>
+                    <p>Fale com um especialista da Inteligencia Brasil e tenha uma visao clara do seu cenario atual de presenca digital.</p>
+                    <a href="../../#contato" class="btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; padding: 15px 40px; border-radius: 8px; font-weight: 600; font-size: 1.1rem; text-decoration: none; display: inline-block;">Solicitar Avaliacao</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação, com as melhores práticas para redução de riscos digitais corporativos.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Serviços</h4>
+                        <ul>
+                            <li><a href="../../#servicos">Segurança da Informação</a></li>
+                            <li><a href="../../#servicos">Red Team / Pentest</a></li>
+                            <li><a href="../../#servicos">Blue Team / Defesa</a></li>
+                            <li><a href="../../#servicos">Resposta a Incidentes</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Serviços</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                        <span class="separator">|</span>
+                        <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/popper.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.easing.min.js"></script>
+    <script>
+        // Back to Top
+        (function() {
+            var backToTop = document.querySelector('.back-to-top');
+            if (backToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTop.style.display = 'flex';
+                    } else {
+                        backToTop.style.display = 'none';
+                    }
+                });
+                backToTop.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        })();
+
+        $(window).on('scroll load', function () {
+            if ($('.navbar').offset().top > 20) {
+                $('.navbar-custom').addClass('top-nav-collapse');
+            } else {
+                $('.navbar-custom').removeClass('top-nav-collapse');
+            }
+        });
+
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            var target = $(this.getAttribute('href'));
+            if (target.length) {
+                $('html, body').animate({ scrollTop: target.offset().top - 100 }, 500, 'easeInOutExpo');
+            }
+        });
+
+        const blockedPublicDomains = ['gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'protonmail.com', 'proton.me', 'zoho.com', 'yandex.com', 'mail.com', 'gmx.com', 'gmx.net', 'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com', 'r7.com'];
+        const blockedTempDomains = ['tempmail.com', 'temp-mail.org', 'guerrillamail.com', 'guerrillamail.org', '10minutemail.com', 'mailinator.com', 'throwaway.email', 'fakeinbox.com', 'sharklasers.com', 'spam4.me', 'grr.la', 'dispostable.com', 'maildrop.cc', 'yopmail.com', 'mohmal.com', 'getnada.com', 'tempail.com', 'emailondeck.com', 'mintemail.com'];
+
+        function isBlockedEmail(email) {
+            const domain = email.split('@')[1]?.toLowerCase();
+            if (!domain) return true;
+            return blockedPublicDomains.includes(domain) || blockedTempDomains.includes(domain);
+        }
+
+        document.getElementById('newsletter-form')?.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletter-email');
+            const messageEl = document.getElementById('newsletter-message');
+            const email = emailInput.value.trim();
+
+            if (isBlockedEmail(email)) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Por favor, utilize um e-mail corporativo.';
+                return;
+            }
+
+            try {
+                let userIP = '';
+                try {
+                    const ipResponse = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await ipResponse.json();
+                    userIP = ipData.ip;
+                } catch (e) { userIP = 'unknown'; }
+
+                await fetch('https://script.google.com/macros/s/AKfycbxhe2brHBkOdTwMblSCWEMJ-PfHrNnxN5JrEXdlp6MIEq7RgT8e2dJfVMBVSjPmO9a-/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ email: email, ip: userIP, source: 'blog-analise-presenca-digital' })
+                });
+
+                messageEl.style.color = '#22c55e';
+                messageEl.textContent = 'Inscrição realizada com sucesso!';
+                emailInput.value = '';
+            } catch (error) {
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Erro ao processar. Tente novamente.';
+            }
+        });
+    </script>
+</body>
+
+</html>
