@@ -930,7 +930,7 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="contact-form-wrapper">
-                        <form id="contactFormServico" class="contact-form" data-toggle="validator">
+                        <form id="contactFormServico" class="contact-form">
                             <div class="form-row">
                                 <input type="hidden" name="ip" id="ip">
 
@@ -1116,328 +1116,201 @@
     </a>
 
     <!-- Scripts -->
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/popper.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/jquery.easing.min.js"></script>
-    <script src="./js/morphext.min.js"></script>
-    <script src="./js/validator.min.js"></script>
+    <script src="./js/site-common.js"></script>
     <script>
-        // Spinner
-        $(window).on('load', function () {
-            $('.spinner-wrapper').fadeOut(300);
-        });
-        setTimeout(function () {
-            var spinner = document.querySelector('.spinner-wrapper');
-            if (spinner) spinner.style.display = 'none';
-        }, 3000);
+    (function() {
+        'use strict';
 
-        // Coleta de IP do visitante para o formulário
-        (function () {
-            const form = document.getElementById("contactFormServico");
-            const ipInput = document.getElementById("ip");
-            const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+        // ========== SHARED: IP FETCH ==========
+        var SCRIPT_URL = 'https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec';
+        var cachedIp = '';
 
-            if (!form || !ipInput) return;
-
-            function withTimeout(promise, ms) {
-                return Promise.race([
-                    promise,
-                    new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), ms))
-                ]);
-            }
-
-            async function fetchIp() {
-                const endpoints = [
-                    "https://api.ipify.org?format=json",
-                    "https://api64.ipify.org?format=json",
-                    "https://ipinfo.io/json"
-                ];
-
-                for (const url of endpoints) {
-                    try {
-                        const res = await withTimeout(fetch(url, { cache: "no-store" }), 2500);
-                        if (!res.ok) continue;
-
-                        const data = await res.json();
-                        const ip = data.ip || data.ip_address;
-                        if (ip && typeof ip === "string") return ip.trim();
-                    } catch (e) {
-                        // tenta o proximo endpoint
-                    }
-                }
-
-                return "";
-            }
-
-            async function ensureIpFilled() {
-                if (ipInput.value && ipInput.value.trim() !== "") return true;
-
-                const ip = await fetchIp();
-                ipInput.value = ip;
-
-                return ipInput.value.trim() !== "";
-            }
-
-            // tenta preencher cedo
-            document.addEventListener("DOMContentLoaded", function () {
-                ensureIpFilled();
-            });
-
-            // garante no submit
-            form.addEventListener("submit", async function (ev) {
-                if (ipInput.value && ipInput.value.trim() !== "") return;
-
-                ev.preventDefault();
-
-                if (submitBtn) submitBtn.disabled = true;
-
-                await ensureIpFilled();
-
-                if (submitBtn) submitBtn.disabled = false;
-
-                // mesmo que falhe (ip vazio), envia do mesmo jeito para nao travar conversao
-                form.submit();
-            });
-        })();
-
-        // Animated Headline - Morphext
-        $('#js-rotating').Morphext({
-            animation: 'fadeIn',
-            separator: ',',
-            speed: 3000,
-            complete: function () { }
-        });
-
-        // Smooth scroll
-        $(document).on('click', 'a.page-scroll', function (e) {
-            var anchor = $(this).attr('href');
-            if (anchor.startsWith('#')) {
-                e.preventDefault();
-                $('html, body').animate({ scrollTop: $(anchor).offset().top - 70 }, 500, 'easeInOutExpo');
-            }
-        });
-
-        // Navbar scroll effect - Always dark background
-        $(window).on('scroll load', function () {
-            if ($('.navbar').offset().top > 20) {
-                $('.navbar-custom').addClass('top-nav-collapse');
-            } else {
-                $('.navbar-custom').removeClass('top-nav-collapse');
-            }
-        });
-
-        // Select placeholder color control
-        $('#servico').addClass('placeholder-selected').on('change', function () {
-            if ($(this).val()) {
-                $(this).removeClass('placeholder-selected');
-            } else {
-                $(this).addClass('placeholder-selected');
-            }
-        });
-
-        // FAQ Accordion
-        $('.faq-question').on('click', function () {
-            var $item = $(this).closest('.faq-item');
-            var isOpen = $item.hasClass('active');
-
-            $('.faq-item').removeClass('active');
-            $('.faq-question').attr('aria-expanded', 'false');
-
-            if (!isOpen) {
-                $item.addClass('active');
-                $(this).attr('aria-expanded', 'true');
-            }
-        });
-
-        // Back to top
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 500) {
-                $('.back-to-top').fadeIn(300);
-            } else {
-                $('.back-to-top').fadeOut(300);
-            }
-        });
-
-        // Form submission to Google Apps Script
-        $('#contactFormServico').on('submit', function (e) {
-            e.preventDefault();
-            var form = $(this);
-            var msgDiv = $('#msgSubmit');
-            var submitBtn = form.find('.btn-submit');
-            var originalText = submitBtn.html();
-
-            // Validate checkbox - MUST be checked
-            if (!$('#termos').is(':checked')) {
-                msgDiv.removeClass('alert-success').addClass('alert-danger')
-                    .text('Você deve aceitar a Política de Privacidade e os Termos de Uso para continuar.')
-                    .parent().fadeIn();
-                setTimeout(function () { msgDiv.parent().fadeOut(); }, 5000);
-                return false;
-            }
-
-            // Collect form data
-            var formData = {
-                name: $('#nome').val(),
-                email: $('#email').val(),
-                phone: $('#telefone').val().replace(/\D/g, ''),
-                empresa: $('#empresa').val(),
-                servico: $('#servico').val(),
-                message: $('#mensagem').val(),
-                terms: 'Aceito',
-                origem: 'Página Home',
-                ip: $('#ip').val() || ''
-            };
-
-            // Validate phone - check for repeated digits
-            var phonePattern = /^(.)\1+$/;
-            if (phonePattern.test(formData.phone)) {
-                msgDiv.removeClass('alert-success').addClass('alert-danger')
-                    .text('Telefone inválido: números não podem ser todos iguais.')
-                    .parent().fadeIn();
-                setTimeout(function () { msgDiv.parent().fadeOut(); }, 5000);
-                return false;
-            }
-
-            // Disable button and show loading
-            submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Enviando...');
-
-            // POST to Google Apps Script
-            $.ajax({
-                type: 'POST',
-                url: 'https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec',
-                data: 'name=' + encodeURIComponent(formData.name) +
-                    '&email=' + encodeURIComponent(formData.email) +
-                    '&phone=' + encodeURIComponent(formData.phone) +
-                    '&empresa=' + encodeURIComponent(formData.empresa) +
-                    '&servico=' + encodeURIComponent(formData.servico) +
-                    '&message=' + encodeURIComponent(formData.message) +
-                    '&terms=' + encodeURIComponent(formData.terms) +
-                    '&origem=' + encodeURIComponent(formData.origem) +
-                    '&ip=' + encodeURIComponent(formData.ip),
-                success: function (response) {
-                    var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
-                    if (result === 'success' || result === 'ok' || response === 'success') {
-                        form[0].reset();
-                        $('#servico').addClass('placeholder-selected');
-                        msgDiv.removeClass('alert-danger').addClass('alert-success')
-                            .text('Mensagem enviada com sucesso! Entraremos em contato em breve.')
-                            .parent().fadeIn();
-                        $('input, textarea').removeClass('notEmpty');
-                    } else {
-                        var errorMsg = (typeof response === 'object') ? (response.message || response.error || 'Erro ao enviar.') : (response || 'Erro ao enviar.');
-                        msgDiv.removeClass('alert-success').addClass('alert-danger')
-                            .text(errorMsg + ' Tente novamente.')
-                            .parent().fadeIn();
-                    }
-                    submitBtn.prop('disabled', false).html(originalText);
-                    setTimeout(function () { msgDiv.parent().fadeOut(); }, 8000);
-                },
-                error: function (xhr, status, error) {
-                    msgDiv.removeClass('alert-success').addClass('alert-danger')
-                        .text('Erro de conexão. Verifique sua internet e tente novamente.')
-                        .parent().fadeIn();
-                    submitBtn.prop('disabled', false).html(originalText);
-                    setTimeout(function () { msgDiv.parent().fadeOut(); }, 8000);
-                }
-            });
-        });
-
-        // Animated Counter
-        function animateCounter($element, target, prefix, suffix, decimals) {
-            var current = 0;
-            var duration = 2000;
-            var stepTime = 20;
-            var steps = duration / stepTime;
-            var increment = target / steps;
-
-            var timer = setInterval(function () {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                var displayValue = decimals > 0 ? current.toFixed(decimals) : Math.floor(current);
-                $element.text((prefix || '') + displayValue + (suffix || ''));
-            }, stepTime);
+        function withTimeout(promise, ms) {
+            return Promise.race([
+                promise,
+                new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout')); }, ms); })
+            ]);
         }
 
-        // Intersection Observer for counters
-        function initCounters() {
-            var counters = document.querySelectorAll('.counter');
-            var observerOptions = {
-                threshold: 0.5,
-                rootMargin: '0px'
-            };
+        async function fetchIp() {
+            if (cachedIp) return cachedIp;
+            var endpoints = [
+                'https://api.ipify.org?format=json',
+                'https://api64.ipify.org?format=json',
+                'https://ipinfo.io/json'
+            ];
+            for (var i = 0; i < endpoints.length; i++) {
+                try {
+                    var res = await withTimeout(fetch(endpoints[i], { cache: 'no-store' }), 2500);
+                    if (!res.ok) continue;
+                    var data = await res.json();
+                    var ip = data.ip || data.ip_address;
+                    if (ip && typeof ip === 'string') {
+                        cachedIp = ip.trim();
+                        return cachedIp;
+                    }
+                } catch (e) {}
+            }
+            return '';
+        }
 
-            var observer = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
+        // Pre-fetch IP
+        fetchIp().then(function(ip) {
+            var ipInput = document.getElementById('ip');
+            var nlIpInput = document.getElementById('newsletterIp');
+            if (ipInput) ipInput.value = ip;
+            if (nlIpInput) nlIpInput.value = ip;
+        });
+
+        // ========== TEXT ROTATOR (replaces Morphext) ==========
+        var rotatingEl = document.getElementById('js-rotating');
+        if (rotatingEl) {
+            var words = rotatingEl.textContent.split(',').map(function(w) { return w.trim(); });
+            if (words.length > 1) {
+                var wordIndex = 0;
+                rotatingEl.textContent = words[0];
+                rotatingEl.style.transition = 'opacity 0.5s';
+                setInterval(function() {
+                    rotatingEl.style.opacity = '0';
+                    setTimeout(function() {
+                        wordIndex = (wordIndex + 1) % words.length;
+                        rotatingEl.textContent = words[wordIndex];
+                        rotatingEl.style.opacity = '1';
+                    }, 500);
+                }, 3000);
+            }
+        }
+
+        // ========== SELECT PLACEHOLDER ==========
+        var servicoSelect = document.getElementById('servico');
+        if (servicoSelect) {
+            servicoSelect.classList.add('placeholder-selected');
+            servicoSelect.addEventListener('change', function() {
+                this.classList.toggle('placeholder-selected', !this.value);
+            });
+        }
+
+        // ========== CONTACT FORM ==========
+        var contactForm = document.getElementById('contactFormServico');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                if (!contactForm.checkValidity()) {
+                    contactForm.reportValidity();
+                    return;
+                }
+
+                var msgDiv = document.getElementById('msgSubmit');
+                var formMessage = msgDiv ? msgDiv.parentElement : null;
+                var submitBtn = contactForm.querySelector('.btn-submit');
+                var originalText = submitBtn ? submitBtn.innerHTML : '';
+
+                function showMsg(type, text, delay) {
+                    if (!msgDiv) return;
+                    msgDiv.className = 'alert alert-' + type;
+                    msgDiv.textContent = text;
+                    if (formMessage) formMessage.style.display = 'block';
+                    setTimeout(function() { if (formMessage) formMessage.style.display = 'none'; }, delay || 5000);
+                }
+
+                // Validate checkbox
+                var termos = document.getElementById('termos');
+                if (!termos || !termos.checked) {
+                    showMsg('danger', 'Você deve aceitar a Política de Privacidade e os Termos de Uso para continuar.');
+                    return;
+                }
+
+                // Collect data
+                var formData = {
+                    name: document.getElementById('nome').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('telefone').value.replace(/\D/g, ''),
+                    empresa: document.getElementById('empresa').value,
+                    servico: document.getElementById('servico').value,
+                    message: document.getElementById('mensagem').value,
+                    terms: 'Aceito',
+                    origem: 'Página Home',
+                    ip: ''
+                };
+
+                // Validate phone - repeated digits
+                if (/^(.)\1+$/.test(formData.phone)) {
+                    showMsg('danger', 'Telefone inválido: números não podem ser todos iguais.');
+                    return;
+                }
+
+                // Ensure IP
+                var ipInput = document.getElementById('ip');
+                formData.ip = (ipInput && ipInput.value) ? ipInput.value : await fetchIp();
+
+                // Disable button
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                }
+
+                var body = Object.keys(formData).map(function(key) {
+                    return key + '=' + encodeURIComponent(formData[key]);
+                }).join('&');
+
+                try {
+                    var res = await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: body
+                    });
+                    var response = await res.json();
+                    var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
+                    if (result === 'success' || result === 'ok') {
+                        contactForm.reset();
+                        if (servicoSelect) servicoSelect.classList.add('placeholder-selected');
+                        showMsg('success', 'Mensagem enviada com sucesso! Entraremos em contato em breve.', 8000);
+                    } else {
+                        var errorMsg = (typeof response === 'object') ? (response.message || response.error || 'Erro ao enviar.') : 'Erro ao enviar.';
+                        showMsg('danger', errorMsg + ' Tente novamente.', 8000);
+                    }
+                } catch (err) {
+                    showMsg('danger', 'Erro de conexão. Verifique sua internet e tente novamente.', 8000);
+                }
+                if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = originalText; }
+            });
+        }
+
+        // ========== ANIMATED COUNTERS ==========
+        var counters = document.querySelectorAll('.counter');
+        if (counters.length && 'IntersectionObserver' in window) {
+            var counterObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
                     if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
                         entry.target.classList.add('counted');
-                        var $el = $(entry.target);
-                        var target = parseFloat($el.data('target'));
-                        var prefix = $el.data('prefix') || '';
-                        var suffix = $el.data('suffix') || '';
-                        var decimals = parseInt($el.data('decimals')) || 0;
-                        animateCounter($el, target, prefix, suffix, decimals);
+                        var el = entry.target;
+                        var target = parseFloat(el.getAttribute('data-target'));
+                        var prefix = el.getAttribute('data-prefix') || '';
+                        var suffix = el.getAttribute('data-suffix') || '';
+                        var decimals = parseInt(el.getAttribute('data-decimals')) || 0;
+                        var current = 0;
+                        var steps = 100;
+                        var increment = target / steps;
+                        var timer = setInterval(function() {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            var displayValue = decimals > 0 ? current.toFixed(decimals) : Math.floor(current);
+                            el.textContent = prefix + displayValue + suffix;
+                        }, 20);
                     }
                 });
-            }, observerOptions);
-
-            counters.forEach(function (counter) {
-                observer.observe(counter);
-            });
+            }, { threshold: 0.5 });
+            counters.forEach(function(counter) { counterObserver.observe(counter); });
         }
 
-        // Initialize counters when DOM is ready
-        $(document).ready(function () {
-            initCounters();
-        });
-
-        // Newsletter Form Submission with Email Validation
-        (function() {
-            const newsletterForm = document.getElementById('newsletterForm');
-            if (!newsletterForm) return;
-
-            const newsletterIpInput = document.getElementById('newsletterIp');
-
-            // Função para buscar IP
-            function withTimeout(promise, ms) {
-                return Promise.race([
-                    promise,
-                    new Promise(function(_, reject) { setTimeout(function() { reject(new Error("timeout")); }, ms); })
-                ]);
-            }
-
-            async function fetchNewsletterIp() {
-                const endpoints = [
-                    "https://api.ipify.org?format=json",
-                    "https://api64.ipify.org?format=json",
-                    "https://ipinfo.io/json"
-                ];
-
-                for (const url of endpoints) {
-                    try {
-                        const res = await withTimeout(fetch(url, { cache: "no-store" }), 2500);
-                        if (!res.ok) continue;
-
-                        const data = await res.json();
-                        const ip = data.ip || data.ip_address;
-                        if (ip && typeof ip === "string") return ip.trim();
-                    } catch (e) {
-                        // tenta o proximo endpoint
-                    }
-                }
-                return "";
-            }
-
-            // Tenta preencher IP ao carregar
-            fetchNewsletterIp().then(function(ip) {
-                if (newsletterIpInput) newsletterIpInput.value = ip;
-            });
-
-            // Lista de domínios públicos (e-mails pessoais) bloqueados
-            const publicDomains = [
+        // ========== NEWSLETTER FORM ==========
+        var newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+            var publicDomains = [
                 'gmail.com', 'gmail.com.br', 'googlemail.com',
                 'outlook.com', 'outlook.com.br', 'hotmail.com', 'hotmail.com.br', 'live.com', 'live.com.br', 'msn.com',
                 'yahoo.com', 'yahoo.com.br', 'ymail.com', 'rocketmail.com',
@@ -1449,9 +1322,7 @@
                 'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com',
                 'r7.com', 'zipmail.com.br', 'oi.com.br', 'pop.com.br'
             ];
-
-            // Lista de domínios de e-mail temporários bloqueados
-            const tempDomains = [
+            var tempDomains = [
                 'tempmail.com', 'temp-mail.org', 'tempmail.net', 'temp-mail.io',
                 'guerrillamail.com', 'guerrillamail.org', 'guerrillamail.net', 'guerrillamail.biz', 'guerrillamailblock.com',
                 '10minutemail.com', '10minutemail.net', '10minmail.com',
@@ -1473,40 +1344,23 @@
                 'tempr.email', 'fakemail.net', 'emailfake.com',
                 'crazymailing.com', 'tempsky.com', 'tempmailaddress.com'
             ];
+            var suspiciousPatterns = [/temp/i, /fake/i, /trash/i, /spam/i, /disposable/i, /throwaway/i, /mailinator/i, /guerrilla/i, /10min/i, /burner/i, /noreply/i, /no-reply/i];
 
             function validateNewsletterEmail(email) {
-                const emailLower = email.toLowerCase().trim();
-                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-                // Verifica formato básico
-                if (!emailRegex.test(emailLower)) {
+                var emailLower = email.toLowerCase().trim();
+                if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailLower)) {
                     return { valid: false, message: 'Por favor, informe um e-mail válido.' };
                 }
-
-                // Extrai o domínio
-                const domain = emailLower.split('@')[1];
-
-                // Verifica se é domínio público
-                if (publicDomains.includes(domain)) {
+                var domain = emailLower.split('@')[1];
+                if (publicDomains.indexOf(domain) !== -1) {
                     return { valid: false, message: 'Por favor, utilize seu e-mail corporativo. E-mails pessoais (Gmail, Outlook, etc.) não são aceitos.' };
                 }
-
-                // Verifica se é domínio temporário
-                if (tempDomains.includes(domain) || tempDomains.some(function(d) { return domain.includes(d); })) {
+                if (tempDomains.indexOf(domain) !== -1 || tempDomains.some(function(d) { return domain.indexOf(d) !== -1; })) {
                     return { valid: false, message: 'E-mails temporários não são permitidos. Por favor, use seu e-mail corporativo.' };
                 }
-
-                // Verifica padrões suspeitos de domínios temporários
-                var suspiciousPatterns = [
-                    /temp/i, /fake/i, /trash/i, /spam/i, /disposable/i,
-                    /throwaway/i, /mailinator/i, /guerrilla/i, /10min/i,
-                    /burner/i, /noreply/i, /no-reply/i
-                ];
-
-                if (suspiciousPatterns.some(function(pattern) { return pattern.test(domain); })) {
+                if (suspiciousPatterns.some(function(p) { return p.test(domain); })) {
                     return { valid: false, message: 'Este domínio de e-mail não é permitido. Por favor, use seu e-mail corporativo.' };
                 }
-
                 return { valid: true };
             }
 
@@ -1515,64 +1369,53 @@
                 msgDiv.textContent = message;
                 msgDiv.className = 'newsletter-message ' + type;
                 msgDiv.style.display = 'block';
-
                 if (type === 'success') {
-                    setTimeout(function() {
-                        msgDiv.style.display = 'none';
-                    }, 5000);
+                    setTimeout(function() { msgDiv.style.display = 'none'; }, 5000);
                 }
             }
 
             newsletterForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
-
                 var emailInput = document.getElementById('newsletterEmail');
                 var submitBtn = newsletterForm.querySelector('.newsletter-btn');
                 var originalText = submitBtn.innerHTML;
                 var email = emailInput.value.trim();
 
-                // Validação de e-mail
-                var emailValidation = validateNewsletterEmail(email);
-                if (!emailValidation.valid) {
-                    showNewsletterMessage(emailValidation.message, 'error');
+                var validation = validateNewsletterEmail(email);
+                if (!validation.valid) {
+                    showNewsletterMessage(validation.message, 'error');
                     return;
                 }
 
-                // Desabilita botão e mostra loading
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
 
-                // Garante que o IP foi coletado
-                var ip = newsletterIpInput ? newsletterIpInput.value : '';
-                if (!ip) {
-                    ip = await fetchNewsletterIp();
-                    if (newsletterIpInput) newsletterIpInput.value = ip;
-                }
+                var ip = cachedIp || await fetchIp();
+                var nlIpInput = document.getElementById('newsletterIp');
+                if (nlIpInput) nlIpInput.value = ip;
 
-                // Envia para o Google Apps Script
-                $.ajax({
-                    type: 'POST',
-                    url: 'https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec',
-                    data: 'email=' + encodeURIComponent(email) + '&origem=Newsletter Home&servico=Newsletter&ip=' + encodeURIComponent(ip),
-                    success: function(response) {
-                        var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
-                        if (result === 'success' || result === 'ok' || response === 'success') {
-                            newsletterForm.reset();
-                            showNewsletterMessage('Inscrição realizada com sucesso! Você receberá nossos conteúdos em breve.', 'success');
-                        } else {
-                            showNewsletterMessage('Erro ao realizar inscrição. Tente novamente.', 'error');
-                        }
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = originalText;
-                    },
-                    error: function() {
-                        showNewsletterMessage('Erro de conexão. Verifique sua internet e tente novamente.', 'error');
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = originalText;
+                try {
+                    var res = await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: 'email=' + encodeURIComponent(email) + '&origem=Newsletter Home&servico=Newsletter&ip=' + encodeURIComponent(ip)
+                    });
+                    var response = await res.json();
+                    var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
+                    if (result === 'success' || result === 'ok') {
+                        newsletterForm.reset();
+                        showNewsletterMessage('Inscrição realizada com sucesso! Você receberá nossos conteúdos em breve.', 'success');
+                    } else {
+                        showNewsletterMessage('Erro ao realizar inscrição. Tente novamente.', 'error');
                     }
-                });
+                } catch (err) {
+                    showNewsletterMessage('Erro de conexão. Verifique sua internet e tente novamente.', 'error');
+                }
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
             });
-        })();
+        }
+    })();
     </script>
 </body>
 
