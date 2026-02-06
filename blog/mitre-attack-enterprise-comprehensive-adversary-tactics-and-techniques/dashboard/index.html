@@ -24587,37 +24587,7 @@ function exportData(){const data={exportDate:new Date().toISOString(),version:da
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.key==='/'&&!e.ctrlKey&&!e.metaKey){e.preventDefault();document.getElementById('globalSearch').focus()}})</script>
 
 <!-- Site Scripts -->
-<script src="../../../js/jquery.min.js"></script>
-<script src="../../../js/popper.min.js"></script>
-<script src="../../../js/bootstrap.min.js"></script>
-<script>
-
-        // Back to Top
-        (function() {
-            var backToTop = document.querySelector('.back-to-top');
-            if (backToTop) {
-                window.addEventListener('scroll', function() {
-                    if (window.pageYOffset > 300) {
-                        backToTop.style.display = 'flex';
-                    } else {
-                        backToTop.style.display = 'none';
-                    }
-                });
-                backToTop.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-        })();
-
-            $(window).on('scroll load', function () {
-        if ($('.navbar').offset().top > 20) {
-            $('.navbar-custom').addClass('top-nav-collapse');
-        } else {
-            $('.navbar-custom').removeClass('top-nav-collapse');
-        }
-    });
-</script>
+<script src="../../../js/site-common.js"></script>
 
 <!-- Newsletter Script -->
 <script>
@@ -24729,26 +24699,27 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.ke
             if (newsletterIpInput) newsletterIpInput.value = ip;
         }
 
-        $.ajax({
-            type: 'POST',
-            url: 'https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec',
-            data: 'email=' + encodeURIComponent(email) + '&origem=MITRE ATT%26CK Dashboard&servico=Newsletter&ip=' + encodeURIComponent(ip),
-            success: function(response) {
-                var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
-                if (result === 'success' || result === 'ok' || response === 'success') {
-                    newsletterForm.reset();
-                    showNewsletterMessage('Inscricao realizada com sucesso! Voce recebera nossos conteudos em breve.', 'success');
-                } else {
-                    showNewsletterMessage('Erro ao realizar inscricao. Tente novamente.', 'error');
-                }
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-            },
-            error: function() {
-                showNewsletterMessage('Erro de conexao. Verifique sua internet e tente novamente.', 'error');
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
+        fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'email=' + encodeURIComponent(email) + '&origem=MITRE ATT%26CK Dashboard&servico=Newsletter&ip=' + encodeURIComponent(ip)
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(response) {
+            var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
+            if (result === 'success' || result === 'ok') {
+                newsletterForm.reset();
+                showNewsletterMessage('Inscricao realizada com sucesso! Voce recebera nossos conteudos em breve.', 'success');
+            } else {
+                showNewsletterMessage('Erro ao realizar inscricao. Tente novamente.', 'error');
             }
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        })
+        .catch(function() {
+            showNewsletterMessage('Erro de conexao. Verifique sua internet e tente novamente.', 'error');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
         });
     });
 })();

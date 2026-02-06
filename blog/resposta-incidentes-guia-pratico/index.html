@@ -601,43 +601,7 @@
     <a href="#" class="back-to-top" aria-label="Voltar ao topo">
         <i class="fas fa-chevron-up"></i>
     </a>
-    <script src="../../js/jquery.min.js"></script>
-    <script src="../../js/popper.min.js"></script>
-    <script src="../../js/bootstrap.min.js"></script>
-    <script src="../../js/jquery.easing.min.js"></script>
-    <script>
-
-        // Back to Top
-        (function() {
-            var backToTop = document.querySelector('.back-to-top');
-            if (backToTop) {
-                window.addEventListener('scroll', function() {
-                    if (window.pageYOffset > 300) {
-                        backToTop.style.display = 'flex';
-                    } else {
-                        backToTop.style.display = 'none';
-                    }
-                });
-                backToTop.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-        })();
-
-                $(window).on('scroll load', function() {
-            if ($('.navbar').offset().top > 20) { $('.navbar-custom').addClass('top-nav-collapse'); }
-            else { $('.navbar-custom').removeClass('top-nav-collapse'); }
-        });
-        $('a[href^="#"]').on('click', function(e) {
-            e.preventDefault();
-            var target = $(this.getAttribute('href'));
-            if (target.length) { $('html, body').animate({ scrollTop: target.offset().top - 100 }, 500, 'easeInOutExpo'); }
-        });
-        document.querySelectorAll('.faq-question').forEach(function(q) {
-            q.addEventListener('click', function() { this.parentElement.classList.toggle('active'); });
-        });
-    </script>
+    <script src="../../js/site-common.js"></script>
 </body>
 
 </html>

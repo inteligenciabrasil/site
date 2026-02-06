@@ -2104,25 +2104,15 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/popper.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.easing.min.js"></script>
+    <script src="../js/site-common.js"></script>
     <script>
-        // Navbar scroll effect
-        $(window).on('scroll load', function () {
-            if ($('.navbar').offset().top > 20) {
-                $('.navbar-custom').addClass('top-nav-collapse');
-            } else {
-                $('.navbar-custom').removeClass('top-nav-collapse');
-            }
-        });
-
         // Filter tags
-        $('.filter-tag').on('click', function() {
-            $('.filter-tag').removeClass('active');
-            $(this).addClass('active');
-            clearSearch();
+        document.querySelectorAll('.filter-tag').forEach(function(tag) {
+            tag.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tag').forEach(function(t) { t.classList.remove('active'); });
+                this.classList.add('active');
+                clearSearch();
+            });
         });
 
         // Search functionality

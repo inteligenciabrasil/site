@@ -436,68 +436,7 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="../../js/jquery.min.js"></script>
-    <script src="../../js/popper.min.js"></script>
-    <script src="../../js/bootstrap.min.js"></script>
-    <script src="../../js/jquery.easing.min.js"></script>
-    <script>
-        $(window).on('scroll load', function () {
-            if ($('.navbar').offset().top > 20) { $('.navbar-custom').addClass('top-nav-collapse'); }
-            else { $('.navbar-custom').removeClass('top-nav-collapse'); }
-        });
-
-        $('a[href^="#"]').on('click', function(e) {
-            e.preventDefault();
-            var target = $(this.getAttribute('href'));
-            if (target.length) { $('html, body').animate({ scrollTop: target.offset().top - 100 }, 500, 'easeInOutExpo'); }
-        });
-
-        const blockedPublicDomains = ['gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'me.com', 'mac.com', 'aol.com', 'protonmail.com', 'proton.me', 'zoho.com', 'yandex.com', 'mail.com', 'gmx.com', 'gmx.net', 'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com', 'r7.com'];
-        const blockedTempDomains = ['tempmail.com', 'temp-mail.org', 'guerrillamail.com', 'guerrillamail.org', '10minutemail.com', 'mailinator.com', 'throwaway.email', 'fakeinbox.com', 'sharklasers.com', 'spam4.me', 'grr.la', 'dispostable.com', 'maildrop.cc', 'yopmail.com', 'mohmal.com', 'getnada.com', 'tempail.com', 'emailondeck.com', 'mintemail.com'];
-
-        function isBlockedEmail(email) {
-            const domain = email.split('@')[1]?.toLowerCase();
-            if (!domain) return true;
-            return blockedPublicDomains.includes(domain) || blockedTempDomains.includes(domain);
-        }
-
-        document.getElementById('newsletter-form')?.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('newsletter-email');
-            const messageEl = document.getElementById('newsletter-message');
-            const email = emailInput.value.trim();
-
-            if (isBlockedEmail(email)) {
-                messageEl.style.color = '#ef4444';
-                messageEl.textContent = 'Por favor, utilize um e-mail corporativo.';
-                return;
-            }
-
-            try {
-                let userIP = '';
-                try {
-                    const ipResponse = await fetch('https://api.ipify.org?format=json');
-                    const ipData = await ipResponse.json();
-                    userIP = ipData.ip;
-                } catch (e) { userIP = 'unknown'; }
-
-                await fetch('https://script.google.com/macros/s/AKfycbxhe2brHBkOdTwMblSCWEMJ-PfHrNnxN5JrEXdlp6MIEq7RgT8e2dJfVMBVSjPmO9a-/exec', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams({ email: email, ip: userIP, source: 'blog-metadados' })
-                });
-
-                messageEl.style.color = '#22c55e';
-                messageEl.textContent = 'Inscrição realizada com sucesso!';
-                emailInput.value = '';
-            } catch (error) {
-                messageEl.style.color = '#ef4444';
-                messageEl.textContent = 'Erro ao processar. Tente novamente.';
-            }
-        });
-    </script>
+    <script src="../../js/site-common.js"></script>
 </body>
 
 </html>

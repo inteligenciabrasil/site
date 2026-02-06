@@ -626,69 +626,7 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="../../js/jquery.min.js"></script>
-    <script src="../../js/popper.min.js"></script>
-    <script src="../../js/bootstrap.min.js"></script>
-    <script src="../../js/jquery.easing.min.js"></script>
-    <script>
-        // Navbar scroll effect
-        $(window).on('scroll load', function () {
-            if ($('.navbar').offset().top > 20) {
-                $('.navbar-custom').addClass('top-nav-collapse');
-            } else {
-                $('.navbar-custom').removeClass('top-nav-collapse');
-            }
-        });
-
-        // Smooth scroll for anchor links
-        $('a[href^="#"]').on('click', function (e) {
-            e.preventDefault();
-            var target = $(this.hash);
-            if (target.length) {
-                $('html, body').animate({
-                    scrollTop: target.offset().top - 80
-                }, 800);
-            }
-        });
-
-        // Newsletter handling
-        const blockedDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'live.com', 'msn.com', 'aol.com', 'icloud.com', 'protonmail.com', 'mail.com', 'zoho.com', 'yandex.com', 'gmx.com', 'tutanota.com', 'fastmail.com', 'hushmail.com', 'mailfence.com', 'runbox.com', 'posteo.de', 'mailbox.org', 'disroot.org', 'riseup.net', 'autistici.org', 'aktivix.org', 'espiv.net', 'systemli.org', 'nadir.org', 'immerda.ch', 'shelter.is', 'cock.li', 'airmail.cc', 'guerrillamail.com', 'tempmail.com', 'throwaway.email', '10minutemail.com', 'mailinator.com', 'sharklasers.com', 'guerrillamail.info', 'grr.la', 'guerrillamail.biz', 'guerrillamail.de', 'guerrillamail.net', 'guerrillamail.org', 'spam4.me', 'trashmail.com', 'mytrashmail.com', 'mt2009.com', 'thankyou2010.com', 'trash2009.com', 'mt2014.com', 'tempinbox.com', 'dispostable.com', 'mintemail.com', 'tempr.email', 'temp-mail.org', 'fakeinbox.com', 'emailondeck.com', 'getnada.com', 'moakt.com', 'tempail.com', 'burnermail.io', 'maildrop.cc'];
-
-        function handleNewsletterSubmit(e) {
-            e.preventDefault();
-            const email = document.getElementById('newsletterEmail').value.trim().toLowerCase();
-            const messageEl = document.getElementById('newsletterMessage');
-
-            const domain = email.split('@')[1];
-            if (blockedDomains.includes(domain)) {
-                messageEl.innerHTML = '<span style="color: #ef4444;">Por favor, utilize seu e-mail corporativo.</span>';
-                return false;
-            }
-
-            // Get IP and submit
-            fetch('https://api.ipify.org?format=json')
-                .then(r => r.json())
-                .then(data => {
-                    const formData = {
-                        email: email,
-                        source: 'blog-mitre-attack',
-                        ip: data.ip,
-                        timestamp: new Date().toISOString(),
-                        page: window.location.href
-                    };
-                    console.log('Newsletter signup:', formData);
-                    messageEl.innerHTML = '<span style="color: #10b981;">Inscrição realizada com sucesso!</span>';
-                    document.getElementById('newsletterEmail').value = '';
-                })
-                .catch(() => {
-                    messageEl.innerHTML = '<span style="color: #10b981;">Inscrição realizada com sucesso!</span>';
-                    document.getElementById('newsletterEmail').value = '';
-                });
-
-            return false;
-        }
-    </script>
+    <script src="../../js/site-common.js"></script>
 </body>
 
 </html>
