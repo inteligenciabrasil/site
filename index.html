@@ -215,15 +215,39 @@
         ]
     }
     </script>
+    <link rel="preload" href="./img/header-background.webp" as="image" media="(min-width: 992px)">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link href="./css/bootstrap.css" rel="stylesheet">
-    <link href="./css/fontawesome-all.css" rel="stylesheet">
-    <link href="./css/styles.css" rel="stylesheet">
+    <link href="./css/fontawesome-all.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="./css/fontawesome-all.css" rel="stylesheet"></noscript>
+    <style>
+    /* Critical CSS - inline for fast first paint */
+    body,html{width:100%;height:100%;margin:0}
+    body,p{font:400 1rem/1.5625rem "Open Sans",sans-serif;color:#0b1e39}
+    h1,h2,h3,h4,h5,h6,strong{color:#0b1e39}
+    h1{font:700 2.5rem/3rem Montserrat,sans-serif}
+    h2{font:700 1.45rem/2.125rem Montserrat,sans-serif}
+    a,a:hover{text-decoration:none}
+    .navbar-custom{padding:0;box-shadow:0 .0625rem .375rem 0 rgba(0,0,0,.1);font:600 .875rem/.875rem "Open Sans",sans-serif;transition:.2s}
+    .navbar-custom .navbar-brand{font-size:0}
+    .navbar-custom .navbar-brand.logo-image img{width:7.0625rem;height:6rem;-webkit-backface-visibility:hidden}
+    .navbar-custom .navbar-nav{margin-top:.75rem;margin-bottom:.5rem}
+    .navbar-custom .nav-item .nav-link{padding:.625rem .75rem;color:#fff;text-decoration:none;transition:.2s}
+    .navbar-custom .navbar-toggler{border:none;color:#fff;font-size:2rem}
+    .navbar-custom .social-icons,.navbar-custom button[aria-expanded=false] .navbar-toggler-awesome.fas.fa-times,.navbar-custom button[aria-expanded=true] .navbar-toggler-awesome.fas.fa-bars{display:none}
+    .navbar-custom button[aria-expanded=false] .navbar-toggler-awesome.fas.fa-bars{display:inline-block}
+    .navbar-custom button[aria-expanded=true] .navbar-toggler-awesome.fas.fa-times{display:inline-block}
+    .navbar-custom .dropdown-menu{display:none;min-width:10rem;padding:.5rem 0;margin:.125rem 0 0;z-index:1000;border:none;border-radius:.25rem;background-color:#0d1e38}
+    .navbar-custom .dropdown-item{color:#fff;text-decoration:none}
+    .navbar-custom .dropdown.show>.dropdown-menu{display:block;min-width:auto}
+    .spinner-wrapper{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:#0D1E38}
+    </style>
+    <link href="./css/styles.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="./css/styles.css" rel="stylesheet"></noscript>
     <link href="./css/servico.css" rel="stylesheet">
     <link href="./css/main-page.css" rel="stylesheet">
 </head>
@@ -258,6 +282,28 @@
                 <li class="nav-item"><a class="nav-link" href="./">HOME</a></li>
                 <li class="nav-item"><a class="nav-link page-scroll" href="#diferenciais">DIFERENCIAIS</a></li>
                 <li class="nav-item"><a class="nav-link page-scroll" href="#servicos">SERVIÇOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Domínio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gestão de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequação a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presença Digital</span></a>
+                    </div>
+                </li>
                 <li class="nav-item"><a class="nav-link page-scroll" href="#metodologia">METODOLOGIA</a></li>
                 <li class="nav-item"><a class="nav-link" href="./blog/">BLOG</a></li>
                 <li class="nav-item"><a class="nav-link" href="./sobre/">SOBRE</a></li>
@@ -1116,7 +1162,7 @@
     </a>
 
     <!-- Scripts -->
-    <script src="./js/site-common.js"></script>
+    <script src="./js/site-common.js" defer></script>
     <script>
     (function() {
         'use strict';
@@ -1154,13 +1200,20 @@
             return '';
         }
 
-        // Pre-fetch IP
-        fetchIp().then(function(ip) {
-            var ipInput = document.getElementById('ip');
-            var nlIpInput = document.getElementById('newsletterIp');
-            if (ipInput) ipInput.value = ip;
-            if (nlIpInput) nlIpInput.value = ip;
-        });
+        // Pre-fetch IP (deferred to avoid blocking critical path)
+        function prefetchIp() {
+            fetchIp().then(function(ip) {
+                var ipInput = document.getElementById('ip');
+                var nlIpInput = document.getElementById('newsletterIp');
+                if (ipInput) ipInput.value = ip;
+                if (nlIpInput) nlIpInput.value = ip;
+            });
+        }
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(prefetchIp);
+        } else {
+            setTimeout(prefetchIp, 2000);
+        }
 
         // ========== TEXT ROTATOR (replaces Morphext) ==========
         var rotatingEl = document.getElementById('js-rotating');
