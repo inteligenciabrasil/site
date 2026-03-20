@@ -24,7 +24,7 @@
 
     // Close navbar on nav-link click (mobile UX)
     document.addEventListener('click', function (e) {
-        if (!e.target.closest('.navbar-nav .nav-link')) return;
+        if (!e.target.closest('.navbar-nav .nav-link') || e.target.closest('.dropdown-toggle')) return;
         var openNav = document.querySelector('.navbar-collapse.show');
         if (!openNav) return;
         openNav.classList.remove('show');
@@ -32,6 +32,68 @@
         if (tog) {
             tog.classList.add('collapsed');
             tog.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // ========== 1b. DROPDOWN TOGGLE (mobile + keyboard) ==========
+    // Click toggle for touch devices & keyboard accessibility
+    document.addEventListener('click', function (e) {
+        var toggle = e.target.closest('.dropdown-toggle');
+        if (!toggle) {
+            // Click outside: close all open dropdowns
+            document.querySelectorAll('.navbar-custom .dropdown.show').forEach(function (d) {
+                d.classList.remove('show');
+                d.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+            });
+            return;
+        }
+        e.preventDefault();
+        var dropdown = toggle.closest('.dropdown');
+        var isOpen = dropdown.classList.contains('show');
+
+        // Close other open dropdowns
+        document.querySelectorAll('.navbar-custom .dropdown.show').forEach(function (d) {
+            d.classList.remove('show');
+            d.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+        });
+
+        // Toggle current
+        if (!isOpen) {
+            dropdown.classList.add('show');
+            toggle.setAttribute('aria-expanded', 'true');
+        }
+    });
+
+    // Keyboard navigation for dropdown
+    document.addEventListener('keydown', function (e) {
+        var dropdown = e.target.closest('.navbar-custom .dropdown');
+        if (!dropdown) return;
+
+        if (e.key === 'Escape') {
+            dropdown.classList.remove('show');
+            dropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+            dropdown.querySelector('.dropdown-toggle').focus();
+        }
+
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            var items = dropdown.querySelectorAll('.dropdown-item');
+            if (!items.length) return;
+            var idx = Array.prototype.indexOf.call(items, document.activeElement);
+            if (e.key === 'ArrowDown') idx = idx < items.length - 1 ? idx + 1 : 0;
+            else idx = idx > 0 ? idx - 1 : items.length - 1;
+            items[idx].focus();
+        }
+
+        if (e.key === 'Enter' && e.target.classList.contains('dropdown-toggle')) {
+            e.preventDefault();
+            var isOpen = dropdown.classList.contains('show');
+            dropdown.classList.toggle('show', !isOpen);
+            e.target.setAttribute('aria-expanded', String(!isOpen));
+            if (!isOpen) {
+                var first = dropdown.querySelector('.dropdown-item');
+                if (first) first.focus();
+            }
         }
     });
 
