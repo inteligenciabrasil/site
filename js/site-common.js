@@ -100,17 +100,20 @@
     // ========== 2. NAVBAR SCROLL EFFECT ==========
     var navbarCustom = document.querySelector('.navbar-custom');
     var scrollTicking = false;
+    var lastScrollY = 0;
     function handleNavScroll() {
-        navbarCustom.classList.toggle('top-nav-collapse', window.pageYOffset > 20);
+        navbarCustom.classList.toggle('top-nav-collapse', lastScrollY > 20);
         scrollTicking = false;
     }
     if (navbarCustom) {
         window.addEventListener('scroll', function () {
+            lastScrollY = window.pageYOffset;
             if (!scrollTicking) {
                 requestAnimationFrame(handleNavScroll);
                 scrollTicking = true;
             }
         }, { passive: true });
+        lastScrollY = window.pageYOffset;
         handleNavScroll();
     }
 
