@@ -331,14 +331,15 @@
     </a>
     <script src="../../js/site-common.js"></script>
 
-    <!-- VLibras - Acessibilidade em Libras -->
+    <!-- VLibras - Acessibilidade em Libras (lazy-loaded) -->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
         <div vw-plugin-wrapper>
             <div class="vw-plugin-top-wrapper"></div>
         </div>
     </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+    <script>
+    (function(){function loadVLibras(){var s=document.createElement('script');s.src='https://vlibras.gov.br/app/vlibras-plugin.js';s.onload=function(){new window.VLibras.Widget('https://vlibras.gov.br/app')};document.body.appendChild(s)}if('requestIdleCallback' in window){window.addEventListener('load',function(){requestIdleCallback(loadVLibras)})}else{window.addEventListener('load',function(){setTimeout(loadVLibras,2000)})}})();
+    </script>
 </body>
 </html>

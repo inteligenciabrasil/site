@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
@@ -579,14 +579,15 @@
     </a>
     <script src="../../js/site-common.js"></script>
 
-    <!-- VLibras - Acessibilidade em Libras -->
+    <!-- VLibras - Acessibilidade em Libras (lazy-loaded) -->
     <div vw class="enabled">
         <div vw-access-button class="active"></div>
         <div vw-plugin-wrapper>
             <div class="vw-plugin-top-wrapper"></div>
         </div>
     </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+    <script>
+    (function(){function loadVLibras(){var s=document.createElement('script');s.src='https://vlibras.gov.br/app/vlibras-plugin.js';s.onload=function(){new window.VLibras.Widget('https://vlibras.gov.br/app')};document.body.appendChild(s)}if('requestIdleCallback' in window){window.addEventListener('load',function(){requestIdleCallback(loadVLibras)})}else{window.addEventListener('load',function(){setTimeout(loadVLibras,2000)})}})();
+    </script>
 </body>
 </html>
