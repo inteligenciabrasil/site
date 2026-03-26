@@ -2439,6 +2439,70 @@ blockquote cite {
     background: transparent;
 }
 
+/* Mid-article CTA */
+.mid-article-cta {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #0f2035 0%, #0D1E38 100%);
+    border: 1px solid rgba(96, 165, 250, 0.3);
+    border-radius: 12px;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 990;
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.4);
+    transition: bottom 0.4s ease;
+    max-width: 680px;
+    width: calc(100% - 40px);
+}
+
+.mid-article-cta.visible {
+    bottom: 24px;
+}
+
+.mid-article-cta.dismissed {
+    bottom: -100px !important;
+}
+
+.mid-article-cta-text {
+    flex: 1;
+    font-size: 0.88rem;
+    color: #CBD5E1;
+    line-height: 1.4;
+}
+
+.mid-article-cta-text strong {
+    color: #F1F5F9;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.92rem;
+}
+
+.mid-article-cta .cta-btn {
+    white-space: nowrap;
+    padding: 10px 20px;
+    font-size: 0.82rem;
+    border-bottom: none;
+}
+
+.mid-article-cta-close {
+    background: none;
+    border: none;
+    color: #64748B;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.mid-article-cta-close:hover {
+    color: #94A3B8;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .article-header {
@@ -2592,6 +2656,17 @@ blockquote cite {
         justify-content: center;
         padding: 14px 20px;
     }
+
+    .mid-article-cta {
+        flex-wrap: wrap;
+        padding: 12px 16px;
+        gap: 10px;
+    }
+
+    .mid-article-cta .cta-btn {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2614,5 +2689,9 @@ blockquote cite {
     .share-btn,
     .article-body .share-btn {
         justify-content: center;
+    }
+
+    .mid-article-cta-text {
+        font-size: 0.82rem;
     }
 }

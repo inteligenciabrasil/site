@@ -193,4 +193,39 @@
         });
     }
 
+    // ========== 8. MID-ARTICLE CTA ==========
+    if (document.querySelector('.article-body')) {
+        var ctaDiv = document.createElement('div');
+        ctaDiv.className = 'mid-article-cta';
+        ctaDiv.innerHTML = '<div class="mid-article-cta-text"><strong>Precisa de ajuda especializada?</strong>Fale com nossos consultores sobre seu projeto de seguran\u00e7a.</div><a href="/index.html#contato" class="cta-btn">Falar com Especialista</a><button class="mid-article-cta-close" aria-label="Fechar">\u00d7</button>';
+        document.body.appendChild(ctaDiv);
+
+        var ctaDismissed = false;
+        var ctaClose = ctaDiv.querySelector('.mid-article-cta-close');
+        ctaClose.addEventListener('click', function () {
+            ctaDismissed = true;
+            ctaDiv.classList.add('dismissed');
+            ctaDiv.classList.remove('visible');
+        });
+
+        var articleBody = document.querySelector('.article-body');
+        var ctaTicking = false;
+        window.addEventListener('scroll', function () {
+            if (ctaDismissed || ctaTicking) return;
+            ctaTicking = true;
+            requestAnimationFrame(function () {
+                var rect = articleBody.getBoundingClientRect();
+                var articleHeight = articleBody.offsetHeight;
+                var scrolled = -rect.top;
+                var progress = scrolled / articleHeight;
+                if (progress > 0.4 && progress < 0.95) {
+                    ctaDiv.classList.add('visible');
+                } else {
+                    ctaDiv.classList.remove('visible');
+                }
+                ctaTicking = false;
+            });
+        }, { passive: true });
+    }
+
 })();
