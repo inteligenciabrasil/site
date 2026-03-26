@@ -1,0 +1,965 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" class="theme-amber">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Basico -->
+    <title>Monitoramento de Credenciais | Deteccao de Vazamentos e Acessos Comprometidos</title>
+    <meta name="description"
+        content="Monitoramento de credenciais corporativas na dark web. Detecte senhas vazadas, contas comprometidas e exposicao a credential stuffing em tempo real.">
+    <meta name="keywords"
+        content="monitoramento de credenciais, credenciais vazadas, credential stuffing, dark web monitoring, senhas vazadas, contas comprometidas, vazamento de dados, deteccao de credenciais, seguranca de acessos, monitoramento dark web, protecao de credenciais, seguranca corporativa">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="publisher" content="Inteligencia Brasil">
+    <meta name="copyright" content="Inteligencia Brasil">
+    <meta name="language" content="pt-BR">
+    <meta name="revisit-after" content="7 days">
+    <meta name="rating" content="general">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/lp/monitorar-credenciais/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Monitoramento de Credenciais | Deteccao de Vazamentos e Acessos Comprometidos">
+    <meta property="og:description"
+        content="Monitoramento de credenciais corporativas na dark web. Detecte senhas vazadas, contas comprometidas e exposicao a credential stuffing em tempo real.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/lp/monitorar-credenciais/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Inteligencia Brasil - Monitoramento de Credenciais">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Monitoramento de Credenciais | Deteccao de Vazamentos e Acessos Comprometidos">
+    <meta name="twitter:description"
+        content="Monitoramento de credenciais corporativas na dark web. Detecte senhas vazadas, contas comprometidas e exposicao a credential stuffing em tempo real.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta name="twitter:image:alt" content="Inteligencia Brasil - Monitoramento de Credenciais">
+
+    <!-- Geo Tags (SEO Local) -->
+    <meta name="geo.region" content="BR-SP">
+    <meta name="geo.placename" content="Sao Paulo">
+    <meta name="geo.position" content="-23.5505;-46.6333">
+    <meta name="ICBM" content="-23.5505, -46.6333">
+
+    <!-- Mobile & PWA -->
+    <meta name="theme-color" content="#0A1628">
+    <meta name="msapplication-TileColor" content="#0A1628">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-title" content="Inteligencia Brasil">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="../../img/apple-touch-icon-iphone-60x60.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../../img/apple-touch-icon-iphone-60x60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../img/apple-touch-icon-ipad-76x76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../../img/apple-touch-icon-iphone-retina-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../../img/apple-touch-icon-ipad-retina-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="../../img/apple-touch-icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="../../img/apple-touch-icon-512x512.png">
+
+    <!-- Windows Tile -->
+    <meta name="msapplication-TileImage" content="../../img/apple-touch-icon-192x192.png">
+    <meta name="msapplication-square70x70logo" content="../../img/apple-touch-icon-ipad-76x76.png">
+    <meta name="msapplication-square150x150logo" content="../../img/apple-touch-icon-ipad-retina-152x152.png">
+    <meta name="msapplication-square310x310logo" content="../../img/apple-touch-icon-512x512.png">
+
+    <!-- Schema.org JSON-LD (Dados Estruturados) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Inteligencia Brasil",
+        "description": "Consultoria especializada em Monitoramento de Credenciais, Deteccao de Vazamentos e Protecao contra Acessos Comprometidos.",
+        "url": "https://inteligenciabrasil.seg.br",
+        "logo": "https://inteligenciabrasil.seg.br/img/logo.svg",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "telephone": "+55-11-99361-9947",
+        "email": "contato@inteligenciabrasil.seg.br",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Sao Paulo",
+            "addressRegion": "SP",
+            "addressCountry": "BR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -23.5505,
+            "longitude": -46.6333
+        },
+        "areaServed": {
+            "@type": "Country",
+            "name": "Brasil"
+        },
+        "serviceType": ["Monitoramento de Credenciais", "Deteccao de Vazamentos", "Dark Web Monitoring", "Credential Stuffing Protection", "Protecao de Acessos Corporativos"],
+        "priceRange": "$$",
+        "openingHours": "Mo-Fr 09:00-18:00",
+        "sameAs": [
+            "https://www.linkedin.com/company/inteligenciabrasil",
+            "https://www.instagram.com/inteligenciabrasiloficial"
+        ]
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://inteligenciabrasil.seg.br/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Monitoramento de Credenciais",
+                "item": "https://inteligenciabrasil.seg.br/lp/monitorar-credenciais/"
+            }
+        ]
+    }
+    </script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que e monitoramento de credenciais?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Monitoramento de credenciais e o processo continuo de rastreamento de senhas, e-mails corporativos e dados de acesso em bases de dados vazadas, foruns da dark web e marketplaces criminosos. O objetivo e identificar credenciais comprometidas antes que sejam usadas em ataques contra sua organizacao."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como as credenciais corporativas vazam na dark web?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Credenciais corporativas vazam por diversos vetores: ataques de phishing contra colaboradores, breaches em servicos de terceiros onde funcionarios reutilizaram senhas corporativas, malware do tipo infostealer instalado em dispositivos, e bancos de dados comprometidos em ataques direcionados. Muitas vezes, os vazamentos sao comercializados em foruns da dark web meses antes de serem explorados."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que e credential stuffing e como me proteger?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Credential stuffing e um ataque automatizado onde criminosos utilizam listas de credenciais vazadas (e-mail e senha) para tentar acessar multiplos servicos e sistemas. Como muitos usuarios reutilizam senhas, um vazamento em um servico pode comprometer o acesso a diversos outros. A protecao envolve monitoramento proativo de vazamentos, politicas de senhas fortes, autenticacao multifator (MFA) e deteccao de tentativas de login suspeitas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Com que frequencia devo monitorar credenciais da minha empresa?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O monitoramento deve ser continuo e em tempo real. Novos vazamentos ocorrem diariamente e credenciais comprometidas podem ser exploradas em questao de horas. Um servico de monitoramento 24/7 garante que sua equipe seja alertada imediatamente quando credenciais corporativas aparecem em bases vazadas, permitindo acao rapida como reset de senhas e bloqueio de acessos."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.css" rel="stylesheet">
+    <!-- LP Base CSS (consolidado) -->
+    <link href="../../css/lp-base.css" rel="stylesheet">
+    <link href="../../css/lp-themes.css" rel="stylesheet">
+
+    <style>
+        /* PAGE-SPECIFIC STYLES */
+        /* Unique overrides only */
+    </style>
+</head>
+
+<body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <a href="../../" class="logo">
+                <img src="../../img/logo.svg" alt="Inteligencia Brasil" height="50">
+            </a>
+            <div class="header-cta">
+                <a href="#servicos" class="btn btn-outline">Servicos</a>
+                <a href="#formulario" class="btn btn-primary">Solicitar Analise</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb" style="max-width: 1200px; margin: 100px auto 0; padding: 0 24px;">
+            <ol style="display: flex; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; font-size: 14px;">
+                <li style="display: flex; align-items: center;">
+                    <a href="../../" style="color: var(--text-secondary); text-decoration: none; transition: color 0.3s;">Home</a>
+                    <span style="margin: 0 8px; color: var(--text-secondary);">/</span>
+                </li>
+                <li style="color: var(--accent);" aria-current="page">Monitoramento de Credenciais</li>
+            </ol>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero" style="padding-top: 40px;">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content fade-in">
+                        <div class="hero-badge">Credential Monitoring & Dark Web Intelligence</div>
+                        <h1>Detecte <span class="highlight">credenciais vazadas</span> antes que sejam exploradas.</h1>
+                        <p class="hero-subtitle">
+                            Monitoramento continuo de senhas, e-mails corporativos e dados de acesso na dark web. Identifique contas comprometidas, previna ataques de credential stuffing e proteja os acessos da sua organizacao em tempo real.
+                        </p>
+                        <div class="hero-cta">
+                            <a href="#formulario" class="btn btn-primary">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                                Solicitar Analise Gratuita
+                            </a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" class="btn btn-whatsapp">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                </svg>
+                                WhatsApp Direto
+                            </a>
+                        </div>
+                        <div class="hero-trust">
+                            <div class="hero-trust-item">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Dark web monitoring</span>
+                            </div>
+                            <div class="hero-trust-item">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Alertas imediatos</span>
+                            </div>
+                            <div class="hero-trust-item">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Resposta rapida</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-card fade-in delay-2">
+                        <div class="stats-card-header">
+                            <div class="stats-card-title">Credential Intelligence</div>
+                            <div class="stats-card-badge">CRED</div>
+                        </div>
+                        <div class="stat-row">
+                            <div>
+                                <div class="stat-value">80%</div>
+                                <div class="stat-label">Dos breaches</div>
+                            </div>
+                            <div class="stat-desc">Envolvem credenciais roubadas ou fracas</div>
+                        </div>
+                        <div class="stat-row">
+                            <div>
+                                <div class="stat-value">&lt;15min</div>
+                                <div class="stat-label">Tempo de alerta</div>
+                            </div>
+                            <div class="stat-desc">Apos deteccao de vazamento de credenciais</div>
+                        </div>
+                        <div class="stat-row">
+                            <div>
+                                <div class="stat-value">24/7</div>
+                                <div class="stat-label">Monitoramento</div>
+                            </div>
+                            <div class="stat-desc">Vigilancia continua na dark web e bases vazadas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="problem">
+            <div class="container">
+                <h2 class="section-title">Ameacas que comprometem <span class="highlight">seus acessos corporativos</span></h2>
+                <p class="section-subtitle">
+                    Credenciais vazadas sao a porta de entrada para invasoes. Sem monitoramento, sua empresa fica vulneravel a ataques silenciosos que podem levar meses para serem detectados.
+                </p>
+
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-user-secret"></i></div>
+                        <h3>Credenciais vazadas na dark web</h3>
+                        <p>Senhas e e-mails corporativos expostos em bases de dados comprometidas sao comercializados em foruns criminosos, permitindo acesso nao autorizado a sistemas e aplicacoes da sua empresa.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-robot"></i></div>
+                        <h3>Ataques de credential stuffing</h3>
+                        <p>Criminosos utilizam listas massivas de credenciais vazadas em ataques automatizados, testando milhoes de combinacoes para invadir contas corporativas onde senhas foram reutilizadas.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><i class="fas fa-unlock-alt"></i></div>
+                        <h3>Contas corporativas comprometidas</h3>
+                        <p>Acessos comprometidos em plataformas de e-mail, nuvem, VPN e sistemas internos permitem movimentacao lateral, exfiltracao de dados e ataques de ransomware contra toda a organizacao.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services" id="servicos">
+            <div class="container">
+                <h2 class="section-title">Servicos de <span class="highlight">Protecao de Credenciais</span></h2>
+                <p class="section-subtitle">
+                    Solucoes completas para detectar, monitorar e remediar credenciais comprometidas antes que causem danos a sua organizacao
+                </p>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-key"></i></div>
+                        <h3>Monitoramento de Credenciais</h3>
+                        <p>Rastreamento continuo de e-mails, senhas e dados de acesso corporativos em bases de dados vazadas e repositorios comprometidos.</p>
+                        <ul class="service-list">
+                            <li>Varredura em bases de dados vazadas</li>
+                            <li>Monitoramento de dominios corporativos</li>
+                            <li>Deteccao de senhas expostas</li>
+                            <li>Cobertura de combolists e infostealers</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-mask"></i></div>
+                        <h3>Analise de Dark Web</h3>
+                        <p>Investigacao profunda em foruns, marketplaces e canais da dark web para identificar comercializacao de credenciais da sua empresa.</p>
+                        <ul class="service-list">
+                            <li>Monitoramento de foruns e marketplaces</li>
+                            <li>Rastreamento de canais de Telegram</li>
+                            <li>Analise de logs de infostealers</li>
+                            <li>Deteccao de venda de acessos corporativos</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-bell"></i></div>
+                        <h3>Alertas de Comprometimento</h3>
+                        <p>Notificacoes imediatas quando credenciais da sua organizacao sao detectadas em vazamentos, permitindo acao rapida e preventiva.</p>
+                        <ul class="service-list">
+                            <li>Alertas em tempo real por e-mail e Slack</li>
+                            <li>Classificacao por nivel de criticidade</li>
+                            <li>Dashboard com visao executiva</li>
+                            <li>Relatorios periodicos de exposicao</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Resposta e Remediacao</h3>
+                        <p>Apoio especializado para conter incidentes de credenciais comprometidas e fortalecer a postura de seguranca da organizacao.</p>
+                        <ul class="service-list">
+                            <li>Procedimentos de reset emergencial</li>
+                            <li>Orientacao para implementacao de MFA</li>
+                            <li>Avaliacao de impacto do vazamento</li>
+                            <li>Recomendacoes de hardening de acessos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodology Section -->
+        <section class="methodology">
+            <div class="container">
+                <h2 class="section-title">Metodologia de <span class="highlight">Protecao de Credenciais</span></h2>
+                <p class="section-subtitle">
+                    Processo estruturado em quatro etapas para monitoramento e protecao continua das credenciais corporativas
+                </p>
+
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h3>Inventario</h3>
+                        <p>Mapeamos todos os dominios, e-mails corporativos e ativos digitais da sua organizacao para definir o escopo de monitoramento</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h3>Monitoramento</h3>
+                        <p>Ativamos varredura 24/7 em bases vazadas, dark web, foruns criminosos e canais de comercializacao de credenciais</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h3>Alerta</h3>
+                        <p>Notificacoes imediatas com detalhes do vazamento, nivel de risco e recomendacoes de acao para sua equipe de seguranca</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <h3>Remediacao</h3>
+                        <p>Apoio na contencao do incidente, reset de credenciais comprometidas e fortalecimento dos controles de acesso</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lead Form Section -->
+        <section class="lead-section" id="formulario">
+            <div class="container">
+                <div class="lead-grid">
+                    <div class="lead-content">
+                        <h2>Solicite uma <span class="highlight">Analise de Exposicao</span></h2>
+                        <p>
+                            Descubra se credenciais da sua empresa estao expostas na dark web. Nossa equipe realiza uma avaliacao inicial gratuita para identificar vazamentos ativos.
+                        </p>
+                        <ul class="lead-benefits">
+                            <li>
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Analise inicial gratuita
+                            </li>
+                            <li>
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Retorno em ate 2 horas uteis
+                            </li>
+                            <li>
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Monitoramento 24/7 disponivel
+                            </li>
+                            <li>
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Proposta personalizada ao seu cenario
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="lead-form-wrapper">
+                        <div class="urgency-banner">
+                            <span class="urgency-icon"><i class="fas fa-shield-alt"></i></span>
+                            <span>Suas credenciais podem estar expostas na dark web agora</span>
+                        </div>
+                        <div class="form-title">Fale com um Especialista em Credenciais</div>
+                        <div class="form-subtitle">Preencha os dados abaixo - suas informacoes estao seguras</div>
+
+                        <form id="leadForm" action="#" method="POST">
+                            <input type="hidden" name="ip" id="ip">
+                            <input type="hidden" name="origem" value="Landing Page Monitorar Credenciais">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="nome">Nome *</label>
+                                    <input type="text" id="nome" name="nome" class="form-input" placeholder="Seu nome"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="empresa">Empresa *</label>
+                                    <input type="text" id="empresa" name="empresa" class="form-input"
+                                        placeholder="Nome da empresa" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="email">E-mail Corporativo *</label>
+                                    <input type="email" id="email" name="email" class="form-input"
+                                        placeholder="voce@empresa.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="telefone">WhatsApp *</label>
+                                    <input type="tel" id="telefone" name="telefone" class="form-input"
+                                        placeholder="(11) 99999-9999" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group full">
+                                <label class="form-label" for="servico">Servico de Interesse *</label>
+                                <select id="servico" name="servico" class="form-select" required>
+                                    <option value="">Selecione uma opcao...</option>
+                                    <option value="Monitoramento de Credenciais">Monitoramento de Credenciais</option>
+                                    <option value="Dark Web Monitoring">Analise de Dark Web</option>
+                                    <option value="Alertas de Comprometimento">Alertas de Comprometimento</option>
+                                    <option value="Resposta e Remediacao">Resposta e Remediacao</option>
+                                    <option value="Programa Completo">Programa Completo de Protecao</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full">
+                                <label class="form-label" for="mensagem">Descreva sua necessidade (opcional)</label>
+                                <textarea id="mensagem" name="mensagem" class="form-textarea"
+                                    placeholder="Informacoes adicionais sobre o monitoramento desejado..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary form-submit">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                    viewBox="0 0 24 24">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                                Solicitar Analise de Exposicao
+                            </button>
+
+                            <div id="formMessage" style="display:none; margin-top:16px; padding:16px; border-radius:10px; text-align:center;"></div>
+
+                            <p class="form-disclaimer">
+                                Todas as informacoes sao tratadas com sigilo absoluto.<br>
+                                Protegidas por NDA e em conformidade com a LGPD.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq">
+            <div class="container">
+                <h2 class="section-title">Perguntas <span class="highlight">Frequentes</span></h2>
+                <p class="section-subtitle">Tire suas duvidas sobre monitoramento de credenciais</p>
+
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>O que e monitoramento de credenciais?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                <strong>Monitoramento de credenciais</strong> e o processo continuo de rastreamento de senhas, e-mails corporativos e dados de acesso em bases de dados vazadas, foruns da dark web e marketplaces criminosos.
+                                <br><br>
+                                O objetivo e identificar credenciais comprometidas antes que sejam usadas em ataques contra sua organizacao, permitindo acao preventiva como reset de senhas e bloqueio de acessos suspeitos.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Como as credenciais corporativas vazam na dark web?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Credenciais corporativas vazam por diversos vetores:
+                                <br><br>
+                                <strong>Phishing:</strong> Ataques direcionados que enganam colaboradores a informar suas senhas<br>
+                                <strong>Breaches de terceiros:</strong> Vazamentos em servicos onde funcionarios reutilizaram senhas corporativas<br>
+                                <strong>Infostealers:</strong> Malware que captura credenciais salvas em navegadores e aplicacoes<br>
+                                <strong>Ataques direcionados:</strong> Bancos de dados corporativos comprometidos por invasores<br><br>
+                                Muitas vezes, os vazamentos sao comercializados em foruns da dark web meses antes de serem efetivamente explorados em ataques.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>O que e credential stuffing e como me proteger?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                <strong>Credential stuffing</strong> e um ataque automatizado onde criminosos utilizam listas de credenciais vazadas (e-mail e senha) para tentar acessar multiplos servicos e sistemas.
+                                <br><br>
+                                Como muitos usuarios reutilizam senhas, um unico vazamento pode comprometer o acesso a diversos sistemas. A protecao envolve:
+                                <br><br>
+                                &#8226; <strong>Monitoramento proativo</strong> de vazamentos de credenciais<br>
+                                &#8226; <strong>Politicas de senhas fortes</strong> e rotacao periodica<br>
+                                &#8226; <strong>Autenticacao multifator (MFA)</strong> em todos os sistemas criticos<br>
+                                &#8226; <strong>Deteccao de tentativas</strong> de login suspeitas e automatizadas
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Com que frequencia devo monitorar credenciais da minha empresa?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner">
+                                <strong>O monitoramento deve ser continuo e em tempo real.</strong> Novos vazamentos ocorrem diariamente e credenciais comprometidas podem ser exploradas em questao de horas.
+                                <br><br>
+                                Um servico de monitoramento 24/7 garante que sua equipe seja alertada imediatamente quando credenciais corporativas aparecem em bases vazadas, permitindo acao rapida como:
+                                <br><br>
+                                &#8226; Reset imediato de senhas comprometidas<br>
+                                &#8226; Bloqueio de acessos suspeitos<br>
+                                &#8226; Investigacao de possiveis acessos indevidos<br>
+                                &#8226; Fortalecimento dos controles de autenticacao
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h3>Suas credenciais estao <span class="highlight">protegidas?</span></h3>
+                <p>Descubra agora se existem senhas e acessos da sua empresa expostos na dark web</p>
+                <div class="cta-buttons">
+                    <a href="#formulario" class="btn btn-primary">Solicitar Analise Gratuita</a>
+                    <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" class="btn btn-whatsapp">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                        </svg>
+                        Falar no WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao, com as melhores praticas para reducao de riscos digitais corporativos.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Servicos</h4>
+                        <ul>
+                            <li><a href="../../#servicos">Seguranca da Informacao</a></li>
+                            <li><a href="../../#servicos">Red Team / Pentest</a></li>
+                            <li><a href="../../#servicos">Blue Team / Defesa</a></li>
+                            <li><a href="../../#servicos">Resposta a Incidentes</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="#servicos">Sobre o Servico</a></li>
+                            <li><a href="../../#metodologia">Metodologia</a></li>
+                            <li><a href="../../#diferenciais">Diferenciais</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                        <span class="separator">|</span>
+                        <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <!-- Common LP JavaScript -->
+    <script src="../../js/lp-common.js"></script>
+
+    <script>
+        // IP Collection
+        (async function() {
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                document.getElementById('ip').value = data.ip || '';
+            } catch (e) {}
+        })();
+
+        // Phone Mask
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            if (value.length > 6) {
+                value = `(${value.slice(0,2)}) ${value.slice(2,7)}-${value.slice(7)}`;
+            } else if (value.length > 2) {
+                value = `(${value.slice(0,2)}) ${value.slice(2)}`;
+            } else if (value.length > 0) {
+                value = `(${value}`;
+            }
+            e.target.value = value;
+        });
+
+        // Form Submission with validation
+        document.getElementById('leadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const btn = this.querySelector('button[type="submit"]');
+            const msgDiv = document.getElementById('formMessage');
+            const originalText = btn.innerHTML;
+
+            // Disable button
+            btn.disabled = true;
+            btn.innerHTML = '<svg width="20" height="20" style="animation: spin 1s linear infinite;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg> Enviando...';
+
+            // Collect data
+            const formData = {
+                name: document.getElementById('nome').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('telefone').value.replace(/\D/g, ''),
+                empresa: document.getElementById('empresa').value.trim(),
+                servico: document.getElementById('servico').value,
+                message: document.getElementById('mensagem').value.trim(),
+                terms: 'Aceito',
+                origem: 'Landing Page Monitorar Credenciais',
+                ip: document.getElementById('ip').value || ''
+            };
+
+            // ========== VALIDACAO ROBUSTA ==========
+
+            // Lista de dominios de e-mail publicos bloqueados
+            const publicDomains = [
+                'gmail.com', 'gmail.com.br', 'googlemail.com',
+                'outlook.com', 'outlook.com.br', 'hotmail.com', 'hotmail.com.br', 'live.com', 'live.com.br', 'msn.com',
+                'yahoo.com', 'yahoo.com.br', 'ymail.com', 'rocketmail.com',
+                'icloud.com', 'me.com', 'mac.com',
+                'aol.com', 'aol.com.br',
+                'protonmail.com', 'protonmail.ch', 'proton.me',
+                'zoho.com', 'zohomail.com',
+                'mail.com', 'email.com',
+                'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com',
+                'r7.com', 'zipmail.com.br', 'oi.com.br', 'pop.com.br'
+            ];
+
+            // Lista de dominios de e-mail temporarios bloqueados
+            const tempDomains = [
+                'tempmail.com', 'temp-mail.org', 'tempmail.net', 'temp-mail.io',
+                'guerrillamail.com', 'guerrillamail.org', 'guerrillamail.net', 'guerrillamail.biz',
+                '10minutemail.com', '10minutemail.net', '10minmail.com',
+                'mailinator.com', 'mailinator.net', 'mailinator2.com',
+                'throwaway.email', 'throwawaymail.com',
+                'fakeinbox.com', 'fakemailgenerator.com',
+                'getnada.com', 'nada.email',
+                'dispostable.com', 'disposablemail.com',
+                'maildrop.cc', 'mailnesia.com',
+                'yopmail.com', 'yopmail.fr', 'yopmail.net',
+                'trashmail.com', 'trashmail.net', 'trash-mail.com',
+                'sharklasers.com', 'spam4.me', 'grr.la',
+                'mohmal.com', 'tempail.com', 'emailondeck.com',
+                'mintemail.com', 'spamgourmet.com', 'mytemp.email',
+                'burnermail.io', 'mailsac.com', 'inboxkitten.com'
+            ];
+
+            // Funcao para validar e-mail
+            function validateEmail(email) {
+                const emailLower = email.toLowerCase().trim();
+                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+                if (!emailRegex.test(emailLower)) {
+                    return { valid: false, message: 'Por favor, informe um e-mail valido.' };
+                }
+
+                const domain = emailLower.split('@')[1];
+
+                if (publicDomains.includes(domain)) {
+                    return { valid: false, message: 'Por favor, utilize seu e-mail corporativo. E-mails pessoais nao sao aceitos.' };
+                }
+
+                if (tempDomains.includes(domain) || tempDomains.some(d => domain.includes(d))) {
+                    return { valid: false, message: 'E-mails temporarios nao sao permitidos. Por favor, use seu e-mail corporativo.' };
+                }
+
+                const suspiciousPatterns = [/temp/i, /fake/i, /trash/i, /spam/i, /disposable/i, /throwaway/i];
+                if (suspiciousPatterns.some(pattern => pattern.test(domain))) {
+                    return { valid: false, message: 'Este dominio de e-mail nao e permitido.' };
+                }
+
+                return { valid: true };
+            }
+
+            // Validacoes
+            if (formData.name.length < 3) {
+                showMessage('Por favor, informe seu nome completo.', 'error');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                return;
+            }
+
+            if (formData.name.split(' ').filter(w => w.length > 1).length < 2) {
+                showMessage('Por favor, informe seu nome completo (nome e sobrenome).', 'error');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                return;
+            }
+
+            const emailValidation = validateEmail(formData.email);
+            if (!emailValidation.valid) {
+                showMessage(emailValidation.message, 'error');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                return;
+            }
+
+            if (formData.phone.length < 10 || formData.phone.length > 11) {
+                showMessage('Por favor, informe um telefone valido com DDD.', 'error');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                return;
+            }
+
+            if (formData.empresa.length < 2) {
+                showMessage('Por favor, informe o nome da empresa.', 'error');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                return;
+            }
+
+            if (!formData.servico) {
+                showMessage('Por favor, selecione o servico de interesse.', 'error');
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                return;
+            }
+
+            try {
+                const response = await fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: Object.entries(formData).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&')
+                });
+
+                // Track conversion
+                if (typeof gtag === 'function') {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+                        'event_callback': function() {}
+                    });
+                }
+
+                // Success
+                showMessage('Solicitacao enviada com sucesso! Entraremos em contato em breve.', 'success');
+                this.reset();
+
+            } catch (error) {
+                showMessage('Erro ao enviar. Por favor, tente novamente ou entre em contato pelo WhatsApp.', 'error');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        });
+
+        function showMessage(text, type) {
+            const msgDiv = document.getElementById('formMessage');
+            msgDiv.style.display = 'block';
+            msgDiv.style.background = type === 'success' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)';
+            msgDiv.style.color = type === 'success' ? '#10B981' : '#EF4444';
+            msgDiv.style.border = `1px solid ${type === 'success' ? '#10B981' : '#EF4444'}`;
+            msgDiv.textContent = text;
+
+            if (type === 'success') {
+                setTimeout(() => { msgDiv.style.display = 'none'; }, 5000);
+            }
+        }
+
+        // Add spin animation
+        const style = document.createElement('style');
+        style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+        document.head.appendChild(style);
+    </script>
+
+    <!-- VLibras - Acessibilidade em Libras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js"></script>
+    <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+    if(document.readyState==='complete'&&window.onload){var _f=window.onload;window.onload=null;_f()}
+    </script>
+</body>
+
+</html>
