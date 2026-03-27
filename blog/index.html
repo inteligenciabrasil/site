@@ -167,6 +167,29 @@
 
             <!-- Blog Grid -->
             <div class="blog-grid">
+                <!-- Post - Gestao de Mudancas -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Governan&#231;a</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 9 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./gestao-mudancas-seguranca-informacao/">Gest&#227;o de Mudan&#231;as em Seguran&#231;a: Risco, Rollback, Documenta&#231;&#227;o e SOPs</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como gerenciar mudan&#231;as sem comprometer a opera&#231;&#227;o: avalia&#231;&#227;o de risco em legados, plano de rollback obrigat&#243;rio, documenta&#231;&#227;o atualizada e SOPs para consist&#234;ncia e auditabilidade.
+                        </p>
+                        <a href="./gestao-mudancas-seguranca-informacao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
                 <!-- Post - Classificacao e Estados dos Dados -->
                 <article class="blog-card">
                     <div class="blog-card-image" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
@@ -2736,17 +2759,30 @@
     })();
     </script>
 
-    <!-- VLibras - Acessibilidade em Libras -->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
     </div>
-    <script src="https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js"></script>
     <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-    if(document.readyState==='complete'&&window.onload){var _f=window.onload;window.onload=null;_f()}
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
     </script>
 </body>
 

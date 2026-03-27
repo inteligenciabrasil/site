@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
@@ -412,7 +412,7 @@
                 </p>
 
                 <div class="concept-card">
-                    <h4><i class="fas fa-sort-amount-up" style="color:#60A5FA;margin-right:10px"></i> O que fazer primeiro com menor investimento</h4>
+                    <p><strong><i class="fas fa-sort-amount-up" style="color:#60A5FA;margin-right:10px"></i> O que fazer primeiro com menor investimento</strong></p>
                     <ul>
                         <li><strong>Impacto alto + custo zero:</strong> Ativar MFA em todas as contas, configurar atualiza&#231;&#245;es autom&#225;ticas, habilitar DMARC/DKIM/SPF</li>
                         <li><strong>Impacto alto + custo baixo:</strong> Implementar gerenciador de senhas, configurar backup 3-2-1, ativar criptografia de disco</li>
@@ -453,7 +453,7 @@
                 </p>
 
                 <div class="tip-box">
-                    <h4><i class="fas fa-lightbulb" style="margin-right:10px"></i> Considera&#231;&#245;es finais</h4>
+                    <p><strong><i class="fas fa-lightbulb" style="margin-right:10px"></i> Considera&#231;&#245;es finais</strong></p>
                     <p>Seguran&#231;a da informa&#231;&#227;o para PMEs n&#227;o exige or&#231;amentos milion&#225;rios nem equipes enormes. Exige <strong>consist&#234;ncia, prioriza&#231;&#227;o e disciplina</strong>.</p>
                     <p>Os dez controles apresentados neste checklist cobrem as bases mais cr&#237;ticas e podem ser implementados de forma progressiva, come&#231;ando pelos de maior impacto e menor custo.</p>
                     <p>O pior erro &#233; n&#227;o come&#231;ar. Cada controle implementado reduz a superf&#237;cie de ataque e aumenta a resili&#234;ncia do neg&#243;cio. Comece hoje, evolua continuamente e transforme seguran&#231;a em parte da cultura da empresa.</p>
@@ -608,17 +608,30 @@
     </a>
     <script src="../../js/site-common.js"></script>
 
-    <!-- VLibras - Acessibilidade em Libras -->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
     </div>
-    <script src="https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js"></script>
     <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-    if(document.readyState==='complete'&&window.onload){var _f=window.onload;window.onload=null;_f()}
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
     </script>
 </body>
 </html>

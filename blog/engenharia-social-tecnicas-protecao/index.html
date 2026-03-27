@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
@@ -209,7 +209,7 @@
                 </p>
 
                 <div class="concept-card">
-                    <h4><i class="fas fa-brain" style="color:#60A5FA;margin-right:10px"></i> Por que a engenharia social funciona</h4>
+                    <p><strong><i class="fas fa-brain" style="color:#60A5FA;margin-right:10px"></i> Por que a engenharia social funciona</strong></p>
                     <ul>
                         <li><strong>Explora o fator humano:</strong> pessoas tendem a confiar, obedecer autoridade e agir sob press&#227;o sem verificar</li>
                         <li><strong>Contorna tecnologia:</strong> n&#227;o importa qu&#227;o robusto seja o firewall se o usu&#225;rio entrega a senha volunt&#225;riamente</li>
@@ -295,7 +295,7 @@
                 </p>
 
                 <div class="concept-card">
-                    <h4><i class="fas fa-unlock-alt" style="color:#60A5FA;margin-right:10px"></i> Fatores que mant&#234;m empresas vulner&#225;veis</h4>
+                    <p><strong><i class="fas fa-unlock-alt" style="color:#60A5FA;margin-right:10px"></i> Fatores que mant&#234;m empresas vulner&#225;veis</strong></p>
                     <ul>
                         <li><strong>Falta de conscientiza&#231;&#227;o cont&#237;nua:</strong> treinamentos pontuais n&#227;o mudam comportamento &mdash; a maioria dos colaboradores esquece o conte&#250;do em semanas</li>
                         <li><strong>Excesso de confian&#231;a:</strong> equipes t&#233;cnicas acreditam que &ldquo;isso n&#227;o acontece aqui&rdquo;, enquanto a alta gest&#227;o subestima o risco humano</li>
@@ -355,7 +355,7 @@
                 </p>
 
                 <div class="tip-box">
-                    <h4><i class="fas fa-lightbulb" style="margin-right:10px"></i> Regra pr&#225;tica de valida&#231;&#227;o</h4>
+                    <p><strong><i class="fas fa-lightbulb" style="margin-right:10px"></i> Regra pr&#225;tica de valida&#231;&#227;o</strong></p>
                     <p>Para qualquer solicita&#231;&#227;o que envolva dinheiro, credenciais ou dados sens&#237;veis, adote a regra do <strong>canal separado</strong>: se o pedido veio por e-mail, confirme por telefone. Se veio por telefone, confirme por e-mail ou presencialmente. Nunca valide uma solicita&#231;&#227;o usando o mesmo canal por onde ela chegou.</p>
                 </div>
 
@@ -389,7 +389,7 @@
                 </p>
 
                 <div class="concept-card">
-                    <h4><i class="fas fa-shield-alt" style="color:#60A5FA;margin-right:10px"></i> Pilares de uma cultura de seguran&#231;a eficaz</h4>
+                    <p><strong><i class="fas fa-shield-alt" style="color:#60A5FA;margin-right:10px"></i> Pilares de uma cultura de seguran&#231;a eficaz</strong></p>
                     <ul>
                         <li><strong>Exemplo da lideran&#231;a:</strong> quando executivos participam dos treinamentos e seguem as pol&#237;ticas, a mensagem se propaga pela organiza&#231;&#227;o</li>
                         <li><strong>Canal de report f&#225;cil:</strong> bot&#227;o de den&#250;ncia de phishing no e-mail, canal direto com o SOC, formul&#225;rio simples de reporte</li>
@@ -425,7 +425,7 @@
                 </p>
 
                 <div class="tip-box">
-                    <h4><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Aten&#231;&#227;o</h4>
+                    <p><strong><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Aten&#231;&#227;o</strong></p>
                     <p>Empresas que investem apenas em tecnologia e ignoram o fator humano est&#227;o protegendo a porta da frente enquanto deixam a janela aberta. A engenharia social &#233; um problema de <strong>pessoas e processos</strong>, n&#227;o apenas de tecnologia. A prote&#231;&#227;o eficaz exige atua&#231;&#227;o nas tr&#234;s frentes simultaneamente.</p>
                 </div>
 
@@ -578,17 +578,30 @@
     </a>
     <script src="../../js/site-common.js"></script>
 
-    <!-- VLibras - Acessibilidade em Libras -->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
     </div>
-    <script src="https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js"></script>
     <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-    if(document.readyState==='complete'&&window.onload){var _f=window.onload;window.onload=null;_f()}
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
     </script>
 </body>
 </html>

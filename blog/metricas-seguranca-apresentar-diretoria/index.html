@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
@@ -393,7 +393,7 @@
                 <h3>Erros que afastam a diretoria</h3>
 
                 <div class="tip-box">
-                    <h4><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Erros cr&#237;ticos a evitar</h4>
+                    <p><strong><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Erros cr&#237;ticos a evitar</strong></p>
                     <p><strong>Jarg&#227;o t&#233;cnico excessivo:</strong> termos como &ldquo;lateral movement&rdquo;, &ldquo;privilege escalation&rdquo; ou &ldquo;zero-day exploit&rdquo; sem tradu&#231;&#227;o para impacto de neg&#243;cio fazem a diretoria desconectar da conversa. Use linguagem que CFOs e CEOs compreendem.</p>
                     <p><strong>M&#233;tricas sem contexto de neg&#243;cio:</strong> dizer que &ldquo;corrigimos 1.247 vulnerabilidades&rdquo; n&#227;o significa nada sem contexto. Quantas existiam? Qual o impacto das que foram corrigidas? Qual a tend&#234;ncia?</p>
                     <p><strong>Foco apenas em problemas:</strong> apresenta&#231;&#245;es que s&#243; mostram riscos e amea&#231;as geram fadiga e impot&#234;ncia. Equilibre com conquistas, evolu&#231;&#227;o e resultados positivos dos investimentos realizados.</p>
@@ -407,7 +407,7 @@
                 </p>
 
                 <div class="concept-card">
-                    <h4><i class="fas fa-presentation" style="color:#60A5FA;margin-right:10px"></i> Modelo de 5 slides para o board</h4>
+                    <p><strong><i class="fas fa-presentation" style="color:#60A5FA;margin-right:10px"></i> Modelo de 5 slides para o board</strong></p>
                     <ul>
                         <li><strong>Slide 1 &mdash; Panorama:</strong> dashboard executivo com as 5-8 m&#233;tricas principais em formato visual (sem&#225;foros, tend&#234;ncias). Vis&#227;o geral do estado de seguran&#231;a em 60 segundos.</li>
                         <li><strong>Slide 2 &mdash; Riscos Principais:</strong> top 3-5 riscos priorizados por impacto financeiro e probabilidade. Para cada risco: cen&#225;rio, exposi&#231;&#227;o estimada e status do tratamento.</li>
@@ -422,7 +422,7 @@
                 </p>
 
                 <div class="tip-box">
-                    <h4><i class="fas fa-lightbulb" style="margin-right:10px"></i> Considera&#231;&#245;es finais</h4>
+                    <p><strong><i class="fas fa-lightbulb" style="margin-right:10px"></i> Considera&#231;&#245;es finais</strong></p>
                     <p>M&#233;tricas de seguran&#231;a para o board n&#227;o se tratam de impressionar com n&#250;meros &mdash; se tratam de <strong>habilitar decis&#245;es</strong>.</p>
                     <p>O CISO que domina a arte de traduzir complexidade t&#233;cnica em linguagem de neg&#243;cio conquista or&#231;amento, apoio estrat&#233;gico e legitimidade organizacional. A seguran&#231;a deixa de ser um tema relegado ao departamento de TI e passa a integrar a pauta estrat&#233;gica da empresa.</p>
                     <p>Comece simples: selecione 5 m&#233;tricas que conectam seguran&#231;a a resultados de neg&#243;cio, estruture o modelo de 5 slides e mantenha a consist&#234;ncia. A confian&#231;a do board se constr&#243;i com previsibilidade, transpar&#234;ncia e resultados demonstr&#225;veis.</p>
@@ -577,17 +577,30 @@
     </a>
     <script src="../../js/site-common.js"></script>
 
-    <!-- VLibras - Acessibilidade em Libras -->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
     </div>
-    <script src="https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js"></script>
     <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-    if(document.readyState==='complete'&&window.onload){var _f=window.onload;window.onload=null;_f()}
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
     </script>
 </body>
 </html>
