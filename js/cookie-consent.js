@@ -18,11 +18,11 @@
     '#cc-text a{color:#60A5FA;text-decoration:underline}' +
     '#cc-text a:hover{color:#93c5fd}' +
     '#cc-btns{display:flex;gap:.75rem;flex-shrink:0}' +
-    '#cc-accept{background:#60A5FA;color:#fff;border:none;' +
+    '#cc-accept{background:#2563EB;color:#fff;border:none;' +
     'padding:.55rem 1.5rem;border-radius:6px;font-size:.875rem;' +
     'font-weight:600;cursor:pointer;font-family:inherit;' +
     'transition:background .2s}' +
-    '#cc-accept:hover{background:#3b82f6}' +
+    '#cc-accept:hover{background:#1D4ED8}' +
     '#cc-reject{background:transparent;color:rgba(255,255,255,.7);' +
     'border:1px solid rgba(255,255,255,.25);padding:.55rem 1.5rem;' +
     'border-radius:6px;font-size:.875rem;font-weight:500;' +
