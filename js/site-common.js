@@ -209,14 +209,13 @@
         });
 
         var articleBody = document.querySelector('.article-body');
+        var articleHeight = articleBody.offsetHeight;
         var ctaTicking = false;
         window.addEventListener('scroll', function () {
             if (ctaDismissed || ctaTicking) return;
             ctaTicking = true;
             requestAnimationFrame(function () {
-                var rect = articleBody.getBoundingClientRect();
-                var articleHeight = articleBody.offsetHeight;
-                var scrolled = -rect.top;
+                var scrolled = -articleBody.getBoundingClientRect().top;
                 var progress = scrolled / articleHeight;
                 if (progress > 0.4 && progress < 0.95) {
                     ctaDiv.classList.add('visible');
