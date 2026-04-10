@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Calculadora CVSS 3.1 e 4.0 online e gratuita. Calcule o score de severidade de vulnerabilidades com base nas metricas do FIRST.org. Ferramenta em portugues com explicacoes detalhadas.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="calculadora cvss, cvss 3.1, cvss 4.0, score cvss, severidade vulnerabilidade, base score, vector cvss, calculadora vulnerabilidade, FIRST.org">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/calculadora-cvss/">
+
+    <meta property="og:title" content="Calculadora CVSS 3.1 e 4.0 Online | Inteligencia Brasil">
+    <meta property="og:description" content="Calcule scores CVSS 3.1 e 4.0 online com explicacoes detalhadas em portugues. Ferramenta gratuita para profissionais de seguranca.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/calculadora-cvss/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-calculadora-cvss.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Calculadora CVSS 3.1 e 4.0 Online">
+    <meta name="twitter:description" content="Calcule scores CVSS de vulnerabilidades online em portugues.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-calculadora-cvss.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Calculadora CVSS 3.1 e 4.0 Online | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Calculadora CVSS 3.1 e 4.0","description":"Calculadora online de scores CVSS 3.1 e 4.0 para avaliacao de severidade de vulnerabilidades.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligencia Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e CVSS?","acceptedAnswer":{"@type":"Answer","text":"CVSS (Common Vulnerability Scoring System) e um framework aberto e padronizado mantido pelo FIRST.org para avaliar a severidade de vulnerabilidades de seguranca. Atribui scores de 0.0 a 10.0 baseado em caracteristicas tecnicas e contextuais da vulnerabilidade."}},{"@type":"Question","name":"Qual a diferenca entre CVSS 3.1 e CVSS 4.0?","acceptedAnswer":{"@type":"Answer","text":"CVSS 4.0 (publicado em 2023) introduz novas metricas como Attack Requirements (AT), separa impacto em sistema vulneravel e sistema subsequente, e refina o calculo de Threat e Environmental. CVSS 3.1 (2019) ainda e amplamente usado em CVEs e ferramentas de seguranca."}},{"@type":"Question","name":"O que significa o vector string?","acceptedAnswer":{"@type":"Answer","text":"O vector string e uma representacao textual das metricas selecionadas, no formato CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H. Permite documentar e compartilhar scores CVSS de forma padronizada e reproduzivel."}},{"@type":"Question","name":"Como sao classificadas as severidades?","acceptedAnswer":{"@type":"Answer","text":"None: 0.0 | Low: 0.1-3.9 | Medium: 4.0-6.9 | High: 7.0-8.9 | Critical: 9.0-10.0. Vulnerabilidades High e Critical demandam acao prioritaria, com SLAs de remediacao mais restritivos."}},{"@type":"Question","name":"O CVSS substitui a analise de risco?","acceptedAnswer":{"@type":"Answer","text":"Nao. CVSS avalia severidade tecnica de uma vulnerabilidade isolada, mas nao considera contexto de negocio, exposicao real, controles compensatorios ou criticidade do ativo. Use CVSS como um insumo para sua analise de risco, nunca como substituto."}}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Ferramentas","item":"https://inteligenciabrasil.seg.br/ferramentas/"},{"@type":"ListItem","position":3,"name":"Calculadora CVSS"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <link href="cvss.min.css?v=2" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ferramenta</span>
+            <h1>Calculadora CVSS 3.1 e 4.0</h1>
+            <p style="color:#94A3B8;font-size:1.1rem;max-width:720px;margin:1rem auto 0">Avalie a severidade de vulnerabilidades de seguranca com a metodologia oficial do FIRST.org. Suporta CVSS 3.1 e 4.0, com explicacoes em portugues e exemplos de CVEs reais.</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Ferramentas</a></li><li class="breadcrumb-item active">Calculadora CVSS</li></ol></div></nav>
+
+    <main id="main-content">
+    <section class="cvss-tool">
+        <div class="container">
+
+            <!-- Tab Navigation -->
+            <div class="cvss-tabs" role="tablist" aria-label="Versao CVSS">
+                <button class="cvss-tab active" role="tab" aria-selected="true" data-tab="v31">CVSS 3.1</button>
+                <button class="cvss-tab" role="tab" aria-selected="false" data-tab="v40">CVSS 4.0</button>
+            </div>
+
+            <!-- ==================== CVSS 3.1 ==================== -->
+            <div class="cvss-panel active" id="panel-v31" role="tabpanel">
+
+                <!-- Score Display -->
+                <div class="cvss-result">
+                    <div class="cvss-gauge-wrap">
+                        <svg class="cvss-gauge" viewBox="0 0 200 200" aria-label="Score CVSS">
+                            <circle class="gauge-bg" cx="100" cy="100" r="85" />
+                            <circle class="gauge-fg" id="gauge31" cx="100" cy="100" r="85" stroke-dasharray="534" stroke-dashoffset="534" />
+                            <text x="100" y="95" class="gauge-score" id="score31" text-anchor="middle">0.0</text>
+                            <text x="100" y="125" class="gauge-label" id="severity31" text-anchor="middle">None</text>
+                        </svg>
+                    </div>
+                    <div class="cvss-info">
+                        <div class="cvss-vector-wrap">
+                            <label for="vector31">Vector String</label>
+                            <div class="cvss-vector-input">
+                                <input type="text" id="vector31" readonly value="CVSS:3.1/AV:_/AC:_/PR:_/UI:_/S:_/C:_/I:_/A:_">
+                                <button type="button" id="copy31" class="cvss-copy-btn" title="Copiar"><i class="fas fa-copy"></i></button>
+                                <button type="button" id="share31" class="cvss-copy-btn" title="Compartilhar URL"><i class="fas fa-link"></i></button>
+                            </div>
+                        </div>
+                        <div class="cvss-subscores" id="subscores31">
+                            <div class="subscore">
+                                <span class="subscore-label">Impact</span>
+                                <span class="subscore-value" id="impact31">-</span>
+                                <div class="subscore-bar"><div class="subscore-bar-fill" id="impact31bar"></div></div>
+                            </div>
+                            <div class="subscore">
+                                <span class="subscore-label">Exploitability</span>
+                                <span class="subscore-value" id="exploit31">-</span>
+                                <div class="subscore-bar"><div class="subscore-bar-fill" id="exploit31bar"></div></div>
+                            </div>
+                        </div>
+                        <button type="button" id="reset31" class="cvss-reset-btn"><i class="fas fa-undo"></i> Limpar selecoes</button>
+                    </div>
+                </div>
+
+                <!-- Examples -->
+                <div class="cvss-examples">
+                    <h3><i class="fas fa-flask"></i> Exemplos de CVEs reais</h3>
+                    <div class="example-buttons">
+                        <button type="button" class="example-btn" data-vector="CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H">
+                            <strong>Log4Shell</strong><span>CVE-2021-44228</span><span class="ex-score">10.0</span>
+                        </button>
+                        <button type="button" class="example-btn" data-vector="CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N">
+                            <strong>Heartbleed</strong><span>CVE-2014-0160</span><span class="ex-score">7.5</span>
+                        </button>
+                        <button type="button" class="example-btn" data-vector="CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H">
+                            <strong>EternalBlue</strong><span>CVE-2017-0144</span><span class="ex-score">8.1</span>
+                        </button>
+                        <button type="button" class="example-btn" data-vector="CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H">
+                            <strong>Spring4Shell</strong><span>CVE-2022-22965</span><span class="ex-score">9.8</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Metrics -->
+                <h2 class="cvss-section-title">Metricas Base</h2>
+                <p class="cvss-section-desc">Avaliam caracteristicas intrinsecas da vulnerabilidade que nao mudam com o tempo nem com o ambiente.</p>
+
+                <div class="cvss-metrics-grid">
+
+                    <!-- Attack Vector -->
+                    <div class="cvss-metric">
+                        <div class="metric-header">
+                            <h3>Attack Vector (AV)</h3>
+                            <span class="metric-tooltip" title="Como a vulnerabilidade pode ser explorada">?</span>
+                        </div>
+                        <p class="metric-desc">Contexto pelo qual a exploracao e possivel.</p>
+                        <div class="metric-options" data-metric="AV" data-version="31">
+                            <button type="button" data-value="N">Network (N)</button>
+                            <button type="button" data-value="A">Adjacent (A)</button>
+                            <button type="button" data-value="L">Local (L)</button>
+                            <button type="button" data-value="P">Physical (P)</button>
+                        </div>
+                    </div>
+
+                    <!-- Attack Complexity -->
+                    <div class="cvss-metric">
+                        <div class="metric-header">
+                            <h3>Attack Complexity (AC)</h3>
+                        </div>
+                        <p class="metric-desc">Condicoes alem do controle do atacante necessarias para a exploracao.</p>
+                        <div class="metric-options" data-metric="AC" data-version="31">
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                    <!-- Privileges Required -->
+                    <div class="cvss-metric">
+                        <div class="metric-header">
+                            <h3>Privileges Required (PR)</h3>
+                        </div>
+                        <p class="metric-desc">Nivel de privilegios que o atacante precisa antes do ataque.</p>
+                        <div class="metric-options" data-metric="PR" data-version="31">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                    <!-- User Interaction -->
+                    <div class="cvss-metric">
+                        <div class="metric-header">
+                            <h3>User Interaction (UI)</h3>
+                        </div>
+                        <p class="metric-desc">Necessidade de participacao de outro usuario para explorar.</p>
+                        <div class="metric-options" data-metric="UI" data-version="31">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="R">Required (R)</button>
+                        </div>
+                    </div>
+
+                    <!-- Scope -->
+                    <div class="cvss-metric">
+                        <div class="metric-header">
+                            <h3>Scope (S)</h3>
+                        </div>
+                        <p class="metric-desc">Se a exploracao impacta recursos alem do componente vulneravel.</p>
+                        <div class="metric-options" data-metric="S" data-version="31">
+                            <button type="button" data-value="U">Unchanged (U)</button>
+                            <button type="button" data-value="C">Changed (C)</button>
+                        </div>
+                    </div>
+
+                    <!-- Confidentiality -->
+                    <div class="cvss-metric">
+                        <div class="metric-header">
+                            <h3>Confidentiality (C)</h3>
+                        </div>
+                        <p class="metric-desc">Impacto na confidencialidade das informacoes.</p>
+                        <div class="metric-options" data-metric="C" data-version="31">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                    <!-- Integrity -->
+                    <div class="cvss-metric">
+                        <div class="metric-header">
+                            <h3>Integrity (I)</h3>
+                        </div>
+                        <p class="metric-desc">Impacto na integridade das informacoes.</p>
+                        <div class="metric-options" data-metric="I" data-version="31">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                    <!-- Availability -->
+                    <div class="cvss-metric">
+                        <div class="metric-header">
+                            <h3>Availability (A)</h3>
+                        </div>
+                        <p class="metric-desc">Impacto na disponibilidade do sistema/servico.</p>
+                        <div class="metric-options" data-metric="A" data-version="31">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Temporal Metrics (collapsible) -->
+                <details class="cvss-temporal">
+                    <summary>
+                        <h2 class="cvss-section-title" style="display:inline">Metricas Temporais (opcional)</h2>
+                        <span class="temporal-score-pill">Temporal: <strong id="temporalScore31">-</strong></span>
+                    </summary>
+                    <p class="cvss-section-desc">Refletem caracteristicas que mudam ao longo do tempo: maturidade do exploit, nivel de remediacao disponivel e confianca na fonte do report.</p>
+
+                    <div class="cvss-metrics-grid">
+                        <div class="cvss-metric">
+                            <div class="metric-header"><h3>Exploit Code Maturity (E)</h3></div>
+                            <p class="metric-desc">Maturidade do codigo de exploit disponivel.</p>
+                            <div class="metric-options" data-metric="E" data-version="31">
+                                <button type="button" data-value="X">Not Defined (X)</button>
+                                <button type="button" data-value="U">Unproven (U)</button>
+                                <button type="button" data-value="P">Proof-of-Concept (P)</button>
+                                <button type="button" data-value="F">Functional (F)</button>
+                                <button type="button" data-value="H">High (H)</button>
+                            </div>
+                        </div>
+
+                        <div class="cvss-metric">
+                            <div class="metric-header"><h3>Remediation Level (RL)</h3></div>
+                            <p class="metric-desc">Nivel de remediacao disponivel.</p>
+                            <div class="metric-options" data-metric="RL" data-version="31">
+                                <button type="button" data-value="X">Not Defined (X)</button>
+                                <button type="button" data-value="O">Official Fix (O)</button>
+                                <button type="button" data-value="T">Temporary Fix (T)</button>
+                                <button type="button" data-value="W">Workaround (W)</button>
+                                <button type="button" data-value="U">Unavailable (U)</button>
+                            </div>
+                        </div>
+
+                        <div class="cvss-metric">
+                            <div class="metric-header"><h3>Report Confidence (RC)</h3></div>
+                            <p class="metric-desc">Confianca na existencia da vulnerabilidade.</p>
+                            <div class="metric-options" data-metric="RC" data-version="31">
+                                <button type="button" data-value="X">Not Defined (X)</button>
+                                <button type="button" data-value="U">Unknown (U)</button>
+                                <button type="button" data-value="R">Reasonable (R)</button>
+                                <button type="button" data-value="C">Confirmed (C)</button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <!-- ==================== CVSS 4.0 ==================== -->
+            <div class="cvss-panel" id="panel-v40" role="tabpanel">
+
+                <div class="cvss-result">
+                    <div class="cvss-gauge-wrap">
+                        <svg class="cvss-gauge" viewBox="0 0 200 200" aria-label="Score CVSS">
+                            <circle class="gauge-bg" cx="100" cy="100" r="85" />
+                            <circle class="gauge-fg" id="gauge40" cx="100" cy="100" r="85" stroke-dasharray="534" stroke-dashoffset="534" />
+                            <text x="100" y="95" class="gauge-score" id="score40" text-anchor="middle">0.0</text>
+                            <text x="100" y="125" class="gauge-label" id="severity40" text-anchor="middle">None</text>
+                        </svg>
+                    </div>
+                    <div class="cvss-info">
+                        <div class="cvss-vector-wrap">
+                            <label for="vector40">Vector String</label>
+                            <div class="cvss-vector-input">
+                                <input type="text" id="vector40" readonly value="CVSS:4.0/AV:_/AC:_/AT:_/PR:_/UI:_/VC:_/VI:_/VA:_/SC:_/SI:_/SA:_">
+                                <button type="button" id="copy40" class="cvss-copy-btn" title="Copiar"><i class="fas fa-copy"></i></button>
+                                <button type="button" id="share40" class="cvss-copy-btn" title="Compartilhar URL"><i class="fas fa-link"></i></button>
+                            </div>
+                        </div>
+                        <div class="cvss-subscores">
+                            <div class="subscore"><span class="subscore-label">Macrovector</span><span class="subscore-value" id="macro40">------</span></div>
+                        </div>
+                        <button type="button" id="reset40" class="cvss-reset-btn"><i class="fas fa-undo"></i> Limpar selecoes</button>
+                    </div>
+                </div>
+
+                <div class="highlight-box warning" style="margin:1.5rem 0">
+                    <div class="highlight-box-title"><i class="fas fa-info-circle"></i> Sobre o CVSS 4.0</div>
+                    <p>Esta calculadora implementa o algoritmo de macrovector + lookup table do CVSS 4.0 conforme especificacao publica do FIRST.org. Pequenas variacoes no score podem ocorrer entre implementacoes. <strong>Para uso em relatorios oficiais, comunicacoes regulatorias ou casos criticos, sempre valide com a <a href="https://www.first.org/cvss/calculator/4.0" target="_blank" rel="noopener">calculadora oficial do FIRST.org</a></strong>, que e a fonte autoritativa.</p>
+                </div>
+
+                <h2 class="cvss-section-title">Metricas Base</h2>
+
+                <div class="cvss-metrics-grid">
+                    <div class="cvss-metric">
+                        <div class="metric-header"><h3>Attack Vector (AV)</h3></div>
+                        <p class="metric-desc">Contexto de exploracao da vulnerabilidade.</p>
+                        <div class="metric-options" data-metric="AV" data-version="40">
+                            <button type="button" data-value="N">Network (N)</button>
+                            <button type="button" data-value="A">Adjacent (A)</button>
+                            <button type="button" data-value="L">Local (L)</button>
+                            <button type="button" data-value="P">Physical (P)</button>
+                        </div>
+                    </div>
+
+                    <div class="cvss-metric">
+                        <div class="metric-header"><h3>Attack Complexity (AC)</h3></div>
+                        <p class="metric-desc">Condicoes alem do controle do atacante.</p>
+                        <div class="metric-options" data-metric="AC" data-version="40">
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                    <div class="cvss-metric">
+                        <div class="metric-header"><h3>Attack Requirements (AT)</h3></div>
+                        <p class="metric-desc">Pre-requisitos do alvo para que o ataque funcione (novo no 4.0).</p>
+                        <div class="metric-options" data-metric="AT" data-version="40">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="P">Present (P)</button>
+                        </div>
+                    </div>
+
+                    <div class="cvss-metric">
+                        <div class="metric-header"><h3>Privileges Required (PR)</h3></div>
+                        <p class="metric-desc">Privilegios necessarios para o ataque.</p>
+                        <div class="metric-options" data-metric="PR" data-version="40">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                    <div class="cvss-metric">
+                        <div class="metric-header"><h3>User Interaction (UI)</h3></div>
+                        <p class="metric-desc">Tipo de participacao do usuario (Passive ou Active no 4.0).</p>
+                        <div class="metric-options" data-metric="UI" data-version="40">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="P">Passive (P)</button>
+                            <button type="button" data-value="A">Active (A)</button>
+                        </div>
+                    </div>
+
+                    <div class="cvss-metric">
+                        <div class="metric-header"><h3>Vulnerable System Confidentiality (VC)</h3></div>
+                        <p class="metric-desc">Impacto na confidencialidade do sistema vulneravel.</p>
+                        <div class="metric-options" data-metric="VC" data-version="40">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                    <div class="cvss-metric">
+                        <div class="metric-header"><h3>Vulnerable System Integrity (VI)</h3></div>
+                        <p class="metric-desc">Impacto na integridade do sistema vulneravel.</p>
+                        <div class="metric-options" data-metric="VI" data-version="40">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                    <div class="cvss-metric">
+                        <div class="metric-header"><h3>Vulnerable System Availability (VA)</h3></div>
+                        <p class="metric-desc">Impacto na disponibilidade do sistema vulneravel.</p>
+                        <div class="metric-options" data-metric="VA" data-version="40">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                    <div class="cvss-metric">
+                        <div class="metric-header"><h3>Subsequent System Confidentiality (SC)</h3></div>
+                        <p class="metric-desc">Impacto em sistemas subsequentes (substitui Scope).</p>
+                        <div class="metric-options" data-metric="SC" data-version="40">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                    <div class="cvss-metric">
+                        <div class="metric-header"><h3>Subsequent System Integrity (SI)</h3></div>
+                        <p class="metric-desc">Impacto na integridade de sistemas subsequentes.</p>
+                        <div class="metric-options" data-metric="SI" data-version="40">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+
+                    <div class="cvss-metric">
+                        <div class="metric-header"><h3>Subsequent System Availability (SA)</h3></div>
+                        <p class="metric-desc">Impacto na disponibilidade de sistemas subsequentes.</p>
+                        <div class="metric-options" data-metric="SA" data-version="40">
+                            <button type="button" data-value="N">None (N)</button>
+                            <button type="button" data-value="L">Low (L)</button>
+                            <button type="button" data-value="H">High (H)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Severity Reference Table -->
+            <div class="severity-table">
+                <h3>Tabela de Severidade</h3>
+                <div class="severity-grid">
+                    <div class="sev sev-none"><strong>None</strong><span>0.0</span></div>
+                    <div class="sev sev-low"><strong>Low</strong><span>0.1 - 3.9</span></div>
+                    <div class="sev sev-medium"><strong>Medium</strong><span>4.0 - 6.9</span></div>
+                    <div class="sev sev-high"><strong>High</strong><span>7.0 - 8.9</span></div>
+                    <div class="sev sev-critical"><strong>Critical</strong><span>9.0 - 10.0</span></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Educational Content -->
+    <section class="article-content">
+        <div class="container">
+            <div class="article-body">
+
+                <h2 id="oque">O que e CVSS?</h2>
+                <p>O <strong>Common Vulnerability Scoring System (CVSS)</strong> e um framework aberto e padronizado mantido pelo <a href="https://www.first.org/cvss/" target="_blank" rel="noopener">FIRST.org</a> para avaliar a severidade de vulnerabilidades de seguranca. E a metrica usada pela maioria dos CVEs publicados, ferramentas de scan e plataformas de gestao de vulnerabilidades.</p>
+
+                <p>O CVSS atribui um score numerico de <strong>0.0 a 10.0</strong>, classificado em 5 niveis qualitativos (None, Low, Medium, High, Critical). Esses scores sao calculados a partir de metricas tecnicas que descrevem como a vulnerabilidade pode ser explorada e qual o impacto potencial.</p>
+
+                <h2 id="como-usar">Como Usar Esta Calculadora</h2>
+                <ol>
+                    <li><strong>Escolha a versao</strong> CVSS 3.1 ou 4.0 nas abas acima.</li>
+                    <li><strong>Selecione cada metrica</strong> clicando nas opcoes correspondentes a vulnerabilidade que voce esta avaliando.</li>
+                    <li><strong>Veja o score atualizar</strong> em tempo real conforme voce seleciona.</li>
+                    <li><strong>Copie o vector string</strong> para documentar em relatorios, tickets ou comunicacoes.</li>
+                    <li><strong>Compartilhe o link</strong> usando o botao de compartilhamento - a URL preserva todas as suas selecoes.</li>
+                </ol>
+
+                <h2 id="diferencas">CVSS 3.1 vs CVSS 4.0</h2>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h3>CVSS 3.1 (2019)</h3>
+                        <ul>
+                            <li>Padrao atual da maioria dos CVEs publicados</li>
+                            <li>8 metricas Base</li>
+                            <li>Suporte amplo em ferramentas de mercado</li>
+                            <li>Formula matematica deterministica</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card">
+                        <h3>CVSS 4.0 (2023)</h3>
+                        <ul>
+                            <li>Nova metrica Attack Requirements (AT)</li>
+                            <li>Separacao entre sistema vulneravel e subsequente</li>
+                            <li>Refinamento de Threat e Environmental</li>
+                            <li>Score baseado em macrovector + lookup table</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 id="boas-praticas">Boas Praticas de Uso</h2>
+                <div class="highlight-box gold">
+                    <div class="highlight-box-title"><i class="fas fa-star"></i> Lembre-se</div>
+                    <p>O CVSS avalia <strong>severidade tecnica</strong>, nao risco real. Um CVE com score 9.8 em um sistema isolado, sem dados sensiveis e atras de varios controles compensatorios, pode representar risco menor que um CVE 6.5 em um sistema critico exposto. Use o CVSS como insumo para sua analise de risco - nunca como substituto.</p>
+                </div>
+
+                <ul>
+                    <li><strong>Documente o vector</strong>: o score sozinho perde contexto. Sempre inclua o vector string completo.</li>
+                    <li><strong>Considere o ambiente</strong>: aplique as metricas Environmental para refletir seu contexto especifico.</li>
+                    <li><strong>Reavalie com Threat</strong>: a existencia de exploits publicos altera a urgencia de remediacao.</li>
+                    <li><strong>Combine com EPSS</strong>: o <em>Exploit Prediction Scoring System</em> complementa o CVSS com probabilidade real de exploracao.</li>
+                </ul>
+
+                <h2 id="metricas-explicadas">Metricas Explicadas</h2>
+
+                <h3>Attack Vector (AV)</h3>
+                <p>Descreve <em>de onde</em> a vulnerabilidade pode ser explorada. Vulnerabilidades exploraveis remotamente pela internet (Network) sao mais severas que aquelas que exigem acesso fisico ao dispositivo (Physical).</p>
+
+                <h3>Attack Complexity (AC)</h3>
+                <p>Avalia se existem condicoes adicionais alem do controle do atacante. AC:Low significa exploracao consistente; AC:High exige condicoes especificas (ex: race condition, configuracoes incomuns).</p>
+
+                <h3>Privileges Required (PR)</h3>
+                <p>Quanto privilegio o atacante precisa antes de explorar. PR:None e o pior caso (qualquer atacante anonimo); PR:High exige acesso administrativo previo.</p>
+
+                <h3>User Interaction (UI)</h3>
+                <p>Se a exploracao depende de uma vitima realizar uma acao (clicar em um link, abrir um arquivo). UI:None significa exploracao sem necessidade de vitima.</p>
+
+                <h3>Scope (S) - apenas CVSS 3.1</h3>
+                <p>Se a exploracao afeta apenas o componente vulneravel (Unchanged) ou pode impactar outros componentes (Changed). Exemplo classico: vulnerabilidade em um sandbox de browser que permite escapar e afetar o SO.</p>
+
+                <h3>Confidentiality / Integrity / Availability (CIA)</h3>
+                <p>Os impactos nos tres pilares da seguranca da informacao. Cada um e classificado em None, Low ou High. None = sem impacto; Low = impacto parcial/limitado; High = impacto total/grave.</p>
+
+                <p>Para mais siglas e termos tecnicos, consulte nosso <a href="../../blog/glossario-acronimos-ti-seguranca-informacao/">glossario de acronimos de TI e SI</a>.</p>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que e CVSS?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>CVSS (Common Vulnerability Scoring System) e um framework aberto e padronizado mantido pelo FIRST.org para avaliar a severidade de vulnerabilidades de seguranca. Atribui scores de 0.0 a 10.0 baseado em caracteristicas tecnicas e contextuais.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Qual a diferenca entre CVSS 3.1 e CVSS 4.0?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>CVSS 4.0 (publicado em 2023) introduz novas metricas como Attack Requirements (AT), separa impacto em sistema vulneravel e subsequente, e refina o calculo. CVSS 3.1 (2019) ainda e amplamente usado em CVEs e ferramentas de seguranca.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que significa o vector string?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O vector string e uma representacao textual das metricas selecionadas, no formato <code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</code>. Permite documentar e compartilhar scores CVSS de forma padronizada.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como sao classificadas as severidades?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>None: 0.0 | Low: 0.1-3.9 | Medium: 4.0-6.9 | High: 7.0-8.9 | Critical: 9.0-10.0. Vulnerabilidades High e Critical demandam acao prioritaria com SLAs mais restritivos.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O CVSS substitui a analise de risco?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Nao. CVSS avalia severidade tecnica de uma vulnerabilidade isolada, mas nao considera contexto de negocio, exposicao real, controles compensatorios ou criticidade do ativo. Use CVSS como insumo para sua analise de risco, nunca como substituto.</p></div>
+                    </div>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Precisa de Apoio em Gestao de Vulnerabilidades?</h3>
+                    <p>Oferecemos consultoria, scan continuo, priorizacao baseada em risco e remediacao acompanhada.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Proposta</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estratégia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Relacionados</h4><ul><li><a href="../../blog/glossario-acronimos-ti-seguranca-informacao/">Glossario</a></li><li><a href="../../blog/gestao-vulnerabilidades-processo-completo/">Vulnerabilidades</a></li><li><a href="../../blog/frameworks-cybersecurity/">Frameworks</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
+
+    <div id="cvss-toast" class="cvss-toast" aria-live="polite"></div>
+
+    <script src="../../js/site-common.min.js"></script>
+    <script src="cvss.min.js?v=2"></script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>
