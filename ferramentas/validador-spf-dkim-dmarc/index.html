@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Validador online de SPF, DKIM e DMARC. Analise registros de autenticacao de email do seu dominio com explicacoes em portugues e recomendacoes praticas.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="validador SPF, validador DKIM, validador DMARC, checker email, autenticacao email, email security, SPF record, DKIM selector, DMARC policy">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/validador-spf-dkim-dmarc/">
+
+    <meta property="og:title" content="Validador SPF DKIM DMARC Online | Inteligencia Brasil">
+    <meta property="og:description" content="Analise os registros de autenticacao de email (SPF, DKIM, DMARC) do seu dominio com explicacoes detalhadas em portugues.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/validador-spf-dkim-dmarc/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Validador SPF DKIM DMARC">
+    <meta name="twitter:description" content="Analise registros de autenticacao de email do seu dominio.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Validador SPF DKIM DMARC Online | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Validador SPF DKIM DMARC","description":"Ferramenta online para validar registros SPF, DKIM e DMARC de autenticacao de email.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligencia Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e SPF?","acceptedAnswer":{"@type":"Answer","text":"SPF (Sender Policy Framework) e um registro DNS TXT que lista quais servidores estao autorizados a enviar email em nome do seu dominio. Quando um servidor receptor recebe um email, ele consulta o SPF do dominio do remetente para verificar se o servidor de origem esta autorizado, ajudando a prevenir spoofing."}},{"@type":"Question","name":"O que e DKIM?","acceptedAnswer":{"@type":"Answer","text":"DKIM (DomainKeys Identified Mail) e uma assinatura criptografica adicionada ao cabecalho do email pelo servidor remetente. O servidor receptor valida essa assinatura usando uma chave publica publicada no DNS. DKIM garante integridade (mensagem nao foi alterada) e autenticidade (originada do dominio declarado)."}},{"@type":"Question","name":"O que e DMARC?","acceptedAnswer":{"@type":"Answer","text":"DMARC (Domain-based Message Authentication, Reporting and Conformance) e uma politica que diz aos servidores receptores o que fazer quando emails falham SPF e/ou DKIM. As politicas sao: none (apenas monitora), quarantine (envia para spam) ou reject (rejeita). DMARC tambem fornece relatorios agregados de autenticacao."}},{"@type":"Question","name":"Por que preciso de SPF, DKIM e DMARC?","acceptedAnswer":{"@type":"Answer","text":"Os tres juntos previnem que atacantes enviem emails se passando pelo seu dominio (spoofing/phishing), protegem sua reputacao de marca, melhoram entregabilidade dos seus emails legitimos e sao requeridos por grandes provedores como Gmail e Yahoo desde 2024."}},{"@type":"Question","name":"Esta ferramenta consulta DNS real?","acceptedAnswer":{"@type":"Answer","text":"Sim. Usamos DNS over HTTPS (DoH) do Cloudflare e Google para consultar os registros DNS publicos do dominio diretamente do seu navegador. As consultas sao publicas e nao revelam dados sensiveis - qualquer pessoa pode consultar registros TXT publicos."}}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Ferramentas","item":"https://inteligenciabrasil.seg.br/ferramentas/"},{"@type":"ListItem","position":3,"name":"Validador SPF DKIM DMARC"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cloudflare-dns.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <link href="email-auth.min.css?v=1" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ferramenta</span>
+            <h1>Validador SPF, DKIM e DMARC</h1>
+            <p style="color:#94A3B8;font-size:1.1rem;max-width:720px;margin:1rem auto 0">Analise os registros de autenticacao de email do seu dominio. Identifique problemas, valide configuracoes e proteja sua marca contra spoofing e phishing.</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Ferramentas</a></li><li class="breadcrumb-item active">Validador SPF DKIM DMARC</li></ol></div></nav>
+
+    <main id="main-content">
+    <section class="email-tool">
+        <div class="container">
+
+            <!-- Input Form -->
+            <div class="email-form">
+                <label for="domainInput" class="form-label">Dominio para analise</label>
+                <div class="form-input-group">
+                    <input type="text" id="domainInput" placeholder="exemplo.com.br" autocomplete="off" spellcheck="false" autocapitalize="none">
+                    <button type="button" id="analyzeBtn" class="form-btn"><i class="fas fa-search"></i> Analisar</button>
+                </div>
+                <div class="form-help">Digite apenas o dominio (ex: <code>empresa.com.br</code>), sem <code>http://</code> ou <code>www.</code>. Opcional: especifique um seletor DKIM no campo abaixo.</div>
+
+                <details class="form-advanced">
+                    <summary>Opcoes avancadas (DKIM selector)</summary>
+                    <div class="form-input-group" style="margin-top:1rem">
+                        <input type="text" id="dkimSelector" placeholder="Seletor DKIM (ex: google, default, selector1)" autocomplete="off" spellcheck="false">
+                    </div>
+                    <p class="form-help">Se vazio, tentamos os seletores mais comuns automaticamente: <code>google, default, selector1, selector2, k1, dkim, mail, smtp</code>.</p>
+                </details>
+            </div>
+
+            <!-- Loading -->
+            <div class="email-loading" id="emailLoading" style="display:none">
+                <div class="spinner-ring"></div>
+                <p>Consultando DNS...</p>
+            </div>
+
+            <!-- Results -->
+            <div class="email-results" id="emailResults" style="display:none">
+
+                <!-- Overall Score -->
+                <div class="email-score-card">
+                    <div class="score-circle" id="scoreCircle">
+                        <div class="score-value" id="scoreValue">-</div>
+                        <div class="score-label">de 100</div>
+                    </div>
+                    <div class="score-info">
+                        <div class="score-badge" id="scoreBadge">-</div>
+                        <p id="scoreSummary">-</p>
+                    </div>
+                </div>
+
+                <!-- SPF Result -->
+                <div class="record-card" id="spfCard">
+                    <div class="record-header">
+                        <h3><i class="fas fa-shield-alt"></i> SPF (Sender Policy Framework)</h3>
+                        <span class="record-status" id="spfStatus">-</span>
+                    </div>
+                    <div class="record-body" id="spfBody">
+                        <div class="record-value" id="spfValue"></div>
+                        <div class="record-analysis" id="spfAnalysis"></div>
+                    </div>
+                </div>
+
+                <!-- DKIM Result -->
+                <div class="record-card" id="dkimCard">
+                    <div class="record-header">
+                        <h3><i class="fas fa-key"></i> DKIM (DomainKeys Identified Mail)</h3>
+                        <span class="record-status" id="dkimStatus">-</span>
+                    </div>
+                    <div class="record-body" id="dkimBody">
+                        <div class="record-value" id="dkimValue"></div>
+                        <div class="record-analysis" id="dkimAnalysis"></div>
+                    </div>
+                </div>
+
+                <!-- DMARC Result -->
+                <div class="record-card" id="dmarcCard">
+                    <div class="record-header">
+                        <h3><i class="fas fa-clipboard-check"></i> DMARC (Domain-based Message Authentication)</h3>
+                        <span class="record-status" id="dmarcStatus">-</span>
+                    </div>
+                    <div class="record-body" id="dmarcBody">
+                        <div class="record-value" id="dmarcValue"></div>
+                        <div class="record-analysis" id="dmarcAnalysis"></div>
+                    </div>
+                </div>
+
+                <!-- MX Result -->
+                <div class="record-card" id="mxCard">
+                    <div class="record-header">
+                        <h3><i class="fas fa-envelope"></i> MX (Mail Exchange)</h3>
+                        <span class="record-status" id="mxStatus">-</span>
+                    </div>
+                    <div class="record-body" id="mxBody">
+                        <div class="record-value" id="mxValue"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy notice -->
+            <div class="highlight-box info" style="margin-top:2rem">
+                <div class="highlight-box-title"><i class="fas fa-info-circle"></i> Como funciona</div>
+                <p>Esta ferramenta usa <strong>DNS over HTTPS (DoH)</strong> do Cloudflare para consultar registros DNS publicos diretamente do seu navegador. Nenhum dado e enviado para nossos servidores - as consultas sao publicas e qualquer pessoa pode acessar registros TXT publicados.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Educational Content -->
+    <section class="article-content">
+        <div class="container">
+            <div class="article-body">
+
+                <h2 id="oque">O Que e Autenticacao de Email?</h2>
+                <p>Autenticacao de email e um conjunto de protocolos que permitem ao servidor receptor verificar se um email realmente vem do dominio que ele afirma ser. Sem autenticacao, qualquer um pode enviar emails se passando pelo seu dominio - isso e chamado de <strong>spoofing</strong> e e a base de fraudes como <strong>BEC (Business Email Compromise)</strong> e <strong>phishing</strong>.</p>
+
+                <p>Tres protocolos trabalham em conjunto para autenticar emails:</p>
+
+                <h2 id="spf">SPF (Sender Policy Framework)</h2>
+                <p>SPF e um registro DNS TXT que lista quais servidores estao autorizados a enviar email em nome do seu dominio. Exemplo:</p>
+                <pre><code>v=spf1 include:_spf.google.com include:mail.zendesk.com ip4:203.0.113.10 ~all</code></pre>
+
+                <p><strong>Mecanismos comuns:</strong></p>
+                <ul>
+                    <li><code>v=spf1</code> - Versao do SPF (sempre 1)</li>
+                    <li><code>include:</code> - Inclui regras de outro dominio (Google Workspace, Microsoft 365, etc.)</li>
+                    <li><code>ip4:</code> / <code>ip6:</code> - IPs autorizados</li>
+                    <li><code>a</code> / <code>mx</code> - Autoriza os IPs dos registros A ou MX</li>
+                    <li><code>~all</code> - Soft fail (recomenda quarentena para nao listados)</li>
+                    <li><code>-all</code> - Hard fail (rejeita emails nao autorizados - mais seguro)</li>
+                    <li><code>+all</code> - Permite tudo (NUNCA use - pior pratica)</li>
+                </ul>
+
+                <div class="highlight-box warning">
+                    <div class="highlight-box-title"><i class="fas fa-exclamation-triangle"></i> Limite de 10 lookups</div>
+                    <p>SPF tem um limite rigido de <strong>10 DNS lookups</strong>. Cada <code>include</code>, <code>a</code>, <code>mx</code>, <code>exists</code>, <code>redirect</code> conta. Exceder esse limite causa falha de validacao (<code>permerror</code>). E uma das causas mais comuns de problemas de entregabilidade.</p>
+                </div>
+
+                <h2 id="dkim">DKIM (DomainKeys Identified Mail)</h2>
+                <p>DKIM adiciona uma assinatura criptografica ao cabecalho do email. O servidor receptor consulta a chave publica no DNS e valida a assinatura, garantindo:</p>
+                <ul>
+                    <li><strong>Integridade</strong> - O conteudo nao foi alterado em transito</li>
+                    <li><strong>Autenticidade</strong> - A mensagem realmente partiu do dominio declarado</li>
+                </ul>
+
+                <p>O DKIM usa <strong>seletores</strong> para identificar qual chave usar. O registro DNS fica em <code>seletor._domainkey.dominio.com</code>. Exemplo:</p>
+                <pre><code>google._domainkey.empresa.com.br = "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSI..."</code></pre>
+
+                <p><strong>Boas praticas DKIM:</strong></p>
+                <ul>
+                    <li>Use chaves de <strong>pelo menos 2048 bits</strong> (1024 bits e considerado fraco)</li>
+                    <li>Faca <strong>rotacao periodica</strong> das chaves (ao menos anual)</li>
+                    <li>Use <strong>seletores diferentes</strong> por servico (ex: <code>google</code>, <code>marketing</code>, <code>transactional</code>)</li>
+                </ul>
+
+                <h2 id="dmarc">DMARC (Domain-based Message Authentication)</h2>
+                <p>DMARC e a politica que diz aos servidores receptores o que fazer quando emails falham SPF e/ou DKIM. Tambem fornece <strong>relatorios agregados</strong> sobre tentativas de autenticacao - essenciais para identificar abusos.</p>
+
+                <p>O registro DMARC fica em <code>_dmarc.dominio.com</code>. Exemplo:</p>
+                <pre><code>v=DMARC1; p=reject; rua=mailto:dmarc@empresa.com; ruf=mailto:forensic@empresa.com; pct=100; sp=reject</code></pre>
+
+                <p><strong>Politicas (tag <code>p=</code>):</strong></p>
+                <ul>
+                    <li><code>p=none</code> - Apenas monitora, nao toma acao (usar inicialmente para coletar dados)</li>
+                    <li><code>p=quarantine</code> - Envia para spam/quarentena</li>
+                    <li><code>p=reject</code> - Rejeita o email (recomendado apos validacao)</li>
+                </ul>
+
+                <div class="highlight-box gold">
+                    <div class="highlight-box-title"><i class="fas fa-star"></i> Caminho recomendado</div>
+                    <p>Comece com <code>p=none</code> + <code>rua</code> para receber relatorios. Analise por 30-60 dias, identifique e corrija fontes legitimas. Avance para <code>p=quarantine</code> com <code>pct=10</code>, depois aumente gradualmente. Por fim, va para <code>p=reject; pct=100</code>.</p>
+                </div>
+
+                <h2 id="bimi">BIMI (Brand Indicators for Message Identification)</h2>
+                <p>BIMI permite que o logo da sua empresa apareca ao lado dos emails autenticados em clientes como Gmail e Yahoo. Requer DMARC com politica <code>p=quarantine</code> ou <code>p=reject</code> e um certificado VMC (Verified Mark Certificate). E um benefício adicional para marcas que ja tem autenticacao bem implementada.</p>
+
+                <h2 id="por-que">Por Que Configurar SPF, DKIM e DMARC?</h2>
+                <ul>
+                    <li><strong>Previne spoofing</strong> - Atacantes nao conseguem se passar pelo seu dominio</li>
+                    <li><strong>Protege reputacao</strong> - Evita que clientes recebam phishing em seu nome</li>
+                    <li><strong>Melhora entregabilidade</strong> - Provedores como Gmail confiam mais em dominios autenticados</li>
+                    <li><strong>Requisito Gmail/Yahoo (2024+)</strong> - Para envio em massa, esses provedores agora exigem SPF + DKIM + DMARC</li>
+                    <li><strong>Compliance</strong> - LGPD, ISO 27001 e PCI DSS valorizam protecao de comunicacoes</li>
+                </ul>
+
+                <p>Para entender o contexto completo de seguranca de email e ataques relacionados, conheca <a href="../../blog/glossario-acronimos-ti-seguranca-informacao/">nosso glossario de acronimos de TI e SI</a>.</p>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que e SPF?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>SPF (Sender Policy Framework) e um registro DNS TXT que lista quais servidores estao autorizados a enviar email em nome do seu dominio. Quando um servidor receptor recebe um email, consulta o SPF do dominio remetente para verificar se o servidor de origem esta autorizado.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que e DKIM?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>DKIM e uma assinatura criptografica adicionada ao cabecalho do email. O servidor receptor valida usando uma chave publica publicada no DNS, garantindo integridade e autenticidade da mensagem.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que e DMARC?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>DMARC e uma politica que define o que fazer quando emails falham SPF/DKIM. As politicas sao: <code>none</code> (monitora), <code>quarantine</code> (envia para spam) ou <code>reject</code> (rejeita). DMARC tambem fornece relatorios de autenticacao.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Por que preciso de SPF, DKIM e DMARC?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Os tres juntos previnem spoofing/phishing usando seu dominio, protegem a reputacao da marca, melhoram entregabilidade e sao requeridos por Gmail e Yahoo desde 2024 para envio em massa.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Esta ferramenta consulta DNS real?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Sim. Usamos DNS over HTTPS (DoH) do Cloudflare para consultar os registros DNS publicos do dominio diretamente do seu navegador. Nenhum dado e enviado para nossos servidores.</p></div>
+                    </div>
+                </div>
+
+                <h2 id="outras-ferramentas">Outras Ferramentas Gratuitas</h2>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h3><i class="fas fa-calculator" style="color:#60A5FA;margin-right:8px"></i> <a href="../calculadora-cvss/" style="color:#60A5FA">Calculadora CVSS</a></h3>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Avalie a severidade de vulnerabilidades com a metodologia oficial do FIRST.org. Suporta CVSS 3.1 e 4.0.</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h3><i class="fas fa-key" style="color:#10B981;margin-right:8px"></i> <a href="../gerador-de-senhas/" style="color:#60A5FA">Gerador de Senhas</a></h3>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Crie senhas fortes ou frases-senha (passphrases) com criptografia segura. 100% local.</p>
+                    </div>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Sua empresa precisa de ajuda com SPF/DKIM/DMARC?</h3>
+                    <p>Implementamos autenticacao de email completa: configuracao, monitoramento de relatorios DMARC e proteção contra phishing.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Proposta</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estratégia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Ferramentas</h4><ul><li><a href="../calculadora-cvss/">Calculadora CVSS</a></li><li><a href="../gerador-de-senhas/">Gerador de Senhas</a></li><li><a href="../">Todas</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
+
+    <div id="email-toast" class="email-toast" aria-live="polite"></div>
+
+    <script src="../../js/site-common.min.js"></script>
+    <script src="email-auth.min.js?v=1"></script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

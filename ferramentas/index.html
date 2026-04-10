@@ -47,6 +47,18 @@
     <link href="../css/styles.min.css" rel="stylesheet">
     <link href="../css/servico.min.css" rel="stylesheet">
     <link href="../css/blog-listing.min.css" rel="stylesheet">
+    <style>
+        .tools-search{max-width:600px;margin:0 auto 2rem;padding:0 1rem}
+        .tools-search-input{position:relative}
+        .tools-search-input i{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:#60A5FA;pointer-events:none}
+        .tools-search-input input{width:100%;padding:14px 20px 14px 48px;border:2px solid rgba(96,165,250,.2);border-radius:12px;background:rgba(96,165,250,.05);color:#E2E8F0;font-size:1rem;outline:none;transition:border-color .2s;font-family:inherit}
+        .tools-search-input input:focus{border-color:#60A5FA}
+        .tools-search-input input::placeholder{color:#64748B}
+        .tools-search-info{text-align:center;color:#94A3B8;margin-top:.75rem;font-size:.9rem;min-height:1.2rem}
+        .tools-no-results{text-align:center;color:#94A3B8;padding:3rem 1rem}
+        .tools-no-results i{font-size:3rem;color:#475569;margin-bottom:1rem;display:block}
+        .blog-card.hidden{display:none !important}
+    </style>
 </head>
 
 <body>
@@ -122,10 +134,24 @@
     <section class="blog-content">
         <div class="container">
 
-            <div class="blog-grid">
+            <!-- Search Bar -->
+            <div class="tools-search">
+                <div class="tools-search-input">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="toolsSearch" placeholder="Buscar ferramenta (ex: senha, cvss, dmarc...)" autocomplete="off">
+                </div>
+                <div class="tools-search-info" id="toolsSearchInfo"></div>
+            </div>
+
+            <div class="tools-no-results" id="toolsNoResults" style="display:none">
+                <i class="fas fa-search-minus"></i>
+                <p>Nenhuma ferramenta encontrada para sua busca.</p>
+            </div>
+
+            <div class="blog-grid" id="toolsGrid">
 
                 <!-- Tool - Calculadora CVSS -->
-                <article class="blog-card">
+                <article class="blog-card" data-tags="cvss calculadora vulnerabilidade severidade score base temporal first.org 3.1 4.0 macrovector">
                     <div class="blog-card-image" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
                         <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Calculadora</span>
                         <i class="fas fa-calculator"></i>
@@ -147,6 +173,52 @@
                     </div>
                 </article>
 
+                <!-- Tool - Gerador de Senhas -->
+                <article class="blog-card" data-tags="senha password gerador passphrase frase forte segura criptografia random nist mfa autenticacao">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #047857 0%, #065f46 100%);">
+                        <span class="blog-card-category" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10B981;">Gerador</span>
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="fas fa-shield-alt"></i> 100% local</span>
+                            <span><i class="fas fa-bolt"></i> Senhas e passphrases</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./gerador-de-senhas/">Gerador de Senhas Seguras</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Crie senhas fortes ou frases-senha (passphrases) usando criptografia segura do navegador. Configuravel, com indicador de forca e geracao em lote. Nada e enviado ao servidor.
+                        </p>
+                        <a href="./gerador-de-senhas/" class="blog-card-link">
+                            Abrir ferramenta <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Tool - Validador SPF DKIM DMARC -->
+                <article class="blog-card" data-tags="spf dkim dmarc bimi email autenticacao validador checker dns txt mx phishing spoofing">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #b45309 0%, #92400e 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #F59E0B;">Validador</span>
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="fas fa-shield-alt"></i> SPF, DKIM, DMARC</span>
+                            <span><i class="fas fa-network-wired"></i> Consulta DNS real</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./validador-spf-dkim-dmarc/">Validador SPF, DKIM e DMARC</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Analise os registros de autenticacao de email do seu dominio. Identifique problemas de configuracao, valide politicas DMARC e proteja sua marca contra spoofing.
+                        </p>
+                        <a href="./validador-spf-dkim-dmarc/" class="blog-card-link">
+                            Abrir ferramenta <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
                 <!-- Future tools placeholder -->
                 <article class="blog-card" style="opacity:.5">
                     <div class="blog-card-image" style="background: linear-gradient(135deg, #475569 0%, #1e293b 100%);">
@@ -161,7 +233,7 @@
                             <a href="#" onclick="event.preventDefault()">Mais ferramentas em breve</a>
                         </h2>
                         <p class="blog-card-excerpt">
-                            Estamos preparando novas ferramentas: gerador de senhas seguras, validador de SPF/DKIM/DMARC, checker de cabecalhos HTTP de seguranca, EPSS lookup e mais.
+                            Em desenvolvimento: security headers checker, EPSS lookup, hash calculator, decoder Base64/JWT, validador de politica de senhas e mais.
                         </p>
                         <span class="blog-card-link" style="opacity:.7">Em breve</span>
                     </div>
@@ -238,6 +310,41 @@
     <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
 
     <script src="../js/site-common.min.js"></script>
+    <script>
+    (function(){
+        var input=document.getElementById('toolsSearch');
+        if(!input)return;
+        var grid=document.getElementById('toolsGrid');
+        var noResults=document.getElementById('toolsNoResults');
+        var info=document.getElementById('toolsSearchInfo');
+        var cards=Array.prototype.slice.call(grid.querySelectorAll('.blog-card'));
+        var totalReal=cards.filter(function(c){return c.style.opacity!=='0.5'}).length;
+        info.textContent=totalReal+' ferramenta'+(totalReal!==1?'s':'')+' disponivel'+(totalReal!==1?'is':'');
+        input.addEventListener('input',function(){
+            var q=this.value.toLowerCase().trim();
+            var visible=0;
+            cards.forEach(function(c){
+                if(!q){c.classList.remove('hidden');if(c.style.opacity!=='0.5')visible++;return;}
+                var tags=(c.getAttribute('data-tags')||'').toLowerCase();
+                var title=(c.querySelector('.blog-card-title')||{}).textContent||'';
+                var excerpt=(c.querySelector('.blog-card-excerpt')||{}).textContent||'';
+                var category=(c.querySelector('.blog-card-category')||{}).textContent||'';
+                var hay=(tags+' '+title+' '+excerpt+' '+category).toLowerCase();
+                if(hay.indexOf(q)>-1){c.classList.remove('hidden');visible++;}
+                else{c.classList.add('hidden');}
+            });
+            if(q){
+                info.textContent=visible+' resultado'+(visible!==1?'s':'')+' para "'+q+'"';
+                noResults.style.display=visible?'none':'block';
+                grid.style.display=visible?'':'none';
+            }else{
+                info.textContent=totalReal+' ferramenta'+(totalReal!==1?'s':'')+' disponivel'+(totalReal!==1?'is':'');
+                noResults.style.display='none';
+                grid.style.display='';
+            }
+        });
+    })();
+    </script>
 <script src="../js/cookie-consent.min.js" defer></script>
 </body>
 </html>
