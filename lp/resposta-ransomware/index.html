@@ -758,9 +758,10 @@
         // IP Collection
         (async function() {
             try {
-                const res = await fetch('https://api.ipify.org?format=json');
-                const data = await res.json();
-                document.getElementById('ip').value = data.ip || '';
+                const res = await fetch('/cdn-cgi/trace', { cache: 'no-store' });
+                const text = await res.text();
+                const match = text.match(/(?:^|\n)ip=([^\n]+)/);
+                document.getElementById('ip').value = match ? match[1].trim() : '';
             } catch (e) {}
         })();
 

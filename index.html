@@ -1330,23 +1330,17 @@
 
         async function fetchIp() {
             if (cachedIp) return cachedIp;
-            var endpoints = [
-                'https://api.ipify.org?format=json',
-                'https://api64.ipify.org?format=json',
-                'https://ipinfo.io/json'
-            ];
-            for (var i = 0; i < endpoints.length; i++) {
-                try {
-                    var res = await withTimeout(fetch(endpoints[i], { cache: 'no-store' }), 2500);
-                    if (!res.ok) continue;
-                    var data = await res.json();
-                    var ip = data.ip || data.ip_address;
-                    if (ip && typeof ip === 'string') {
-                        cachedIp = ip.trim();
+            try {
+                var res = await withTimeout(fetch('/cdn-cgi/trace', { cache: 'no-store' }), 2500);
+                if (res.ok) {
+                    var text = await res.text();
+                    var match = text.match(/(?:^|\n)ip=([^\n]+)/);
+                    if (match && match[1]) {
+                        cachedIp = match[1].trim();
                         return cachedIp;
                     }
-                } catch (e) {}
-            }
+                }
+            } catch (e) {}
             return '';
         }
 
