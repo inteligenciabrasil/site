@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Codificador e decodificador Base64, URL e Hex online e gratuito. Converta texto entre formatos usado em pentest, APIs e analise de malware. 100% local no navegador.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="base64 encoder, base64 decoder, url encode, url decode, hex encoder, hex decoder, codificador base64, decodificador base64, percent encoding">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/codificador-base64-url-hex/">
+
+    <meta property="og:title" content="Codificador Base64, URL e Hex Online | Inteligencia Brasil">
+    <meta property="og:description" content="Converta texto entre Base64, URL e Hex. 100% local, sem envio ao servidor. Util para pentest, APIs, OSINT e analise de malware.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/codificador-base64-url-hex/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Codificador Base64, URL e Hex Online">
+    <meta name="twitter:description" content="Converta texto entre Base64, URL e Hex. 100% local.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Codificador Base64, URL e Hex Online | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Codificador Base64, URL e Hex","description":"Ferramenta online gratuita para codificar e decodificar Base64, URL e Hexadecimal. Roda 100% no navegador.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligencia Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e Base64 e para que serve?","acceptedAnswer":{"@type":"Answer","text":"Base64 e uma codificacao que representa dados binarios usando 64 caracteres ASCII imprimiveis (A-Z, a-z, 0-9, +, /). Serve para transmitir dados binarios por canais que aceitam apenas texto, como emails (MIME), JSON, URLs (Base64URL) e tokens JWT. Nao e criptografia - qualquer pessoa pode decodificar."}},{"@type":"Question","name":"Qual a diferenca entre encodeURI e encodeURIComponent?","acceptedAnswer":{"@type":"Answer","text":"encodeURI preserva caracteres reservados de URL (como / ? # : &) porque assume que voce esta codificando uma URL completa. encodeURIComponent codifica todos os caracteres especiais, ideal para codificar um valor individual de parametro (query string). Regra pratica: use Componente para valores dentro de uma URL."}},{"@type":"Question","name":"Hex e seguro para transportar dados?","acceptedAnswer":{"@type":"Answer","text":"Hex (hexadecimal) e apenas uma representacao textual de bytes - cada byte vira 2 caracteres (00-FF). Nao oferece seguranca alguma, apenas legibilidade. E comum em assinaturas, hashes, chaves criptograficas e analise forense de memoria/rede."}},{"@type":"Question","name":"Os dados sao enviados ao servidor?","acceptedAnswer":{"@type":"Answer","text":"Nao. Toda a codificacao/decodificacao acontece no seu navegador usando APIs nativas (TextEncoder, btoa/atob, encodeURI). Nenhum dado e transmitido, salvo ou registrado. Voce pode desconectar da internet apos carregar a pagina e a ferramenta continua funcionando."}},{"@type":"Question","name":"Por que Base64 aumenta o tamanho dos dados?","acceptedAnswer":{"@type":"Answer","text":"Base64 usa 6 bits por caractere para representar 8 bits de dado - logo o tamanho cresce cerca de 33% (4/3). Alem disso, o comprimento e arredondado para multiplo de 4 com padding (=). Para 100 bytes binarios, voce obtem ~136 caracteres Base64."}}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Ferramentas","item":"https://inteligenciabrasil.seg.br/ferramentas/"},{"@type":"ListItem","position":3,"name":"Codificador Base64, URL e Hex"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <link href="codificador.min.css?v=1" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../">FERRAMENTAS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ferramenta</span>
+            <h1>Codificador Base64, URL e Hex</h1>
+            <p style="color:#94A3B8;font-size:1.1rem;max-width:720px;margin:1rem auto 0">Converta texto entre Base64, URL encoding e Hexadecimal. <strong>100% local</strong> - nenhum dado e enviado ao servidor.</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Ferramentas</a></li><li class="breadcrumb-item active">Codificador Base64, URL e Hex</li></ol></div></nav>
+
+    <main id="main-content">
+    <section class="enc-tool">
+        <div class="container">
+
+            <div class="enc-tabs" role="tablist">
+                <button class="enc-tab active" data-tab="base64" role="tab"><i class="fas fa-code"></i> Base64</button>
+                <button class="enc-tab" data-tab="url" role="tab"><i class="fas fa-link"></i> URL</button>
+                <button class="enc-tab" data-tab="hex" role="tab"><i class="fas fa-hashtag"></i> Hexadecimal</button>
+            </div>
+
+            <!-- BASE64 PANEL -->
+            <div class="enc-panel active" id="panel-base64">
+                <div class="enc-options">
+                    <label><input type="checkbox" id="opt-b64-urlsafe"> URL-safe (Base64URL: - _ sem padding)</label>
+                </div>
+                <div class="enc-grid">
+                    <div class="enc-box">
+                        <div class="enc-box-head">
+                            <h2 class="enc-box-title">Entrada (texto ou Base64)</h2>
+                            <div class="enc-box-actions">
+                                <button class="enc-box-btn" id="paste-base64" title="Colar"><i class="fas fa-paste"></i></button>
+                                <button class="enc-box-btn" id="clear-base64" title="Limpar"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <textarea class="enc-textarea" id="input-base64" placeholder="Cole aqui seu texto ou Base64..." spellcheck="false"></textarea>
+                    </div>
+                    <div class="enc-box">
+                        <div class="enc-box-head">
+                            <h2 class="enc-box-title">Saida</h2>
+                            <div class="enc-box-actions">
+                                <button class="enc-box-btn" id="copy-base64" title="Copiar"><i class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <textarea class="enc-textarea" id="output-base64" readonly spellcheck="false"></textarea>
+                    </div>
+                </div>
+                <div class="enc-controls">
+                    <button class="enc-btn" id="encode-base64"><i class="fas fa-arrow-right"></i> Codificar</button>
+                    <button class="enc-btn" id="decode-base64"><i class="fas fa-arrow-left"></i> Decodificar</button>
+                    <button class="enc-btn enc-btn-secondary" id="swap-base64"><i class="fas fa-exchange-alt"></i> Trocar</button>
+                </div>
+                <div class="enc-status" id="status-base64"></div>
+                <div class="enc-stats" id="stats-base64"></div>
+            </div>
+
+            <!-- URL PANEL -->
+            <div class="enc-panel" id="panel-url">
+                <div class="enc-options">
+                    <label>Modo:
+                        <select id="opt-url-mode">
+                            <option value="component">Componente (encodeURIComponent)</option>
+                            <option value="full">URL completa (encodeURI)</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="enc-grid">
+                    <div class="enc-box">
+                        <div class="enc-box-head">
+                            <h2 class="enc-box-title">Entrada</h2>
+                            <div class="enc-box-actions">
+                                <button class="enc-box-btn" id="paste-url" title="Colar"><i class="fas fa-paste"></i></button>
+                                <button class="enc-box-btn" id="clear-url" title="Limpar"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <textarea class="enc-textarea" id="input-url" placeholder="Cole aqui seu texto ou URL codificada..." spellcheck="false"></textarea>
+                    </div>
+                    <div class="enc-box">
+                        <div class="enc-box-head">
+                            <h2 class="enc-box-title">Saida</h2>
+                            <div class="enc-box-actions">
+                                <button class="enc-box-btn" id="copy-url" title="Copiar"><i class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <textarea class="enc-textarea" id="output-url" readonly spellcheck="false"></textarea>
+                    </div>
+                </div>
+                <div class="enc-controls">
+                    <button class="enc-btn" id="encode-url"><i class="fas fa-arrow-right"></i> Codificar</button>
+                    <button class="enc-btn" id="decode-url"><i class="fas fa-arrow-left"></i> Decodificar</button>
+                    <button class="enc-btn enc-btn-secondary" id="swap-url"><i class="fas fa-exchange-alt"></i> Trocar</button>
+                </div>
+                <div class="enc-status" id="status-url"></div>
+                <div class="enc-stats" id="stats-url"></div>
+            </div>
+
+            <!-- HEX PANEL -->
+            <div class="enc-panel" id="panel-hex">
+                <div class="enc-options">
+                    <label>Separador:
+                        <select id="opt-hex-sep">
+                            <option value="">Sem separador (deadbeef)</option>
+                            <option value=" ">Espaco (de ad be ef)</option>
+                            <option value=":">Dois pontos (de:ad:be:ef)</option>
+                            <option value="-">Hifen (de-ad-be-ef)</option>
+                            <option value=",">Virgula (de,ad,be,ef)</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="enc-grid">
+                    <div class="enc-box">
+                        <div class="enc-box-head">
+                            <h2 class="enc-box-title">Entrada</h2>
+                            <div class="enc-box-actions">
+                                <button class="enc-box-btn" id="paste-hex" title="Colar"><i class="fas fa-paste"></i></button>
+                                <button class="enc-box-btn" id="clear-hex" title="Limpar"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <textarea class="enc-textarea" id="input-hex" placeholder="Cole aqui seu texto ou hex (aceita espacos, :, -, 0x)..." spellcheck="false"></textarea>
+                    </div>
+                    <div class="enc-box">
+                        <div class="enc-box-head">
+                            <h2 class="enc-box-title">Saida</h2>
+                            <div class="enc-box-actions">
+                                <button class="enc-box-btn" id="copy-hex" title="Copiar"><i class="fas fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <textarea class="enc-textarea" id="output-hex" readonly spellcheck="false"></textarea>
+                    </div>
+                </div>
+                <div class="enc-controls">
+                    <button class="enc-btn" id="encode-hex"><i class="fas fa-arrow-right"></i> Codificar</button>
+                    <button class="enc-btn" id="decode-hex"><i class="fas fa-arrow-left"></i> Decodificar</button>
+                    <button class="enc-btn enc-btn-secondary" id="swap-hex"><i class="fas fa-exchange-alt"></i> Trocar</button>
+                </div>
+                <div class="enc-status" id="status-hex"></div>
+                <div class="enc-stats" id="stats-hex"></div>
+            </div>
+
+            <div class="highlight-box info" style="margin:2rem 0">
+                <div class="highlight-box-title"><i class="fas fa-shield-alt"></i> Sua privacidade</div>
+                <p>Esta ferramenta roda <strong>100% no seu navegador</strong> usando APIs nativas (<code>TextEncoder</code>, <code>btoa/atob</code>, <code>encodeURI</code>). Nenhum dado e enviado, salvo ou registrado. Abra o DevTools (F12) e audite o codigo JavaScript a qualquer momento.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="article-content">
+        <div class="container">
+            <div class="article-body">
+
+                <h2 id="base64">O Que e Base64?</h2>
+                <p>Base64 e uma codificacao que representa dados binarios usando apenas 64 caracteres ASCII imprimiveis: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>+</code> e <code>/</code>, com <code>=</code> como padding. Serve para transportar binarios por canais que so aceitam texto.</p>
+
+                <h3>Onde Base64 e usado em SegInfo?</h3>
+                <ul>
+                    <li><strong>Tokens JWT</strong> - header e payload sao Base64URL</li>
+                    <li><strong>Certificados PEM</strong> - BEGIN CERTIFICATE ... END CERTIFICATE</li>
+                    <li><strong>Payloads de phishing</strong> - atacantes ocultam scripts maliciosos em Base64</li>
+                    <li><strong>Basic Authentication</strong> - <code>Authorization: Basic dXNlcjpwYXNz</code></li>
+                    <li><strong>Imagens inline</strong> - <code>data:image/png;base64,...</code></li>
+                    <li><strong>MIME email</strong> - anexos codificados em Base64</li>
+                </ul>
+
+                <div class="highlight-box danger">
+                    <div class="highlight-box-title"><i class="fas fa-exclamation-triangle"></i> Base64 nao e criptografia</div>
+                    <p>Qualquer pessoa pode decodificar Base64 em milissegundos. Nunca use Base64 para "esconder" senhas ou dados sensiveis. Para proteger dados, use criptografia real (AES-256, TLS, bcrypt para senhas).</p>
+                </div>
+
+                <h3>Base64 vs Base64URL</h3>
+                <p>Base64 padrao usa <code>+</code> e <code>/</code>, que sao caracteres reservados em URLs. Base64URL substitui por <code>-</code> e <code>_</code>, alem de remover o padding <code>=</code>. E o formato usado em JWT, OAuth e cookies.</p>
+
+                <h2 id="url">URL Encoding (Percent Encoding)</h2>
+                <p>URL encoding, tambem chamado <em>percent encoding</em>, converte caracteres que tem significado especial em URLs (como espacos, <code>?</code>, <code>&amp;</code>, <code>=</code>) para a forma <code>%XX</code>, onde XX e o valor hexadecimal do byte UTF-8.</p>
+
+                <h3>encodeURI vs encodeURIComponent</h3>
+                <ul>
+                    <li><strong>encodeURI</strong> - codifica uma URL completa, preserva <code>:/?#&amp;=</code> que tem funcao estrutural</li>
+                    <li><strong>encodeURIComponent</strong> - codifica um valor individual, escapa tudo que nao e alfanumerico</li>
+                </ul>
+
+                <h4>Quando usar cada um?</h4>
+                <p>Use <strong>encodeURIComponent</strong> para codificar valores que voce insere em uma URL (nome de usuario em query string, por exemplo). Use <strong>encodeURI</strong> apenas quando voce esta codificando uma URL inteira que ainda precisa funcionar como URL.</p>
+
+                <h2 id="hex">Codificacao Hexadecimal</h2>
+                <p>Hex representa cada byte (8 bits) como dois caracteres hexadecimais (0-9, a-f). E a representacao textual padrao de dados binarios em SegInfo.</p>
+
+                <h3>Onde Hex e usado em SegInfo?</h3>
+                <ul>
+                    <li><strong>Hashes</strong> - MD5, SHA-1, SHA-256 sao exibidos em hex</li>
+                    <li><strong>Chaves criptograficas</strong> - chaves AES, HMAC</li>
+                    <li><strong>MAC addresses</strong> - <code>de:ad:be:ef:00:01</code></li>
+                    <li><strong>Analise de memoria</strong> - hex dumps em forense e engenharia reversa</li>
+                    <li><strong>IoCs</strong> - assinaturas de malware em YARA</li>
+                    <li><strong>Shellcodes</strong> - <code>\x90\x90\x31\xc0</code></li>
+                </ul>
+
+                <h2 id="uso-seguranca">Uso em Cibersegurança</h2>
+                <p>Estas codificacoes sao onipresentes em analise de trafego, pentest de APIs, reverse engineering de malware e response a incidentes. Veja alguns cenarios:</p>
+
+                <h3>Analise de phishing</h3>
+                <p>URLs de phishing frequentemente escondem o destino real via URL encoding ou Base64. Decodifique para revelar o domino malicioso:</p>
+                <p><code>hxxps://safe[.]com?r=aHR0cHM6Ly9waGlzaGluZy5jb20=</code> &rarr; decode Base64 &rarr; <code>https://phishing.com</code></p>
+
+                <h3>Pentest de APIs</h3>
+                <p>JWT tokens sao tres segmentos Base64URL separados por ponto: <code>header.payload.signature</code>. Decodifique os dois primeiros para inspecionar claims. Nossa <a href="../decoder-jwt/">ferramenta de decodificacao de JWT</a> automatiza isso.</p>
+
+                <h3>Analise de malware</h3>
+                <p>Macros maliciosos em documentos Office frequentemente usam Base64 para ocultar payloads PowerShell. Decodificar revela o comando real:</p>
+                <p><code>powershell -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQALgAu...</code></p>
+
+                <h2 id="erros-comuns">Erros Comuns</h2>
+                <ul>
+                    <li><strong>Achar que Base64 e seguranca</strong> - nao e criptografia, apenas codificacao</li>
+                    <li><strong>Misturar Base64 e Base64URL</strong> - o decoder falha se o formato nao bate com o encoder</li>
+                    <li><strong>Esquecer UTF-8</strong> - caracteres acentuados viram bytes multiplos; ignorar isso corrompe dados</li>
+                    <li><strong>Double encoding</strong> - aplicar duas vezes por engano (<code>%2520</code> em vez de <code>%20</code>)</li>
+                    <li><strong>Hex com caracteres estranhos</strong> - espacos, <code>:</code>, <code>-</code>, <code>0x</code> precisam ser removidos antes de decodificar</li>
+                </ul>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que e Base64 e para que serve?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Base64 e uma codificacao que representa dados binarios usando 64 caracteres ASCII imprimiveis. Serve para transmitir dados binarios por canais que aceitam apenas texto (email, JSON, URLs, JWT). Nao e criptografia - qualquer um pode decodificar.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Qual a diferenca entre encodeURI e encodeURIComponent?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>encodeURI preserva caracteres reservados de URL (/ ? # : &amp;) pois assume URL completa. encodeURIComponent codifica todos os especiais, ideal para valores individuais de query string. Regra: use Componente para valores dentro de uma URL.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Hex e seguro para transportar dados?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Hex e apenas representacao textual de bytes - cada byte vira 2 caracteres (00-FF). Nao oferece seguranca alguma, apenas legibilidade. Comum em assinaturas, hashes, chaves criptograficas e analise forense.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Os dados sao enviados ao servidor?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Nao. Toda codificacao/decodificacao acontece no seu navegador usando APIs nativas. Nenhum dado e transmitido, salvo ou registrado. Voce pode desconectar da internet e a ferramenta continua funcionando.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Por que Base64 aumenta o tamanho dos dados?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Base64 usa 6 bits por caractere para representar 8 bits de dado - tamanho cresce ~33% (4/3). Alem disso, o comprimento e arredondado para multiplo de 4 com padding (=). 100 bytes binarios viram ~136 caracteres Base64.</p></div>
+                    </div>
+                </div>
+
+                <h2 id="outras-ferramentas">Outras Ferramentas Gratuitas</h2>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h3><i class="fas fa-key" style="color:#10B981;margin-right:8px"></i> <a href="../decoder-jwt/" style="color:#60A5FA">Decoder JWT</a></h3>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Decode e inspecione tokens JWT, veja header e payload, detecte vulnerabilidades como alg=none.</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h3><i class="fas fa-fingerprint" style="color:#F59E0B;margin-right:8px"></i> <a href="../calculadora-hash/" style="color:#60A5FA">Calculadora de Hash</a></h3>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Calcule hashes MD5, SHA-1, SHA-256, SHA-384 e SHA-512 de texto ou arquivo.</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h3><i class="fas fa-lock" style="color:#8B5CF6;margin-right:8px"></i> <a href="../gerador-de-senhas/" style="color:#60A5FA">Gerador de Senhas</a></h3>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Gere senhas fortes e frases-senha com criptografia segura do navegador.</p>
+                    </div>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Precisa de uma avaliacao de seguranca em sua aplicacao?</h3>
+                    <p>Nossa equipe realiza pentest de APIs, analise de tokens JWT e revisao de criptografia em produtos web e mobile.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Proposta</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Ferramentas</h4><ul><li><a href="../calculadora-cvss/">Calculadora CVSS</a></li><li><a href="../gerador-de-senhas/">Gerador de Senhas</a></li><li><a href="../">Todas as ferramentas</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
+
+    <div id="encToast" class="enc-toast" aria-live="polite"></div>
+
+    <script src="../../js/site-common.min.js"></script>
+    <script src="codificador.min.js?v=1"></script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

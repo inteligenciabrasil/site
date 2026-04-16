@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Decoder JWT online e gratuito. Decodifique tokens JWT, inspecione header, payload e claims, detecte vulnerabilidades como alg=none. 100% local no navegador.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="jwt decoder, jwt decode, decoder jwt, jwt parser, json web token decoder, decode jwt online, jwt online">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/decoder-jwt/">
+
+    <meta property="og:title" content="Decoder JWT Online | Inteligencia Brasil">
+    <meta property="og:description" content="Decode JSON Web Tokens (JWT) no navegador. Inspecione header, payload e detecte vulnerabilidades. 100% local.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/decoder-jwt/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Decoder JWT Online">
+    <meta name="twitter:description" content="Decode JWTs com analise de seguranca. 100% local.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Decoder JWT Online com Analise de Seguranca | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Decoder JWT","description":"Ferramenta online gratuita para decodificar e analisar JSON Web Tokens. Detecta vulnerabilidades comuns como alg=none. Roda 100% no navegador.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligencia Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e um JWT (JSON Web Token)?","acceptedAnswer":{"@type":"Answer","text":"JWT e um padrao aberto (RFC 7519) para representar claims (afirmacoes) entre duas partes como um objeto JSON assinado. Consiste em tres segmentos codificados em Base64URL separados por ponto: header.payload.signature. Muito usado para autenticacao em APIs, OAuth 2.0 e OpenID Connect."}},{"@type":"Question","name":"JWT e criptografado?","acceptedAnswer":{"@type":"Answer","text":"Por padrao nao. O header e payload sao apenas codificados em Base64URL - qualquer pessoa pode ler. A assinatura garante que o token nao foi adulterado, mas nao oculta o conteudo. Se voce precisa confidencialidade, use JWE (JSON Web Encryption) ou transporte o JWT apenas sobre TLS e nao coloque dados sensiveis no payload."}},{"@type":"Question","name":"O que e o ataque alg=none em JWT?","acceptedAnswer":{"@type":"Answer","text":"Algumas bibliotecas aceitavam tokens com header alg=none, que indicava que o token nao precisava de assinatura. Atacantes podiam entao forjar qualquer token, mudando claims como user_id ou roles. E uma vulnerabilidade classica (CVE-2015-9235). Sempre configure sua biblioteca para rejeitar alg=none e validar o algoritmo esperado."}},{"@type":"Question","name":"Onde devo armazenar JWT no cliente?","acceptedAnswer":{"@type":"Answer","text":"Evite localStorage (vulneravel a XSS). O padrao recomendado e cookies HttpOnly + Secure + SameSite=Strict, combinados com tokens curtos e rotacao. Para SPAs, considere o padrao BFF (Backend for Frontend) mantendo o token apenas no backend e entregando sessao via cookie de sessao tradicional."}},{"@type":"Question","name":"Este decoder envia meu token a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Nao. Toda a decodificacao acontece no seu navegador usando JavaScript (atob e JSON.parse). Nenhum token e enviado, salvo ou registrado. Voce pode desconectar da internet apos carregar a pagina e a ferramenta continua funcionando. Isso e critico: tokens podem conter credenciais sensiveis e nao deveriam ser colados em servicos online de terceiros sem essa garantia."}}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Ferramentas","item":"https://inteligenciabrasil.seg.br/ferramentas/"},{"@type":"ListItem","position":3,"name":"Decoder JWT"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <link href="jwt.min.css?v=1" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../">FERRAMENTAS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ferramenta</span>
+            <h1>Decoder JWT (JSON Web Token)</h1>
+            <p style="color:#94A3B8;font-size:1.1rem;max-width:720px;margin:1rem auto 0">Decode JWTs, inspecione header e payload, analise claims temporais e detecte vulnerabilidades como <code>alg=none</code>. <strong>100% local.</strong></p>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Ferramentas</a></li><li class="breadcrumb-item active">Decoder JWT</li></ol></div></nav>
+
+    <main id="main-content">
+    <section class="jwt-tool">
+        <div class="container">
+
+            <div class="jwt-input-box">
+                <div class="jwt-input-head">
+                    <h2 class="jwt-input-title">Cole seu JWT aqui</h2>
+                    <div class="jwt-actions">
+                        <button class="jwt-action-btn" id="jwtExample" title="Carregar exemplo"><i class="fas fa-flask"></i> Exemplo</button>
+                        <button class="jwt-action-btn" id="jwtPaste" title="Colar"><i class="fas fa-paste"></i></button>
+                        <button class="jwt-action-btn" id="jwtClear" title="Limpar"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <textarea class="jwt-textarea" id="jwtInput" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." spellcheck="false" autocomplete="off"></textarea>
+                <div style="margin-top:.75rem;padding:.75rem;background:rgba(13,30,56,.4);border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:.85rem;word-break:break-all;color:#E2E8F0;min-height:2rem" id="jwtDisplay"></div>
+                <p style="color:#64748B;font-size:.8rem;margin:.5rem 0 0"><span class="jwt-header">header</span>.<span class="jwt-payload">payload</span>.<span class="jwt-signature">signature</span></p>
+            </div>
+
+            <div class="jwt-empty" id="jwtEmpty">
+                <i class="fas fa-key"></i>
+                <h2 style="color:#94A3B8;font-size:1.1rem;font-weight:600">Cole um JWT acima para decodificar</h2>
+                <p style="color:#64748B;font-size:.9rem">A decodificacao acontece instantaneamente no seu navegador.</p>
+            </div>
+
+            <div id="jwtOutput" style="display:none">
+                <div class="jwt-alerts" id="jwtAlerts"></div>
+
+                <div class="jwt-decoded-grid">
+                    <div class="jwt-box header">
+                        <h2 class="jwt-box-title"><i class="fas fa-heading"></i> Header</h2>
+                        <pre class="jwt-json" id="headerJson"></pre>
+                        <div class="jwt-claims" id="headerClaims"></div>
+                    </div>
+
+                    <div class="jwt-box payload">
+                        <h2 class="jwt-box-title"><i class="fas fa-database"></i> Payload</h2>
+                        <pre class="jwt-json" id="payloadJson"></pre>
+                        <div class="jwt-claims" id="payloadClaims"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box info" style="margin:2rem 0">
+                <div class="highlight-box-title"><i class="fas fa-shield-alt"></i> Sua privacidade</div>
+                <p>Esta ferramenta roda <strong>100% no seu navegador</strong> usando <code>atob()</code> e <code>JSON.parse()</code>. Nenhum token e enviado, salvo ou registrado. Isso e critico para JWTs reais - eles podem conter credenciais sensiveis e nao deveriam ser decodificados em servicos de terceiros sem essa garantia.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="article-content">
+        <div class="container">
+            <div class="article-body">
+
+                <h2 id="o-que-e-jwt">O Que e um JSON Web Token?</h2>
+                <p>JWT (RFC 7519) e um padrao aberto para representar <em>claims</em> (afirmacoes) entre duas partes como um objeto JSON assinado. E onipresente em autenticacao de APIs modernas, OAuth 2.0 e OpenID Connect.</p>
+
+                <h3>Estrutura de um JWT</h3>
+                <p>Um JWT tem tres segmentos codificados em Base64URL e separados por ponto:</p>
+                <ul>
+                    <li><strong class="jwt-header">Header</strong> - metadados: algoritmo (<code>alg</code>) e tipo (<code>typ</code>)</li>
+                    <li><strong class="jwt-payload">Payload</strong> - claims (identidade, permissoes, expiracao...)</li>
+                    <li><strong class="jwt-signature">Signature</strong> - HMAC ou assinatura digital sobre header+payload</li>
+                </ul>
+
+                <h3>Claims padronizados (RFC 7519)</h3>
+                <ul>
+                    <li><code>iss</code> (Issuer) - quem emitiu</li>
+                    <li><code>sub</code> (Subject) - sujeito (geralmente user ID)</li>
+                    <li><code>aud</code> (Audience) - destinatario pretendido</li>
+                    <li><code>exp</code> (Expiration) - timestamp Unix de expiracao</li>
+                    <li><code>nbf</code> (Not Before) - valido a partir de</li>
+                    <li><code>iat</code> (Issued At) - quando foi emitido</li>
+                    <li><code>jti</code> (JWT ID) - identificador unico (util para revogar)</li>
+                </ul>
+
+                <div class="highlight-box danger">
+                    <div class="highlight-box-title"><i class="fas fa-exclamation-triangle"></i> JWT nao e criptografado por padrao</div>
+                    <p>O header e payload sao apenas <strong>codificados</strong> em Base64URL, nao cifrados. Qualquer pessoa com acesso ao token pode ler seu conteudo. A assinatura garante integridade (nao foi adulterado), nao confidencialidade. Nunca coloque senhas, CPF, chaves privadas ou dados sensiveis no payload. Se precisar confidencialidade, use JWE.</p>
+                </div>
+
+                <h2 id="vulnerabilidades">Vulnerabilidades Comuns em JWT</h2>
+
+                <h3>1. alg=none</h3>
+                <p>A especificacao permite <code>alg=none</code>, indicando token sem assinatura. Implementacoes vulneraveis aceitavam esse valor e confiavam no payload, permitindo que atacantes forjassem qualquer token - por exemplo, trocando <code>"role":"user"</code> por <code>"role":"admin"</code>. Documentado em CVE-2015-9235. Sempre rejeite <code>alg=none</code> no servidor e valide o algoritmo explicitamente.</p>
+
+                <h3>2. Algorithm confusion (RS256 &rarr; HS256)</h3>
+                <p>Implementacoes antigas aceitavam a chave publica RSA (que e publica!) como se fosse segredo HMAC. Atacantes pegavam a chave publica do servidor, trocavam alg para HS256 e assinavam um token com ela. Sempre valide que o alg do token bate com o alg esperado pela aplicacao.</p>
+
+                <h3>3. kid injection</h3>
+                <p>Header <code>kid</code> (Key ID) e usado para selecionar qual chave verificar. Se a aplicacao usa o valor para carregar arquivos (<code>keys/{kid}.pem</code>), atacantes podem injetar caminhos como <code>../../etc/passwd</code> ou apontar para arquivos previsiveis. Faca allowlist de kids permitidos.</p>
+
+                <h3>4. Brute force de segredo HMAC</h3>
+                <p>Se o token usa HS256 (HMAC-SHA256) com segredo fraco, atacantes podem tentar brute-force offline. Ferramentas como <code>hashcat</code> (modo 16500) testam bilhoes de senhas por segundo. Use segredos gerados aleatoriamente com pelo menos 32 bytes (256 bits) de entropia, ou prefira RS256/ES256.</p>
+
+                <h3>5. Falta de validacao de exp/aud</h3>
+                <p>Servidores que decodificam o token mas nao validam <code>exp</code>, <code>nbf</code>, <code>iss</code> e <code>aud</code> podem aceitar tokens expirados ou emitidos para outro servico. Sempre valide todas as claims relevantes, de preferencia usando uma biblioteca JWT madura que faz isso por voce.</p>
+
+                <h2 id="boas-praticas">Boas Praticas para Usar JWT</h2>
+
+                <h3>Do lado do servidor</h3>
+                <ul>
+                    <li><strong>Valide o algoritmo explicitamente</strong> - nunca confie no header</li>
+                    <li><strong>Rejeite alg=none</strong> sem excecao</li>
+                    <li><strong>Use segredos fortes</strong> (32+ bytes aleatorios) para HMAC</li>
+                    <li><strong>Prefira RS256 ou ES256</strong> para sistemas distribuidos (chave publica verificada por varios servicos, privada so no emissor)</li>
+                    <li><strong>Valide exp, nbf, iat, iss, aud</strong> em toda requisicao</li>
+                    <li><strong>Implemente revogacao</strong> - lista de jtis revogados ou tokens de vida muito curta + refresh</li>
+                    <li><strong>Use access tokens curtos</strong> (15-60 min) + refresh tokens</li>
+                </ul>
+
+                <h3>Do lado do cliente</h3>
+                <ul>
+                    <li><strong>Nunca armazene em localStorage</strong> - vulneravel a XSS</li>
+                    <li><strong>Use cookies HttpOnly + Secure + SameSite=Strict</strong></li>
+                    <li><strong>Considere o padrao BFF</strong> (Backend for Frontend) para SPAs</li>
+                    <li><strong>Nao exponha JWTs em logs</strong> - use request IDs em seu lugar</li>
+                </ul>
+
+                <h2 id="quando-usar">Quando Usar JWT (e Quando Nao)</h2>
+
+                <h3>Bom para</h3>
+                <ul>
+                    <li>APIs stateless (verificar sem consultar banco)</li>
+                    <li>Single Sign-On (SSO) entre servicos</li>
+                    <li>OAuth 2.0 / OpenID Connect (padrao de facto)</li>
+                    <li>Comunicacao maquina-a-maquina</li>
+                </ul>
+
+                <h3>Evitar para</h3>
+                <ul>
+                    <li>Sessoes tradicionais de aplicacao web - use cookie de sessao com store server-side (mais simples, facil de revogar)</li>
+                    <li>Armazenar dados sensiveis no payload</li>
+                    <li>Tokens de longa duracao sem mecanismo de revogacao</li>
+                </ul>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que e um JWT (JSON Web Token)?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>JWT (RFC 7519) e um padrao aberto para representar claims entre duas partes como JSON assinado. Tem tres segmentos Base64URL separados por ponto: header.payload.signature. Usado em APIs, OAuth e OpenID Connect.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>JWT e criptografado?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Por padrao nao. Header e payload sao apenas codificados em Base64URL - legiveis. A assinatura garante integridade, nao confidencialidade. Para confidencialidade, use JWE ou so trafegue por TLS sem dados sensiveis no payload.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que e o ataque alg=none em JWT?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Bibliotecas vulneraveis aceitavam tokens com alg=none (sem assinatura), permitindo que atacantes forjassem qualquer claim (CVE-2015-9235). Sempre rejeite alg=none e valide o algoritmo esperado.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Onde devo armazenar JWT no cliente?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Evite localStorage (XSS). Use cookies HttpOnly + Secure + SameSite=Strict com tokens curtos e rotacao. Para SPAs, considere BFF (Backend for Frontend) mantendo token no backend.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Este decoder envia meu token a algum servidor?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Nao. Toda decodificacao acontece no seu navegador via atob() e JSON.parse(). Tokens podem conter credenciais sensiveis e nao deveriam ser colados em servicos online sem essa garantia.</p></div>
+                    </div>
+                </div>
+
+                <h2 id="outras-ferramentas">Outras Ferramentas Gratuitas</h2>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h3><i class="fas fa-code" style="color:#60A5FA;margin-right:8px"></i> <a href="../codificador-base64-url-hex/" style="color:#60A5FA">Codificador Base64/URL/Hex</a></h3>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Decode manualmente os segmentos de um JWT ou outras strings Base64URL.</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h3><i class="fas fa-fingerprint" style="color:#F59E0B;margin-right:8px"></i> <a href="../calculadora-hash/" style="color:#60A5FA">Calculadora de Hash</a></h3>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Calcule HMAC-SHA256 usado como assinatura em JWTs HS256 (requer segredo).</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h3><i class="fas fa-lock" style="color:#8B5CF6;margin-right:8px"></i> <a href="../gerador-de-senhas/" style="color:#60A5FA">Gerador de Senhas</a></h3>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Gere segredos fortes (32+ bytes) para assinar tokens HMAC.</p>
+                    </div>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Sua API esta segura? Faca um pentest especializado</h3>
+                    <p>Nossa equipe revisa implementacoes de JWT, OAuth, OpenID Connect e detecta vulnerabilidades como alg=none, algorithm confusion e kid injection.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Proposta</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Ferramentas</h4><ul><li><a href="../calculadora-cvss/">Calculadora CVSS</a></li><li><a href="../gerador-de-senhas/">Gerador de Senhas</a></li><li><a href="../">Todas as ferramentas</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
+
+    <div id="jwtToast" class="jwt-toast" aria-live="polite"></div>
+
+    <script src="../../js/site-common.min.js"></script>
+    <script src="jwt.min.js?v=1"></script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>
