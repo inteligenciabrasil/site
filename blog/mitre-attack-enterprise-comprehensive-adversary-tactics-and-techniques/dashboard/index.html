@@ -24627,20 +24627,14 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.ke
     }
 
     async function fetchNewsletterIp() {
-        const endpoints = [
-            "https://api.ipify.org?format=json",
-            "https://api64.ipify.org?format=json",
-            "https://ipinfo.io/json"
-        ];
-        for (const url of endpoints) {
-            try {
-                const res = await withTimeout(fetch(url, { cache: "no-store" }), 2500);
-                if (!res.ok) continue;
-                const data = await res.json();
-                const ip = data.ip || data.ip_address;
-                if (ip && typeof ip === "string") return ip.trim();
-            } catch (e) {}
-        }
+        try {
+            const res = await withTimeout(fetch("/cdn-cgi/trace", { cache: "no-store" }), 2500);
+            if (res.ok) {
+                const text = await res.text();
+                const match = text.match(/(?:^|\n)ip=([^\n]+)/);
+                if (match && match[1]) return match[1].trim();
+            }
+        } catch (e) {}
         return "";
     }
 
