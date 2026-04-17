@@ -213,6 +213,7 @@ header {
 .logo img {
     height: 50px;
     width: auto;
+    aspect-ratio: 1 / 1;
 }
 
 .header-cta {
@@ -1123,12 +1124,97 @@ header {
         display: none;
     }
 
+    .container {
+        padding: 0 16px;
+    }
+
+    header {
+        padding: 8px 0;
+    }
+
+    .logo img {
+        height: 40px;
+    }
+
+    .header-cta .btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 100px 0 60px;
+    }
+
+    .hero-grid {
+        gap: 32px;
+    }
+
     .hero h1 {
         font-size: 32px;
     }
 
+    .hero-subtitle {
+        font-size: 16px;
+        margin-bottom: 24px;
+    }
+
+    .hero-cta {
+        margin-bottom: 28px;
+    }
+
+    .problem,
+    .services,
+    .methodology,
+    .faq,
+    .cta-section,
+    .lead-section {
+        padding: 60px 0;
+    }
+
+    .section-subtitle {
+        margin-bottom: 32px;
+        font-size: 16px;
+    }
+
+    .stats-card {
+        padding: 24px;
+    }
+
+    .stat-value {
+        font-size: 26px;
+    }
+
+    .stat-desc {
+        font-size: 12px;
+        max-width: 140px;
+    }
+
+    .lead-form-wrapper {
+        padding: 24px;
+    }
+
+    .lead-content h2,
+    .cta-section h2,
+    .cta-section h3 {
+        font-size: 28px;
+    }
+
+    .cta-section > p {
+        font-size: 16px;
+    }
+
+    .problem-card,
+    .service-card {
+        padding: 20px;
+    }
+
+    .service-card h3 {
+        font-size: 20px;
+    }
+
     .form-row {
         grid-template-columns: 1fr;
+        gap: 0;
     }
 
     .btn {
@@ -1140,6 +1226,42 @@ header {
         align-items: center;
     }
 
+    .faq-question {
+        padding: 16px 18px;
+        font-size: 15px;
+    }
+
+    .faq-answer-inner {
+        padding: 0 18px 16px;
+        font-size: 14px;
+    }
+
+    .whatsapp-float {
+        bottom: 78px;
+        right: 16px;
+    }
+
+    .whatsapp-float a {
+        width: 52px;
+        height: 52px;
+    }
+
+    .whatsapp-float svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .back-to-top {
+        bottom: 16px;
+        right: 16px;
+        width: 42px;
+        height: 42px;
+    }
+
+    .footer-section {
+        padding-top: 3rem;
+    }
+
     .footer-bottom .text-md-right {
         text-align: left;
         margin-top: 1rem;
@@ -1147,5 +1269,58 @@ header {
 
     .footer-section .row > div {
         margin-bottom: 2rem;
+    }
+
+    /* Reduce expensive GPU ops on mobile */
+    header,
+    .stats-card,
+    .lead-form-wrapper {
+        backdrop-filter: none;
+    }
+
+    /* Skip painting off-screen sections until scrolled */
+    .faq,
+    .cta-section,
+    .footer-section {
+        content-visibility: auto;
+        contain-intrinsic-size: 1px 600px;
+    }
+}
+
+@media (max-width: 420px) {
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero-badge {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .stat-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .stat-desc {
+        text-align: left;
+        max-width: 100%;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY - REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    .btn-primary,
+    .hero-badge::before,
+    .urgency-banner,
+    .fade-in {
+        animation: none !important;
+    }
+
+    * {
+        transition-duration: 0.01ms !important;
     }
 }
