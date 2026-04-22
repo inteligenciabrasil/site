@@ -1,0 +1,849 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo sobre programas de Bug Bounty: como estruturar, lançar e gerenciar um programa de recompensas por vulnerabilidades para fortalecer a segurança da sua organização.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="bug bounty, programa recompensas, vulnerability disclosure, VDP, hacking ético, crowdsourced security, HackerOne, Bugcrowd, Intigriti">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/bug-bounty-programa-recompensas/">
+
+    <meta property="og:title" content="Bug Bounty: Guia Completo para Programas de Recompensas">
+    <meta property="og:description" content="Como estruturar, lançar e gerenciar um programa de bug bounty eficaz para encontrar vulnerabilidades antes dos atacantes.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/bug-bounty-programa-recompensas/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2026-01-31T19:00:00-03:00">
+    <meta property="article:section" content="Offensive Security">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bug Bounty: Guia Completo para Programas de Recompensas">
+    <meta name="twitter:description" content="Como estruturar e gerenciar um programa de bug bounty eficaz.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Bug Bounty: Guia Completo para Programas de Recompensas | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Bug Bounty: Guia Completo para Programas de Recompensas",
+        "description": "Como estruturar, lançar e gerenciar um programa de bug bounty eficaz para encontrar vulnerabilidades antes dos atacantes.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": {"@type": "Organization", "name": "Inteligência Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/bug-bounty-programa-recompensas/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que é um programa de Bug Bounty?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Bug Bounty é um programa onde organizações pagam recompensas a pesquisadores de segurança que encontram e reportam vulnerabilidades de forma responsável. É uma forma de crowdsourced security que complementa testes tradicionais, aproveitando a expertise diversa de milhares de hackers éticos globalmente para encontrar falhas antes que atacantes maliciosos as explorem."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual a diferença entre Bug Bounty e VDP?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "VDP (Vulnerability Disclosure Program) é um canal para receber reports de vulnerabilidades sem pagamento de recompensas - apenas reconhecimento e safe harbor legal. Bug Bounty adiciona incentivos financeiros. VDP é recomendado como passo inicial antes de bug bounty, custando menos e estabelecendo processos. Organizações maduras frequentemente mantêm ambos: VDP público + Bug Bounty privado ou focado."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quanto custa um programa de Bug Bounty?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Custos incluem: recompensas (variável, $100-500k+/ano dependendo do escopo e maturidade), plataforma ($20k-100k+/ano para HackerOne, Bugcrowd, etc. ou grátis para self-hosted), triagem ($50k-150k/ano se terceirizada), e tempo interno para validação e correção. Programas iniciantes podem começar com $50-100k/ano em budget total; programas maduros de empresas tech investem $500k-2M+/ano."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quanto pagar por vulnerabilidade?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Valores variam por severidade: Critical (RCE, auth bypass em produção) $5,000-100,000+; High (SQLi, stored XSS em área sensível) $1,000-15,000; Medium (CSRF, IDOR) $200-3,000; Low (information disclosure menor) $50-500. Fatores que aumentam: impacto em dados sensíveis, qualidade do report, exploitability. Compare com programas similares e ajuste conforme feedback dos pesquisadores."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Bug Bounty substitui pentest tradicional?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não - são complementares. Pentest oferece cobertura sistemática em tempo definido, relatório formal para compliance, e teste de áreas específicas. Bug Bounty oferece testing contínuo, diversidade de perspectivas e técnicas, e descoberta de vulnerabilidades criativas. Modelo ideal: pentest anual para baseline e compliance + bug bounty contínuo para descoberta ongoing."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Bug Bounty"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Offensive Security</span>
+            <h1>Bug Bounty: Guia Completo para Programas de Recompensas</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligência Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Bug Bounty</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#introducao">Introdução</a></li>
+                        <li><a href="#o-que-e-bug-bounty">O que é Bug Bounty</a></li>
+                        <li><a href="#vdp-vs-bug-bounty">VDP vs Bug Bounty</a></li>
+                        <li><a href="#estruturando-programa">Estruturando o Programa</a></li>
+                        <li><a href="#escopo">Definindo o Escopo</a></li>
+                        <li><a href="#recompensas">Estrutura de Recompensas</a></li>
+                        <li><a href="#plataformas">Plataformas e Modelos</a></li>
+                        <li><a href="#triagem">Triagem e Validação</a></li>
+                        <li><a href="#relacionamento">Relacionamento com Pesquisadores</a></li>
+                        <li><a href="#metricas">Métricas de Sucesso</a></li>
+                        <li><a href="#faq">Perguntas Frequentes</a></li>
+                        <li><a href="#conclusão">Conclusão</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introducao">Introdução</h2>
+
+                <p>Não importa quão rigoroso seja seu programa de segurança - você não pode testar tudo, o tempo todo, com todas as perspectivas possíveis. É aqui que <strong>Bug Bounty</strong> entra: programas que pagam recompensas a pesquisadores externos que encontram e reportam vulnerabilidades antes que atacantes maliciosos as explorem.</p>
+
+                <p>Gigantes de tecnologia como Google, Microsoft, Meta e Apple pagam coletivamente dezenas de milhões de dólares por ano em recompensas. O Google pagou mais de $12 milhões em 2023 apenas no programa Android/Chrome. Mas bug bounty não é mais exclusividade de big tech - organizações de todos os tamanhos e setores estão adotando essa abordagem.</p>
+
+                <p>Este guia explora como estruturar um programa de bug bounty eficaz, desde a decisão de lançar até a gestão contínua e métricas de sucesso.</p>
+
+                <h2 id="o-que-e-bug-bounty">O que é Bug Bounty</h2>
+
+                <h3>Conceito</h3>
+                <p>Bug Bounty é uma forma de crowdsourced security onde organizações convidam hackers éticos a testar seus sistemas em troca de recompensas financeiras por vulnerabilidades válidas encontradas. É um modelo de "pay for results" - você só paga quando algo é encontrado.</p>
+
+                <h3>Por que Bug Bounty Funciona</h3>
+
+                <div class="code-block">
+                    <h4>Vantagens do Modelo</h4>
+                    <pre>
++---------------------------------------------------------------+
+|                  POR QUE BUG BOUNTY FUNCIONA                  |
++---------------------------------------------------------------+
+|                                                               |
+|  DIVERSIDADE DE EXPERTISE                                     |
+|  - Milhares de pesquisadores com habilidades diferentes       |
+|  - Especialistas em web, mobile, API, infra, cloud            |
+|  - Técnicas e ferramentas diversas                            |
+|  - Perspectivas que seu time interno não tem                  |
+|                                                               |
+|  TESTING CONTÍNUO                                             |
+|  - 24/7/365 - sempre tem alguém testando                      |
+|  - Cada deploy, cada feature nova                             |
+|  - Não limitado por escopo de projeto                         |
+|                                                               |
+|  ECONOMIA                                                     |
+|  - Pay-for-results - só paga se encontrar                     |
+|  - Sem overhead de contratação                                |
+|  - Escala sem limite de headcount                             |
+|                                                               |
+|  MOTIVAÇÃO ALINHADA                                           |
+|  - Pesquisadores querem encontrar - são pagos para isso       |
+|  - Competição natural leva a criatividade                     |
+|  - Reputação na comunidade como incentivo adicional           |
+|                                                               |
++---------------------------------------------------------------+
+                    </pre>
+                </div>
+
+                <h3>O que Bug Bounty NÃO é</h3>
+                <ul>
+                    <li><strong>Não substitui security by design</strong> - Você precisa de um baseline de segurança</li>
+                    <li><strong>Não substitui pentest</strong> - Pentest é sistemático, bug bounty é oportunístico</li>
+                    <li><strong>Não é só para empresas tech</strong> - Qualquer organização com presença digital pode se beneficiar</li>
+                    <li><strong>Não é "deixar hackers atacarem"</strong> - É um programa controlado com regras claras</li>
+                </ul>
+
+                <h2 id="vdp-vs-bug-bounty">VDP vs Bug Bounty</h2>
+
+                <div class="code-block">
+                    <h3>Comparação VDP vs Bug Bounty</h3>
+                    <pre>
++---------------------------------------------------------------+
+|                    VDP vs BUG BOUNTY                          |
++---------------------------------------------------------------+
+|                                                               |
+|  VDP (Vulnerability Disclosure Program)                       |
+|  +-----------------------------------------------------------+|
+|  | - Canal para receber reports sem pagamento                ||
+|  | - Reconhecimento/Hall of Fame como incentivo              ||
+|  | - Safe harbor legal para pesquisadores                    ||
+|  | - Baixo custo (apenas tempo de triagem)                   ||
+|  | - Menor volume de reports                                 ||
+|  | - Recomendado como primeiro passo                         ||
+|  |                                                           ||
+|  | Quando usar:                                              ||
+|  | - Orçamento limitado                                      ||
+|  | - Maturidade de segurança inicial                         ||
+|  | - Testar processos internos primeiro                      ||
+|  +-----------------------------------------------------------+|
+|                                                               |
+|  BUG BOUNTY                                                   |
+|  +-----------------------------------------------------------+|
+|  | - Recompensas financeiras por vulnerabilidades            ||
+|  | - Atrai mais pesquisadores e mais esforço                 ||
+|  | - Maior volume e qualidade de reports                     ||
+|  | - Custo variável baseado em findings                      ||
+|  | - Pode ser privado (convidados) ou público                ||
+|  |                                                           ||
+|  | Quando usar:                                              ||
+|  | - Maturidade para processar volume de reports             ||
+|  | - Orçamento para recompensas                              ||
+|  | - Ativos críticos que justificam investimento             ||
+|  +-----------------------------------------------------------+|
+|                                                               |
+|  PROGRESSÃO RECOMENDADA:                                      |
+|  1. VDP privado > 2. VDP publico > 3. Bug Bounty privado     |
+|  > 4. Bug Bounty publico                                      |
+|                                                               |
++---------------------------------------------------------------+
+                    </pre>
+                </div>
+
+                <h2 id="estruturando-programa">Estruturando o Programa</h2>
+
+                <h3>Pré-requisitos Organizacionais</h3>
+
+                <div class="info-box">
+                    <h4>Antes de Lançar um Bug Bounty</h4>
+                    <ul>
+                        <li><strong>Baseline de segurança</strong> - Corrija vulnerabilidades óbvias primeiro</li>
+                        <li><strong>Processo de remediação</strong> - Capacidade de corrigir findings em tempo hábil</li>
+                        <li><strong>Triagem interna</strong> - Recursos para validar e responder a reports</li>
+                        <li><strong>Buy-in da liderança</strong> - Orçamento aprovado e suporte executivo</li>
+                        <li><strong>Ambiente de teste</strong> - Idealmente staging separado de produção</li>
+                        <li><strong>Documentação</strong> - Escopo, regras, política de disclosure claramente definidos</li>
+                    </ul>
+                </div>
+
+                <h3>Componentes do Programa</h3>
+
+                <h4>1. Política do Programa</h4>
+                <p>Documento público que define:</p>
+                <ul>
+                    <li>Escopo (o que pode e não pode ser testado)</li>
+                    <li>Regras de engajamento (comportamento permitido)</li>
+                    <li>Safe harbor legal (proteção aos pesquisadores)</li>
+                    <li>Processo de report e comunicação</li>
+                    <li>SLAs de resposta</li>
+                    <li>Estrutura de recompensas</li>
+                </ul>
+
+                <h4>2. Infraestrutura</h4>
+                <ul>
+                    <li>Canal de recebimento de reports (plataforma ou email)</li>
+                    <li>Sistema de tracking (integração com ticketing)</li>
+                    <li>Ambiente para reprodução de vulnerabilidades</li>
+                    <li>Processo de pagamento</li>
+                </ul>
+
+                <h4>3. Equipe</h4>
+                <ul>
+                    <li>Triadores (validar reports, comunicar com pesquisadores)</li>
+                    <li>Desenvolvedores (corrigir vulnerabilidades)</li>
+                    <li>Gestão do programa (métricas, orçamento, políticas)</li>
+                </ul>
+
+                <h2 id="escopo">Definindo o Escopo</h2>
+
+                <h3>In Scope (Permitido)</h3>
+
+                <div class="code-block">
+                    <h4>Exemplo de Escopo</h4>
+                    <pre>
+# ATIVOS IN SCOPE
+
+## Produção
+- www.exemplo.com
+- api.exemplo.com
+- app.exemplo.com (web app)
+- Aplicativo iOS (App Store)
+- Aplicativo Android (Play Store)
+
+## Staging (preferível para testes destrutivos)
+- staging.exemplo.com
+
+# TIPOS DE VULNERABILIDADE IN SCOPE
+
+## Crítico ($$$)
+- Remote Code Execution (RCE)
+- SQL Injection com acesso a dados
+- Authentication Bypass
+- Privilege Escalation
+
+## Alto ($$)
+- Stored XSS em áreas autenticadas
+- IDOR com acesso a dados sensíveis
+- SSRF interno
+- Insecure Direct Object Reference
+
+## Médio ($)
+- CSRF em ações críticas
+- Reflected XSS
+- Information Disclosure significativa
+- Misconfiguration com impacto
+
+## Baixo
+- Information Disclosure menor
+- Self-XSS
+- Missing security headers
+                    </pre>
+                </div>
+
+                <h3>Out of Scope (Proibido)</h3>
+
+                <div class="code-block">
+                    <h4>Exclusões Comuns</h4>
+                    <pre>
+# ATIVOS OUT OF SCOPE
+- Infraestrutura de parceiros/terceiros
+- Domínios de teste não listados
+- Ambientes de desenvolvimento interno
+- Sistemas corporativos internos (email, VPN)
+
+# TÉCNICAS PROIBIDAS
+- DoS/DDoS
+- Spam ou phishing contra usuários reais
+- Engenharia social contra funcionários
+- Acesso físico às instalações
+- Teste em contas de outros usuários (sem permissão)
+- Divulgação pública antes de correção
+
+# VULNERABILIDADES OUT OF SCOPE
+- Relatórios de scanner sem PoC
+- Clickjacking em páginas sem ação sensível
+- CSRF em logout
+- Self-XSS
+- Ratelimit issues sem impacto demonstrado
+- Missing security headers sem exploit
+- Versão de software desatualizada (sem PoC)
+- Políticas de senha fracas (apenas report)
+- Email spoofing sem SPF/DKIM (já conhecido)
+                    </pre>
+                </div>
+
+                <h2 id="recompensas">Estrutura de Recompensas</h2>
+
+                <h3>Tabela de Recompensas</h3>
+
+                <div class="code-block">
+                    <h4>Exemplo de Estrutura de Pagamento</h4>
+                    <pre>
++---------------------------------------------------------------+
+|                    TABELA DE RECOMPENSAS                      |
++---------------------------------------------------------------+
+|                                                               |
+|  SEVERIDADE      RANGE            EXEMPLOS                    |
+|  -----------------------------------------------------------  |
+|  Critical       $5,000 - $25,000  RCE, Auth bypass completo,  |
+|                                   SQLi com dump de DB,         |
+|                                   Account takeover em massa    |
+|                                                               |
+|  High           $1,000 - $5,000   Stored XSS em área sensível,|
+|                                   IDOR com PII, SSRF interno,  |
+|                                   Privilege escalation         |
+|                                                               |
+|  Medium         $200 - $1,000     Reflected XSS, CSRF em       |
+|                                   ação importante, Info        |
+|                                   disclosure moderada          |
+|                                                               |
+|  Low            $50 - $200        Info disclosure menor,       |
+|                                   Missing security controls    |
+|                                   com impacto limitado         |
+|                                                               |
+|  -----------------------------------------------------------  |
+|                                                               |
+|  MODIFICADORES:                                               |
+|  + Qualidade excepcional do report: +25%                      |
+|  + Impacto em dados de clientes: +50%                         |
+|  + Exploit chain criativo: +25%                               |
+|  - Duplicata (segundo a reportar): 0                          |
+|  - Report incompleto: Pendente ate completar                  |
+|                                                               |
++---------------------------------------------------------------+
+                    </pre>
+                </div>
+
+                <h3>Fatores que Influenciam Valores</h3>
+                <ul>
+                    <li><strong>Indústria</strong> - Fintech e crypto pagam mais</li>
+                    <li><strong>Tamanho da empresa</strong> - Grandes empresas têm budgets maiores</li>
+                    <li><strong>Criticidade dos dados</strong> - Dados sensíveis = recompensas maiores</li>
+                    <li><strong>Maturidade do programa</strong> - Programas novos podem pagar menos</li>
+                    <li><strong>Competição</strong> - Atrair pesquisadores requer ser competitivo</li>
+                </ul>
+
+                <h2 id="plataformas">Plataformas e Modelos</h2>
+
+                <h3>Plataformas Gerenciadas</h3>
+
+                <h4>HackerOne</h4>
+                <ul>
+                    <li>Maior plataforma global</li>
+                    <li>Pool de 1M+ pesquisadores</li>
+                    <li>Triagem gerenciada opcional</li>
+                    <li>Enterprise features robustos</li>
+                </ul>
+
+                <h4>Bugcrowd</h4>
+                <ul>
+                    <li>Forte em programas gerenciados</li>
+                    <li>Foco em qualidade sobre quantidade</li>
+                    <li>Triagem incluída na maioria dos planos</li>
+                </ul>
+
+                <h4>Intigriti</h4>
+                <ul>
+                    <li>Forte na Europa (GDPR-friendly)</li>
+                    <li>Triagem de qualidade</li>
+                    <li>Bom para empresas europeias</li>
+                </ul>
+
+                <h4>YesWeHack</h4>
+                <ul>
+                    <li>Europeia, foco em compliance</li>
+                    <li>Bom para regulados (finanças, saúde)</li>
+                </ul>
+
+                <h3>Self-Hosted</h3>
+                <p>Algumas organizações gerenciam programas internamente:</p>
+                <ul>
+                    <li><strong>Pros:</strong> Controle total, sem taxa de plataforma</li>
+                    <li><strong>Contras:</strong> Menos visibilidade, overhead de gestão, menor pool de pesquisadores</li>
+                    <li><strong>Ferramentas:</strong> security.txt, email dedicado, integração com Jira/ServiceNow</li>
+                </ul>
+
+                <h3>Privado vs Público</h3>
+
+                <div class="info-box">
+                    <h4>Programa Privado vs Público</h4>
+                    <p><strong>Privado (Invite-Only):</strong></p>
+                    <ul>
+                        <li>Convida pesquisadores selecionados</li>
+                        <li>Menor volume, maior qualidade</li>
+                        <li>Bom para início ou ativos sensíveis</li>
+                        <li>Menos ruído e duplicatas</li>
+                    </ul>
+                    <p><strong>Público:</strong></p>
+                    <ul>
+                        <li>Aberto a qualquer pesquisador</li>
+                        <li>Maior cobertura e volume</li>
+                        <li>Mais duplicatas e low-quality reports</li>
+                        <li>Demonstra maturidade de segurança</li>
+                    </ul>
+                </div>
+
+                <h2 id="triagem">Triagem e Validação</h2>
+
+                <h3>Workflow de Triagem</h3>
+
+                <div class="code-block">
+                    <h4>Processo de Validação</h4>
+                    <pre>
++---------------------------------------------------------------+
+|                    WORKFLOW DE TRIAGEM                        |
++---------------------------------------------------------------+
+|                                                               |
+|  1. REPORT RECEBIDO                                           |
+|     +-> Acknowledge em < 24h                                  |
+|         "Obrigado pelo report. Estamos analisando."           |
+|                                                               |
+|  2. TRIAGEM INICIAL (24-48h)                                  |
+|     +-> É in scope?                                           |
+|     |   +-> NÃO -> Close como out of scope                    |
+|     +-> É duplicata?                                          |
+|     |   +-> SIM -> Close como duplicate                       |
+|     +-> Informações suficientes?                              |
+|     |   +-> NÃO -> Pedir mais detalhes                        |
+|     +-> Passa para validação técnica                          |
+|                                                               |
+|  3. VALIDAÇÃO TÉCNICA (48-72h)                                |
+|     +-> Reproduzir em ambiente de teste                       |
+|     +-> Confirmar impacto real                                |
+|     +-> Classificar severidade (CVSS ou interno)              |
+|     +-> Determinar recompensa                                 |
+|                                                               |
+|  4. COMUNICAÇÃO                                               |
+|     +-> Informar pesquisador: validado/não validado,          |
+|         severidade, recompensa aprovada                       |
+|                                                               |
+|  5. REMEDIAÇÃO                                                |
+|     +-> Criar ticket para dev team                            |
+|     +-> Priorizar baseado em severidade                       |
+|     +-> Timeline típica:                                      |
+|         Critical: 1-7 dias                                    |
+|         High: 7-30 dias                                       |
+|         Medium: 30-60 dias                                    |
+|         Low: 90 dias                                          |
+|                                                               |
+|  6. FECHAMENTO                                                |
+|     +-> Notificar pesquisador quando corrigido                |
+|     +-> Pagar recompensa                                      |
+|     +-> Fechar report                                         |
+|                                                               |
++---------------------------------------------------------------+
+                    </pre>
+                </div>
+
+                <h3>SLAs Recomendados</h3>
+                <ul>
+                    <li><strong>Acknowledge inicial:</strong> < 24 horas</li>
+                    <li><strong>Triagem inicial:</strong> < 3 dias úteis</li>
+                    <li><strong>Validação completa:</strong> < 10 dias úteis</li>
+                    <li><strong>Decisão de bounty:</strong> < 15 dias úteis</li>
+                    <li><strong>Pagamento após aprovação:</strong> < 30 dias</li>
+                </ul>
+
+                <h2 id="relacionamento">Relacionamento com Pesquisadores</h2>
+
+                <h3>Boas Práticas</h3>
+                <ul>
+                    <li><strong>Comunicação rápida e respeitosa</strong> - Pesquisadores são parceiros, não adversários</li>
+                    <li><strong>Transparência</strong> - Explique decisões de triagem e severidade</li>
+                    <li><strong>Reconhecimento</strong> - Hall of Fame, swag, agradecimentos públicos</li>
+                    <li><strong>Feedback</strong> - Ajude pesquisadores a melhorar reports</li>
+                    <li><strong>Consistência</strong> - Aplique regras igualmente a todos</li>
+                </ul>
+
+                <h3>O que Evitar</h3>
+                <ul>
+                    <li>Ignorar ou demorar excessivamente para responder</li>
+                    <li>Fechar reports válidos sem explicação</li>
+                    <li>Downgrade injustificado de severidade</li>
+                    <li>Ameaças legais contra pesquisadores de boa-fé</li>
+                    <li>Pedir exclusividade em troca de safe harbor</li>
+                </ul>
+
+                <h3>Construindo Comunidade</h3>
+                <p>Programas bem-sucedidos cultivam relacionamentos:</p>
+                <ul>
+                    <li>Comunicar fixes e agradecer publicamente</li>
+                    <li>Oferecer bonus por reports excepcionais</li>
+                    <li>Convidar top researchers para programas exclusivos</li>
+                    <li>Participar de eventos de segurança</li>
+                </ul>
+
+                <h2 id="metricas">Métricas de Sucesso</h2>
+
+                <div class="code-block">
+                    <h3>KPIs de Bug Bounty</h3>
+                    <pre>
+# Métricas de Volume
+- Total de reports recebidos
+- Reports válidos vs inválidos (signal-to-noise)
+- Vulnerabilidades por severidade
+- Pesquisadores ativos
+
+# Métricas de Tempo
+- Tempo para first response
+- Tempo para triagem
+- Tempo para fix (por severidade)
+- Tempo para pagamento
+
+# Métricas Financeiras
+- Total pago em recompensas
+- Custo por vulnerabilidade
+- Cost per valid report
+- ROI vs custo de breach evitado
+
+# Métricas de Qualidade
+- Duplicatas rate
+- Reopen rate (fix incompleto)
+- Researcher satisfaction
+- Top vulnerabilities found
+
+# Benchmarks Típicos
+- Valid rate: 15-30% (bom programa)
+- First response: < 24h
+- Triagem: < 5 dias
+- Fix critical: < 7 dias
+                    </pre>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O que é um programa de Bug Bounty?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Bug Bounty é um programa onde organizações pagam recompensas a pesquisadores de segurança que encontram e reportam vulnerabilidades de forma responsável. É uma forma de crowdsourced security que complementa testes tradicionais, aproveitando a expertise diversa de milhares de hackers éticos globalmente para encontrar falhas antes que atacantes maliciosos as explorem.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Qual a diferença entre Bug Bounty e VDP?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>VDP (Vulnerability Disclosure Program) é um canal para receber reports de vulnerabilidades sem pagamento de recompensas - apenas reconhecimento e safe harbor legal. Bug Bounty adiciona incentivos financeiros. VDP é recomendado como passo inicial antes de bug bounty, custando menos e estabelecendo processos. Organizações maduras frequentemente mantêm ambos: VDP público + Bug Bounty privado ou focado.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quanto custa um programa de Bug Bounty?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Custos incluem: recompensas (variável, $100-500k+/ano dependendo do escopo e maturidade), plataforma ($20k-100k+/ano para HackerOne, Bugcrowd, etc. ou grátis para self-hosted), triagem ($50k-150k/ano se terceirizada), e tempo interno para validação e correção. Programas iniciantes podem começar com $50-100k/ano em budget total; programas maduros de empresas tech investem $500k-2M+/ano.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quanto pagar por vulnerabilidade?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Valores variam por severidade: Critical (RCE, auth bypass em produção) $5,000-100,000+; High (SQLi, stored XSS em área sensível) $1,000-15,000; Medium (CSRF, IDOR) $200-3,000; Low (information disclosure menor) $50-500. Fatores que aumentam: impacto em dados sensíveis, qualidade do report, exploitability. Compare com programas similares e ajuste conforme feedback dos pesquisadores.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Bug Bounty substitui pentest tradicional?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Não - são complementares. Pentest oferece cobertura sistemática em tempo definido, relatório formal para compliance, e teste de áreas específicas. Bug Bounty oferece testing contínuo, diversidade de perspectivas e técnicas, e descoberta de vulnerabilidades criativas. Modelo ideal: pentest anual para baseline e compliance + bug bounty contínuo para descoberta ongoing.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="conclusão">Conclusão</h2>
+
+                <p>Bug Bounty representa uma mudança de paradigma na forma como organizações encontram vulnerabilidades: em vez de depender exclusivamente de equipe interna ou pentests pontuais, você tem acesso contínuo a milhares de especialistas motivados a encontrar problemas antes que atacantes o façam.</p>
+
+                <p>O sucesso de um programa de bug bounty depende menos do tamanho das recompensas e mais da qualidade da execução: escopo claro, comunicação rápida e respeitosa, remediação eficiente, e tratamento justo dos pesquisadores. Programas que constroem reputação positiva atraem os melhores talentos e geram o maior retorno.</p>
+
+                <p>Comece com um VDP para estabelecer processos, evolua para bug bounty privado para controlar volume, e considere publico quando tiver maturidade para lidar com a escala. O investimento se paga na primeira vulnerabilidade critica encontrada antes de ser explorada.</p>
+
+                <div class="cta-box">
+                    <h3>Lance seu Programa de Bug Bounty</h3>
+                    <p>Precisa de ajuda para estruturar seu programa de bug bounty, definir políticas ou gerenciar triagem? Entre em contato para uma consultoria especializada.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Avaliação</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/bug-bounty-programa-recompensas/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/bug-bounty-programa-recompensas/&text=Bug Bounty: Guia Completo para Programas de Recompensas" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Bug Bounty: Guia Completo https://inteligenciabrasil.seg.br/blog/bug-bounty-programa-recompensas/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligência Brasil</a></h4>
+                        <p>Consultoria especializada em Segurança Ofensiva, Pentest e Programas de Bug Bounty.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
+                        <p>Consultoria especializada em Segurança, Estrategia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../pentest-frameworks-e-metodologias/">Pentest</a></li>
+                            <li><a href="../red-team-blue-team-purple-team/">Red Team</a></li>
+                            <li><a href="../gestao-vulnerabilidades-processo-completo/">Gestão de Vulnerabilidades</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Serviços</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

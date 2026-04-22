@@ -1,0 +1,909 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo sobre SOAR (Security Orchestration, Automation, and Response): como automatizar resposta a incidentes, criar playbooks eficazes e integrar ferramentas de segurança para um SOC mais eficiente.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="SOAR, Security Orchestration, automação segurança, resposta incidentes, playbooks, SOC automation, incident response, orquestração segurança">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/soar-automacao-orquestracao/">
+
+    <meta property="og:title" content="SOAR: Guia Completo de Automação e Orquestração de Segurança">
+    <meta property="og:description" content="Como implementar SOAR para automatizar resposta a incidentes, reduzir MTTR e aumentar a eficiência do SOC através de playbooks e integrações.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/soar-automacao-orquestracao/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2026-01-31T19:00:00-03:00">
+    <meta property="article:section" content="SOC">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SOAR: Automação e Orquestração de Segurança">
+    <meta name="twitter:description" content="Como implementar SOAR para automatizar resposta a incidentes e aumentar a eficiência do SOC.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>SOAR: Guia Completo de Automação e Orquestração de Segurança | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "SOAR: Guia Completo de Automação e Orquestração de Segurança",
+        "description": "Como implementar SOAR para automatizar resposta a incidentes, reduzir MTTR e aumentar a eficiência do SOC através de playbooks e integrações.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": {"@type": "Organization", "name": "Inteligência Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/soar-automacao-orquestracao/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que é SOAR e como funciona?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "SOAR (Security Orchestration, Automation, and Response) é uma categoria de soluções que combina três capacidades: Orquestração (conectar e coordenar ferramentas de segurança), Automação (executar tarefas repetitivas sem intervenção humana), e Resposta (ações para conter e remediar ameaças). Funciona através de playbooks que definem fluxos de trabalho automatizados, integrando SIEM, EDR, firewalls, threat intel e outras ferramentas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual a diferença entre SOAR e SIEM?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "SIEM foca em coletar, correlacionar e analisar logs para detectar ameaças e gerar alertas. SOAR complementa o SIEM automatizando a resposta a esses alertas. Enquanto SIEM responde 'o que aconteceu?', SOAR responde 'o que fazer sobre isso?' executando ações automatizadas ou guiando analistas através de playbooks. Muitos vendors agora oferecem SIEM e SOAR integrados."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais processos devo automatizar primeiro com SOAR?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Comece com processos de alto volume e baixo risco: enriquecimento de alertas (consultar threat intel, WHOIS, VirusTotal), triagem automática de alertas conhecidos como falsos positivos, bloqueio de IOCs confirmados (hashes, IPs maliciosos), criação e atualização de tickets. Após maturidade, avance para respostas mais complexas como isolamento de endpoints e bloqueio de contas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "SOAR pode substituir analistas de SOC?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. SOAR potencializa analistas, não os substitui. Automatiza tarefas repetitivas e de baixo valor (copy/paste, consultas manuais, triagem de alertas óbvios), liberando analistas para investigações complexas, threat hunting e melhoria contínua. O objetivo é fazer analistas N1 operarem como N2, e N2 como N3, aumentando a capacidade do time sem necessariamente aumentar headcount."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais são os principais vendors de SOAR?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Principais players incluem: Palo Alto Cortex XSOAR (ex-Demisto), Splunk SOAR (ex-Phantom), Google Chronicle SOAR (ex-Siemplify), IBM Security QRadar SOAR (ex-Resilient), Microsoft Sentinel (SOAR integrado), ServiceNow Security Operations, Swimlane, e Tines. A escolha depende do SIEM existente, orçamento, e necessidade de customização."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "SOAR"}
+        ]
+    }
+    </script>
+
+    <link rel="preçonnect" href="https://fonts.googleapis.com">
+    <link rel="preçonnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">SOC</span>
+            <h1>SOAR: Guia Completo de Automação e Orquestração de Segurança</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligência Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">SOAR</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#introducao">Introdução</a></li>
+                        <li><a href="#o-que-e-soar">O que é SOAR</a></li>
+                        <li><a href="#componentes">Componentes do SOAR</a></li>
+                        <li><a href="#soar-vs-siem">SOAR vs SIEM</a></li>
+                        <li><a href="#playbooks">Criando Playbooks Eficazes</a></li>
+                        <li><a href="#integrações">Integrações Essenciais</a></li>
+                        <li><a href="#casos-uso">Casos de Uso</a></li>
+                        <li><a href="#metricas">Métricas e ROI</a></li>
+                        <li><a href="#implementacao">Estratégia de Implementação</a></li>
+                        <li><a href="#fornecedores">Principais Fornecedores</a></li>
+                        <li><a href="#faq">Perguntas Frequentes</a></li>
+                        <li><a href="#conclusão">Conclusão</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introducao">Introdução</h2>
+
+                <p>Security Operations Centers enfrentam um desafio crescente: o volume de alertas aumenta exponencialmente enquanto o pool de analistas qualificados permanece escasso. Em média, um SOC recebe <strong>mais de 10.000 alertas por dia</strong>, mas apenas uma fração recebe investigação adequada. Analistas gastam horas em tarefas repetitivas - copiar IOCs, consultar threat intel, criar tickets - tempo que poderia ser usado para análise e hunting.</p>
+
+                <p><strong>SOAR (Security Orchestration, Automation, and Response)</strong> surgiu para resolver essa equação impossível. Automatizando tarefas repetitivas, orquestrando ferramentas díspares, e padronizando respostas através de playbooks, SOAR transforma operações de segurança de reativas para proativas.</p>
+
+                <p>Este guia explora como SOAR funciona, como criar playbooks eficazes, e como implementá-lo para maximizar a eficiência do seu SOC.</p>
+
+                <h2 id="o-que-e-soar">O que é SOAR</h2>
+
+                <p>SOAR é uma categoria de soluções que combina três capacidades fundamentais:</p>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-layer-group" style="color:#60A5FA;margin-right:10px"></i> Os Três Pilares do SOAR</h3>
+                    <ul>
+                        <li><strong>Security Orchestration:</strong> Conectar e coordenar múltiplas ferramentas de segurança através de integrações e APIs. O SOAR atua como hub central que pode acionar firewall, EDR, SIEM, ticketing e outras ferramentas em um único fluxo.</li>
+                        <li><strong>Automation:</strong> Executar tarefas repetitivas sem intervenção humana. Desde enriquecimento de alertas até bloqueio de IOCs, automação elimina trabalho manual e acelera resposta.</li>
+                        <li><strong>Response:</strong> Ações coordenadas para conter, erradicar e recuperar de incidentes. Playbooks definem respostas padronizadas que garantem consistência e velocidade.</li>
+                    </ul>
+                </div>
+
+                <h3>Evolução do SOAR</h3>
+
+                <div class="code-block">
+                    <h4>Gerações de Automação de Segurança</h4>
+                    <pre>
+GEN 1: Scripts Manuais
+  - Scripts Python/PowerShell isolados
+  - Sem orquestração, sem UI
+  - Dependente de quem escreveu
+
+GEN 2: Incident Response Platforms (IRP)
+  - Workflow de incident management
+  - Documentação de processos
+  - Pouca automação real
+
+GEN 3: SOAR Tradicional (2017-2022)
+  - Integrações via APIs
+  - Playbooks visuais
+  - Automação significativa
+  - Standalone ou integrado ao SIEM
+
+GEN 4: SOAR + AI/ML (2023+)
+  - Decisões assistidas por ML
+  - Playbooks adaptativos
+  - Nativamente integrado em XDR/SIEM
+  - LLMs para assistência ao analista
+                    </pre>
+                </div>
+
+                <h3>Por que SOAR é Necessário</h3>
+
+                <div class="stat-highlight">
+                    <div class="number">70%</div>
+                    <div class="label">do tempo de analistas é gasto em tarefas manuais repetitivas</div>
+                </div>
+
+                <h4>O Problema de Escala</h4>
+                <ul>
+                    <li>Volume de alertas cresce 30% ao ano</li>
+                    <li>Escassez de 3.5 milhões de profissionais de segurança globalmente</li>
+                    <li>Analistas gastam 70% do tempo em tarefas manuais repetitivas</li>
+                    <li>Alert fatigue leva a ameaças reais sendo ignoradas</li>
+                </ul>
+
+                <h4>O Problema de Consistência</h4>
+                <ul>
+                    <li>Respostas variam entre analistas</li>
+                    <li>Conhecimento perdido quando analistas saem</li>
+                    <li>Difícil garantir que melhores práticas são seguidas</li>
+                    <li>Auditoria e compliance complexos</li>
+                </ul>
+
+                <h2 id="componentes">Componentes do SOAR</h2>
+
+                <h3>1. Integrations (Conectores)</h3>
+                <p>Integrações pré-construídas ou custom para conectar com o ecossistema de segurança:</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Ferramentas Típicas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Detecção</strong></td>
+                            <td>SIEM (Splunk, QRadar), EDR (CrowdStrike, Defender), NDR (Darktrace, Vectra)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prevenção</strong></td>
+                            <td>Firewall (Palo Alto, Fortinet), WAF (Cloudflare, Imperva), Proxy (Zscaler)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Threat Intelligence</strong></td>
+                            <td>VirusTotal, Shodan, MISP, Recorded Future, AlienVault OTX</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Identity</strong></td>
+                            <td>Active Directory, Azure AD/Entra, Okta, PAM (CyberArk)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IT Operations</strong></td>
+                            <td>ServiceNow, Jira, PagerDuty, BMC Remedy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Comunicação</strong></td>
+                            <td>Slack, Microsoft Teams, Email, SMS</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>2. Playbooks (Workflows)</h3>
+                <p>Fluxos de trabalho automatizados que definem sequência de ações para tipos específicos de incidentes. Podem ser:</p>
+                <ul>
+                    <li><strong>Totalmente automatizados:</strong> Executam do início ao fim sem intervenção</li>
+                    <li><strong>Semi-automatizados:</strong> Requerem aprovação humana em pontos críticos</li>
+                    <li><strong>Assistidos:</strong> Guiam o analista através de passos, executando ações sob demanda</li>
+                </ul>
+
+                <h3>3. Case Management</h3>
+                <p>Gerenciamento centralizado de incidentes:</p>
+                <ul>
+                    <li>Agregação de alertas relacionados em um único caso</li>
+                    <li>Timeline de investigação e ações</li>
+                    <li>Colaboração entre analistas</li>
+                    <li>Documentação e evidências</li>
+                    <li>Métricas e relatórios</li>
+                </ul>
+
+                <h3>4. Threat Intelligence Platform (TIP)</h3>
+                <p>Muitos SOARs incluem capacidades de TIP:</p>
+                <ul>
+                    <li>Agregação de feeds de threat intel</li>
+                    <li>Enriquecimento automático de IOCs</li>
+                    <li>Correlação de indicadores</li>
+                    <li>Sharing (STIX/TAXII)</li>
+                </ul>
+
+                <h2 id="soar-vs-siem">SOAR vs SIEM</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>SIEM</th>
+                            <th>SOAR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Função Principal</strong></td>
+                            <td>Coleta logs, correlaciona eventos</td>
+                            <td>Orquestra ferramentas, automatiza ações</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Output</strong></td>
+                            <td>Gera alertas</td>
+                            <td>Responde a alertas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pergunta que Responde</strong></td>
+                            <td>"O que aconteceu?"</td>
+                            <td>"O que fazer sobre isso?"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Foco</strong></td>
+                            <td>Detecção</td>
+                            <td>Resposta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dados</strong></td>
+                            <td>Armazena dados</td>
+                            <td>Executa workflows</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compliance</strong></td>
+                            <td>Reporting</td>
+                            <td>Incident management</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tip-box">
+                    <h3><i class="fas fa-lightbulb" style="margin-right:10px"></i> SIEM + SOAR: Ciclo Completo</h3>
+                    <p>Juntos formam o ciclo completo de operações: <a href="../siem-implementacao-casos-uso/">SIEM</a> detecta e gera alertas, SOAR enriquece, investiga, contém e documenta. A tendência é integração nativa: Splunk + Phantom, Microsoft Sentinel com Playbooks, Google Chronicle + Siemplify, IBM QRadar + Resilient.</p>
+                </div>
+
+                <h2 id="playbooks">Criando Playbooks Eficazes</h2>
+
+                <h3>Anatomia de um Playbook: Phishing Email Response</h3>
+
+                <div class="code-block">
+                    <h4>Estrutura de Playbook</h4>
+                    <pre>
+TRIGGER: Alerta de email suspeito (Proofpoint, M365)
+
+1. ENRICH (Automático)
+   - Extrair IOCs (URLs, anexos, sender)
+   - VirusTotal lookup (hashes)
+   - URL reputation check
+   - Sender reputation (DMARC, SPF)
+   - Check se remetente interno (AD lookup)
+
+2. TRIAGE (Automático)
+   - Se score > 80: Alta prioridade
+   - Se sender interno comprometido: Critico
+   - Se anexo malicioso confirmado: Escalar
+   - Se falso positivo conhecido: Auto-close
+
+3. CONTAIN (Semi-automático - requer aprovação)
+   - Deletar email de todas as mailboxes
+   - Bloquear sender/dominio
+   - Bloquear URLs no proxy
+   - Bloquear hashes no EDR
+
+4. INVESTIGATE (Assistido)
+   - Identificar quem clicou/abriu
+   - Check EDR para execução de payload
+   - Verificar movimentacao lateral
+   - Timeline de atividades dos afetados
+
+5. COMMUNICATE (Automático)
+   - Notificar usuário que reportou
+   - Alertar usuários que clicaram
+   - Update ticket com findings
+   - Relatório para management (se crítico)
+
+6. DOCUMENT (Automático)
+   - Fechar caso com classificação
+   - Atualizar threat intel interno
+   - Métricas para dashboard
+                    </pre>
+                </div>
+
+                <h3>Princípios de Design</h3>
+
+                <h4>1. Start Small, Iterate</h4>
+                <p>Comece automatizando uma parte do processo (ex: só enriquecimento). Adicione mais automação conforme confiança aumenta.</p>
+
+                <h4>2. Human-in-the-Loop para Ações Destrutivas</h4>
+                <p>Ações irreversíveis ou de alto impacto devem requerer aprovação:</p>
+                <ul>
+                    <li>Isolar endpoint</li>
+                    <li>Desabilitar conta de usuário</li>
+                    <li>Bloquear range de IPs</li>
+                    <li>Deletar arquivos</li>
+                </ul>
+
+                <h4>3. Handle Errors Gracefully</h4>
+                <p>APIs falham, integrações quebram. Playbooks devem:</p>
+                <ul>
+                    <li>Ter timeouts definidos</li>
+                    <li>Capturar e logar erros</li>
+                    <li>Ter fallback paths</li>
+                    <li>Escalar para humano quando necessário</li>
+                </ul>
+
+                <h4>4. Version Control e Testing</h4>
+                <p>Playbooks são código - trate como tal:</p>
+                <ul>
+                    <li>Versionamento de playbooks</li>
+                    <li>Ambiente de teste/staging</li>
+                    <li>Rollback se necessário</li>
+                    <li>Documentação de mudanças</li>
+                </ul>
+
+                <h2 id="integrações">Integrações Essenciais</h2>
+
+                <h3>Tier 1: Críticas (Day 1)</h3>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-plug" style="color:#60A5FA;margin-right:10px"></i> Integrações Prioritárias</h4>
+                    <ul>
+                        <li><strong>SIEM:</strong> Fonte primária de alertas, contexto histórico</li>
+                        <li><strong>EDR:</strong> Isolamento, coleta de evidências, remediação</li>
+                        <li><strong>Ticketing:</strong> ServiceNow/Jira para workflow e documentação</li>
+                        <li><strong>Threat Intel:</strong> VirusTotal, AbuseIPDB para enriquecimento</li>
+                        <li><strong>Active Directory:</strong> Contexto de usuário, disable/reset</li>
+                    </ul>
+                </div>
+
+                <h3>Tier 2: Importantes (Primeiros 90 dias)</h3>
+                <ul>
+                    <li><strong>Firewall/Proxy:</strong> Bloqueio de IPs/domínios</li>
+                    <li><strong>Email Security:</strong> Quarentena, purge de emails</li>
+                    <li><strong>Vulnerability Scanner:</strong> Contexto de vulnerabilidades</li>
+                    <li><strong>Cloud Platforms:</strong> AWS/Azure/GCP para cloud incidents</li>
+                    <li><strong>Communication:</strong> Slack/Teams para notificações</li>
+                </ul>
+
+                <h3>Tier 3: Nice to Have</h3>
+                <ul>
+                    <li>Sandbox (Cuckoo, Joe Sandbox, Any.Run)</li>
+                    <li>DNS (Infoblox, Umbrella)</li>
+                    <li>CMDB para contexto de ativos</li>
+                    <li>HR Systems para contexto de usuários</li>
+                    <li>Physical Security para casos especiais</li>
+                </ul>
+
+                <h2 id="casos-uso">Casos de Uso</h2>
+
+                <h3>1. Phishing Response</h3>
+                <p>Caso de uso mais comum e de maior ROI:</p>
+                <ul>
+                    <li>Recebe alerta ou report de usuário</li>
+                    <li>Extrai e enriquece IOCs automaticamente</li>
+                    <li>Determina se outros usuários receberam</li>
+                    <li>Remove email de todas as mailboxes</li>
+                    <li>Bloqueia IOCs em controles preventivos</li>
+                    <li>Verifica se alguém clicou/abriu</li>
+                    <li>Investiga comprometimento se necessário</li>
+                </ul>
+
+                <h3>2. Malware Alert Triage</h3>
+                <ul>
+                    <li>Recebe alerta de EDR</li>
+                    <li>Enriquece hash com threat intel</li>
+                    <li>Verifica se é falso positivo conhecido</li>
+                    <li>Coleta evidencias adicionais do endpoint</li>
+                    <li>Se confirmado: isola endpoint, coleta artefatos</li>
+                    <li>Verifica se há lateral movement</li>
+                    <li>Cria ticket com todas as evidencias</li>
+                </ul>
+
+                <h3>3. Suspicious Login</h3>
+                <ul>
+                    <li>Alerta de impossible travel ou login anômalo</li>
+                    <li>Enriquece IP (geolocation, reputation, VPN?)</li>
+                    <li>Verifica histórico de login do usuário</li>
+                    <li>Checa se dispositivo é conhecido</li>
+                    <li>Se suspeito: forca re-auth, notifica usuário</li>
+                    <li>Se confirmado comprometimento: disable, revoke sessions</li>
+                </ul>
+
+                <h3>4. Vulnerability Alert</h3>
+                <ul>
+                    <li>Nova vulnerabilidade crítica publicada</li>
+                    <li>Query CMDB/scanner para assets afetados</li>
+                    <li>Prioriza baseado em criticidade do asset</li>
+                    <li>Cria tickets para patching</li>
+                    <li>Implementa compensating controls se necessário</li>
+                    <li>Monitora exploração até patch aplicado</li>
+                </ul>
+
+                <h3>5. IOC Blocking</h3>
+                <ul>
+                    <li>Recebe IOC de threat intel ou interno</li>
+                    <li>Valida e enriquece</li>
+                    <li>Propaga para todos os controles: firewall, proxy, EDR, DNS</li>
+                    <li>Verifica se houve hits históricos</li>
+                    <li>Documenta e reporta</li>
+                </ul>
+
+                <h2 id="metricas">Métricas e ROI</h2>
+
+                <h3>Métricas Operacionais</h3>
+
+                <div class="code-block">
+                    <h4>KPIs de SOAR</h4>
+                    <pre>
+EFICIÊNCIA
+- MTTR (Mean Time to Respond): Antes vs Depois
+- MTTC (Mean Time to Contain): Antes vs Depois
+- Alertas processados por analista por dia
+- % de alertas com resposta automatizada
+
+VOLUME
+- Total de playbook executions
+- Playbooks executados sem intervenção humana
+- Actions automatizadas por dia/semana
+- Integrações utilizadas
+
+QUALIDADE
+- Falsos positivos auto-fechados corretamente
+- Casos reabertos (indicador de fechamento prematuro)
+- Playbook failures/errors
+- Tempo de desenvolvimento de novos playbooks
+
+IMPACTO NO NEGÓCIO
+- Horas de analista economizadas
+- Custo por incidente (antes/depois)
+- Capacidade de resposta em horário não-comercial
+- Consistência de resposta (variance entre analistas)
+                    </pre>
+                </div>
+
+                <h3>Calculando ROI</h3>
+
+                <div class="code-block">
+                    <h4>Exemplo de Cálculo de ROI</h4>
+                    <pre>
+Cenário: SOC com 5 analistas, 1000 alertas/dia
+
+ANTES DO SOAR:
+Tempo médio por alerta: 15 min
+Alertas investigados: 200/dia (capacidade)
+Alertas ignorados: 800/dia
+Custo por analista: $80,000/ano
+
+COM SOAR:
+Automação de enriquecimento: -8 min por alerta
+Auto-close de FPs: 40% alertas
+Tempo por alerta restante: 7 min
+Alertas investigados: 400/dia (capacidade dobrada)
+
+BENEFÍCIOS:
+Horas economizadas: (8 min x 200 alertas x 250 dias) = 6,666 horas/ano
+Valor das horas: ~$250,000/ano
+Ou: evitar contratação de 2-3 analistas adicionais
+
+CUSTOS:
+Licença SOAR: ~$100,000-300,000/ano
+Implementação: ~$50,000-150,000 (one-time)
+Manutenção: ~$30,000/ano
+
+ROI:
+Payback: 6-12 meses (típico)
+ROI 3 anos: 150-300%
+                    </pre>
+                </div>
+
+                <h2 id="implementacao">Estratégia de Implementação</h2>
+
+                <h3>Fase 1: Foundation (Mês 1-2)</h3>
+                <ul>
+                    <li>Deploy da plataforma SOAR</li>
+                    <li>Integrações Tier 1 (SIEM, EDR, Ticketing, TI)</li>
+                    <li>Playbook #1: Enriquecimento de alertas (só automação)</li>
+                    <li>Treinamento inicial da equipe</li>
+                </ul>
+
+                <h3>Fase 2: Quick Wins (Mês 3-4)</h3>
+                <ul>
+                    <li>Playbook #2: Phishing response (semi-automático)</li>
+                    <li>Playbook #3: IOC blocking automatizado</li>
+                    <li>Integrações Tier 2 (Firewall, Email, Vuln Scanner)</li>
+                    <li>Métricas baseline estabelecidas</li>
+                </ul>
+
+                <h3>Fase 3: Expansion (Mês 5-8)</h3>
+                <ul>
+                    <li>Playbooks para top 5 tipos de alerta</li>
+                    <li>Aumentar automação em playbooks existentes</li>
+                    <li>Case management para todos os incidentes</li>
+                    <li>Integração com change management</li>
+                </ul>
+
+                <h3>Fase 4: Optimization (Mês 9+)</h3>
+                <ul>
+                    <li>ML/AI para assistência de decisão</li>
+                    <li>Playbooks para casos menos comuns</li>
+                    <li>Automação de reporting</li>
+                    <li>Continuous improvement baseado em métricas</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> O que Fazer e Não Fazer</h4>
+                    <p><strong>FAZER:</strong></p>
+                    <ul>
+                        <li>Começar com processos bem documentados antes de automatizar</li>
+                        <li>Envolver analistas no design de playbooks</li>
+                        <li>Testar extensivamente antes de produção</li>
+                        <li>Medir baseline antes para demonstrar ROI</li>
+                        <li>Iterar incrementalmente</li>
+                    </ul>
+                    <p><strong>NÃO FAZER:</strong></p>
+                    <ul>
+                        <li>Automatizar processos quebrados</li>
+                        <li>Tentar automatizar tudo de uma vez</li>
+                        <li>Ignorar gestão de mudança</li>
+                        <li>Subestimar manutenção de integrações</li>
+                        <li>Esperar que SOAR resolva problemas de processo</li>
+                    </ul>
+                </div>
+
+                <h2 id="fornecedores">Principais Fornecedores</h2>
+
+                <div class="vendor-grid">
+                    <div class="vendor-card">
+                        <h3><i class="fas fa-shield-alt" style="color:#60A5FA;margin-right:8px"></i> Palo Alto Cortex XSOAR</h3>
+                        <p>Maior marketplace de integrações, forte em customização. Ex-Demisto.</p>
+                        <div class="strength">Forte em: Marketplace de integrações</div>
+                    </div>
+                    <div class="vendor-card">
+                        <h4><i class="fas fa-search" style="color:#60A5FA;margin-right:8px"></i> Splunk SOAR</h4>
+                        <p>Integração nativa com Splunk SIEM, forte comunidade. Ex-Phantom.</p>
+                        <div class="strength">Forte em: Ecossistema Splunk</div>
+                    </div>
+                    <div class="vendor-card">
+                        <h4><i class="fab fa-microsoft" style="color:#60A5FA;margin-right:8px"></i> Microsoft Sentinel</h4>
+                        <p>SOAR built-in via Logic Apps, bom para shops Microsoft.</p>
+                        <div class="strength">Forte em: Ambientes Microsoft</div>
+                    </div>
+                    <div class="vendor-card">
+                        <h4><i class="fab fa-google" style="color:#60A5FA;margin-right:8px"></i> Google Chronicle SOAR</h4>
+                        <p>Integração com Chronicle SIEM, forte em escala. Ex-Siemplify.</p>
+                        <div class="strength">Forte em: Escala e cloud</div>
+                    </div>
+                    <div class="vendor-card">
+                        <h4><i class="fas fa-cogs" style="color:#60A5FA;margin-right:8px"></i> IBM QRadar SOAR</h4>
+                        <p>Integração com QRadar, forte em regulados. Ex-Resilient.</p>
+                        <div class="strength">Forte em: Compliance</div>
+                    </div>
+                    <div class="vendor-card">
+                        <h4><i class="fas fa-robot" style="color:#60A5FA;margin-right:8px"></i> Tines</h4>
+                        <p>No-code SOAR, muito flexível, preço acessível.</p>
+                        <div class="strength">Forte em: Facilidade de uso</div>
+                    </div>
+                </div>
+
+                <h3>Critérios de Seleção</h3>
+                <ul>
+                    <li><strong>Integrações:</strong> Tem conectores para seu stack atual?</li>
+                    <li><strong>Playbook Builder:</strong> Visual, código, ou ambos?</li>
+                    <li><strong>Pricing Model:</strong> Por action, por usuário, por volume?</li>
+                    <li><strong>Case Management:</strong> Built-in ou requer integração?</li>
+                    <li><strong>SIEM Integration:</strong> Nativo ou via API?</li>
+                    <li><strong>Cloud/On-prem:</strong> Onde pode ser deployed?</li>
+                </ul>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O que é SOAR e como funciona?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>SOAR (Security Orchestration, Automation, and Response) é uma categoria de soluções que combina três capacidades: Orquestração (conectar e coordenar ferramentas de segurança), Automação (executar tarefas repetitivas sem intervenção humana), e Resposta (ações para conter e remediar ameaças). Funciona através de playbooks que definem fluxos de trabalho automatizados, integrando SIEM, EDR, firewalls, threat intel e outras ferramentas.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Qual a diferença entre SOAR e SIEM?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>SIEM foca em coletar, correlacionar e analisar logs para detectar ameaças e gerar alertas. SOAR complementa o SIEM automatizando a resposta a esses alertas. Enquanto SIEM responde "o que aconteceu?", SOAR responde "o que fazer sobre isso?" executando ações automatizadas ou guiando analistas através de playbooks. Muitos vendors agora oferecem SIEM e SOAR integrados.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quais processos devo automatizar primeiro com SOAR?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Comece com processos de alto volume e baixo risco: enriquecimento de alertas (consultar threat intel, WHOIS, VirusTotal), triagem automática de alertas conhecidos como falsos positivos, bloqueio de IOCs confirmados (hashes, IPs maliciosos), criação e atualização de tickets. Após maturidade, avance para respostas mais complexas como isolamento de endpoints e bloqueio de contas.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>SOAR pode substituir analistas de SOC?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Não. SOAR potencializa analistas, não os substitui. Automatiza tarefas repetitivas e de baixo valor (copy/paste, consultas manuais, triagem de alertas óbvios), liberando analistas para investigações complexas, threat hunting e melhoria contínua. O objetivo é fazer analistas N1 operarem como N2, e N2 como N3, aumentando a capacidade do time sem necessariamente aumentar headcount.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quais são os principais vendors de SOAR?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Principais players incluem: Palo Alto Cortex XSOAR (ex-Demisto), Splunk SOAR (ex-Phantom), Google Chronicle SOAR (ex-Siemplify), IBM Security QRadar SOAR (ex-Resilient), Microsoft Sentinel (SOAR integrado), ServiceNow Security Operations, Swimlane, e Tines. A escolha depende do SIEM existente, orçamento, e necessidade de customização.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="conclusão">Conclusão</h2>
+
+                <p>SOAR representa uma evolução fundamental na forma como operações de segurança funcionam. Em um cenário onde o volume de alertas cresce exponencialmente e o talento de segurança permanece escasso, automação não é mais um luxo - é uma necessidade operacional.</p>
+
+                <p>O sucesso com SOAR não vem de automatizar tudo imediatamente, mas de uma abordagem gradual: comece com enriquecimento e triagem automática, evolua para respostas semi-automatizadas com aprovação humana, e apenas depois avance para automação completa de processos bem compreendidos.</p>
+
+                <p>O verdadeiro valor do SOAR está em liberar analistas do trabalho repetitivo para que possam focar no que humanos fazem melhor: investigação criativa, threat hunting, e melhoria contínua dos processos de segurança. Quando implementado corretamente, SOAR não substitui pessoas - as potencializa.</p>
+
+                <div class="cta-box">
+                    <h3>Automatize seu SOC</h3>
+                    <p>Precisa de ajuda para selecionar uma solução SOAR, desenvolver playbooks ou integrar com seu stack existente? Entre em contato para uma consultoria especializada.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Avaliação</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/soar-automacao-orquestracao/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/soar-automacao-orquestracao/&text=SOAR: Guia Completo de Automação e Orquestração de Segurança" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=SOAR Automação e Orquestração https://inteligenciabrasil.seg.br/blog/soar-automacao-orquestracao/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligência Brasil</a></h4>
+                        <p>Consultoria especializada em Security Operations, Automação e Orquestração de Segurança.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../siem-implementacao-casos-uso/">SIEM</a></li>
+                            <li><a href="../xdr-extended-detection-response/">XDR</a></li>
+                            <li><a href="../resposta-incidentes-guia-pratico/">Resposta a Incidentes</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Serviços</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

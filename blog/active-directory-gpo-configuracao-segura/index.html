@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia pratico de configuracao segura do Active Directory e GPOs: politicas de senha, Kerberos, delegacao, hardening de Domain Controllers e protecao contra ataques comuns.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="Active Directory, GPO, Group Policy, hardening AD, Kerberos, NTLM, Domain Controller, politica de senha, LAPS, tiering model, privileged access, seguranca identidade, Pass-the-Hash, Kerberoasting">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/active-directory-gpo-configuracao-segura/">
+
+    <meta property="og:title" content="Active Directory e GPOs: Configuracao Segura para Organizacoes">
+    <meta property="og:description" content="Como configurar Active Directory e Group Policies de forma segura: politicas, hardening, tiering e protecao contra ataques de identidade.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/active-directory-gpo-configuracao-segura/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-03-30T10:00:00-03:00">
+    <meta property="article:section" content="Identidade e Acesso">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Active Directory e GPOs: Configuracao Segura">
+    <meta name="twitter:description" content="Hardening de AD, GPOs essenciais, tiering model e protecao contra Pass-the-Hash e Kerberoasting.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Active Directory e GPOs: Configura&#231;&#227;o Segura para Organiza&#231;&#245;es | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Active Directory e GPOs: Configuracao Segura para Organizacoes",
+        "description": "Guia de configuracao segura do Active Directory e Group Policies: hardening, tiering model, protecao contra ataques e GPOs essenciais.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
+        "datePublished": "2026-03-30",
+        "dateModified": "2026-03-30",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/active-directory-gpo-configuracao-segura/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Por que o Active Directory e o principal alvo de ataques?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O AD centraliza autenticacao, autorizacao e politicas de toda a organizacao. Comprometer o AD significa obter acesso a todos os recursos do dominio. Atacantes buscam contas privilegiadas, Domain Controllers e relacoes de confianca porque uma unica escalacao de privilegio pode dar controle total sobre o ambiente."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais as GPOs mais importantes para seguranca?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "As GPOs essenciais incluem: politica de senhas (comprimento minimo, complexidade, historico), bloqueio de conta apos tentativas falhas, restricao de NTLM, configuracao de auditoria avancada, controle de execucao (AppLocker/WDAC), restricao de acesso remoto e LAPS para senhas de administrador local."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que e o tiering model do Active Directory?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "E um modelo de segmentacao de privilegios em 3 niveis: Tier 0 (Domain Controllers e contas de dominio), Tier 1 (servidores e aplicacoes) e Tier 2 (estacoes de trabalho e usuarios). Contas de um tier nao devem autenticar em recursos de outro tier, limitando o impacto de um comprometimento."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como proteger o AD contra Kerberoasting e Pass-the-Hash?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Contra Kerberoasting: use senhas longas e complexas em service accounts, implemente gMSA (Group Managed Service Accounts) e monitore requisicoes TGS anomalas. Contra Pass-the-Hash: restrinja NTLM, implemente Credential Guard, use estacoes administrativas dedicadas (PAW) e aplique o tiering model para limitar onde credenciais privilegiadas sao expostas."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Active Directory e GPOs"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="../../lp/monitorar-emails/"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/anticibercrime/"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/monitorar-dominio/"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/monitorar-credenciais/"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/grc/"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/cti-monitoramento/"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/analise-vulnerabilidades/"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/lgpd/"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/analise-presenca-digital/"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Identidade &amp; Acesso</span>
+            <h1>Active Directory e GPOs: Configura&#231;&#227;o Segura para Organiza&#231;&#245;es</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Active Directory e GPOs</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#por-que">Por que o AD &#233; o principal alvo</a></li>
+                        <li><a href="#gpo-essenciais">GPOs essenciais de seguran&#231;a</a></li>
+                        <li><a href="#hardening-dc">Hardening de Domain Controllers</a></li>
+                        <li><a href="#tiering">Tiering Model e segmenta&#231;&#227;o</a></li>
+                        <li><a href="#ataques">Ataques comuns e como prevenir</a></li>
+                        <li><a href="#monitoramento">Monitoramento e auditoria</a></li>
+                        <li><a href="#erros">Erros comuns</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <p>
+                    O Active Directory &#233; o cora&#231;&#227;o da infraestrutura de identidade da maioria das organiza&#231;&#245;es. Ele centraliza autentica&#231;&#227;o, autoriza&#231;&#227;o e pol&#237;ticas para todos os recursos do dom&#237;nio &mdash; o que o torna, inevitavelmente, o <strong>alvo mais valioso para atacantes</strong>.
+                </p>
+
+                <p>
+                    Apesar disso, &#233; comum encontrar ambientes AD com configura&#231;&#245;es padr&#227;o nunca ajustadas, GPOs insuficientes e pr&#225;ticas que facilitam escala&#231;&#227;o de privil&#233;gios. Este artigo cobre as configura&#231;&#245;es essenciais para proteger o AD de forma pr&#225;tica e estruturada. Para uma vis&#227;o complementar sobre ataques espec&#237;ficos, consulte nosso artigo sobre <a href="../active-directory-security-protecao-ataques/">prote&#231;&#227;o do AD contra ataques</a>.
+                </p>
+
+                <h2 id="por-que">Por que o AD &#233; o principal alvo de ataques</h2>
+
+                <div class="stat-highlight">
+                    <div class="number">95%</div>
+                    <div class="label">das organiza&#231;&#245;es Fortune 1000 usam Active Directory &mdash; comprometer o AD significa comprometer a organiza&#231;&#227;o inteira</div>
+                </div>
+
+                <p>O AD &#233; alvo priorit&#225;rio porque:</p>
+
+                <ul>
+                    <li><strong>Centraliza&#231;&#227;o:</strong> uma &#250;nica conta Domain Admin d&#225; acesso a todos os recursos</li>
+                    <li><strong>Persist&#234;ncia:</strong> backdoors no AD (Golden Ticket, skeleton key) sobrevivem a reimaging de servidores</li>
+                    <li><strong>Movimenta&#231;&#227;o lateral:</strong> credenciais em cache permitem <a href="../active-directory-security-protecao-ataques/">Pass-the-Hash</a> entre m&#225;quinas</li>
+                    <li><strong>Configura&#231;&#245;es padr&#227;o inseguras:</strong> NTLM habilitado, delega&#231;&#227;o irrestrita, SPNs vulner&#225;veis</li>
+                    <li><strong>Complexidade:</strong> ambientes com anos de acumula&#231;&#227;o de objetos, permiss&#245;es e trusts n&#227;o revisados</li>
+                </ul>
+
+                <h2 id="gpo-essenciais">GPOs essenciais de seguran&#231;a</h2>
+
+                <p>Group Policy Objects s&#227;o o mecanismo nativo para aplicar configura&#231;&#245;es de seguran&#231;a em escala. As GPOs a seguir representam o <a href="../baseline-vs-hardening-seguranca-infraestrutura/">baseline m&#237;nimo</a> que toda organiza&#231;&#227;o deve implementar.</p>
+
+                <h3>Pol&#237;tica de senhas e bloqueio de conta</h3>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-key" style="color:#60A5FA;margin-right:10px"></i> Configura&#231;&#245;es recomendadas</strong></p>
+                    <ul>
+                        <li><strong>Comprimento m&#237;nimo:</strong> 14 caracteres (NIST recomenda foco em comprimento sobre complexidade)</li>
+                        <li><strong>Hist&#243;rico de senhas:</strong> m&#237;nimo 24 senhas lembradas</li>
+                        <li><strong>Idade m&#225;xima:</strong> 365 dias (ou sem expira&#231;&#227;o se combinado com MFA e monitoramento)</li>
+                        <li><strong>Bloqueio de conta:</strong> 5 tentativas falhas, bloqueio de 30 minutos</li>
+                        <li><strong>Fine-Grained Password Policies:</strong> pol&#237;ticas diferenciadas para contas privilegiadas (20+ chars, 0 expira&#231;&#227;o com <a href="../mfa-fatigue-bypass-attacks/">MFA obrigat&#243;rio</a>)</li>
+                    </ul>
+                </div>
+
+                <h3>Restri&#231;&#227;o de protocolos legados</h3>
+
+                <ul>
+                    <li><strong>Desabilitar NTLM onde poss&#237;vel:</strong> for&#231;ar Kerberos como protocolo de autentica&#231;&#227;o</li>
+                    <li><strong>Auditar uso de NTLM:</strong> GPO <code>Network Security: Restrict NTLM</code> em modo auditoria antes de bloquear</li>
+                    <li><strong>Desabilitar LM Hash:</strong> <code>Network Security: Do not store LAN Manager hash</code> = Enabled</li>
+                    <li><strong>Exigir NTLMv2:</strong> se NTLM for necess&#225;rio, aceitar apenas v2 com 128-bit</li>
+                </ul>
+
+                <h3>Auditoria avan&#231;ada</h3>
+
+                <ul>
+                    <li><strong>Account Logon Events:</strong> sucesso e falha (detecta brute force e credential stuffing)</li>
+                    <li><strong>Logon Events:</strong> logons interativos, remotos e de rede</li>
+                    <li><strong>Object Access:</strong> altera&#231;&#245;es em objetos cr&#237;ticos do AD</li>
+                    <li><strong>Privilege Use:</strong> uso de privil&#233;gios sens&#237;veis (SeDebugPrivilege, SeTcbPrivilege)</li>
+                    <li><strong>Policy Change:</strong> modifica&#231;&#245;es em GPOs e pol&#237;ticas de seguran&#231;a</li>
+                </ul>
+
+                <p>Esses logs devem ser encaminhados para o <a href="../siem-implementacao-casos-uso/">SIEM</a> para correla&#231;&#227;o e alerta em tempo real.</p>
+
+                <h3>Controle de execu&#231;&#227;o e software</h3>
+
+                <ul>
+                    <li><strong>AppLocker ou WDAC:</strong> controle de aplica&#231;&#245;es permitidas por whitelist</li>
+                    <li><strong>PowerShell Constrained Language Mode:</strong> limita comandos dispon&#237;veis para usu&#225;rios n&#227;o privilegiados</li>
+                    <li><strong>Script Block Logging:</strong> registra todo c&#243;digo PowerShell executado</li>
+                    <li><strong>Desabilitar macros Office:</strong> bloquear ou restringir macros VBA por GPO</li>
+                </ul>
+
+                <h3>LAPS &mdash; Local Administrator Password Solution</h3>
+
+                <p>LAPS gera senhas &#250;nicas e aleat&#243;rias para a conta de administrador local de cada m&#225;quina, armazenando-as de forma segura no AD. Elimina o risco de <strong>senha de admin local &#250;nica</strong> em todo o parque &mdash; um dos vetores mais explorados em movimenta&#231;&#227;o lateral.</p>
+
+                <h2 id="hardening-dc">Hardening de Domain Controllers</h2>
+
+                <p>Domain Controllers s&#227;o os ativos mais cr&#237;ticos do ambiente. Seu comprometimento equivale ao comprometimento total do dom&#237;nio.</p>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-server" style="color:#60A5FA;margin-right:10px"></i> Checklist de hardening para DCs</strong></p>
+                    <ul>
+                        <li><strong>Dedicados exclusivamente:</strong> DCs n&#227;o devem executar outras fun&#231;&#245;es (file server, print, aplica&#231;&#245;es)</li>
+                        <li><strong>Patches em dia:</strong> ciclo de atualiza&#231;&#227;o priorit&#225;rio com testes pr&#233;vios</li>
+                        <li><strong>Acesso restrito:</strong> apenas contas Tier 0 podem fazer logon em DCs</li>
+                        <li><strong>Credential Guard:</strong> protege hashes em mem&#243;ria contra extra&#231;&#227;o</li>
+                        <li><strong>SMB signing obrigat&#243;rio:</strong> previne ataques de relay</li>
+                        <li><strong>LDAP signing e channel binding:</strong> previne LDAP relay attacks</li>
+                        <li><strong>Desabilitar Print Spooler:</strong> vetor de ataque conhecido (PrintNightmare)</li>
+                        <li><strong>Monitoramento dedicado:</strong> alertas espec&#237;ficos para eventos cr&#237;ticos no DC</li>
+                    </ul>
+                </div>
+
+                <h2 id="tiering">Tiering Model e segmenta&#231;&#227;o de privil&#233;gios</h2>
+
+                <p>
+                    O tiering model &#233; a pr&#225;tica de segmentar privil&#233;gios em n&#237;veis, impedindo que credenciais de um n&#237;vel sejam expostas em outro. &#201; a base para proteger o AD contra escala&#231;&#227;o de privil&#233;gios e movimenta&#231;&#227;o lateral.
+                </p>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-layer-group" style="color:#60A5FA;margin-right:10px"></i> Modelo de 3 Tiers</strong></p>
+                    <ul>
+                        <li><strong>Tier 0 &mdash; Controle do dom&#237;nio:</strong> Domain Controllers, contas Domain Admin, Azure AD Connect, PKI. Acesso apenas via PAW (Privileged Access Workstation) dedicada</li>
+                        <li><strong>Tier 1 &mdash; Servidores e aplica&#231;&#245;es:</strong> servidores de aplica&#231;&#227;o, bancos de dados, Exchange, file servers. Administrados por contas Tier 1 separadas</li>
+                        <li><strong>Tier 2 &mdash; Esta&#231;&#245;es e usu&#225;rios:</strong> desktops, laptops, helpdesk. Contas Tier 2 n&#227;o devem ter acesso a Tier 1 ou Tier 0</li>
+                    </ul>
+                </div>
+
+                <p><strong>Regra fundamental:</strong> credenciais de Tier 0 nunca devem fazer logon em m&#225;quinas Tier 1 ou Tier 2. Um Domain Admin que faz logon em uma esta&#231;&#227;o de trabalho expõe suas credenciais em cache &mdash; qualquer malware naquela m&#225;quina pode extra&#237;-las.</p>
+
+                <p>A implementa&#231;&#227;o de <a href="../pam-gestao-acessos-privilegiados/">PAM (Privileged Access Management)</a> complementa o tiering com controle granular sobre quem acessa o qu&#234; e quando.</p>
+
+                <h2 id="ataques">Ataques comuns ao AD e como prevenir</h2>
+
+                <h3>Pass-the-Hash (PtH)</h3>
+
+                <p>O atacante extrai hashes NTLM da mem&#243;ria e os usa para autenticar sem conhecer a senha original.</p>
+
+                <ul>
+                    <li><strong>Preven&#231;&#227;o:</strong> Credential Guard, restri&#231;&#227;o de NTLM, tiering model, LAPS</li>
+                    <li><strong>Detec&#231;&#227;o:</strong> logons an&#244;malos com hash (Event ID 4624 tipo 3 + 4776), ferramentas de <a href="../itdr-deteccao-ameacas-identidade/">ITDR</a></li>
+                </ul>
+
+                <h3>Kerberoasting</h3>
+
+                <p>O atacante solicita tickets Kerberos (TGS) para service accounts com SPN e tenta quebrar a senha offline.</p>
+
+                <ul>
+                    <li><strong>Preven&#231;&#227;o:</strong> senhas longas (25+ chars) em service accounts, gMSA (Group Managed Service Accounts), limitar SPNs</li>
+                    <li><strong>Detec&#231;&#227;o:</strong> volume an&#244;malo de requisi&#231;&#245;es TGS (Event ID 4769), especialmente com criptografia RC4</li>
+                </ul>
+
+                <h3>DCSync</h3>
+
+                <p>O atacante simula um Domain Controller e solicita replica&#231;&#227;o de hashes de todas as contas.</p>
+
+                <ul>
+                    <li><strong>Preven&#231;&#227;o:</strong> restringir permiss&#245;es de replica&#231;&#227;o (DS-Replication-Get-Changes) apenas a DCs reais</li>
+                    <li><strong>Detec&#231;&#227;o:</strong> Event ID 4662 com opera&#231;&#227;o de replica&#231;&#227;o originada de n&#227;o-DC</li>
+                </ul>
+
+                <h3>Golden Ticket</h3>
+
+                <p>Com o hash da conta KRBTGT, o atacante gera tickets Kerberos v&#225;lidos para qualquer conta, incluindo Domain Admin.</p>
+
+                <ul>
+                    <li><strong>Preven&#231;&#227;o:</strong> rotacionar senha do KRBTGT periodicamente (2x seguidas para invalidar tickets antigos)</li>
+                    <li><strong>Detec&#231;&#227;o:</strong> tickets com lifetime an&#244;malo, logons sem TGT pr&#233;vio correspondente</li>
+                </ul>
+
+                <div class="tip-box">
+                    <p><strong><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Delega&#231;&#227;o irrestrita</strong></p>
+                    <p>Servidores com <strong>delega&#231;&#227;o irrestrita (Unconstrained Delegation)</strong> podem armazenar tickets Kerberos de qualquer usu&#225;rio que se conecte a eles. Se um Domain Admin se conectar a esse servidor, seu TGT fica dispon&#237;vel para extra&#231;&#227;o. Substitua por <strong>Constrained Delegation</strong> ou <strong>Resource-Based Constrained Delegation</strong>.</p>
+                </div>
+
+                <h2 id="monitoramento">Monitoramento e auditoria do AD</h2>
+
+                <p>Configurar o AD sem monitorar &#233; como trancar a porta e n&#227;o instalar alarme. Os eventos cr&#237;ticos que devem gerar alerta imediato:</p>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-bell" style="color:#60A5FA;margin-right:10px"></i> Eventos cr&#237;ticos para monitorar</strong></p>
+                    <ul>
+                        <li><strong>4728/4732/4756:</strong> membro adicionado a grupo privilegiado (Domain Admins, Enterprise Admins, Schema Admins)</li>
+                        <li><strong>4724/4723:</strong> reset de senha de conta privilegiada</li>
+                        <li><strong>4662:</strong> opera&#231;&#245;es de replica&#231;&#227;o (detecta DCSync)</li>
+                        <li><strong>4769 com RC4:</strong> requisi&#231;&#245;es Kerberos com criptografia fraca (Kerberoasting)</li>
+                        <li><strong>4625 em volume:</strong> falhas de autentica&#231;&#227;o em massa (brute force)</li>
+                        <li><strong>4719:</strong> altera&#231;&#227;o de pol&#237;tica de auditoria (tentativa de encobrir rastros)</li>
+                        <li><strong>7045:</strong> novo servi&#231;o instalado em DC (poss&#237;vel persist&#234;ncia)</li>
+                    </ul>
+                </div>
+
+                <p>Esses eventos devem ser encaminhados para <a href="../siem-implementacao-casos-uso/">SIEM</a> com regras de correla&#231;&#227;o espec&#237;ficas. Ferramentas de <a href="../itdr-deteccao-ameacas-identidade/">ITDR</a> adicionam detec&#231;&#227;o comportamental especializada em ataques de identidade.</p>
+
+                <h2 id="erros">Erros comuns na configura&#231;&#227;o do AD</h2>
+
+                <h3>Domain Admins usados no dia a dia</h3>
+                <p>Contas Domain Admin usadas para tarefas rotineiras exp&#245;em credenciais em dezenas de m&#225;quinas. Cada logon deixa hash em cache. Use contas separadas para cada n&#237;vel de privil&#233;gio.</p>
+
+                <h3>GPOs padr&#227;o nunca ajustadas</h3>
+                <p>A Default Domain Policy e Default Domain Controllers Policy v&#234;m com configura&#231;&#245;es m&#237;nimas. Organizações que n&#227;o customizam operam com o <a href="../baseline-vs-hardening-seguranca-infraestrutura/">baseline</a> mais fraco poss&#237;vel.</p>
+
+                <h3>Service accounts com senha est&#225;tica</h3>
+                <p>Service accounts com a mesma senha h&#225; anos s&#227;o alvos f&#225;ceis de Kerberoasting. Implemente gMSA para rota&#231;&#227;o autom&#225;tica.</p>
+
+                <h3>Objetos &#243;rf&#227;os e permiss&#245;es acumuladas</h3>
+                <p>Contas de ex-funcion&#225;rios, grupos vazios, permiss&#245;es delegadas sem revis&#227;o. Cada objeto desnecess&#225;rio &#233; superf&#237;cie de ataque.</p>
+
+                <h3>Aus&#234;ncia de monitoramento em DCs</h3>
+                <p>DCs sem logs encaminhados para SIEM significam que ataques cr&#237;ticos passam despercebidos. Um DCSync executado sem alerta pode comprometer todo o dom&#237;nio em minutos.</p>
+
+                <div class="tip-box">
+                    <p><strong><i class="fas fa-lightbulb" style="margin-right:10px"></i> Considera&#231;&#245;es finais</strong></p>
+                    <p>O Active Directory &#233; a infraestrutura de identidade mais cr&#237;tica da organiza&#231;&#227;o e, por isso, exige configura&#231;&#227;o intencional, n&#227;o padr&#245;es de f&#225;brica.</p>
+                    <p>GPOs bem definidas, hardening de DCs, tiering model e monitoramento cont&#237;nuo transformam o AD de <strong>maior vulnerabilidade</strong> em <strong>maior for&#231;a</strong> da estrat&#233;gia de seguran&#231;a. A diferen&#231;a entre um AD seguro e um AD comprometido est&#225; na disciplina de configura&#231;&#227;o e revis&#227;o cont&#237;nua.</p>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Por que o Active Directory &#233; o principal alvo de ataques?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O AD centraliza autentica&#231;&#227;o, autoriza&#231;&#227;o e pol&#237;ticas de toda a organiza&#231;&#227;o. Comprometer o AD significa obter acesso a todos os recursos do dom&#237;nio. Atacantes buscam contas privilegiadas e Domain Controllers porque uma &#250;nica escala&#231;&#227;o de privil&#233;gio pode dar controle total sobre o ambiente.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quais as GPOs mais importantes para seguran&#231;a?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>As GPOs essenciais incluem: pol&#237;tica de senhas (comprimento m&#237;nimo 14 chars), bloqueio de conta, restri&#231;&#227;o de NTLM, auditoria avan&#231;ada, controle de execu&#231;&#227;o (AppLocker/WDAC) e LAPS para senhas de administrador local.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que &#233; o tiering model do Active Directory?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>&#201; um modelo de segmenta&#231;&#227;o em 3 n&#237;veis: Tier 0 (Domain Controllers), Tier 1 (servidores) e Tier 2 (esta&#231;&#245;es de trabalho). Contas de um tier n&#227;o devem autenticar em recursos de outro, limitando o impacto de um comprometimento.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como proteger o AD contra Kerberoasting e Pass-the-Hash?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Contra Kerberoasting: senhas longas em service accounts, gMSA e monitoramento de requisi&#231;&#245;es TGS. Contra Pass-the-Hash: restri&#231;&#227;o de NTLM, Credential Guard, esta&#231;&#245;es administrativas dedicadas (PAW) e tiering model.</p></div>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-book" style="color:#60A5FA;margin-right:10px"></i> Fontes e refer&#234;ncias t&#233;cnicas</h3>
+                    <ul>
+                        <li>Microsoft &mdash; Best Practices for Securing Active Directory</li>
+                        <li>Microsoft &mdash; Privileged Access Strategy (Enterprise Access Model)</li>
+                        <li>CIS Benchmark for Microsoft Windows Server &mdash; Domain Controller</li>
+                        <li>NIST SP 800-63B &mdash; Digital Identity Guidelines (Authentication)</li>
+                        <li>MITRE ATT&amp;CK &mdash; Credential Access, Lateral Movement, Persistence</li>
+                        <li>ANSSI &mdash; Recommandations pour l&#8217;administration s&#233;curis&#233;e des SI (AD Tiering)</li>
+                    </ul>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Precisa avaliar a seguran&#231;a do seu Active Directory?</h3>
+                    <p>Realizamos assessment de AD, revis&#227;o de GPOs, implementa&#231;&#227;o de tiering model e hardening de Domain Controllers com monitoramento cont&#237;nuo.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/active-directory-gpo-configuracao-segura/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/active-directory-gpo-configuracao-segura/&text=Active Directory e GPOs: Configuracao Segura" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Active Directory e GPOs https://inteligenciabrasil.seg.br/blog/active-directory-gpo-configuracao-segura/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em Seguran&#231;a de Identidade, Active Directory e Gest&#227;o de Acessos Privilegiados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
+                        <p>Consultoria especializada em Seguran&#231;a, Estrat&#233;gia e Tecnologia da Informa&#231;&#227;o.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../active-directory-security-protecao-ataques/">AD Security</a></li>
+                            <li><a href="../pam-gestao-acessos-privilegiados/">PAM</a></li>
+                            <li><a href="../itdr-deteccao-ameacas-identidade/">ITDR</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navega&#231;&#227;o</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servi&#231;os</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, S&#227;o Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Pol&#237;tica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Entenda os fundamentos da Segurança da Informação: a Tríade CID (Confidencialidade, Integridade e Disponibilidade) e pilares adicionais como Autenticidade, Não-Repúdio, Legalidade e Privacidade.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="segurança da informação, CID, confidencialidade, integridade, disponibilidade, autenticidade, não-repúdio, cibersegurança, pilares da segurança">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Segurança da Informação e seus Fundamentos">
+    <meta property="og:description" content="Entenda a Tríade CID e os pilares fundamentais da Segurança da Informação.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2023-06-15T10:00:00-03:00">
+    <meta property="article:modified_time" content="2026-01-25T10:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Segurança">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Segurança da Informação e seus Fundamentos">
+    <meta name="twitter:description" content="Entenda a Tríade CID e os pilares fundamentais da Segurança da Informação.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Segurança da Informação e seus Fundamentos | Blog Inteligência Brasil</title>
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Segurança da Informação e seus Fundamentos",
+        "description": "Entenda os fundamentos da Segurança da Informação: a Tríade CID (Confidencialidade, Integridade e Disponibilidade) e pilares adicionais.",
+        "image": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp",
+        "author": {
+            "@type": "Person",
+            "name": "Roberto Lima",
+            "url": "https://www.linkedin.com/in/roberto-lima/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Inteligência Brasil",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"
+            }
+        },
+        "datePublished": "2023-06-15",
+        "dateModified": "2026-01-25",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/"
+        },"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2023,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Fundamentos de Segurança", "item": "https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/" }
+        ]
+    }
+    </script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que e a Triade CID na seguranca da informacao?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A Triade CID (CIA Triad em ingles) representa os tres pilares fundamentais da seguranca da informacao: Confidencialidade (garantir que informacoes sejam acessiveis apenas por pessoas autorizadas), Integridade (assegurar que dados permanecam precisos e nao alterados indevidamente) e Disponibilidade (manter sistemas acessiveis quando necessario)."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que e Confidencialidade em seguranca da informacao?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Confidencialidade e o principio que impede a divulgacao de informacoes para pessoas, recursos ou processos nao autorizados. E protegida atraves de criptografia, controle de acesso, autenticacao multifator (MFA), classificacao de dados e treinamento de funcionarios contra engenharia social e phishing."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual a diferenca entre Integridade e Disponibilidade?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Integridade garante que dados permanecam precisos e nao sejam alterados de forma nao autorizada, usando mecanismos como hashing, assinaturas digitais e controle de versao. Disponibilidade garante que sistemas estejam acessiveis quando necessario, usando redundancia, backups, balanceamento de carga e planos de recuperacao de desastres."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais sao os pilares adicionais alem da Triade CID?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Alem da Triade CID, a seguranca moderna considera: Autenticidade (garantir que informacoes e usuarios sao genuinos), Nao-Repudio (impedir que acoes sejam negadas posteriormente), Legalidade (conformidade com leis como LGPD e GDPR) e Privacidade (protecao de dados pessoais conforme consentimento do titular)."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../">
+            <img src="../../img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196" height="113">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack">
+                    <a href="https://www.linkedin.com/company/inteligenciabrasil" title="Linkedin Inteligência Brasil" target="_blank" rel="noopener">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                    </a>
+                </span>
+            </span>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Segurança</span>
+            <h1>Segurança da Informação e seus Fundamentos</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Junho 2023</span>
+                <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                <span><i class="far fa-user"></i> <a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Fundamentos de Segurança</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#introducao">Introducao</a></li>
+                        <li><a href="#triade-cid">A Triade CID</a></li>
+                        <li><a href="#confidencialidade">Confidencialidade</a></li>
+                        <li><a href="#integridade">Integridade</a></li>
+                        <li><a href="#disponibilidade">Disponibilidade</a></li>
+                        <li><a href="#pilares-adicionais">Pilares Adicionais</a></li>
+                        <li><a href="#conclusao">Conclusao</a></li>
+                    </ul>
+                </div>
+
+                <div class="quote-box">
+                    <p>"A inteligência foi dada ao homem pra duvidar"</p>
+                    <cite>- E. Verhaeren</cite>
+                </div>
+
+                <h2 id="introducao">Introducao</h2>
+
+                <p>
+                    Atualmente no cenário de Tecnologia da Informação a área de segurança está em alta, pois o acesso
+                    à informação está cada vez mais difundido, com muitos adeptos aos ataques via internet. Com essa
+                    linha de pensamento as empresas estão cada vez mais preocupadas em proteger suas informações.
+                </p>
+
+                <p>
+                    Uma passagem rápida pela história da segurança da informação nos traz alguns pontos de um estudo
+                    efetuado por <strong>John McCumber</strong>, um dos primeiros especialistas em segurança cibernética,
+                    desenvolvendo uma estrutura comumente usada chamada <strong>Cubo McCumber</strong> ou popularmente
+                    conhecida como cubo de segurança cibernética.
+                </p>
+
+                <p>
+                    Esse modelo estabelece a relação entre três dimensões fundamentais: os <strong>estados das informações</strong>
+                    (transmissão, armazenamento e processamento), as <strong>contramedidas</strong> (tecnologia, políticas
+                    e pessoas) e os <strong>princípios de segurança</strong> (confidencialidade, integridade e disponibilidade).
+                </p>
+
+                <h2 id="triade-cid">A Triade CID</h2>
+
+                <p>
+                    A <strong>Tríade CID</strong> (ou CIA Triad em inglês) representa os três pilares fundamentais da
+                    segurança da informação. Esses princípios são a base para qualquer programa de segurança cibernética
+                    e permitem que especialistas utilizem como referência em suas tomadas de decisão.
+                </p>
+
+                <div class="pillar-cards">
+                    <div class="pillar-card confidentiality">
+                        <div class="icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h3>Confidencialidade</h3>
+                        <p>Garantir que a informação seja acessível apenas por pessoas autorizadas</p>
+                    </div>
+                    <div class="pillar-card integrity">
+                        <div class="icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Integridade</h3>
+                        <p>Assegurar que os dados permaneçam precisos e não sejam alterados indevidamente</p>
+                    </div>
+                    <div class="pillar-card availability">
+                        <div class="icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>Disponibilidade</h3>
+                        <p>Manter sistemas e dados acessíveis sempre que necessário</p>
+                    </div>
+                </div>
+
+                <h2 id="confidencialidade">Confidencialidade</h2>
+
+                <div class="pillar-section confidentiality">
+                    <h3><span class="pillar-badge confidentiality"><i class="fas fa-user-shield"></i> CONFIDENCIALIDADE</span></h3>
+                    <p>
+                        A <strong>Confidencialidade</strong> impede a divulgação de informações para pessoas, recursos
+                        ou processos não autorizados. É o princípio que garante que apenas quem tem permissão pode
+                        acessar determinados dados.
+                    </p>
+                </div>
+
+                <h3>Exemplos de Ameaças à Confidencialidade</h3>
+                <ul>
+                    <li><strong>Engenharia Social:</strong> Técnicas de manipulação para obter informações sensíveis</li>
+                    <li><strong>Ataques de Phishing:</strong> E-mails falsos que visam roubar credenciais</li>
+                    <li><strong>Vazamento de Dados:</strong> Exposição não autorizada de informações confidenciais</li>
+                    <li><strong>Espionagem Industrial:</strong> Acesso não autorizado a segredos comerciais</li>
+                    <li><strong>Shoulder Surfing:</strong> Observação não autorizada de telas ou teclados</li>
+                </ul>
+
+                <h3>Mecanismos de Proteção da Confidencialidade</h3>
+                <ul>
+                    <li><strong>Criptografia:</strong> Transformação de dados em formato ilegível para não autorizados</li>
+                    <li><strong>Controle de Acesso:</strong> Definição de quem pode acessar quais recursos</li>
+                    <li><strong>Autenticação Multifator (MFA):</strong> Verificação de identidade por múltiplos métodos</li>
+                    <li><strong>Classificação de Dados:</strong> Categorização de informações por nível de sensibilidade</li>
+                    <li><strong>Treinamento de Funcionários:</strong> Conscientização sobre práticas de proteção de dados</li>
+                    <li><strong>Gerenciadores de Senhas:</strong> Ferramentas para criar e armazenar senhas fortes - veja nossas <a href="../gerenciadores-senhas-seguros-gratuitos/">recomendacoes de gerenciadores seguros e gratuitos</a></li>
+                </ul>
+
+                <div class="quote-box">
+                    <p>"Para conhecer o seu inimigo você deve tornar-se seu inimigo"</p>
+                    <cite>- Sun Tzu, A Arte da Guerra</cite>
+                </div>
+
+                <h2 id="integridade">Integridade</h2>
+
+                <div class="pillar-section integrity">
+                    <h3><span class="pillar-badge integrity"><i class="fas fa-shield-alt"></i> INTEGRIDADE</span></h3>
+                    <p>
+                        A <strong>Integridade</strong> é a precisão, a consistência e a confiabilidade dos dados
+                        durante todo seu ciclo de vida. Garante que a informação não seja alterada de forma
+                        não autorizada ou acidental.
+                    </p>
+                </div>
+
+                <h3>Exemplos de Ameaças à Integridade</h3>
+                <ul>
+                    <li><strong>Malware:</strong> Software malicioso que pode corromper ou modificar arquivos</li>
+                    <li><strong>Ataques Man-in-the-Middle:</strong> Interceptação e alteração de comunicações</li>
+                    <li><strong>Erros Humanos:</strong> Modificações acidentais em dados críticos</li>
+                    <li><strong>Falhas de Hardware:</strong> Corrupção de dados por problemas físicos</li>
+                    <li><strong>SQL Injection:</strong> Manipulação de bancos de dados através de entradas maliciosas</li>
+                </ul>
+
+                <h3>Mecanismos de Proteção da Integridade</h3>
+                <ul>
+                    <li><strong>Hashing:</strong> Função hash (MD5, SHA-256) para verificar integridade de arquivos</li>
+                    <li><strong>Assinaturas Digitais:</strong> Garantia de autoria e integridade de documentos</li>
+                    <li><strong>Controle de Versão:</strong> Rastreamento de alterações em arquivos e códigos</li>
+                    <li><strong>Checksums:</strong> Verificação matemática de integridade de dados transferidos</li>
+                    <li><strong>Backups Regulares:</strong> Cópias de segurança para recuperação de dados íntegros</li>
+                    <li><strong>Logs de Auditoria:</strong> Registro de todas as modificações realizadas</li>
+                </ul>
+
+                <h2 id="disponibilidade">Disponibilidade</h2>
+
+                <div class="pillar-section availability">
+                    <h3><span class="pillar-badge availability"><i class="fas fa-server"></i> DISPONIBILIDADE</span></h3>
+                    <p>
+                        A <strong>Disponibilidade</strong> garante que os sistemas de informação estejam disponíveis
+                        sempre que necessário. Falhas de sistemas ou ataques cibernéticos podem impedir o acesso
+                        aos sistemas, ferindo esse princípio fundamental.
+                    </p>
+                </div>
+
+                <h3>Exemplos de Ameaças à Disponibilidade</h3>
+                <ul>
+                    <li><strong>Ataques DDoS:</strong> Sobrecarga de servidores com tráfego malicioso</li>
+                    <li><strong>Ransomware:</strong> Sequestro de dados que impede acesso aos sistemas</li>
+                    <li><strong>Falhas de Hardware:</strong> Quebra de equipamentos críticos</li>
+                    <li><strong>Desastres Naturais:</strong> Incêndios, inundações, terremotos</li>
+                    <li><strong>Falhas de Energia:</strong> Interrupções no fornecimento elétrico</li>
+                    <li><strong>Erros de Configuração:</strong> Configurações incorretas que derrubam serviços</li>
+                </ul>
+
+                <h3>Mecanismos de Proteção da Disponibilidade</h3>
+                <ul>
+                    <li><strong>Redundância:</strong> Sistemas duplicados para failover automático</li>
+                    <li><strong>Balanceamento de Carga:</strong> Distribuição de tráfego entre múltiplos servidores</li>
+                    <li><strong>Backups e Disaster Recovery:</strong> Planos de recuperação de desastres</li>
+                    <li><strong>UPS e Geradores:</strong> Fornecimento ininterrupto de energia</li>
+                    <li><strong>Monitoramento 24/7:</strong> Vigilância contínua da infraestrutura</li>
+                    <li><strong>SLA (Service Level Agreement):</strong> Acordos de nível de serviço com fornecedores</li>
+                </ul>
+
+                <h2 id="pilares-adicionais">Pilares Adicionais</h2>
+
+                <p>
+                    Além da tríade CID, a segurança da informação moderna considera outros princípios importantes
+                    que complementam a proteção de dados e sistemas.
+                </p>
+
+                <div class="pillar-section additional">
+                    <h3><span class="pillar-badge additional"><i class="fas fa-fingerprint"></i> AUTENTICIDADE</span></h3>
+                    <p>
+                        A <strong>Autenticidade</strong> garante que uma informação ou usuário é genuíno e não foi
+                        falsificado. Confirma que a origem da informação é legítima e que a identidade de usuários
+                        e sistemas pode ser verificada.
+                    </p>
+                    <ul>
+                        <li><strong>Mecanismos:</strong> Certificados digitais, tokens de autenticação, biometria</li>
+                    </ul>
+                </div>
+
+                <div class="pillar-section additional">
+                    <h3><span class="pillar-badge additional"><i class="fas fa-file-signature"></i> NAO-REPUDIO</span></h3>
+                    <p>
+                        O <strong>Não-Repúdio</strong> (ou irretratabilidade) garante que uma ação ou transação não
+                        pode ser negada posteriormente. O autor de uma ação não pode negar ter realizado aquela
+                        operação, sendo essencial para transações legais e financeiras.
+                    </p>
+                    <ul>
+                        <li><strong>Mecanismos:</strong> Assinaturas digitais, logs de auditoria, carimbos de tempo</li>
+                    </ul>
+                </div>
+
+                <div class="pillar-section additional">
+                    <h3><span class="pillar-badge additional"><i class="fas fa-balance-scale"></i> LEGALIDADE</span></h3>
+                    <p>
+                        A <strong>Legalidade</strong> assegura que todas as ações relacionadas à informação estejam
+                        em conformidade com leis e regulamentações vigentes, como a LGPD no Brasil, GDPR na Europa
+                        e outras normas setoriais.
+                    </p>
+                    <ul>
+                        <li><strong>Mecanismos:</strong> Políticas de compliance, auditorias regulares, DPO (Data Protection Officer)</li>
+                    </ul>
+                </div>
+
+                <div class="pillar-section additional">
+                    <h3><span class="pillar-badge additional"><i class="fas fa-user-secret"></i> PRIVACIDADE</span></h3>
+                    <p>
+                        A <strong>Privacidade</strong> garante que dados pessoais sejam coletados, processados e
+                        armazenados de acordo com o consentimento do titular e em conformidade com as leis de
+                        proteção de dados.
+                    </p>
+                    <ul>
+                        <li><strong>Mecanismos:</strong> Anonimização, pseudonimização, consentimento informado, políticas de privacidade</li>
+                    </ul>
+                </div>
+
+                <h2 id="conclusao">Conclusao</h2>
+
+                <p>
+                    A segurança da informação é um campo em constante evolução que exige atenção contínua aos
+                    fundamentos apresentados. A <strong>Tríade CID</strong> - Confidencialidade, Integridade e
+                    Disponibilidade - forma a base de qualquer estratégia de proteção de dados, enquanto os
+                    pilares adicionais como Autenticidade, Não-Repúdio, Legalidade e Privacidade complementam
+                    uma abordagem completa de segurança.
+                </p>
+
+                <p>
+                    Compreender esses princípios é essencial para profissionais de TI e segurança, bem como para
+                    gestores que precisam tomar decisões sobre proteção de ativos informacionais. A aplicação
+                    correta desses conceitos pode significar a diferença entre uma organização resiliente e
+                    uma vulnerável a ataques cibernéticos.
+                </p>
+
+                <div class="highlight-box">
+                    <p>
+                        <strong>Precisa implementar uma estratégia de segurança da informação?</strong> Nossa equipe
+                        oferece consultoria completa para avaliar riscos, implementar controles e estabelecer uma
+                        cultura de segurança na sua organização.
+                    </p>
+                </div>
+
+                <!-- References -->
+                <div class="references">
+                    <h3><i class="fas fa-book"></i> Referências</h3>
+                    <ul>
+                        <li><a href="https://www.nist.gov/cyberframework" target="_blank" rel="nofollow noopener">NIST Cybersecurity Framework</a></li>
+                        <li><a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank" rel="nofollow noopener">ISO/IEC 27001</a></li>
+                        <li><a href="https://csrc.nist.gov/glossary" target="_blank" rel="nofollow noopener">NIST Glossary</a></li>
+                        <li><a href="https://www.gov.br/esporte/pt-br/acesso-a-informacao/lgpd" target="_blank" rel="nofollow noopener">LGPD Brasil</a></li>
+                    </ul>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons">
+                    <span style="color: #94A3B8; margin-right: 10px;">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/" target="_blank" class="share-btn linkedin">
+                        <i class="fab fa-linkedin-in"></i> LinkedIn
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/&text=Segurança da Informação e seus Fundamentos - Tríade CID" target="_blank" class="share-btn twitter">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="https://wa.me/?text=Segurança da Informação e seus Fundamentos https://inteligenciabrasil.seg.br/blog/seguranca-da-informacao-e-seus-fundamentos/" target="_blank" class="share-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+
+                <!-- Author Box -->
+                <div class="author-box">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="80" height="80">
+                    </picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/in/roberto-lima/" target="_blank" rel="noopener">Roberto Lima</a></h4>
+                        <p>Especialista em Segurança da Informação e Governança de Dados na Inteligência Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 style="color: #F1F5F9; font-size: 2rem; margin-bottom: 20px;">Proteja sua empresa com os fundamentos certos</h3>
+                    <p>Nossa equipe pode ajudar a implementar uma estratégia de segurança da informação baseada nos princípios da Tríade CID e nas melhores práticas do mercado.</p>
+                    <a href="../../#contato" class="btn" style="background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; padding: 15px 40px; border-radius: 8px; font-weight: 600; font-size: 1.1rem; text-decoration: none; display: inline-block;">Solicitar Consultoria</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="100" height="100">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="100" height="100" >
+                    </picture>
+                    <h3 style="color: #F1F5F9; margin-bottom: 15px;">Fique por dentro das novidades</h3>
+                    <p>Receba conteúdos exclusivos sobre segurança da informação e governança de dados.</p>
+                    <form id="newsletter-form" class="newsletter-form">
+                        <div class="newsletter-input-group">
+                            <input type="email" id="newsletter-email" name="email" class="newsletter-input" placeholder="Seu melhor e-mail corporativo" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}">
+                            <button type="submit" class="newsletter-btn">
+                                <span>Inscrever</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <p id="newsletter-message"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Blog</h4>
+                        <ul>
+                            <li><a href="../ciclo-ooda-observar-orientar-decidir-agir/">Ciclo OODA</a></li>
+                            <li><a href="../como-funciona-o-tlp-traffic-light-protocol/">TLP Protocol</a></li>
+                            <li><a href="../lockpicking-nenhuma-fechadura-esta-segura-com-isso/">Lockpicking</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Serviços</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

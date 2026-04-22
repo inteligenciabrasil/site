@@ -1,0 +1,554 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo sobre classificacao de dados, estados da informacao (repouso, transito, uso), soberania de dados, PII e PHI. Protecao adequada para cada cenario com exemplos praticos.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="classificacao dados, dados em repouso, dados em transito, dados em uso, PII, PHI, LGPD, GDPR, HIPAA, criptografia, AES-256, TLS, soberania dados, protecao dados, DLP">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/classificacao-estados-dados-protecao/">
+
+    <meta property="og:title" content="Classificacao e Estados dos Dados: Guia de Protecao por Cenario">
+    <meta property="og:description" content="Entenda como classificar dados, proteger em repouso, transito e uso, e cumprir LGPD, GDPR e HIPAA na pratica.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/classificacao-estados-dados-protecao/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-03-26T10:00:00-03:00">
+    <meta property="article:section" content="Seguranca da Informacao">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Classificacao e Estados dos Dados: Protecao Adequada">
+    <meta name="twitter:description" content="Como classificar dados e proteger em cada estado: repouso, transito e uso. PII, PHI e soberania de dados.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Classifica&#231;&#227;o e Estados dos Dados: Guia Completo de Prote&#231;&#227;o | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Classificacao e Estados dos Dados: Guia Completo de Protecao por Cenario",
+        "description": "Classificacao de dados, protecao em repouso, transito e uso, soberania de dados, PII e PHI com exemplos praticos e referencia a LGPD, GDPR e HIPAA.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
+        "datePublished": "2026-03-26",
+        "dateModified": "2026-03-26",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/classificacao-estados-dados-protecao/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Quais sao os niveis de classificacao de dados?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Os niveis mais comuns sao: Publico (sem restricao), Uso Interno (acesso limitado a colaboradores), Confidencial ou Restrito (acesso controlado por necessidade) e Secreto ou Critico (protecao maxima, acesso extremamente restrito). A classificacao define quais controles de protecao devem ser aplicados."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual a diferenca entre dados em repouso, em transito e em uso?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Dados em repouso estao armazenados (disco, banco, backup) e sao protegidos com criptografia como AES-256. Dados em transito estao sendo transmitidos (rede, API, e-mail) e exigem TLS, HTTPS ou VPN. Dados em uso estao sendo processados na memoria RAM e sao os mais dificeis de proteger, exigindo tecnologias como enclaves seguros."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que e PII e por que precisa de protecao especial?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "PII (Personally Identifiable Information) sao dados que identificam uma pessoa: nome, CPF, e-mail, IP, biometria. LGPD e GDPR exigem protecao especifica para esses dados, incluindo base legal para tratamento, consentimento quando aplicavel e medidas tecnicas adequadas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que e soberania de dados e como afeta minha empresa?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Soberania de dados e o principio de que dados estao sujeitos as leis do pais onde estao armazenados ou processados. Se sua empresa armazena dados de brasileiros em servidores nos EUA, tanto a LGPD quanto leis americanas podem se aplicar. Isso impacta diretamente escolhas de cloud, transferencias internacionais e contratos com fornecedores."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Classificacao e Estados dos Dados"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="../../lp/monitorar-emails/"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/anticibercrime/"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/monitorar-dominio/"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/monitorar-credenciais/"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/grc/"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/cti-monitoramento/"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/analise-vulnerabilidades/"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/lgpd/"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/analise-presenca-digital/"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Seguran&#231;a da Informa&#231;&#227;o</span>
+            <h1>Classifica&#231;&#227;o e Estados dos Dados: Prote&#231;&#227;o por Cen&#225;rio</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Classifica&#231;&#227;o e Estados dos Dados</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#classificacao">N&#237;veis de classifica&#231;&#227;o de dados</a></li>
+                        <li><a href="#repouso">Dados em repouso</a></li>
+                        <li><a href="#transito">Dados em tr&#226;nsito</a></li>
+                        <li><a href="#uso">Dados em uso</a></li>
+                        <li><a href="#soberania">Soberania de dados</a></li>
+                        <li><a href="#pii">PII &mdash; Dados pessoais identific&#225;veis</a></li>
+                        <li><a href="#phi">PHI &mdash; Dados de sa&#250;de protegidos</a></li>
+                        <li><a href="#como-aplicar">Como aplicar na pr&#225;tica</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <p>
+                    Proteger dados exige mais do que criptografia gen&#233;rica. &#201; preciso entender <strong>o que</strong> est&#225; sendo protegido, <strong>onde</strong> o dado se encontra e <strong>qual lei</strong> se aplica a ele. Sem essa vis&#227;o, controles s&#227;o aplicados de forma fragmentada e lacunas cr&#237;ticas passam despercebidas.
+                </p>
+
+                <p>
+                    Este artigo cobre os fundamentos que todo profissional de seguran&#231;a precisa dominar: classifica&#231;&#227;o de dados, os tr&#234;s estados da informa&#231;&#227;o, soberania de dados e as categorias regulat&#243;rias mais relevantes &mdash; PII e PHI.
+                </p>
+
+                <!-- ===== CLASSIFICAÇÃO ===== -->
+                <h2 id="classificacao"><i class="fas fa-tags" style="color:#60A5FA;margin-right:10px"></i> N&#237;veis de classifica&#231;&#227;o de dados</h2>
+
+                <p>
+                    A classifica&#231;&#227;o de dados &#233; o processo de categorizar informa&#231;&#245;es conforme seu <strong>n&#237;vel de sensibilidade</strong> e o <strong>impacto</strong> que sua exposi&#231;&#227;o causaria. Ela define quais controles de prote&#231;&#227;o devem ser aplicados a cada tipo de dado.
+                </p>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-layer-group" style="color:#60A5FA;margin-right:10px"></i> Escala de classifica&#231;&#227;o</strong></p>
+                    <ul>
+                        <li><strong>P&#250;blico:</strong> sem restri&#231;&#227;o de acesso. Divulga&#231;&#227;o n&#227;o causa dano. Ex: conte&#250;do do site, materiais de marketing</li>
+                        <li><strong>Uso Interno:</strong> acesso limitado a colaboradores. Exposi&#231;&#227;o pode causar inconveni&#234;ncia. Ex: comunicados internos, organogramas</li>
+                        <li><strong>Confidencial / Restrito:</strong> acesso controlado por necessidade. Exposi&#231;&#227;o causa dano significativo. Ex: dados de clientes, contratos, propriedade intelectual</li>
+                        <li><strong>Secreto / Cr&#237;tico:</strong> prote&#231;&#227;o m&#225;xima, acesso extremamente restrito. Exposi&#231;&#227;o causa dano grave. Ex: chaves criptogr&#225;ficas, planos estrat&#233;gicos, dados regulados</li>
+                    </ul>
+                </div>
+
+                <p>
+                    A classifica&#231;&#227;o &#233; a base de qualquer programa de <a href="../dlp-prevencao-perda-dados/">DLP (Preven&#231;&#227;o de Perda de Dados)</a> &mdash; sem saber o que &#233; cr&#237;tico, n&#227;o h&#225; como proteger adequadamente.
+                </p>
+
+                <h3>Por que classificar importa</h3>
+
+                <ul>
+                    <li>Direciona investimento para onde o risco &#233; maior</li>
+                    <li>Define requisitos de criptografia, acesso e monitoramento por n&#237;vel</li>
+                    <li>&#201; requisito em <a href="../iso-27001-guia-implementacao/">ISO 27001</a> (Annex A 5.12/5.13) e LGPD</li>
+                    <li>Facilita compliance e resposta a incidentes</li>
+                </ul>
+
+                <!-- ===== EM REPOUSO ===== -->
+                <h2 id="repouso"><i class="fas fa-database" style="color:#60A5FA;margin-right:10px"></i> Dados em repouso (Data at Rest)</h2>
+
+                <div class="concept-card">
+                    <p><strong>Dados armazenados em disco, banco de dados, backup ou storage</strong></p>
+                    <p>Dados em repouso est&#227;o <strong>parados</strong> &mdash; armazenados em algum meio f&#237;sico ou virtual. S&#227;o vulner&#225;veis a roubo f&#237;sico de dispositivos, acessos n&#227;o autorizados ao storage e vazamentos por configura&#231;&#227;o incorreta.</p>
+                </div>
+
+                <h3>Prote&#231;&#227;o de dados em repouso</h3>
+
+                <ul>
+                    <li><strong>AES-256:</strong> padr&#227;o de criptografia sim&#233;trica para dados armazenados. Usado em bancos de dados, volumes e arquivos</li>
+                    <li><strong>FDE (Full Disk Encryption):</strong> criptografia de disco completo &mdash; BitLocker (Windows), FileVault (macOS), LUKS (Linux)</li>
+                    <li><strong>TDE (Transparent Data Encryption):</strong> criptografia nativa em bancos de dados (SQL Server, Oracle, PostgreSQL)</li>
+                    <li><strong>Criptografia de backups:</strong> essencial para proteger c&#243;pias offline e em <a href="../seguranca-cloud-aws-azure-gcp/">ambientes cloud</a></li>
+                    <li><strong>Controle de acesso ao storage:</strong> IAM, permiss&#245;es granulares, princ&#237;pio do menor privil&#233;gio</li>
+                </ul>
+
+                <div class="stat-highlight">
+                    <div class="number">AES-256 + FDE</div>
+                    <div class="label">Combina&#231;&#227;o m&#237;nima recomendada para dados confidenciais em repouso</div>
+                </div>
+
+                <!-- ===== EM TRÂNSITO ===== -->
+                <h2 id="transito"><i class="fas fa-exchange-alt" style="color:#60A5FA;margin-right:10px"></i> Dados em tr&#226;nsito (Data in Transit)</h2>
+
+                <div class="concept-card">
+                    <p><strong>Dados sendo transmitidos por rede, API ou e-mail</strong></p>
+                    <p>Dados em tr&#226;nsito est&#227;o <strong>em movimento</strong> entre sistemas, usu&#225;rios ou servi&#231;os. S&#227;o vulner&#225;veis a intercepta&#231;&#227;o (man-in-the-middle), sniffing de rede e adultera&#231;&#227;o durante a transmiss&#227;o.</p>
+                </div>
+
+                <h3>Prote&#231;&#227;o de dados em tr&#226;nsito</h3>
+
+                <ul>
+                    <li><strong>TLS 1.2+ / TLS 1.3:</strong> protocolo padr&#227;o para comunica&#231;&#245;es seguras. TLS 1.0 e 1.1 est&#227;o obsoletos e devem ser desabilitados</li>
+                    <li><strong>HTTPS:</strong> HTTP sobre TLS &mdash; obrigat&#243;rio para qualquer aplica&#231;&#227;o web</li>
+                    <li><strong>S/MIME e PGP:</strong> criptografia ponta-a-ponta para e-mails. Complementado por <a href="../dmarc-dkim-spf-autenticacao-email/">DMARC, DKIM e SPF</a> para autentica&#231;&#227;o</li>
+                    <li><strong>VPN (IPSec / WireGuard):</strong> t&#250;nel criptografado para acesso remoto e comunica&#231;&#227;o entre sites</li>
+                    <li><strong>mTLS (Mutual TLS):</strong> autentica&#231;&#227;o m&#250;tua entre cliente e servidor, comum em <a href="../seguranca-apis-owasp-top-10/">APIs cr&#237;ticas</a></li>
+                </ul>
+
+                <div class="tip-box">
+                    <p><strong><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Aten&#231;&#227;o</strong></p>
+                    <p>Criptografia em tr&#226;nsito sem criptografia em repouso (e vice-versa) deixa lacunas. Um dado protegido por HTTPS durante a transmiss&#227;o, mas armazenado sem criptografia no banco, est&#225; vulner&#225;vel a acessos indevidos ao storage.</p>
+                </div>
+
+                <!-- ===== EM USO ===== -->
+                <h2 id="uso"><i class="fas fa-microchip" style="color:#60A5FA;margin-right:10px"></i> Dados em uso (Data in Use)</h2>
+
+                <div class="concept-card">
+                    <p><strong>Dados sendo processados em mem&#243;ria RAM</strong></p>
+                    <p>Dados em uso est&#227;o <strong>sendo processados ativamente</strong>. &#201; o estado mais dif&#237;cil de proteger porque o dado precisa estar decriptografado para ser utilizado. Ataques como memory scraping, cold boot e side-channel exploram essa vulnerabilidade.</p>
+                </div>
+
+                <h3>Prote&#231;&#227;o de dados em uso</h3>
+
+                <ul>
+                    <li><strong>Enclaves seguros (TEE):</strong> Intel SGX, ARM TrustZone &mdash; isolam processamento em &#225;rea protegida do hardware</li>
+                    <li><strong>Confidential Computing:</strong> servi&#231;os cloud (Azure Confidential Computing, AWS Nitro Enclaves) que processam dados em enclaves</li>
+                    <li><strong>Criptografia homom&#243;rfica:</strong> permite opera&#231;&#245;es matem&#225;ticas sobre dados criptografados sem decriptar &mdash; tecnologia emergente com avan&#231;os significativos em 2026</li>
+                    <li><strong>Memory encryption:</strong> AMD SME/SEV criptografa a mem&#243;ria RAM no n&#237;vel do processador</li>
+                    <li><strong>Tokeniza&#231;&#227;o:</strong> substitui dados sens&#237;veis por tokens durante o processamento</li>
+                </ul>
+
+                <p>A <a href="../criptografia-pos-quantica-pqc/">criptografia p&#243;s-qu&#226;ntica</a> ter&#225; impacto direto na prote&#231;&#227;o de dados em todos os estados, especialmente com a evolu&#231;&#227;o de amea&#231;as qu&#226;nticas.</p>
+
+                <div class="stat-highlight">
+                    <div class="number">3 estados = 3 estrat&#233;gias</div>
+                    <div class="label">Repouso (AES/FDE) + Tr&#226;nsito (TLS/VPN) + Uso (Enclaves/Tokeniza&#231;&#227;o) &mdash; prote&#231;&#227;o completa exige cobertura nos tr&#234;s</div>
+                </div>
+
+                <!-- ===== SOBERANIA ===== -->
+                <h2 id="soberania"><i class="fas fa-globe-americas" style="color:#60A5FA;margin-right:10px"></i> Soberania de dados (Data Sovereignty)</h2>
+
+                <p>
+                    Soberania de dados &#233; o princ&#237;pio de que <strong>dados est&#227;o sujeitos &#224;s leis do pa&#237;s onde est&#227;o armazenados ou processados</strong>. A localiza&#231;&#227;o geogr&#225;fica dos servidores determina qual legisla&#231;&#227;o se aplica.
+                </p>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-map-marked-alt" style="color:#60A5FA;margin-right:10px"></i> Implica&#231;&#245;es pr&#225;ticas</strong></p>
+                    <ul>
+                        <li>Dados de brasileiros armazenados nos EUA est&#227;o sujeitos &#224; <strong>LGPD</strong> e &#224;s leis americanas (CLOUD Act)</li>
+                        <li>Dados de europeus processados no Brasil exigem conformidade com <strong>GDPR</strong> e mecanismos de transfer&#234;ncia como SCCs</li>
+                        <li>Escolhas de <a href="../seguranca-cloud-aws-azure-gcp/">provedores cloud</a> (regi&#227;o do datacenter) afetam diretamente o regime regulat&#243;rio</li>
+                        <li>Contratos com fornecedores devem especificar onde dados s&#227;o armazenados e processados</li>
+                    </ul>
+                </div>
+
+                <p>Para um comparativo detalhado entre as legisla&#231;&#245;es, consulte nosso artigo sobre <a href="../lgpd-vs-gdpr-comparativo-2026/">LGPD vs GDPR</a>.</p>
+
+                <!-- ===== PII ===== -->
+                <h2 id="pii"><i class="fas fa-id-card" style="color:#60A5FA;margin-right:10px"></i> PII &mdash; Dados Pessoais Identific&#225;veis</h2>
+
+                <p>
+                    PII (Personally Identifiable Information) s&#227;o quaisquer dados que, isoladamente ou combinados, possam <strong>identificar uma pessoa</strong>. S&#227;o o foco central da <a href="../lgpd-implementacao-tecnica/">LGPD</a> e do GDPR.
+                </p>
+
+                <h3>Exemplos de PII</h3>
+
+                <ul>
+                    <li><strong>Identificadores diretos:</strong> nome completo, CPF, RG, n&#250;mero de passaporte</li>
+                    <li><strong>Contato:</strong> e-mail pessoal, n&#250;mero de telefone, endere&#231;o</li>
+                    <li><strong>Identificadores digitais:</strong> endere&#231;o IP, cookies, device ID, geolocaliza&#231;&#227;o</li>
+                    <li><strong>Biometria:</strong> impress&#227;o digital, reconhecimento facial, &#237;ris &mdash; classificados como <strong>dados sens&#237;veis</strong> pela LGPD</li>
+                </ul>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-gavel" style="color:#60A5FA;margin-right:10px"></i> Obriga&#231;&#245;es regulat&#243;rias para PII</strong></p>
+                    <ul>
+                        <li><strong>LGPD (Brasil):</strong> base legal obrigat&#243;ria, direito de acesso/corre&#231;&#227;o/exclus&#227;o, notifica&#231;&#227;o de incidentes</li>
+                        <li><strong>GDPR (UE):</strong> consentimento granular, DPIA obrigat&#243;rio para alto risco, DPO obrigat&#243;rio em certos cen&#225;rios</li>
+                        <li>Ambas exigem <strong>minimiza&#231;&#227;o de dados</strong>: coletar apenas o necess&#225;rio para a finalidade espec&#237;fica</li>
+                    </ul>
+                </div>
+
+                <!-- ===== PHI ===== -->
+                <h2 id="phi"><i class="fas fa-heartbeat" style="color:#60A5FA;margin-right:10px"></i> PHI &mdash; Dados de Sa&#250;de Protegidos</h2>
+
+                <p>
+                    PHI (Protected Health Information) s&#227;o dados de sa&#250;de vinculados a um indiv&#237;duo identific&#225;vel. Representam uma <strong>subcategoria cr&#237;tica de PII</strong> com prote&#231;&#245;es adicionais espec&#237;ficas.
+                </p>
+
+                <h3>O que constitui PHI</h3>
+
+                <ul>
+                    <li>Diagn&#243;sticos e hist&#243;rico m&#233;dico</li>
+                    <li>Resultados de exames e tratamentos</li>
+                    <li>Prescri&#231;&#245;es m&#233;dicas</li>
+                    <li>N&#250;meros de planos de sa&#250;de e registros hospitalares</li>
+                    <li>Dados gen&#233;ticos e gen&#244;micos</li>
+                </ul>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-hospital" style="color:#60A5FA;margin-right:10px"></i> HIPAA &mdash; Prote&#231;&#227;o de dados de sa&#250;de (EUA)</strong></p>
+                    <p>A HIPAA (Health Insurance Portability and Accountability Act) &#233; a principal regulamenta&#231;&#227;o americana para PHI. Exige:</p>
+                    <ul>
+                        <li><strong>Administrative safeguards:</strong> pol&#237;ticas, treinamento, gest&#227;o de acessos</li>
+                        <li><strong>Physical safeguards:</strong> controle f&#237;sico de instala&#231;&#245;es e equipamentos</li>
+                        <li><strong>Technical safeguards:</strong> criptografia, controle de acesso, auditoria, integridade</li>
+                        <li><strong>Breach notification:</strong> notifica&#231;&#227;o obrigat&#243;ria em at&#233; 60 dias para incidentes afetando 500+ indiv&#237;duos</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <p><strong><i class="fas fa-lightbulb" style="margin-right:10px"></i> PHI no Brasil</strong></p>
+                    <p>Embora o Brasil n&#227;o tenha equivalente direto &#224; HIPAA, a LGPD classifica dados de sa&#250;de como <strong>dados sens&#237;veis</strong> (Art. 11), exigindo base legal espec&#237;fica e medidas t&#233;cnicas refor&#231;adas. Empresas do setor de sa&#250;de que operam internacionalmente devem estar em conformidade com ambas.</p>
+                </div>
+
+                <!-- ===== COMO APLICAR ===== -->
+                <h2 id="como-aplicar">Como aplicar na pr&#225;tica</h2>
+
+                <h3>Mapeamento de dados</h3>
+
+                <p>O primeiro passo &#233; <strong>saber o que voc&#234; tem</strong>: quais dados s&#227;o coletados, onde est&#227;o armazenados, como s&#227;o transmitidos e quem tem acesso. Sem mapeamento, a classifica&#231;&#227;o &#233; apenas te&#243;rica.</p>
+
+                <h3>Defini&#231;&#227;o de pol&#237;ticas por n&#237;vel</h3>
+
+                <p>Cada n&#237;vel de classifica&#231;&#227;o deve ter regras claras:</p>
+
+                <ul>
+                    <li><strong>P&#250;blico:</strong> sem restri&#231;&#245;es espec&#237;ficas</li>
+                    <li><strong>Interno:</strong> acesso autenticado, transmiss&#227;o por canais corporativos</li>
+                    <li><strong>Confidencial:</strong> criptografia obrigat&#243;ria (repouso + tr&#226;nsito), DLP ativo, acesso por aprova&#231;&#227;o</li>
+                    <li><strong>Secreto:</strong> todos os controles acima + monitoramento intensificado, enclaves para processamento, auditoria cont&#237;nua</li>
+                </ul>
+
+                <h3>Integra&#231;&#227;o com DLP e monitoramento</h3>
+
+                <p>A classifica&#231;&#227;o alimenta diretamente as pol&#237;ticas de <a href="../dlp-prevencao-perda-dados/">DLP</a>: o sistema sabe o que bloquear porque sabe o que &#233; cr&#237;tico. Sem classifica&#231;&#227;o, DLP gera excesso de falsos positivos ou n&#227;o detecta o que importa.</p>
+
+                <div class="tip-box">
+                    <p><strong><i class="fas fa-lightbulb" style="margin-right:10px"></i> Considera&#231;&#245;es finais</strong></p>
+                    <p>Proteger dados come&#231;a por entend&#234;-los. Classifica&#231;&#227;o, estados e contexto regulat&#243;rio s&#227;o os tr&#234;s pilares que determinam <strong>o que proteger, como proteger e por que proteger</strong>.</p>
+                    <p>Organiza&#231;&#245;es que tratam todos os dados da mesma forma desperdi&#231;am recursos em dados p&#250;blicos e subprotegem dados cr&#237;ticos. A diferen&#231;a est&#225; na maturidade para aplicar o controle certo, no lugar certo, para o dado certo.</p>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quais s&#227;o os n&#237;veis de classifica&#231;&#227;o de dados?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Os n&#237;veis mais comuns s&#227;o: P&#250;blico, Uso Interno, Confidencial/Restrito e Secreto/Cr&#237;tico. A classifica&#231;&#227;o define quais controles de prote&#231;&#227;o devem ser aplicados a cada tipo de dado.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Qual a diferen&#231;a entre dados em repouso, em tr&#226;nsito e em uso?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Dados em repouso est&#227;o armazenados (disco, banco, backup) e s&#227;o protegidos com AES-256 ou FDE. Dados em tr&#226;nsito est&#227;o sendo transmitidos e exigem TLS, HTTPS ou VPN. Dados em uso est&#227;o em processamento na mem&#243;ria e exigem enclaves seguros ou tokeniza&#231;&#227;o.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que &#233; PII e por que precisa de prote&#231;&#227;o especial?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>PII (Personally Identifiable Information) s&#227;o dados que identificam uma pessoa: nome, CPF, e-mail, IP, biometria. LGPD e GDPR exigem prote&#231;&#227;o espec&#237;fica incluindo base legal, consentimento e medidas t&#233;cnicas adequadas.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que &#233; soberania de dados e como afeta minha empresa?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Soberania de dados significa que dados est&#227;o sujeitos &#224;s leis do pa&#237;s onde est&#227;o armazenados. Isso impacta escolhas de cloud, transfer&#234;ncias internacionais e contratos com fornecedores. Dados de brasileiros nos EUA ficam sujeitos &#224; LGPD e &#224;s leis americanas.</p></div>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-book" style="color:#60A5FA;margin-right:10px"></i> Fontes e refer&#234;ncias t&#233;cnicas</h3>
+                    <ul>
+                        <li>NIST SP 800-88 &mdash; Guidelines for Media Sanitization</li>
+                        <li>NIST SP 800-175B &mdash; Guideline for Using Cryptographic Standards</li>
+                        <li>ISO/IEC 27001:2022 &mdash; Annex A 5.12/5.13 (Classification of Information)</li>
+                        <li>LGPD &mdash; Lei n&#186; 13.709/2018 (Art. 5, 11, 33)</li>
+                        <li>GDPR &mdash; General Data Protection Regulation (Art. 4, 9, 44-49)</li>
+                        <li>HIPAA &mdash; Health Insurance Portability and Accountability Act</li>
+                        <li>Confidential Computing Consortium</li>
+                    </ul>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Precisa estruturar a classifica&#231;&#227;o de dados da sua empresa?</h3>
+                    <p>Realizamos mapeamento de dados, defini&#231;&#227;o de pol&#237;ticas de classifica&#231;&#227;o, implementa&#231;&#227;o de controles por n&#237;vel e adequa&#231;&#227;o regulat&#243;ria (LGPD, GDPR, HIPAA).</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/classificacao-estados-dados-protecao/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/classificacao-estados-dados-protecao/&text=Classificacao e Estados dos Dados" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Classificacao e Estados dos Dados https://inteligenciabrasil.seg.br/blog/classificacao-estados-dados-protecao/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em Seguran&#231;a da Informa&#231;&#227;o, Prote&#231;&#227;o de Dados e Compliance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
+                        <p>Consultoria especializada em Seguran&#231;a, Estrat&#233;gia e Tecnologia da Informa&#231;&#227;o.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../dlp-prevencao-perda-dados/">DLP</a></li>
+                            <li><a href="../lgpd-implementacao-tecnica/">LGPD</a></li>
+                            <li><a href="../criptografia-pos-quantica-pqc/">Criptografia PQC</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navega&#231;&#227;o</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servi&#231;os</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, S&#227;o Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Pol&#237;tica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

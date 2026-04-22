@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Security Chaos Engineering: como testar resiliência de segurança injetando falhas controladas, validar controles em produção e preparar equipes para incidentes reais.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="security chaos engineering, chaos engineering, resiliência segurança, gamedays, fault injection, teste produção, incident response, red team">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/security-chaos-engineering/">
+
+    <meta property="og:title" content="Security Chaos Engineering: Testando Resiliência de Segurança">
+    <meta property="og:description" content="Como injetar falhas controladas para validar controles de segurança.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/security-chaos-engineering/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2026-01-31T20:00:00-03:00">
+    <meta property="article:section" content="DevSecOps">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Security Chaos Engineering: Testando Resiliência de Segurança | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Security Chaos Engineering: Testando Resiliência de Segurança",
+        "description": "Como injetar falhas controladas para validar controles de segurança.",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "datePublished": "2026-01-31","dateModified":"2026-01-31","copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que e Security Chaos Engineering?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Security Chaos Engineering aplica os principios de Chaos Engineering ao dominio de seguranca, injetando falhas controladas para testar se controles de seguranca, deteccoes e processos de resposta funcionam quando realmente necessario. A ideia e provar que seus controles funcionam, nao apenas assumir."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que sao Security GameDays?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "GameDays sao exercicios estruturados onde equipes se reunem para executar cenarios de seguranca e observar resultados em tempo real. Incluem planejamento previo, execucao de cenarios como simulacao de ransomware ou lateral movement, e retrospectiva para identificar melhorias nos controles."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais ferramentas sao usadas em Security Chaos Engineering?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "As principais ferramentas incluem Atomic Red Team e MITRE Caldera para simulacao de ataques baseados no ATT&CK, Infection Monkey para simulacao de propagacao, Gremlin e LitmusChaos para chaos engineering geral, e plataformas BAS como AttackIQ e SafeBreach para validacao continua."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como comecar com Security Chaos Engineering?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Comece simples: gere um alerta falso no SIEM e meça quanto tempo o SOC leva para investigar. Obtenha aprovacao da lideranca, defina escopo inicial em ambiente de teste, estabeleca metricas de baseline e crie processo de aprovacao. Gradualmente expanda para GameDays regulares e automacao."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">DevSecOps</span>
+            <h1>Security Chaos Engineering: Testando Resiliência de Segurança</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 16 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligência Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Security Chaos Engineering</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#EF4444"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#oque">O que é Security Chaos Engineering</a></li>
+                        <li><a href="#princípios">Princípios fundamentais</a></li>
+                        <li><a href="#experimentos">Tipos de experimentos</a></li>
+                        <li><a href="#gamedays">Security GameDays</a></li>
+                        <li><a href="#ferramentas">Ferramentas</a></li>
+                        <li><a href="#implementacao">Implementação</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="oque">O que é Security Chaos Engineering</h2>
+
+                <p>
+                    <strong>Security Chaos Engineering</strong> aplica os princípios de Chaos Engineering - injetar falhas controladas para testar resiliência - ao domínio de segurança. A ideia é proativamente testar se controles de segurança, detecções e processos de resposta funcionam quando realmente necessário.
+                </p>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-bomb" style="color:#EF4444;margin-right:10px"></i> A filosofia</h3>
+                    <p>Em vez de assumir que seus controles funcionam, <strong>prove</strong> que funcionam injetando eventos de segurança controlados. Se seu SIEM diz que detecta lateral movement, injete lateral movement e veja se detecta. Se seu runbook de ransomware diz que recupera em 4 horas, simule ransomware e cronometre.</p>
+                </div>
+
+                <p>
+                    Assim como Netflix usa Chaos Monkey para matar instâncias aleatoriamente e garantir que o sistema sobrevive, organizações podem usar Security Chaos Engineering para "matar" controles de segurança e garantir que a defesa sobrevive.
+                </p>
+
+                <h2 id="princípios">Princípios Fundamentais</h2>
+
+                <h3>1. Hipótese primeiro</h3>
+                <p>
+                    Antes de executar, defina a hipótese: "Acreditamos que se X acontecer, Y detectará e Z responderá em menos de N minutos."
+                </p>
+
+                <h3>2. Blast radius controlado</h3>
+                <p>
+                    Comece pequeno. Teste em ambiente controlado antes de produção. Tenha mecanismo de abort. Documente rollback plan.
+                </p>
+
+                <h3>3. Minimize impacto real</h3>
+                <p>
+                    O objetivo é aprender, não causar incidente real. Use simulações que parecem reais mas têm impacto controlado.
+                </p>
+
+                <h3>4. Automate e repita</h3>
+                <p>
+                    Experimentos devem ser repetíveis e automatizados para rodar contínuamente, não apenas uma vez.
+                </p>
+
+                <h3>5. Aprenda com resultados</h3>
+                <p>
+                    Experimento que "falha" (controle não funcionou) é um sucesso - encontrou gap antes do atacante.
+                </p>
+
+                <h2 id="experimentos">Tipos de Experimentos</h2>
+
+                <div class="chaos-scenario">
+                    <h3><i class="fas fa-search"></i> Detecção</h3>
+                    <p><strong>Hipótese:</strong> "SIEM detecta brute force em menos de 5 minutos"</p>
+                    <p><strong>Experimento:</strong> Simular 100 tentativas de login falho em 1 minuto</p>
+                    <p><strong>Validação:</strong> Alerta foi gerado? Em quanto tempo? Para o usuário certo?</p>
+                </div>
+
+                <div class="chaos-scenario">
+                    <h4><i class="fas fa-reply"></i> Resposta</h4>
+                    <p><strong>Hipótese:</strong> "Time de IR inicia investigação em menos de 15 minutos"</p>
+                    <p><strong>Experimento:</strong> Gerar alerta de severidade crítica em horário de trabalho</p>
+                    <p><strong>Validação:</strong> Quanto tempo até primeiro contato? Runbook foi seguido?</p>
+                </div>
+
+                <div class="chaos-scenario">
+                    <h4><i class="fas fa-ban"></i> Prevenção</h4>
+                    <p><strong>Hipótese:</strong> "WAF bloqueia SQL injection"</p>
+                    <p><strong>Experimento:</strong> Enviar payloads de SQLi conhecidos para aplicação</p>
+                    <p><strong>Validação:</strong> Requests foram bloqueados? Alerta foi gerado?</p>
+                </div>
+
+                <div class="chaos-scenario">
+                    <h4><i class="fas fa-undo"></i> Recuperação</h4>
+                    <p><strong>Hipótese:</strong> "Backup restaura ambiente em menos de 4 horas"</p>
+                    <p><strong>Experimento:</strong> Simular perda de sistema e iniciar restauração</p>
+                    <p><strong>Validação:</strong> RTO foi cumprido? Dados estavam íntegros?</p>
+                </div>
+
+                <h2 id="gamedays">Security GameDays</h2>
+
+                <p>
+                    GameDays são exercícios estruturados de Security Chaos Engineering onde equipes se reúnem para executar cenários e observar resultados em tempo real.
+                </p>
+
+                <h3>Estrutura de um GameDay</h3>
+                <ol>
+                    <li><strong>Planejamento (1-2 semanas antes):</strong>
+                        <ul>
+                            <li>Definir cenários e hipóteses</li>
+                            <li>Identificar participantes e papéis</li>
+                            <li>Preparar ambiente e ferramentas</li>
+                            <li>Comunicar stakeholders</li>
+                        </ul>
+                    </li>
+                    <li><strong>Execução (2-4 horas):</strong>
+                        <ul>
+                            <li>Kickoff com contexto e regras</li>
+                            <li>Executar cenários sequencialmente</li>
+                            <li>Observar e documentar em tempo real</li>
+                            <li>Pausar para discussão após cada cenário</li>
+                        </ul>
+                    </li>
+                    <li><strong>Retrospectiva (1 hora):</strong>
+                        <ul>
+                            <li>O que funcionou? O que falhou?</li>
+                            <li>Surpresas e aprendizados</li>
+                            <li>Ações de melhoria</li>
+                        </ul>
+                    </li>
+                    <li><strong>Follow-up (1-2 semanas depois):</strong>
+                        <ul>
+                            <li>Documentar findings formalmente</li>
+                            <li>Criar tickets para ações</li>
+                            <li>Agendar próximo GameDay</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>Cenários de exemplo para GameDays</h3>
+                <ul>
+                    <li><strong>Ransomware simulation:</strong> Criptografar arquivos de teste, validar detecção e resposta</li>
+                    <li><strong>Credential theft:</strong> Simular exfiltração de credenciais, validar detecção</li>
+                    <li><strong>Data exfiltration:</strong> Tentar enviar dados para destino externo, validar DLP</li>
+                    <li><strong>Lateral movement:</strong> Mover entre sistemas, validar detecção NDR/EDR</li>
+                    <li><strong>Privilege escalation:</strong> Tentar escalar privilégios, validar controles PAM</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Precauções importantes</h4>
+                    <ul>
+                        <li>Sempre tenha aprovação formal antes de executar</li>
+                        <li>Documente claramente o escopo e limites</li>
+                        <li>Tenha mecanismo de abort/rollback</li>
+                        <li>Não execute em sistemas críticos de produção sem preparação adequada</li>
+                        <li>Comunique NOC/SOC que exercício está em andamento (ou não, se for teste de resposta)</li>
+                    </ul>
+                </div>
+
+                <h2 id="ferramentas">Ferramentas</h2>
+
+                <h3>Chaos Engineering geral (com aplicações de segurança)</h3>
+                <ul>
+                    <li><strong>Chaos Monkey (Netflix):</strong> Matar instâncias - testar resiliência de serviços de segurança</li>
+                    <li><strong>Gremlin:</strong> Plataforma de chaos engineering com cenários pré-definidos</li>
+                    <li><strong>LitmusChaos:</strong> Chaos engineering para Kubernetes</li>
+                </ul>
+
+                <h3>Simulação de ataques</h3>
+                <ul>
+                    <li><strong>Atomic Red Team:</strong> Biblioteca de técnicas ATT&CK para testar detecção</li>
+                    <li><strong>MITRE Caldera:</strong> Adversary emulation automatizada</li>
+                    <li><strong>Infection Monkey:</strong> Simulação de propagação e breach</li>
+                    <li><strong>AttackIQ/SafeBreach:</strong> BAS comercial para validação contínua</li>
+                </ul>
+
+                <h3>Teste de resposta</h3>
+                <ul>
+                    <li><strong>PagerDuty/Opsgenie:</strong> Simular alertas e medir resposta</li>
+                    <li><strong>Runbook automation:</strong> Testar playbooks automaticamente</li>
+                </ul>
+
+                <h2 id="implementacao">Implementação</h2>
+
+                <h3>Fase 1: Fundação</h3>
+                <ul>
+                    <li>Obter buy-in da liderança</li>
+                    <li>Definir escopo inicial (comece com ambiente de teste)</li>
+                    <li>Estabelecer métricas de baseline</li>
+                    <li>Criar processo de aprovação e comunicação</li>
+                </ul>
+
+                <h3>Fase 2: Primeiros experimentos</h3>
+                <ul>
+                    <li>Selecionar 3-5 hipóteses críticas para testar</li>
+                    <li>Executar em ambiente controlado</li>
+                    <li>Documentar resultados detalhadamente</li>
+                    <li>Implementar melhorias identificadas</li>
+                </ul>
+
+                <h3>Fase 3: GameDays regulares</h3>
+                <ul>
+                    <li>Agendar GameDays mensais ou trimestrais</li>
+                    <li>Expandir escopo gradualmente</li>
+                    <li>Incluir mais equipes (dev, ops, negócio)</li>
+                    <li>Começar a testar em produção com cuidado</li>
+                </ul>
+
+                <h3>Fase 4: Automação</h3>
+                <ul>
+                    <li>Automatizar experimentos repetíveis</li>
+                    <li>Integrar com CI/CD para validação contínua</li>
+                    <li>Dashboard de cobertura e resultados</li>
+                    <li>Alertas quando experimentos automatizados falham</li>
+                </ul>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-lightbulb"></i> Comece pequeno</h4>
+                    <p>O primeiro experimento pode ser tão simples quanto: "Vou gerar um alerta falso no SIEM e ver quanto tempo o SOC leva para investigar." Não precisa de ferramentas sofisticadas para começar a praticar Security Chaos Engineering.</p>
+                </div>
+
+                <h2>Conclusão</h2>
+
+                <p>
+                    Security Chaos Engineering traz a mentalidade de "assumir falhas" para segurança. Em vez de confiar que controles funcionam, prove que funcionam através de testes proativos e controlados.
+                </p>
+
+                <p>
+                    A prática expõe gaps que você não sabia que tinha - aquela regra de SIEM que nunca foi testada, aquele runbook que ninguém leu, aquele backup que nunca foi restaurado. Melhor descobrir isso em um GameDay do que durante um incidente real.
+                </p>
+
+                <p>
+                    Comece simples, aprenda com cada experimento, e gradualmente construa uma cultura onde testar e validar segurança é tão normal quanto testar código antes de deploy.
+                </p>
+
+                <div class="cta-box">
+                    <h3>Implemente Security Chaos Engineering</h3>
+                    <p>Precisa de ajuda para conduzir GameDays ou implementar validação contínua de controles de segurança? Entre em contato.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                                        <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul style="list-style:none;padding:0">
+                            <li><a href="../purple-teaming-pratica/">Purple Teaming</a></li>
+                            <li><a href="../detection-engineering-regras-deteccao/">Detection Engineering</a></li>
+                            <li><a href="../resposta-incidentes-guia-pratico/">Resposta a Incidentes</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul style="list-style:none;padding:0">
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Serviços</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Política de Privacidade</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>
