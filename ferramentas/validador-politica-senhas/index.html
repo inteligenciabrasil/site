@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Validador de politica de senhas online. Teste senhas contra NIST 800-63B, ISO 27001, PCI-DSS. Avalia forca, entropia e tempo estimado de quebra. 100% local.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="validador senha, politica senhas, forca da senha, teste senha, nist 800-63b, iso 27001, pci dss senhas, entropia senha">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/validador-politica-senhas/">
+
+    <meta property="og:title" content="Validador de Politica de Senhas (NIST, ISO, PCI) | Inteligencia Brasil">
+    <meta property="og:description" content="Teste senhas contra NIST 800-63B, ISO 27001 e PCI-DSS. Veja entropia, tempo de quebra e recomendacoes. 100% local.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/validador-politica-senhas/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Validador de Politica de Senhas">
+    <meta name="twitter:description" content="Teste contra NIST/ISO/PCI. Entropia e tempo de quebra. 100% local.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Validador de Politica de Senhas (NIST, ISO, PCI) | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Validador de Politica de Senhas","description":"Ferramenta online gratuita para validar senhas contra politicas NIST 800-63B, ISO 27001 e PCI-DSS. Calcula entropia, forca e tempo estimado de quebra. Roda 100% no navegador.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligencia Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e uma boa politica de senhas?","acceptedAnswer":{"@type":"Answer","text":"Uma boa politica de senhas foca em tamanho (12-16+ caracteres), diversidade de caracteres, bloqueio de senhas comuns/vazadas, permite TODOS os caracteres (incluindo espacos e Unicode) e NAO forca trocas periodicas sem motivo. Essa e a diretriz moderna do NIST SP 800-63B, que abandonou regras de complexidade rigida e expiracao arbitraria."}},{"@type":"Question","name":"O que mudou no NIST SP 800-63B?","acceptedAnswer":{"@type":"Answer","text":"A nova diretriz (revisao 3 em 2017, atualizada em 2024) abandonou varias praticas tradicionais: nao exige complexidade obrigatoria (maiusculas+numeros+simbolos), nao exige expiracao periodica, mas exige minimo 8 caracteres (recomendado 16+), bloqueio de senhas em listas de vazamentos, e permite todos os caracteres Unicode imprimiveis. O foco mudou de complexidade imposta para tamanho e aleatoriedade."}},{"@type":"Question","name":"Devo exigir troca de senha a cada 90 dias?","acceptedAnswer":{"@type":"Answer","text":"Nao. Trocas periodicas arbitrarias diminuem a qualidade da senha (usuarios incrementam numero no final) sem aumentar seguranca. Troque senha apenas se houver suspeita de comprometimento. Para mitigar risco, use MFA, detecte vazamentos, monitore logins suspeitos e bloqueie senhas comuns/reutilizadas."}},{"@type":"Question","name":"Quanto vale a entropia de uma senha?","acceptedAnswer":{"@type":"Answer","text":"Entropia (em bits) mede a imprevisibilidade. Calcula-se como comprimento * log2(tamanho do alfabeto). Uma senha de 8 caracteres minusculos tem ~38 bits (fraca); 12 caracteres mistos tem ~72 bits (boa); 16 caracteres mistos tem ~95 bits (forte). Abaixo de 60 bits, um atacante com GPU moderna quebra em menos de um ano. Mire em 80+ bits para contas comuns e 100+ para criticas."}},{"@type":"Question","name":"Esta ferramenta envia minha senha a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Nao. Toda a validacao acontece no seu navegador em JavaScript puro. Nenhuma senha e transmitida, salva ou registrada. A lista de senhas comuns esta embutida no codigo. Voce pode desconectar da internet apos carregar a pagina e continuar usando. Abra o DevTools (F12) para auditar o codigo fonte."}}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Ferramentas","item":"https://inteligenciabrasil.seg.br/ferramentas/"},{"@type":"ListItem","position":3,"name":"Validador de Politica de Senhas"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <link href="validador.min.css?v=1" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../">FERRAMENTAS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ferramenta</span>
+            <h1>Validador de Politica de Senhas</h1>
+            <p style="color:#94A3B8;font-size:1.1rem;max-width:720px;margin:1rem auto 0">Teste senhas contra politicas NIST 800-63B, ISO 27001 e PCI-DSS. Analisa forca, entropia e tempo estimado de quebra. <strong>100% local.</strong></p>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Ferramentas</a></li><li class="breadcrumb-item active">Validador de Politica de Senhas</li></ol></div></nav>
+
+    <main id="main-content">
+    <section class="pol-tool">
+        <div class="container">
+
+            <div class="pol-layout">
+                <!-- Input + Policy -->
+                <div class="pol-box" id="pol-policy">
+                    <h2 class="pol-box-title"><i class="fas fa-sliders-h"></i> Senha e Politica</h2>
+
+                    <div class="pol-input-wrap">
+                        <input type="password" class="pol-input" id="pol-input" placeholder="Digite uma senha para testar..." autocomplete="new-password" spellcheck="false">
+                        <button class="pol-input-toggle" id="pol-toggle" type="button" title="Mostrar/ocultar"><i class="fas fa-eye"></i></button>
+                    </div>
+
+                    <div class="pol-presets">
+                        <button class="pol-preset" data-preset="nist" type="button">NIST 800-63B</button>
+                        <button class="pol-preset" data-preset="iso" type="button">ISO 27001</button>
+                        <button class="pol-preset" data-preset="pci" type="button">PCI-DSS</button>
+                        <button class="pol-preset active" data-preset="strong" type="button">Forte</button>
+                    </div>
+
+                    <h3 style="color:#F1F5F9;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px;margin:1rem 0 .75rem">Requisitos</h3>
+
+                    <div class="pol-policy-row">
+                        <label for="pol-min-length">Tamanho minimo</label>
+                        <input type="number" id="pol-min-length" min="1" max="128" value="16">
+                    </div>
+                    <div class="pol-policy-row">
+                        <label for="pol-min-unique">Caracteres unicos minimo</label>
+                        <input type="number" id="pol-min-unique" min="0" max="50" value="8">
+                    </div>
+                    <div class="pol-policy-row">
+                        <label for="pol-req-upper">Exigir letras maiusculas</label>
+                        <input type="checkbox" id="pol-req-upper" checked>
+                    </div>
+                    <div class="pol-policy-row">
+                        <label for="pol-req-lower">Exigir letras minusculas</label>
+                        <input type="checkbox" id="pol-req-lower" checked>
+                    </div>
+                    <div class="pol-policy-row">
+                        <label for="pol-req-number">Exigir numeros</label>
+                        <input type="checkbox" id="pol-req-number" checked>
+                    </div>
+                    <div class="pol-policy-row">
+                        <label for="pol-req-symbol">Exigir simbolos</label>
+                        <input type="checkbox" id="pol-req-symbol" checked>
+                    </div>
+                    <div class="pol-policy-row">
+                        <label for="pol-block-common">Bloquear senhas comuns</label>
+                        <input type="checkbox" id="pol-block-common" checked>
+                    </div>
+                    <div class="pol-policy-row">
+                        <label for="pol-block-sequential">Bloquear sequencias (abc, 123, qwerty)</label>
+                        <input type="checkbox" id="pol-block-sequential" checked>
+                    </div>
+                    <div class="pol-policy-row">
+                        <label for="pol-block-repeating">Bloquear repeticoes (aaa, 111)</label>
+                        <input type="checkbox" id="pol-block-repeating" checked>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="pol-box">
+                    <h2 class="pol-box-title"><i class="fas fa-chart-bar"></i> Analise</h2>
+
+                    <div class="pol-empty" id="pol-empty">
+                        <i class="fas fa-shield-alt"></i>
+                        <p>Digite uma senha para comecar a analise.</p>
+                    </div>
+
+                    <div id="pol-output" style="display:none">
+                        <div class="pol-score">
+                            <div class="pol-score-label" id="pol-score-label">-</div>
+                            <div class="pol-score-value" id="pol-score-val">0</div>
+                            <div class="pol-score-bar"><div class="pol-score-fill" id="pol-score-fill"></div></div>
+                        </div>
+
+                        <div class="pol-metrics">
+                            <div class="pol-metric">
+                                <div class="pol-metric-label">Entropia</div>
+                                <div class="pol-metric-value" id="pol-entropy">-</div>
+                            </div>
+                            <div class="pol-metric">
+                                <div class="pol-metric-label">Chars unicos</div>
+                                <div class="pol-metric-value" id="pol-uniq">-</div>
+                            </div>
+                            <div class="pol-metric" style="grid-column:1/-1">
+                                <div class="pol-metric-label">Alfabeto</div>
+                                <div class="pol-metric-value" id="pol-pool">-</div>
+                            </div>
+                        </div>
+
+                        <div class="pol-time" id="pol-crack">Tempo estimado para quebra: <strong>-</strong></div>
+
+                        <h3 style="color:#F1F5F9;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px;margin:1rem 0 .75rem">Checks</h3>
+                        <ul class="pol-check-list" id="pol-checks"></ul>
+
+                        <div class="pol-recs" id="pol-recs" style="display:none">
+                            <h3 class="pol-recs-title"><i class="fas fa-lightbulb"></i> Recomendacoes</h3>
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box info" style="margin:0 0 2rem">
+                <div class="highlight-box-title"><i class="fas fa-shield-alt"></i> Sua privacidade</div>
+                <p>Esta ferramenta roda <strong>100% no seu navegador</strong>. Nenhuma senha e enviada, salva ou registrada. A lista de senhas comuns esta embutida no codigo (sem chamada ao HIBP ou qualquer API externa). Voce pode desconectar da internet apos carregar a pagina e continuar usando.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="article-content">
+        <div class="container">
+            <div class="article-body">
+
+                <h2 id="boa-politica">O Que e uma Boa Politica de Senhas?</h2>
+                <p>Uma politica de senhas define as regras minimas que uma senha deve atender para ser aceita em um sistema. A ciencia moderna mudou bastante nos ultimos anos - o que antes era boa pratica (expiracao a cada 90 dias, complexidade obrigatoria) hoje e considerado <strong>contraproducente</strong>.</p>
+
+                <h3>Principios modernos (2026)</h3>
+                <ul>
+                    <li><strong>Tamanho &gt; complexidade</strong> - 16 caracteres minusculos e mais seguro que 8 com tudo</li>
+                    <li><strong>Permita tudo</strong> - aceite todos os caracteres Unicode imprimiveis (emojis, espacos, acentos)</li>
+                    <li><strong>Bloqueie senhas conhecidas</strong> - listas de vazamentos, dicionarios e variacoes comuns</li>
+                    <li><strong>Nao force expiracao</strong> - so exija troca se houver suspeita de comprometimento</li>
+                    <li><strong>MFA como padrao</strong> - senha sozinha nunca e suficiente</li>
+                    <li><strong>Monitore autenticacoes anomalas</strong> - login de local novo, dispositivo novo</li>
+                </ul>
+
+                <h2 id="padroes">Padroes de Referencia</h2>
+
+                <h3>NIST SP 800-63B (EUA)</h3>
+                <p>A diretriz de autenticacao digital do NIST (<em>National Institute of Standards and Technology</em>), revisao 3 de 2017 e atualizacoes de 2024. E considerada o padrao-ouro para politicas modernas.</p>
+                <ul>
+                    <li>Minimo 8 caracteres (recomendado 16+)</li>
+                    <li><strong>Nao</strong> exija complexidade (misturar maiusculas/numeros/simbolos)</li>
+                    <li><strong>Nao</strong> exija expiracao periodica sem motivo</li>
+                    <li>Bloqueie senhas em listas de vazamentos</li>
+                    <li>Permita todos os caracteres imprimiveis, incluindo espacos e Unicode</li>
+                    <li>Limite tentativas de login (rate limiting)</li>
+                </ul>
+
+                <h3>ISO/IEC 27001 e 27002</h3>
+                <p>Norma internacional de gestao de seguranca da informacao. Menos especifica que o NIST, mas exige politica formal de controle de acesso e gestao de credenciais (controle A.9.4.3). Referencia pratica comum: 12+ caracteres, complexidade misturada, alinhado a risco do ativo.</p>
+
+                <h3>PCI-DSS 4.0</h3>
+                <p>Padrao do setor de cartoes de pagamento. Requisito 8.3.6 exige senhas com minimo 12 caracteres contendo letras e numeros. Considera-se que MFA e obrigatorio para acesso administrativo e acesso remoto a ambientes de dados de cartao (CDE).</p>
+
+                <h3>LGPD (Brasil)</h3>
+                <p>A LGPD nao especifica regras tecnicas de senha, mas o Art. 46 exige adocao de medidas de seguranca aptas a proteger dados pessoais. Na pratica, ISMS (ISO 27001) e ANPD recomendam 12+ caracteres, MFA e proibicao de reuso. Para detalhes, veja nosso <a href="../../blog/lgpd-implementacao-tecnica/">guia de implementacao tecnica da LGPD</a>.</p>
+
+                <div class="highlight-box gold">
+                    <div class="highlight-box-title"><i class="fas fa-star"></i> Tamanho domina a matematica</div>
+                    <p>Cada caractere adicional multiplica o espaco de busca pelo tamanho do alfabeto. Em alfabeto de 62 chars (a-z,A-Z,0-9), cada char adicional multiplica por 62. De 8 para 9 chars: 62x mais combinacoes. Tamanho e de longe a variavel mais importante.</p>
+                </div>
+
+                <h2 id="entropia">Entendendo Entropia</h2>
+                <p>Entropia (em bits) mede quanto uma senha e imprevisivel. Calcula-se como:</p>
+                <p><code>entropia = tamanho * log2(tamanho_do_alfabeto)</code></p>
+
+                <h3>Tabela de referencia</h3>
+                <ul>
+                    <li><strong>&lt; 40 bits</strong> - Fraca, quebrada em segundos por GPU moderna</li>
+                    <li><strong>40-60 bits</strong> - Regular, vulneravel a forca bruta em horas/dias</li>
+                    <li><strong>60-80 bits</strong> - Boa, resistente a brute force offline por meses</li>
+                    <li><strong>80-100 bits</strong> - Forte, resistente por anos mesmo com hardware avancado</li>
+                    <li><strong>100+ bits</strong> - Excelente, sem ataque conhecido em tempo razoavel</li>
+                </ul>
+
+                <h4>Pegadinha da entropia</h4>
+                <p>O calculo acima assume senha <strong>aleatoria</strong>. Uma senha como <code>Empresa@2026</code> tem teoricamente ~66 bits, mas na pratica tem &lt;25 bits de entropia real porque segue padroes humanos previsiveis. Atacantes usam dicionarios e regras que priorizam esses padroes.</p>
+
+                <h2 id="erros-politica">Erros Comuns em Politicas</h2>
+                <ul>
+                    <li><strong>Forcar expiracao frequente</strong> - usuarios incrementam (Empresa@2025 &rarr; Empresa@2026), reduzindo qualidade</li>
+                    <li><strong>Tamanho maximo baixo</strong> - bloquear senhas com mais de 16 chars impede uso de passphrases</li>
+                    <li><strong>Regras complexas confusas</strong> - usuarios escrevem em post-it</li>
+                    <li><strong>Lista de caracteres proibidos</strong> - sinaliza sistema armazenando em texto puro ou com SQL vulneravel</li>
+                    <li><strong>Nao bloquear vazamentos conhecidos</strong> - atacantes comecam por ai (credential stuffing)</li>
+                    <li><strong>Sem MFA</strong> - nenhuma politica de senha sozinha compensa ausencia de MFA</li>
+                </ul>
+
+                <h2 id="recomendacoes">Recomendacoes Praticas</h2>
+
+                <h3>Para usuarios</h3>
+                <ul>
+                    <li>Use um <a href="../../blog/gerenciadores-senhas-seguros-gratuitos/">gerenciador de senhas</a> (Bitwarden, 1Password, KeePassXC)</li>
+                    <li>Senha unica para cada servico - jamais reutilize</li>
+                    <li>Use passphrases (5-7 palavras aleatorias) para o que precisa decorar</li>
+                    <li>Ative MFA (preferir TOTP ou passkeys sobre SMS)</li>
+                    <li>Troque senha apenas se suspeitar de vazamento</li>
+                </ul>
+
+                <h3>Para organizacoes</h3>
+                <ul>
+                    <li>Adote NIST SP 800-63B como baseline</li>
+                    <li>Minimo 12-16 caracteres conforme criticidade</li>
+                    <li>Implemente bloqueio de senhas vazadas (haveibeenpwned API, listas internas)</li>
+                    <li>MFA obrigatorio para admins e acesso remoto</li>
+                    <li>Treinamento de conscientizacao - veja nosso <a href="../../lp/conscientizacao-treinamento/treinamento/">programa gratuito</a></li>
+                    <li>SSO + gerenciador corporativo para reduzir quantidade de senhas</li>
+                </ul>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que e uma boa politica de senhas?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Foca em tamanho (12-16+ caracteres), diversidade, bloqueio de senhas comuns/vazadas, permite todos os caracteres e NAO forca trocas periodicas sem motivo. E a diretriz moderna do NIST SP 800-63B.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que mudou no NIST SP 800-63B?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Abandonou praticas tradicionais: nao exige complexidade obrigatoria, nao exige expiracao, exige minimo 8 (recomendado 16+), bloqueio de listas de vazamento e permite Unicode. Foco mudou para tamanho e aleatoriedade.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Devo exigir troca de senha a cada 90 dias?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Nao. Trocas arbitrarias diminuem qualidade (usuarios incrementam numero). Troque apenas se houver suspeita de comprometimento. Mitigue risco com MFA, deteccao de vazamentos e monitoramento.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quanto vale a entropia de uma senha?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Entropia (bits) mede imprevisibilidade. 8 chars minusculos = ~38 bits (fraca); 12 mistos = ~72 bits (boa); 16 mistos = ~95 bits (forte). Mire em 80+ bits para contas comuns.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Esta ferramenta envia minha senha a algum servidor?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Nao. Toda validacao acontece no navegador em JavaScript puro. Nenhuma senha e transmitida, salva ou registrada. Lista de senhas comuns embutida no codigo. Abra DevTools (F12) para auditar.</p></div>
+                    </div>
+                </div>
+
+                <h2 id="outras-ferramentas">Outras Ferramentas Gratuitas</h2>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h3><i class="fas fa-key" style="color:#10B981;margin-right:8px"></i> <a href="../gerador-de-senhas/" style="color:#60A5FA">Gerador de Senhas</a></h3>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Gere senhas fortes ou passphrases com criptografia segura do navegador. Configuravel, 100% local.</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h3><i class="fas fa-fingerprint" style="color:#F59E0B;margin-right:8px"></i> <a href="../calculadora-hash/" style="color:#60A5FA">Calculadora de Hash</a></h3>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Calcule MD5, SHA-1, SHA-256 e outros hashes - util para entender por que senhas em SHA puro sao inseguras.</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h3><i class="fas fa-code" style="color:#60A5FA;margin-right:8px"></i> <a href="../codificador-base64-url-hex/" style="color:#60A5FA">Codificador Base64/URL/Hex</a></h3>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Converta texto entre Base64, URL e Hexadecimal. Util para pentest e analise de payloads.</p>
+                    </div>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Sua empresa precisa de politica de senhas alinhada a NIST/ISO/LGPD?</h3>
+                    <p>Implementamos politicas, controles tecnicos (AD/LDAP, SSO, MFA), conscientizacao e auditoria de conformidade.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Proposta</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Ferramentas</h4><ul><li><a href="../calculadora-cvss/">Calculadora CVSS</a></li><li><a href="../gerador-de-senhas/">Gerador de Senhas</a></li><li><a href="../">Todas as ferramentas</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
+
+    <script src="../../js/site-common.min.js"></script>
+    <script src="validador.min.js?v=1"></script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

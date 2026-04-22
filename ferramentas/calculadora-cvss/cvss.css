@@ -1,0 +1,720 @@
+/* CVSS Calculator Styles */
+
+/* Override global styles.css "strong{color:#0b1e39}" que torna texto ilegivel no tema escuro */
+.article-header strong,
+.highlight-box strong,
+.cvss-tool strong,
+.cvss-tool p strong { color: inherit; font-weight: 700; }
+
+.cvss-tool {
+    padding: 2rem 0 3rem;
+}
+
+/* Tabs */
+.cvss-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(96, 165, 250, 0.15);
+}
+
+.cvss-tab {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.cvss-tab:hover {
+    color: #60A5FA;
+}
+
+.cvss-tab.active {
+    color: #60A5FA;
+    border-bottom-color: #60A5FA;
+}
+
+.cvss-panel {
+    display: none;
+}
+
+.cvss-panel.active {
+    display: block;
+}
+
+/* Result Display */
+.cvss-result {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+    align-items: center;
+    background: rgba(96, 165, 250, 0.04);
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.cvss-gauge-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.cvss-gauge {
+    width: 200px;
+    height: 200px;
+    display: block;
+}
+
+.gauge-bg,
+.gauge-fg {
+    fill: none;
+    stroke-width: 14;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    transform-box: fill-box;
+}
+
+.gauge-bg {
+    stroke: rgba(96, 165, 250, 0.1);
+}
+
+.gauge-fg {
+    stroke: #94A3B8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.4s;
+}
+
+.gauge-score {
+    fill: #F1F5F9;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.gauge-label {
+    fill: #94A3B8;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Severity colors */
+.gauge-fg.sev-none { stroke: #94A3B8; }
+.gauge-fg.sev-low { stroke: #10B981; }
+.gauge-fg.sev-medium { stroke: #F59E0B; }
+.gauge-fg.sev-high { stroke: #F97316; }
+.gauge-fg.sev-critical { stroke: #EF4444; }
+
+.gauge-label.sev-none { fill: #94A3B8; }
+.gauge-label.sev-low { fill: #10B981; }
+.gauge-label.sev-medium { fill: #F59E0B; }
+.gauge-label.sev-high { fill: #F97316; }
+.gauge-label.sev-critical { fill: #EF4444; }
+
+/* Vector input */
+.cvss-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cvss-vector-wrap label {
+    display: block;
+    font-size: 0.85rem;
+    color: #94A3B8;
+    margin-bottom: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cvss-vector-input {
+    display: flex;
+    gap: 6px;
+    align-items: stretch;
+}
+
+.cvss-vector-input input {
+    flex: 1;
+    background: rgba(13, 30, 56, 0.6);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 8px;
+    color: #E2E8F0;
+    padding: 12px 14px;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.cvss-vector-input input:focus {
+    border-color: #60A5FA;
+}
+
+.cvss-copy-btn {
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 8px;
+    color: #60A5FA;
+    padding: 0 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cvss-copy-btn:hover {
+    background: #60A5FA;
+    color: #0D1E38;
+    border-color: #60A5FA;
+}
+
+/* Subscores */
+.cvss-subscores {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.subscore {
+    background: rgba(13, 30, 56, 0.4);
+    border: 1px solid rgba(96, 165, 250, 0.1);
+    border-radius: 8px;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    min-width: 140px;
+}
+
+.subscore-label {
+    font-size: 0.75rem;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.subscore-value {
+    font-size: 1.1rem;
+    color: #60A5FA;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.subscore-bar {
+    margin-top: 6px;
+    height: 6px;
+    background: rgba(96, 165, 250, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.subscore-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #10B981, #60A5FA);
+    border-radius: 3px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cvss-reset-btn {
+    align-self: flex-start;
+    background: transparent;
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 8px;
+    color: #94A3B8;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.cvss-reset-btn:hover {
+    color: #60A5FA;
+    border-color: #60A5FA;
+}
+
+/* Examples */
+.cvss-examples {
+    margin-bottom: 2rem;
+}
+
+.cvss-examples-title {
+    color: #F1F5F9;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.cvss-examples-title i {
+    color: #60A5FA;
+    margin-right: 8px;
+}
+
+.example-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.example-btn {
+    background: rgba(96, 165, 250, 0.06);
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    color: #E2E8F0;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: inherit;
+    position: relative;
+}
+
+.example-btn:hover {
+    background: rgba(96, 165, 250, 0.12);
+    border-color: #60A5FA;
+    transform: translateY(-2px);
+}
+
+.example-btn strong {
+    color: #60A5FA;
+    font-size: 0.95rem;
+}
+
+.example-btn span {
+    font-size: 0.8rem;
+    color: #94A3B8;
+}
+
+.example-btn .ex-score {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #EF4444;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+/* Section titles */
+.cvss-section-title {
+    color: #F1F5F9;
+    font-size: 1.3rem;
+    margin: 2rem 0 0.5rem;
+}
+
+.cvss-section-desc {
+    color: #94A3B8;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+/* Metrics grid */
+.cvss-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+}
+
+.cvss-metric {
+    background: rgba(96, 165, 250, 0.04);
+    border: 1px solid rgba(96, 165, 250, 0.12);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.metric-header .metric-title {
+    color: #F1F5F9;
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.metric-tooltip {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(96, 165, 250, 0.15);
+    color: #60A5FA;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: help;
+}
+
+.metric-desc {
+    color: #94A3B8;
+    font-size: 0.85rem;
+    margin: 0 0 12px;
+    line-height: 1.4;
+}
+
+.metric-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.metric-options button {
+    flex: 1;
+    min-width: 80px;
+    background: rgba(13, 30, 56, 0.5);
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 8px;
+    color: #94A3B8;
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.metric-options button:hover {
+    background: rgba(96, 165, 250, 0.1);
+    color: #60A5FA;
+    border-color: rgba(96, 165, 250, 0.3);
+}
+
+.metric-options button.active {
+    background: linear-gradient(135deg, #60A5FA, #3B82F6);
+    color: #0D1E38;
+    border-color: #60A5FA;
+    box-shadow: 0 0 12px rgba(96, 165, 250, 0.3);
+}
+
+/* Temporal section (collapsible) */
+.cvss-temporal {
+    margin-top: 2rem;
+    background: rgba(96, 165, 250, 0.04);
+    border: 1px solid rgba(96, 165, 250, 0.12);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.cvss-temporal summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    user-select: none;
+    outline: none;
+}
+
+.cvss-temporal summary::-webkit-details-marker { display: none; }
+
+.cvss-temporal summary::before {
+    content: '\f078';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #60A5FA;
+    margin-right: 8px;
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.cvss-temporal[open] summary::before {
+    transform: rotate(180deg);
+}
+
+.cvss-temporal summary h2 {
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+.temporal-score-pill {
+    background: rgba(96, 165, 250, 0.1);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    color: #94A3B8;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.temporal-score-pill strong {
+    color: #60A5FA;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.cvss-temporal[open] .cvss-metrics-grid {
+    margin-top: 1rem;
+}
+
+/* Severity table */
+.severity-table {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: rgba(96, 165, 250, 0.04);
+    border: 1px solid rgba(96, 165, 250, 0.12);
+    border-radius: 12px;
+}
+
+.severity-table h3 {
+    color: #F1F5F9;
+    font-size: 1.1rem;
+    margin: 0 0 1rem;
+}
+
+.severity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+}
+
+.sev {
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sev strong {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sev span {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.sev-none { background: #475569; }
+.sev-low { background: #10B981; }
+.sev-medium { background: #F59E0B; }
+.sev-high { background: #F97316; }
+.sev-critical { background: #EF4444; }
+
+/* Comparison */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.comparison-card {
+    background: rgba(96, 165, 250, 0.04);
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.comparison-card h3 {
+    color: #60A5FA;
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+.comparison-card ul {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.comparison-card li {
+    color: #94A3B8;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+/* Toast */
+.cvss-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #0D1E38;
+    border: 1px solid #60A5FA;
+    color: #60A5FA;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(96, 165, 250, 0.3);
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cvss-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .cvss-tool {
+        padding: 1rem 0 2rem;
+    }
+    .cvss-result {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+    .cvss-gauge {
+        width: 170px;
+        height: 170px;
+    }
+    .cvss-info {
+        align-items: center;
+    }
+    .cvss-vector-input {
+        width: 100%;
+    }
+    .cvss-vector-input input {
+        font-size: 0.75rem;
+        padding: 10px 12px;
+    }
+    .cvss-subscores {
+        justify-content: center;
+        gap: 0.65rem;
+    }
+    .subscore {
+        min-width: calc(50% - 0.35rem);
+        flex: 1;
+    }
+    .cvss-tabs {
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .cvss-tabs::-webkit-scrollbar { display: none; }
+    .cvss-tab {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+    .cvss-metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+    }
+    .cvss-metric {
+        padding: 1rem;
+    }
+    .metric-options {
+        gap: 5px;
+    }
+    .metric-options button {
+        min-width: 0;
+        padding: 8px 6px;
+        font-size: 0.72rem;
+        letter-spacing: -0.01em;
+    }
+    .severity-table {
+        padding: 1.1rem;
+    }
+    .severity-grid {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        gap: 6px;
+    }
+    .sev {
+        padding: 10px 6px;
+    }
+    .sev strong {
+        font-size: 0.8rem;
+    }
+    .sev span {
+        font-size: 0.75rem;
+    }
+    .cvss-temporal summary {
+        gap: 0.5rem;
+    }
+    .cvss-temporal summary h2 {
+        font-size: 1rem;
+    }
+    .example-buttons {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .cvss-result {
+        padding: 1rem;
+    }
+    .cvss-gauge {
+        width: 140px;
+        height: 140px;
+    }
+    .gauge-score {
+        font-size: 42px;
+    }
+    .gauge-label {
+        font-size: 14px;
+    }
+    .subscore {
+        min-width: 100%;
+    }
+    .cvss-vector-wrap label {
+        font-size: 0.75rem;
+    }
+    .cvss-vector-input input {
+        font-size: 0.7rem;
+        padding: 9px 10px;
+    }
+    .cvss-copy-btn {
+        padding: 0 10px;
+    }
+    .example-buttons {
+        grid-template-columns: 1fr;
+    }
+    .severity-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+    }
+    .sev {
+        padding: 8px 2px;
+    }
+    .sev strong {
+        font-size: 0.68rem;
+        letter-spacing: 0.3px;
+    }
+    .sev span {
+        font-size: 0.65rem;
+    }
+    .cvss-reset-btn {
+        width: 100%;
+        text-align: center;
+    }
+    .temporal-score-pill {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+    }
+    .cvss-toast {
+        bottom: 20px;
+        left: 16px;
+        right: 16px;
+        transform: translateY(100px);
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    .cvss-toast.show {
+        transform: translateY(0);
+    }
+}
