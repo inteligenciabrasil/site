@@ -1,0 +1,904 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo sobre NDR (Network Detection and Response): como detectar ameaças na rede com análise de tráfego, machine learning éresposta automatizada. Diferencas entre NDR, IDS/IPS éSIEM.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="NDR, Network Detection Response, detecção rede, análise tráfego, network security, IDS, IPS, packet analysis, threat detection, lateral movement">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/ndr-deteccao-resposta-rede/">
+
+    <meta property="og:title" content="NDR: Guia Completo de Network Detection and Response">
+    <meta property="og:description" content="Como implementar NDR para detectar ameaças na rede, identificar movimentação lateral éresponder a incidentes com análise de tráfego émachine learning.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/ndr-deteccao-resposta-rede/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-31T19:00:00-03:00">
+    <meta property="article:section" content="Segurança de Rede">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NDR: Guia Completo de Network Detection and Response">
+    <meta name="twitter:description" content="Como implementar NDR para detectar ameaças na rede éresponder a incidentes com análise de tráfego.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>NDR: Guia Completo de Network Detection and Response | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "NDR: Guia Completo de Network Detection and Response",
+        "description": "Como implementar NDR para detectar ameaças na rede, identificar movimentação lateral éresponder a incidentes com análise de tráfego émachine learning.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-segurança-da-informação-cyber-security.png"}},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/ndr-deteccao-resposta-rede/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que éNDR écomo funciona?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "NDR (Network Detection and Response) éuma solucao de segurança que monitora o tráfego de rede em tempo real para detectar ameaças écomportamentos maliciosos. Funciona através de sensores que capturam tráfego (via TAP ou SPAN), analisam usando deep packet inspection, machine learning éanálise comportamental, épodem responder automaticamente isolando hosts ou bloqueando conexões."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual a diferença entre NDR éIDS/IPS?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "IDS/IPS usam principalmente assinaturas para detectar ameaças conhecidas éoperam em linha (inline). NDR usa análise comportamental émachine learning para detectar ameaças desconhecidas, opera passivamente (out-of-band), mantem contexto histórico de semanas/meses, éfoca em detectar atividade pos-comprometimento como movimentação lateral éexfiltração."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "NDR funciona com tráfego criptografado (TLS)?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim, NDR pode detectar ameaças mesmo em tráfego criptografado através de: análise de metadados (tamanho de pacotes, timing, certificados), JA3/JA4 fingerprinting para identificar clientes/servidores, detecção de C2 por padroes de beaconing, éopcionalmente integração com TLS inspection para descriptografar tráfego em proxies."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "NDR pode detectar ransomware?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim. NDR detecta indicadores de ransomware na rede: comúnicação com C2 servers, downloads de payloads, movimentação lateral via SMB/RDP/WMI, reconhecimento interno (port scanning, AD enumeration), étentativas de exfiltração de dados antes da criptografia. NDR éparticularmente eficaz para detectar a fase de propagação do ransomware."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Preciso de NDR se ja tenho EDR éSIEM?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "NDR complementa EDR éSIEM oferecendo visibilidade única: monitora dispositivos sem agente (IoT, OT, BYOD), detecta ameaças que nãotocam disco (fileless, living-off-the-land), ve comúnicação entre hosts que EDR individual nãocorrelaciona, énãopode ser desabilitado por malware. A combinação EDR+NDR+SIEM (SOC Visibility Triad) oferece cobertura completa."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "NDR: Network Detection and Response"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Segurança de Rede</span>
+            <h1>NDR: Guia Completo de Network Detection and Response</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">NDR</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#introducao">Introdução</a></li>
+                        <li><a href="#o-que-e-ndr">O que éNDR</a></li>
+                        <li><a href="#como-funciona">Como NDR Funciona</a></li>
+                        <li><a href="#ndr-vs-ids-ips">NDR vs IDS/IPS</a></li>
+                        <li><a href="#detecção-ameaças">Detecção de Ameaças</a></li>
+                        <li><a href="#tráfego-criptografado">Análise de Trafego Criptografado</a></li>
+                        <li><a href="#arquitetura">Arquitetura éDeployment</a></li>
+                        <li><a href="#casos-uso">Casos de Uso</a></li>
+                        <li><a href="#integração">Integração com SOC</a></li>
+                        <li><a href="#fornecedores">Principais Fornecedores</a></li>
+                        <li><a href="#faq">Perguntas Frequentes</a></li>
+                        <li><a href="#conclusao">Conclusão</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introducao">Introdução</h2>
+
+                <p>A rede éo tecido conjuntivo de toda infraestrutura - tudo que um atacante faz, desde o comprometimento inicial ate a exfiltração de dados, gera tráfego de rede. <strong>Network Detection and Response (NDR)</strong> explora essa caracteristica fundamental para fornecer visibilidade sobre ameaças que outras soluções nãoconseguem ver.</p>
+
+                <p>Enquanto EDR pode ser desabilitado por malware élogs podem ser deletados, o tráfego de rede émuito mais difícil de esconder. Se um atacante se comúnica com um servidor C2, se move lateralmente, ou exfiltra dados, NDR pode detectar - mesmo que o atacante use tecnicas de living-off-the-land que nãodeixam rastros em disco.</p>
+
+                <p>Este guia explora como NDR funciona, suas diferenças para soluções tradicionais como IDS/IPS, écomo implementa-lo para complementar suas defesas existentes.</p>
+
+                <h2 id="o-que-e-ndr">O que éNDR</h2>
+
+                <h3>Definição</h3>
+                <p>NDR éuma categoria de soluções de segurança que monitora tráfego de rede em tempo real para detectar ameaças, comportamentos anomalos éatividades maliciosas. Utiliza combinação de assinaturas, machine learning éanálise comportamental para identificar tanto ameaças conhecidas quanto desconhecidas.</p>
+
+                <h3>Evolução: De NTA para NDR</h3>
+                <p>NDR evoluiu de Network Traffic Analysis (NTA):</p>
+
+                <div class="info-box">
+                    <h4>Evolução das Solucoes de Rede</h4>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Geração</th>
+                                <th>Tecnologia</th>
+                                <th>Foco</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1a Gen</strong></td>
+                                <td>IDS (Snort, Suricata)</td>
+                                <td>Assinaturas, ameaças conhecidas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2a Gen</strong></td>
+                                <td>IPS</td>
+                                <td>Assinaturas + prevenção inline</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3a Gen</strong></td>
+                                <td>NTA</td>
+                                <td>ML, anomalias, análise comportamental</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4a Gen</strong></td>
+                                <td>NDR</td>
+                                <td>NTA + resposta automatizada + integração</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Capacidades Principais</h3>
+                <ul>
+                    <li><strong>Visibilidade completa</strong> - Todo tráfego norte-sul éleste-oeste</li>
+                    <li><strong>Detecção comportamental</strong> - Identifica anomalias sem assinaturas</li>
+                    <li><strong>Análise de protocolos</strong> - Deep packet inspection de 50+ protocolos</li>
+                    <li><strong>Machine learning</strong> - Modelos treinados para detectar ameaças</li>
+                    <li><strong>Metadados enriquecidos</strong> - Contexto alem do payload</li>
+                    <li><strong>Resposta automatizada</strong> - Integração com firewall, NAC, EDR</li>
+                    <li><strong>Forense éhunting</strong> - Histórico para investigação retroativa</li>
+                </ul>
+
+                <h2 id="como-funciona">Como NDR Funciona</h2>
+
+                <h3>Arquitetura Básica</h3>
+
+                <div class="code-block">
+                    <h4>Componentes de NDR</h4>
+                    <pre>
++---------------------------------------------------------------+
+|                    ARQUITETURA NDR                            |
++---------------------------------------------------------------+
+|                                                               |
+|  +----------------------------------------------------------+ |
+|  |                 DATA COLLECTION                          | |
+|  |                                                          | |
+|  |   +---------+   +---------+   +---------+                | |
+|  |   |   TAP   |   |  SPAN   |   |  Flow   |                | |
+|  |   | (mirror)|   | (port)  |   | (NetFlow|                | |
+|  |   +----+----+   +----+----+   | IPFIX)  |                | |
+|  |        |             |        +----+----+                | |
+|  |        +------+------+-----------+                       | |
+|  |               v                                          | |
+|  +---------------+------------------------------------------+ |
+|                  |                                            |
+|  +---------------v------------------------------------------+ |
+|  |                    NDR SENSOR                            | |
+|  |                                                          | |
+|  |  +------------------------------------------------------+| |
+|  |  | Packet Processing                                    || |
+|  |  | - Reassembly - Protocol parsing - DPI                || |
+|  |  +------------------------------------------------------+| |
+|  |                         |                                | |
+|  |  +---------+------------+------------+---------+         | |
+|  |  |Signature| Behavioral | Protocol   |  ML     |         | |
+|  |  | Engine  | Analytics  | Anomaly    | Models  |         | |
+|  |  +---------+------------+------------+---------+         | |
+|  |                         |                                | |
+|  |  +------------------------------------------------------+| |
+|  |  | Metadata Generation                                  || |
+|  |  | - Sessions - DNS - HTTP - TLS - Files - Alerts       || |
+|  |  +------------------------------------------------------+| |
+|  +----------------------------+-----------------------------+ |
+|                               |                               |
+|  +----------------------------v-----------------------------+ |
+|  |              MANAGEMENT / ANALYTICS PLATFORM             | |
+|  |                                                          | |
+|  |  - Correlation   - Investigation   - Response            | |
+|  |  - Dashboards    - Threat Intel    - API/Integration     | |
+|  +----------------------------------------------------------+ |
+|                                                               |
++---------------------------------------------------------------+
+                    </pre>
+                </div>
+
+                <h3>Metodos de Captura</h3>
+
+                <h4>Network TAP</h4>
+                <p>Dispositivo fisico que copia todo o tráfego passando pelo link. 100% confiável, nãointroduz latência, mas requer instalacao fisica.</p>
+
+                <h4>SPAN/Mirror Port</h4>
+                <p>Switch copia tráfego para porta de monitoramento. Mais flexível que TAP, mas pode dropar pacotes sob carga alta.</p>
+
+                <h4>Flow Data (NetFlow/IPFIX)</h4>
+                <p>Metadados de conexao sem payload completo. Menor volume de dados, útil para visibilidade ampla, mas perde contexto.</p>
+
+                <h4>Packet Broker</h4>
+                <p>Agrega tráfego de múltiplos TAPs/SPANs, filtra édistribui para ferramentas. Essencial em ambientes grandes.</p>
+
+                <h3>Técnicas de Detecção</h3>
+
+                <h4>1. Assinaturas (Signatures)</h4>
+                <p>Regras para padroes conhecidos de malware, exploits, éC2. Alta precisão para ameaças conhecidas.</p>
+
+                <h4>2. Anomalia de Protocolo</h4>
+                <p>Detecta desvios do comportamento esperado de protocolos (HTTP com metodos estranhos, DNS com queries muito longas).</p>
+
+                <h4>3. Análise Comportamental</h4>
+                <p>Baseline do comportamento normal édetecção de desvios (host que nunca fez SMB agora conectando em múltiplos servidores).</p>
+
+                <h4>4. Machine Learning</h4>
+                <p>Modelos treinados para detectar padroes complexos como beaconing de C2, DGA domains, data exfiltration.</p>
+
+                <h2 id="ndr-vs-ids-ips">NDR vs IDS/IPS</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>IDS/IPS</th>
+                            <th>NDR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Deployment</strong></td>
+                            <td>Inline (IPS) ou Passivo (IDS)</td>
+                            <td>Passivo (TAP/SPAN)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Metodo de Detecção</strong></td>
+                            <td>Assinaturas (principalmente)</td>
+                            <td>ML + Behavioral + Signatures</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ameaças Detectadas</strong></td>
+                            <td>Conhecidas</td>
+                            <td>Conhecidas + Desconhecidas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Contexto</strong></td>
+                            <td>Pacote/Sessao</td>
+                            <td>Host/Rede/Tempo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Histórico</strong></td>
+                            <td>Alertas</td>
+                            <td>Metadata completo (semanas/meses)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Falsos Positivos</strong></td>
+                            <td>Alto</td>
+                            <td>Baixo (com tuning)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Resposta</strong></td>
+                            <td>Block (IPS) / Alert (IDS)</td>
+                            <td>Alert + Integrate + Orchestrate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Investigacao</strong></td>
+                            <td>Limitada</td>
+                            <td>Forense completo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Encrypted Traffic</strong></td>
+                            <td>Cego (sem decrypt)</td>
+                            <td>Metadata analysis, JA3/JA4, timing</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Quando Usar Cada Um</h3>
+                <ul>
+                    <li><strong>IPS</strong> - Perímetro, bloquear exploits conhecidos, compliance</li>
+                    <li><strong>IDS</strong> - Detecção de assinaturas onde IPS nãoe viável</li>
+                    <li><strong>NDR</strong> - Detecção avançada, hunting, visibilidade leste-oeste</li>
+                </ul>
+
+                <p>A combinação ideal usa IPS no perimetro para bloquear ameaças conhecidas éNDR internamente para detectar o que passou émovimentação lateral.</p>
+
+                <h2 id="detecção-ameaças">Detecção de Ameaças</h2>
+
+                <h3>Command & Control (C2)</h3>
+                <p>NDR detecta comúnicação com C2 através de:</p>
+
+                <div class="code-block">
+                    <h4>Indicadores de C2 na Rede</h4>
+                    <pre>
+# Beaconing Detection
+- Conexoes periódicas para mesmo destino
+- Intervalos regulares (mesmo com jitter)
+- Payload consistente (mesmo tamanho)
+- Horarios fora do expediente
+
+# DGA (Domain Generation Algorithm)
+- Domains com alta entropia
+- Padrao de caracteres aleatorios
+- Multiplos NXDOMAINs seguidos de resolucao
+
+# Protocol Tunneling
+- DNS com queries muito longas (DNS over DNS)
+- HTTP com dados base64 no header
+- ICMP com payload anormal
+
+# TLS Indicators
+- JA3 fingerprint de ferramentas conhecidas
+- Certificados self-signed ou suspeitos
+- SNI vs destino mismatch
+                    </pre>
+                </div>
+
+                <h3>Movimentacao Lateral</h3>
+                <p>Detectar atacantes se movendo pela rede interna:</p>
+
+                <ul>
+                    <li><strong>SMB anomalo</strong> - Host fazendo conexões SMB para múltiplos servidores</li>
+                    <li><strong>RDP incomum</strong> - Conexoes RDP de/para hosts que nãofazem normalmente</li>
+                    <li><strong>WMI/WinRM remoto</strong> - Execucao remota detectada via tráfego</li>
+                    <li><strong>PsExec patterns</strong> - Named pipes caracteristicos</li>
+                    <li><strong>DCE/RPC</strong> - Chamadas de procedimento remoto suspeitas</li>
+                </ul>
+
+                <h3>Exfiltração de Dados</h3>
+                <p>Detectar dados sendo roubados:</p>
+
+                <ul>
+                    <li><strong>Volume anormal</strong> - Uploads muito maiores que baseline</li>
+                    <li><strong>Destinos novos</strong> - Dados indo para cloud storage nãoaprovado</li>
+                    <li><strong>Timing suspeito</strong> - Transferencias grandes fora do horário</li>
+                    <li><strong>Compressao/encoding</strong> - Dados comprimidos ou codificados no tráfego</li>
+                    <li><strong>Staging</strong> - Dados sendo movidos internamente antes de sair</li>
+                </ul>
+
+                <h3>Reconhecimento Interno</h3>
+                <ul>
+                    <li><strong>Port scanning</strong> - Host varrendo portas de múltiplos destinos</li>
+                    <li><strong>AD enumeration</strong> - Queries LDAP anormais</li>
+                    <li><strong>Service discovery</strong> - Tentativas de conexao em múltiplas portas</li>
+                    <li><strong>Network mapping</strong> - ICMP/ARP reconnaissance</li>
+                </ul>
+
+                <h2 id="tráfego-criptografado">Análise de Trafego Criptografado</h2>
+
+                <p>Com 90%+ do tráfego web usando TLS, NDR precisa detectar ameaças sem ver o payload.</p>
+
+                <h3>Técnicas de Análise</h3>
+
+                <h4>JA3/JA4 Fingerprinting</h4>
+                <p>Hash do TLS Client Hello que identifica o cliente. Mesmo C2 sobre TLS tem fingerprint caracteristico.</p>
+
+                <div class="code-block">
+                    <h4>JA3 Fingerprint</h4>
+                    <pre>
+# JA3 éhash MD5 de:
+# - TLS Version
+# - Accepted Ciphers
+# - List of Extensions
+# - Elliptic Curves
+# - EC Point Formats
+
+# Exemplo de detecção:
+JA3: 51c64c77e60f3980eea90869b68c58a8
+Match: Cobalt Strike Beacon (default profile)
+
+# JA4 (evolução) adiciona:
+# - TLS version prioritization
+# - ALPN protocols
+# - Signature algorithms
+                    </pre>
+                </div>
+
+                <h4>Análise de Certificados</h4>
+                <ul>
+                    <li>Certificados self-signed</li>
+                    <li>Certificados Let's Encrypt (comum em phishing)</li>
+                    <li>Validade muito curta ou muito longa</li>
+                    <li>Subject/Issuer suspeitos</li>
+                </ul>
+
+                <h4>Timing éPadroes</h4>
+                <ul>
+                    <li>Beaconing detectavel mesmo criptografado</li>
+                    <li>Tamanho de pacotes (mesmo com padding)</li>
+                    <li>Inter-packet timing caracteristico</li>
+                </ul>
+
+                <h4>TLS Inspection (Opcional)</h4>
+                <p>Para inspeção completa, NDR pode integrar com proxies que fazem MITM do TLS. Requer infraestrutura de PKI étem implicações de privacidade.</p>
+
+                <h2 id="arquitetura">Arquitetura éDeployment</h2>
+
+                <h3>Posicionamento de Sensores</h3>
+
+                <div class="code-block">
+                    <h4>Pontos de Monitoramento</h4>
+                    <pre>
++---------------------------------------------------------------+
+|              PONTOS DE MONITORAMENTO NDR                      |
++---------------------------------------------------------------+
+|                                                               |
+|                        INTERNET                               |
+|                            |                                  |
+|                     +------+------+                           |
+|                     |  Firewall   |                           |
+|                     +------+------+                           |
+|                            |                                  |
+|     +----------------------+----------------------+           |
+|     |                      |                      |           |
+|     |          v SENSOR 1: Perímetro              |           |
+|     |          (Norte-Sul / Ingress-Egress)       |           |
+|     |                      |                      |           |
+|     |               +------+------+               |           |
+|     |               | Core Switch |               |           |
+|     |               +------+------+               |           |
+|     |                      |                      |           |
+|     |          v SENSOR 2: Core                   |           |
+|     |          (Leste-Oeste / Inter-VLAN)         |           |
+|     |                      |                      |           |
+|     |        +-------------+-------------+        |           |
+|     |        |             |             |        |           |
+|     |  +-----+-----+ +-----+-----+ +-----+-----+  |           |
+|     |  | Servers   | |Workstation| |    OT     |  |           |
+|     |  |   VLAN    | |   VLAN    | |   VLAN    |  |           |
+|     |  +-----------+ +-----------+ +-----------+  |           |
+|     |       ^              ^             ^        |           |
+|     |  SENSOR 3        SENSOR 4     SENSOR 5      |           |
+|     |  (opcional)      (opcional)   (crítico)     |           |
+|     |                                             |           |
+|     +---------------------------------------------+           |
+|                                                               |
+|  PRIORIDADE DE DEPLOY:                                        |
+|  1. Perímetro (visibilidade de entrada/saida)                 |
+|  2. Core (movimentação lateral)                               |
+|  3. Segmentos críticos (crown jewels)                         |
+|  4. Demais segmentos                                          |
+|                                                               |
++---------------------------------------------------------------+
+                    </pre>
+                </div>
+
+                <h3>Sizing éPerformance</h3>
+
+                <div class="info-box">
+                    <h4>Considerações de Dimensionamento</h4>
+                    <ul>
+                        <li><strong>Throughput</strong> - Sensor precisa processar todo o tráfego do link</li>
+                        <li><strong>Storage</strong> - Metadados para 30-90 dias de retenção</li>
+                        <li><strong>PCAP</strong> - Se capturar pacotes completos, storage cresce 10-100x</li>
+                        <li><strong>Baseline</strong> - 2-4 semanas para ML aprender comportamento normal</li>
+                        <li><strong>Criptografia</strong> - TLS inspection aumenta processamento significativamente</li>
+                    </ul>
+                </div>
+
+                <h3>Cloud éAmbientes Híbridos</h3>
+                <ul>
+                    <li><strong>AWS</strong> - VPC Traffic Mirroring para sensores virtuais</li>
+                    <li><strong>Azure</strong> - Azure Network Watcher, packet capture</li>
+                    <li><strong>GCP</strong> - Packet Mirroring para NDR virtual</li>
+                    <li><strong>Hybrid</strong> - Sensores on-prem + cloud com console unificado</li>
+                </ul>
+
+                <h2 id="casos-uso">Casos de Uso</h2>
+
+                <h3>Detecção de Ransomware</h3>
+                <p>NDR detecta ransomware em múltiplas fases:</p>
+                <ul>
+                    <li><strong>Initial access</strong> - Download de payload, C2 inicial</li>
+                    <li><strong>Reconnaissance</strong> - Scanning interno, AD enumeration</li>
+                    <li><strong>Lateral movement</strong> - SMB, RDP, WMI para outros hosts</li>
+                    <li><strong>Staging</strong> - Dados sendo coletados antes de exfiltrar</li>
+                    <li><strong>Exfiltration</strong> - Double extortion data theft</li>
+                </ul>
+
+                <h3>Insider Threat</h3>
+                <p>Funcionarios maliciosos ou comprometidos:</p>
+                <ul>
+                    <li>Acesso a sistemas fora do escopo de trabalho</li>
+                    <li>Downloads massivos de dados</li>
+                    <li>Uploads para storage pessoal</li>
+                    <li>Comportamento fora do horário</li>
+                </ul>
+
+                <h3>IoT/OT Security</h3>
+                <p>Dispositivos sem agente onde EDR nãofunciona:</p>
+                <ul>
+                    <li>Descoberta de dispositivos shadow</li>
+                    <li>Comúnicacao anomala de dispositivos IoT</li>
+                    <li>Acesso nãoautorizado a redes OT</li>
+                    <li>Protocolos industriais (Modbus, DNP3, etc.)</li>
+                </ul>
+
+                <h3>Compliance éAuditoria</h3>
+                <ul>
+                    <li>PCI-DSS - Monitoramento de tráfego do CDE</li>
+                    <li>LGPD - Detectar transferências de dados pessoais</li>
+                    <li>Auditoria - Histórico de comúnicações para investigação</li>
+                </ul>
+
+                <h2 id="integração">Integração com SOC</h2>
+
+                <h3>SOC Visibility Triad</h3>
+                <p>Gartner define tres pilares de visibilidade:</p>
+
+                <div class="code-block">
+                    <h4>Cobertura Complementar</h4>
+                    <pre>
++---------------------------------------------------------------+
+|                SOC VISIBILITY TRIAD                           |
++---------------------------------------------------------------+
+|                                                               |
+|                         +---------+                           |
+|                         |  SIEM   |                           |
+|                         | (Logs)  |                           |
+|                         +----+----+                           |
+|                              |                                |
+|                     Correlation & Investigation               |
+|                              |                                |
+|          +-------------------+-------------------+            |
+|          |                                       |            |
+|    +-----+-----+                           +-----+-----+      |
+|    |    EDR    |                           |    NDR    |      |
+|    |(Endpoint) |                           | (Network) |      |
+|    +-----------+                           +-----------+      |
+|          |                                       |            |
+|     - Malware                              - Lateral Move     |
+|     - Exploits                             - C2 Comms         |
+|     - Process                              - Exfiltration     |
+|     - File                                 - Reconnaissance   |
+|                                                               |
+|  Combinados: Cobertura completa de visibilidade               |
+|                                                               |
++---------------------------------------------------------------+
+                    </pre>
+                </div>
+
+                <h3>Integração com SIEM</h3>
+                <ul>
+                    <li>Alertas de NDR enviados para SIEM</li>
+                    <li>Correlacao com eventos de outras fontes</li>
+                    <li>NDR enriquece alertas com contexto de rede</li>
+                    <li>SIEM como console unificado de investigação</li>
+                </ul>
+
+                <h3>Integração com SOAR</h3>
+                <ul>
+                    <li>Playbooks acionados por alertas de NDR</li>
+                    <li>Resposta automatizada (isolar host, bloquear IP)</li>
+                    <li>Enriquecimento automatico com threat intel</li>
+                    <li>Escalacao baseada em severidade</li>
+                </ul>
+
+                <h3>Integração com EDR</h3>
+                <ul>
+                    <li>NDR detecta - EDR investiga endpoint específico</li>
+                    <li>EDR detecta - NDR mostra comúnicações do host</li>
+                    <li>Correlacao: mesmo IP/host em ambos = alta confianca</li>
+                </ul>
+
+                <h2 id="fornecedores">Principais Fornecedores</h2>
+
+                <h3>Leaders de Mercado</h3>
+                <ul>
+                    <li><strong>Darktrace</strong> - AI self-learning, autonomous response</li>
+                    <li><strong>Vectra AI</strong> - Forte em detecção de C2 élateral movement</li>
+                    <li><strong>ExtraHop Reveal(x)</strong> - Deep packet inspection, cloud-native</li>
+                    <li><strong>Cisco Secure Network Analytics</strong> - (ex-Stealthwatch) Integração Cisco</li>
+                    <li><strong>Corelight</strong> - Baseado em Zeek, open core</li>
+                </ul>
+
+                <h3>Parte de Plataformas XDR</h3>
+                <ul>
+                    <li><strong>CrowdStrike Falcon</strong> - Network component do XDR</li>
+                    <li><strong>Palo Alto Cortex XDR</strong> - Integração com firewalls</li>
+                    <li><strong>Microsoft Defender for IoT</strong> - Foco em OT/IoT</li>
+                </ul>
+
+                <h3>Critérios de Seleção</h3>
+                <ul>
+                    <li><strong>Throughput</strong> - Suporta volume de tráfego atual + crescimento?</li>
+                    <li><strong>Protocolos</strong> - Parsers para protocolos do seu ambiente?</li>
+                    <li><strong>Encrypted traffic</strong> - JA3/JA4, TLS metadata analysis?</li>
+                    <li><strong>Cloud support</strong> - Sensores virtuais, integração nativa?</li>
+                    <li><strong>Integração</strong> - APIs, conectores SIEM/SOAR?</li>
+                    <li><strong>Deployment</strong> - Hardware appliance vs software vs SaaS?</li>
+                </ul>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O que éNDR écomo funciona?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>NDR (Network Detection and Response) éuma solucao de segurança que monitora tráfego de rede em tempo real para detectar ameaças écomportamentos maliciosos. Funciona através de sensores que capturam tráfego (via TAP ou SPAN), analisam usando deep packet inspection, machine learning éanálise comportamental, épodem responder automaticamente isolando hosts ou bloqueando conexões.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Qual a diferença entre NDR éIDS/IPS?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>IDS/IPS usam principalmente assinaturas para detectar ameaças conhecidas éoperam em linha (inline). NDR usa análise comportamental émachine learning para detectar ameaças desconhecidas, opera passivamente (out-of-band), mantem contexto histórico de semanas/meses, éfoca em detectar atividade pos-comprometimento como movimentação lateral éexfiltração.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>NDR funciona com tráfego criptografado (TLS)?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim, NDR pode detectar ameaças mesmo em tráfego criptografado através de: análise de metadados (tamanho de pacotes, timing, certificados), JA3/JA4 fingerprinting para identificar clientes/servidores, detecção de C2 por padroes de beaconing, éopcionalmente integração com TLS inspection para descriptografar tráfego em proxies.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>NDR pode detectar ransomware?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim. NDR detecta indicadores de ransomware na rede: comúnicação com C2 servers, downloads de payloads, movimentação lateral via SMB/RDP/WMI, reconhecimento interno (port scanning, AD enumeration), étentativas de exfiltração de dados antes da criptografia. NDR éparticularmente eficaz para detectar a fase de propagação do ransomware.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Preciso de NDR se ja tenho EDR éSIEM?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>NDR complementa EDR éSIEM oferecendo visibilidade única: monitora dispositivos sem agente (IoT, OT, BYOD), detecta ameaças que nãotocam disco (fileless, living-off-the-land), ve comúnicação entre hosts que EDR individual nãocorrelaciona, énãopode ser desabilitado por malware. A combinação EDR+NDR+SIEM (SOC Visibility Triad) oferece cobertura completa.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="conclusao">Conclusão</h2>
+
+                <p>NDR preenche uma lacuna crítica na visibilidade de segurança: a rede. Enquanto EDR pode ser desabilitado, logs podem ser deletados, e firewalls podem ser contornados, o tráfego de rede é inerentemente difícil de esconder. Se um atacante se comunica, se move ou exfiltra dados, a evidência está na rede.</p>
+
+                <p>A evolução de simples IDS baseado em assinaturas para NDR com machine learning e análise comportamental permite detectar ameaças sofisticadas que não têm assinatura conhecida - incluindo ataques zero-day, APTs, e insiders maliciosos. A capacidade de analisar tráfego criptografado através de metadados e fingerprinting mantém a eficácia mesmo com TLS ubíquo.</p>
+
+                <p>Para organizações que já investiram em EDR e SIEM, NDR completa o SOC Visibility Triad. Para ambientes com IoT, OT, ou dispositivos sem agente, NDR pode ser a única fonte de visibilidade. Em qualquer caso, a rede continua sendo a testemunha mais confiável de atividade maliciosa.</p>
+
+                <div class="cta-box">
+                    <h3>Melhore sua Visibilidade de Rede</h3>
+                    <p>Precisa avaliar soluções NDR, planejar deployment de sensores ou integrar com seu SOC existente? Entre em contato para uma consultoria especializada.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Avaliação</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/ndr-deteccao-resposta-rede/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/ndr-deteccao-resposta-rede/&text=NDR: Guia Completo de Network Detection and Response" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=NDR Network Detection https://inteligenciabrasil.seg.br/blog/ndr-deteccao-resposta-rede/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em Security Operations, NDR éDetecção de Ameaças de Rede.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
+                        <p>Consultoria especializada em Segurança, Estrategia éTecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../xdr-extended-detection-response/">XDR</a></li>
+                            <li><a href="../siem-implementacao-casos-uso/">SIEM</a></li>
+                            <li><a href="../itdr-deteccao-ameacas-identidade/">ITDR</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Serviços</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

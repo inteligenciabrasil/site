@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo de seguranca em cloud: AWS, Azure e GCP. Modelo de responsabilidade compartilhada, erros comuns, IAM, criptografia, compliance e melhores práticas.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="cloud security, seguranca AWS, seguranca Azure, seguranca GCP, responsabilidade compartilhada, IAM cloud, S3 security, bucket publico, CSPM, cloud compliance">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/seguranca-cloud-aws-azure-gcp/">
+
+    <meta property="og:title" content="Seguranca em Cloud: AWS, Azure e GCP - Guia Completo">
+    <meta property="og:description" content="Como proteger ambientes cloud: modelo de responsabilidade compartilhada, erros comuns e melhores práticas.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/seguranca-cloud-aws-azure-gcp/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="article:published_time" content="2026-01-31T10:00:00-03:00">
+    <meta property="article:section" content="Cloud">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <title>Seguranca em Cloud: AWS, Azure e GCP | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Seguranca em Cloud: AWS, Azure e GCP - Guia Completo","description":"Guia completo de seguranca em cloud: modelo de responsabilidade compartilhada, erros comuns e melhores práticas.","author":{"@type":"Person","name":"Roberto Lima","url":"https://inteligenciabrasil.seg.br/sobre/"},"datePublished":"2026-01-31","dateModified":"2026-01-31","copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/","inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e o modelo de responsabilidade compartilhada?","acceptedAnswer":{"@type":"Answer","text":"O provedor cloud (AWS, Azure, GCP) e responsavel pela seguranca DA nuvem (infraestrutura fisica, rede, hypervisor). O cliente e responsavel pela seguranca NA nuvem (dados, identidades, configuracoes, aplicacoes). A divisao exata varia conforme o servico (IaaS, PaaS, SaaS)."}},{"@type":"Question","name":"Quais os erros de configuracao cloud mais comuns?","acceptedAnswer":{"@type":"Answer","text":"Buckets S3/Blob Storage publicos, security groups permissivos (0.0.0.0/0), credenciais em codigo, IAM com privilegios excessivos, logging desabilitado, recursos sem criptografia, falta de MFA em contas root/admin. Esses erros causam a maioria dos breaches em cloud."}}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Cloud</span>
+            <h1>Seguranca em Cloud: AWS, Azure e GCP - Guia Completo</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 22 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">Seguranca Cloud</li></ol></div></nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#responsabilidade">Modelo de responsabilidade compartilhada</a></li>
+                        <li><a href="#erros">Erros de configuracao mais comuns</a></li>
+                        <li><a href="#iam">IAM e gestao de identidades</a></li>
+                        <li><a href="#providers">Seguranca por provedor</a></li>
+                        <li><a href="#melhores">Melhores práticas</a></li>
+                        <li><a href="#ferramentas">Ferramentas e CSPM</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="responsabilidade">Modelo de Responsabilidade Compartilhada</h2>
+
+                <p>O conceito mais importante em cloud security e o <strong>modelo de responsabilidade compartilhada</strong>. Muitos breaches em cloud ocorrem porque organizações assumem que o provedor cuida de tudo - quando na verdade a seguranca dos dados e configuracoes e responsabilidade do cliente.</p>
+
+                <div class="stat-highlight">
+                    <div class="number">99%</div>
+                    <div class="label">dos breaches em cloud ate 2025 serao culpa do cliente, nao do provedor (Gartner)</div>
+                </div>
+
+                <table class="shared-table">
+                    <thead>
+                        <tr><th>Responsabilidade</th><th>Provedor (AWS/Azure/GCP)</th><th>Cliente</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Infraestrutura fisica</strong></td><td>Data centers, rede, hardware</td><td>-</td></tr>
+                        <tr><td><strong>Virtualizacao</strong></td><td>Hypervisor, isolamento</td><td>-</td></tr>
+                        <tr><td><strong>Sistema operacional</strong></td><td>Somente em PaaS/SaaS</td><td>IaaS: patches, hardening</td></tr>
+                        <tr><td><strong>Rede</strong></td><td>Backbone, DDoS basico</td><td>Security groups, NACLs, WAF</td></tr>
+                        <tr><td><strong>Identidade</strong></td><td>Servico IAM disponivel</td><td>Configuracao, MFA, politicas</td></tr>
+                        <tr><td><strong>Dados</strong></td><td>Durabilidade do storage</td><td>Criptografia, classificacao, acesso</td></tr>
+                        <tr><td><strong>Aplicacoes</strong></td><td>-</td><td>Codigo, vulnerabilidades, configuracao</td></tr>
+                    </tbody>
+                </table>
+
+                <h2 id="erros">Erros de Configuracao Mais Comuns</h2>
+
+                <p>A maioria dos incidentes em cloud nao envolve exploracao sofisticada - sao erros de configuracao basicos:</p>
+
+                <div class="error-card">
+                    <h3><i class="fas fa-folder-open" style="margin-right:10px"></i> Storage Publico</h3>
+                    <p>Buckets S3 (AWS), Blob Storage (Azure) ou Cloud Storage (GCP) expostos publicamente. Causa de vazamentos massivos de dados. Configure Block Public Access por padrao.</p>
+                </div>
+
+                <div class="error-card">
+                    <h4><i class="fas fa-door-open" style="margin-right:10px"></i> Security Groups Permissivos</h4>
+                    <p>Regras com 0.0.0.0/0 permitindo acesso de qualquer IP. Especialmente perigoso em SSH (22), RDP (3389) e bancos de dados. Use IPs especificos ou bastion hosts.</p>
+                </div>
+
+                <div class="error-card">
+                    <h4><i class="fas fa-key" style="margin-right:10px"></i> Credenciais em Codigo</h4>
+                    <p>Access keys e secrets commitados em repositorios. Bots escaneiam GitHub em segundos. Use IAM roles, secrets managers (AWS Secrets Manager, Azure Key Vault, GCP Secret Manager).</p>
+                </div>
+
+                <div class="error-card">
+                    <h4><i class="fas fa-crown" style="margin-right:10px"></i> IAM com Privilegios Excessivos</h4>
+                    <p>Politicas com "*" em actions/resources. Usuarios com AdministratorAccess desnecessario. Aplique principio do <a href="../zero-trust-architecture-guia-completo/">minimo privilegio</a>.</p>
+                </div>
+
+                <div class="error-card">
+                    <h4><i class="fas fa-eye-slash" style="margin-right:10px"></i> Logging Desabilitado</h4>
+                    <p>CloudTrail (AWS), Azure Monitor ou GCP Cloud Audit Logs desativados. Sem logs, nao ha visibilidade de atividades maliciosas. Habilite logging para todos os servicos.</p>
+                </div>
+
+                <h2 id="iam">IAM e Gestao de Identidades</h2>
+
+                <p>Identity and Access Management (IAM) e o fundamento da seguranca em cloud. Controle quem pode fazer o que em quais recursos.</p>
+
+                <h3>Principios de IAM</h3>
+                <ul>
+                    <li><strong>Minimo privilegio:</strong> Apenas permissoes necessarias para a funcao</li>
+                    <li><strong>Separacao de funcoes:</strong> Evite que uma pessoa controle todo o processo</li>
+                    <li><strong>MFA obrigatorio:</strong> Especialmente para contas root/admin</li>
+                    <li><strong>Roles vs Users:</strong> Prefira roles para workloads, evite access keys longevas</li>
+                    <li><strong>Revisao periodica:</strong> Audite permissoes regularmente</li>
+                </ul>
+
+                <h3>IAM por Provedor</h3>
+
+                <div class="provider-card aws">
+                    <h4><i class="fab fa-aws"></i> AWS IAM</h4>
+                    <ul>
+                        <li>Nunca use conta root - crie usuario admin separado</li>
+                        <li>Use IAM Roles para EC2, Lambda, ECS (nao access keys)</li>
+                        <li>Implemente SCPs em AWS Organizations</li>
+                        <li>Use IAM Access Analyzer para detectar recursos expostos</li>
+                        <li>Habilite IAM Identity Center (SSO) para acesso centralizado</li>
+                    </ul>
+                </div>
+
+                <div class="provider-card azure">
+                    <h4><i class="fab fa-microsoft"></i> Azure IAM (Entra ID)</h4>
+                    <ul>
+                        <li>Use Managed Identities para Azure resources</li>
+                        <li>Implemente Privileged Identity Management (PIM)</li>
+                        <li>Configure Conditional Access Policies</li>
+                        <li>Habilite Azure AD Identity Protection</li>
+                        <li>Use Azure Policy para governanca</li>
+                    </ul>
+                </div>
+
+                <div class="provider-card gcp">
+                    <h4><i class="fab fa-google"></i> GCP IAM</h4>
+                    <ul>
+                        <li>Use Service Accounts com permissoes minimas</li>
+                        <li>Evite chaves de service account - use Workload Identity</li>
+                        <li>Implemente Organization Policies</li>
+                        <li>Use IAM Recommender para otimizar permissoes</li>
+                        <li>Configure VPC Service Controls para dados sensiveis</li>
+                    </ul>
+                </div>
+
+                <h2 id="providers">Seguranca por Provedor</h2>
+
+                <h3>AWS Security</h3>
+                <ul>
+                    <li><strong>GuardDuty:</strong> Deteccao de ameacas ML-based</li>
+                    <li><strong>Security Hub:</strong> Agregacao de findings, CIS benchmarks</li>
+                    <li><strong>CloudTrail:</strong> Auditoria de todas as chamadas API</li>
+                    <li><strong>Config:</strong> Compliance continuo de recursos</li>
+                    <li><strong>WAF:</strong> Protecao de aplicacoes web</li>
+                    <li><strong>KMS:</strong> Gerenciamento de chaves de criptografia</li>
+                </ul>
+
+                <h3>Azure Security</h3>
+                <ul>
+                    <li><strong>Defender for Cloud:</strong> CSPM e protecao de workloads</li>
+                    <li><strong>Sentinel:</strong> SIEM cloud-native</li>
+                    <li><strong>Key Vault:</strong> Gestao de secrets e chaves</li>
+                    <li><strong>Network Security Groups:</strong> Firewall de camada 4</li>
+                    <li><strong>Application Gateway + WAF:</strong> Protecao web</li>
+                    <li><strong>Defender for Identity:</strong> Protecao de <a href="../active-directory-security-protecao-ataques/">AD</a></li>
+                </ul>
+
+                <h3>GCP Security</h3>
+                <ul>
+                    <li><strong>Security Command Center:</strong> Visibilidade e deteccao</li>
+                    <li><strong>Chronicle:</strong> SIEM de alta escala</li>
+                    <li><strong>Cloud Armor:</strong> WAF e DDoS protection</li>
+                    <li><strong>VPC Service Controls:</strong> Perimetro de dados</li>
+                    <li><strong>Binary Authorization:</strong> Controle de deploy</li>
+                    <li><strong>Cloud KMS:</strong> Criptografia e chaves</li>
+                </ul>
+
+                <h2 id="melhores">Melhores Praticas de Seguranca Cloud</h2>
+
+                <div class="checklist">
+                    <h3><i class="fas fa-shield-alt"></i> Checklist Essencial</h3>
+                    <ul>
+                        <li>MFA em todas as contas, especialmente root/admin</li>
+                        <li>Block Public Access em storage por padrao</li>
+                        <li>Logging habilitado em todos os servicos</li>
+                        <li>Criptografia em repouso e transito</li>
+                        <li>Security groups/NSGs com regras minimas</li>
+                        <li>IAM com minimo privilegio, revisao periodica</li>
+                        <li>Secrets em secrets manager, nunca em codigo</li>
+                        <li>Backups automatizados e testados</li>
+                        <li>Patching automatizado de VMs</li>
+                        <li>Monitoramento de custos anomalos (pode indicar cryptomining)</li>
+                    </ul>
+                </div>
+
+                <h2 id="ferramentas">Ferramentas e CSPM</h2>
+
+                <p>Cloud Security Posture Management (CSPM) automatiza deteccao de misconfiguration:</p>
+
+                <ul>
+                    <li><strong>Nativos:</strong> AWS Security Hub, Azure Defender, GCP Security Command Center</li>
+                    <li><strong>Multi-cloud:</strong> Prisma Cloud (Palo Alto), Wiz, Orca, Lacework</li>
+                    <li><strong>Open source:</strong> Prowler (AWS), ScoutSuite, CloudSploit</li>
+                    <li><strong>Infrastructure as Code:</strong> Checkov, tfsec, Terrascan</li>
+                </ul>
+
+                <div class="cta-box">
+                    <h3>Precisa de Assessment de Seguranca Cloud?</h3>
+                    <p>Realizamos auditoria de ambientes AWS, Azure e GCP com ferramentas automatizadas e revisao manual.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Assessment</a>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Cloud e mais ou menos seguro que on-premises?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Depende. Provedores cloud investem bilhoes em seguranca que a maioria das empresas nao consegue replicar on-premises. Porem, a facilidade de criar recursos em cloud tambem facilita misconfiguration. Com as práticas certas, cloud pode ser mais seguro - mas requer conhecimento especifico.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Devo usar multi-cloud para maior seguranca?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Multi-cloud aumenta complexidade e superfície de ataque, não necessariamente segurança. A maioria das organizações se beneficia mais de dominar um provedor bem do que usar varios de forma superficial. Multi-cloud faz sentido por outros motivos (vendor lock-in, requisitos especificos), mas raramente por segurança.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como detectar recursos expostos publicamente?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Use ferramentas nativas: AWS IAM Access Analyzer, Azure Defender External Attack Surface Management, GCP Security Command Center. Ferramentas third-party como Prowler, ScoutSuite ou CSPM comerciais tambem identificam recursos publicos. Configure alertas para criacao de recursos com acesso publico.</p></div>
+                    </div>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/seguranca-cloud-aws-azure-gcp/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://wa.me/?text=Seguranca Cloud https://inteligenciabrasil.seg.br/blog/seguranca-cloud-aws-azure-gcp/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80">
+                    <div class="author-info">
+                        <h3>Inteligencia Brasil</h3>
+                        <p>Consultoria especializada em Cloud Security, DevSecOps e Arquitetura Segura.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140"><p>Consultoria em Seguranca e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Relacionados</h4><ul><li><a href="../kubernetes-container-security/">Container Security</a></li><li><a href="../zero-trust-architecture-guia-completo/">Zero Trust</a></li><li><a href="../devsecops-seguranca-desenvolvimento/">DevSecOps</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 Inteligencia Brasil.</p></div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

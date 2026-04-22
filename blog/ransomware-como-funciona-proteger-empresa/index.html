@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo sobre ransomware: como funciona, principais grupos, vetores de ataque, impacto financeiro e estratégias de protecao e recuperacao para empresas brasileiras.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="ransomware, como funciona ransomware, protecao ransomware, LockBit, BlackCat, backup ransomware, sequestro de dados, ciberseguranca empresarial, recuperacao ransomware">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/ransomware-como-funciona-proteger-empresa/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Ransomware: Como Funciona e Como Proteger sua Empresa">
+    <meta property="og:description" content="Entenda como o ransomware funciona, principais grupos, estatisticas de impacto e estratégias comprovadas de protecao e recuperacao.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/ransomware-como-funciona-proteger-empresa/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-30T10:00:00-03:00">
+    <meta property="article:section" content="Ciberseguranca">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ransomware: Como Funciona e Como Proteger">
+    <meta name="twitter:description" content="Guia completo sobre ransomware para empresas brasileiras.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Ransomware: Como Funciona e Como Proteger sua Empresa | Inteligencia Brasil</title>
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Ransomware: Como Funciona e Como Proteger sua Empresa",
+        "description": "Guia completo sobre ransomware: como funciona, principais grupos, vetores de ataque, impacto financeiro e estratégias de protecao.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": { "@type": "Organization", "name": "Inteligencia Brasil", "logo": { "@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp" } },
+        "datePublished": "2026-01-30",
+        "dateModified": "2026-01-30","copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Devo pagar o resgate em caso de ransomware?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A recomendacao geral e NAO pagar. Pagar financia criminosos, nao garante recuperacao dos dados (30% nao recuperam mesmo pagando), e coloca a empresa como alvo para ataques futuros. Invista em prevencao e backups. Em casos extremos, consulte especialistas e considere implicacoes legais."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual o custo medio de um ataque de ransomware?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Segundo o IBM Cost of a Data Breach 2025, o custo medio global de um ataque de ransomware e de US$ 5.13 milhoes, incluindo resgate, downtime, recuperacao, investigacao e danos reputacionais. No Brasil, o custo medio e de R$ 6.75 milhoes. PMEs podem ter custos proporcionalmente maiores devido a menor resiliencia."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Backup em nuvem protege contra ransomware?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Depende da implementacao. Backup sincronizado automaticamente pode ser criptografado junto. O ideal e backup 3-2-1: 3 copias, 2 midias diferentes, 1 offsite. Adicione imutabilidade (write-once) e air-gap (desconectado) para protecao maxima. Teste restauracao regularmente."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quanto tempo leva para recuperar de um ransomware?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Em media, 22 dias para recuperacao completa das operacoes. Empresas com plano de resposta a incidentes e backups testados recuperam em 3-7 dias. Sem preparacao, pode levar semanas ou meses. O tempo de deteccao (antes da criptografia) e critico - quanto antes detectar, menor o impacto."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Ransomware: Como Funciona e Como Proteger" }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ameacas</span>
+            <h1>Ransomware: Como Funciona e Como Proteger sua Empresa</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Ransomware</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color: #60A5FA;"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#oque">O que e ransomware</a></li>
+                        <li><a href="#estatisticas">Estatisticas e impacto no Brasil</a></li>
+                        <li><a href="#como-funciona">Como funciona um ataque</a></li>
+                        <li><a href="#grupos">Principais grupos de ransomware</a></li>
+                        <li><a href="#vetores">Vetores de ataque mais comuns</a></li>
+                        <li><a href="#protecao">Estrategias de protecao</a></li>
+                        <li><a href="#resposta">O que fazer se for atacado</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="oque">O que e Ransomware</h2>
+
+                <p>
+                    <strong>Ransomware</strong> e um tipo de malware que criptografa arquivos e sistemas de uma vitima, exigindo pagamento de resgate (ransom) para fornecer a chave de descriptografia. Nos ultimos anos, evoluiu de ataques oportunistas para operacoes sofisticadas conduzidas por grupos organizados que funcionam como verdadeiras empresas criminosas.
+                </p>
+
+                <div class="warning-box">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Dupla e Tripla Extorsao</h3>
+                    <p>Ransomware moderno nao apenas criptografa dados. Na <strong>dupla extorsao</strong>, dados sao roubados antes da criptografia e ameaca-se vazar publicamente. Na <strong>tripla extorsao</strong>, adiciona-se ataques DDoS ou contato direto com clientes/parceiros da vitima para aumentar a pressao.</p>
+                </div>
+
+                <h2 id="estatisticas">Estatisticas e Impacto no Brasil</h2>
+
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="number">R$ 6.75M</div>
+                        <div class="label">Custo medio de um ataque no Brasil (IBM 2025)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">22 dias</div>
+                        <div class="label">Tempo medio de recuperacao</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">71%</div>
+                        <div class="label">Das empresas brasileiras sofreram tentativa em 2025</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">US$ 1.1M</div>
+                        <div class="label">Resgate medio exigido globalmente</div>
+                    </div>
+                </div>
+
+                <p>
+                    Segundo o <strong>IBM Cost of a Data Breach 2025</strong>, ataques de ransomware tiveram o maior custo medio entre todos os tipos de breach. No Brasil, o setor financeiro, saude e varejo sao os mais visados, com ataques crescendo <strong>62% em relacao a 2024</strong>.
+                </p>
+
+                <p>
+                    A <strong>FEBRABAN</strong> reportou que fraudes ciberneticas no Brasil, incluindo ransomware, aumentaram significativamente, com prejuizos totais superando R$ 2.5 bilhoes em 2025. PMEs sao particularmente vulneraveis por terem menos recursos para defesa e recuperacao.
+                </p>
+
+                <h2 id="como-funciona">Como Funciona um Ataque de Ransomware</h2>
+
+                <p>
+                    Um ataque de ransomware moderno segue multiplas fases, frequentemente mapeadas no framework <a href="../mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/">MITRE ATT&CK</a>. O tempo entre acesso inicial e criptografia pode variar de horas a meses, dependendo do grupo.
+                </p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>1. Acesso Inicial</h3>
+                        <p>Atacantes ganham acesso via phishing, vulnerabilidades expostas (RDP, VPN) ou credenciais vazadas. Grupos tambem compram acesso de "Initial Access Brokers".</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>2. Reconhecimento e Movimentacao Lateral</h4>
+                        <p>Exploracao do ambiente: mapeamento de rede, identificacao de sistemas criticos, escalacao de privilegios, comprometimento de Domain Controller.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>3. Exfiltracao de Dados</h4>
+                        <p>Antes de criptografar, dados sensiveis sao copiados para servidores dos atacantes. Isso habilita dupla extorsao e aumenta pressao para pagamento.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>4. Desativacao de Defesas</h4>
+                        <p>EDR/antivirus sao desabilitados, backups sao deletados ou criptografados, shadow copies do Windows sao removidas.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>5. Deployment do Ransomware</h4>
+                        <p>Execucao massiva via GPO, PsExec ou outras ferramentas. Criptografia de arquivos em endpoints e servidores. Nota de resgate e exibida.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>6. Extorsao</h4>
+                        <p>Vitima recebe instrucoes de pagamento (geralmente em criptomoedas). Negociacao pode ocorrer via chat. Prazo para vazamento de dados e estabelecido.</p>
+                    </div>
+                </div>
+
+                <h2 id="grupos">Principais Grupos de Ransomware (2025-2026)</h2>
+
+                <div class="group-card">
+                    <h3><i class="fas fa-skull" style="color: #ef4444;"></i> LockBit 3.0 <span class="tag">RaaS</span></h3>
+                    <p>Um dos grupos mais ativos globalmente, opera modelo Ransomware-as-a-Service (RaaS). Conhecido por velocidade de criptografia e programa de bug bounty proprio. Alvos incluem governo, saude e manufatura.</p>
+                </div>
+
+                <div class="group-card">
+                    <h4><i class="fas fa-skull" style="color: #ef4444;"></i> BlackCat/ALPHV <span class="tag">Rust-based</span></h4>
+                    <p>Primeiro ransomware escrito em Rust, dificultando deteccao. Modelo RaaS com afiliados recebendo ate 90% do resgate. Especializados em dupla extorsao com site de leaks.</p>
+                </div>
+
+                <div class="group-card">
+                    <h4><i class="fas fa-skull" style="color: #ef4444;"></i> Cl0p <span class="tag">Supply Chain</span></h4>
+                    <p>Notorio por explorar vulnerabilidades em software amplamente utilizado (MOVEit, GoAnywhere). Ataque via supply chain permite comprometer multiplas vitimas simultaneamente.</p>
+                </div>
+
+                <div class="group-card">
+                    <h4><i class="fas fa-skull" style="color: #ef4444;"></i> Royal/BlackSuit <span class="tag">Manual</span></h4>
+                    <p>Grupo que prefere ataques manuais e direcionados vs. automatizados. Foco em grandes empresas com capacidade de pagar resgates altos. Conhecido por exfiltrar TBs de dados.</p>
+                </div>
+
+                <h2 id="vetores">Vetores de Ataque Mais Comuns</h2>
+
+                <h3>1. Phishing e Engenharia Social</h3>
+                <p>
+                    O vetor mais comum (aproximadamente 40% dos casos). E-mails com anexos maliciosos (macros, ISO, OneNote) ou links para sites de phishing que capturam credenciais. Ataques cada vez mais direcionados (spear phishing) usam informacoes especificas da vitima.
+                </p>
+                <p>
+                    Para entender melhor esse vetor, consulte nosso artigo sobre <a href="../phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">phishing e monitoramento continuo</a>.
+                </p>
+
+                <h3>2. Exploracao de Vulnerabilidades</h3>
+                <p>
+                    Servicos expostos na internet com vulnerabilidades conhecidas: VPNs (Fortinet, Pulse Secure, Citrix), Exchange Server, ferramentas de gerenciamento remoto. Patches atrasados sao porta de entrada comum.
+                </p>
+
+                <h3>3. RDP Exposto</h3>
+                <p>
+                    Remote Desktop Protocol exposto diretamente na internet e alvo frequente. Atacantes usam brute force ou credenciais vazadas. Milhoes de servidores RDP estao expostos globalmente.
+                </p>
+
+                <h3>4. Initial Access Brokers (IABs)</h3>
+                <p>
+                    Criminosos especializados vendem acesso ja comprometido para grupos de ransomware. Precos variam de US$ 500 a US$ 100.000+ dependendo do alvo. Isso reduz a barreira de entrada para operadores de ransomware.
+                </p>
+
+                <h3>5. Supply Chain</h3>
+                <p>
+                    Comprometimento de software legitimo ou provedores de servicos permite atingir multiplas vitimas. Exemplos: Kaseya, SolarWinds, MOVEit. Impacto amplificado e mais dificil de detectar.
+                </p>
+
+                <h2 id="protecao">Estrategias de Protecao contra Ransomware</h2>
+
+                <div class="checklist">
+                    <h3><i class="fas fa-shield-alt"></i> Controles Essenciais (Must-Have)</h3>
+                    <ul>
+                        <li><strong>Backup 3-2-1 testado:</strong> 3 copias, 2 midias, 1 offsite/air-gapped. Teste restauracao regularmente</li>
+                        <li><strong>EDR em todos os endpoints:</strong> CrowdStrike, SentinelOne, Defender for Endpoint</li>
+                        <li><strong>MFA em tudo:</strong> Especialmente VPN, e-mail, sistemas criticos e acesso administrativo</li>
+                        <li><strong>Patch management:</strong> Vulnerabilidades criticas em menos de 72h, especialmente perimetro</li>
+                        <li><strong>Segmentacao de rede:</strong> Isolar sistemas criticos, limitar movimentacao lateral</li>
+                        <li><strong>Minimo privilegio:</strong> Usuarios e servicos apenas com permissoes necessárias</li>
+                        <li><strong>Email security:</strong> Filtro de anexos, sandbox para links, DMARC configurado</li>
+                    </ul>
+                </div>
+
+                <div class="checklist">
+                    <h4><i class="fas fa-lock"></i> Controles Avancados (Should-Have)</h4>
+                    <ul>
+                        <li><strong>Monitoramento 24/7:</strong> SOC interno ou <a href="../soc-vs-mdr-vs-mssp-qual-modelo-certo/">servico MDR/MSSP</a></li>
+                        <li><strong>Threat Hunting:</strong> Busca proativa de <a href="../ameaca-persistente-avancada-o-que-e-apt/">indicadores de comprometimento</a></li>
+                        <li><strong>Application Whitelisting:</strong> Permitir apenas softwares autorizados</li>
+                        <li><strong>LAPS:</strong> Senhas de admin local únicas por maquina</li>
+                        <li><strong>Disable macros:</strong> Ou ao menos bloquear da internet</li>
+                        <li><strong>Network Detection (NDR):</strong> Identificar exfiltracao e C2</li>
+                        <li><strong>Plano de resposta testado:</strong> Exercicios tabletop e simulacoes regulares</li>
+                    </ul>
+                </div>
+
+                <h3>Estrategia de Backup Anti-Ransomware</h3>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-database" style="color: #60A5FA; margin-right: 10px;"></i> Regra 3-2-1-1-0</h4>
+                    <p>Evolucao da regra classica para cenario de ransomware:</p>
+                    <ul>
+                        <li><strong>3</strong> copias dos dados</li>
+                        <li><strong>2</strong> tipos de midia diferentes</li>
+                        <li><strong>1</strong> copia offsite (cloud ou localizacao fisica separada)</li>
+                        <li><strong>1</strong> copia offline/air-gapped (desconectada da rede)</li>
+                        <li><strong>0</strong> erros verificados (teste de restauracao regular)</li>
+                    </ul>
+                </div>
+
+                <p>
+                    Considere backups <strong>imutaveis</strong> (WORM - Write Once Read Many) que nao podem ser alterados mesmo com credenciais administrativas. Servicos de cloud como AWS S3 Object Lock, Azure Immutable Blob e Veeam Hardened Repository oferecem essa funcionalidade.
+                </p>
+
+                <h2 id="resposta">O que Fazer se For Atacado</h2>
+
+                <h3>Primeiros 15 Minutos (Contencao)</h3>
+                <ol>
+                    <li><strong>NAO desligue os sistemas</strong> - evidencias volateis serao perdidas</li>
+                    <li>Isole sistemas afetados da rede (desconectar cabo, desabilitar Wi-Fi)</li>
+                    <li>Desconecte backups da rede imediatamente</li>
+                    <li>Preserve logs e evidencias</li>
+                    <li>Ative o time de resposta a incidentes</li>
+                </ol>
+
+                <h3>Primeiras Horas (Avaliacao)</h3>
+                <ol>
+                    <li>Identifique a variante de ransomware (pode haver decryptor gratuito)</li>
+                    <li>Determine extensao do comprometimento (quais sistemas, quais dados)</li>
+                    <li>Verifique integridade dos backups</li>
+                    <li>Documente tudo para investigacao forense</li>
+                    <li>Comunique stakeholders internos (sem detalhes publicos ainda)</li>
+                </ol>
+
+                <h3>Primeiros Dias (Recuperacao)</h3>
+                <ol>
+                    <li>Erradique a ameaca antes de restaurar (atacante pode ter persistencia)</li>
+                    <li>Restaure sistemas criticos a partir de backups limpos</li>
+                    <li>Reset de todas as credenciais (assume que foram comprometidas)</li>
+                    <li>Monitore intensivamente para reinfeccao</li>
+                    <li>Cumpra obrigacoes legais (LGPD, reguladores, clientes)</li>
+                </ol>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-ban"></i> Sobre Pagar o Resgate</h4>
+                    <p><strong>A recomendacao e NAO pagar.</strong> Motivos: financia criminosos, nao garante recuperacao (30% nao recebem chave mesmo pagando), pode violar sancoes (OFAC), e marca a empresa como pagadora (alvo futuro). Invista o valor em prevencao e recuperacao.</p>
+                </div>
+
+                <p>
+                    Para um guia completo sobre resposta a incidentes, consulte nosso artigo sobre <a href="../resposta-incidentes-guia-pratico/">Resposta a Incidentes: Guia Pratico</a>.
+                </p>
+
+                <div class="cta-box">
+                    <h3>Precisa de Ajuda com Seguranca contra Ransomware?</h3>
+                    <p>Oferecemos assessment de resiliencia, implementacao de controles e resposta a incidentes.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Antivirus tradicional protege contra ransomware?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Antivirus baseado em assinaturas tem eficácia limitada contra ransomware moderno, que usa técnicas de evasao e variantes customizadas. Solucoes de EDR (Endpoint Detection and Response) com análise comportamental sao mais eficazes, pois detectam atividades suspeitas como criptografia em massa mesmo sem conhecer a variante especifica.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Seguro cyber cobre ransomware?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Depende da apolice. Muitos seguros cyber cobrem custos de resposta a incidentes, recuperacao e ate pagamento de resgate. Porem, seguradoras estao mais rigorosas: exigem controles minimos (MFA, EDR, backups), podem negar cobertura por negligencia, e premios aumentaram significativamente. Leia a apolice com atencao.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Ransomware pode afetar sistemas Linux ou Mac?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim. Embora Windows seja o alvo mais comum, existem variantes para Linux (especialmente servidores VMware ESXi) e macOS. Grupos como LockBit e BlackCat tem versoes multiplataforma. Servidores Linux com dados criticos ou ambientes de virtualizacao sao alvos crescentes.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Existe decryptor gratuito para algum ransomware?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Para algumas variantes antigas ou quando chaves sao obtidas pela policia, sim. O projeto <a href="https://www.nomoreransom.org/" target="_blank" rel="nofollow noopener">No More Ransom</a> mantem uma colecao de decryptors gratuitos. Sempre verifique antes de pagar. Porem, grupos modernos raramente tem falhas que permitam descriptografia sem a chave.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons">
+                    <span style="color: #94A3B8;">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/ransomware-como-funciona-proteger-empresa/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/ransomware-como-funciona-proteger-empresa/&text=Ransomware: Como Funciona e Como Proteger" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Ransomware: Como Funciona e Como Proteger https://inteligenciabrasil.seg.br/blog/ransomware-como-funciona-proteger-empresa/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <!-- Author Box -->
+                <div class="author-box">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80">
+                    </picture>
+                    <div class="author-info">
+                        <h3><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h3>
+                        <p>Consultoria especializada em Seguranca da Informacao, Resposta a Incidentes e Inteligencia de Ameacas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../resposta-incidentes-guia-pratico/">Resposta a Incidentes</a></li>
+                            <li><a href="../ameaca-persistente-avancada-o-que-e-apt/">APTs</a></li>
+                            <li><a href="../phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">Phishing</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

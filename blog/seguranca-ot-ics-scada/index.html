@@ -1,0 +1,724 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo sobre segurança OT/ICS/SCADA: como proteger sistemas de controle industrial, implementar segmentação de rede, monitorar protocolos industriais e defender infraestrutura crítica.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="OT Security, ICS Security, SCADA, segurança industrial, infraestrutura crítica, Purdue Model, segmentação OT, Modbus, DNP3, IEC 62443, NERC CIP">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/seguranca-ot-ics-scada/">
+
+    <meta property="og:title" content="Segurança OT/ICS/SCADA: Guia Completo para Infraestrutura Crítica">
+    <meta property="og:description" content="Como proteger sistemas de controle industrial, implementar defesas em profundidade e defender infraestrutura crítica.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/seguranca-ot-ics-scada/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-31T19:00:00-03:00">
+    <meta property="article:section" content="Infraestrutura Crítica">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Segurança OT/ICS/SCADA: Guia Completo">
+    <meta name="twitter:description" content="Como proteger sistemas de controle industrial éinfraestrutura crítica.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Segurança OT/ICS/SCADA: Guia Completo para Infraestrutura Crítica | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Segurança OT/ICS/SCADA: Guia Completo para Infraestrutura Crítica",
+        "description": "Como proteger sistemas de controle industrial, implementar defesas em profundidade e defender infraestrutura crítica.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-segurança-da-informação-cyber-security.png"}},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/seguranca-ot-ics-scada/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Qual a diferença entre IT e OT Security?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "IT Security foca em confidencialidade, integridade édisponibilidade de dados, com ciclos de atualização frequentes. OT Security prioriza disponibilidade e segurança física (safety), protegendo sistemas que controlam processos físicos com ciclos de vida de 15-25 anos."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que é o Modelo Purdue?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O Modelo Purdue (ISA-95/IEC 62443) define níveis de segmentação para ambientes industriais: Nível 0 (Processo Físico), Nível 1 (PLCs, RTUs), Nível 2 (HMI, SCADA), Nível 3 (MES, Historian), DMZ, e Níveis 4-5 (IT Corporativo)."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais os principais ataques contra sistemas industriais?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Principais ataques incluem Stuxnet (centrífugas iranianas), Industroyer (blackout na Ucrânia), Triton (sistemas de segurança), Colonial Pipeline (ransomware em oleoduto), éataques de engenharia social visando operadores."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Segurança OT/ICS/SCADA"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#serviços">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Infraestrutura Crítica</span>
+            <h1>Segurança OT/ICS/SCADA: Guia Completo para Infraestrutura Crítica</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 25 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Segurança OT/ICS/SCADA</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#introducao">Introdução</a></li>
+                        <li><a href="#fundamentos">Fundamentos de OT/ICS</a></li>
+                        <li><a href="#it-vs-ot">IT vs OT: Diferenças Fundamentais</a></li>
+                        <li><a href="#ameaças">Ameaças e Ataques Históricos</a></li>
+                        <li><a href="#purdue-model">Modelo Purdue e Segmentação</a></li>
+                        <li><a href="#protocolos">Protocolos Industriais</a></li>
+                        <li><a href="#defesa">Defesa em Profundidade</a></li>
+                        <li><a href="#monitoramento">Monitoramento e Detecção</a></li>
+                        <li><a href="#frameworks">Frameworks e Compliance</a></li>
+                        <li><a href="#implementação">Estratégia de implementação</a></li>
+                        <li><a href="#faq">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introducao">Introdução</h2>
+
+                <p>
+                    Sistemas de controle industrial (ICS) operam infraestrutura essencial para a sociedade moderna: redes elétricas, tratamento de água, refinarias, fábricas, transporte ferroviário emuito mais. Um ataque bem-sucedido não resulta apenas em perda de dados - pode causar <strong>blackouts, contaminação de água, explosões émortes</strong>.
+                </p>
+
+                <div class="stat-highlight">
+                    <div class="number">70%</div>
+                    <div class="label">dos ataques a infraestrutura crítica envolvem vulnerabilidades conhecidas não corrigidas (CISA)</div>
+                </div>
+
+                <p>
+                    A convergência entre IT (Tecnologia da Informação) éOT (Tecnologia Operacional), impulsionada pela <a href="../industria-4-0/">Indústria 4.0</a>, expôs sistemas historicamente isolados a ameaças cibernéticas. Atacantes estatais égrupos criminosos reconhecem o valor estratégico desses alvos, como demonstrado por ataques como <strong>Stuxnet, Industroyer, Triton éColonial Pipeline</strong>.
+                </p>
+
+                <h2 id="fundamentos">Fundamentos de OT/ICS</h2>
+
+                <h3>Terminologia Essencial</h3>
+
+                <div class="concept-card">
+                    <h4><i class="fas fa-book" style="color:#60A5FA;margin-right:10px"></i> Glossário OT/ICS</h4>
+                    <ul>
+                        <li><strong>OT (Operational Technology):</strong> Hardware ésoftware que detecta ou causa mudanças através de monitoramento e/ou controle direto de equipamentos industriais</li>
+                        <li><strong>ICS (Industrial Control Systems):</strong> Termo genérico para sistemas de controle industrial, inclui SCADA, DCS, PLC</li>
+                        <li><strong>SCADA (Supervisory Control and Data Acquisition):</strong> Sistema de supervisão eaquisição de dados distribuído geograficamente</li>
+                        <li><strong>DCS (Distributed Control System):</strong> Sistema de controle distribuído, comum em processos contínuos</li>
+                        <li><strong>PLC (Programmable Logic Controller):</strong> Controlador lógico programável, "cérebro" que executa lógica de controle</li>
+                        <li><strong>RTU (Remote Terminal Unit):</strong> Unidade terminal remota, coleta dados em campo e envia para SCADA</li>
+                        <li><strong>HMI (Human-Machine Interface):</strong> Interface gráfica para operadores monitorarem e controlarem processos</li>
+                        <li><strong>Historian:</strong> Banco de dados especializado para séries temporais de dados de processo</li>
+                        <li><strong>SIS (Safety Instrumented System):</strong> Sistema independente para segurança de processo (safety, não security)</li>
+                    </ul>
+                </div>
+
+                <h3>Arquitetura Típica de ICS</h3>
+
+                <p>
+                    Um sistema ICS típico consiste em camadas hierárquicas: no nível mais baixo estão sensores eatuadores conectados a PLCs, que executam lógica de controle em tempo real. Esses PLCs comunicam-se com servidores SCADA e HMIs na sala de controle, onde operadores monitoram e intervêm quando necessário.
+                </p>
+
+                <h2 id="it-vs-ot">IT vs OT: Diferenças Fundamentais</h2>
+
+                <p>
+                    Aplicar práticas de segurança de TI diretamente em ambientes OT pode causar mais danos que ataques. As diferenças fundamentais exigem abordagens específicas.
+                </p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>IT</th>
+                            <th>OT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Prioridade CIA</strong></td>
+                            <td>Confidencialidade > Integridade > Disponibilidade</td>
+                            <td>Disponibilidade > Integridade > Confidencialidade</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Safety</strong></td>
+                            <td>Não aplicável</td>
+                            <td>CRÍTICO - Vidas em risco</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ciclo de Vida</strong></td>
+                            <td>3-5 anos</td>
+                            <td>15-25 anos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Patches</strong></td>
+                            <td>Frequentes (Patch Tuesday)</td>
+                            <td>Raros, planejados (paradas anuais)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Downtime</strong></td>
+                            <td>Tolerável (manutenção)</td>
+                            <td>Inaceitável (24/7/365)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Protocolos</strong></td>
+                            <td>TCP/IP, HTTP, TLS</td>
+                            <td>Modbus, DNP3, OPC, EtherNet/IP</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Consequência</strong></td>
+                            <td>Perda de dados, financeiro</td>
+                            <td>Danos físicos, explosões, mortes</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning-box">
+                    <h3><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Cuidados ao aplicar práticas IT em OT</h3>
+                    <ul>
+                        <li><strong>Scans de vulnerabilidade:</strong> Podem crashar PLCs e RTUs - use scanning passivo</li>
+                        <li><strong>Antivirus:</strong> Pode quebrar sistemas legados - teste extensivamente</li>
+                        <li><strong>Patches:</strong> Requerem aprovação do fabricante etestes em homologação</li>
+                        <li><strong>Reboots:</strong> Podem causar paradas de produção não planejadas</li>
+                    </ul>
+                </div>
+
+                <h2 id="ameaças">Ameaças e Ataques Históricos</h2>
+
+                <h3>Ataques que Mudaram o Cenário</h3>
+
+                <h4>Stuxnet (2010)</h4>
+                <p>
+                    Primeiro malware projetado especificamente para ICS. Sabotou centrífugas de enriquecimento de urânio no Irã modificando a velocidade dos motores enquanto mostrava valores normais para operadores. Demonstrou que ataques cibernéticos podem causar destruição física.
+                </p>
+
+                <h4>Industroyer/CrashOverride (2016)</h4>
+                <p>
+                    Causou blackout em Kiev, Ucrânia, manipulando subestações elétricas. Malware modular com payloads específicos para protocolos industriais (IEC 61850, IEC 104, OPC DA).
+                </p>
+
+                <h4>Triton/Trisis (2017)</h4>
+                <p>
+                    Atacou sistemas de segurança (SIS) Triconex em planta petroquímica na Arábia Saudita. Objetivo era desabilitar sistemas de segurança para permitir condições de operação perigosas. Um dos ataques mais perigosos já documentados.
+                </p>
+
+                <h4>Colonial Pipeline (2021)</h4>
+                <p>
+                    Ransomware DarkSide forçou desligamento do maior oleoduto dos EUA. Impactou abastecimento de combustível na costa leste americana. Demonstrou vulnerabilidade de infraestrutura crítica a ransomware.
+                </p>
+
+                <h2 id="purdue-model">Modelo Purdue e Segmentação</h2>
+
+                <p>
+                    O <strong>Modelo Purdue</strong> (formalizado em ISA-95/IEC 62443) define níveis hierárquicos para segmentação de ambientes industriais:
+                </p>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-layer-group" style="color:#60A5FA;margin-right:10px"></i> Níveis do Modelo Purdue</h3>
+                    <ul>
+                        <li><strong>Nível 5:</strong> Rede Corporativa - Email, ERP, CRM, Internet</li>
+                        <li><strong>Nível 4:</strong> Planejamento de Negócio - ERP Manufacturing, Scheduling</li>
+                        <li><strong>DMZ Industrial:</strong> Jump Server, Historian Mirror, Patch Server</li>
+                        <li><strong>Nível 3:</strong> Operações - MES, Historian, Asset Management</li>
+                        <li><strong>Nível 2:</strong> Controle de Processo - HMI, SCADA Server, OPC Server</li>
+                        <li><strong>Nível 1:</strong> Controladores - PLCs, RTUs, DCS Controllers, SIS</li>
+                        <li><strong>Nível 0:</strong> Processo Físico - Sensores, Atuadores, Válvulas, Motores</li>
+                    </ul>
+                </div>
+
+                <h3>Princípios de Segmentação</h3>
+
+                <h4>1. DMZ Industrial</h4>
+                <p>Zona desmilitarizada entre IT e OT. Nenhum tráfego direto de IT para OT - tudo passa pela DMZ:</p>
+                <ul>
+                    <li>Jump servers para acesso administrativo</li>
+                    <li>Historian mirror para BI corporativo acessar dados</li>
+                    <li>Patch/Update servers para distribuição controlada</li>
+                    <li>Remote access gateway (nunca VPN direto para OT)</li>
+                </ul>
+
+                <h4>2. Firewalls Industriais</h4>
+                <p>Firewalls entre níveis devem entender protocolos industriais para fazer DPI (Deep Packet Inspection) de Modbus, DNP3, OPC. Firewalls de TI tradicionais veem apenas TCP/IP.</p>
+
+                <h4>3. Segmentação por Célula</h4>
+                <p>Além dos níveis verticais, segmentar horizontalmente por áreas funcionais (células) para limitar blast radius de comprometimentos.</p>
+
+                <h2 id="protocolos">Protocolos Industriais</h2>
+
+                <p>
+                    Protocolos industriais foram projetados para confiabilidade édeterminismo, não segurança. Maioria não tem autenticação ou criptografia nativa.
+                </p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Protocolo</th>
+                            <th>Uso</th>
+                            <th>Segurança</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Modbus TCP/RTU</strong></td>
+                            <td>Mais comum em ambientes industriais (porta 502)</td>
+                            <td>Sem autenticação, sem criptografia</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DNP3</strong></td>
+                            <td>Distribuição de energia, água (porta 20000)</td>
+                            <td>Secure Authentication opcional</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OPC DA/UA</strong></td>
+                            <td>Comunicação SCADA-aplicações</td>
+                            <td>OPC UA tem segurança built-in</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EtherNet/IP</strong></td>
+                            <td>Automação Rockwell/Allen-Bradley (porta 44818)</td>
+                            <td>Limitada</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PROFINET</strong></td>
+                            <td>Automação Siemens</td>
+                            <td>Variantes RT, IRT</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IEC 61850</strong></td>
+                            <td>Subestações elétricas</td>
+                            <td>GOOSE, MMS</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Vulnerabilidades Comuns</h3>
+                <ul>
+                    <li><strong>Sem autenticação:</strong> Qualquer um na rede pode enviar comandos</li>
+                    <li><strong>Sem criptografia:</strong> Tráfego em texto claro, fácil de interceptar</li>
+                    <li><strong>Replay attacks:</strong> Comandos capturados podem ser reenviados</li>
+                    <li><strong>Man-in-the-middle:</strong> Valores de sensores podem ser alterados</li>
+                    <li><strong>DoS:</strong> Flood de pacotes pode crashar dispositivos</li>
+                </ul>
+
+                <h2 id="defesa">Defesa em Profundidade</h2>
+
+                <h3>Camadas de Proteção</h3>
+
+                <h4>1. Inventário eVisibilidade</h4>
+                <p>Você não pode proteger o que não conhece:</p>
+                <ul>
+                    <li>Inventário completo de todos os dispositivos OT</li>
+                    <li>Mapeamento de comunicações e fluxos de dados</li>
+                    <li>Identificação de firmware e versões</li>
+                    <li>Descoberta de dispositivos "shadow" conectados</li>
+                </ul>
+
+                <h4>2. Segmentação de rede</h4>
+                <ul>
+                    <li>Implementar Modelo Purdue com DMZ</li>
+                    <li>Firewalls industriais com DPI de protocolos OT</li>
+                    <li>Micro-segmentação de células críticas</li>
+                    <li>VLANs separadas por função</li>
+                </ul>
+
+                <h4>3. Hardening de Dispositivos</h4>
+                <ul>
+                    <li>Desabilitar serviços e portas não utilizados</li>
+                    <li>Alterar credenciais padrão de fábrica</li>
+                    <li>Habilitar logging onde disponível</li>
+                    <li>Atualizar firmware quando possível e testado</li>
+                </ul>
+
+                <h4>4. Controle de Acesso</h4>
+                <ul>
+                    <li>Autenticação forte para acesso remoto</li>
+                    <li>MFA para sistemas críticos</li>
+                    <li>Role-Based Access Control (RBAC)</li>
+                    <li>Principio do menor privilégio</li>
+                </ul>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-lightbulb" style="margin-right:10px"></i> Top 10 Controles para OT Security</h4>
+                    <ol>
+                        <li>Inventário de ativos OT atualizado</li>
+                        <li>Segmentação IT/OT com DMZ</li>
+                        <li>Remocao de acesso remoto direto (VPN para PLCs)</li>
+                        <li>Autenticação forte para acesso administrativo</li>
+                        <li>Backup offline de configurações e lógica de PLCs</li>
+                        <li>Monitoramento de rede OT (<a href="../ndr-deteccao-resposta-rede/">NDR</a>)</li>
+                        <li>Política de USB emídia removível</li>
+                        <li>Gestão de vulnerabilidades (scan passivo)</li>
+                        <li>Treinamento de awareness para operadores</li>
+                        <li>Plano de resposta a incidentes OT</li>
+                    </ol>
+                </div>
+
+                <h2 id="monitoramento">Monitoramento e Detecção</h2>
+
+                <h3>NDR para OT</h3>
+                <p>Soluções <a href="../ndr-deteccao-resposta-rede/">NDR</a> especializadas para OT entendem protocolos industriais e podem:</p>
+                <ul>
+                    <li>Fazer inventário passivo de dispositivos</li>
+                    <li>Detectar comandos anômalo em Modbus, DNP3, etc.</li>
+                    <li>Alertar sobre alterações em lógica de PLCs</li>
+                    <li>Identificar tentativas de reconhecimento</li>
+                    <li>Detectar malware específico de ICS</li>
+                </ul>
+
+                <h3>O que Monitorar em OT</h3>
+                <ul>
+                    <li><strong>Alterações em Configuração:</strong> Lógica de PLC, setpoints, firmware</li>
+                    <li><strong>Comportamento de Rede:</strong> Novos dispositivos, comunicações não esperadas</li>
+                    <li><strong>Comportamento de Processo:</strong> Valores fora de range, comandos em horários atípicos</li>
+                    <li><strong>Acesso éAutenticação:</strong> Logins anômalo, uso de credenciais privilegiadas</li>
+                </ul>
+
+                <h3>Integração com o SOC</h3>
+                <p>Alertas de OT devem ser correlacionados com eventos de IT no <a href="../siem-implementacao-casos-uso/">SIEM</a>, mas com tratamento especial:</p>
+                <ul>
+                    <li>Analistas com conhecimento de OT no SOC</li>
+                    <li>Playbooks específicos para incidentes OT</li>
+                    <li>Escalação para equipe de de automação/engenharia</li>
+                    <li>Coordenação com operações da planta</li>
+                </ul>
+
+                <h2 id="frameworks">Frameworks e Compliance</h2>
+
+                <h3>IEC 62443</h3>
+                <p>Padrão internacional para segurança de sistemas de automação e controle industrial (IACS). Define Security Levels (SL 1-4) baseados em capacidade do atacante, requisitos para fabricantes, integradores e operadores.</p>
+
+                <h3>NIST SP 800-82</h3>
+                <p>Guide to Industrial Control Systems Security. Referencia do governo americano com arquiteturas de referência, controles específicos para ICS emapeamento para NIST CSF.</p>
+
+                <h3>NERC CIP</h3>
+                <p>Critical Infrastructure Protection standards. Obrigatório para setor elétrico na América do Norte. Inclui CIP-002 (Identificação de ativos), CIP-005 (perímetro de segurança), CIP-007 (gerenciamento de sistemas).</p>
+
+                <h3>Regulamentação no Brasil</h3>
+                <ul>
+                    <li><strong>ANEEL/ONS:</strong> Requisitos para setor elétrico no Brasil</li>
+                    <li><strong>LGPD:</strong> Se dados pessoais forem processados em sistemas OT</li>
+                    <li><strong>Decreto n. 10.748/2021:</strong> Política Nacional de Segurança de Infraestruturas Críticas</li>
+                </ul>
+
+                <h2 id="implementação">Estratégia de implementação</h2>
+
+                <h3>Fase 1: Assessment (1-3 meses)</h3>
+                <ul>
+                    <li>Inventário de ativos OT</li>
+                    <li>Mapeamento de rede efluxos</li>
+                    <li>Avaliação de vulnerabilidades (passiva)</li>
+                    <li>Gap analysis vs IEC 62443 ou framework escolhido</li>
+                    <li>Identificação dos ativos críticos (crown jewels)</li>
+                </ul>
+
+                <h3>Fase 2: Quick Wins (3-6 meses)</h3>
+                <ul>
+                    <li>Implementar ou reforçar segmentação IT/OT</li>
+                    <li>Remover acessos remotos inseguros</li>
+                    <li>Alterar credenciais padrão</li>
+                    <li>Backup de configurações de PLCs</li>
+                    <li>Deploy de NDR passivo</li>
+                </ul>
+
+                <h3>Fase 3: Fundação (6-12 meses)</h3>
+                <ul>
+                    <li>Implementar DMZ industrial completa</li>
+                    <li>Deploy de firewalls industriais</li>
+                    <li>Estabelecer SOC visibility para OT</li>
+                    <li>Programa de gestão das vulnerabilidades OT</li>
+                    <li>Treinamento de equipe</li>
+                </ul>
+
+                <h3>Fase 4: Maturidade (12-24 meses)</h3>
+                <ul>
+                    <li>Micro-segmentação de células críticas</li>
+                    <li>Monitoramento de integridade de PLCs</li>
+                    <li>Threat hunting em OT</li>
+                    <li>Automação de resposta</li>
+                    <li>Certificação IEC 62443 , se aplicável</li>
+                </ul>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Qual a diferença entre IT e OT Security?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>IT Security foca em confidencialidade, integridade édisponibilidade de dados, com ciclos de atualização frequentes. OT Security prioriza disponibilidade e segurança física (safety), protegendo sistemas que controlam processos físicos com ciclos de vida de 15-25 anos érestrições de downtime para patches.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O que é o Modelo Purdue?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>O Modelo Purdue (ISA-95/IEC 62443) define níveis de segmentação para ambientes industriais: Nível 0 (Processo Físico), Nível 1 (PLCs, RTUs), Nível 2 (HMI, SCADA), Nível 3 (MES, Historian), DMZ, e Níveis 4-5 (IT Corporativo). Cada nível deve ter controles de acesso éfirewalls separando comunicação entre níveis.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Como proteger PLCs e dispositivos de controle?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Proteção de PLCs inclui: segmentação de rede isolando PLCs em VLANs dedicadas, firewalls industriais permitindo apenas protocolos necessários, desabilitar portas éserviços não utilizados, alterar senhas padrão de fábrica, monitorar alterações de lógica de programacao, émanter firmware atualizado quando possível.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quais frameworks se aplicam a OT?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Principais frameworks: IEC 62443 (padrao internacional), NIST SP 800-82 (guia para ICS security), NERC CIP (setor elétrico), <a href="../nis2-diretiva-europeia-impactos/">NIS2</a> (Europa), éANEEL/ONS no Brasil. Cada setor pode ter regulamentos específicos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Conclusão</h2>
+
+                <p>
+                    A segurança de sistemas industriais éfundamentalmente diferente da segurança de TI tradicional. As consequências de um ataque bem-sucedido transcendem a perda de dados e podem resultar em danos físicos, ambientais éate perda de vidas.
+                </p>
+
+                <p>
+                    A convergência IT/OT éirreversivel - os beneficios de eficiencia évisibilidade sãosignificativos demais para serem ignorados. O desafio érealizar essa integração de forma segura, implementando o Modelo Purdue com DMZ industrial, monitoramento específico para protocolos OT, éuma cultura de segurança que envolva operadores éengenheiros.
+                </p>
+
+                <p>
+                    O caminho para maturidade em OT Security égradual. Comece pelo inventario ésegmentação basica, avance para monitoramento édetecção, éevolua para uma postura proativa. Cada passo reduz significativamente o risco de um incidente que poderia ter consequências catastroficas. Para entender o contexto mais amplo da transforma&#231;&#227;o digital na ind&#250;stria, consulte nosso artigo sobre <a href="../industria-4-0/">Ind&#250;stria 4.0</a>.
+                </p>
+
+                <div class="cta-box">
+                    <h3>Precisa de Ajuda com Segurança OT?</h3>
+                    <p>Oferecemos assessment de ambientes industriais, implementação de segmentação éprogramas de segurança OT.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/seguranca-ot-ics-scada/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/seguranca-ot-ics-scada/&text=Segurança OT/ICS/SCADA: Guia Completo" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Segurança OT/ICS/SCADA https://inteligenciabrasil.seg.br/blog/seguranca-ot-ics-scada/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em Segurança de Infraestrutura Crítica éSistemas Industriais.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
+                        <p>Consultoria especializada em Segurança, Estratégia éTecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../ndr-deteccao-resposta-rede/">NDR</a></li>
+                            <li><a href="../siem-implementacao-casos-uso/">SIEM</a></li>
+                            <li><a href="../soar-automacao-orquestracao/">SOAR</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#serviços">Serviços</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

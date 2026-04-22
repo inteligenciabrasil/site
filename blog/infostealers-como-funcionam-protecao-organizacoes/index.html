@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Infostealers: como funcionam, o que roubam, vetores de distribuicao, casos reais de supply chain e como proteger sua organizacao contra roubo de credenciais e dados sensiveis.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="infostealer, malware, roubo credenciais, Raccoon Stealer, Redline, Lumma, supply chain attack, cookies, session hijacking, credential stuffing, EDR, SIEM, botnet, exfiltracao dados">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/infostealers-como-funcionam-protecao-organizacoes/">
+
+    <meta property="og:title" content="Infostealers: Como Funcionam e Como Proteger sua Organizacao">
+    <meta property="og:description" content="Anatomia de infostealers modernos: o que roubam, como se distribuem, arquitetura em camadas e estrategias de defesa para empresas.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/infostealers-como-funcionam-protecao-organizacoes/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-03-30T10:00:00-03:00">
+    <meta property="article:section" content="Ameacas Ciberneticas">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Infostealers: Anatomia e Defesa">
+    <meta name="twitter:description" content="Como infostealers roubam credenciais, cookies e dados sensiveis, e como defender sua organizacao.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Infostealers: Como Funcionam e Como Proteger sua Organiza&#231;&#227;o | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Infostealers: Como Funcionam e Como Proteger sua Organizacao",
+        "description": "Analise tecnica de infostealers modernos: arquitetura em camadas, dados roubados, supply chain attacks, botnets e estrategias de deteccao e defesa.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
+        "datePublished": "2026-03-30",
+        "dateModified": "2026-03-30",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/infostealers-como-funcionam-protecao-organizacoes/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que e um infostealer?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "E um tipo de malware projetado especificamente para extrair informacoes sensiveis de sistemas comprometidos: credenciais salvas em browsers, cookies de sessao, tokens de autenticacao, chaves SSH, carteiras de criptomoedas, dados de preenchimento automatico e arquivos de configuracao. Opera silenciosamente e exfiltra dados para servidores controlados pelo atacante."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como infostealers roubam senhas salvas no navegador?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Navegadores baseados em Chromium armazenam credenciais em bancos SQLite criptografados com DPAPI (Windows). Infostealers acessam o processo do browser, extraem a master key da DPAPI e decriptam o banco de senhas. Em alguns casos, copiam os arquivos Login Data e Cookies diretamente e decriptam offline."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Cookies roubados sao realmente perigosos?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim. Cookies de sessao permitem session hijacking: o atacante importa os cookies no proprio browser e acessa contas autenticadas sem precisar de senha ou MFA. O servico ve o cookie valido e concede acesso como se fosse o usuario legitimo. Isso afeta email corporativo, cloud consoles, SaaS e qualquer servico web."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como proteger minha organizacao contra infostealers?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Combine: EDR/XDR com deteccao comportamental, monitoramento de credenciais vazadas na dark web, politica de sessoes curtas e re-autenticacao, MFA resistente a phishing (FIDO2), controle de software e execucao (AppLocker), seguranca de supply chain (verificacao de pacotes), e conscientizacao sobre phishing e downloads maliciosos."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Infostealers"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="../../lp/monitorar-emails/"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/anticibercrime/"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/monitorar-dominio/"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/monitorar-credenciais/"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/grc/"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/cti-monitoramento/"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/analise-vulnerabilidades/"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/lgpd/"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="../../lp/analise-presenca-digital/"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Amea&#231;as Cibern&#233;ticas</span>
+            <h1>Infostealers: Como Funcionam e Como Proteger sua Organiza&#231;&#227;o</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                <span><i class="far fa-clock"></i> 13 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Infostealers</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <figure class="article-hero">
+                    <img src="../../img/infostealers-como-funcionam-protecao-organizacoes.webp" alt="Infostealers - como funcionam e como proteger organizacoes" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async">
+                </figure>
+
+<div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#o-que-e">O que s&#227;o infostealers</a></li>
+                        <li><a href="#o-que-roubam">O que infostealers roubam</a></li>
+                        <li><a href="#arquitetura">Arquitetura em 3 camadas</a></li>
+                        <li><a href="#distribuicao">Vetores de distribui&#231;&#227;o</a></li>
+                        <li><a href="#supply-chain">Caso real: supply chain attack</a></li>
+                        <li><a href="#familias">Fam&#237;lias mais ativas</a></li>
+                        <li><a href="#impacto">Impacto nas organiza&#231;&#245;es</a></li>
+                        <li><a href="#defesa">Estrat&#233;gias de defesa</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <p>Infostealers se tornaram uma das amea&#231;as mais impactantes para organiza&#231;&#245;es em 2026. Diferente de <a href="../ransomware-como-funciona-proteger-empresa/">ransomware</a>, que anuncia sua presen&#231;a, infostealers operam em <strong>sil&#234;ncio absoluto</strong> &mdash; extraem credenciais, cookies, tokens e dados sens&#237;veis sem que a v&#237;tima perceba.</p>
+
+                <p>O resultado aparece semanas ou meses depois: contas corporativas comprometidas, acessos vendidos em marketplaces da dark web e incidentes que ningu&#233;m sabe explicar como come&#231;aram.</p>
+
+                <h2 id="o-que-e">O que s&#227;o infostealers</h2>
+
+                <p>Infostealers s&#227;o malwares projetados especificamente para <strong>extrair informa&#231;&#245;es sens&#237;veis</strong> de sistemas comprometidos e exfiltr&#225;-las para servidores controlados pelo atacante. Operam de forma r&#225;pida e discreta &mdash; muitos executam em segundos, coletam tudo e se autodestroem.</p>
+
+                <div class="stat-highlight">
+                    <div class="number">26 bilh&#245;es+</div>
+                    <div class="label">credenciais comprometidas por infostealers circulam em marketplaces da dark web (SpyCloud 2025)</div>
+                </div>
+
+                <h2 id="o-que-roubam">O que infostealers roubam</h2>
+
+                <h3>Credenciais de navegadores</h3>
+
+                <p>Navegadores Chromium (Chrome, Edge, Brave) armazenam senhas em bancos SQLite criptografados com DPAPI (Windows). Infostealers extraem a master key e <strong>decriptam todo o banco de senhas</strong> em sequ&#234;ncia. Firefox usa NSS com perfil pr&#243;prio, tamb&#233;m vulner&#225;vel.</p>
+
+                <h3>Cookies de sess&#227;o</h3>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-cookie-bite" style="color:#60A5FA;margin-right:10px"></i> Por que cookies s&#227;o t&#227;o valiosos</strong></p>
+                    <p>Cookies de sess&#227;o permitem <strong>session hijacking</strong>: o atacante importa os cookies no pr&#243;prio browser e acessa contas autenticadas <strong>sem precisar de senha ou MFA</strong>. O servi&#231;o v&#234; o cookie v&#225;lido e concede acesso como se fosse o usu&#225;rio leg&#237;timo. Isso afeta e-mail corporativo, cloud consoles (AWS, Azure), SaaS e qualquer servi&#231;o web.</p>
+                </div>
+
+                <h3>Tokens e chaves</h3>
+
+                <ul>
+                    <li><strong>Tokens de API:</strong> GitHub, GitLab, Slack, Discord, cloud providers</li>
+                    <li><strong>Chaves SSH:</strong> acesso a servidores sem senha</li>
+                    <li><strong>Certificados:</strong> client certificates para VPNs e servi&#231;os autenticados</li>
+                    <li><strong>Tokens de sess&#227;o MFA:</strong> bypass de autentica&#231;&#227;o multifator em alguns contextos</li>
+                </ul>
+
+                <h3>Dados sens&#237;veis</h3>
+
+                <ul>
+                    <li><strong>Preenchimento autom&#225;tico:</strong> nomes, endere&#231;os, cart&#245;es de cr&#233;dito salvos no browser</li>
+                    <li><strong>Carteiras de criptomoedas:</strong> MetaMask, Exodus, Electrum, keystores Ethereum</li>
+                    <li><strong>Arquivos de configura&#231;&#227;o:</strong> .env, terraform.tfstate, docker-compose com credenciais</li>
+                    <li><strong>Gerenciadores de senhas:</strong> vaults locais do KeePass, dados exportados</li>
+                </ul>
+
+                <h3>Dados de infraestrutura (em ataques avan&#231;ados)</h3>
+
+                <ul>
+                    <li><strong>Credenciais cloud:</strong> AWS (access keys, IMDS, ECS task roles), GCP, Azure</li>
+                    <li><strong>Kubernetes:</strong> service account tokens, secrets de namespaces</li>
+                    <li><strong>CI/CD:</strong> configura&#231;&#245;es de GitLab CI, Jenkins, Travis com segredos embutidos</li>
+                    <li><strong>Bancos de dados:</strong> connection strings com credenciais em MySQL, PostgreSQL, Redis</li>
+                </ul>
+
+                <h2 id="arquitetura">Arquitetura em 3 camadas</h2>
+
+                <p>Infostealers modernos operam em est&#225;gios distintos, cada um com fun&#231;&#227;o espec&#237;fica:</p>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-layer-group" style="color:#60A5FA;margin-right:10px"></i> 3 est&#225;gios de execu&#231;&#227;o</strong></p>
+                    <ul>
+                        <li><strong>Est&#225;gio 1 &mdash; Dropper:</strong> ponto de entrada que decodifica e executa o payload principal. Opera inteiramente em mem&#243;ria &mdash; nunca toca o disco &mdash; dificultando detec&#231;&#227;o por antiv&#237;rus baseado em assinaturas</li>
+                        <li><strong>Est&#225;gio 2 &mdash; Stealer:</strong> coleta dados silenciosamente. Varre diret&#243;rios sens&#237;veis (/home, /root, /opt, .config), extrai credenciais de browsers, copia chaves SSH e tokens. Criptografa tudo com AES-256 + RSA-4096 antes de exfiltrar</li>
+                        <li><strong>Est&#225;gio 3 &mdash; C2 Agent:</strong> backdoor persistente instalada como servi&#231;o do sistema. Faz polling peri&#243;dico para o servidor C2, recebe e executa comandos arbitr&#225;rios. Sobrevive a reinicializa&#231;&#245;es</li>
+                    </ul>
+                </div>
+
+                <p>A exfiltra&#231;&#227;o usa criptografia h&#237;brida: <strong>AES-256-CBC para os dados + RSA-4096 para a chave de sess&#227;o</strong>. Apenas o atacante possui a chave privada RSA para decriptar &mdash; mesmo que o tr&#225;fego seja capturado, os dados n&#227;o s&#227;o leg&#237;veis por terceiros.</p>
+
+                <h2 id="distribuicao">Vetores de distribui&#231;&#227;o</h2>
+
+                <h3>Phishing e malvertising</h3>
+
+                <p>O vetor mais comum: e-mails com anexos maliciosos ou links para downloads de software &ldquo;crackeado&rdquo;, atualizações falsas e ferramentas gratuitas trojanizadas. <a href="../engenharia-social-tecnicas-protecao/">Engenharia social</a> convence o usu&#225;rio a executar o payload.</p>
+
+                <h3>Supply chain attack</h3>
+
+                <p>Infostealers embutidos em pacotes leg&#237;timos de reposit&#243;rios como PyPI, npm e RubyGems. O c&#243;digo malicioso executa durante a instala&#231;&#227;o (<code>pip install</code>, <code>npm install</code>) &mdash; antes mesmo de o desenvolvedor usar a biblioteca. A <a href="../supply-chain-security-cadeia-suprimentos/">seguran&#231;a de supply chain</a> &#233; cr&#237;tica para mitigar esse vetor.</p>
+
+                <h3>SEO Poisoning e fake software</h3>
+
+                <ul>
+                    <li>Sites falsos posicionados no topo do Google para downloads de software popular</li>
+                    <li>Vers&#245;es trojanizadas de ferramentas como OBS, VLC, 7-Zip, Notepad++</li>
+                    <li>Resultados patrocinados (Google Ads) apontando para dom&#237;nios maliciosos</li>
+                </ul>
+
+                <h3>Telegram e Discord como distribui&#231;&#227;o</h3>
+
+                <p>Canais de Telegram e servidores Discord distribuem infostealers disfarçados de cheats de jogos, ativadores de software e ferramentas de &ldquo;hack&rdquo;. P&#250;blico jovem e t&#233;cnico &#233; o alvo principal.</p>
+
+                <h2 id="supply-chain">Caso real: infostealer via supply chain</h2>
+
+                <div class="tip-box">
+                    <p><strong><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> LiteLLM Supply Chain Attack (mar&#231;o 2026)</strong></p>
+                    <p>Vers&#245;es comprometidas do LiteLLM (v1.82.7-1.82.8) no PyPI continham infostealer em 3 est&#225;gios. O LiteLLM &#233; um gateway centralizado para APIs de IA &mdash; <strong>por design, tem acesso a credenciais de m&#250;ltiplos provedores cloud</strong>.</p>
+                    <p>O dropper executava em mem&#243;ria durante o <code>pip install</code>, coletava chaves SSH, credenciais AWS/GCP/Azure, tokens Kubernetes, configs de CI/CD e carteiras crypto. Em ambientes Kubernetes, criava pods privilegiados para escalar para root no n&#243; f&#237;sico. O C2 agent se instalava como servi&#231;o systemd e fazia polling a cada 50 minutos.</p>
+                    <p><strong>Li&#231;&#227;o:</strong> ferramentas de IA/ML com acesso amplo a credenciais s&#227;o alvos de alto valor. A verifica&#231;&#227;o de hash do pacote confirma que o arquivo &#233; o publicado no PyPI &mdash; n&#227;o que o conte&#250;do &#233; seguro.</p>
+                </div>
+
+                <h2 id="familias">Fam&#237;lias de infostealers mais ativas</h2>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-virus" style="color:#60A5FA;margin-right:10px"></i> Principais fam&#237;lias em 2025-2026</strong></p>
+                    <ul>
+                        <li><strong>Lumma Stealer:</strong> MaaS (Malware-as-a-Service) dominante. Foco em credenciais de browser, crypto wallets e 2FA tokens. Distribu&#237;do via malvertising e fake CAPTCHA</li>
+                        <li><strong>Redline Stealer:</strong> um dos mais prolíficos. Rouba credenciais, cookies, autofill, FTP, VPN. Vendido em f&#243;runs por US$100-200/m&#234;s</li>
+                        <li><strong>Raccoon Stealer v2:</strong> retornou ap&#243;s opera&#231;&#227;o do FBI. Extrai dados de 60+ aplica&#231;&#245;es incluindo browsers, e-mail clients e carteiras crypto</li>
+                        <li><strong>Vidar:</strong> focado em browsers e gerenciadores de senhas. Usa Telegram e Steam como dead-drop para recuperar endere&#231;o do C2</li>
+                        <li><strong>Aurora/Stealc:</strong> nova gera&#231;&#227;o em Go e Rust, mais dif&#237;ceis de detectar por EDRs tradicionais</li>
+                    </ul>
+                </div>
+
+                <h3>Modelo de neg&#243;cio: Malware-as-a-Service</h3>
+
+                <p>A maioria opera como <strong>MaaS</strong>: o desenvolvedor cria e mant&#233;m o malware; &ldquo;clientes&rdquo; pagam assinatura mensal (US$100-300) e recebem painel de controle, builder para gerar payloads customizados e suporte. Os dados roubados s&#227;o organizados em &ldquo;logs&rdquo; vendidos em marketplaces especializados.</p>
+
+                <h2 id="impacto">Impacto nas organiza&#231;&#245;es</h2>
+
+                <h3>Comprometimento de contas corporativas</h3>
+
+                <p>Um colaborador infectado em m&#225;quina pessoal (BYOD) que acessa e-mail e cloud corporativo via browser exp&#245;e todas as credenciais salvas. O atacante compra os &ldquo;logs&rdquo; e acessa o ambiente corporativo com credenciais v&#225;lidas &mdash; sem disparar alertas de brute force.</p>
+
+                <h3>Bypass de MFA via cookies</h3>
+
+                <p>Com cookies de sess&#227;o v&#225;lidos, o atacante ignora completamente <a href="../mfa-fatigue-bypass-attacks/">MFA</a>. O servi&#231;o reconhece a sess&#227;o autenticada e n&#227;o solicita segundo fator. &#201; um dos motivos pelos quais MFA sozinho n&#227;o &#233; suficiente.</p>
+
+                <h3>Acesso inicial para ransomware</h3>
+
+                <p>Credenciais roubadas por infostealers s&#227;o frequentemente o <strong>acesso inicial</strong> que leva a ataques de ransomware semanas depois. Os grupos de ransomware compram logs em bulk de IABs (Initial Access Brokers).</p>
+
+                <div class="stat-highlight">
+                    <div class="number">80%</div>
+                    <div class="label">dos ataques de ransomware em 2025 come&#231;aram com credenciais comprometidas &mdash; muitas obtidas por infostealers (Mandiant M-Trends 2025)</div>
+                </div>
+
+                <h3>Custo financeiro e reputacional</h3>
+
+                <p>O <a href="../custo-vazamento-dados-2026-impactos/">custo de um vazamento</a> causado por credenciais roubadas inclui resposta a incidentes, rota&#231;&#227;o massiva de credenciais, investiga&#231;&#227;o forense, notifica&#231;&#227;o &#224; ANPD e perda de confian&#231;a de clientes.</p>
+
+                <h2 id="defesa">Estrat&#233;gias de defesa</h2>
+
+                <h3>Detec&#231;&#227;o no endpoint</h3>
+
+                <ul>
+                    <li><strong>EDR/XDR:</strong> <a href="../xdr-extended-detection-response/">detec&#231;&#227;o comportamental</a> de processos acessando bancos de credenciais do browser, leitura de DPAPI keys, enum de vaults</li>
+                    <li><strong>AppLocker/WDAC:</strong> controle de execu&#231;&#227;o por whitelist &mdash; bloqueia bin&#225;rios n&#227;o autorizados</li>
+                    <li><strong>Credential Guard:</strong> isola credenciais em enclave, impedindo extra&#231;&#227;o por malware em user space</li>
+                </ul>
+
+                <h3>Monitoramento de credenciais vazadas</h3>
+
+                <ul>
+                    <li>Servi&#231;os de <a href="../threat-intelligence-operacional/">threat intelligence</a> que monitoram dark web marketplaces por credenciais corporativas</li>
+                    <li>Alerts autom&#225;ticos quando dom&#237;nios da empresa aparecem em dumps de infostealers</li>
+                    <li>Integra&#231;&#227;o com <a href="../siem-implementacao-casos-uso/">SIEM</a> para correla&#231;&#227;o: credencial vazada + login an&#244;malo = alerta cr&#237;tico</li>
+                </ul>
+
+                <h3>Pol&#237;ticas de sess&#227;o e acesso</h3>
+
+                <ul>
+                    <li><strong>Sess&#245;es curtas:</strong> tokens de sess&#227;o com TTL reduzido (1-4h), for&#231;ando re-autentica&#231;&#227;o</li>
+                    <li><strong>Binding de sess&#227;o:</strong> vincular cookie ao device fingerprint (IP, user agent, hardware)</li>
+                    <li><strong>MFA resistente a phishing:</strong> <a href="../passwordless-passkeys-fido2/">FIDO2/Passkeys</a> n&#227;o podem ser extra&#237;dos por infostealers</li>
+                    <li><strong>Conditional access:</strong> bloquear acesso de dispositivos n&#227;o gerenciados (MDM)</li>
+                </ul>
+
+                <h3>Seguran&#231;a de supply chain</h3>
+
+                <ul>
+                    <li>Pinning de vers&#245;es em requirements.txt / package.json</li>
+                    <li>Verifica&#231;&#227;o de integridade al&#233;m do hash (an&#225;lise de diff entre vers&#245;es)</li>
+                    <li>Reposit&#243;rios privados com proxy e scanning (Artifactory, Nexus)</li>
+                    <li>SBOM (<a href="../sbom-software-bill-of-materials/">Software Bill of Materials</a>) para rastrear depend&#234;ncias</li>
+                </ul>
+
+                <h3>Conscientiza&#231;&#227;o</h3>
+
+                <p>Usu&#225;rios precisam entender que <strong>baixar software crackeado, cheats ou ativadores &#233; o vetor #1 de infostealers</strong>. Treinamento de <a href="../security-awareness-programa-conscientizacao/">conscientiza&#231;&#227;o</a> deve cobrir riscos de downloads n&#227;o oficiais, fake ads no Google e anexos suspeitos.</p>
+
+                <h3>Resposta a compromisso por infostealer</h3>
+
+                <div class="concept-card">
+                    <p><strong><i class="fas fa-fire-extinguisher" style="color:#60A5FA;margin-right:10px"></i> Playbook de resposta</strong></p>
+                    <ul>
+                        <li><strong>1.</strong> Tratar a m&#225;quina infectada como <strong>totalmente comprometida</strong> &mdash; reimaging, n&#227;o apenas limpeza</li>
+                        <li><strong>2.</strong> Rota&#231;&#227;o imediata de todas as credenciais acessadas pelo browser infectado</li>
+                        <li><strong>3.</strong> Invalidar todas as sess&#245;es ativas (force logout em todos os servi&#231;os)</li>
+                        <li><strong>4.</strong> Revogar chaves SSH, tokens de API e certificados</li>
+                        <li><strong>5.</strong> Auditar CloudTrail/Activity Logs por acessos an&#244;malos com as credenciais comprometidas</li>
+                        <li><strong>6.</strong> Monitorar dark web por logs da organiza&#231;&#227;o nas semanas seguintes</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <p><strong><i class="fas fa-lightbulb" style="margin-right:10px"></i> Considera&#231;&#245;es finais</strong></p>
+                    <p>Infostealers s&#227;o o elo entre um clique descuidado e um incidente corporativo completo. Eles n&#227;o pedem resgate, n&#227;o criptografam arquivos, n&#227;o se anunciam &mdash; simplesmente <strong>coletam tudo e saem</strong>.</p>
+                    <p>A defesa exige camadas: prote&#231;&#227;o no endpoint, monitoramento de credenciais, pol&#237;ticas de sess&#227;o, seguran&#231;a de supply chain e conscientiza&#231;&#227;o. Tratar uma infec&#231;&#227;o por infostealer como &ldquo;apenas um malware removido&rdquo; ignora que todas as credenciais do sistema est&#227;o nas m&#227;os do atacante.</p>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que &#233; um infostealer?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>&#201; um malware projetado para extrair informa&#231;&#245;es sens&#237;veis: credenciais de browsers, cookies de sess&#227;o, tokens, chaves SSH, carteiras crypto e arquivos de configura&#231;&#227;o. Opera silenciosamente e exfiltra dados para servidores do atacante.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como infostealers roubam senhas do navegador?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Navegadores Chromium armazenam senhas em SQLite criptografado com DPAPI. Infostealers extraem a master key e decriptam todo o banco. Em alguns casos, copiam os arquivos diretamente e decriptam offline.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Cookies roubados s&#227;o realmente perigosos?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Sim. Cookies de sess&#227;o permitem session hijacking: o atacante acessa contas autenticadas sem senha ou MFA. O servi&#231;o v&#234; o cookie v&#225;lido e concede acesso normalmente. Afeta e-mail, cloud consoles e qualquer SaaS.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como proteger minha organiza&#231;&#227;o?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Combine EDR/XDR com detec&#231;&#227;o comportamental, monitoramento de credenciais na dark web, sess&#245;es curtas com re-autentica&#231;&#227;o, MFA resistente a phishing (FIDO2), controle de execu&#231;&#227;o, seguran&#231;a de supply chain e conscientiza&#231;&#227;o sobre downloads maliciosos.</p></div>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-book" style="color:#60A5FA;margin-right:10px"></i> Fontes e refer&#234;ncias t&#233;cnicas</h3>
+                    <ul>
+                        <li>SpyCloud &mdash; Annual Identity Exposure Report 2025</li>
+                        <li>Mandiant &mdash; M-Trends 2025: Threat Landscape</li>
+                        <li>Gutem &mdash; Anatomia de um Infostealer Moderno: Tr&#234;s Camadas, Uma Botnet</li>
+                        <li>MITRE ATT&amp;CK &mdash; T1555 (Credentials from Password Stores), T1539 (Steal Web Session Cookie)</li>
+                        <li>MITRE ATT&amp;CK &mdash; T1195.002 (Supply Chain Compromise: Software)</li>
+                        <li>Group-IB &mdash; Infostealer Market Intelligence</li>
+                        <li>Recorded Future &mdash; Stolen Credentials and Initial Access Brokers</li>
+                    </ul>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Suas credenciais est&#227;o na dark web?</h3>
+                    <p>Monitoramos marketplaces, f&#243;runs e canais onde logs de infostealers s&#227;o vendidos. Detecte compromissos antes que se tornem incidentes.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Diagn&#243;stico</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/infostealers-como-funcionam-protecao-organizacoes/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/infostealers-como-funcionam-protecao-organizacoes/&text=Infostealers: Como Funcionam e Como se Proteger" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Infostealers https://inteligenciabrasil.seg.br/blog/infostealers-como-funcionam-protecao-organizacoes/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em Threat Intelligence, Monitoramento de Amea&#231;as e Resposta a Incidentes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
+                        <p>Consultoria especializada em Seguran&#231;a, Estrat&#233;gia e Tecnologia da Informa&#231;&#227;o.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../ransomware-como-funciona-proteger-empresa/">Ransomware</a></li>
+                            <li><a href="../supply-chain-security-cadeia-suprimentos/">Supply Chain</a></li>
+                            <li><a href="../threat-intelligence-operacional/">Threat Intelligence</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navega&#231;&#227;o</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servi&#231;os</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, S&#227;o Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Pol&#237;tica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Autenticacao Passwordless: guia completo de Passkeys, FIDO2, WebAuthn. Como eliminar senhas, implementar autenticacao resistente a phishing e melhorar UX e seguranca.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="passwordless, passkeys, FIDO2, WebAuthn, autenticacao sem senha, biometria, security keys, YubiKey, phishing resistant, MFA, autenticacao forte">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/passwordless-passkeys-fido2/">
+
+    <meta property="og:title" content="Passwordless: Guia Completo de Passkeys e FIDO2">
+    <meta property="og:description" content="Como eliminar senhas com Passkeys, FIDO2 e WebAuthn.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/passwordless-passkeys-fido2/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-31T19:00:00-03:00">
+    <meta property="article:section" content="Identity">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Passwordless: Passkeys e FIDO2">
+    <meta name="twitter:description" content="Guia completo de autenticacao sem senhas.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Passwordless: Guia Completo de Passkeys e FIDO2 | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Passwordless: Guia Completo de Passkeys e FIDO2",
+        "description": "Como eliminar senhas com Passkeys, FIDO2 e WebAuthn para autenticacao mais segura.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/passwordless-passkeys-fido2/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que sao Passkeys?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Passkeys sao credenciais FIDO2/WebAuthn sincronizaveis entre dispositivos. Substituem senhas usando criptografia de chave publica. A chave privada fica no dispositivo (protegida por biometria/PIN), o site so tem a chave publica. Nao ha segredo compartilhado para roubar, tornando phishing impossivel."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Passkeys sao resistentes a phishing?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim, por design. Passkeys estao vinculadas ao dominio especifico (origin binding). Se voce criou passkey para banco.com.br, ela nao funciona em banc0.com.br (site falso). O navegador verifica automaticamente, usuario nao precisa identificar phishing. E a única autenticacao verdadeiramente phishing-resistant."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "E se eu perder meu dispositivo?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Com passkeys sincronizadas (iCloud Keychain, Google Password Manager), elas estao em todos os seus dispositivos Apple/Google automaticamente. Se perder um, os outros ainda tem. Para security keys fisicas (YubiKey), registre pelo menos 2 keys por conta. Sites devem oferecer recovery via email/SMS como fallback."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Passwordless"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Identity</span>
+            <h1>Passwordless: Guia Completo de Passkeys e FIDO2</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Passwordless</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#problema">O problema das senhas</a></li>
+                        <li><a href="#fido2">FIDO2 e WebAuthn</a></li>
+                        <li><a href="#passkeys">O que sao Passkeys</a></li>
+                        <li><a href="#como-funciona">Como funciona tecnicamente</a></li>
+                        <li><a href="#metodos">Metodos passwordless</a></li>
+                        <li><a href="#implementacao">Implementacao para empresas</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                        <li><a href="#conclusao">Conclusao</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="problema">O Problema das Senhas</h2>
+
+                <p>
+                    Senhas sao a forma de autenticacao mais antiga e mais problematica da era digital. Usuarios escolhem senhas fracas, reutilizam entre sites, caem em <a href="../phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">phishing</a>, e empresas sofrem breaches massivos de credenciais. MFA ajuda, mas ainda depende de senha como primeiro fator.
+                </p>
+
+                <div class="stat-highlight">
+                    <div class="number">80%</div>
+                    <div class="label">dos breaches envolvem credenciais comprometidas (Verizon DBIR)</div>
+                </div>
+
+                <div class="comparison-box">
+                    <h3>Senhas vs Passwordless</h3>
+                    <div class="comparison-grid">
+                        <div class="comparison-item bad">
+                            <h4><i class="fas fa-times-circle" style="margin-right:8px"></i> Senhas</h4>
+                            <ul>
+                                <li>Podem ser adivinhadas/forcadas</li>
+                                <li>Podem ser roubadas via phishing</li>
+                                <li>Podem vazar em breaches</li>
+                                <li>Usuarios reutilizam</li>
+                                <li>Fricao na UX</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item good">
+                            <h4><i class="fas fa-check-circle" style="margin-right:8px"></i> Passwordless</h4>
+                            <ul>
+                                <li>Nada para adivinhar</li>
+                                <li>Resistente a phishing</li>
+                                <li>Nao ha segredo compartilhado</li>
+                                <li>Unica por site</li>
+                                <li>UX superior (biometria)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="fido2">FIDO2 e WebAuthn</h2>
+
+                <p>
+                    <strong>FIDO2</strong> e o padrao da FIDO Alliance que habilita autenticacao forte sem senhas. E composto por dois protocolos:
+                </p>
+
+                <ul>
+                    <li><strong>WebAuthn:</strong> API JavaScript padronizada pelo W3C para navegadores</li>
+                    <li><strong>CTAP2:</strong> Protocolo de comunicacao com autenticadores (USB, NFC, Bluetooth)</li>
+                </ul>
+
+                <h3>Criptografia de chave publica</h3>
+
+                <p>
+                    FIDO2 usa criptografia assimetrica. Durante o registro, o autenticador gera um par de chaves:
+                </p>
+
+                <ul>
+                    <li><strong>Chave privada:</strong> Fica no dispositivo, nunca sai</li>
+                    <li><strong>Chave publica:</strong> Enviada ao servidor/site</li>
+                </ul>
+
+                <p>
+                    Durante login, o servidor envia um challenge. O autenticador assina com a chave privada. O servidor verifica com a chave publica. Nenhum segredo e transmitido - impossivel interceptar ou roubar credencial.
+                </p>
+
+                <h3>Origin binding</h3>
+
+                <p>
+                    Credenciais FIDO2 sao vinculadas ao dominio (origin) exato. Uma credencial criada para <code>banco.com.br</code> nao funciona em <code>banc0.com.br</code>. O navegador verifica automaticamente, tornando phishing impossivel por design.
+                </p>
+
+                <h2 id="passkeys">O que sao Passkeys</h2>
+
+                <p>
+                    <strong>Passkeys</strong> sao a evolucao das credenciais FIDO2 com uma diferenca crucial: sao <strong>sincronizaveis</strong> entre dispositivos. Lancadas em 2022 por Apple, Google e Microsoft em conjunto.
+                </p>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-key" style="color:#60A5FA;margin-right:10px"></i> Passkeys vs Security Keys tradicionais</h3>
+                    <ul>
+                        <li><strong>Security Key (YubiKey):</strong> Credencial presa ao dispositivo fisico</li>
+                        <li><strong>Passkey:</strong> Credencial sincronizada via iCloud/Google, disponivel em todos os dispositivos do usuario</li>
+                    </ul>
+                    <p style="margin-top:15px;margin-bottom:0">Passkeys resolvem o problema de "perdi minha YubiKey" sem sacrificar seguranca significativamente.</p>
+                </div>
+
+                <h3>Onde passkeys ficam armazenadas</h3>
+
+                <ul>
+                    <li><strong>Apple:</strong> iCloud Keychain (sincroniza entre iPhone, iPad, Mac)</li>
+                    <li><strong>Google:</strong> Google Password Manager (sincroniza entre Android e Chrome)</li>
+                    <li><strong>Microsoft:</strong> Windows Hello / Microsoft Authenticator</li>
+                    <li><strong>Password managers:</strong> 1Password, Dashlane, Bitwarden suportam passkeys</li>
+                </ul>
+
+                <h2 id="como-funciona">Como Funciona Tecnicamente</h2>
+
+                <h3>Registro (criacao de passkey)</h3>
+
+                <ol>
+                    <li>Usuario clica "Criar passkey" no site</li>
+                    <li>Site chama WebAuthn API com parametros (dominio, user ID, etc.)</li>
+                    <li>Navegador solicita autenticacao local (Face ID, Touch ID, PIN)</li>
+                    <li>Autenticador gera par de chaves e armazena chave privada</li>
+                    <li>Chave publica e enviada ao servidor e associada a conta</li>
+                </ol>
+
+                <h3>Login (uso de passkey)</h3>
+
+                <ol>
+                    <li>Usuario clica "Login com passkey"</li>
+                    <li>Site envia challenge aleatorio via WebAuthn</li>
+                    <li>Navegador solicita autenticacao local</li>
+                    <li>Autenticador assina challenge com chave privada</li>
+                    <li>Assinatura enviada ao servidor</li>
+                    <li>Servidor verifica assinatura com chave publica armazenada</li>
+                    <li>Login concedido</li>
+                </ol>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-lightbulb" style="margin-right:10px"></i> UX na prática</h4>
+                    <p>Para o usuario, e simplesmente: clique em "Login" > olhe para o celular (Face ID) ou toque no sensor (Touch ID). Login instantaneo, sem digitar nada.</p>
+                </div>
+
+                <h2 id="metodos">Metodos Passwordless</h2>
+
+                <div class="method-grid">
+                    <div class="method-card">
+                        <i class="fas fa-fingerprint"></i>
+                        <h3>Biometria no dispositivo</h3>
+                        <p>Face ID, Touch ID, Windows Hello. Chave privada protegida por biometria local. Mais conveniente para usuarios.</p>
+                    </div>
+                    <div class="method-card">
+                        <i class="fas fa-usb"></i>
+                        <h4>Security Keys (YubiKey)</h4>
+                        <p>Hardware dedicado USB/NFC. Maximo nivel de seguranca. Ideal para contas criticas e admins.</p>
+                    </div>
+                    <div class="method-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Phone as authenticator</h4>
+                        <p><a href="../seguranca-smartphones-ios-android/">Celular</a> como segundo dispositivo via Bluetooth/QR code. Util quando dispositivo principal nao tem biometria.</p>
+                    </div>
+                    <div class="method-card">
+                        <i class="fas fa-cloud"></i>
+                        <h4>Passkeys sincronizadas</h4>
+                        <p>Credenciais FIDO2 em nuvem. Conveniencia de senhas, seguranca de FIDO2. Padrao emergente.</p>
+                    </div>
+                </div>
+
+                <h2 id="implementacao">Implementacao para Empresas</h2>
+
+                <h3>Para aplicacoes web (desenvolvedores)</h3>
+
+                <ul>
+                    <li><strong>WebAuthn API:</strong> Nativa em todos browsers modernos</li>
+                    <li><strong>Bibliotecas:</strong> SimpleWebAuthn, webauthn4j, py_webauthn</li>
+                    <li><strong>Servicos:</strong> Auth0, Okta, Duo oferecem passkeys como feature</li>
+                </ul>
+
+                <h3>Para workforce (IT/Security)</h3>
+
+                <ul>
+                    <li><strong>Azure AD/Entra ID:</strong> Suporte nativo a FIDO2 e Windows Hello</li>
+                    <li><strong>Okta:</strong> FastPass passwordless</li>
+                    <li><strong>Google Workspace:</strong> Passkeys para contas Google</li>
+                    <li><strong>Duo:</strong> Passwordless com biometria e security keys</li>
+                </ul>
+
+                <h3>Estrategia de rollout</h3>
+
+                <ol>
+                    <li><strong>Piloto:</strong> Comecar com grupo de early adopters e admins</li>
+                    <li><strong>Paralelo:</strong> Oferecer passwordless como opcao, manter senha como fallback</li>
+                    <li><strong>Incentivo:</strong> Promover adocao com comunicacao e treinamento</li>
+                    <li><strong>Mandatorio:</strong> Para contas privilegiadas, exigir FIDO2</li>
+                    <li><strong>Deprecacao:</strong> Gradualmente remover opcao de senha</li>
+                </ol>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Recovery e fallback</h4>
+                    <p>Sempre tenha mecanismo de recovery. Se usuario perde todos os dispositivos com passkeys, precisa de alternativa (email de recuperacao, codigo backup, suporte humano). Passwordless nao significa "sem opcao de recuperacao".</p>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Passkeys funcionam sem internet?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>A autenticacao local (biometria) funciona offline. Mas o login em si requer conexao com o servidor para enviar a assinatura. Security keys fisicas podem funcionar em cenarios air-gapped dependendo da aplicacao.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Posso usar passkey de um dispositivo em outro?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Com passkeys sincronizadas, sim - estao em todos os dispositivos do mesmo ecossistema (Apple/Google). Cross-platform (usar iPhone para logar no Windows) funciona via QR code + Bluetooth, onde o celular atua como autenticador remoto.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Biometria e segura? E se copiarem minha digital?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Biometria em FIDO2 e verificacao local apenas - nao e transmitida. O servidor nunca ve sua digital ou face, apenas a assinatura criptografica. Mesmo que alguem tenha sua digital, precisaria do seu dispositivo fisico. E muito mais seguro que senhas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="conclusao">Conclusao</h2>
+
+                <p>
+                    Passwordless nao e mais futuro - e presente. Apple, Google e Microsoft adotaram passkeys. Grandes sites (Google, GitHub, eBay, Kayak) ja suportam. A transicao esta acontecendo.
+                </p>
+
+                <p>
+                    Para organizações, o momento de planejar e agora. Comece habilitando FIDO2/passkeys como opcao para usuarios que querem. Exija para contas privilegiadas. Gradualmente expanda ate poder deprecar senhas completamente.
+                </p>
+
+                <p>
+                    Os beneficios sao claros: eliminacao de phishing de credenciais, fim de breaches de senhas, melhor experiencia do usuario. O custo e principalmente mudanca de processo e comunicacao - a tecnologia esta madura e disponivel.
+                </p>
+
+                <div class="cta-box">
+                    <h3>Precisa de Ajuda com Passwordless?</h3>
+                    <p>Oferecemos consultoria de implementacao de autenticacao passwordless, FIDO2 e estratégia de transicao.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/passwordless-passkeys-fido2/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/passwordless-passkeys-fido2/&text=Passwordless: Guia de Passkeys e FIDO2" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Passwordless Passkeys https://inteligenciabrasil.seg.br/blog/passwordless-passkeys-fido2/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em Identity Security e Autenticacao Moderna.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao, com as melhores praticas para reducao de riscos digitais corporativos.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../pam-gestao-acessos-privilegiados/">PAM</a></li>
+                            <li><a href="../zero-trust-architecture-guia-completo/">Zero Trust</a></li>
+                            <li><a href="../phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">Phishing</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

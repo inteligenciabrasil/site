@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Entenda as diferenças entre Red Team, Blue Team e Purple Team. Guia completo sobre segurança ofensiva, defensiva e colaborativa com exemplos práticos e como implementar.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="red team, blue team, purple team, segurança ofensiva, segurança defensiva, pentest, SOC, threat hunting, adversary simulation, cibersegurança">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/red-team-blue-team-purple-team/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Red Team vs Blue Team vs Purple Team: Guia Completo">
+    <meta property="og:description" content="Entenda as diferenças entre equipes de segurança ofensiva, defensiva e colaborativa. Como implementar e quando usar cada abordagem.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/red-team-blue-team-purple-team/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-30T10:00:00-03:00">
+    <meta property="article:section" content="Cibersegurança">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Red Team vs Blue Team vs Purple Team">
+    <meta name="twitter:description" content="Guia completo sobre equipes de segurança ofensiva, defensiva e colaborativa.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Red Team vs Blue Team vs Purple Team: Guia Completo | Inteligencia Brasil</title>
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Red Team vs Blue Team vs Purple Team: Guia Completo",
+        "description": "Entenda as diferenças entre Red Team, Blue Team e Purple Team. Guia completo sobre segurança ofensiva, defensiva e colaborativa.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": { "@type": "Organization", "name": "Inteligencia Brasil", "logo": { "@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp" } },
+        "datePublished": "2026-01-30",
+        "dateModified": "2026-01-30","copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Qual a diferença entre Red Team e Pentest?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Pentest foca em encontrar vulnerabilidades técnicas em escopo definido. Red Team simula um adversário completo com objetivo específico, usando qualquer meio necessário (técnico, humano, físico) para alcançar o objetivo, testando também detecção e resposta da organização."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Preciso ter Blue Team antes de contratar Red Team?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Idealmente sim. Red Team sem Blue Team é como fazer um exame médico sem médico para interpretar. Se a organização não tem capacidade de detectar ou responder, um Red Team apenas confirmará isso sem gerar melhorias. Comece com pentest, amadureça defesas, depois evolua para Red Team."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que é Purple Team e quando devo usar?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Purple Team é a colaboração entre Red e Blue Team em tempo real. O Red executa técnicas enquanto o Blue tenta detectar, com feedback imediato. Ideal para melhorar detecção rapidamente, treinar analistas e validar controles de segurança. Gera mais aprendizado que Red Team tradicional."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Red Team vs Blue Team vs Purple Team" }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Cibersegurança</span>
+            <h1>Red Team vs Blue Team vs Purple Team: Guia Completo</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Red Team vs Blue Team vs Purple Team</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color: #60A5FA;"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#introducao">Introdução: A origem dos termos</a></li>
+                        <li><a href="#red-team">Red Team: Segurança Ofensiva</a></li>
+                        <li><a href="#blue-team">Blue Team: Segurança Defensiva</a></li>
+                        <li><a href="#purple-team">Purple Team: Colaboração</a></li>
+                        <li><a href="#comparativo">Comparativo completo</a></li>
+                        <li><a href="#mitre">MITRE ATT&CK e os times</a></li>
+                        <li><a href="#implementar">Como implementar</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introducao">A Origem dos Termos Red Team e Blue Team</h2>
+
+                <p>
+                    Os termos <strong>Red Team</strong> e <strong>Blue Team</strong> originam-se de exercícios militares, onde forças opostas simulavam conflitos para testar estratégias e defesas. No contexto de cibersegurança, essa nomenclatura foi adotada para descrever equipes com funções opostas mas complementares: uma focada em atacar (Red) e outra em defender (Blue).
+                </p>
+
+                <div class="stat-highlight">
+                    <div class="number">280 dias</div>
+                    <div class="label">é o tempo médio para identificar e conter um breach sem exercícios de Red/Blue Team, segundo o IBM Cost of a Data Breach 2025. Com exercícios regulares, esse tempo cai para menos de 200 dias.</div>
+                </div>
+
+                <p>
+                    A abordagem de times coloridos evoluiu ao longo dos anos, dando origem ao <strong>Purple Team</strong> - uma metodologia que combina o melhor dos dois mundos através da colaboração. Organizações maduras frequentemente empregam as três abordagens de forma integrada para maximizar sua postura de segurança.
+                </p>
+
+                <h2 id="red-team">Red Team: Segurança Ofensiva</h2>
+
+                <div class="team-card red">
+                    <h3><span class="icon"><i class="fas fa-crosshairs"></i></span> Red Team</h3>
+                    <p>O Red Team é uma equipe de profissionais de segurança que simula adversários reais, utilizando as mesmas táticas, técnicas e procedimentos (TTPs) de atacantes para testar as defesas da organização. Diferente de um pentest tradicional, o Red Team tem objetivos específicos e escopo amplo.</p>
+                </div>
+
+                <h3>Características do Red Team</h3>
+                <ul>
+                    <li><strong>Objetivo:</strong> Alcançar um objetivo específico (exfiltrar dados, acessar sistema crítico)</li>
+                    <li><strong>Escopo:</strong> Amplo - qualquer vetor de ataque pode ser usado</li>
+                    <li><strong>Metodologia:</strong> Simula adversários reais usando TTPs documentados</li>
+                    <li><strong>Duração:</strong> Semanas a meses (simulação realista)</li>
+                    <li><strong>Furtividade:</strong> Evita detecção para testar capacidades do Blue Team</li>
+                    <li><strong>Foco:</strong> Testar pessoas, processos e tecnologia</li>
+                </ul>
+
+                <h3>Táticas comuns do Red Team</h3>
+                <ul>
+                    <li><strong>Reconhecimento:</strong> OSINT, footprinting, engenharia social passiva</li>
+                    <li><strong>Acesso inicial:</strong> Phishing, exploração de vulnerabilidades, supply chain</li>
+                    <li><strong>Persistência:</strong> Backdoors, implantes, scheduled tasks</li>
+                    <li><strong>Movimentação lateral:</strong> Pass-the-hash, Kerberoasting, pivoting</li>
+                    <li><strong>Exfiltração:</strong> Canais covert, DNS tunneling, cloud storage</li>
+                    <li><strong>Acesso físico:</strong> Tailgating, lockpicking, badge cloning</li>
+                </ul>
+
+                <div class="framework-card">
+                    <h4><i class="fas fa-tools" style="color: #ef4444; margin-right: 10px;"></i> Ferramentas típicas do Red Team</h4>
+                    <ul>
+                        <li><strong>C2 Frameworks:</strong> Cobalt Strike, Mythic, Sliver, Havoc</li>
+                        <li><strong>Exploitation:</strong> Metasploit, custom exploits</li>
+                        <li><strong>Post-exploitation:</strong> Mimikatz, BloodHound, Rubeus</li>
+                        <li><strong>Phishing:</strong> Gophish, Evilginx, custom payloads</li>
+                        <li><strong>Reconnaissance:</strong> Maltego, Shodan, theHarvester</li>
+                    </ul>
+                </div>
+
+                <h3>Certificações relevantes para Red Team</h3>
+                <ul>
+                    <li><strong>OSCP</strong> - Offensive Security Certified Professional (baseline)</li>
+                    <li><strong>OSEP</strong> - Offensive Security Experienced Penetration Tester</li>
+                    <li><strong>CRTO</strong> - Certified Red Team Operator</li>
+                    <li><strong>CRTP</strong> - Certified Red Team Professional (Active Directory)</li>
+                    <li><strong>GPEN</strong> - GIAC Penetration Tester</li>
+                </ul>
+
+                <h2 id="blue-team">Blue Team: Segurança Defensiva</h2>
+
+                <div class="team-card blue">
+                    <h3><span class="icon"><i class="fas fa-shield-alt"></i></span> Blue Team</h3>
+                    <p>O Blue Team é responsável por defender a organização contra ameaças. Isso inclui monitoramento contínuo, detecção de ameaças, resposta a incidentes e implementação de controles de segurança. O objetivo é detectar, conter e erradicar ameaças o mais rápido possível.</p>
+                </div>
+
+                <h3>Características do Blue Team</h3>
+                <ul>
+                    <li><strong>Objetivo:</strong> Proteger ativos, detectar e responder a ameaças</li>
+                    <li><strong>Operação:</strong> Contínua (24/7 em muitos casos)</li>
+                    <li><strong>Metodologia:</strong> Defense-in-depth, Zero Trust, frameworks como NIST</li>
+                    <li><strong>Métricas:</strong> MTTD (tempo de detecção), MTTR (tempo de resposta)</li>
+                    <li><strong>Foco:</strong> Visibilidade, detecção, resposta, recuperação</li>
+                </ul>
+
+                <h3>Funções do Blue Team</h3>
+                <ul>
+                    <li><strong>SOC (Security Operations Center):</strong> Monitoramento 24/7, triagem de alertas</li>
+                    <li><strong>Incident Response:</strong> Investigação e contenção de incidentes</li>
+                    <li><strong>Threat Hunting:</strong> Busca proativa por ameaças não detectadas</li>
+                    <li><strong>Threat Intelligence:</strong> Coleta e análise de inteligência de ameaças</li>
+                    <li><strong>Vulnerability Management:</strong> Identificação e correção de vulnerabilidades</li>
+                    <li><strong>Security Engineering:</strong> Implementação e tuning de controles</li>
+                </ul>
+
+                <p>
+                    Para uma visão aprofundada sobre SOC, consulte nosso artigo sobre <a href="../csoc-o-centro-de-operacoes-de-seguranca-cibernetica/">CSOC - Centro de Operações de Segurança Cibernética</a>. Para entender threat hunting, veja <a href="../a-importancia-do-threat-hunting-para-organizacao/">A Importância do Threat Hunting</a>.
+                </p>
+
+                <div class="framework-card">
+                    <h4><i class="fas fa-desktop" style="color: #3B82F6; margin-right: 10px;"></i> Tecnologias típicas do Blue Team</h4>
+                    <ul>
+                        <li><strong>SIEM:</strong> Splunk, Microsoft Sentinel, Elastic SIEM, QRadar</li>
+                        <li><strong>EDR/XDR:</strong> CrowdStrike, SentinelOne, Microsoft Defender</li>
+                        <li><strong>SOAR:</strong> Phantom, Demisto/XSOAR, Swimlane</li>
+                        <li><strong>NDR:</strong> Darktrace, Vectra, Corelight</li>
+                        <li><strong>Threat Intel:</strong> MISP, OpenCTI, ThreatConnect</li>
+                    </ul>
+                </div>
+
+                <h3>Certificações relevantes para Blue Team</h3>
+                <ul>
+                    <li><strong>GCIH</strong> - GIAC Certified Incident Handler</li>
+                    <li><strong>GCFA</strong> - GIAC Certified Forensic Analyst</li>
+                    <li><strong>GCIA</strong> - GIAC Certified Intrusion Analyst</li>
+                    <li><strong>BTL1/BTL2</strong> - Blue Team Level 1/2</li>
+                    <li><strong>OSDA</strong> - OffSec Defense Analyst</li>
+                    <li><strong>CySA+</strong> - CompTIA Cybersecurity Analyst</li>
+                </ul>
+
+                <h2 id="purple-team">Purple Team: Colaboração Estratégica</h2>
+
+                <div class="team-card purple">
+                    <h3><span class="icon"><i class="fas fa-handshake"></i></span> Purple Team</h3>
+                    <p>O Purple Team não é uma terceira equipe separada, mas sim uma metodologia de colaboração entre Red e Blue Team. Em exercícios Purple Team, o time ofensivo executa técnicas enquanto o time defensivo tenta detectar, com feedback e aprendizado em tempo real.</p>
+                </div>
+
+                <h3>Características do Purple Team</h3>
+                <ul>
+                    <li><strong>Objetivo:</strong> Maximizar aprendizado e melhorar detecção</li>
+                    <li><strong>Metodologia:</strong> Colaboração em tempo real entre Red e Blue</li>
+                    <li><strong>Transparência:</strong> TTPs são conhecidos por ambos os times</li>
+                    <li><strong>Foco:</strong> Gap analysis, tuning de detecções, treinamento</li>
+                    <li><strong>Entregáveis:</strong> Regras de detecção, playbooks, melhorias documentadas</li>
+                </ul>
+
+                <h3>Como funciona um exercício Purple Team</h3>
+                <ol>
+                    <li><strong>Planejamento:</strong> Definir TTPs a serem testados (baseado em MITRE ATT&CK)</li>
+                    <li><strong>Execução:</strong> Red Team executa técnica específica</li>
+                    <li><strong>Observação:</strong> Blue Team tenta detectar em tempo real</li>
+                    <li><strong>Feedback:</strong> Discussão imediata sobre o que foi/não foi detectado</li>
+                    <li><strong>Melhoria:</strong> Criação/ajuste de regras de detecção</li>
+                    <li><strong>Validação:</strong> Re-execução para confirmar detecção</li>
+                    <li><strong>Documentação:</strong> Registro de gaps e melhorias implementadas</li>
+                </ol>
+
+                <h3>Benefícios do Purple Team</h3>
+                <ul>
+                    <li>Feedback loop imediato (vs. relatório pós-engajamento)</li>
+                    <li>Transferência de conhecimento entre equipes</li>
+                    <li>Melhoria mensurável em capacidades de detecção</li>
+                    <li>Melhor ROI que Red Team tradicional para melhoria de detecção</li>
+                    <li>Treinamento prático para analistas do SOC</li>
+                    <li>Validação de controles de segurança</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <p><strong>Quando usar Purple Team vs Red Team tradicional:</strong> Use Red Team tradicional para testar a postura de segurança de forma realista (o Blue Team não sabe que está sendo testado). Use Purple Team quando o objetivo é melhorar capacidades de detecção rapidamente e treinar a equipe.</p>
+                </div>
+
+                <h2 id="comparativo">Comparativo: Red Team vs Blue Team vs Purple Team</h2>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th style="color: #ef4444;">Red Team</th>
+                            <th style="color: #3B82F6;">Blue Team</th>
+                            <th style="color: #8B5CF6;">Purple Team</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Objetivo principal</strong></td>
+                            <td>Simular adversários</td>
+                            <td>Defender e responder</td>
+                            <td>Melhorar detecção</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Abordagem</strong></td>
+                            <td>Ofensiva</td>
+                            <td>Defensiva</td>
+                            <td>Colaborativa</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Transparência</strong></td>
+                            <td>Nenhuma (furtivo)</td>
+                            <td>Total internamente</td>
+                            <td>Total entre times</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feedback</strong></td>
+                            <td>Pós-engajamento</td>
+                            <td>Contínuo (métricas)</td>
+                            <td>Tempo real</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Duração típica</strong></td>
+                            <td>4-8 semanas</td>
+                            <td>Contínuo</td>
+                            <td>1-2 semanas por ciclo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Custo relativo</strong></td>
+                            <td>$$$</td>
+                            <td>$$ (operacional)</td>
+                            <td>$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Melhor para</strong></td>
+                            <td>Testar resiliência</td>
+                            <td>Operação diária</td>
+                            <td>Capacitação rápida</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Entregável principal</strong></td>
+                            <td>Relatório de riscos</td>
+                            <td>Métricas de segurança</td>
+                            <td>Regras de detecção</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2 id="mitre">MITRE ATT&CK e os Times de Segurança</h2>
+
+                <p>
+                    O framework <a href="../mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/">MITRE ATT&CK</a> é fundamental para todos os times de segurança. Ele fornece uma linguagem comum e uma matriz de táticas e técnicas que permite:
+                </p>
+
+                <ul>
+                    <li><strong>Red Team:</strong> Planejar operações baseadas em adversários reais, documentar TTPs utilizados</li>
+                    <li><strong>Blue Team:</strong> Mapear cobertura de detecção, identificar gaps, priorizar investimentos</li>
+                    <li><strong>Purple Team:</strong> Estruturar exercícios por técnica, medir melhoria na cobertura</li>
+                </ul>
+
+                <div class="framework-card">
+                    <h3><i class="fas fa-th" style="color: #60A5FA; margin-right: 10px;"></i> Usando ATT&CK na prática</h3>
+                    <p>Exemplo de exercício Purple Team estruturado por MITRE ATT&CK:</p>
+                    <ol>
+                        <li>Selecionar técnica: <strong>T1059.001 - PowerShell</strong></li>
+                        <li>Red Team executa: Download de payload via PowerShell</li>
+                        <li>Blue Team monitora: Logs de PowerShell, EDR, SIEM</li>
+                        <li>Avaliar: Alerta gerado? Qual a qualidade? Falsos positivos?</li>
+                        <li>Melhorar: Ajustar regra de detecção, adicionar contexto</li>
+                        <li>Documentar: Atualizar matriz de cobertura ATT&CK</li>
+                    </ol>
+                </div>
+
+                <h2 id="implementar">Como Implementar na Sua Organização</h2>
+
+                <h3>Estágio 1: Fundação (Blue Team básico)</h3>
+                <ul>
+                    <li>Implementar SIEM com logs críticos (AD, firewall, endpoints)</li>
+                    <li>Configurar EDR em todos os endpoints</li>
+                    <li>Estabelecer processo de resposta a incidentes</li>
+                    <li>Realizar pentests regulares para identificar vulnerabilidades</li>
+                </ul>
+
+                <h3>Estágio 2: Maturação (Blue Team avançado)</h3>
+                <ul>
+                    <li>Expandir cobertura de logs e detecções</li>
+                    <li>Iniciar programa de Threat Hunting</li>
+                    <li>Integrar Threat Intelligence</li>
+                    <li>Automatizar resposta com SOAR</li>
+                </ul>
+
+                <h3>Estágio 3: Validação (Introdução de Red Team)</h3>
+                <ul>
+                    <li>Contratar Red Team externo para assessment</li>
+                    <li>Medir eficácia real das defesas</li>
+                    <li>Identificar gaps em pessoas, processos e tecnologia</li>
+                    <li>Desenvolver capacidade interna de Red Team (opcional)</li>
+                </ul>
+
+                <h3>Estágio 4: Otimização (Purple Team)</h3>
+                <ul>
+                    <li>Implementar exercícios Purple Team regulares</li>
+                    <li>Criar ciclo contínuo de melhoria</li>
+                    <li>Medir cobertura ATT&CK ao longo do tempo</li>
+                    <li>Desenvolver adversary emulation plans internos</li>
+                </ul>
+
+                <div class="cta-box">
+                    <h3>Precisa de Red Team ou Purple Team?</h3>
+                    <p>Nossa equipe oferece serviços de Red Team, Purple Team e Adversary Simulation baseados em MITRE ATT&CK.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Qual a diferença entre Red Team e Pentest?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Pentest foca em encontrar vulnerabilidades técnicas em escopo definido (aplicação, rede). Red Team simula um adversário completo com objetivo específico (ex: acessar dados de clientes), usando qualquer meio necessário incluindo engenharia social e acesso físico. Red Team testa toda a organização, não apenas sistemas técnicos. Para mais detalhes sobre pentest, veja nosso artigo sobre <a href="../tipos-de-pentest-guia-completo/">tipos de pentest</a>.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Minha empresa precisa de um Red Team interno?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Depende do tamanho e maturidade. A maioria das empresas se beneficia mais de Red Team externo (visão imparcial, expertise diversa) combinado com Purple Team periódico. Red Team interno faz sentido para grandes organizações com programas de segurança maduros que precisam de testes frequentes e conhecimento específico do ambiente.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quanto custa um engajamento de Red Team?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Red Team completo tipicamente custa entre R$ 80.000 e R$ 250.000+, dependendo do escopo, duração e objetivos. Inclui reconhecimento, multiple attack vectors, persistência e relatório executivo. Engajamentos mais longos ou com objetivos complexos custam mais. Purple Team exercises custam menos (R$ 40.000-80.000) por focarem em colaboração vs. furtividade.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O Blue Team deve saber quando o Red Team está atuando?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Em Red Team tradicional, não - apenas stakeholders de alto nível sabem (CISO, C-level). Isso permite avaliar detecção e resposta realistas. Em Purple Team, sim - a colaboração é explícita. Algumas organizações fazem "assumed breach" exercises onde o Blue sabe que há um Red Team, mas não sabe quando/onde atacarão.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons">
+                    <span style="color: #94A3B8;">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/red-team-blue-team-purple-team/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/red-team-blue-team-purple-team/&text=Red Team vs Blue Team vs Purple Team: Guia Completo" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Red Team vs Blue Team vs Purple Team https://inteligenciabrasil.seg.br/blog/red-team-blue-team-purple-team/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <!-- Author Box -->
+                <div class="author-box">
+                    <picture>
+                        <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80">
+                        <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80">
+                    </picture>
+                    <div class="author-info">
+                        <h3><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h3>
+                        <p>Consultoria especializada em Red Team, Purple Team e Segurança Ofensiva. Operações baseadas em MITRE ATT&CK.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../tipos-de-pentest-guia-completo/">Tipos de Pentest</a></li>
+                            <li><a href="../mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/">MITRE ATT&CK</a></li>
+                            <li><a href="../csoc-o-centro-de-operacoes-de-seguranca-cibernetica/">CSOC</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

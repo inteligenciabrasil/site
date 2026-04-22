@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="IPv8 e a proposta da IETF para suceder o IPv6. Entenda o draft-thain-ipv8, enderecamento de 512 bits, seguranca nativa, preparacao pos-quantica e impactos para organizacoes de ciberseguranca.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="IPv8, IPv6, IETF, draft-thain-ipv8, protocolo internet, enderecamento 512 bits, seguranca de rede, criptografia pos-quantica, evolucao IP, roteamento, NAT, IoT, redes do futuro">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/ipv8-protocolo-internet-evolucao-ipv6/">
+
+    <meta property="og:title" content="IPv8: A Proposta da IETF para Suceder o IPv6">
+    <meta property="og:description" content="Entenda o draft IPv8 da IETF: enderecamento de 512 bits, seguranca nativa, preparacao pos-quantica e impactos para redes corporativas.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/ipv8-protocolo-internet-evolucao-ipv6/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-04-20T10:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Frameworks e Padroes">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IPv8: A Proposta da IETF para Suceder o IPv6">
+    <meta name="twitter:description" content="draft-thain-ipv8, enderecamento 512 bits, seguranca nativa e criptografia pos-quantica. O que vem depois do IPv6.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>IPv8: A Proposta da IETF para Suceder o IPv6 (draft-thain-ipv8) | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"IPv8: A Proposta da IETF para Suceder o IPv6 (draft-thain-ipv8)","description":"Analise tecnica do draft IPv8 da IETF: enderecamento de 512 bits, seguranca nativa, preparacao pos-quantica e impactos para organizacoes.","image":"https://inteligenciabrasil.seg.br/img/og-image.webp","author":{"@type":"Person","name":"Roberto Lima","url":"https://inteligenciabrasil.seg.br/sobre/"},"publisher":{"@type":"Organization","name":"Inteligencia Brasil","logo":{"@type":"ImageObject","url":"https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},"datePublished":"2026-04-20","dateModified":"2026-04-20","copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/","inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e IPv8?","acceptedAnswer":{"@type":"Answer","text":"IPv8 e uma proposta de protocolo de Internet formalizada no draft-thain-ipv8 da IETF. Pretende suceder o IPv6 com enderecamento de 512 bits, seguranca nativa, suporte a criptografia pos-quantica e melhorias estruturais aprendidas durante duas decadas de deployment do IPv6. E um Internet-Draft em estagio inicial, nao uma RFC padronizada."}},{"@type":"Question","name":"Quando o IPv8 sera implementado globalmente?","acceptedAnswer":{"@type":"Answer","text":"O IPv8 ainda esta em fase de draft e discussao na IETF. Considerando que o IPv6 levou mais de duas decadas para alcancar cerca de 45% de adocao global, uma eventual padronizacao e deployment do IPv8 em escala global e um cenario que se estenderia por decadas. Organizacoes nao devem adiar projetos de IPv6 esperando o IPv8."}},{"@type":"Question","name":"Por que precisariamos de IPv8 se o IPv6 ainda nao foi totalmente adotado?","acceptedAnswer":{"@type":"Answer","text":"O IPv6 resolveu o problema de esgotamento de enderecos, mas introduziu complexidades operacionais, nao incorporou seguranca nativa em todos os cenarios e nao foi projetado para a era pos-quantica. O IPv8 propoe incorporar essas evolucoes arquiteturalmente, em vez de via extensoes sobrepostas como IPsec, TLS e outras camadas adicionadas ao IPv6."}},{"@type":"Question","name":"IPv8 vai quebrar compatibilidade com IPv4 e IPv6?","acceptedAnswer":{"@type":"Answer","text":"O draft IPv8 considera mecanismos de transicao e coexistencia, assim como o IPv6 manteve interoperabilidade com o IPv4 via dual-stack, tunelamento e traducao. Qualquer adocao eventual exigira periodo longo de convivencia, pois substituir o stack IP global de uma vez nao e viavel tecnica nem economicamente."}},{"@type":"Question","name":"O que o IPv8 significa para a ciberseguranca corporativa?","acceptedAnswer":{"@type":"Answer","text":"Seguranca nativa no protocolo reduz dependencia de camadas sobrepostas, mas exige atualizacao de toda a stack: firewalls, IDS/IPS, SIEM, EDR, ferramentas de analise forense, WAFs e appliances de rede. Organizacoes devem acompanhar o draft, mas priorizar hoje a maturidade em IPv6, Zero Trust e criptografia pos-quantica."}}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inteligenciabrasil.seg.br/blog/"},{"@type":"ListItem","position":3,"name":"IPv8: A Proposta da IETF"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Frameworks e Padroes</span>
+            <h1>IPv8: A Proposta da IETF para Suceder o IPv6 (draft-thain-ipv8)</h1>
+            <div class="article-meta">
+                <span><i class="far fa-user"></i> Roberto Lima</span>
+                <span><i class="far fa-calendar"></i> Abril 2026</span>
+                <span><i class="far fa-clock"></i> 16 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">IPv8: A Proposta da IETF</li></ol></div></nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#o-que-e-ipv8">O que e o IPv8</a></li>
+                        <li><a href="#contexto">Contexto historico: de IPv4 a IPv8</a></li>
+                        <li><a href="#motivacoes">Motivacoes para um novo protocolo</a></li>
+                        <li><a href="#caracteristicas">Principais caracteristicas propostas</a></li>
+                        <li><a href="#enderecamento">Enderecamento expandido de 512 bits</a></li>
+                        <li><a href="#seguranca">Seguranca nativa e criptografia pos-quantica</a></li>
+                        <li><a href="#comparativo">Comparativo IPv4 vs IPv6 vs IPv8</a></li>
+                        <li><a href="#desafios">Desafios de adocao</a></li>
+                        <li><a href="#impacto-ciberseguranca">Impacto para a ciberseguranca corporativa</a></li>
+                        <li><a href="#recomendacoes">Recomendacoes para organizacoes</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <p>O protocolo <strong>IP (Internet Protocol)</strong> e a base invisivel sobre a qual toda a Internet moderna opera. Apos quase cinco decadas do IPv4 e mais de vinte anos desde a padronizacao do IPv6, surge uma nova proposta em discussao na <strong>IETF (Internet Engineering Task Force)</strong>: o <strong>IPv8</strong>, formalizado no <em>draft-thain-ipv8-00</em>.</p>
+
+                <p>Este artigo analisa o conteudo e o contexto tecnico do draft IPv8, compara com IPv4 e IPv6, e discute o que isso significa para arquiteturas de rede corporativa e estrategias de ciberseguranca na proxima decada.</p>
+
+                <div class="stat-highlight">
+                    <div class="number">512 bits</div>
+                    <div class="label">tamanho do enderecamento proposto pelo IPv8 (4x maior que o IPv6 de 128 bits)</div>
+                </div>
+
+                <p style="font-size:.9rem;color:#94A3B8">Este artigo utiliza diversas siglas tecnicas (IPsec, NAT, MTU, QoS, BGP, SLAAC). Consulte nosso <a href="../glossario-acronimos-ti-seguranca-informacao/">glossario de acronimos de TI e SI</a> para referencia rapida.</p>
+
+                <h2 id="o-que-e-ipv8">O Que e o IPv8</h2>
+
+                <h3>Definicao e escopo do draft</h3>
+
+                <p>O <strong>IPv8</strong> e uma proposta de protocolo de Internet de nova geracao formalizada como <em>Internet-Draft</em> na IETF sob o identificador <code>draft-thain-ipv8-00</code>. Diferente de uma <strong>RFC (Request for Comments)</strong> publicada, um Internet-Draft e um documento preliminar que descreve especificacoes tecnicas em discussao, sujeito a revisao, modificacao ou abandono.</p>
+
+                <p>A proposta busca suceder o IPv6 incorporando licoes aprendidas em duas decadas de deployment, enderecando limitacoes estruturais e preparando o protocolo para os desafios da proxima geracao de Internet: <strong>IoT em escala massiva, computacao pos-quantica, zero trust nativo, edge computing e redes espaciais</strong>.</p>
+
+                <h3>Status atual: draft, nao padrao</h3>
+
+                <p>E fundamental entender o estagio do IPv8:</p>
+
+                <ul>
+                    <li><strong>Nao e uma RFC oficial</strong> - e um draft em fase inicial de discussao</li>
+                    <li><strong>Nao tem implementacao em producao</strong> - sistemas operacionais, roteadores e equipamentos nao suportam IPv8</li>
+                    <li><strong>Pode ser modificado, renomeado ou abandonado</strong> - drafts frequentemente evoluem ou nao avancam</li>
+                    <li><strong>O IPv6 continua sendo o caminho atual</strong> para modernizacao de redes</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <div class="highlight-box-title"><i class="fas fa-exclamation-circle"></i> IPv7 nao existe como protocolo IP operacional</div>
+                    <p>O numero "7" foi historicamente reservado e associado a experimentos sem deployment global (como o TP/IX e o Internet Stream Protocol). Por isso, propostas sucessoras do IPv6 normalmente saltam direto para <strong>IPv8</strong>.</p>
+                </div>
+
+                <h2 id="contexto">Contexto Historico: De IPv4 a IPv8</h2>
+
+                <h3>IPv4 (1981): o protocolo fundador</h3>
+
+                <p>Padronizado pela <strong>RFC 791</strong> em 1981, o IPv4 usa enderecos de 32 bits, oferecendo cerca de <strong>4,3 bilhoes de enderecos unicos</strong>. Em 1981, isso parecia inesgotavel. Em 2011, a IANA distribuiu o ultimo bloco /8 aos <strong>RIRs (Regional Internet Registries)</strong>, e desde entao o esgotamento se propagou regionalmente.</p>
+
+                <h3>IPv6 (1998-1999): a resposta ao esgotamento</h3>
+
+                <p>Padronizado pela <strong>RFC 2460</strong> (posteriormente atualizado pela RFC 8200), o IPv6 amplia o enderecamento para <strong>128 bits</strong> - suficiente para aproximadamente 340 undecilhoes de enderecos (3,4 x 10^38). Incorpora tambem autoconfiguracao (SLAAC), simplificacao do cabecalho e suporte nativo a IPsec.</p>
+
+                <div class="annexa-grid">
+                    <div class="annexa-item"><div class="number">32</div><div class="label">bits IPv4</div></div>
+                    <div class="annexa-item"><div class="number">128</div><div class="label">bits IPv6</div></div>
+                    <div class="annexa-item"><div class="number">512</div><div class="label">bits IPv8 (proposta)</div></div>
+                    <div class="annexa-item"><div class="number">~45%</div><div class="label">adocao IPv6 global (2025)</div></div>
+                </div>
+
+                <h3>Por que a adocao do IPv6 foi lenta</h3>
+
+                <p>Apos mais de duas decadas, o IPv6 chegou a cerca de <strong>45% de adocao global</strong> (Google IPv6 Statistics). Os principais fatores de lentidao:</p>
+
+                <ul>
+                    <li><strong>NAT + CGNAT</strong> mitigaram o esgotamento de IPv4, reduzindo urgencia</li>
+                    <li><strong>Falta de compatibilidade</strong> - IPv4 e IPv6 nao falam entre si sem traducao/tunelamento</li>
+                    <li><strong>Complexidade operacional</strong> - dual-stack dobra a superficie de ataque e a complexidade de gerenciamento</li>
+                    <li><strong>Mercado conservador</strong> - ISPs, operadoras e data centers so migram quando forcados</li>
+                    <li><strong>Ferramentas e profissionais</strong> ainda focados em IPv4</li>
+                </ul>
+
+                <p>Essa experiencia e central para entender o IPv8: <strong>o draft tenta incorporar estrategias de transicao mais amigaveis</strong> e beneficios operacionais que justifiquem adocao por valor, nao apenas por necessidade.</p>
+
+                <h2 id="motivacoes">Motivacoes para um Novo Protocolo</h2>
+
+                <h3>Limitacoes estruturais do IPv6</h3>
+
+                <p>Apesar de ter resolvido o esgotamento de enderecos, o IPv6 nao foi projetado com todas as demandas modernas em mente:</p>
+
+                <ul>
+                    <li><strong>Seguranca opcional na pratica</strong> - IPsec e "obrigatorio" no IPv6, mas raramente habilitado fim-a-fim</li>
+                    <li><strong>Cabecalhos de extensao problematicos</strong> - criam superficies de ataque (Type 0 Routing Header, fragmentacao)</li>
+                    <li><strong>Enderecamento previsivel via SLAAC</strong> - gera rastreamento baseado em MAC (mitigado parcialmente pela RFC 8981)</li>
+                    <li><strong>Ausencia de nocao nativa de identidade</strong> - ainda separa host e endereco sem vinculo criptografico</li>
+                    <li><strong>Preparacao limitada para pos-quantico</strong> - depende de protocolos de camada superior</li>
+                </ul>
+
+                <h3>Novas demandas da Internet moderna</h3>
+
+                <p>A Internet de 2030 em diante sera muito diferente da de 2000:</p>
+
+                <div class="phase-card" data-phase="Demanda 1">
+                    <h3>IoT em escala massiva</h3>
+                    <p>Bilhoes de dispositivos conectados exigem enderecamento hierarquico, mecanismos de agrupamento eficientes e seguranca por padrao - pois endpoints IoT raramente recebem patches em tempo habil.</p>
+                </div>
+
+                <div class="phase-card" data-phase="Demanda 2">
+                    <h3>Era pos-quantica</h3>
+                    <p>Computadores quanticos praticos ameacam algoritmos assimetricos atuais (RSA, ECC, Diffie-Hellman). Protocolos modernos precisam suportar algoritmos <strong>PQC (Post-Quantum Cryptography)</strong> padronizados pelo NIST (ML-KEM, ML-DSA).</p>
+                </div>
+
+                <div class="phase-card" data-phase="Demanda 3">
+                    <h3>Zero Trust como premissa</h3>
+                    <p>Confianca implicita em redes internas desapareceu. Protocolos novos devem incorporar autenticacao continua, microsegmentacao e verificacao fim-a-fim - nao depender apenas de camadas sobrepostas.</p>
+                </div>
+
+                <div class="phase-card" data-phase="Demanda 4">
+                    <h3>Edge computing e latencia</h3>
+                    <p>5G, veiculos autonomos, realidade aumentada e telemedicina exigem <strong>SLAs de latencia muito estritos</strong> - o que impacta roteamento, QoS e descoberta de servico.</p>
+                </div>
+
+                <div class="phase-card" data-phase="Demanda 5">
+                    <h3>Redes interplanetarias e espaciais</h3>
+                    <p>Constellations de satelites (Starlink, Kuiper), enlaces lunares e futuras redes marcianas tem caracteristicas de <em>Delay-Tolerant Networking</em> que o IPv4/IPv6 nao enderecam nativamente.</p>
+                </div>
+
+                <h2 id="caracteristicas">Principais Caracteristicas Propostas pelo IPv8</h2>
+
+                <p>O <em>draft-thain-ipv8</em> reune um conjunto de propostas que podem variar entre versoes, mas os eixos centrais incluem:</p>
+
+                <h3>Enderecamento hierarquico de 512 bits</h3>
+
+                <p>Endereco quatro vezes maior que o IPv6. Alem de capacidade ainda maior, o tamanho expandido permite <strong>estrutura hierarquica mais rica</strong>: prefixos de organizacao, regiao, fabricante, tipo de dispositivo, entre outros, podem ser codificados no proprio endereco.</p>
+
+                <h3>Identidade criptografica nativa</h3>
+
+                <p>Vinculacao opcional ou obrigatoria entre endereco e chave publica do host, permitindo <strong>autenticacao na camada de rede</strong>. Reduz dependencia de certificados X.509 em cada conexao e facilita modelos Zero Trust nativos.</p>
+
+                <h3>Agilidade criptografica (crypto agility)</h3>
+
+                <p>Suporte a multiplos algoritmos, incluindo <strong>criptografia pos-quantica</strong>. Quando um algoritmo e comprometido ou um novo padrao emerge, o protocolo pode migrar sem quebrar interoperabilidade.</p>
+
+                <h3>Cabecalhos simplificados e seguros</h3>
+
+                <p>Eliminar cabecalhos de extensao problematicos do IPv6 que geram vulnerabilidades. Estrutura fixa ou extensoes rigorosamente tipadas para evitar ambiguidades que atacantes exploram.</p>
+
+                <h3>QoS estruturado</h3>
+
+                <p>Classes de servico integradas no cabecalho principal, com suporte a SLAs deterministicos para aplicacoes criticas (saude, seguranca publica, controle industrial).</p>
+
+                <h3>Descoberta de servico embutida</h3>
+
+                <p>Mecanismos para descobrir recursos de rede sem depender exclusivamente de DNS - reduzindo pontos unicos de falha e melhorando resiliencia.</p>
+
+                <h3>Eliminacao ou reducao de NAT</h3>
+
+                <p>Com enderecamento abundante, NAT deixa de ser necessidade. Isso simplifica troubleshooting, melhora trafego fim-a-fim e elimina uma das maiores fontes de dor operacional em IPv4.</p>
+
+                <div class="highlight-box info">
+                    <div class="highlight-box-title"><i class="fas fa-lightbulb"></i> Crypto agility: a licao do IPv6</div>
+                    <p>O IPsec do IPv6 foi desenhado quando 3DES e SHA-1 eram o estado da arte. Hoje ambos sao considerados fracos. A licao: protocolos novos precisam de <strong>mecanismos de negociacao de algoritmos</strong> que permitam evolucao sem quebra de compatibilidade.</p>
+                </div>
+
+                <h2 id="enderecamento">Enderecamento Expandido de 512 Bits</h2>
+
+                <h3>Por que 512 bits?</h3>
+
+                <p>128 bits do IPv6 ja oferecem 3,4 x 10^38 enderecos - mais que suficiente para IoT massiva. Entao por que 512 bits? A resposta nao e "mais enderecos", mas <strong>mais estrutura</strong>:</p>
+
+                <ul>
+                    <li><strong>Identidade + localizacao</strong> - parte do endereco pode ser identidade criptografica, outra parte localizacao topologica</li>
+                    <li><strong>Metadados de policy</strong> - classe de trafego, prioridade, dominio administrativo</li>
+                    <li><strong>Compatibilidade transparente</strong> - bits sobram para encapsular enderecos IPv4 e IPv6 dentro do IPv8</li>
+                    <li><strong>Espaco para evolucao</strong> - permite adicionar semanticas futuras sem quebrar o protocolo</li>
+                </ul>
+
+                <h3>Estrutura hierarquica proposta</h3>
+
+                <p>Embora o formato final esteja em discussao, uma estrutura tipica pode incluir:</p>
+
+                <ul>
+                    <li><strong>Prefixo de autoridade/regiao</strong> - equivalente a ASN (Autonomous System Number) embutido</li>
+                    <li><strong>Prefixo de organizacao</strong> - empresa, operadora, provedor de nuvem</li>
+                    <li><strong>Prefixo de dominio</strong> - datacenter, rede, VLAN logica</li>
+                    <li><strong>Identificador de host</strong> - potencialmente derivado de chave publica</li>
+                    <li><strong>Bits de policy e classe</strong> - QoS, seguranca, compliance</li>
+                </ul>
+
+                <h3>Implicacoes operacionais</h3>
+
+                <p>Enderecos de 512 bits aumentam overhead de cabecalho, mas com <strong>redes de 100Gbps+</strong> e hardware especializado (ASICs, programabilidade P4), esse overhead e negligenciavel. O maior impacto esta em ferramentas: log parsers, IDS/IPS, SIEM, WAF e analise forense precisam ser atualizados para lidar com os novos formatos.</p>
+
+                <h2 id="seguranca">Seguranca Nativa e Criptografia Pos-Quantica</h2>
+
+                <h3>Seguranca como premissa arquitetural</h3>
+
+                <p>No IPv4, seguranca foi quase sempre sobreposta (IPsec, TLS, VPNs). No IPv6, IPsec foi mandatorio em teoria mas opcional na pratica. O IPv8 propoe tratar seguranca como <strong>propriedade do protocolo</strong>, nao como camada adicional.</p>
+
+                <p>Beneficios esperados:</p>
+
+                <ul>
+                    <li><strong>Autenticacao de origem</strong> garantida por padrao - dificulta spoofing de IP</li>
+                    <li><strong>Integridade de pacote</strong> verificavel sem depender de protocolos superiores</li>
+                    <li><strong>Confidencialidade opcional</strong> na propria camada 3, complementar ao TLS</li>
+                    <li><strong>Nao repudio</strong> criptografico para auditoria e forense</li>
+                </ul>
+
+                <h3>Preparacao para a era pos-quantica</h3>
+
+                <p>Computadores quanticos com capacidade criptograficamente relevante <strong>ainda nao existem comercialmente</strong>, mas a ameaca "harvest now, decrypt later" e concreta: adversarios ja capturam trafego cifrado hoje para decifrar no futuro. Por isso o <strong>NIST padronizou em 2024 os primeiros algoritmos PQC</strong> (FIPS 203, 204 e 205).</p>
+
+                <p>O IPv8 pretende:</p>
+
+                <ul>
+                    <li>Oferecer <strong>suites de algoritmos PQC</strong> (ML-KEM para KEM, ML-DSA e SLH-DSA para assinaturas) como primeira classe</li>
+                    <li>Suportar <strong>modos hibridos</strong> (classico + PQC) durante a transicao</li>
+                    <li>Permitir <strong>substituicao de algoritmos</strong> sem rever o protocolo inteiro</li>
+                </ul>
+
+                <h3>Protecao contra novos vetores de ataque</h3>
+
+                <p>O draft tambem busca mitigar classes de ataque conhecidas em IPv4 e IPv6:</p>
+
+                <ul>
+                    <li><strong>Reflection/amplification</strong> - validacao criptografica de origem</li>
+                    <li><strong>Route hijacking</strong> (ex.: BGP leaks) - autenticacao de anuncios de rota</li>
+                    <li><strong>Fragmentation attacks</strong> - estrutura de cabecalho simplificada</li>
+                    <li><strong>Neighbor Discovery spoofing</strong> - assinaturas digitais nas mensagens de descoberta</li>
+                </ul>
+
+                <h2 id="comparativo">Comparativo IPv4 vs IPv6 vs IPv8</h2>
+
+                <h3>Tabela comparativa</h3>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Caracteristica</th>
+                            <th>IPv4</th>
+                            <th>IPv6</th>
+                            <th>IPv8 (proposta)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Tamanho do endereco</strong></td>
+                            <td>32 bits</td>
+                            <td>128 bits</td>
+                            <td>512 bits</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Enderecos disponiveis</strong></td>
+                            <td>~4,3 bilhoes</td>
+                            <td>~3,4 x 10^38</td>
+                            <td>~1,3 x 10^154</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Seguranca nativa</strong></td>
+                            <td>Nao (ad hoc)</td>
+                            <td>IPsec obrigatorio (raramente usado)</td>
+                            <td>Integrada no design</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Criptografia pos-quantica</strong></td>
+                            <td>Nao</td>
+                            <td>Via extensoes</td>
+                            <td>Suporte nativo previsto</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NAT</strong></td>
+                            <td>Essencial</td>
+                            <td>Opcional</td>
+                            <td>Desnecessario/desencorajado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>QoS</strong></td>
+                            <td>ToS/DSCP</td>
+                            <td>Traffic Class + Flow Label</td>
+                            <td>Classes estruturadas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Identidade de host</strong></td>
+                            <td>Nenhuma</td>
+                            <td>Opcional (CGA, HIP)</td>
+                            <td>Nativa, criptografica</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status</strong></td>
+                            <td>RFC 791 (1981)</td>
+                            <td>RFC 8200 (2017)</td>
+                            <td>Draft IETF (2025+)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Principais saltos arquiteturais</h3>
+
+                <p>De IPv4 para IPv6, o salto foi principalmente em <strong>escala</strong> (enderecamento). De IPv6 para IPv8, o salto e em <strong>expressividade e seguranca</strong> - o endereco deixa de ser apenas um identificador numerico e passa a carregar estrutura, identidade e policy.</p>
+
+                <h2 id="desafios">Desafios de Adocao</h2>
+
+                <h3>Inercia do ecossistema</h3>
+
+                <p>A Internet e o ecossistema de software mais heterogeneo ja construido. Atualizar simultaneamente milhoes de roteadores, switches, firewalls, servidores, sistemas operacionais, bibliotecas e aplicacoes nao e uma transicao trivial - e uma <strong>epopeia geracional</strong>.</p>
+
+                <h3>Licoes do deployment de IPv6</h3>
+
+                <div class="highlight-box">
+                    <div class="highlight-box-title"><i class="fas fa-history"></i> O IPv6 ainda nao terminou</div>
+                    <p>Com ~45% de adocao global em 2025, mais de duas decadas apos sua padronizacao, o IPv6 mostra que transicoes de protocolo IP sao medidas em decadas, nao em anos. Qualquer planejamento realistico para IPv8 precisa considerar pelo menos <strong>15-25 anos ate adocao significativa</strong>.</p>
+                </div>
+
+                <h3>Atualizacao completa da stack de seguranca</h3>
+
+                <p>Para suportar IPv8, toda a cadeia de seguranca precisaria ser repensada:</p>
+
+                <ul>
+                    <li><strong>Firewalls e IDS/IPS</strong> - novas regras, parsing de cabecalhos de 512 bits</li>
+                    <li><strong>SIEM e log pipelines</strong> - campos novos, normalizacao diferente</li>
+                    <li><strong>WAFs e proxies</strong> - suporte ao novo transporte</li>
+                    <li><strong>EDR e network sensors</strong> - capacidade de interpretar o novo protocolo</li>
+                    <li><strong>Ferramentas forenses</strong> - parsers para o novo formato</li>
+                    <li><strong>Threat intelligence</strong> - feeds de IoCs adaptados</li>
+                </ul>
+
+                <h3>Capacitacao de profissionais</h3>
+
+                <p>Um ecossistema inteiro de profissionais precisara ser retreinado. Redes formam a base de TI - administradores, arquitetos, engenheiros de seguranca e pentesters precisarao aprender novos fundamentos.</p>
+
+                <h3>Compatibilidade com IPv6 e IPv4</h3>
+
+                <p>Assim como IPv6 usa dual-stack, tunelamento e traducao para conviver com IPv4, o IPv8 precisara de mecanismos de transicao robustos. A experiencia do IPv6 sugere que <strong>a compatibilidade e mais importante que as features novas</strong> - um protocolo que forca "tudo ou nada" nao sobrevive politicamente.</p>
+
+                <h2 id="impacto-ciberseguranca">Impacto para a Ciberseguranca Corporativa</h2>
+
+                <h3>Oportunidades defensivas</h3>
+
+                <p>Seguranca nativa no protocolo pode reduzir classes inteiras de ataques hoje comuns:</p>
+
+                <ul>
+                    <li><strong>IP spoofing</strong> - dificultado por autenticacao criptografica de origem</li>
+                    <li><strong>DDoS volumetricos por reflection</strong> - reduzidos com validacao de origem</li>
+                    <li><strong>Man-in-the-middle na camada de rede</strong> - barrado por integridade nativa</li>
+                    <li><strong>BGP hijacking</strong> - mitigado por autenticacao de anuncios</li>
+                </ul>
+
+                <h3>Novos riscos e superficies de ataque</h3>
+
+                <p>Qualquer novo protocolo traz consigo riscos:</p>
+
+                <ul>
+                    <li><strong>Bugs de implementacao</strong> - primeiras implementacoes sempre tem vulnerabilidades novas</li>
+                    <li><strong>Complexidade criptografica</strong> - mais surface para side-channel attacks</li>
+                    <li><strong>Dual-stack triplicado</strong> (IPv4 + IPv6 + IPv8) durante transicao</li>
+                    <li><strong>Atraso na maturidade de ferramentas defensivas</strong> - adversarios podem explorar esse gap</li>
+                    <li><strong>Algoritmos PQC relativamente novos</strong> - podem revelar fraquezas com mais analise</li>
+                </ul>
+
+                <h3>Impacto em arquiteturas Zero Trust</h3>
+
+                <p>Como a <a href="../zero-trust-architecture-guia-completo/">arquitetura Zero Trust</a> assume que a rede nunca e confiavel e exige verificacao continua, um protocolo com identidade criptografica nativa se alinha naturalmente. O IPv8 pode se tornar <strong>fundacao tecnica para Zero Trust</strong> em vez de apenas um padrao de melhor esforco.</p>
+
+                <h3>Ameacas quanticas no horizonte</h3>
+
+                <p>Mesmo sem IPv8, organizacoes precisam planejar a migracao para <strong>criptografia pos-quantica</strong>. O NIST ja finalizou os primeiros algoritmos PQC em 2024, e agencias como CISA, NSA e ANSSI recomendam inventario criptografico e plano de migracao. O IPv8 acelera essa pressao, mas a migracao PQC nao deve esperar por ele.</p>
+
+                <h2 id="recomendacoes">Recomendacoes para Organizacoes</h2>
+
+                <h3>O que NAO fazer agora</h3>
+
+                <ul>
+                    <li>Adiar projetos de <strong>IPv6</strong> esperando o IPv8 - IPv6 e o presente e continuara sendo por muito tempo</li>
+                    <li>Investir em "produtos IPv8-ready" - ainda nao existem especificacoes estaveis</li>
+                    <li>Tratar o draft como padrao definitivo - pode mudar substancialmente ou nao avancar</li>
+                </ul>
+
+                <h3>O que fazer agora</h3>
+
+                <div class="phase-card" data-phase="Passo 1">
+                    <h3>Consolidar IPv6</h3>
+                    <p>Se sua organizacao ainda nao opera IPv6 em producao, essa e a prioridade imediata. Habilidades, ferramentas e processos construidos para IPv6 servirao de base para IPv8 quando/se ele chegar.</p>
+                </div>
+
+                <div class="phase-card" data-phase="Passo 2">
+                    <h3>Iniciar inventario criptografico (PQC readiness)</h3>
+                    <p>Mapeie onde sua organizacao usa criptografia assimetrica: TLS, SSH, VPNs, assinaturas de codigo, emails, PKI interna. Identifique sistemas criticos, estimar vida util dos dados e planeje migracao para <strong>algoritmos pos-quanticos</strong>.</p>
+                </div>
+
+                <div class="phase-card" data-phase="Passo 3">
+                    <h3>Avancar em Zero Trust</h3>
+                    <p>Implementar microsegmentacao, autenticacao continua, verificacao de identidade e acesso baseado em contexto. Essas capacidades serao ampliadas por IPv8, mas valem por si so hoje.</p>
+                </div>
+
+                <div class="phase-card" data-phase="Passo 4">
+                    <h3>Monitorar a evolucao do draft</h3>
+                    <p>Acompanhe drafts da IETF, participacoes de fornecedores-chave (Cisco, Juniper, Microsoft, Google, Cloudflare) e grupos de trabalho relevantes. A direcao dessas discussoes revela para onde a Internet caminha.</p>
+                </div>
+
+                <div class="phase-card" data-phase="Passo 5">
+                    <h3>Atualizar planos de longo prazo</h3>
+                    <p>Em roadmaps de 5-10 anos, incluir IPv8 como cenario a monitorar. Refresh tecnologico de equipamentos de rede deve priorizar <strong>programabilidade</strong> (P4, SONiC, SDN) que permita suportar novos protocolos via firmware/software.</p>
+                </div>
+
+                <h3>Postura recomendada: pragmatismo estrategico</h3>
+
+                <p>IPv8 representa uma visao ambiciosa para o futuro da Internet, mas o presente continua sendo IPv4 em declinio, IPv6 em consolidacao e criptografia pos-quantica em transicao. A <strong>postura correta e investir nas prioridades atuais com olho no horizonte</strong>, nao abandonar o presente pelo futuro incerto.</p>
+
+                <div class="cta-box">
+                    <h3>Sua rede esta pronta para o futuro?</h3>
+                    <p>Avalie a maturidade da sua infraestrutura em IPv6, criptografia pos-quantica e Zero Trust. Nossa consultoria identifica gaps estrategicos e prepara sua organizacao para a proxima decada de evolucao de protocolos.</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Assessment de Infraestrutura</a>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que e IPv8?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>IPv8 e uma proposta de protocolo de Internet formalizada no draft-thain-ipv8 da IETF. Pretende suceder o IPv6 com enderecamento de 512 bits, seguranca nativa, suporte a criptografia pos-quantica e melhorias estruturais aprendidas durante duas decadas de deployment do IPv6. E um Internet-Draft em estagio inicial, nao uma RFC padronizada.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quando o IPv8 sera implementado globalmente?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O IPv8 ainda esta em fase de draft e discussao na IETF. Considerando que o IPv6 levou mais de duas decadas para alcancar cerca de 45% de adocao global, uma eventual padronizacao e deployment do IPv8 em escala global e um cenario que se estenderia por decadas. Organizacoes nao devem adiar projetos de IPv6 esperando o IPv8.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Por que precisariamos de IPv8 se o IPv6 ainda nao foi totalmente adotado?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O IPv6 resolveu o problema de esgotamento de enderecos, mas introduziu complexidades operacionais, nao incorporou seguranca nativa em todos os cenarios e nao foi projetado para a era pos-quantica. O IPv8 propoe incorporar essas evolucoes arquiteturalmente, em vez de via extensoes sobrepostas como IPsec, TLS e outras camadas adicionadas ao IPv6.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>IPv8 vai quebrar compatibilidade com IPv4 e IPv6?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O draft IPv8 considera mecanismos de transicao e coexistencia, assim como o IPv6 manteve interoperabilidade com o IPv4 via dual-stack, tunelamento e traducao. Qualquer adocao eventual exigira periodo longo de convivencia, pois substituir o stack IP global de uma vez nao e viavel tecnica nem economicamente.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que o IPv8 significa para a ciberseguranca corporativa?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Seguranca nativa no protocolo reduz dependencia de camadas sobrepostas, mas exige atualizacao de toda a stack: firewalls, IDS/IPS, SIEM, EDR, ferramentas de analise forense, WAFs e appliances de rede. Organizacoes devem acompanhar o draft, mas priorizar hoje a maturidade em IPv6, Zero Trust e criptografia pos-quantica.</p></div>
+                    </div>
+                </div>
+
+                <h2>Conclusao</h2>
+
+                <p>O <strong>IPv8</strong>, conforme formalizado no <em>draft-thain-ipv8</em>, e uma leitura ambiciosa sobre o que a camada de rede precisa ser na proxima geracao da Internet: mais segura por design, preparada para a era pos-quantica, com identidade nativa e espaco de enderecamento que acomoda decadas de evolucao.</p>
+
+                <p>Ao mesmo tempo, a historia do IPv6 nos ensina que <strong>padronizar um protocolo nao e o mesmo que adota-lo</strong>. Entre o draft atual e qualquer impacto operacional real, ha anos de revisoes, implementacoes de referencia, testes, deployment em laboratorio e, finalmente, adocao em producao - frequentemente medida em decadas.</p>
+
+                <p>Para organizacoes, a mensagem e clara: <strong>nao se distraia com o futuro especulativo enquanto o presente ainda exige atencao</strong>. IPv6, Zero Trust e criptografia pos-quantica sao os alicerces que posicionam sua infraestrutura para qualquer cenario - inclusive um em que o IPv8 eventualmente se torne realidade.</p>
+
+                <p>A melhor estrategia para IPv8 <strong>e executar excelencia no IPv6 hoje</strong>. Profissionais, processos e ferramentas construidos agora formarao a base sobre a qual qualquer transicao futura sera viavel.</p>
+
+                <div class="module-sources" style="margin-top:2rem;padding:1.5rem;background:rgba(96,165,250,.04);border-left:3px solid #60A5FA;border-radius:8px">
+                    <div style="font-weight:700;color:#60A5FA;margin-bottom:.75rem"><i class="fas fa-bookmark"></i> Fontes e referencias tecnicas</div>
+                    <ul style="margin:0;padding-left:1.2rem">
+                        <li><a href="https://www.ietf.org/archive/id/draft-thain-ipv8-00.html" target="_blank" rel="noopener">IETF Draft - draft-thain-ipv8-00</a></li>
+                        <li><a href="https://datatracker.ietf.org/doc/html/rfc8200" target="_blank" rel="noopener">RFC 8200 - Internet Protocol, Version 6 (IPv6) Specification</a></li>
+                        <li><a href="https://datatracker.ietf.org/doc/html/rfc791" target="_blank" rel="noopener">RFC 791 - Internet Protocol (IPv4)</a></li>
+                        <li><a href="https://www.google.com/intl/en/ipv6/statistics.html" target="_blank" rel="noopener">Google IPv6 Adoption Statistics</a></li>
+                        <li><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" rel="noopener">NIST Post-Quantum Cryptography Standardization</a></li>
+                        <li><a href="https://www.ietf.org/standards/process/" target="_blank" rel="noopener">IETF Standards Process</a></li>
+                        <li><a href="https://www.cisa.gov/quantum" target="_blank" rel="noopener">CISA Post-Quantum Cryptography Initiative</a></li>
+                    </ul>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/ipv8-protocolo-internet-evolucao-ipv6/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/ipv8-protocolo-internet-evolucao-ipv6/" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=IPv8: A proposta da IETF para suceder o IPv6 https://inteligenciabrasil.seg.br/blog/ipv8-protocolo-internet-evolucao-ipv6/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h3>Roberto Lima</h3>
+                        <p>Especialista em Seguranca Ofensiva, Threat Intelligence e Detection Engineering na Inteligencia Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estratégia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Relacionados</h4><ul><li><a href="../zero-trust-architecture-guia-completo/">Zero Trust</a></li><li><a href="../criptografia-pos-quantica-pqc/">Criptografia Pos-Quantica</a></li><li><a href="../frameworks-cybersecurity/">Frameworks</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

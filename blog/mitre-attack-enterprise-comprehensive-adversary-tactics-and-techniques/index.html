@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo sobre o MITRE ATT&CK Enterprise. Conheça as 14 táticas, centenas de técnicas e como usar este framework para melhorar a postura de segurança da sua organização.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="MITRE ATT&CK, framework segurança, táticas adversários, técnicas ataque, threat intelligence, red team, blue team, cibersegurança, matriz ATT&CK, kill chain">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="MITRE ATT&CK Enterprise: Guia Completo de Táticas e Técnicas">
+    <meta property="og:description" content="Conheça o framework MITRE ATT&CK e como ele mapeia comportamentos de adversários para fortalecer sua segurança.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-26T10:00:00-03:00">
+    <meta property="article:modified_time" content="2026-01-26T10:00:00-03:00">
+    <meta property="article:author" content="Inteligencia Brasil">
+    <meta property="article:section" content="Cibersegurança">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MITRE ATT&CK Enterprise: Táticas e Técnicas de Adversários">
+    <meta name="twitter:description" content="Framework completo para entender e mapear comportamentos de ameaças cibernéticas.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>MITRE ATT&CK Enterprise: Guia Completo | Blog Inteligencia Brasil</title>
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "MITRE ATT&CK Enterprise: Guia Completo de Táticas e Técnicas",
+        "description": "Guia completo sobre o framework MITRE ATT&CK Enterprise. Conheça as 14 táticas, centenas de técnicas e como usar para melhorar a postura de segurança.",
+        "image": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": {
+            "@type": "Organization",
+            "name": "Inteligencia Brasil",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"
+            }
+        },
+        "datePublished": "2026-01-26",
+        "dateModified": "2026-01-26",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://inteligenciabrasil.seg.br/blog/mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/"
+        },"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "MITRE ATT&CK", "item": "https://inteligenciabrasil.seg.br/blog/mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/" }
+        ]
+    }
+    </script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que e o MITRE ATT&CK?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O MITRE ATT&CK (Adversarial Tactics, Techniques, and Common Knowledge) e uma base de conhecimento globalmente reconhecida que documenta taticas, tecnicas e procedimentos (TTPs) utilizados por adversarios em ataques ciberneticos do mundo real. Desenvolvido pela MITRE Corporation, o framework concentra-se no comportamento do adversario, descrevendo o que os atacantes fazem apos obter acesso inicial a um sistema ou rede."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quantas taticas existem no MITRE ATT&CK Enterprise?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A matriz Enterprise do MITRE ATT&CK contem 14 taticas: Reconnaissance, Resource Development, Initial Access, Execution, Persistence, Privilege Escalation, Defense Evasion, Credential Access, Discovery, Lateral Movement, Collection, Command and Control, Exfiltration e Impact. Estas taticas representam os objetivos dos adversarios durante diferentes fases de um ataque e nao seguem necessariamente uma ordem sequencial."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual a diferenca entre taticas, tecnicas e sub-tecnicas no ATT&CK?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Taticas representam o objetivo tatico do adversario durante um ataque (as colunas da matriz). Tecnicas descrevem como os adversarios atingem esses objetivos e sao identificadas por codigos como T1059. Sub-tecnicas fornecem descricoes mais especificas dentro de uma tecnica, identificadas como T1059.001 (PowerShell), por exemplo. O framework tambem inclui procedimentos (implementacoes especificas por grupos conhecidos), mitigacoes e deteccoes."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como implementar o MITRE ATT&CK na minha organizacao?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A implementacao deve ser gradual: primeiro, mapeie seus controles existentes contra as tecnicas do ATT&CK para identificar lacunas. Depois, priorize por risco baseando-se em tecnicas usadas por grupos que atacam seu setor. Desenvolva deteccoes especificas considerando fontes de dados necessarias e integracao com SIEM. Por fim, realize validacao continua usando ferramentas como Atomic Red Team ou Caldera. O ATT&CK e uma referencia, nao uma checklist."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../">
+            <img src="../../img/logo.svg" title="Logo Inteligencia Brasil" alt="Logo Inteligencia Brasil" width="196" height="113">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack">
+                    <a href="https://www.linkedin.com/company/inteligenciabrasil" title="Linkedin Inteligencia Brasil" target="_blank" rel="noopener">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                    </a>
+                </span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Cibersegurança</span>
+            <h1>MITRE ATT&CK Enterprise: Guia Completo de Táticas e Técnicas</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active" aria-current="page">MITRE ATT&CK</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <figure class="article-hero">
+                    <img src="../../img/mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques.webp" alt="MITRE ATT&amp;CK Enterprise - taticas e tecnicas adversarias" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async">
+                </figure>
+
+<div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#introducao">O que e o MITRE ATT&CK?</a></li>
+                        <li><a href="#estrutura">Estrutura do Framework</a></li>
+                        <li><a href="#taticas">As 14 Táticas do ATT&CK Enterprise</a></li>
+                        <li><a href="#tecnicas">Técnicas e Sub-técnicas</a></li>
+                        <li><a href="#dashboard">Dashboard Interativo</a></li>
+                        <li><a href="#casos-uso">Casos de Uso</a></li>
+                        <li><a href="#implementacao">Como Implementar</a></li>
+                        <li><a href="#conclusao">Conclusão</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introducao">O que e o MITRE ATT&CK?</h2>
+
+                <p>
+                    O <strong>MITRE ATT&CK</strong> (Adversarial Tactics, Techniques, and Common Knowledge) é uma base de conhecimento
+                    globalmente reconhecida que documenta táticas, técnicas e procedimentos (TTPs) utilizados por adversários em ataques
+                    cibernéticos do mundo real. Desenvolvido pela organização sem fins lucrativos MITRE Corporation, o framework se tornou
+                    um padrão da indústria para entender e categorizar comportamentos de ameaças.
+                </p>
+
+                <p>
+                    Diferente de outras abordagens focadas em vulnerabilidades ou indicadores de comprometimento (IOCs), o ATT&CK
+                    concentra-se no <strong>comportamento do adversário</strong>, descrevendo o que os atacantes fazem após obter
+                    acesso inicial a um sistema ou rede. Esta perspectiva comportamental permite que organizações desenvolvam
+                    defesas mais robustas e resilientes.
+                </p>
+
+                <div class="highlight-box">
+                    <p>
+                        <strong>ATT&CK</strong> significa Adversarial Tactics, Techniques, and Common Knowledge. O framework foi
+                        lançado publicamente em 2015 e hoje contém mais de 700 técnicas e sub-técnicas documentadas, cobrindo
+                        ambientes Windows, Linux, macOS, Cloud, Mobile e ICS (Sistemas de Controle Industrial).
+                    </p>
+                </div>
+
+                <h2 id="estrutura">Estrutura do Framework</h2>
+
+                <p>
+                    O MITRE ATT&CK é organizado em uma matriz que relaciona <strong>táticas</strong> (o objetivo do adversário)
+                    com <strong>técnicas</strong> (como o adversário atinge esse objetivo). Cada técnica pode conter múltiplas
+                    <strong>sub-técnicas</strong> que detalham variações específicas de implementação.
+                </p>
+
+                <h3>Componentes Principais</h3>
+
+                <ul>
+                    <li><strong>Táticas:</strong> Representam o objetivo tático do adversário durante um ataque. São as colunas da matriz ATT&CK.</li>
+                    <li><strong>Técnicas:</strong> Descrevem como os adversários atingem seus objetivos táticos. Uma única técnica pode ser usada em múltiplas táticas.</li>
+                    <li><strong>Sub-técnicas:</strong> Fornecem descrições mais específicas do comportamento adversário dentro de uma técnica.</li>
+                    <li><strong>Procedimentos:</strong> São implementações específicas de técnicas por grupos de ameaças conhecidos.</li>
+                    <li><strong>Mitigações:</strong> Controles de segurança que podem prevenir ou detectar técnicas específicas.</li>
+                    <li><strong>Detecções:</strong> Métodos e fontes de dados para identificar o uso de técnicas.</li>
+                </ul>
+
+                <h2 id="taticas">As 14 Táticas do ATT&CK Enterprise</h2>
+
+                <p>
+                    A matriz Enterprise do MITRE ATT&CK contém 14 táticas que representam as diferentes fases de um ataque cibernético.
+                    Estas táticas não seguem necessariamente uma ordem sequencial, pois adversários podem alternar entre elas
+                    conforme a situação.
+                </p>
+
+                <div class="tactics-grid">
+                    <div class="tactic-card">
+                        <span class="number">1</span>
+                        <h3>Reconnaissance</h3>
+                        <p>Coleta de informações sobre o alvo antes do ataque. Inclui pesquisa em fontes abertas, varredura de redes e identificação de funcionários.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">2</span>
+                        <h4>Resource Development</h4>
+                        <p>Criação de infraestrutura de ataque como domínios, servidores C2, contas falsas e desenvolvimento de malware.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">3</span>
+                        <h4>Initial Access</h4>
+                        <p>Técnicas para obter acesso inicial a rede alvo. Inclui phishing, exploits em serviços expostos e supply chain compromise.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">4</span>
+                        <h4>Execution</h4>
+                        <p>Execução de código malicioso no sistema comprometido. Inclui PowerShell, scripts, scheduled tasks e user execution.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">5</span>
+                        <h4>Persistence</h4>
+                        <p>Manutenção do acesso após reinicializações ou mudanças de credenciais. Registry run keys, scheduled tasks, implants.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">6</span>
+                        <h4>Privilege Escalation</h4>
+                        <p>Obtenção de permissões elevadas. Exploração de vulnerabilidades, bypass de UAC, token manipulation.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">7</span>
+                        <h4>Defense Evasion</h4>
+                        <p>Técnicas para evitar detecção. Ofuscação, desabilitação de antivírus, limpeza de logs, process injection.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">8</span>
+                        <h4>Credential Access</h4>
+                        <p>Roubo de credenciais. Keylogging, credential dumping, brute force, password spraying.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">9</span>
+                        <h4>Discovery</h4>
+                        <p>Exploração do ambiente comprometido. Enumeração de sistemas, usuários, processos, arquivos e configurações.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">10</span>
+                        <h4>Lateral Movement</h4>
+                        <p>Movimentação entre sistemas na rede. Remote services, pass-the-hash, remote file copy.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">11</span>
+                        <h4>Collection</h4>
+                        <p>Coleta de dados de interesse. Screen capture, clipboard data, email collection, local data staging.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">12</span>
+                        <h4>Command and Control</h4>
+                        <p>Comunicação com sistemas comprometidos. Web protocols, encrypted channels, proxy, domain fronting.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">13</span>
+                        <h4>Exfiltration</h4>
+                        <p>Transferência de dados para fora da rede. Exfiltration over C2, alternative protocols, physical medium.</p>
+                    </div>
+                    <div class="tactic-card">
+                        <span class="number">14</span>
+                        <h4>Impact</h4>
+                        <p>Manipulação, interrupção ou destruição de sistemas e dados. Ransomware, data destruction, defacement.</p>
+                    </div>
+                </div>
+
+                <h2 id="tecnicas">Técnicas e Sub-técnicas</h2>
+
+                <p>
+                    Cada tática contém múltiplas técnicas que descrevem métodos específicos usados por adversários. As técnicas são
+                    identificadas por um código no formato <strong>T####</strong>, enquanto sub-técnicas seguem o formato
+                    <strong>T####.###</strong>.
+                </p>
+
+                <div class="technique-example">
+                    <h3><i class="fas fa-terminal"></i> Exemplo: T1059, Command and Scripting Interpreter</h3>
+                    <p>
+                        Esta técnica descreve o uso de interpretadores de comandos e scripts para execução de código. Possui 9 sub-técnicas:
+                    </p>
+                    <ul>
+                        <li><code>T1059.001</code> PowerShell</li>
+                        <li><code>T1059.002</code> AppleScript</li>
+                        <li><code>T1059.003</code> Windows Command Shell</li>
+                        <li><code>T1059.004</code> Unix Shell</li>
+                        <li><code>T1059.005</code> Visual Basic</li>
+                        <li><code>T1059.006</code> Python</li>
+                        <li><code>T1059.007</code> JavaScript</li>
+                        <li><code>T1059.008</code> Network Device CLI</li>
+                        <li><code>T1059.009</code> Cloud API</li>
+                    </ul>
+                </div>
+
+                <div class="technique-example">
+                    <h4><i class="fas fa-key"></i> Exemplo: T1003, OS Credential Dumping</h4>
+                    <p>
+                        Técnica para extrair credenciais do sistema operacional. Sub-técnicas incluem:
+                    </p>
+                    <ul>
+                        <li><code>T1003.001</code> LSASS Memory (Mimikatz)</li>
+                        <li><code>T1003.002</code> Security Account Manager</li>
+                        <li><code>T1003.003</code> NTDS (Active Directory)</li>
+                        <li><code>T1003.004</code> LSA Secrets</li>
+                        <li><code>T1003.005</code> Cached Domain Credentials</li>
+                        <li><code>T1003.006</code> DCSync</li>
+                    </ul>
+                </div>
+
+                <h2 id="dashboard">Dashboard Interativo</h2>
+
+                <p>
+                    Para facilitar a exploração e compreensão do framework MITRE ATT&CK, disponibilizamos um dashboard interativo
+                    que permite navegar por todas as táticas, técnicas e sub-técnicas de forma visual e intuitiva.
+                </p>
+
+                <div class="dashboard-cta">
+                    <h3><i class="fas fa-th"></i> Explore o MITRE ATT&CK Enterprise</h3>
+                    <p>
+                        Navegue pela matriz completa com todas as táticas, técnicas e sub-técnicas.
+                        Visualize detalhes, exemplos de procedimentos e grupos de ameaças associados.
+                    </p>
+                    <a href="./dashboard/" class="btn-dashboard" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Acessar Dashboard Interativo
+                    </a>
+                </div>
+
+                <h2 id="casos-uso">Casos de Uso</h2>
+
+                <p>
+                    O MITRE ATT&CK pode ser utilizado de diversas formas por equipes de segurança. Abaixo estão os principais
+                    casos de uso do framework:
+                </p>
+
+                <div class="use-case-grid">
+                    <div class="use-case-card">
+                        <h3><i class="fas fa-shield-alt"></i> Avaliação de Defesas</h3>
+                        <p>
+                            Mapeie seus controles de segurança existentes contra as técnicas do ATT&CK para identificar lacunas
+                            de cobertura e priorizar investimentos em segurança.
+                        </p>
+                    </div>
+                    <div class="use-case-card">
+                        <h4><i class="fas fa-crosshairs"></i> Red Team Operations</h4>
+                        <p>
+                            Utilize o framework para planejar exercícios de red team baseados em comportamentos reais de adversários,
+                            garantindo que os testes sejam relevantes e realistas.
+                        </p>
+                    </div>
+                    <div class="use-case-card">
+                        <h4><i class="fas fa-search"></i> Threat Hunting</h4>
+                        <p>
+                            Desenvolva hipóteses de caça a ameaças baseadas em técnicas específicas, criando queries e detecções
+                            para identificar atividades maliciosas proativamente.
+                        </p>
+                    </div>
+                    <div class="use-case-card">
+                        <h4><i class="fas fa-brain"></i> Threat Intelligence</h4>
+                        <p>
+                            Padronize a descrição de comportamentos de ameaças usando a taxonomia do ATT&CK, facilitando
+                            o compartilhamento e correlação de inteligência.
+                        </p>
+                    </div>
+                    <div class="use-case-card">
+                        <h4><i class="fas fa-cogs"></i> Engenharia de Detecção</h4>
+                        <p>
+                            Crie regras de detecção específicas para técnicas do ATT&CK, garantindo que seu SIEM ou EDR
+                            possa identificar comportamentos adversários conhecidos.
+                        </p>
+                    </div>
+                    <div class="use-case-card">
+                        <h4><i class="fas fa-graduation-cap"></i> Treinamento e Educação</h4>
+                        <p>
+                            Use o framework como base para capacitação de equipes de segurança, fornecendo contexto
+                            sobre como adversários realmente operam.
+                        </p>
+                    </div>
+                </div>
+
+                <h2 id="implementacao">Como Implementar</h2>
+
+                <p>
+                    A implementação do MITRE ATT&CK em uma organização deve ser gradual e alinhada aos objetivos de segurança.
+                    Recomendamos a seguinte abordagem:
+                </p>
+
+                <h3>1. Mapeamento Inicial</h3>
+                <p>
+                    Comece mapeando seus controles de segurança existentes, como firewalls, EDR, SIEM, contra as técnicas do ATT&CK.
+                    Identifique quais técnicas você consegue detectar, prevenir ou nenhuma das duas.
+                </p>
+
+                <h3>2. Priorização por Risco</h3>
+                <p>
+                    Nem todas as técnicas são igualmente relevantes para sua organização. Priorize baseando-se em:
+                </p>
+                <ul>
+                    <li>Técnicas usadas por grupos de ameaças que historicamente atacam seu setor</li>
+                    <li>Técnicas mais comuns em incidentes recentes</li>
+                    <li>Técnicas que exploram vulnerabilidades em sua infraestrutura específica</li>
+                </ul>
+
+                <h3>3. Desenvolvimento de Detecções</h3>
+                <p>
+                    Para cada técnica priorizada, desenvolva detecções específicas considerando:
+                </p>
+                <ul>
+                    <li>Fontes de dados necessárias (logs de processo, rede, autenticação)</li>
+                    <li>Lógica de detecção e possibilidade de falsos positivos</li>
+                    <li>Integração com sua plataforma SIEM ou SOAR</li>
+                </ul>
+
+                <h3>4. Validação Contínua</h3>
+                <p>
+                    Realize testes periódicos usando ferramentas como Atomic Red Team, Caldera ou exercícios de red team
+                    para validar se suas detecções funcionam corretamente contra as técnicas mapeadas.
+                </p>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Importante</h4>
+                    <p>
+                        O MITRE ATT&CK é uma ferramenta de referência, não uma checklist. Não é necessário nem prático
+                        implementar detecções para todas as técnicas. Foque nas que representam maior risco para
+                        sua organização e evolua gradualmente.
+                    </p>
+                </div>
+
+                <h2 id="conclusao">Conclusão</h2>
+
+                <p>
+                    O <strong>MITRE ATT&CK</strong> se consolidou como a linguagem comum da indústria de segurança cibernética
+                    para descrever comportamentos de adversários. Ao adotar este framework, organizações conseguem:
+                </p>
+
+                <ul>
+                    <li>Entender melhor como adversários realmente operam</li>
+                    <li>Identificar lacunas em suas capacidades de detecção e resposta</li>
+                    <li>Priorizar investimentos em segurança baseados em ameaças reais</li>
+                    <li>Melhorar a comunicação entre equipes técnicas e executivas</li>
+                    <li>Validar a eficácia de controles de segurança de forma objetiva</li>
+                </ul>
+
+                <p>
+                    O framework é continuamente atualizado pela MITRE com novas técnicas e grupos de ameaças, refletindo
+                    a evolução do cenário de ameaças. Manter-se atualizado é fundamental para uma postura de segurança eficaz.
+                </p>
+
+                <!-- References -->
+                <div class="references">
+                    <h3><i class="fas fa-link"></i> Referências e Recursos</h3>
+                    <ul>
+                        <li><a href="https://attack.mitre.org/" target="_blank" rel="noopener">MITRE ATT&CK Official</a></li>
+                        <li><a href="https://attack.mitre.org/matrices/enterprise/" target="_blank" rel="noopener">ATT&CK Enterprise Matrix</a></li>
+                        <li><a href="https://github.com/redcanaryco/atomic-red-team" target="_blank" rel="noopener">Atomic Red Team</a></li>
+                        <li><a href="https://github.com/mitre/caldera" target="_blank" rel="noopener">MITRE Caldera</a></li>
+                        <li><a href="https://car.mitre.org/" target="_blank" rel="noopener">MITRE CAR</a></li>
+                    </ul>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="share-buttons">
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/" class="share-btn linkedin" target="_blank" rel="noopener">
+                        <i class="fab fa-linkedin-in"></i> Compartilhar
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/&text=MITRE ATT%26CK Enterprise: Guia Completo de Taticas e Tecnicas" class="share-btn twitter" target="_blank" rel="noopener">
+                        <i class="fab fa-twitter"></i> Tweetar
+                    </a>
+                    <a href="https://wa.me/?text=MITRE ATT%26CK Enterprise: Guia Completo https://inteligenciabrasil.seg.br/blog/mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/" class="share-btn whatsapp" target="_blank" rel="noopener">
+                        <i class="fab fa-whatsapp"></i> Enviar
+                    </a>
+                </div>
+
+                <!-- Author Box -->
+                <div class="author-box">
+                    <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil">
+                    <div class="author-info">
+                        <h4><a href="../../">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em Segurança da Informação, Estratégia e Tecnologia. Ajudamos organizações a proteger seus ativos digitais e desenvolver maturidade em segurança cibernética.</p>
+                    </div>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="highlight-box">
+                    <h4 style="color: #F1F5F9; margin-bottom: 15px;"><i class="fas fa-envelope" style="color: #60A5FA;"></i> Receba nossos conteúdos</h4>
+                    <p style="margin-bottom: 20px;">Cadastre-se para receber artigos, pesquisas e novidades sobre Segurança da Informação.</p>
+                    <form id="newsletterForm" onsubmit="return handleNewsletterSubmit(event)">
+                        <div class="newsletter-input-group">
+                            <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Seu melhor e-mail corporativo" required>
+                            <button type="submit" class="newsletter-btn">
+                                <i class="fas fa-paper-plane"></i> Inscrever
+                            </button>
+                        </div>
+                        <p id="newsletterMessage"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Blog</h4>
+                        <ul>
+                            <li><a href="../ciclo-ooda-observar-orientar-decidir-agir/">Ciclo OODA</a></li>
+                            <li><a href="./">MITRE ATT&CK</a></li>
+                            <li><a href="../ameaca-persistente-avancada-o-que-e-apt/">APT</a></li>
+                            <li><a href="../como-funciona-o-tlp-traffic-light-protocol/">TLP Protocol</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../../#metodologia">Metodologia</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo, SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

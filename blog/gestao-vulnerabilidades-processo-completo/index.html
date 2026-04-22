@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo de Gestão de Vulnerabilidades: ciclo de vida, priorização com CVSS e EPSS, ferramentas de scan, métricas de SLA e integração com patch management.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="gestão vulnerabilidades, vulnerability management, CVSS, EPSS, scan vulnerabilidades, Nessus, Qualys, patch management, remediação, priorização vulnerabilidades">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/gestao-vulnerabilidades-processo-completo/">
+
+    <meta property="og:title" content="Gestão de Vulnerabilidades: Processo Completo">
+    <meta property="og:description" content="Como implementar gestão de vulnerabilidades: ciclo de vida, priorização, ferramentas e métricas.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/gestao-vulnerabilidades-processo-completo/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="article:published_time" content="2026-01-31T14:00:00-03:00">
+    <meta property="article:section" content="Governanca">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <title>Gestão de Vulnerabilidades: Processo Completo | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Gestão de Vulnerabilidades: Processo Completo",
+        "description": "Guia completo de Gestão de Vulnerabilidades: ciclo de vida, priorização, ferramentas e métricas.",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil"},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31","copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Qual a diferença entre CVSS e EPSS?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "CVSS (Common Vulnerability Scoring System) mede a severidade técnica intrínseca da vulnerabilidade (0-10). EPSS (Exploit Prediction Scoring System) estima a probabilidade de exploração nos próximos 30 dias (0-100%). Combine ambos: uma vuln CVSS 9.0 com EPSS 1% é menos urgente que CVSS 7.0 com EPSS 90%."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Com que frequência devo fazer scan de vulnerabilidades?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Recomendação: scan completo semanal ou quinzenal para infraestrutura geral. Ativos críticos e expostos a internet: diário ou contínuo. Após mudanças significativas: scan imediato. Para compliance (PCI DSS), scan trimestral externo é obrigatório. O importante é consistência e capacidade de processar resultados."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Devo corrigir todas as vulnerabilidades?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não é prático nem necessário. Priorize baseado em: criticidade do ativo, explorabilidade (EPSS), exposição (internet vs interno), existência de controles compensatórios. Foque em vulnerabilidades críticas/altas em ativos importantes. Aceite risco documentado para vulns baixas em sistemas não-críticos."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inteligenciabrasil.seg.br/blog/"},{"@type":"ListItem","position":3,"name":"Gestao Vulnerabilidades"}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"HowTo","name":"Como Implementar Gestao de Vulnerabilidades","description":"Processo completo de gestao de vulnerabilidades: descoberta, priorizacao com CVSS/EPSS, remediacao e validacao.","totalTime":"P3M","step":[{"@type":"HowToStep","position":1,"name":"Inventario de Ativos","text":"Mapear todos os ativos da organizacao: servidores, endpoints, aplicacoes, bibliotecas, infraestrutura cloud e dispositivos IoT."},{"@type":"HowToStep","position":2,"name":"Scan de Vulnerabilidades","text":"Executar scans regulares com ferramentas como Nessus, Qualys ou OpenVAS. Combinar scan autenticado e nao autenticado.","url":"https://inteligenciabrasil.seg.br/ferramentas/calculadora-cvss/"},{"@type":"HowToStep","position":3,"name":"Priorizacao com CVSS e EPSS","text":"Classificar vulnerabilidades por severidade tecnica (CVSS), probabilidade de exploracao (EPSS) e contexto de negocio."},{"@type":"HowToStep","position":4,"name":"Remediacao","text":"Aplicar patches, configurar workarounds ou implementar controles compensatorios conforme prioridade definida."},{"@type":"HowToStep","position":5,"name":"Validacao","text":"Re-escanear apos remediacao para confirmar que a vulnerabilidade foi efetivamente corrigida."},{"@type":"HowToStep","position":6,"name":"Metricas e Relatorios","text":"Acompanhar SLA de remediacao, MTTR (Mean Time to Remediate) e tendencias para melhoria continua do processo."}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Governanca</span>
+            <h1>Gestão de Vulnerabilidades: Processo Completo</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 22 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">Gestao Vulnerabilidades</li></ol></div></nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <figure class="article-hero">
+                    <img src="../../img/gestao-vulnerabilidades-processo-completo.webp" alt="Gestao de vulnerabilidades - processo completo e ciclo de vida" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async">
+                </figure>
+
+<div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#oque">O que é Gestão de Vulnerabilidades</a></li>
+                        <li><a href="#ciclo">Ciclo de vida do processo</a></li>
+                        <li><a href="#priorizacao">Priorização: CVSS, EPSS e contexto</a></li>
+                        <li><a href="#ferramentas">Ferramentas de scan</a></li>
+                        <li><a href="#sla">SLAs de remediação</a></li>
+                        <li><a href="#metricas">Métricas e KPIs</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                        <li><a href="#conclusao">Conclusão</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="oque">O que é Gestão de Vulnerabilidades</h2>
+
+                <p>
+                    <strong>Gestão de Vulnerabilidades</strong> é o processo contínuo de identificar, classificar, priorizar e remediar vulnerabilidades de segurança em sistemas, aplicações e infraestrutura. É uma capacidade fundamental de qualquer programa de segurança - sem ela, você não sabe o que precisa proteger.
+                </p>
+
+                <div class="stat-highlight">
+                    <div class="number">60%</div>
+                    <div class="label">dos breaches em 2024 envolveram vulnerabilidades conhecidas para as quais patches existiam (Verizon DBIR)</div>
+                </div>
+
+                <p>
+                    O desafio não é falta de informação - é excesso. Organizações típicas têm milhares de vulnerabilidades identificadas. A arte está em <strong>priorizar corretamente</strong>: focar nas que realmente importam, considerando criticidade do ativo, explorabilidade e contexto de negócio.
+                </p>
+
+                <h2 id="ciclo">Ciclo de Vida do Processo</h2>
+
+                <div class="phase-card" data-phase="1. Descoberta">
+                    <h3>Inventário de Ativos</h3>
+                    <p>Você não pode proteger o que não conhece. Mantenha inventário atualizado de:</p>
+                    <ul>
+                        <li>Servidores (físicos, virtuais, cloud)</li>
+                        <li>Endpoints (workstations, laptops, mobile)</li>
+                        <li>Equipamentos de rede (switches, routers, firewalls)</li>
+                        <li>Aplicações (web, mobile, APIs)</li>
+                        <li>Containers e workloads cloud</li>
+                    </ul>
+                    <p><strong>Classifique por criticidade:</strong> produção vs dev, internet-facing vs interno, dados sensíveis vs não.</p>
+                </div>
+
+                <div class="phase-card" data-phase="2. Scan">
+                    <h4>Identificação de Vulnerabilidades</h4>
+                    <ul>
+                        <li><strong>Scan autenticado:</strong> Com credenciais, detecta mais vulnerabilidades</li>
+                        <li><strong>Scan não-autenticado:</strong> Visão de atacante externo</li>
+                        <li><strong>Scan de rede:</strong> Infraestrutura, servidores, dispositivos</li>
+                        <li><strong>Scan de aplicacoes:</strong> DAST para web apps</li>
+                        <li><strong>Scan de containers:</strong> Imagens e runtime</li>
+                        <li><strong>Scan de cloud:</strong> Configurações e workloads</li>
+                    </ul>
+                    <p>Frequência recomendada: semanal para infraestrutura, contínuo para ativos críticos.</p>
+                </div>
+
+                <div class="phase-card" data-phase="3. Análise">
+                    <h4>Priorização e Contextualização</h4>
+                    <ul>
+                        <li>Correlacionar vulnerabilidades com inventário de ativos</li>
+                        <li>Aplicar contexto de negócio (criticidade do sistema)</li>
+                        <li>Verificar explorabilidade (EPSS, exploits públicos)</li>
+                        <li>Identificar controles compensatórios existentes</li>
+                        <li>Eliminar falsos positivos</li>
+                        <li>Gerar lista priorizada para remediação</li>
+                    </ul>
+                </div>
+
+                <div class="phase-card" data-phase="4. Remediação">
+                    <h4>Correção e Mitigação</h4>
+                    <ul>
+                        <li><strong>Patch:</strong> Aplicar atualização do vendor (preferencial)</li>
+                        <li><strong>Upgrade:</strong> Atualizar para versão não-vulnerável</li>
+                        <li><strong>Workaround:</strong> Mitigação temporária (desabilitar recurso, regra de firewall)</li>
+                        <li><strong>Controle compensatório:</strong> WAF, IPS, segmentação</li>
+                        <li><strong>Aceitação de risco:</strong> Documentar e aceitar (com aprovação)</li>
+                    </ul>
+                    <p>Coordene com change management e teste antes de produção.</p>
+                </div>
+
+                <div class="phase-card" data-phase="5. Verificação">
+                    <h4>Validação da Correção</h4>
+                    <ul>
+                        <li>Re-scan para confirmar remediação</li>
+                        <li>Validar que sistema continua funcional</li>
+                        <li>Atualizar status no sistema de tracking</li>
+                        <li>Documentar exceções e aceitações de risco</li>
+                    </ul>
+                </div>
+
+                <div class="phase-card" data-phase="6. Reporting">
+                    <h4>Métricas e Comunicação</h4>
+                    <ul>
+                        <li>Dashboards executivos e operacionais</li>
+                        <li>Tendências ao longo do tempo</li>
+                        <li>Compliance com SLAs</li>
+                        <li>Áreas problemáticas (sistemas com mais vulns)</li>
+                        <li>Relatórios para auditoria e compliance</li>
+                    </ul>
+                </div>
+
+                <h2 id="priorizacao">Priorização: CVSS, EPSS e Contexto</h2>
+
+                <h3>CVSS (Common Vulnerability Scoring System)</h3>
+                <p>Score de 0 a 10 que mede severidade técnica intrínseca. Versão atual: CVSS 4.0. Use nossa <a href="../../ferramentas/calculadora-cvss/">calculadora CVSS 3.1 e 4.0</a> para avaliar vulnerabilidades especificas.</p>
+
+                <table class="severity-table">
+                    <thead>
+                        <tr><th>Severidade</th><th>Score CVSS</th><th>SLA Tipico</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="severity-critical">Crítica</td><td>9.0 - 10.0</td><td>24-72 horas</td></tr>
+                        <tr><td class="severity-high">Alta</td><td>7.0 - 8.9</td><td>7-14 dias</td></tr>
+                        <tr><td class="severity-medium">Média</td><td>4.0 - 6.9</td><td>30-60 dias</td></tr>
+                        <tr><td class="severity-low">Baixa</td><td>0.1 - 3.9</td><td>90 dias ou aceitar</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>EPSS (Exploit Prediction Scoring System)</h3>
+                <p>Probabilidade de exploração nos próximos 30 dias (0-100%). Desenvolvido pelo FIRST. <strong>EPSS complementa CVSS</strong> - uma vulnerabilidade CVSS 9.0 com EPSS 0.1% é menos urgente que CVSS 7.0 com EPSS 80%.</p>
+
+                <h3>Contexto de Negócio</h3>
+                <p>Além de CVSS e EPSS, considere:</p>
+                <ul>
+                    <li><strong>Criticidade do ativo:</strong> Sistema de pagamentos vs blog interno</li>
+                    <li><strong>Exposição:</strong> Internet-facing vs segmentado interno</li>
+                    <li><strong>Dados processados:</strong> PII, dados financeiros, propriedade intelectual</li>
+                    <li><strong>Controles existentes:</strong> WAF, EDR, segmentação já mitigam?</li>
+                    <li><strong>Impacto de indisponibilidade:</strong> Janela de manutenção disponível?</li>
+                </ul>
+
+                <h2 id="ferramentas">Ferramentas de Scan de Vulnerabilidades</h2>
+
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <h3><i class="fas fa-search" style="color:#f59e0b;margin-right:8px"></i> Tenable Nessus</h3>
+                        <p>Líder de mercado para scan de infraestrutura. Versão Pro e Enterprise.</p>
+                        <span class="tag">Comercial</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-cloud" style="color:#f59e0b;margin-right:8px"></i> Qualys</h4>
+                        <p>Plataforma cloud-native completa. Forte em compliance e cloud.</p>
+                        <span class="tag">Comercial</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-shield-alt" style="color:#f59e0b;margin-right:8px"></i> Rapid7 InsightVM</h4>
+                        <p>Scan com priorização baseada em risco e integração com IT.</p>
+                        <span class="tag">Comercial</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-terminal" style="color:#f59e0b;margin-right:8px"></i> OpenVAS</h4>
+                        <p>Scanner open source robusto. Boa opção para PMEs.</p>
+                        <span class="tag">Open Source</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-box" style="color:#f59e0b;margin-right:8px"></i> Trivy</h4>
+                        <p>Scanner de containers e IaC. Integra com CI/CD.</p>
+                        <span class="tag">Open Source</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-bug" style="color:#f59e0b;margin-right:8px"></i> Snyk</h4>
+                        <p>Foco em developers: SCA, containers, IaC. DevSecOps.</p>
+                        <span class="tag">Freemium</span>
+                    </div>
+                </div>
+
+                <h2 id="sla">SLAs de Remediação</h2>
+
+                <p>Defina SLAs realistas baseados em severidade e contexto. Exemplo de política:</p>
+
+                <ul>
+                    <li><strong>Critica + Internet-facing:</strong> 24 horas</li>
+                    <li><strong>Critica + Interno:</strong> 72 horas</li>
+                    <li><strong>Alta + Internet-facing:</strong> 7 dias</li>
+                    <li><strong>Alta + Interno:</strong> 14 dias</li>
+                    <li><strong>Média:</strong> 30-60 dias</li>
+                    <li><strong>Baixa:</strong> 90 dias ou próximo ciclo de patch</li>
+                </ul>
+
+                <p><strong>Exceções:</strong> Documente formalmente com aprovação de risco owner quando SLA não puder ser cumprido. Inclua controles compensatórios e data de revisão.</p>
+
+                <h2 id="metricas">Métricas e KPIs</h2>
+
+                <div class="metric-box">
+                    <h3><i class="fas fa-chart-line"></i> Métricas Essenciais</h3>
+                    <ul>
+                        <li><strong>MTTR (Mean Time to Remediate):</strong> Tempo médio para corrigir por severidade</li>
+                        <li><strong>Vulnerability Density:</strong> Vulns por ativo ou por 1000 linhas de código</li>
+                        <li><strong>Compliance Rate:</strong> % de vulns corrigidas dentro do SLA</li>
+                        <li><strong>Age of Vulnerabilities:</strong> Distribuição de idade das vulns abertas</li>
+                        <li><strong>Reopen Rate:</strong> % de vulns que reaparecem após correção</li>
+                        <li><strong>Coverage:</strong> % de ativos com scan recente</li>
+                        <li><strong>Risk Score:</strong> Pontuação agregada de risco do ambiente</li>
+                    </ul>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Gestão de vulnerabilidades substitui <a href="../tipos-de-pentest-guia-completo/">pentest</a>?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Não. Scan de vulnerabilidades encontra problemas conhecidos de forma automatizada. Pentest encontra vulnerabilidades de lógica, cadeia de explorações e problemas que scanners não detectam. Use ambos: scan contínuo para higiene e pentest periódico para validação profunda.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como lidar com vulnerabilidades que nao podem ser corrigidas?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Documente formalmente como aceitação de risco ou implemente controles compensatórios: segmentação de rede, WAF, monitoramento aumentado, restrição de acesso. Revise periodicamente se a situação mudou. Para sistemas legados, considere plano de descomissionamento.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Qual a relacao com patch management?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Gestão de vulnerabilidades identifica O QUE corrigir. Patch management é o processo de COMO aplicar correções (teste, deploy, rollback). Devem trabalhar integrados: vuln management alimenta priorização de patches, patch management reporta status de remediação.</p></div>
+                    </div>
+                </div>
+
+                <h2 id="conclusao">Conclusão</h2>
+
+                <p>
+                    Gestão de vulnerabilidades é uma das capacidades mais fundamentais de segurança. A maioria dos breaches explora vulnerabilidades conhecidas que poderiam ter sido corrigidas. O desafio não é identificar - é priorizar e executar remediação de forma consistente.
+                </p>
+
+                <p>
+                    Invista em processo antes de ferramentas: defina SLAs realistas, integre com patch management, estabeleça métricas claras. Use CVSS como base mas adicione contexto: EPSS para explorabilidade, criticidade do ativo, exposição. Uma vulnerabilidade média em sistema de pagamentos internet-facing pode ser mais urgente que crítica em servidor de teste interno.
+                </p>
+
+                <p>
+                    O objetivo não é zerar vulnerabilidades - é improvável e possivelmente desperdiçador de recursos. O objetivo é manter risco em nível aceitável, focando energia onde o impacto é maior.
+                </p>
+
+                <div class="cta-box">
+                    <h3>Precisa Estruturar Gestão de Vulnerabilidades?</h3>
+                    <p>Oferecemos implementação de processos, seleção de ferramentas e operação de programa de vulnerabilidades.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/gestao-vulnerabilidades-processo-completo/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://wa.me/?text=Gestao de Vulnerabilidades https://inteligenciabrasil.seg.br/blog/gestao-vulnerabilidades-processo-completo/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80">
+                    <div class="author-info">
+                        <h4>Inteligencia Brasil</h4>
+                        <p>Consultoria especializada em Gestão de Vulnerabilidades e Segurança Proativa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140"><p>Consultoria em Segurança e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Relacionados</h4><ul><li><a href="../tipos-de-pentest-guia-completo/">Pentest</a></li><li><a href="../devsecops-seguranca-desenvolvimento/">DevSecOps</a></li><li><a href="../siem-implementacao-casos-uso/">SIEM</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegação</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 Inteligencia Brasil.</p></div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,3087 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Blog da Inteligência Brasil - Artigos, pesquisas e insights sobre Segurança da Informação, Cibersegurança, LGPD, Pentest e muito mais.">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="blog segurança da informação, artigos cibersegurança, pesquisas pentest, LGPD, ISO 27001, red team, blue team, threat intelligence">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blog | Inteligência Brasil - Segurança da Informação">
+    <meta property="og:description" content="Artigos, pesquisas e insights sobre Segurança da Informação, Cibersegurança, LGPD e muito mais.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog | Inteligência Brasil">
+    <meta name="twitter:description" content="Artigos e pesquisas sobre Segurança da Informação e Cibersegurança.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Blog | Inteligência Brasil - Artigos sobre Segurança da Informação</title>
+
+    <!-- Schema.org Blog -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Blog Inteligência Brasil",
+        "description": "Artigos, pesquisas e insights sobre Segurança da Informação e Cibersegurança",
+        "url": "https://inteligenciabrasil.seg.br/blog/",
+        "inLanguage": "pt-BR",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Inteligência Brasil",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"
+            }
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://inteligenciabrasil.seg.br/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://inteligenciabrasil.seg.br/blog/"
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../css/styles.min.css" rel="stylesheet">
+    <link href="../css/servico.min.css" rel="stylesheet">
+    <link href="../css/blog-listing.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Navigation -->
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../">
+            <img src="../img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196" height="113">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Domínio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gestão de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequação a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presença Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="./">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons">
+                <span class="fa-stack">
+                    <a href="https://www.linkedin.com/company/inteligenciabrasil" title="Linkedin Inteligência Brasil" target="_blank" rel="noopener">
+                        <span class="hexagon"></span>
+                        <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                    </a>
+                </span>
+            </span>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <header class="blog-header">
+        <div class="container">
+            <span class="section-tag"><i class="fas fa-circle"></i> BLOG</span>
+            <h1>Artigos e Pesquisas</h1>
+            <p>Conteúdos exclusivos sobre Segurança da Informação, Cibersegurança, Compliance e muito mais.</p>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <!-- Blog Content -->
+    <section class="blog-content">
+        <div class="container">
+            <!-- Search Bar -->
+            <div class="blog-search">
+                <div class="search-input-group">
+                    <input type="text" class="search-input" id="blogSearch" placeholder="Pesquisar artigos..." autocomplete="off">
+                    <button class="search-btn" onclick="searchBlog()">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </div>
+            </div>
+            <div class="search-results-info" id="searchResultsInfo"></div>
+
+            <!-- Filter Tags -->
+            <div class="blog-filters">
+                <span class="filter-tag active">Todos</span>
+                <span class="filter-tag">Seguran&#231;a Ofensiva</span>
+                <span class="filter-tag">Defesa Cibern&#233;tica</span>
+                <span class="filter-tag">LGPD</span>
+                <span class="filter-tag">Frameworks</span>
+                <span class="filter-tag">Cloud &amp; Infraestrutura</span>
+                <span class="filter-tag">Governan&#231;a &amp; GRC</span>
+                <span class="filter-tag">Intelig&#234;ncia Artificial</span>
+                <span class="filter-tag">Identidade &amp; Acesso</span>
+                <span class="filter-tag">Seguran&#231;a da Informa&#231;&#227;o</span>
+                <span class="filter-tag">Pesquisas</span>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid">
+                <!-- Post - IPv4 vs IPv6 Explicado -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0e7490 0%, #164e63 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Redes e Infraestrutura</span>
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Abril 2026</span>
+                            <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./ipv4-vs-ipv6-explicado/">IPv4 vs IPv6 Explicado: o Tradutor e o Fim-a-Fim</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            32 bits esgotados, NAT como gambiarra elegante, ARP vs Neighbor Discovery, DHCP vs SLAAC. O contraste entre manter a Internet viva e a Internet como ela deveria ter sido.
+                        </p>
+                        <a href="./ipv4-vs-ipv6-explicado/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - IPv8 Protocolo Internet -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Frameworks e Padr&#245;es</span>
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Abril 2026</span>
+                            <span><i class="far fa-clock"></i> 16 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./ipv8-protocolo-internet-evolucao-ipv6/">IPv8: A Proposta da IETF para Suceder o IPv6 (draft-thain-ipv8)</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Enderecamento de 512 bits, seguranca nativa, criptografia pos-quantica e o que o draft IPv8 significa para a evolucao da Internet e para a ciberseguranca corporativa.
+                        </p>
+                        <a href="./ipv8-protocolo-internet-evolucao-ipv6/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Sinais silenciosos de invasao -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Defesa Cibern&#233;tica</span>
+                        <i class="fas fa-user-ninja"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Abril 2026</span>
+                            <span><i class="far fa-clock"></i> 14 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./sinais-silenciosos-invasao-dwell-time/">Voce J&#225; Foi Hackeado e N&#227;o Percebeu? Sinais Silenciosos de Invas&#227;o</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Dwell time medio de 194 dias, IoCs, movimentacao lateral e por que invasoes silenciosas passam despercebidas por meses. Aprenda a identificar comprometimentos invisiveis.
+                        </p>
+                        <a href="./sinais-silenciosos-invasao-dwell-time/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Como atacantes mapeiam empresa -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Defesa Cibern&#233;tica</span>
+                        <i class="fas fa-binoculars"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Abril 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./como-atacantes-mapeiam-empresa-reconhecimento/">Como Atacantes Mapeiam sua Empresa Antes do Primeiro Ataque</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Reconhecimento, OSINT, CT Logs, JARM e EASM. Entenda o processo silencioso que precede invasoes e como reduzir sua superficie de ataque vista pela perspectiva de um adversario.
+                        </p>
+                        <a href="./como-atacantes-mapeiam-empresa-reconhecimento/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Glossario Acronimos TI e SI -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);">
+                        <span class="blog-card-category" style="background: rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.3); color: #06B6D4;">Seguran&#231;a da Informa&#231;&#227;o</span>
+                        <i class="fas fa-spell-check"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Abril 2026</span>
+                            <span><i class="far fa-clock"></i> Refer&#234;ncia r&#225;pida</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./glossario-acronimos-ti-seguranca-informacao/">Gloss&#225;rio de Acr&#244;nimos de TI e Seguran&#231;a da Informa&#231;&#227;o</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Refer&#234;ncia r&#225;pida com mais de 150 siglas e acr&#244;nimos de Tecnologia da Informa&#231;&#227;o e Seguran&#231;a da Informa&#231;&#227;o organizados de A a Z, com busca interativa.
+                        </p>
+                        <a href="./glossario-acronimos-ti-seguranca-informacao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Infostealers -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #EF4444;">Amea&#231;as Cibern&#233;ticas</span>
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 13 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./infostealers-como-funcionam-protecao-organizacoes/">Infostealers: Como Funcionam e Como Proteger sua Organiza&#231;&#227;o</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Anatomia de infostealers modernos: o que roubam (credenciais, cookies, tokens), arquitetura em 3 camadas, supply chain attacks, fam&#237;lias ativas e estrat&#233;gias de defesa.
+                        </p>
+                        <a href="./infostealers-como-funcionam-protecao-organizacoes/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - C2 Redirectors -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #EF4444;">Seguran&#231;a Ofensiva</span>
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./c2-redirectors-como-funcionam-defesa/">C2 Redirectors: Como Funcionam e Como Defender sua Organiza&#231;&#227;o</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como atacantes usam redirectors para ocultar servidores C2, tipos (dumb vs smart), domain fronting, DNS tunneling, traffic shaping e estrat&#233;gias de detec&#231;&#227;o com JA3, NDR e an&#225;lise comportamental.
+                        </p>
+                        <a href="./c2-redirectors-como-funcionam-defesa/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Computacao Forense Digital -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Defesa Cibern&#233;tica</span>
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 11 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./computacao-forense-digital-organizacoes/">Computa&#231;&#227;o Forense Digital: Import&#226;ncia nas Organiza&#231;&#245;es</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Processo forense em 4 fases, cadeia de cust&#243;dia, tipos de an&#225;lise (disco, mem&#243;ria, rede, cloud), ferramentas e como integrar forense com resposta a incidentes.
+                        </p>
+                        <a href="./computacao-forense-digital-organizacoes/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Cyber Law -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Governan&#231;a &amp; GRC</span>
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./cyber-law-legislacao-cibernetica-organizacoes/">Cyber Law: Legisla&#231;&#227;o Cibern&#233;tica e Impacto nas Organiza&#231;&#245;es</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Panorama completo da legisla&#231;&#227;o cibern&#233;tica: Marco Civil, LGPD, crimes digitais, GDPR, NIS2, responsabilidade corporativa e como adequar sua empresa ao cen&#225;rio regulat&#243;rio.
+                        </p>
+                        <a href="./cyber-law-legislacao-cibernetica-organizacoes/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Web3 e Blockchain -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);">
+                        <span class="blog-card-category" style="background: rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.3); color: #06B6D4;">Seguran&#231;a da Informa&#231;&#227;o</span>
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./web3-blockchain-impacto-seguranca-organizacoes/">Web3 e Blockchain: Impacto e Seguran&#231;a para Organiza&#231;&#245;es</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como Web3 afeta empresas: blockchain, smart contracts, DeFi, identidade descentralizada, tokeniza&#231;&#227;o e os novos riscos de seguran&#231;a que acompanham a descentraliza&#231;&#227;o.
+                        </p>
+                        <a href="./web3-blockchain-impacto-seguranca-organizacoes/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Active Directory e GPOs -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+                        <span class="blog-card-category" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #8B5CF6;">Identidade &amp; Acesso</span>
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./active-directory-gpo-configuracao-segura/">Active Directory e GPOs: Configura&#231;&#227;o Segura para Organiza&#231;&#245;es</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            GPOs essenciais, hardening de Domain Controllers, tiering model, prote&#231;&#227;o contra Pass-the-Hash, Kerberoasting e DCSync. Guia pr&#225;tico para configurar o AD com seguran&#231;a.
+                        </p>
+                        <a href="./active-directory-gpo-configuracao-segura/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Firewall nas Organizacoes -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Defesa Cibern&#233;tica</span>
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 11 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./firewall-importancia-tipos-implementacao/">Firewall nas Organiza&#231;&#245;es: Import&#226;ncia, Tipos e Implementa&#231;&#227;o</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Evolu&#231;&#227;o do firewall, tipos (stateful, NGFW, WAF, cloud), funcionalidades essenciais e como integrar com Zero Trust, SIEM e microsegmenta&#231;&#227;o na sua arquitetura de seguran&#231;a.
+                        </p>
+                        <a href="./firewall-importancia-tipos-implementacao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Gestao de Mudancas -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Governan&#231;a</span>
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 9 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./gestao-mudancas-seguranca-informacao/">Gest&#227;o de Mudan&#231;as em Seguran&#231;a: Risco, Rollback, Documenta&#231;&#227;o e SOPs</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como gerenciar mudan&#231;as sem comprometer a opera&#231;&#227;o: avalia&#231;&#227;o de risco em legados, plano de rollback obrigat&#243;rio, documenta&#231;&#227;o atualizada e SOPs para consist&#234;ncia e auditabilidade.
+                        </p>
+                        <a href="./gestao-mudancas-seguranca-informacao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Classificacao e Estados dos Dados -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+                        <span class="blog-card-category" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #8B5CF6;">Seguran&#231;a da Informa&#231;&#227;o</span>
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./classificacao-estados-dados-protecao/">Classifica&#231;&#227;o e Estados dos Dados: Como Proteger Informa&#231;&#245;es em Cada Cen&#225;rio</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            N&#237;veis de classifica&#231;&#227;o, prote&#231;&#227;o em repouso (AES-256), tr&#226;nsito (TLS) e uso (enclaves), soberania de dados, PII e PHI. Guia completo com exemplos e refer&#234;ncias regulat&#243;rias.
+                        </p>
+                        <a href="./classificacao-estados-dados-protecao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Tipos de Controles de Seguranca -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Seguran&#231;a da Informa&#231;&#227;o</span>
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./tipos-controles-seguranca-informacao/">Tipos de Controles de Seguran&#231;a: Preventivo, Detectivo, Corretivo e Mais</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Conhe&#231;a os 6 tipos de controles de seguran&#231;a da informa&#231;&#227;o &mdash; preventivo, dissuador, detectivo, corretivo, compensat&#243;rio e diretivo &mdash; com exemplos pr&#225;ticos e como aplic&#225;-los em defesa em camadas.
+                        </p>
+                        <a href="./tipos-controles-seguranca-informacao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Engenharia Social -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #EF4444;">Seguran&#231;a da Informa&#231;&#227;o</span>
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 11 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./engenharia-social-tecnicas-protecao/">Engenharia Social: T&#233;cnicas Mais Usadas e Como Proteger sua Empresa</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Conhe&#231;a as principais t&#233;cnicas de engenharia social como phishing, vishing e pretexting, entenda por que funcionam e saiba como proteger sua empresa com conscientiza&#231;&#227;o e controles eficazes.
+                        </p>
+                        <a href="./engenharia-social-tecnicas-protecao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Checklist Seguranca PMEs -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #15803d 0%, #166534 100%);">
+                        <span class="blog-card-category" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3); color: #22C55E;">Seguran&#231;a da Informa&#231;&#227;o</span>
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./checklist-seguranca-pmes-pequenas-empresas/">Checklist de Seguran&#231;a da Informa&#231;&#227;o para PMEs: Guia Pr&#225;tico 2026</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Guia pr&#225;tico com os 10 controles essenciais de seguran&#231;a para pequenas e m&#233;dias empresas: do backup &#224; LGPD, priorizado por impacto e custo de implementa&#231;&#227;o.
+                        </p>
+                        <a href="./checklist-seguranca-pmes-pequenas-empresas/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Metricas para Diretoria -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Governan&#231;a</span>
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 11 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./metricas-seguranca-apresentar-diretoria/">M&#233;tricas de Seguran&#231;a para Apresentar &#224; Diretoria: Guia para CISOs</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Quais m&#233;tricas de seguran&#231;a apresentar ao board: operacionais, de risco, compliance e ROI. Inclui framework pr&#225;tico de 5 slides para reporting executivo.
+                        </p>
+                        <a href="./metricas-seguranca-apresentar-diretoria/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Custo Vazamento de Dados 2026 -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Seguran&#231;a da Informa&#231;&#227;o</span>
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./custo-vazamento-dados-2026-impactos/">Quanto Custa um Vazamento de Dados em 2026? Impactos Reais para Empresas</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Custos diretos, indiretos, multas LGPD/GDPR e impacto reputacional de um data breach. Inclui simulador interativo para estimar o impacto financeiro no seu neg&#243;cio.
+                        </p>
+                        <a href="./custo-vazamento-dados-2026-impactos/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Pentest vs Bug Bounty -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #EF4444;">Seguran&#231;a Ofensiva</span>
+                        <i class="fas fa-crosshairs"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 11 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./pentest-vs-bug-bounty-qual-protege-empresa/">Pentest vs Bug Bounty: Qual Realmente Protege sua Empresa?</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Comparativo entre pentest e bug bounty: diferen&#231;as em profundidade, escala, controle e custo. Saiba quando usar cada abordagem e como integrar ambas na sua estrat&#233;gia de seguran&#231;a ofensiva.
+                        </p>
+                        <a href="./pentest-vs-bug-bounty-qual-protege-empresa/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Baseline vs Hardening -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Defesa Cibern&#233;tica</span>
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./baseline-vs-hardening-seguranca-infraestrutura/">Baseline vs Hardening: Diferen&#231;as, Aplica&#231;&#245;es e Como Fortalecer sua Infraestrutura</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Entenda as diferen&#231;as entre baseline e hardening de seguran&#231;a, frameworks de refer&#234;ncia como CIS Benchmarks e NIST, e como aplicar cada abordagem para proteger sua infraestrutura.
+                        </p>
+                        <a href="./baseline-vs-hardening-seguranca-infraestrutura/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Comparativo LGPD vs GDPR 2026 -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+                        <span class="blog-card-category" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #8B5CF6;">Compliance</span>
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Mar&#231;o 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./lgpd-vs-gdpr-comparativo-2026/">Comparativo LGPD vs GDPR Atualizado 2026: Diferen&#231;as, Semelhan&#231;as e Impactos</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            An&#225;lise comparativa entre LGPD e GDPR: conceitos, penalidades, direitos dos titulares, obriga&#231;&#245;es de conformidade e estrat&#233;gias de adequa&#231;&#227;o simult&#226;nea para empresas.
+                        </p>
+                        <a href="./lgpd-vs-gdpr-comparativo-2026/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Featured Post - CISO -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Governanca</span>
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./as-10-exigencias-que-um-ciso-deve-fazer-ao-seu-time/">As 10 Exigencias que um CISO Deve Fazer ao Seu Time</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Descubra as 10 exigencias essenciais que um CISO deve fazer ao seu time de seguranca para garantir governanca de risco eficaz e protecao do negocio.
+                        </p>
+                        <a href="./as-10-exigencias-que-um-ciso-deve-fazer-ao-seu-time/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- NOVOS ARTIGOS - Fevereiro 2026 -->
+
+                <!-- Post - Proteção CPF e CNPJ: Redesim e BC Protege+ -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #15803d 0%, #166534 100%);">
+                        <span class="blog-card-category" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3); color: #22C55E;">Utilidade Pública</span>
+                        <i class="fas fa-id-card-alt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Fevereiro 2026</span>
+                            <span><i class="far fa-clock"></i> 14 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./protecao-cpf-cnpj-redesim-bc-protege-fraudes/">Proteção do CPF e CNPJ no Brasil: Redesim, BC Protege+ e Como Evitar Fraudes</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Guia completo sobre as ferramentas gratuitas do governo para proteger seu CPF e CNPJ contra fraudes. Redesim, BC Protege+ e boas práticas de segurança digital.
+                        </p>
+                        <a href="./protecao-cpf-cnpj-redesim-bc-protege-fraudes/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post Pilar - Segurança da Informação nas Empresas -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Pilar</span>
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Fevereiro 2026</span>
+                            <span><i class="far fa-clock"></i> 15 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./seguranca-informacao-empresas-riscos-ameacas-2026/">Segurança da Informação nas Empresas: Riscos, Ameaças e Como se Proteger em 2026</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Guia estratégico sobre segurança da informação corporativa. Conheça os riscos reais, as principais ameaças digitais e como estruturar proteção eficaz para sua empresa.
+                        </p>
+                        <a href="./seguranca-informacao-empresas-riscos-ameacas-2026/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post Satélite 1 - O que é Segurança da Informação -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Segurança da Informação</span>
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Fevereiro 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./o-que-e-seguranca-informacao-empresas/">O que é Segurança da Informação e por que Empresas Ignoram até Virar Incidente</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Entenda o conceito real de Segurança da Informação, seus três pilares fundamentais e por que a maioria das empresas só age depois que o problema acontece.
+                        </p>
+                        <a href="./o-que-e-seguranca-informacao-empresas/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post Satélite 2 - Ataques Cibernéticos contra Empresas -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #EF4444;">Ameaças Cibernéticas</span>
+                        <i class="fas fa-crosshairs"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Fevereiro 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./ataques-ciberneticos-empresas-brasil/">Principais Ataques Cibernéticos contra Empresas no Brasil</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Ransomware, phishing, exploração de vulnerabilidades e ameaças internas: conheça os ataques mais comuns e como direcionar investimentos em proteção.
+                        </p>
+                        <a href="./ataques-ciberneticos-empresas-brasil/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post Satélite 3 - Maturidade em Segurança da Informação -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);">
+                        <span class="blog-card-category" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #8B5CF6;">Governança</span>
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Fevereiro 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./maturidade-seguranca-informacao-avaliacao/">Como Avaliar o Nível de Maturidade em Segurança da Informação da sua Empresa</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Identifique sinais de baixa maturidade, entenda como estruturar uma avaliação de riscos e valide seus controles com testes contínuos.
+                        </p>
+                        <a href="./maturidade-seguranca-informacao-avaliacao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post Satélite 4 - Custo ou Investimento Estratégico -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #b45309 0%, #92400e 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #F59E0B;">Estratégia</span>
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Fevereiro 2026</span>
+                            <span><i class="far fa-clock"></i> 7 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./seguranca-informacao-custo-investimento/">Segurança da Informação: Custo ou Investimento Estratégico?</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Descubra o custo invisível da falta de segurança e por que empresas maduras tratam proteção como vantagem competitiva, não como despesa.
+                        </p>
+                        <a href="./seguranca-informacao-custo-investimento/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Segurança em Smartphones iOS e Android -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);">
+                        <span class="blog-card-category" style="background: rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.3); color: #06B6D4;">Mobile</span>
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Fevereiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./seguranca-smartphones-ios-android/">Segurança em Smartphones iOS e Android: Guia Completo</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Aprenda a proteger seu smartphone contra ameaças digitais. Comparativo iOS vs Android, boas práticas, MDM corporativo e prevenção de incidentes.
+                        </p>
+                        <a href="./seguranca-smartphones-ios-android/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Análise de Presença Digital -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+                        <span class="blog-card-category" style="background: rgba(167, 139, 250, 0.1); border-color: rgba(167, 139, 250, 0.3); color: #A78BFA;">Inteligencia</span>
+                        <i class="fas fa-search-location"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Fevereiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./analise-presenca-digital/">Qual Proteção Digital Faz Sentido para Você</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Análise de presença digital com OSINT, SOCMINT e DFIR: como mapear pegadas digitais, detectar perfis falsos, monitorar vazamentos e proteger VIPs e PEPs com conformidade legal.
+                        </p>
+                        <a href="./analise-presenca-digital/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- NOVOS ARTIGOS - Janeiro 2026 -->
+
+                <!-- Post - Zero Trust Architecture -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);">
+                        <span class="blog-card-category" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10B981;">Arquitetura</span>
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./zero-trust-architecture-guia-completo/">Zero Trust Architecture: Guia Completo de Implementacao</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Entenda o modelo Zero Trust: principios, pilares, tecnologias e como implementar. Nunca confie, sempre verifique.
+                        </p>
+                        <a href="./zero-trust-architecture-guia-completo/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Active Directory Security -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Ciberseguranca</span>
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 25 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./active-directory-security-protecao-ataques/">Active Directory Security: Protecao contra Ataques</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como proteger o Active Directory: ataques comuns (Kerberoasting, Pass-the-Hash, DCSync), hardening e ferramentas de auditoria.
+                        </p>
+                        <a href="./active-directory-security-protecao-ataques/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - ISO 27001 -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #b45309 0%, #92400e 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Compliance</span>
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./iso-27001-guia-implementacao/">ISO 27001: Guia Prático de Implementacao e Certificacao</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como implementar a ISO 27001: requisitos, controles do Anexo A, timeline e processo de certificacao passo a passo.
+                        </p>
+                        <a href="./iso-27001-guia-implementacao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Security Awareness -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #5b21b6 0%, #4c1d95 100%);">
+                        <span class="blog-card-category" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #8B5CF6;">Pessoas</span>
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./security-awareness-programa-conscientizacao/">Security Awareness: Como Criar um Programa de Conscientizacao Eficaz</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Estrategias para construir cultura de seguranca: treinamentos, simulacoes de phishing, metricas e gamificacao.
+                        </p>
+                        <a href="./security-awareness-programa-conscientizacao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Seguranca Cloud -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);">
+                        <span class="blog-card-category" style="background: rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.3); color: #06B6D4;">Cloud</span>
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./seguranca-cloud-aws-azure-gcp/">Seguranca em Cloud: AWS, Azure e GCP - Guia Completo</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Modelo de responsabilidade compartilhada, erros de configuracao comuns, IAM e melhores práticas para cloud security.
+                        </p>
+                        <a href="./seguranca-cloud-aws-azure-gcp/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - DevSecOps -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);">
+                        <span class="blog-card-category" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3); color: #22C55E;">Desenvolvimento</span>
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./devsecops-seguranca-desenvolvimento/">DevSecOps: Seguranca Integrada ao Desenvolvimento</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como implementar DevSecOps: SAST, DAST, SCA, secrets management, pipeline seguro e shift-left security.
+                        </p>
+                        <a href="./devsecops-seguranca-desenvolvimento/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Seguranca de APIs -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #d97706 0%, #b45309 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #F59E0B;">Aplicacoes</span>
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./seguranca-apis-owasp-top-10/">Seguranca de APIs: OWASP API Security Top 10</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Vulnerabilidades mais criticas em APIs: BOLA, Broken Auth, rate limiting e melhores práticas de protecao.
+                        </p>
+                        <a href="./seguranca-apis-owasp-top-10/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - IA em Ciberseguranca -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);">
+                        <span class="blog-card-category" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #8B5CF6;">Tendencias</span>
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./inteligencia-artificial-ciberseguranca/">Inteligencia Artificial em Ciberseguranca: Oportunidades e Riscos</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como IA esta transformando seguranca: deteccao de ameacas, automacao, phishing com IA, deepfakes e riscos de LLMs.
+                        </p>
+                        <a href="./inteligencia-artificial-ciberseguranca/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - SIEM Implementacao -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">SOC</span>
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 25 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./siem-implementacao-casos-uso/">SIEM: Guia Completo de Implementacao e Casos de Uso</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Arquitetura de SIEM, fontes de log, regras de correlacao, casos de uso e metricas de sucesso para Security Operations.
+                        </p>
+                        <a href="./siem-implementacao-casos-uso/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Gestao de Vulnerabilidades -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #b45309 0%, #92400e 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Gestão</span>
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./gestao-vulnerabilidades-processo-completo/">Gestão de Vulnerabilidades: Processo Completo</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Ciclo de vida, CVSS, EPSS, priorizacao baseada em risco, ferramentas de scanning e SLAs de remediacao.
+                        </p>
+                        <a href="./gestao-vulnerabilidades-processo-completo/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Supply Chain Security -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Desenvolvimento</span>
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./supply-chain-security-cadeia-suprimentos/">Supply Chain Security: Protegendo a Cadeia de Suprimentos</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Ataques a cadeia de suprimentos (SolarWinds, Log4j), SBOM, avaliacao de fornecedores e SLSA framework.
+                        </p>
+                        <a href="./supply-chain-security-cadeia-suprimentos/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Seguro Cibernetico -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);">
+                        <span class="blog-card-category" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10B981;">Gestão</span>
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./seguro-cibernetico-cyber-insurance/">Seguro Cibernetico: Guia Completo de Cyber Insurance</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Tipos de cobertura, requisitos das seguradoras, como escolher apolice e processo de sinistro.
+                        </p>
+                        <a href="./seguro-cibernetico-cyber-insurance/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - ROI Ciberseguranca -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #5b21b6 0%, #4c1d95 100%);">
+                        <span class="blog-card-category" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #8B5CF6;">Gestão</span>
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./roi-ciberseguranca-justificar-investimentos/">ROI de Ciberseguranca: Como Justificar Investimentos</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Metricas financeiras, análise FAIR, custo de breach e como apresentar business case para executivos.
+                        </p>
+                        <a href="./roi-ciberseguranca-justificar-investimentos/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - LGPD Implementacao -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #b45309 0%, #92400e 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Compliance</span>
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./lgpd-implementacao-tecnica/">LGPD: Guia Técnico de Implementacao para TI</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Mapeamento de dados, bases legais, direitos dos titulares, DPIA e medidas técnicas de seguranca.
+                        </p>
+                        <a href="./lgpd-implementacao-tecnica/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Kubernetes Security -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);">
+                        <span class="blog-card-category" style="background: rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.3); color: #06B6D4;">DevSecOps</span>
+                        <i class="fas fa-dharmachakra"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 25 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./kubernetes-container-security/">Seguranca em Kubernetes e Containers: Guia Completo</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Hardening de clusters, network policies, RBAC, image scanning, runtime security e secrets management.
+                        </p>
+                        <a href="./kubernetes-container-security/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - XDR -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+                        <span class="blog-card-category" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #8B5CF6;">Detecção e Resposta</span>
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./xdr-extended-detection-response/">XDR: Guia Completo de Extended Detection and Response</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como XDR unifica endpoint, rede e cloud para detecção avançada. Diferenças entre XDR, EDR e SIEM.
+                        </p>
+                        <a href="./xdr-extended-detection-response/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - PAM -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Identity Security</span>
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./pam-gestao-acessos-privilegiados/">PAM: Guia Completo de Gestão de Acessos Privilegiados</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como implementar PAM: cofre de senhas, sessões privilegiadas, JIT access e proteção contra insider threats.
+                        </p>
+                        <a href="./pam-gestao-acessos-privilegiados/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - DMARC/DKIM/SPF -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);">
+                        <span class="blog-card-category" style="background: rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.3); color: #06B6D4;">Email Security</span>
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./dmarc-dkim-spf-autenticacao-email/">DMARC, DKIM e SPF: Guia de Autenticação de Email</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como implementar autenticação de email para prevenir spoofing e phishing. Configuração passo a passo.
+                        </p>
+                        <a href="./dmarc-dkim-spf-autenticacao-email/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - DLP -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);">
+                        <span class="blog-card-category" style="background: rgba(249, 115, 22, 0.1); border-color: rgba(249, 115, 22, 0.3); color: #f97316;">Data Security</span>
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./dlp-prevencao-perda-dados/">DLP: Guia Completo de Prevenção de Perda de Dados</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como implementar DLP para proteger dados sensíveis. Classificação, políticas e integração com LGPD.
+                        </p>
+                        <a href="./dlp-prevencao-perda-dados/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Backup e Cyber Resilience -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);">
+                        <span class="blog-card-category" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3); color: #22c55e;">Resiliência</span>
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./backup-cyber-resilience-recuperacao/">Backup e Cyber Resilience: Recuperação Contra Ransomware</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Estratégia 3-2-1-1-0, immutable backups, air-gapped storage e recuperação após ataques de ransomware.
+                        </p>
+                        <a href="./backup-cyber-resilience-recuperacao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Passwordless/Passkeys -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);">
+                        <span class="blog-card-category" style="background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3); color: #3b82f6;">Autenticação</span>
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./passwordless-passkeys-fido2/">Autenticação Passwordless: Passkeys e FIDO2</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como implementar autenticação sem senha com Passkeys, FIDO2 e WebAuthn para eliminar phishing.
+                        </p>
+                        <a href="./passwordless-passkeys-fido2/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - ITDR -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #be123c 0%, #9f1239 100%);">
+                        <span class="blog-card-category" style="background: rgba(244, 63, 94, 0.1); border-color: rgba(244, 63, 94, 0.3); color: #f43f5e;">Identity Security</span>
+                        <i class="fas fa-user-lock"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./itdr-deteccao-ameacas-identidade/">ITDR: Detecção e Resposta a Ameaças de Identidade</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Proteja Active Directory contra Kerberoasting, Golden Ticket e DCSync com Identity Threat Detection.
+                        </p>
+                        <a href="./itdr-deteccao-ameacas-identidade/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - NDR -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);">
+                        <span class="blog-card-category" style="background: rgba(20, 184, 166, 0.1); border-color: rgba(20, 184, 166, 0.3); color: #14b8a6;">Network Security</span>
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./ndr-deteccao-resposta-rede/">NDR: Guia Completo de Network Detection and Response</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Detecte ameaças na rede com análise de tráfego, ML e resposta automatizada. NDR vs IDS/IPS.
+                        </p>
+                        <a href="./ndr-deteccao-resposta-rede/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - OT/ICS Security -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%);">
+                        <span class="blog-card-category" style="background: rgba(234, 179, 8, 0.1); border-color: rgba(234, 179, 8, 0.3); color: #eab308;">Infraestrutura Crítica</span>
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 25 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./seguranca-ot-ics-scada/">Segurança OT/ICS/SCADA: Guia para Infraestrutura Crítica</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Proteja sistemas de controle industrial: Modelo Purdue, segmentação, protocolos e defesa contra Stuxnet/Triton.
+                        </p>
+                        <a href="./seguranca-ot-ics-scada/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - SOAR -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%);">
+                        <span class="blog-card-category" style="background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3); color: #a855f7;">Operações de Segurança</span>
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./soar-automacao-orquestracao/">SOAR: Automação e Orquestração de Segurança</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Automatize resposta a incidentes com playbooks, integre ferramentas e aumente eficiência do SOC.
+                        </p>
+                        <a href="./soar-automacao-orquestracao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - TPRM -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);">
+                        <span class="blog-card-category" style="background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.3); color: #6366f1;">Gestão de Riscos</span>
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./tprm-gestao-risco-terceiros/">TPRM: Gestão de Risco de Terceiros e Supply Chain</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como avaliar e monitorar fornecedores: due diligence, questionários SIG e proteção contra supply chain attacks.
+                        </p>
+                        <a href="./tprm-gestao-risco-terceiros/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Bug Bounty -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
+                        <span class="blog-card-category" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10b981;">Segurança Aplicações</span>
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./bug-bounty-programa-recompensas/">Bug Bounty: Como Estruturar Programas de Recompensas</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Implemente bug bounty: escopo, recompensas, plataformas e gestão de relacionamento com pesquisadores.
+                        </p>
+                        <a href="./bug-bounty-programa-recompensas/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - LLM Security -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);">
+                        <span class="blog-card-category" style="background: rgba(251, 113, 133, 0.1); border-color: rgba(251, 113, 133, 0.3); color: #fb7185;">Segurança de IA</span>
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./seguranca-llm-genai-prompt-injection/">Segurança de LLM e GenAI: Prompt Injection e Riscos</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Proteja aplicações de IA contra prompt injection, data leakage e jailbreaking. OWASP LLM Top 10.
+                        </p>
+                        <a href="./seguranca-llm-genai-prompt-injection/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - CSPM/DSPM/SSPM -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
+                        <span class="blog-card-category" style="background: rgba(14, 165, 233, 0.1); border-color: rgba(14, 165, 233, 0.3); color: #0ea5e9;">Cloud Security</span>
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./cspm-dspm-sspm-posture-management/">CSPM, DSPM e SSPM: Posture Management Completo</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Gerencie postura de segurança em cloud, dados e SaaS. Diferenças, casos de uso e convergência CNAPP.
+                        </p>
+                        <a href="./cspm-dspm-sspm-posture-management/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Post-Quantum Crypto -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);">
+                        <span class="blog-card-category" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #8b5cf6;">Criptografia</span>
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./criptografia-pos-quantica-pqc/">Criptografia Pós-Quântica: Preparação para Era Quântica</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Entenda a ameaça quântica, algoritmos NIST (Kyber, Dilithium) e como preparar sua organização para PQC.
+                        </p>
+                        <a href="./criptografia-pos-quantica-pqc/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- NOVOS ARTIGOS - Janeiro 2026 (Batch 2) -->
+
+                <!-- Post - CTEM -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7c2d12 0%, #431407 100%);">
+                        <span class="blog-card-category" style="background: rgba(249, 115, 22, 0.1); border-color: rgba(249, 115, 22, 0.3); color: #f97316;">Gestão de Risco</span>
+                        <i class="fas fa-radar"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./ctem-continuous-threat-exposure-management/">CTEM: Continuous Threat Exposure Management</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Guia completo do programa CTEM do Gartner: ciclo de 5 fases, implementacao prática, ferramentas e metricas.
+                        </p>
+                        <a href="./ctem-continuous-threat-exposure-management/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - ASM -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);">
+                        <span class="blog-card-category" style="background: rgba(20, 184, 166, 0.1); border-color: rgba(20, 184, 166, 0.3); color: #14b8a6;">ASM</span>
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./asm-attack-surface-management/">ASM: Gestão de Superfície de Ataque (EASM vs CAASM)</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            O que é Attack Surface Management, diferenças entre EASM e CAASM, ferramentas e como implementar.
+                        </p>
+                        <a href="./asm-attack-surface-management/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - MFA Fatigue -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #991b1b 0%, #7f1d1d 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">IAM</span>
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./mfa-fatigue-bypass-attacks/">MFA Fatigue e Ataques de Bypass: Como se Proteger</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Ataques de fadiga de MFA, prompt bombing, técnicas de bypass e como implementar MFA resistente a phishing.
+                        </p>
+                        <a href="./mfa-fatigue-bypass-attacks/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - SBOM -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%);">
+                        <span class="blog-card-category" style="background: rgba(129, 140, 248, 0.1); border-color: rgba(129, 140, 248, 0.3); color: #818cf8;">AppSec</span>
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./sbom-software-bill-of-materials/">SBOM: Software Bill of Materials na Pratica</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            O que e SBOM, formatos (SPDX, CycloneDX), como gerar, integrar no CI/CD e atender requisitos regulatorios.
+                        </p>
+                        <a href="./sbom-software-bill-of-materials/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Detection Engineering -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">SOC</span>
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./detection-engineering-regras-deteccao/">Detection Engineering: Criando Regras de Deteccao Eficazes</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como criar, testar e manter regras de deteccao. MITRE ATT&CK, Sigma, YARA e ciclo de vida de deteccoes.
+                        </p>
+                        <a href="./detection-engineering-regras-deteccao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Threat Intelligence Operacional -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #0369a1 0%, #075985 100%);">
+                        <span class="blog-card-category" style="background: rgba(14, 165, 233, 0.1); border-color: rgba(14, 165, 233, 0.3); color: #0ea5e9;">CTI</span>
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./threat-intelligence-operacional/">Threat Intelligence Operacional: Guia Prático</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como operacionalizar threat intelligence: feeds, plataformas TIP, integracao com SOC e metricas de eficácia.
+                        </p>
+                        <a href="./threat-intelligence-operacional/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Purple Teaming -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7e22ce 0%, #6b21a8 100%);">
+                        <span class="blog-card-category" style="background: rgba(192, 132, 252, 0.1); border-color: rgba(192, 132, 252, 0.3); color: #c084fc;">Ciberseguranca</span>
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./purple-teaming-pratica/">Purple Teaming na Prática: Integrando Ataque e Defesa</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como implementar purple teaming: exercicios colaborativos, ferramentas de emulacao e melhoria continua.
+                        </p>
+                        <a href="./purple-teaming-pratica/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Board Reporting -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #b45309 0%, #92400e 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Governanca</span>
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 16 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./board-reporting-ciberseguranca/">Board Reporting: Comunicando Cyber Risk ao Conselho</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como apresentar riscos ciberneticos ao board: metricas, linguagem de negocios e dashboards executivos.
+                        </p>
+                        <a href="./board-reporting-ciberseguranca/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - CRQ -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);">
+                        <span class="blog-card-category" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10B981;">Gestão de Risco</span>
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./crq-quantificacao-risco-cibernetico/">CRQ: Quantificacao de Risco Cibernetico com FAIR</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como quantificar riscos ciberneticos em valores monetarios usando metodologia FAIR e ferramentas de CRQ.
+                        </p>
+                        <a href="./crq-quantificacao-risco-cibernetico/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Security Chaos Engineering -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);">
+                        <span class="blog-card-category" style="background: rgba(248, 113, 113, 0.1); border-color: rgba(248, 113, 113, 0.3); color: #f87171;">DevSecOps</span>
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./security-chaos-engineering/">Security Chaos Engineering: Testando Resiliencia</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como aplicar principios de chaos engineering para seguranca: experimentos, game days e ferramentas.
+                        </p>
+                        <a href="./security-chaos-engineering/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - GraphQL Security -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #e11d48 0%, #be185d 100%);">
+                        <span class="blog-card-category" style="background: rgba(251, 113, 133, 0.1); border-color: rgba(251, 113, 133, 0.3); color: #fb7185;">AppSec</span>
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./graphql-api-security/">Seguranca de APIs GraphQL: Vulnerabilidades e Protecao</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Ataques especificos de GraphQL (introspection, batching, DoS) e melhores práticas de seguranca.
+                        </p>
+                        <a href="./graphql-api-security/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - NIS2 -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">GRC</span>
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./nis2-diretiva-europeia-impactos/">NIS2: Diretiva Europeia e Impactos para Empresas Brasileiras</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            O que e NIS2, requisitos, setores afetados e como empresas brasileiras devem se preparar.
+                        </p>
+                        <a href="./nis2-diretiva-europeia-impactos/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Cyber Due Diligence -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">GRC</span>
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./cyber-due-diligence-ma/">Cyber Due Diligence em M&A: Avaliacao de Riscos</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Como avaliar riscos ciberneticos em fusoes e aquisicoes: checklist, passivos ocultos e integracao.
+                        </p>
+                        <a href="./cyber-due-diligence-ma/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Tipos de Pentest -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Seguranca Ofensiva</span>
+                        <i class="fas fa-crosshairs"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./tipos-de-pentest-guia-completo/">Tipos de Pentest: Guia Completo - Black Box, White Box, Gray Box</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Conheça todos os tipos de pentest: por nivel de conhecimento, por alvo (rede, web, mobile, API, cloud) e por objetivo. Guia pratico para escolher o teste certo.
+                        </p>
+                        <a href="./tipos-de-pentest-guia-completo/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Red Team vs Blue Team vs Purple Team -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #5b21b6 0%, #4c1d95 100%);">
+                        <span class="blog-card-category" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #8B5CF6;">Ciberseguranca</span>
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./red-team-blue-team-purple-team/">Red Team vs Blue Team vs Purple Team: Guia Completo</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Entenda as diferencas entre equipes de seguranca ofensiva, defensiva e colaborativa. Como implementar e quando usar cada abordagem.
+                        </p>
+                        <a href="./red-team-blue-team-purple-team/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Ransomware -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Ameacas</span>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 22 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./ransomware-como-funciona-proteger-empresa/">Ransomware: Como Funciona e Como Proteger sua Empresa</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Guia completo sobre ransomware: como funciona, principais grupos, estatisticas de impacto e estratégias comprovadas de protecao e recuperacao.
+                        </p>
+                        <a href="./ransomware-como-funciona-proteger-empresa/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Resposta a Incidentes -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #b45309 0%, #92400e 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Governanca</span>
+                        <i class="fas fa-ambulance"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./resposta-incidentes-guia-pratico/">Resposta a Incidentes: Guia Prático para Organizações</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Framework completo de IR: fases do processo, construcao de CSIRT, playbooks, ferramentas essenciais e metricas. NIST e SANS aplicados.
+                        </p>
+                        <a href="./resposta-incidentes-guia-pratico/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - SOC vs MDR vs MSSP -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">SOC</span>
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./soc-vs-mdr-vs-mssp-qual-modelo-certo/">SOC vs MDR vs MSSP: Qual o Modelo Certo para Sua Empresa?</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Comparativo completo entre SOC interno, MDR e MSSP. Descubra qual modelo de seguranca atende melhor sua empresa considerando porte, orcamento e maturidade.
+                        </p>
+                        <a href="./soc-vs-mdr-vs-mssp-qual-modelo-certo/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Como Avaliar Empresa de Ciberseguranca -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);">
+                        <span class="blog-card-category" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10B981;">Avaliacao</span>
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 16 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./como-avaliar-empresa-ciberseguranca/">Como Avaliar e Escolher uma Empresa de Ciberseguranca</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Guia completo com criterios objetivos, checklist de certificacoes, perguntas essenciais e red flags para avaliar fornecedores de ciberseguranca.
+                        </p>
+                        <a href="./como-avaliar-empresa-ciberseguranca/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Ciberseguranca PMEs -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);">
+                        <span class="blog-card-category" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #10B981;">PME</span>
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 15 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./melhores-servicos-ciberseguranca-pequenas-empresas-brasil/">Melhores Servicos de Ciberseguranca para Pequenas Empresas</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Guia completo com os melhores servicos de ciberseguranca para PMEs brasileiras. Solucoes acessiveis de protecao, monitoramento e conformidade LGPD.
+                        </p>
+                        <a href="./melhores-servicos-ciberseguranca-pequenas-empresas-brasil/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Protecao Dados Pessoais -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #5b21b6 0%, #4c1d95 100%);">
+                        <span class="blog-card-category" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.3); color: #8B5CF6;">Privacidade</span>
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./como-proteger-dados-pessoais-sites-aplicacoes/">Como Proteger Dados Pessoais em Sites e Aplicacoes</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Aprenda a proteger seus dados pessoais online com dicas práticas sobre senhas, autenticacao 2FA, navegacao segura e como identificar golpes.
+                        </p>
+                        <a href="./como-proteger-dados-pessoais-sites-aplicacoes/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Gerenciadores de Senhas -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #b45309 0%, #92400e 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Ferramentas</span>
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./gerenciadores-senhas-seguros-gratuitos/">Gerenciadores de Senhas Seguros e Gratuitos</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Comparativo completo dos melhores gerenciadores de senhas gratuitos: Bitwarden, KeePass e Proton Pass. Proteja suas credenciais.
+                        </p>
+                        <a href="./gerenciadores-senhas-seguros-gratuitos/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Monitoramento de Ameacas -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">SOC</span>
+                        <i class="fas fa-radar"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 14 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./como-contratar-monitoramento-ameacas-ciberneticas/">Como Contratar Monitoramento de Ameacas Ciberneticas</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Guia para contratar servicos de monitoramento de ameacas: tipos de servico (SOC, MDR, SIEM), criterios de avaliacao e processo de contratacao.
+                        </p>
+                        <a href="./como-contratar-monitoramento-ameacas-ciberneticas/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Auditoria de Seguranca -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);">
+                        <span class="blog-card-category" style="background: rgba(96, 165, 250, 0.1); border-color: rgba(96, 165, 250, 0.3); color: #60A5FA;">Compliance</span>
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./empresas-auditoria-seguranca-cibernetica/">Onde Encontrar Empresas de Auditoria de Seguranca</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Saiba onde encontrar empresas de auditoria de seguranca cibernetica no Brasil. Criterios de avaliacao, tipos de auditoria e como se preparar.
+                        </p>
+                        <a href="./empresas-auditoria-seguranca-cibernetica/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Industria 4.0 -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Estrategia</span>
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./industria-4-0/">Industria 4.0: A Quarta Revolucao Industrial</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Entenda o que e a Industria 4.0, como IoT, IA e automacao estao transformando a manufatura e quais os desafios de seguranca cibernetica envolvidos.
+                        </p>
+                        <a href="./industria-4-0/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - CSOC -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e3a5f 0%, #0D1E38 100%);">
+                        <span class="blog-card-category">Ciberseguranca</span>
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 20 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./csoc-o-centro-de-operacoes-de-seguranca-cibernetica/">CSOC: Centro de Operacoes de Seguranca Cibernetica</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Guia completo sobre como construir e administrar um SOC. Conheça os niveis de analistas, processos, tecnologias e capacidades necessárias.
+                        </p>
+                        <a href="./csoc-o-centro-de-operacoes-de-seguranca-cibernetica/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Pentest Frameworks -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Seguranca Ofensiva</span>
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./pentest-frameworks-e-metodologias/">Pentest: Frameworks e Metodologias</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Conheça os principais frameworks de pentest como NIST 800-115, OSSTMM, PTES, OWASP e PCI DSS para conduzir testes de intrusao eficazes.
+                        </p>
+                        <a href="./pentest-frameworks-e-metodologias/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Pensamento Hacker -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e3a5f 0%, #0D1E38 100%);">
+                        <span class="blog-card-category">Seguranca</span>
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 8 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./pensamento-hacker/">Pensamento Hacker: A Mentalidade por Tras da Seguranca</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Entenda o que e o pensamento hacker, os motores motivacionais de atacantes e como aplicar essa mentalidade para proteger seu ambiente.
+                        </p>
+                        <a href="./pensamento-hacker/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Golpes Virtuais -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Seguranca</span>
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 6 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./golpes-virtuais/">Golpes Virtuais: Como se Proteger</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Aprenda a identificar e se proteger de phishing e outros golpes virtuais. Dicas práticas para evitar fraudes online e proteger seus dados.
+                        </p>
+                        <a href="./golpes-virtuais/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Frameworks Cybersecurity -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Frameworks</span>
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 15 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./frameworks-cybersecurity/">Frameworks de Cybersecurity: Guia de Referencias</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Catalogo de frameworks e metodologias de seguranca: NIST, OWASP, OSSTMM, PTES, PCI DSS, ISO 27001, COBIT, MITRE e muito mais.
+                        </p>
+                        <a href="./frameworks-cybersecurity/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Cyberwar -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Seguranca</span>
+                        <i class="fas fa-fighter-jet"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Maio 2024</span>
+                            <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./cyberwar-a-nova-fronteira-do-conflito-global-atraves-da-guerra-cibernetica/">Cyberwar: A Nova Fronteira do Conflito Global</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Descubra como a ciberguerra e a guerrilha cibernetica moldam a seguranca global. Exploracao profunda das ameacas digitais, exemplos como Stuxnet e estratégias de defesa modernas.
+                        </p>
+                        <a href="./cyberwar-a-nova-fronteira-do-conflito-global-atraves-da-guerra-cibernetica/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - MITRE ATT&CK -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Ciberseguranca</span>
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 18 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/">MITRE ATT&CK Enterprise: Guia Completo</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Conheça o framework MITRE ATT&CK, as 14 taticas, centenas de técnicas e como usar para mapear comportamentos de adversarios e fortalecer sua seguranca.
+                        </p>
+                        <a href="./mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Phishing e Monitoramento -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Seguranca</span>
+                        <i class="fas fa-fish"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">Phishing: Por que o Monitoramento Continuo de Sites e Decisivo</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Descubra por que o monitoramento continuo de sites e decisivo para evitar fraudes de phishing. Entenda como proteger sua marca e seus clientes contra ataques modernos.
+                        </p>
+                        <a href="./phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Monitoramento Seguranca -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Governanca</span>
+                        <i class="fas fa-eye-slash"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./o-que-quase-ninguem-monitora-em-seguranca-da-informacao/">O que Quase Ninguem Monitora em Seguranca da Informacao</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Descubra os riscos silenciosos que se acumulam nas organizações e que raramente aparecem em relatorios tradicionais, mas frequentemente estao presentes nos incidentes mais relevantes.
+                        </p>
+                        <a href="./o-que-quase-ninguem-monitora-em-seguranca-da-informacao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Ontologias -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Estrategia</span>
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                            <span><i class="far fa-clock"></i> 14 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./ontologias-seguranca-informacao-organizar-conhecimento-inteligencia/">Ontologias na Seguranca da Informacao: organizar conhecimento e fortalecer a inteligencia</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Descubra como ontologias podem organizar conhecimento, aprimorar análises e fortalecer a inteligencia de ameacas. Entenda a diferenca entre ontologia e taxonomia e os frameworks que utilizam esse conceito.
+                        </p>
+                        <a href="./ontologias-seguranca-informacao-organizar-conhecimento-inteligencia/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - TLP -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Seguranca</span>
+                        <i class="fas fa-traffic-light"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Abril 2024</span>
+                            <span><i class="far fa-clock"></i> 8 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./como-funciona-o-tlp-traffic-light-protocol/">Como Funciona o Traffic Light Protocol (TLP)</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Entenda o Traffic Light Protocol e como ele classifica informacoes para compartilhamento seguro. Conheça TLP:RED, TLP:AMBER, TLP:GREEN e TLP:CLEAR.
+                        </p>
+                        <a href="./como-funciona-o-tlp-traffic-light-protocol/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Ciclo OODA -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Estrategia</span>
+                        <i class="fas fa-crosshairs"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Agosto 2023</span>
+                            <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./ciclo-ooda-observar-orientar-decidir-agir/">Ciclo OODA: Observar, Orientar, Decidir e Agir</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Descubra como o framework OODA Loop de John Boyd pode ser aplicado para melhorar a tomada de decisoes em resposta a incidentes de seguranca.
+                        </p>
+                        <a href="./ciclo-ooda-observar-orientar-decidir-agir/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Lockpicking -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Seguranca</span>
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Agosto 2023</span>
+                            <span><i class="far fa-clock"></i> 8 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./lockpicking-nenhuma-fechadura-esta-segura-com-isso/">Lockpicking: Nenhuma fechadura esta segura com isso?</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Conheça o mundo do lockpicking, sua historia, técnicas e a legislacao brasileira. Entenda por que a seguranca fisica e tao importante quanto a digital.
+                        </p>
+                        <a href="./lockpicking-nenhuma-fechadura-esta-segura-com-isso/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Metadados -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Seguranca</span>
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Agosto 2023</span>
+                            <span><i class="far fa-clock"></i> 6 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./porque-tudo-tem-minhas-informacoes-em-excesso/">Por que tudo tem minhas informacoes em excesso?</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Descubra o que sao metadados, como eles sao coletados e por que voce deveria se preocupar com a quantidade de informacoes que seus dispositivos revelam.
+                        </p>
+                        <a href="./porque-tudo-tem-minhas-informacoes-em-excesso/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - APT -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);">
+                        <span class="blog-card-category" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3); color: #ef4444;">Ciberseguranca</span>
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Setembro 2023</span>
+                            <span><i class="far fa-clock"></i> 15 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./ameaca-persistente-avancada-o-que-e-apt/">Ameaca Persistente Avancada: O que e APT?</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Entenda o que sao APTs, como funcionam, quais os grupos mais conhecidos e como proteger sua organizacao contra essas ameacas sofisticadas.
+                        </p>
+                        <a href="./ameaca-persistente-avancada-o-que-e-apt/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Golpes -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Seguranca</span>
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Outubro 2023</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./com-tantos-golpes-voce-esta-seguro/">Com Tantos Golpes, Voce Esta Seguro?</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Conheça os principais golpes digitais no Brasil, como phishing, golpes do PIX, clonagem de WhatsApp e aprenda a se proteger dessas ameacas.
+                        </p>
+                        <a href="./com-tantos-golpes-voce-esta-seguro/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Fraude Cartoes -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Seguranca</span>
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Julho 2023</span>
+                            <span><i class="far fa-clock"></i> 10 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./a-fraude-de-cartoes-ira-acabar/">A Fraude de Cartoes Ira Acabar?</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Analise da evolucao das fraudes com cartoes, tecnologias de seguranca como EMV e tokenizacao, e o futuro dos pagamentos digitais.
+                        </p>
+                        <a href="./a-fraude-de-cartoes-ira-acabar/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Fundamentos Seguranca -->
+                <article class="blog-card">
+                    <div class="blog-card-image">
+                        <span class="blog-card-category">Seguranca</span>
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Junho 2023</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./seguranca-da-informacao-e-seus-fundamentos/">Seguranca da Informacao e seus Fundamentos</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Conheça os pilares da Seguranca da Informacao: Confidencialidade, Integridade e Disponibilidade (CID) e sua importância para as organizações.
+                        </p>
+                        <a href="./seguranca-da-informacao-e-seus-fundamentos/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Threat Hunting -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #1e3a5f 0%, #0D1E38 100%);">
+                        <span class="blog-card-category">Ciberseguranca</span>
+                        <i class="fas fa-crosshairs"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Outubro 2023</span>
+                            <span><i class="far fa-clock"></i> 15 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./a-importancia-do-threat-hunting-para-organizacao/">A Importância do Threat Hunting para Organizações</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Descubra como a caca proativa de ameacas pode identificar invasores antes que causem danos e fortalecer a postura de seguranca da sua organizacao.
+                        </p>
+                        <a href="./a-importancia-do-threat-hunting-para-organizacao/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post - Inteligencia OSINT -->
+                <article class="blog-card">
+                    <div class="blog-card-image" style="background: linear-gradient(135deg, #78350f 0%, #451a03 100%);">
+                        <span class="blog-card-category" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #f59e0b;">Estrategia</span>
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-calendar"></i> Agosto 2023</span>
+                            <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="./voce-sabe-como-usar-a-inteligencia/">Voce Sabe Como Usar a Inteligencia? OSINT e o Ciclo de Inteligencia</a>
+                        </h2>
+                        <p class="blog-card-excerpt">
+                            Aprenda sobre o ciclo de inteligencia, tipos de coleta SIGINT, HUMINT, OSINT e como transformar dados em informacao estrategica para sua organizacao.
+                        </p>
+                        <a href="./voce-sabe-como-usar-a-inteligencia/" class="blog-card-link">
+                            Ler artigo completo <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Pagination -->
+            <nav class="blog-pagination" id="blogPagination" aria-label="Paginacao do blog">
+                <button class="page-btn" id="prevPage" aria-label="Pagina anterior"><i class="fas fa-chevron-left"></i></button>
+                <div class="page-numbers" id="pageNumbers"></div>
+                <button class="page-btn" id="nextPage" aria-label="Proxima pagina"><i class="fas fa-chevron-right"></i></button>
+            </nav>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults">
+                <i class="fas fa-search"></i>
+                <h3>Nenhum resultado encontrado</h3>
+                <p>Tente buscar por outros termos ou navegue pelos filtros de categoria.</p>
+                <button class="clear-search" onclick="clearSearch()">Limpar busca</button>
+            </div>
+        </div>
+    </section>
+
+<!-- Newsletter Section -->
+    <section id="newsletter" class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-wrapper">
+                <div class="newsletter-content">
+                    <div class="newsletter-icon">
+                        <picture>
+                            <source type="image/webp" srcset="./../img/logo-white-140x140.webp" width="120" height="120">
+                            <img src="./../img/logo-white-140x140.png" alt="Inteligência Brasil" width="120" height="120" loading="lazy">
+                        </picture>
+                    </div>
+                    <h3>Receba conteúdos exclusivos sobre Segurança da Informação</h3>
+                    <p>Assine nossa newsletter e fique por dentro das últimas tendências, ameaças e melhores práticas em cibersegurança.</p>
+                </div>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="hidden" name="ip" id="newsletterIp">
+                    <div class="newsletter-input-group">
+                        <input type="email" id="newsletterEmail" name="email" class="newsletter-input"
+                               placeholder="Seu e-mail corporativo"
+                               pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                               maxlength="100" required>
+                        <button type="submit" class="newsletter-btn">
+                            <span class="btn-text">Assinar</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <p class="newsletter-disclaimer">
+                        <i class="fas fa-lock"></i> Seu e-mail está seguro. Não enviamos spam e você pode cancelar a qualquer momento.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+    </main>
+
+<!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="./../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="./../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação, com as
+                            melhores práticas para redução de riscos digitais corporativos.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"
+                                aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"
+                                aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i
+                                    class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Servicos</h4>
+                        <ul>
+                            <li><a href="./../#servicos">Seguranca da Informacao</a></li>
+                            <li><a href="./../#servicos">Red Team / Pentest</a></li>
+                            <li><a href="./../#servicos">Blue Team / Defesa</a></li>
+                            <li><a href="./../#servicos">Resposta a Incidentes</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="./../#metodologia">Metodologia</a></li>
+                            <li><a href="./">Blog</a></li>
+                            <li><a href="./../ferramentas/">Ferramentas</a></li>
+                            <li><a href="./../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="./../politica-de-privacidade.html">Política de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="./../#contato">Contato</a>
+                        <span class="separator">|</span>
+                        <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/site-common.min.js"></script>
+    <script>
+    (function(){
+        var ITEMS_PER_PAGE = 12;
+        var CAROUSEL_COUNT = 5;
+        var CAROUSEL_INTERVAL = 6000;
+        var currentPage = 1;
+        var allCards = Array.prototype.slice.call(document.querySelectorAll('.blog-card'));
+        var filteredCards = allCards.slice();
+
+        var blogGrid = document.querySelector('.blog-grid');
+        var noResults = document.getElementById('noResults');
+        var resultsInfo = document.getElementById('searchResultsInfo');
+        var pagination = document.getElementById('blogPagination');
+        var pageNumbers = document.getElementById('pageNumbers');
+        var prevBtn = document.getElementById('prevPage');
+        var nextBtn = document.getElementById('nextPage');
+
+        // ===== CAROUSEL =====
+        var carouselEl = null;
+        var carouselTimer = null;
+        var carouselSlide = 0;
+        var carouselPaused = false;
+
+        function destroyCarousel(){
+            if(carouselTimer){ clearInterval(carouselTimer); carouselTimer = null; }
+            if(carouselEl){
+                // move cards back to grid
+                var slides = carouselEl.querySelectorAll('.featured-slide');
+                for(var i = slides.length - 1; i >= 0; i--){
+                    var card = slides[i].querySelector('.blog-card');
+                    if(card){
+                        card.classList.add('hidden');
+                        card.classList.remove('featured');
+                        blogGrid.insertBefore(card, blogGrid.firstChild);
+                    }
+                }
+                carouselEl.parentNode.removeChild(carouselEl);
+                carouselEl = null;
+            }
+        }
+
+        function buildCarousel(cards){
+            destroyCarousel();
+            if(cards.length === 0) return;
+
+            var count = Math.min(CAROUSEL_COUNT, cards.length);
+            carouselSlide = 0;
+
+            carouselEl = document.createElement('div');
+            carouselEl.className = 'featured-carousel';
+
+            for(var i = 0; i < count; i++){
+                var slide = document.createElement('div');
+                slide.className = 'featured-slide' + (i === 0 ? ' active' : '');
+                cards[i].classList.remove('hidden');
+                cards[i].classList.add('featured');
+                slide.appendChild(cards[i]);
+                carouselEl.appendChild(slide);
+            }
+
+            // dots
+            var dotsWrap = document.createElement('div');
+            dotsWrap.className = 'featured-dots';
+            for(var i = 0; i < count; i++){
+                var dot = document.createElement('button');
+                dot.className = 'featured-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('data-slide', i);
+                dot.setAttribute('aria-label', 'Artigo ' + (i + 1));
+                dotsWrap.appendChild(dot);
+            }
+            carouselEl.appendChild(dotsWrap);
+
+            // progress bar
+            var progress = document.createElement('div');
+            progress.className = 'featured-progress';
+            progress.style.width = '0%';
+            carouselEl.appendChild(progress);
+
+            blogGrid.insertBefore(carouselEl, blogGrid.firstChild);
+
+            // events
+            dotsWrap.addEventListener('click', function(e){
+                var dot = e.target.closest('[data-slide]');
+                if(dot) goToSlide(Number(dot.getAttribute('data-slide')));
+            });
+            carouselEl.addEventListener('mouseenter', function(){ carouselPaused = true; });
+            carouselEl.addEventListener('mouseleave', function(){ carouselPaused = false; });
+
+            startCarouselTimer(count);
+        }
+
+        function goToSlide(idx){
+            if(!carouselEl) return;
+            var slides = carouselEl.querySelectorAll('.featured-slide');
+            var dots = carouselEl.querySelectorAll('.featured-dot');
+            if(idx < 0 || idx >= slides.length) return;
+            carouselSlide = idx;
+            for(var i = 0; i < slides.length; i++){
+                slides[i].classList.toggle('active', i === idx);
+                if(dots[i]) dots[i].classList.toggle('active', i === idx);
+            }
+            resetProgress();
+        }
+
+        function resetProgress(){
+            if(!carouselEl) return;
+            var bar = carouselEl.querySelector('.featured-progress');
+            if(bar){ bar.style.transition = 'none'; bar.style.width = '0%'; }
+        }
+
+        function startCarouselTimer(count){
+            if(carouselTimer) clearInterval(carouselTimer);
+            var elapsed = 0;
+            var step = 50;
+            carouselTimer = setInterval(function(){
+                if(carouselPaused) return;
+                elapsed += step;
+                var bar = carouselEl ? carouselEl.querySelector('.featured-progress') : null;
+                if(bar){
+                    bar.style.transition = 'width ' + step + 'ms linear';
+                    bar.style.width = ((elapsed / CAROUSEL_INTERVAL) * 100) + '%';
+                }
+                if(elapsed >= CAROUSEL_INTERVAL){
+                    elapsed = 0;
+                    goToSlide((carouselSlide + 1) % count);
+                }
+            }, step);
+        }
+
+        // ===== PAGINATION =====
+        function getTotalPages(){
+            var carouselItems = (filteredCards.length > CAROUSEL_COUNT) ? CAROUSEL_COUNT : 0;
+            var remaining = filteredCards.length - carouselItems;
+            return remaining > 0 ? Math.ceil(remaining / ITEMS_PER_PAGE) : (carouselItems > 0 ? 1 : 1);
+        }
+
+        function showPage(page){
+            destroyCarousel();
+            allCards.forEach(function(c){ c.classList.add('hidden'); c.classList.remove('featured'); });
+
+            var useCarousel = filteredCards.length > CAROUSEL_COUNT && page === 1;
+            var carouselItems = useCarousel ? CAROUSEL_COUNT : 0;
+            var gridCards = filteredCards.slice(carouselItems);
+            var totalGridPages = Math.ceil(gridCards.length / ITEMS_PER_PAGE) || 1;
+
+            if(page === 1 && useCarousel){
+                currentPage = 1;
+                buildCarousel(filteredCards.slice(0, CAROUSEL_COUNT));
+            } else if(page === 1 && !useCarousel && filteredCards.length > 0){
+                currentPage = 1;
+                // few results: first one featured, rest normal
+                filteredCards[0].classList.remove('hidden');
+                filteredCards[0].classList.add('featured');
+            }
+
+            var adjustedPage = useCarousel ? page : page;
+            currentPage = Math.max(1, Math.min(page, totalGridPages));
+            var start = (currentPage - 1) * ITEMS_PER_PAGE;
+            var end = start + ITEMS_PER_PAGE;
+
+            gridCards.forEach(function(c, i){
+                if(i >= start && i < end) c.classList.remove('hidden');
+            });
+
+            // If page 1, no carousel, and we have cards: first is featured
+            if(page === 1 && !useCarousel && filteredCards.length > 0){
+                filteredCards[0].classList.add('featured');
+            }
+
+            renderPagination(totalGridPages);
+            var section = document.querySelector('.blog-section') || blogGrid;
+            if(section && page > 1) section.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+
+        function renderPagination(totalOverride){
+            var total = totalOverride || getTotalPages();
+            // On page 1 with carousel, we still might have grid pages
+            pagination.style.display = total <= 1 ? 'none' : 'flex';
+            prevBtn.disabled = currentPage <= 1;
+            nextBtn.disabled = currentPage >= total;
+
+            var html = '';
+            var pages = [];
+            if(total <= 7){
+                for(var i=1;i<=total;i++) pages.push(i);
+            } else {
+                pages.push(1);
+                if(currentPage > 3) pages.push('...');
+                var s = Math.max(2, currentPage - 1);
+                var e = Math.min(total - 1, currentPage + 1);
+                for(var i=s;i<=e;i++) pages.push(i);
+                if(currentPage < total - 2) pages.push('...');
+                pages.push(total);
+            }
+
+            pages.forEach(function(p){
+                if(p === '...'){
+                    html += '<span class="page-ellipsis">...</span>';
+                } else {
+                    html += '<button class="page-btn' + (p === currentPage ? ' active' : '') + '" data-page="' + p + '">' + p + '</button>';
+                }
+            });
+            pageNumbers.innerHTML = html;
+        }
+
+        pageNumbers.addEventListener('click', function(e){
+            var btn = e.target.closest('[data-page]');
+            if(btn) showPage(Number(btn.getAttribute('data-page')));
+        });
+        prevBtn.addEventListener('click', function(){ showPage(currentPage - 1); });
+        nextBtn.addEventListener('click', function(){ showPage(currentPage + 1); });
+
+        // Filter by category
+        function filterCards(category){
+            isSearchActive = false;
+            document.getElementById('blogSearch').value = '';
+            resultsInfo.style.display = 'none';
+            noResults.style.display = 'none';
+            blogGrid.style.display = 'grid';
+
+            if(!category || category === 'Todos'){
+                filteredCards = allCards.slice();
+            } else {
+                filteredCards = allCards.filter(function(c){
+                    var cat = c.querySelector('.blog-card-category');
+                    return cat && cat.textContent.toLowerCase().indexOf(category.toLowerCase()) !== -1;
+                });
+            }
+            showPage(1);
+        }
+
+        document.querySelectorAll('.filter-tag').forEach(function(tag){
+            tag.addEventListener('click', function(){
+                document.querySelectorAll('.filter-tag').forEach(function(t){ t.classList.remove('active'); });
+                this.classList.add('active');
+                filterCards(this.textContent.trim());
+            });
+        });
+
+        // Search
+        function searchBlog(){
+            var term = document.getElementById('blogSearch').value.toLowerCase().trim();
+            if(term === ''){
+                clearSearch();
+                return;
+            }
+            isSearchActive = true;
+
+            filteredCards = allCards.filter(function(c){
+                var title = c.querySelector('.blog-card-title').textContent.toLowerCase();
+                var excerpt = c.querySelector('.blog-card-excerpt').textContent.toLowerCase();
+                var category = c.querySelector('.blog-card-category').textContent.toLowerCase();
+                return title.indexOf(term) !== -1 || excerpt.indexOf(term) !== -1 || category.indexOf(term) !== -1;
+            });
+
+            if(filteredCards.length === 0){
+                allCards.forEach(function(c){ c.classList.add('hidden'); });
+                blogGrid.style.display = 'none';
+                noResults.style.display = 'block';
+                resultsInfo.style.display = 'none';
+                pagination.style.display = 'none';
+            } else {
+                blogGrid.style.display = 'grid';
+                noResults.style.display = 'none';
+                resultsInfo.style.display = 'block';
+                resultsInfo.innerHTML = 'Exibindo <span class="highlight">' + filteredCards.length + '</span> resultado(s) para "<span class="highlight">' + term + '</span>" <button class="clear-search" onclick="clearSearch()" style="margin-left:15px">Limpar</button>';
+                showPage(1);
+            }
+        }
+        window.searchBlog = searchBlog;
+
+        function clearSearch(){
+            isSearchActive = false;
+            document.getElementById('blogSearch').value = '';
+            resultsInfo.style.display = 'none';
+            noResults.style.display = 'none';
+            blogGrid.style.display = 'grid';
+            document.querySelectorAll('.filter-tag').forEach(function(t){ t.classList.remove('active'); });
+            var todosTag = document.querySelector('.filter-tag');
+            if(todosTag) todosTag.classList.add('active');
+            filteredCards = allCards.slice();
+            showPage(1);
+        }
+        window.clearSearch = clearSearch;
+
+        document.getElementById('blogSearch').addEventListener('keypress', function(e){
+            if(e.key === 'Enter') searchBlog();
+        });
+        document.getElementById('blogSearch').addEventListener('input', function(){
+            if(this.value.length >= 2) searchBlog();
+            else if(this.value.length === 0) clearSearch();
+        });
+
+        // Init
+        showPage(1);
+    })();
+    </script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+    <script src="../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,804 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Guia completo de seguranca em Kubernetes e containers: hardening de clusters, network policies, RBAC, image scanning, runtime security, secrets management e melhores práticas de produção.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="kubernetes security, container security, k8s hardening, network policies, RBAC kubernetes, image scanning, trivy, falco, runtime security, secrets management, pod security, DevSecOps containers">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/kubernetes-container-security/">
+
+    <meta property="og:title" content="Seguranca em Kubernetes e Containers: Guia Completo">
+    <meta property="og:description" content="Hardening de K8s, network policies, RBAC, scanning e runtime security.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/kubernetes-container-security/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-01-31T18:00:00-03:00">
+    <meta property="article:section" content="DevSecOps">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Seguranca em Kubernetes e Containers">
+    <meta name="twitter:description" content="Guia completo de hardening e seguranca para ambientes containerizados.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Seguranca em Kubernetes e Containers: Guia Completo | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Seguranca em Kubernetes e Containers: Guia Completo",
+        "description": "Guia completo de seguranca em Kubernetes e containers: hardening, network policies, RBAC e runtime security.",
+        "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
+        "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
+        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
+        "datePublished": "2026-01-31",
+        "dateModified": "2026-01-31",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/kubernetes-container-security/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "inLanguage": "pt-BR"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Quais as principais vulnerabilidades em Kubernetes?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "As principais sao: containers rodando como root, imagens com vulnerabilidades conhecidas, secrets expostos em variaveis de ambiente, RBAC permissivo demais, falta de network policies (pods comunicando livremente), API server exposto publicamente, ausencia de pod security policies/standards, e mount de volumes sensiveis do host."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual a diferenca entre Pod Security Policy e Pod Security Standards?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "PodSecurityPolicy (PSP) foi deprecado no K8s 1.21 e removido no 1.25. Foi substituido por Pod Security Standards (PSS) com tres niveis: Privileged (sem restricoes), Baseline (previne escalacao conhecida), e Restricted (hardening maximo). PSS e enforced via Pod Security Admission controller no namespace."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como proteger secrets no Kubernetes?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Kubernetes Secrets sao base64 encoded, nao criptografados por padrao. Habilite encryption at rest no etcd. Use external secret stores (Vault, AWS Secrets Manager) com operadores como External Secrets Operator. Monte secrets como volumes (nao env vars). Implemente RBAC restritivo para acesso a secrets. Rotacione secrets regularmente."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "Kubernetes Security"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Emails&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-emails" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Anticibercrime&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=anticibercrime" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Dom%C3%ADnio&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-dominio" target="_blank" rel="noopener"><i class="fas fa-globe fa-fw"></i> <span class="item-text">Monitorar Dom&#237;nio</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Monitorar%20Credenciais&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=monitorar-credenciais" target="_blank" rel="noopener"><i class="fas fa-key fa-fw"></i> <span class="item-text">Monitorar Credenciais</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20GRC&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=grc" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> <span class="item-text">GRC</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20CTI&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=cti" target="_blank" rel="noopener"><i class="fas fa-crosshairs fa-fw"></i> <span class="item-text">CTI</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Gest%C3%A3o%20de%20Vulnerabilidades&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=gestao-vulnerabilidades" target="_blank" rel="noopener"><i class="fas fa-bug fa-fw"></i> <span class="item-text">Gest&#227;o de Vulnerabilidades</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Adequa%C3%A7%C3%A3o%20a%20LGPD&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=adequacao-lgpd" target="_blank" rel="noopener"><i class="fas fa-gavel fa-fw"></i> <span class="item-text">Adequa&#231;&#227;o a LGPD</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Presen%C3%A7a%20Digital&utm_source=site&utm_medium=menu&utm_campaign=produtos&utm_content=presenca-digital" target="_blank" rel="noopener"><i class="fas fa-chart-line fa-fw"></i> <span class="item-text">Presen&#231;a Digital</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+            <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">DevSecOps</span>
+            <h1>Seguranca em Kubernetes e Containers: Guia Completo de Hardening</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Janeiro 2026</span>
+                <span><i class="far fa-clock"></i> 25 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Kubernetes Security</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#ameacas">Modelo de ameacas em K8s</a></li>
+                        <li><a href="#imagens">Seguranca de imagens</a></li>
+                        <li><a href="#cluster">Hardening do cluster</a></li>
+                        <li><a href="#rbac">RBAC e autenticacao</a></li>
+                        <li><a href="#network">Network Policies</a></li>
+                        <li><a href="#runtime">Runtime security</a></li>
+                        <li><a href="#secrets">Gestao de secrets</a></li>
+                        <li><a href="#ferramentas">Ferramentas essenciais</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                        <li><a href="#conclusao">Conclusao</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="ameacas">Modelo de Ameacas em Kubernetes</h2>
+
+                <p>
+                    <strong>Kubernetes</strong> revolucionou como deployamos aplicacoes, mas tambem introduziu nova superfície de ataque. Antes de implementar controles, e essencial entender o modelo de ameacas especifico de ambientes containerizados.
+                </p>
+
+                <div class="stat-highlight">
+                    <div class="number">94%</div>
+                    <div class="label">das organizações tiveram incidente de seguranca em containers em 2025 (Red Hat State of Kubernetes Security)</div>
+                </div>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-skull-crossbones" style="color:#60A5FA;margin-right:10px"></i> Vetores de ataque comuns</h3>
+                    <ul>
+                        <li><strong>Imagem comprometida:</strong> Vulnerabilidades em base images, dependencias maliciosas</li>
+                        <li><strong>Escape de container:</strong> Privilegios excessivos permitem acesso ao host</li>
+                        <li><strong>Lateral movement:</strong> Pod comprometido ataca outros pods/services</li>
+                        <li><strong>Supply chain:</strong> Componentes maliciosos no build pipeline</li>
+                        <li><strong>Secrets exposure:</strong> Credenciais vazadas em logs, env vars, configmaps</li>
+                        <li><strong>API server abuse:</strong> RBAC permissivo permite escalacao</li>
+                        <li><strong>etcd exposure:</strong> Acesso direto ao banco de dados do cluster</li>
+                    </ul>
+                </div>
+
+                <h3>Camadas de seguranca (Defense in Depth)</h3>
+
+                <p>
+                    Seguranca em Kubernetes deve ser implementada em multiplas camadas:
+                </p>
+
+                <ol>
+                    <li><strong>Build time:</strong> Imagens seguras, scanning, assinaturas</li>
+                    <li><strong>Deploy time:</strong> Admission control, policies</li>
+                    <li><strong>Runtime:</strong> Monitoramento, deteccao de anomalias</li>
+                    <li><strong>Infrastructure:</strong> Host hardening, network segregation</li>
+                </ol>
+
+                <h2 id="imagens">Seguranca de Imagens de Container</h2>
+
+                <p>
+                    A seguranca comeca bem antes do deploy - na construcao da imagem.
+                </p>
+
+                <h3>Melhores práticas de Dockerfile</h3>
+
+                <div class="code-box">
+                    <pre><span class="comment"># Use base image minima e especifica (nao :latest)</span>
+<span class="keyword">FROM</span> cgr.dev/chainguard/python:latest-dev <span class="keyword">AS</span> builder
+<span class="keyword">WORKDIR</span> /app
+<span class="keyword">COPY</span> requirements.txt .
+<span class="keyword">RUN</span> pip install --no-cache-dir -r requirements.txt
+
+<span class="comment"># Multi-stage build - imagem final minima</span>
+<span class="keyword">FROM</span> cgr.dev/chainguard/python:latest
+<span class="keyword">WORKDIR</span> /app
+<span class="keyword">COPY</span> --from=builder /app .
+<span class="keyword">COPY</span> . .
+
+<span class="comment"># Usuario nao-root</span>
+<span class="keyword">USER</span> nonroot:nonroot
+
+<span class="comment"># Nao precisa de shell para maioria das apps</span>
+<span class="keyword">ENTRYPOINT</span> [<span class="string">"python"</span>, <span class="string">"app.py"</span>]</pre>
+                </div>
+
+                <h3>Checklist de imagem segura</h3>
+
+                <ul>
+                    <li>[ ] Base image minima (distroless, alpine, chainguard)</li>
+                    <li>[ ] Tag especifica (nunca :latest em producao)</li>
+                    <li>[ ] Multi-stage build para reduzir tamanho</li>
+                    <li>[ ] Usuario nao-root (USER nonroot)</li>
+                    <li>[ ] Sem shell se possivel</li>
+                    <li>[ ] Sem ferramentas de debug em producao</li>
+                    <li>[ ] COPY especifico (nao COPY . .)</li>
+                    <li>[ ] Dependencias pinadas com hashes</li>
+                </ul>
+
+                <h3>Image scanning no CI/CD</h3>
+
+                <p>
+                    Integre scanning automatico no pipeline para bloquear imagens vulneraveis:
+                </p>
+
+                <div class="code-box">
+                    <pre><span class="comment"># Exemplo: GitHub Actions com Trivy</span>
+- name: Scan image
+  uses: aquasecurity/trivy-action@master
+  with:
+    image-ref: '${{ env.IMAGE }}'
+    format: 'sarif'
+    severity: 'CRITICAL,HIGH'
+    exit-code: '1'  <span class="comment"># Falha o build se encontrar critical/high</span></pre>
+                </div>
+
+                <h3>Assinatura e verificacao de imagens</h3>
+
+                <p>
+                    Use <strong>Sigstore/Cosign</strong> para assinar e verificar imagens:
+                </p>
+
+                <div class="code-box">
+                    <pre><span class="comment"># Assinar imagem</span>
+cosign sign --key cosign.key myregistry.io/myapp:v1.2.3
+
+<span class="comment"># Verificar antes de deploy (admission controller)</span>
+cosign verify --key cosign.pub myregistry.io/myapp:v1.2.3</pre>
+                </div>
+
+                <h2 id="cluster">Hardening do Cluster Kubernetes</h2>
+
+                <h3>API Server</h3>
+
+                <ul>
+                    <li><strong>Autenticacao:</strong> Desabilite autenticacao anonima (<code>--anonymous-auth=false</code>)</li>
+                    <li><strong>Autorizacao:</strong> Use RBAC, nunca AlwaysAllow</li>
+                    <li><strong>Audit logging:</strong> Habilite para rastrear todas as chamadas</li>
+                    <li><strong>TLS:</strong> Certificados validos para todas as comunicacoes</li>
+                    <li><strong>Acesso:</strong> Nao exponha API server publicamente</li>
+                </ul>
+
+                <h3>etcd</h3>
+
+                <ul>
+                    <li><strong>Encryption at rest:</strong> Criptografe secrets no etcd</li>
+                    <li><strong>TLS:</strong> Comunicacao criptografada com API server</li>
+                    <li><strong>Acesso:</strong> Isole etcd da rede de pods</li>
+                    <li><strong>Backup:</strong> Backups criptografados regulares</li>
+                </ul>
+
+                <div class="code-box">
+                    <pre><span class="comment"># EncryptionConfiguration para secrets</span>
+apiVersion: apiserver.config.k8s.io/v1
+kind: EncryptionConfiguration
+resources:
+  - resources:
+      - secrets
+    providers:
+      - aescbc:
+          keys:
+            - name: key1
+              secret: <span class="string">&lt;base64-encoded-key&gt;</span>
+      - identity: {}</pre>
+                </div>
+
+                <h3>Kubelet</h3>
+
+                <ul>
+                    <li><strong>Autenticacao:</strong> Webhook ou certificados (nunca anonimo)</li>
+                    <li><strong>Read-only port:</strong> Desabilite (<code>--read-only-port=0</code>)</li>
+                    <li><strong>Protect kernel defaults:</strong> <code>--protect-kernel-defaults=true</code></li>
+                </ul>
+
+                <h2 id="rbac">RBAC e Controle de Acesso</h2>
+
+                <p>
+                    <strong>RBAC (Role-Based Access Control)</strong> e fundamental para seguranca em K8s. O principio: minimo privilegio.
+                </p>
+
+                <h3>Estrutura do RBAC</h3>
+
+                <ul>
+                    <li><strong>Role/ClusterRole:</strong> Define permissoes (verbs em resources)</li>
+                    <li><strong>RoleBinding/ClusterRoleBinding:</strong> Liga roles a usuarios/serviceaccounts</li>
+                    <li><strong>ServiceAccount:</strong> Identidade para pods</li>
+                </ul>
+
+                <div class="code-box">
+                    <pre><span class="comment"># Role restritivo para aplicacao</span>
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: myapp
+  name: myapp-role
+rules:
+- apiGroups: [<span class="string">""</span>]
+  resources: [<span class="string">"configmaps"</span>]
+  resourceNames: [<span class="string">"myapp-config"</span>]  <span class="comment"># Apenas configmap especifico</span>
+  verbs: [<span class="string">"get"</span>]
+- apiGroups: [<span class="string">""</span>]
+  resources: [<span class="string">"secrets"</span>]
+  resourceNames: [<span class="string">"myapp-secret"</span>]
+  verbs: [<span class="string">"get"</span>]
+---
+<span class="comment"># ServiceAccount dedicada</span>
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: myapp-sa
+  namespace: myapp
+automountServiceAccountToken: false  <span class="comment"># Desabilitar se nao precisar</span></pre>
+                </div>
+
+                <div class="warning-box">
+                    <h4><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> RBAC anti-patterns</h4>
+                    <ul>
+                        <li>Usar <code>cluster-admin</code> para tudo</li>
+                        <li>Wildcards em resources/verbs (<code>*</code>)</li>
+                        <li>Bindings em namespace <code>kube-system</code></li>
+                        <li>Deixar serviceaccount default com permissoes</li>
+                        <li>Permitir <code>escalate</code>, <code>bind</code>, <code>impersonate</code></li>
+                    </ul>
+                </div>
+
+                <h3>Audit de RBAC</h3>
+
+                <p>
+                    Use ferramentas para identificar permissoes excessivas:
+                </p>
+
+                <div class="code-box">
+                    <pre><span class="comment"># kubectl-who-can: quem pode fazer o que</span>
+kubectl who-can create pods --all-namespaces
+kubectl who-can get secrets -n production
+
+<span class="comment"># rbac-tool: visualizar e auditar</span>
+rbac-tool lookup --kind ServiceAccount
+rbac-tool viz --outformat dot | dot -Tpng > rbac.png</pre>
+                </div>
+
+                <h2 id="network">Network Policies</h2>
+
+                <p>
+                    Por padrao, todos os pods podem comunicar com todos. <strong>Network Policies</strong> implementam segmentacao:
+                </p>
+
+                <div class="code-box">
+                    <pre><span class="comment"># Default deny all - ponto de partida</span>
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+---
+<span class="comment"># Permitir apenas trafego necessario</span>
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-backend
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: frontend
+      ports:
+        - protocol: TCP
+          port: 8080</pre>
+                </div>
+
+                <h3>Estratégia de implementação</h3>
+
+                <ol>
+                    <li>Comece em modo observacao (log, nao block)</li>
+                    <li>Mapeie fluxos de comunicacao reais</li>
+                    <li>Implemente default-deny por namespace</li>
+                    <li>Adicione allowlists especificas</li>
+                    <li>Monitore e ajuste continuamente</li>
+                </ol>
+
+                <div class="tip-box">
+                    <h4><i class="fas fa-lightbulb" style="margin-right:10px"></i> CNI e Network Policies</h4>
+                    <p>Nem todo CNI suporta Network Policies. Verifique compatibilidade: Calico, Cilium e Weave suportam. Flannel nao suporta nativamente. Cilium oferece L7 policies (HTTP, gRPC) alem de L3/L4.</p>
+                </div>
+
+                <h2 id="runtime">Runtime Security</h2>
+
+                <h3>Pod Security Standards (PSS)</h3>
+
+                <p>
+                    Pod Security Standards substituiu PodSecurityPolicy (removido no K8s 1.25). Tres niveis:
+                </p>
+
+                <ul>
+                    <li><strong>Privileged:</strong> Sem restricoes (apenas para system pods)</li>
+                    <li><strong>Baseline:</strong> Previne escalacao conhecida (minimo para producao)</li>
+                    <li><strong>Restricted:</strong> Hardening maximo (recomendado)</li>
+                </ul>
+
+                <div class="code-box">
+                    <pre><span class="comment"># Aplicar PSS no namespace</span>
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted</pre>
+                </div>
+
+                <h3>SecurityContext no Pod</h3>
+
+                <div class="code-box">
+                    <pre>apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-pod
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: app
+      image: myapp:v1
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop:
+            - ALL
+      resources:
+        limits:
+          memory: <span class="string">"256Mi"</span>
+          cpu: <span class="string">"500m"</span>
+        requests:
+          memory: <span class="string">"128Mi"</span>
+          cpu: <span class="string">"100m"</span></pre>
+                </div>
+
+                <h3>Runtime detection com Falco</h3>
+
+                <p>
+                    <strong>Falco</strong> detecta comportamentos anomalos em runtime usando regras baseadas em syscalls:
+                </p>
+
+                <ul>
+                    <li>Shell spawned in container</li>
+                    <li>File written to sensitive directory</li>
+                    <li>Unexpected network connection</li>
+                    <li>Container drift (arquivo criado que nao estava na imagem)</li>
+                    <li>Privilege escalation attempt</li>
+                </ul>
+
+                <h2 id="secrets">Gestao de Secrets</h2>
+
+                <p>
+                    Kubernetes Secrets sao base64 encoded, <strong>não criptografados por padrão</strong>. Melhores práticas:
+                </p>
+
+                <h3>Encryption at rest</h3>
+
+                <p>
+                    Habilite criptografia de secrets no etcd (EncryptionConfiguration mostrado anteriormente).
+                </p>
+
+                <h3>External secret stores</h3>
+
+                <p>
+                    Use secret managers externos com operadores:
+                </p>
+
+                <div class="code-box">
+                    <pre><span class="comment"># External Secrets Operator - sincroniza do AWS Secrets Manager</span>
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: database-credentials
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: aws-secrets-manager
+    kind: ClusterSecretStore
+  target:
+    name: db-secret
+  data:
+    - secretKey: password
+      remoteRef:
+        key: production/database
+        property: password</pre>
+                </div>
+
+                <h3>Melhores práticas de secrets</h3>
+
+                <ul>
+                    <li>Monte como volume, nao env var (evita logging acidental)</li>
+                    <li>RBAC restritivo para acesso a secrets</li>
+                    <li>Rotacao automatica com external stores</li>
+                    <li>Audit logging de acesso a secrets</li>
+                    <li>Nunca commite secrets em git (use sealed-secrets se necessario)</li>
+                </ul>
+
+                <h2 id="ferramentas">Ferramentas Essenciais de Seguranca K8s</h2>
+
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <h3><i class="fas fa-search" style="color:#60A5FA;margin-right:8px"></i> Trivy</h3>
+                        <p>Scanner de vulnerabilidades em imagens, IaC, filesystems. Open source da Aqua.</p>
+                        <span class="tag">Scanning</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-eye" style="color:#60A5FA;margin-right:8px"></i> Falco</h4>
+                        <p>Runtime security e deteccao de anomalias baseada em syscalls.</p>
+                        <span class="tag">Runtime</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-shield-alt" style="color:#60A5FA;margin-right:8px"></i> OPA/Gatekeeper</h4>
+                        <p>Policy engine para admission control. Enforce policies como codigo.</p>
+                        <span class="tag">Policy</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-network-wired" style="color:#60A5FA;margin-right:8px"></i> Cilium</h4>
+                        <p>CNI com eBPF, network policies L3-L7, observabilidade.</p>
+                        <span class="tag">Network</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-key" style="color:#60A5FA;margin-right:8px"></i> Vault</h4>
+                        <p>Secret management com integracao nativa K8s, rotacao automatica.</p>
+                        <span class="tag">Secrets</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-check-double" style="color:#60A5FA;margin-right:8px"></i> Kube-bench</h4>
+                        <p>Verifica compliance com CIS Kubernetes Benchmark.</p>
+                        <span class="tag">Compliance</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-signature" style="color:#60A5FA;margin-right:8px"></i> Sigstore/Cosign</h4>
+                        <p>Assinatura e verificacao de imagens e artefatos.</p>
+                        <span class="tag">Supply Chain</span>
+                    </div>
+                    <div class="tool-card">
+                        <h4><i class="fas fa-cube" style="color:#60A5FA;margin-right:8px"></i> Kubescape</h4>
+                        <p>Scanner de misconfiguration, NSA/MITRE frameworks.</p>
+                        <span class="tag">Scanning</span>
+                    </div>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Managed K8s (EKS, GKE, AKS) e mais seguro que self-managed?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Control plane gerenciado elimina responsabilidade de hardening de API server, etcd e kubelet master. Porem, seguranca de workloads (pods, images, RBAC, network policies) continua sua responsabilidade. Managed facilita, mas nao resolve tudo automaticamente.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Service mesh (Istio/Linkerd) e necessario para seguranca?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Service mesh adiciona mTLS automatico entre pods, authorization policies e observabilidade. E valioso para zero trust interno, mas adiciona complexidade significativa. Para muitos casos, Network Policies + RBAC adequado sao suficientes. Avalie se a complexidade adicional justifica.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Como lidar com imagens de terceiros sem controle?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Mantenha registry interno e faca proxy/cache de imagens externas. Scan todas as imagens antes de permitir no cluster. Use admission controllers para bloquear imagens nao verificadas. Para imagens criticas, considere rebuild com sua propria base image e <a href="../supply-chain-security-cadeia-suprimentos/">verificacao de supply chain</a>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="conclusao">Conclusao</h2>
+
+                <p>
+                    Seguranca em Kubernetes requer abordagem em camadas - nao existe bala de prata. Da construcao de imagens ao runtime, cada etapa oferece oportunidades de hardening e pontos de falha potenciais.
+                </p>
+
+                <p>
+                    Comece pelo basico: imagens minimas, RBAC restritivo, Network Policies com default-deny, Pod Security Standards restricted. Estas medidas eliminam a maioria dos vetores de ataque comuns. Depois, adicione camadas como runtime security (Falco), policy enforcement (OPA), e secret management externo (Vault).
+                </p>
+
+                <p>
+                    Automatize verificacoes de seguranca no <a href="../devsecops-seguranca-desenvolvimento/">pipeline CI/CD</a> - scanning de imagens, compliance checks, assinatura. Seguranca que depende de processo manual nao escala e falha silenciosamente.
+                </p>
+
+                <p>
+                    Por fim, trate seguranca K8s como processo continuo. O ecossistema evolui rapidamente, novas vulnerabilidades surgem, best practices mudam. Atualize clusters regularmente, acompanhe CVEs de componentes, e revise configuracoes periodicamente.
+                </p>
+
+                <div class="cta-box">
+                    <h3>Precisa de Ajuda com Kubernetes Security?</h3>
+                    <p>Oferecemos assessment de seguranca de clusters, implementacao de hardening e integracao de ferramentas de seguranca em pipelines.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/kubernetes-container-security/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/kubernetes-container-security/&text=Seguranca em Kubernetes e Containers" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Seguranca Kubernetes https://inteligenciabrasil.seg.br/blog/kubernetes-container-security/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
+                        <p>Consultoria especializada em DevSecOps, Cloud Security e Seguranca de Containers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao, com as melhores praticas para reducao de riscos digitais corporativos.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Artigos Relacionados</h4>
+                        <ul>
+                            <li><a href="../devsecops-seguranca-desenvolvimento/">DevSecOps</a></li>
+                            <li><a href="../supply-chain-security-cadeia-suprimentos/">Supply Chain Security</a></li>
+                            <li><a href="../seguranca-cloud-aws-azure-gcp/">Cloud Security</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegacao</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <span class="separator">|</span>
+                        <a href="../../#contato">Contato</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+
+    <!-- VLibras - Acessibilidade em Libras (load on click) -->
+    <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
+        <img src="../../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <script>
+    (function(){
+        var ph=document.getElementById('vlibras-placeholder');
+        if(!ph)return;
+        ph.addEventListener('click',function(){
+            ph.style.display='none';
+            var wrap=document.createElement('div');
+            wrap.setAttribute('vw','');
+            wrap.className='enabled';
+            wrap.innerHTML='<div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>';
+            document.body.appendChild(wrap);
+            var s=document.createElement('script');
+            s.src='https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/vlibras-plugin.js';
+            s.onload=function(){
+                new window.VLibras.Widget('https://vlibras.gov.br/app');
+                if(window.onload){var f=window.onload;window.onload=null;f()}
+            };
+            document.body.appendChild(s);
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>
