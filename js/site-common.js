@@ -189,7 +189,73 @@
         });
     }
 
-    // ========== 8. MID-ARTICLE CTA ==========
+    // ========== 8. IMAGE LIGHTBOX (article hero images) ==========
+    // Allows readers to tap dense infographic images and view them at full size
+    var heroFigures = document.querySelectorAll('.article-hero');
+    if (heroFigures.length) {
+        var lightbox = null;
+        var lightboxImg = null;
+        var lastFocus = null;
+
+        function ensureLightbox() {
+            if (lightbox) return;
+            lightbox = document.createElement('div');
+            lightbox.className = 'image-lightbox';
+            lightbox.setAttribute('role', 'dialog');
+            lightbox.setAttribute('aria-modal', 'true');
+            lightbox.setAttribute('aria-label', 'Visualizacao ampliada da imagem');
+            lightbox.innerHTML = '<button type="button" class="image-lightbox-close" aria-label="Fechar">&times;</button><img alt="">';
+            document.body.appendChild(lightbox);
+            lightboxImg = lightbox.querySelector('img');
+
+            lightbox.addEventListener('click', function (e) {
+                if (e.target === lightbox || e.target.classList.contains('image-lightbox-close')) {
+                    closeLightbox();
+                }
+            });
+        }
+
+        function openLightbox(src, alt) {
+            ensureLightbox();
+            lightboxImg.src = src;
+            lightboxImg.alt = alt || '';
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            lastFocus = document.activeElement;
+            var closeBtn = lightbox.querySelector('.image-lightbox-close');
+            if (closeBtn) closeBtn.focus();
+        }
+
+        function closeLightbox() {
+            if (!lightbox) return;
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+        }
+
+        heroFigures.forEach(function (fig) {
+            var img = fig.querySelector('img');
+            if (!img) return;
+            fig.setAttribute('role', 'button');
+            fig.setAttribute('tabindex', '0');
+            fig.setAttribute('aria-label', 'Ampliar imagem: ' + (img.alt || ''));
+            fig.addEventListener('click', function () { openLightbox(img.src, img.alt); });
+            fig.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openLightbox(img.src, img.alt);
+                }
+            });
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && lightbox && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+    }
+
+    // ========== 9. MID-ARTICLE CTA ==========
     if (document.querySelector('.article-body')) {
         var ctaDiv = document.createElement('div');
         ctaDiv.className = 'mid-article-cta';
