@@ -5,14 +5,17 @@
  */
 
 /* Base */
+/* clip (not hidden) prevents horizontal overflow without making html/body a scroll container.
+   Using `hidden` here promotes overflow-y to auto, which steals scroll from window and breaks
+   anchor scrolling and window.scrollTo (e.g. TOC links and back-to-top). */
 html {
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 body {
     background: #0a1628;
     color: #F1F5F9;
-    overflow-x: hidden;
+    overflow-x: clip;
     width: 100%;
     max-width: 100vw;
 }
@@ -161,6 +164,12 @@ body {
     color: #F1F5F9;
     font-size: 1.4rem;
     margin: 30px 0 15px;
+}
+
+/* Anchor link offset compensation: keeps TOC targets visible below fixed navbar */
+.article-body h2[id],
+.article-body h3[id] {
+    scroll-margin-top: 100px;
 }
 
 .article-body h4 {
@@ -2558,7 +2567,8 @@ blockquote cite {
 
     .article-content {
         padding: 30px 0;
-        overflow-x: hidden;
+        /* clip (not hidden) avoids creating a scroll container that breaks anchor scroll inside the article */
+        overflow-x: clip;
     }
 
     .article-body {

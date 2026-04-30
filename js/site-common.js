@@ -289,4 +289,92 @@
         }, { passive: true });
     }
 
+    // ========== 10. NEWSLETTER FORM (kebab-case ids) ==========
+    // Targets blog-article markup: #newsletter-form / #newsletter-email / #newsletter-message
+    // Posts to the same Google Apps Script endpoint used elsewhere.
+    var nlForm = document.getElementById('newsletter-form');
+    if (nlForm) {
+        var nlEmail = document.getElementById('newsletter-email');
+        var nlMsg = document.getElementById('newsletter-message');
+        var nlBtn = nlForm.querySelector('.newsletter-btn');
+
+        var publicDomains = ['gmail.com','gmail.com.br','googlemail.com','outlook.com','outlook.com.br','hotmail.com','hotmail.com.br','live.com','live.com.br','msn.com','yahoo.com','yahoo.com.br','ymail.com','rocketmail.com','icloud.com','me.com','mac.com','aol.com','aol.com.br','protonmail.com','protonmail.ch','proton.me','zoho.com','zohomail.com','mail.com','email.com','uol.com.br','bol.com.br','terra.com.br','ig.com.br','globo.com','globomail.com','r7.com','zipmail.com.br','oi.com.br','pop.com.br'];
+        var tempDomains = ['tempmail.com','temp-mail.org','guerrillamail.com','mailinator.com','10minutemail.com','throwaway.email','fakeinbox.com','trashmail.com','dispostable.com','yopmail.com','sharklasers.com','getairmail.com'];
+
+        function nlShow(text, type) {
+            if (!nlMsg) return;
+            nlMsg.textContent = text;
+            nlMsg.className = 'newsletter-message ' + type;
+            nlMsg.style.display = 'block';
+            if (type === 'success') {
+                setTimeout(function () { nlMsg.style.display = 'none'; }, 5000);
+            }
+        }
+
+        function nlValidate(email) {
+            var lower = (email || '').toLowerCase().trim();
+            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(lower)) {
+                return { valid: false, message: 'Por favor, informe um e-mail valido.' };
+            }
+            var domain = lower.split('@')[1];
+            if (publicDomains.indexOf(domain) !== -1) {
+                return { valid: false, message: 'Por favor, utilize seu e-mail corporativo. E-mails pessoais nao sao aceitos.' };
+            }
+            if (tempDomains.indexOf(domain) !== -1 || tempDomains.some(function (d) { return domain.indexOf(d) !== -1; })) {
+                return { valid: false, message: 'E-mails temporarios nao sao permitidos.' };
+            }
+            return { valid: true };
+        }
+
+        function nlFetchIp() {
+            return Promise.race([
+                fetch('/cdn-cgi/trace', { cache: 'no-store' }).then(function (r) { return r.ok ? r.text() : ''; }),
+                new Promise(function (_, rej) { setTimeout(rej, 2500); })
+            ]).then(function (text) {
+                var m = (text || '').match(/(?:^|\n)ip=([^\n]+)/);
+                return m && m[1] ? m[1].trim() : '';
+            }).catch(function () { return ''; });
+        }
+
+        nlForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!nlEmail || !nlBtn) return;
+
+            var email = nlEmail.value.trim();
+            var v = nlValidate(email);
+            if (!v.valid) { nlShow(v.message, 'error'); return; }
+
+            var originalText = nlBtn.innerHTML;
+            nlBtn.disabled = true;
+            nlBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+            var slug = location.pathname.replace(/^\/blog\//, '').replace(/\/$/, '') || 'blog';
+            var origem = 'Blog: ' + slug;
+
+            nlFetchIp().then(function (ip) {
+                return fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'email=' + encodeURIComponent(email) + '&origem=' + encodeURIComponent(origem) + '&servico=Newsletter&ip=' + encodeURIComponent(ip)
+                });
+            }).then(function (res) { return res.json(); })
+                .then(function (response) {
+                    var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
+                    if (result === 'success' || result === 'ok') {
+                        nlForm.reset();
+                        nlShow('Inscricao realizada com sucesso! Voce recebera nossos conteudos em breve.', 'success');
+                    } else {
+                        nlShow('Erro ao realizar inscricao. Tente novamente.', 'error');
+                    }
+                    nlBtn.disabled = false;
+                    nlBtn.innerHTML = originalText;
+                })
+                .catch(function () {
+                    nlShow('Erro de conexao. Verifique sua internet e tente novamente.', 'error');
+                    nlBtn.disabled = false;
+                    nlBtn.innerHTML = originalText;
+                });
+        });
+    }
+
 })();
