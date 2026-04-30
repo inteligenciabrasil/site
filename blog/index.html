@@ -3171,6 +3171,134 @@
     })();
     </script>
 
+    <!-- Newsletter Script -->
+    <script>
+    (function() {
+        var newsletterForm = document.getElementById('newsletterForm');
+        if (!newsletterForm) return;
+
+        var newsletterIpInput = document.getElementById('newsletterIp');
+
+        function withTimeout(promise, ms) {
+            return Promise.race([
+                promise,
+                new Promise(function(_, reject) { setTimeout(function() { reject(new Error('timeout')); }, ms); })
+            ]);
+        }
+
+        function fetchNewsletterIp() {
+            return withTimeout(fetch('/cdn-cgi/trace', { cache: 'no-store' }), 2500)
+                .then(function(res) { return res.ok ? res.text() : ''; })
+                .then(function(text) {
+                    var match = text.match(/(?:^|\n)ip=([^\n]+)/);
+                    return match && match[1] ? match[1].trim() : '';
+                })
+                .catch(function() { return ''; });
+        }
+
+        fetchNewsletterIp().then(function(ip) {
+            if (newsletterIpInput) newsletterIpInput.value = ip;
+        });
+
+        var publicDomains = [
+            'gmail.com', 'gmail.com.br', 'googlemail.com',
+            'outlook.com', 'outlook.com.br', 'hotmail.com', 'hotmail.com.br', 'live.com', 'live.com.br', 'msn.com',
+            'yahoo.com', 'yahoo.com.br', 'ymail.com', 'rocketmail.com',
+            'icloud.com', 'me.com', 'mac.com',
+            'aol.com', 'aol.com.br',
+            'protonmail.com', 'protonmail.ch', 'proton.me',
+            'zoho.com', 'zohomail.com',
+            'mail.com', 'email.com',
+            'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br', 'globo.com', 'globomail.com',
+            'r7.com', 'zipmail.com.br', 'oi.com.br', 'pop.com.br'
+        ];
+
+        var tempDomains = [
+            'tempmail.com', 'temp-mail.org', 'guerrillamail.com', 'mailinator.com',
+            '10minutemail.com', 'throwaway.email', 'fakeinbox.com', 'trashmail.com',
+            'dispostable.com', 'yopmail.com', 'sharklasers.com', 'getairmail.com'
+        ];
+
+        function validateNewsletterEmail(email) {
+            var emailLower = email.toLowerCase().trim();
+            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (!emailRegex.test(emailLower)) {
+                return { valid: false, message: 'Por favor, informe um e-mail valido.' };
+            }
+
+            var domain = emailLower.split('@')[1];
+
+            if (publicDomains.indexOf(domain) !== -1) {
+                return { valid: false, message: 'Por favor, utilize seu e-mail corporativo. E-mails pessoais nao sao aceitos.' };
+            }
+
+            if (tempDomains.indexOf(domain) !== -1 || tempDomains.some(function(d) { return domain.indexOf(d) !== -1; })) {
+                return { valid: false, message: 'E-mails temporarios nao sao permitidos.' };
+            }
+
+            return { valid: true };
+        }
+
+        function showNewsletterMessage(message, type) {
+            var msgDiv = document.getElementById('newsletterMessage');
+            msgDiv.textContent = message;
+            msgDiv.className = 'newsletter-message ' + type;
+            msgDiv.style.display = 'block';
+            if (type === 'success') {
+                setTimeout(function() { msgDiv.style.display = 'none'; }, 5000);
+            }
+        }
+
+        newsletterForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            var emailInput = document.getElementById('newsletterEmail');
+            var submitBtn = newsletterForm.querySelector('.newsletter-btn');
+            var originalText = submitBtn.innerHTML;
+            var email = emailInput.value.trim();
+
+            var emailValidation = validateNewsletterEmail(email);
+            if (!emailValidation.valid) {
+                showNewsletterMessage(emailValidation.message, 'error');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+            var ip = newsletterIpInput ? newsletterIpInput.value : '';
+            if (!ip) {
+                ip = await fetchNewsletterIp();
+                if (newsletterIpInput) newsletterIpInput.value = ip;
+            }
+
+            fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'email=' + encodeURIComponent(email) + '&origem=Blog Listagem&servico=Newsletter&ip=' + encodeURIComponent(ip)
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(response) {
+                var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
+                if (result === 'success' || result === 'ok') {
+                    newsletterForm.reset();
+                    showNewsletterMessage('Inscricao realizada com sucesso! Voce recebera nossos conteudos em breve.', 'success');
+                } else {
+                    showNewsletterMessage('Erro ao realizar inscricao. Tente novamente.', 'error');
+                }
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            })
+            .catch(function() {
+                showNewsletterMessage('Erro de conexao. Verifique sua internet e tente novamente.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            });
+        });
+    })();
+    </script>
+
     <!-- VLibras - Acessibilidade em Libras (load on click) -->
     <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
         <img src="../img/vlibras-icon.svg" alt="VLibras" width="40" height="40" style="border-radius:8px;box-shadow:0 4px 15px rgba(54,144,250,0.3);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
