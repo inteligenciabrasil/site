@@ -3112,7 +3112,37 @@
             });
         });
 
-        // Search
+        // Lazy-loaded full-text index (built by _build-blog-index.ps1)
+        var __idxPromise = null;
+        function loadFullTextIndex(){
+            if(__idxPromise) return __idxPromise;
+            __idxPromise = fetch('./_data/search-index.json').then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; });
+            return __idxPromise;
+        }
+        function cardSlug(c){
+            var a = c.querySelector('a[href]');
+            if(!a) return '';
+            return a.getAttribute('href').replace(/^\.\//,'').replace(/\/$/,'');
+        }
+
+        function renderSearchResults(term, bodyHits){
+            if(filteredCards.length === 0){
+                allCards.forEach(function(c){ c.classList.add('hidden'); });
+                blogGrid.style.display = 'none';
+                noResults.style.display = 'block';
+                resultsInfo.style.display = 'none';
+                pagination.style.display = 'none';
+            } else {
+                blogGrid.style.display = 'grid';
+                noResults.style.display = 'none';
+                resultsInfo.style.display = 'block';
+                var extra = bodyHits ? ' <small style="opacity:.7">(+' + bodyHits + ' por conteúdo)</small>' : '';
+                resultsInfo.innerHTML = 'Exibindo <span class="highlight">' + filteredCards.length + '</span> resultado(s) para "<span class="highlight">' + term + '</span>"' + extra + ' <button class="clear-search" onclick="clearSearch()" style="margin-left:15px">Limpar</button>';
+                showPage(1);
+            }
+        }
+
+        // Search (cards-first, enriched with full-text body matches when term >= 3 chars)
         function searchBlog(){
             var term = document.getElementById('blogSearch').value.toLowerCase().trim();
             if(term === ''){
@@ -3128,18 +3158,24 @@
                 return title.indexOf(term) !== -1 || excerpt.indexOf(term) !== -1 || category.indexOf(term) !== -1;
             });
 
-            if(filteredCards.length === 0){
-                allCards.forEach(function(c){ c.classList.add('hidden'); });
-                blogGrid.style.display = 'none';
-                noResults.style.display = 'block';
-                resultsInfo.style.display = 'none';
-                pagination.style.display = 'none';
-            } else {
-                blogGrid.style.display = 'grid';
-                noResults.style.display = 'none';
-                resultsInfo.style.display = 'block';
-                resultsInfo.innerHTML = 'Exibindo <span class="highlight">' + filteredCards.length + '</span> resultado(s) para "<span class="highlight">' + term + '</span>" <button class="clear-search" onclick="clearSearch()" style="margin-left:15px">Limpar</button>';
-                showPage(1);
+            renderSearchResults(term);
+
+            if(term.length >= 3){
+                loadFullTextIndex().then(function(idx){
+                    if(!idx || document.getElementById('blogSearch').value.toLowerCase().trim() !== term) return;
+                    var existing = {};
+                    filteredCards.forEach(function(c){ existing[cardSlug(c)] = 1; });
+                    var bodySlugs = {};
+                    idx.forEach(function(e){
+                        if(!existing[e.slug] && (e.body || '').toLowerCase().indexOf(term) !== -1) bodySlugs[e.slug] = 1;
+                    });
+                    var keys = Object.keys(bodySlugs);
+                    if(keys.length === 0) return;
+                    var bodyMatches = allCards.filter(function(c){ return bodySlugs[cardSlug(c)]; });
+                    if(bodyMatches.length === 0) return;
+                    filteredCards = filteredCards.concat(bodyMatches);
+                    renderSearchResults(term, bodyMatches.length);
+                });
             }
         }
         window.searchBlog = searchBlog;
