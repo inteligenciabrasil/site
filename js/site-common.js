@@ -255,11 +255,44 @@
         });
     }
 
-    // ========== 9. MID-ARTICLE CTA ==========
+    // ========== 9. MID-ARTICLE CTA (CONTEXTUAL) ==========
+    // Maps article category/slug to the most relevant LP.
+    // Falls back to generic /index.html#contato when no rule matches.
     if (document.querySelector('.article-body')) {
+        var ctaMap = [
+            { match: /pentest|red team|offensive|ofensiv|bug bounty|exploit/i, url: '/lp/pentest/', title: 'Quer testar suas defesas?', desc: 'Pentest profissional com relat\u00f3rio executivo e t\u00e9cnico.', label: 'Solicitar Pentest' },
+            { match: /lgpd|privacidade|dados pessoais|data protection|dpo/i, url: '/lp/lgpd/', title: 'Sua empresa est\u00e1 em conformidade com a LGPD?', desc: 'Adequa\u00e7\u00e3o LGPD com diagn\u00f3stico, plano de a\u00e7\u00e3o e DPO as a Service.', label: 'Adequar \u00e0 LGPD' },
+            { match: /cloud|aws|azure|gcp|cspm|kubernetes|container/i, url: '/lp/cloud-security/', title: 'Sua nuvem est\u00e1 segura?', desc: 'Avalia\u00e7\u00e3o de postura cloud (CSPM/KSPM) em AWS, Azure e GCP.', label: 'Avaliar Cloud' },
+            { match: /devsecops|appsec|api|sast|dast|sbom|graphql/i, url: '/lp/application-security/', title: 'Seu c\u00f3digo \u00e9 seguro desde o design?', desc: 'AppSec/DevSecOps: SAST, DAST, SBOM e seguran\u00e7a no SDLC.', label: 'Proteger Aplica\u00e7\u00f5es' },
+            { match: /grc|governan|compliance|auditoria|risco|iso 27001|nis2/i, url: '/lp/grc/', title: 'Como est\u00e1 sua maturidade em GRC?', desc: 'Programa de Governan\u00e7a, Riscos e Compliance sob medida.', label: 'Diagnosticar GRC' },
+            { match: /soc|siem|soar|xdr|edr|ndr|detection|threat hunt/i, url: '/lp/csoc/', title: 'Precisa de monitoramento 24x7?', desc: 'Cyber SOC com detec\u00e7\u00e3o, resposta e threat hunting.', label: 'Conhecer o cSOC' },
+            { match: /threat intel|cti|inteligencia|intelig\u00eancia|osint/i, url: '/lp/cti-monitoramento/', title: 'Antecipe-se \u00e0s amea\u00e7as.', desc: 'Cyber Threat Intelligence operacional para sua superf\u00edcie de risco.', label: 'Conhecer CTI' },
+            { match: /ransomware|incident|resposta|forense|breach/i, url: '/lp/resposta-incidentes/', title: 'Sofreu um incidente?', desc: 'Resposta a incidentes 24x7 com conten\u00e7\u00e3o e recupera\u00e7\u00e3o.', label: 'Acionar Resposta' },
+            { match: /vulnerab|cvss|cve|patch/i, url: '/lp/analise-vulnerabilidades/', title: 'Conhece suas vulnerabilidades cr\u00edticas?', desc: 'An\u00e1lise de vulnerabilidades com prioriza\u00e7\u00e3o por risco real.', label: 'Solicitar An\u00e1lise' },
+            { match: /ot|ics|scada|industrial|infraestrutura cr/i, url: '/lp/seguranca-ot-ics/', title: 'Protege seu ambiente OT/ICS?', desc: 'Seguran\u00e7a para SCADA e infraestruturas cr\u00edticas.', label: 'Proteger OT/ICS' },
+            { match: /email|spf|dkim|dmarc|phishing|spoofing/i, url: '/lp/monitorar-emails/', title: 'Seu dom\u00ednio est\u00e1 protegido?', desc: 'Monitoramento de e-mail, marca e abuse de dom\u00ednio.', label: 'Monitorar E-mails' },
+            { match: /awareness|conscienti|treinamento|engenharia social/i, url: '/lp/conscientizacao-treinamento/', title: 'Pessoas s\u00e3o seu primeiro per\u00edmetro.', desc: 'Programa de conscientiza\u00e7\u00e3o com simula\u00e7\u00e3o de phishing.', label: 'Conhecer Programa' },
+            { match: /terceiros|tprm|supply chain|due diligence/i, url: '/lp/gestao-riscos-terceiros/', title: 'Conhece o risco dos seus fornecedores?', desc: 'Gest\u00e3o de risco de terceiros (TPRM) ponta a ponta.', label: 'Avaliar Terceiros' },
+            { match: /forense|investiga|computa.{0,2}forense/i, url: '/lp/computacao-forense/', title: 'Precisa de evid\u00eancias t\u00e9cnicas?', desc: 'Computa\u00e7\u00e3o forense com cadeia de cust\u00f3dia e laudo.', label: 'Solicitar Per\u00edcia' },
+            { match: /fraude|cartao|cart\u00e3o|golpe/i, url: '/lp/prevencao-fraudes/', title: 'Reduza perdas com fraudes.', desc: 'Preven\u00e7\u00e3o e resposta a fraudes digitais.', label: 'Conhecer Solu\u00e7\u00e3o' }
+        ];
+
+        function pickCta() {
+            var section = (document.querySelector('meta[property="article:section"]') || {}).content || '';
+            var keywords = (document.querySelector('meta[name="keywords"]') || {}).content || '';
+            var slug = location.pathname;
+            var hay = (section + ' ' + keywords + ' ' + slug).toLowerCase();
+            for (var i = 0; i < ctaMap.length; i++) {
+                if (ctaMap[i].match.test(hay)) return ctaMap[i];
+            }
+            return { url: '/index.html#contato', title: 'Precisa de ajuda especializada?', desc: 'Fale com nossos consultores sobre seu projeto de seguran\u00e7a.', label: 'Falar com Especialista' };
+        }
+        var cta = pickCta();
+
         var ctaDiv = document.createElement('div');
         ctaDiv.className = 'mid-article-cta';
-        ctaDiv.innerHTML = '<div class="mid-article-cta-text"><strong>Precisa de ajuda especializada?</strong>Fale com nossos consultores sobre seu projeto de seguran\u00e7a.</div><a href="/index.html#contato" class="cta-btn">Falar com Especialista</a><button class="mid-article-cta-close" aria-label="Fechar">\u00d7</button>';
+        var utm = (cta.url.indexOf('?') === -1 ? '?' : '&') + 'utm_source=site&utm_medium=mid-article&utm_campaign=blog-cta';
+        ctaDiv.innerHTML = '<div class="mid-article-cta-text"><strong>' + cta.title + '</strong>' + cta.desc + '</div><a href="' + cta.url + utm + '" class="cta-btn">' + cta.label + '</a><button class="mid-article-cta-close" aria-label="Fechar">\u00d7</button>';
         document.body.appendChild(ctaDiv);
 
         var ctaDismissed = false;
@@ -288,6 +321,60 @@
             });
         }, { passive: true });
     }
+
+    // ========== 9b. RELATED TOOLS (auto-injected on /ferramentas/<tool>/) ==========
+    // Detects tool pages and appends a "Ferramentas Relacionadas" block before the footer.
+    (function () {
+        var m = location.pathname.match(/^\/ferramentas\/([^\/]+)\/?$/);
+        if (!m) return;
+        var current = m[1];
+        if (current === 'index.html' || !current) return;
+
+        var tools = {
+            'calculadora-cvss':            { name: 'Calculadora CVSS 3.1 e 4.0', desc: 'Avalie severidade de vulnerabilidades.', icon: 'fa-calculator', tags: ['vuln', 'cvss', 'risco'] },
+            'calculadora-risco-owasp':     { name: 'Calculadora de Risco OWASP', desc: 'Likelihood × Impact em matriz 3x3.', icon: 'fa-chart-line', tags: ['risco', 'owasp', 'pentest'] },
+            'gerador-de-senhas':           { name: 'Gerador de Senhas', desc: 'Senhas e passphrases seguras.', icon: 'fa-key', tags: ['senha', 'password'] },
+            'validador-politica-senhas':   { name: 'Validador de Política de Senhas', desc: 'NIST, ISO e PCI com entropia.', icon: 'fa-shield-alt', tags: ['senha', 'password', 'compliance'] },
+            'validador-spf-dkim-dmarc':    { name: 'Validador SPF, DKIM e DMARC', desc: 'Análise de autenticação de e-mail.', icon: 'fa-envelope-open-text', tags: ['email', 'dns', 'phishing'] },
+            'codificador-base64-url-hex':  { name: 'Codificador Base64, URL, Hex', desc: 'Encode/decode rápido para pentest.', icon: 'fa-code', tags: ['encoding', 'pentest', 'jwt'] },
+            'calculadora-hash':            { name: 'Calculadora de Hash', desc: 'MD5, SHA-1, SHA-256, SHA-512.', icon: 'fa-fingerprint', tags: ['hash', 'integridade', 'ioc'] },
+            'decoder-jwt':                 { name: 'Decoder JWT', desc: 'Decode e análise de segurança.', icon: 'fa-key', tags: ['jwt', 'pentest', 'encoding'] }
+        };
+
+        // Curated relations by overlap of tags + manual tweaks
+        var relations = {
+            'calculadora-cvss':            ['calculadora-risco-owasp', 'calculadora-hash', 'decoder-jwt'],
+            'calculadora-risco-owasp':     ['calculadora-cvss', 'validador-politica-senhas', 'validador-spf-dkim-dmarc'],
+            'gerador-de-senhas':           ['validador-politica-senhas', 'calculadora-hash', 'decoder-jwt'],
+            'validador-politica-senhas':   ['gerador-de-senhas', 'calculadora-risco-owasp', 'calculadora-hash'],
+            'validador-spf-dkim-dmarc':    ['decoder-jwt', 'calculadora-risco-owasp', 'codificador-base64-url-hex'],
+            'codificador-base64-url-hex':  ['decoder-jwt', 'calculadora-hash', 'gerador-de-senhas'],
+            'calculadora-hash':            ['codificador-base64-url-hex', 'gerador-de-senhas', 'decoder-jwt'],
+            'decoder-jwt':                 ['codificador-base64-url-hex', 'calculadora-hash', 'validador-spf-dkim-dmarc']
+        };
+
+        var related = relations[current];
+        if (!related || !related.length) return;
+
+        var section = document.createElement('section');
+        section.className = 'related-tools';
+        section.setAttribute('aria-label', 'Ferramentas relacionadas');
+        var html = '<div class="container"><h2 class="related-tools-title">Ferramentas Relacionadas</h2><div class="related-tools-grid">';
+        related.forEach(function (slug) {
+            var t = tools[slug];
+            if (!t) return;
+            html += '<a class="related-tool-card" href="../' + slug + '/"><span class="related-tool-icon"><i class="fas ' + t.icon + '"></i></span><span class="related-tool-name">' + t.name + '</span><span class="related-tool-desc">' + t.desc + '</span></a>';
+        });
+        html += '</div><a href="../" class="related-tools-all">Ver todas as ferramentas <i class="fas fa-arrow-right"></i></a></div>';
+        section.innerHTML = html;
+
+        var footer = document.querySelector('footer.footer-section');
+        if (footer && footer.parentNode) {
+            footer.parentNode.insertBefore(section, footer);
+        } else {
+            document.body.appendChild(section);
+        }
+    })();
 
     // ========== 10. NEWSLETTER FORM (kebab-case ids) ==========
     // Targets blog-article markup: #newsletter-form / #newsletter-email / #newsletter-message
