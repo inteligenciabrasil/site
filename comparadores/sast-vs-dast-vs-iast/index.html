@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="SAST vs DAST vs IAST: comparativo completo das três categorias de teste de segurança de aplicações. 18 critérios para escolher quando usar cada uma.">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="sast vs dast vs iast, comparativo appsec, teste seguranca aplicacoes, sast dast iast, application security testing">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/comparadores/sast-vs-dast-vs-iast/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Inteligência Brasil — RSS" href="../../feed.xml">
+
+    <meta property="og:title" content="SAST vs DAST vs IAST — Comparativo Completo | Inteligência Brasil">
+    <meta property="og:description" content="18 critérios lado-a-lado para escolher entre teste estático, dinâmico e interativo de segurança.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/comparadores/sast-vs-dast-vs-iast/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SAST vs DAST vs IAST — Comparativo">
+    <meta name="twitter:description" content="Comparativo lado-a-lado para escolher o stack de AppSec testing.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>SAST vs DAST vs IAST — Comparativo Completo | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"SAST vs DAST vs IAST — Comparativo Completo","description":"Matriz comparativa com 18 critérios para decidir entre SAST, DAST e IAST.","author":{"@type":"Organization","name":"Inteligência Brasil"},"publisher":{"@type":"Organization","name":"Inteligência Brasil"},"datePublished":"2026-05-23","inLanguage":"pt-BR","url":"https://inteligenciabrasil.seg.br/comparadores/sast-vs-dast-vs-iast/"}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Comparadores","item":"https://inteligenciabrasil.seg.br/comparadores/"},{"@type":"ListItem","position":3,"name":"SAST vs DAST vs IAST","item":"https://inteligenciabrasil.seg.br/comparadores/sast-vs-dast-vs-iast/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"SAST, DAST e IAST são alternativas ou complementares?","acceptedAnswer":{"@type":"Answer","text":"São complementares. SAST analisa código-fonte e cobre toda a base; DAST testa a aplicação em execução simulando ataques externos; IAST instrumenta a aplicação e combina visibilidade interna com fluxos reais. Em DevSecOps maduro, os três coexistem."}},
+        {"@type":"Question","name":"Por onde começar em uma adoção do zero?","acceptedAnswer":{"@type":"Answer","text":"Comece com SAST nos PRs (shift-left clássico) — barato, integrado ao IDE e ao pipeline. Em seguida, adicione DAST em ambiente de stage para validar a aplicação em runtime. IAST entra quando há equipe e maturidade para gerir agentes em ambientes pré-produção."}},
+        {"@type":"Question","name":"IAST substitui SAST e DAST?","acceptedAnswer":{"@type":"Answer","text":"Não substitui SAST porque IAST só vê o código exercitado pelos testes — a cobertura é menor. Pode reduzir a necessidade de DAST em algumas equipes, mas ainda perde validação black-box externa. O ideal é combinação."}},
+        {"@type":"Question","name":"Como medir ROI dessas ferramentas?","acceptedAnswer":{"@type":"Answer","text":"Por taxa de vulnerabilidades encontradas antes de produção, MTTR de fix em dev, redução de findings em pentest e bug bounty, e queda no custo de remediação por vulnerabilidade (vulnerability cost curve)."}}
+    ]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <style>
+        .comparator-wrap{max-width:1200px;margin:0 auto;padding:0 1rem}
+        .verdict-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin:2rem 0}
+        .verdict-card{padding:1.25rem 1.25rem;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.18);border-radius:.6rem}
+        .verdict-card h3{font-family:Montserrat,sans-serif;font-size:1.15rem;color:#60A5FA;margin:0 0 .5rem}
+        .verdict-card p{color:#CBD5E1;margin:0;font-size:.95rem;line-height:1.55}
+        .table-controls{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin:1.5rem 0 .75rem}
+        .table-controls input[type=text]{flex:1;min-width:220px;padding:.55rem .9rem;background:rgba(96,165,250,.05);border:1px solid rgba(96,165,250,.22);border-radius:.4rem;color:#E2E8F0;font:inherit;outline:none}
+        .table-controls input[type=text]:focus{border-color:#60A5FA}
+        .table-controls label{color:#CBD5E1;display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;cursor:pointer;user-select:none}
+        .comparison-table{width:100%;border-collapse:collapse;background:rgba(13,30,56,.55);border:1px solid rgba(96,165,250,.18);border-radius:.5rem;overflow:hidden;font-size:.92rem}
+        .comparison-table thead th{background:rgba(96,165,250,.12);color:#E2E8F0;text-align:left;padding:.85rem 1rem;font-family:Montserrat,sans-serif;font-weight:600;border-bottom:1px solid rgba(96,165,250,.25);position:sticky;top:80px;z-index:5}
+        .comparison-table thead th:first-child{color:#60A5FA}
+        .comparison-table tbody td{padding:.7rem 1rem;border-bottom:1px solid rgba(148,163,184,.08);color:#CBD5E1;vertical-align:top;line-height:1.5}
+        .comparison-table tbody tr:last-child td{border-bottom:0}
+        .comparison-table tbody tr:hover{background:rgba(96,165,250,.04)}
+        .comparison-table .feature{color:#E2E8F0;font-weight:600;background:rgba(13,30,56,.35)}
+        .comparison-table .yes{color:#10B981;font-weight:600}
+        .comparison-table .no{color:#EF4444;font-weight:600}
+        .comparison-table .partial{color:#F59E0B;font-weight:600}
+        .comparison-table tr.hidden{display:none}
+        .decision-tree{margin:2.5rem 0 1rem;padding:1.5rem 1.75rem;background:rgba(96,165,250,.06);border-left:3px solid #60A5FA;border-radius:.4rem}
+        .decision-tree h3{font-family:Montserrat,sans-serif;color:#60A5FA;margin:0 0 1rem;font-size:1.25rem}
+        .decision-tree ul{margin:0;padding:0 0 0 1.25rem;color:#CBD5E1;line-height:1.7}
+        .decision-tree ul li{margin-bottom:.35rem}
+        .decision-tree strong{color:#E2E8F0}
+        .faq-block{margin:2.5rem 0}
+        .faq-block h2{font-family:Montserrat,sans-serif;color:#E2E8F0;margin-bottom:1rem}
+        .faq-item{margin-bottom:1rem;padding:1rem 1.25rem;background:rgba(96,165,250,.04);border:1px solid rgba(96,165,250,.15);border-radius:.4rem}
+        .faq-item h3{font-family:Montserrat,sans-serif;color:#60A5FA;font-size:1rem;margin:0 0 .4rem}
+        .faq-item p{margin:0;color:#CBD5E1;line-height:1.6;font-size:.95rem}
+        .cta-block{margin:3rem auto 0;padding:2rem;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.2);border-radius:.75rem;text-align:center}
+        .cta-block h3{color:#E2E8F0;margin-bottom:.5rem}
+        .cta-block p{color:#94A3B8;margin-bottom:1.25rem}
+        .cta-block a{display:inline-block;padding:.75rem 1.5rem;background:#60A5FA;color:#0d1e38;border-radius:.375rem;text-decoration:none;font-weight:600}
+        @media (max-width:768px){
+            .comparison-table{font-size:.82rem}
+            .comparison-table thead th,.comparison-table tbody td{padding:.55rem .55rem}
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../">
+            <img src="../../img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196" height="113">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">COMPARADORES</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="blog-header">
+        <div class="container">
+            <span class="section-tag"><i class="fas fa-circle"></i> COMPARADOR</span>
+            <h1>SAST vs DAST vs IAST</h1>
+            <p>Três abordagens de teste de segurança de aplicações — quando usar cada uma e como combinar.</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Comparadores</a></li>
+                <li class="breadcrumb-item active" aria-current="page">SAST vs DAST vs IAST</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <section class="blog-content">
+        <div class="comparator-wrap">
+
+            <h2 style="color:#E2E8F0;font-family:Montserrat,sans-serif;margin-top:2rem">Resumo rápido</h2>
+            <p style="color:#CBD5E1;line-height:1.7">
+                Três categorias complementares de teste de segurança de aplicações.
+                <strong>SAST</strong> lê o código-fonte (estático), age cedo no SDLC e tem alta cobertura, mas gera muito falso positivo.
+                <strong>DAST</strong> ataca a aplicação em execução (caixa-preta) — falsos positivos baixos, mas cobertura limitada aos fluxos exercitados.
+                <strong>IAST</strong> instrumenta a aplicação (agente) e combina o melhor dos dois: visibilidade interna durante execução real.
+            </p>
+
+            <div class="verdict-grid">
+                <div class="verdict-card">
+                    <h3>SAST</h3>
+                    <p>Análise estática do código-fonte. Roda em pre-commit/PR, cobre toda a base e identifica padrões inseguros e taint flows.</p>
+                </div>
+                <div class="verdict-card">
+                    <h3>DAST</h3>
+                    <p>Análise dinâmica em runtime. Simula ataques HTTP, encontra problemas reais como SQLi e XSS sem precisar de código-fonte.</p>
+                </div>
+                <div class="verdict-card">
+                    <h3>IAST</h3>
+                    <p>Análise interativa instrumentada. Agente dentro da aplicação correlaciona fluxos e dados em tempo real durante testes.</p>
+                </div>
+            </div>
+
+            <div class="table-controls">
+                <input type="text" id="featureSearch" placeholder="Filtrar critérios (ex.: falso positivo, custo, cobertura)..." autocomplete="off">
+                <label><input type="checkbox" id="diffOnly"> Mostrar só onde há diferença</label>
+            </div>
+
+            <div style="overflow-x:auto;border-radius:.5rem">
+                <table class="comparison-table" id="comparisonTable">
+                    <thead>
+                        <tr>
+                            <th style="min-width:200px">Critério</th>
+                            <th>SAST</th>
+                            <th>DAST</th>
+                            <th>IAST</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="feature">Tipo de análise</td><td>Estática (código-fonte)</td><td>Dinâmica (caixa-preta)</td><td>Interativa (instrumentada)</td></tr>
+                        <tr><td class="feature">Quando atua no SDLC</td><td class="yes">Pre-commit / PR</td><td>Stage / pre-prod</td><td>Stage / pre-prod</td></tr>
+                        <tr><td class="feature">Requer aplicação rodando</td><td class="no">Não</td><td class="yes">Sim</td><td class="yes">Sim</td></tr>
+                        <tr><td class="feature">Acesso ao código-fonte</td><td class="yes">Sim</td><td class="no">Não</td><td>Sim (via agente)</td></tr>
+                        <tr><td class="feature">Cobertura da base</td><td class="yes">Toda</td><td class="no">Apenas paths exercitados</td><td class="no">Apenas paths exercitados</td></tr>
+                        <tr><td class="feature">Vulnerabilidades típicas</td><td>Code patterns, taint, secrets, IaC</td><td>SQLi, XSS, IDOR, config errors</td><td>Híbrido — code + runtime</td></tr>
+                        <tr><td class="feature">Falsos positivos</td><td class="no">Altos (sem contexto)</td><td class="yes">Baixos (exploit real)</td><td class="yes">Baixos</td></tr>
+                        <tr><td class="feature">Falsos negativos</td><td class="yes">Baixos (escaneia tudo)</td><td class="no">Médios-altos</td><td>Médios</td></tr>
+                        <tr><td class="feature">Detecta lógica de negócio</td><td class="no">Limitado</td><td class="no">Limitado</td><td>Médio</td></tr>
+                        <tr><td class="feature">Tempo de scan</td><td>Minutos a horas</td><td>Horas</td><td class="yes">Tempo real (durante testes)</td></tr>
+                        <tr><td class="feature">Awareness de linguagem/framework</td><td class="yes">Alto</td><td class="no">Baixo</td><td class="yes">Alto</td></tr>
+                        <tr><td class="feature">Output esperado</td><td>Linha + CWE + sugestão de fix</td><td>URL + payload + reproduce steps</td><td>Linha + payload + contexto</td></tr>
+                        <tr><td class="feature">Integração com IDE</td><td class="yes">Excelente</td><td class="no">Não</td><td>Limitada</td></tr>
+                        <tr><td class="feature">Integração com CI/CD</td><td class="yes">Nativa</td><td>Sim (job de stage)</td><td>Sim (agente em stage)</td></tr>
+                        <tr><td class="feature">Suporte a APIs/Microservices</td><td>Sim</td><td>Sim (com config de fluxos)</td><td class="yes">Sim (detecta dependências)</td></tr>
+                        <tr><td class="feature">Custo de implantação</td><td>Médio</td><td class="no">Alto (ambiente + manutenção)</td><td>Médio-alto (agente)</td></tr>
+                        <tr><td class="feature">Lock-in</td><td>Médio</td><td>Médio</td><td class="no">Médio-alto</td></tr>
+                        <tr><td class="feature">Onde brilha</td><td>Shift-left, secrets, hygiene</td><td>Validação final, OWASP runtime</td><td>DevSecOps maduro com QA forte</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="decision-tree">
+                <h3><i class="fas fa-route"></i> Como decidir</h3>
+                <ul>
+                    <li><strong>Time pequeno, começando AppSec:</strong> SAST no PR + SCA são o ponto de partida — baixo custo, alto retorno.</li>
+                    <li><strong>Aplicações web/APIs em produção:</strong> adicione DAST em stage para pegar o que SAST não vê (config, runtime, auth).</li>
+                    <li><strong>QA com testes funcionais robustos:</strong> IAST aproveita a cobertura de QA para reduzir falsos positivos.</li>
+                    <li><strong>Setor regulado (PCI, banking):</strong> SAST + DAST são quase obrigatórios; IAST é diferencial.</li>
+                    <li><strong>Microservices distribuídos:</strong> IAST tem vantagem por correlacionar fluxos entre serviços.</li>
+                </ul>
+            </div>
+
+            <h2 style="color:#E2E8F0;font-family:Montserrat,sans-serif;margin-top:2.5rem">Aprofunde nos conceitos</h2>
+            <ul style="color:#CBD5E1;line-height:1.8">
+                <li><a href="../../blog/devsecops-seguranca-desenvolvimento/" style="color:#60A5FA">DevSecOps — segurança no desenvolvimento</a></li>
+                <li><a href="../../blog/seguranca-apis-owasp-top-10/" style="color:#60A5FA">Segurança de APIs — OWASP API Top 10</a></li>
+                <li><a href="../../blog/sbom-software-bill-of-materials/" style="color:#60A5FA">SBOM e Software Composition Analysis</a></li>
+                <li><a href="../../blog/supply-chain-security-cadeia-suprimentos/" style="color:#60A5FA">Supply Chain Security</a></li>
+            </ul>
+
+            <div class="faq-block">
+                <h2>Perguntas frequentes</h2>
+                <div class="faq-item"><h3>SAST, DAST e IAST são alternativas ou complementares?</h3><p>São complementares. SAST analisa código-fonte e cobre toda a base; DAST testa a aplicação em execução simulando ataques externos; IAST instrumenta a aplicação e combina visibilidade interna com fluxos reais. Em DevSecOps maduro, os três coexistem.</p></div>
+                <div class="faq-item"><h3>Por onde começar em uma adoção do zero?</h3><p>Comece com SAST nos PRs (shift-left clássico) — barato, integrado ao IDE e ao pipeline. Em seguida, adicione DAST em ambiente de stage para validar a aplicação em runtime. IAST entra quando há equipe e maturidade para gerir agentes em ambientes pré-produção.</p></div>
+                <div class="faq-item"><h3>IAST substitui SAST e DAST?</h3><p>Não substitui SAST porque IAST só vê o código exercitado pelos testes — a cobertura é menor. Pode reduzir a necessidade de DAST em algumas equipes, mas ainda perde validação black-box externa. O ideal é combinação.</p></div>
+                <div class="faq-item"><h3>Como medir ROI dessas ferramentas?</h3><p>Por taxa de vulnerabilidades encontradas antes de produção, MTTR de fix em dev, redução de findings em pentest e bug bounty, e queda no custo de remediação por vulnerabilidade (vulnerability cost curve).</p></div>
+            </div>
+
+            <div class="cta-block">
+                <h3>Avaliação de programa AppSec</h3>
+                <p>Mapeamos seu SDLC atual, gaps de teste e maturidade — e desenhamos o stack SAST/DAST/IAST proporcional ao risco.</p>
+                <a href="../../#contato">Falar com Especialista</a>
+            </div>
+
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="../../feed.xml" target="_blank" rel="noopener" aria-label="RSS Feed"><i class="fas fa-rss"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Conteúdo</h4>
+                        <ul>
+                            <li><a href="../../blog/">Blog</a></li>
+                            <li><a href="../../ferramentas/">Ferramentas</a></li>
+                            <li><a href="../../recursos/">Recursos</a></li>
+                            <li><a href="../../glossario/">Glossário</a></li>
+                            <li><a href="../">Comparadores</a></li>
+                            <li><a href="../../newsletter/">Newsletter</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../sobre/">Sobre</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                        <p><i class="fas fa-phone"></i> +55 11 99361-9947</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados. <a href="../../politica-de-privacidade.html">Política de Privacidade</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/site-common.js"></script>
+    <script>
+    (function(){
+        var table = document.getElementById('comparisonTable');
+        var search = document.getElementById('featureSearch');
+        var diffOnly = document.getElementById('diffOnly');
+        var rows = Array.prototype.slice.call(table.tBodies[0].rows);
+
+        function normalize(s){ return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+        function apply(){
+            var q = normalize(search.value.trim());
+            var onlyDiff = diffOnly.checked;
+            rows.forEach(function(r){
+                var feature = normalize(r.cells[0].textContent);
+                var cells = [r.cells[1].textContent.trim(), r.cells[2].textContent.trim(), r.cells[3].textContent.trim()];
+                var matchQ = !q || feature.indexOf(q) !== -1;
+                var allEqual = cells[0] === cells[1] && cells[1] === cells[2];
+                var matchDiff = !onlyDiff || !allEqual;
+                r.classList.toggle('hidden', !(matchQ && matchDiff));
+            });
+        }
+        search.addEventListener('input', apply);
+        diffOnly.addEventListener('change', apply);
+    })();
+    </script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

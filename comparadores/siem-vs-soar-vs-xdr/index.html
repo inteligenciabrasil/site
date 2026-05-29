@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="SIEM vs SOAR vs XDR: comparativo do stack do SOC moderno com 20 critérios. Função, telemetria, custo, lock-in e quando usar cada um.">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="siem vs soar vs xdr, stack soc moderno, comparativo siem soar xdr, security operations stack, automação resposta">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/comparadores/siem-vs-soar-vs-xdr/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Intelig&#234;ncia Brasil &#8212; RSS" href="../../feed.xml">
+
+    <meta property="og:title" content="SIEM vs SOAR vs XDR — Comparativo do Stack do SOC | Inteligência Brasil">
+    <meta property="og:description" content="20 critérios para decidir o stack do SOC moderno.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/comparadores/siem-vs-soar-vs-xdr/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SIEM vs SOAR vs XDR — Comparativo">
+    <meta name="twitter:description" content="Stack do SOC moderno comparado lado-a-lado.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>SIEM vs SOAR vs XDR — Comparativo do Stack do SOC | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"SIEM vs SOAR vs XDR — Comparativo do Stack do SOC","description":"Matriz comparativa com 20 critérios para decidir entre SIEM, SOAR e XDR.","author":{"@type":"Organization","name":"Inteligência Brasil"},"publisher":{"@type":"Organization","name":"Inteligência Brasil"},"datePublished":"2026-05-23","inLanguage":"pt-BR","url":"https://inteligenciabrasil.seg.br/comparadores/siem-vs-soar-vs-xdr/"}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Comparadores","item":"https://inteligenciabrasil.seg.br/comparadores/"},{"@type":"ListItem","position":3,"name":"SIEM vs SOAR vs XDR","item":"https://inteligenciabrasil.seg.br/comparadores/siem-vs-soar-vs-xdr/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"SIEM, SOAR e XDR são tecnologias concorrentes?","acceptedAnswer":{"@type":"Answer","text":"Não. SIEM agrega e correlaciona logs com retenção longa. SOAR orquestra playbooks de resposta. XDR detecta entre superfícies. Eles convivem — o XDR moderno pode reduzir, mas não substituir, o SIEM em cenários regulados."}},
+        {"@type":"Question","name":"Qual a ordem de adoção recomendada?","acceptedAnswer":{"@type":"Answer","text":"Para um SOC do zero: comece com EDR + SIEM básico, evolua para XDR cobrindo as superfícies de maior risco, e adicione SOAR quando o volume de alertas justificar automação. Pular o SIEM sai caro em compliance e investigação."}},
+        {"@type":"Question","name":"Como medir ROI de SOAR?","acceptedAnswer":{"@type":"Answer","text":"Por redução de tempo médio de resposta (MTTR), por automação efetiva de casos repetitivos (% de alertas resolvidos por playbook sem intervenção) e por liberação de tempo do L1 para hunting e melhoria contínua."}},
+        {"@type":"Question","name":"XDR substitui SIEM em ambiente regulado?","acceptedAnswer":{"@type":"Answer","text":"Geralmente não. Reguladores e auditorias frequentemente exigem retenção de logs por anos, com integridade e independência da plataforma de detecção. Mantenha o SIEM como camada de conformidade, mesmo que reduzido."}}
+    ]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <style>
+        .comparator-wrap{max-width:1200px;margin:0 auto;padding:0 1rem}
+        .verdict-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin:2rem 0}
+        .verdict-card{padding:1.25rem 1.25rem;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.18);border-radius:.6rem}
+        .verdict-card h3{font-family:Montserrat,sans-serif;font-size:1.15rem;color:#60A5FA;margin:0 0 .5rem}
+        .verdict-card p{color:#CBD5E1;margin:0;font-size:.95rem;line-height:1.55}
+        .table-controls{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin:1.5rem 0 .75rem}
+        .table-controls input[type=text]{flex:1;min-width:220px;padding:.55rem .9rem;background:rgba(96,165,250,.05);border:1px solid rgba(96,165,250,.22);border-radius:.4rem;color:#E2E8F0;font:inherit;outline:none}
+        .table-controls input[type=text]:focus{border-color:#60A5FA}
+        .table-controls label{color:#CBD5E1;display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;cursor:pointer;user-select:none}
+        .comparison-table{width:100%;border-collapse:collapse;background:rgba(13,30,56,.55);border:1px solid rgba(96,165,250,.18);border-radius:.5rem;overflow:hidden;font-size:.92rem}
+        .comparison-table thead th{background:rgba(96,165,250,.12);color:#E2E8F0;text-align:left;padding:.85rem 1rem;font-family:Montserrat,sans-serif;font-weight:600;border-bottom:1px solid rgba(96,165,250,.25);position:sticky;top:80px;z-index:5}
+        .comparison-table thead th:first-child{color:#60A5FA}
+        .comparison-table tbody td{padding:.7rem 1rem;border-bottom:1px solid rgba(148,163,184,.08);color:#CBD5E1;vertical-align:top;line-height:1.5}
+        .comparison-table tbody tr:last-child td{border-bottom:0}
+        .comparison-table tbody tr:hover{background:rgba(96,165,250,.04)}
+        .comparison-table .feature{color:#E2E8F0;font-weight:600;background:rgba(13,30,56,.35)}
+        .comparison-table .yes{color:#10B981;font-weight:600}
+        .comparison-table .no{color:#EF4444;font-weight:600}
+        .comparison-table .partial{color:#F59E0B;font-weight:600}
+        .comparison-table tr.hidden{display:none}
+        .decision-tree{margin:2.5rem 0 1rem;padding:1.5rem 1.75rem;background:rgba(96,165,250,.06);border-left:3px solid #60A5FA;border-radius:.4rem}
+        .decision-tree h3{font-family:Montserrat,sans-serif;color:#60A5FA;margin:0 0 1rem;font-size:1.25rem}
+        .decision-tree ul{margin:0;padding:0 0 0 1.25rem;color:#CBD5E1;line-height:1.7}
+        .decision-tree ul li{margin-bottom:.35rem}
+        .decision-tree strong{color:#E2E8F0}
+        .faq-block{margin:2.5rem 0}
+        .faq-block h2{font-family:Montserrat,sans-serif;color:#E2E8F0;margin-bottom:1rem}
+        .faq-item{margin-bottom:1rem;padding:1rem 1.25rem;background:rgba(96,165,250,.04);border:1px solid rgba(96,165,250,.15);border-radius:.4rem}
+        .faq-item h3{font-family:Montserrat,sans-serif;color:#60A5FA;font-size:1rem;margin:0 0 .4rem}
+        .faq-item p{margin:0;color:#CBD5E1;line-height:1.6;font-size:.95rem}
+        .cta-block{margin:3rem auto 0;padding:2rem;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.2);border-radius:.75rem;text-align:center}
+        .cta-block h3{color:#E2E8F0;margin-bottom:.5rem}
+        .cta-block p{color:#94A3B8;margin-bottom:1.25rem}
+        .cta-block a{display:inline-block;padding:.75rem 1.5rem;background:#60A5FA;color:#0d1e38;border-radius:.375rem;text-decoration:none;font-weight:600}
+        @media (max-width:768px){
+            .comparison-table{font-size:.82rem}
+            .comparison-table thead th,.comparison-table tbody td{padding:.55rem .55rem}
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../">
+            <img src="../../img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196" height="113">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">COMPARADORES</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="blog-header">
+        <div class="container">
+            <span class="section-tag"><i class="fas fa-circle"></i> COMPARADOR</span>
+            <h1>SIEM vs SOAR vs XDR</h1>
+            <p>O stack do SOC moderno — três peças que não competem entre si, comparadas em 20 critérios.</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Comparadores</a></li>
+                <li class="breadcrumb-item active" aria-current="page">SIEM vs SOAR vs XDR</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <section class="blog-content">
+        <div class="comparator-wrap">
+
+            <h2 style="color:#E2E8F0;font-family:Montserrat,sans-serif;margin-top:2rem">Resumo rápido</h2>
+            <p style="color:#CBD5E1;line-height:1.7">
+                Três peças complementares do SOC. <strong>SIEM</strong> coleta, correlaciona e retém logs (compliance, hunting, investigação).
+                <strong>SOAR</strong> orquestra playbooks que executam resposta de forma consistente e automatizada.
+                <strong>XDR</strong> detecta ameaças correlacionando telemetria entre superfícies (endpoint, rede, e-mail, cloud, identidade).
+                Em SOCs maduros, os três coexistem.
+            </p>
+
+            <div class="verdict-grid">
+                <div class="verdict-card">
+                    <h3>SIEM</h3>
+                    <p>Centro de gravidade analítico — onde logs vivem por anos e onde compliance, hunting e investigação acontecem.</p>
+                </div>
+                <div class="verdict-card">
+                    <h3>SOAR</h3>
+                    <p>Trilho de automação. Recebe alertas (de SIEM, EDR, XDR) e executa playbooks de triagem, enriquecimento e contenção.</p>
+                </div>
+                <div class="verdict-card">
+                    <h3>XDR</h3>
+                    <p>Detecção nativa cross-domain — reduz silos de alertas vindos de fornecedores diferentes.</p>
+                </div>
+            </div>
+
+            <div class="table-controls">
+                <input type="text" id="featureSearch" placeholder="Filtrar critérios (ex.: custo, retenção, automação)..." autocomplete="off">
+                <label><input type="checkbox" id="diffOnly"> Mostrar só onde há diferença</label>
+            </div>
+
+            <div style="overflow-x:auto;border-radius:.5rem">
+                <table class="comparison-table" id="comparisonTable">
+                    <thead>
+                        <tr>
+                            <th style="min-width:180px">Critério</th>
+                            <th>SIEM</th>
+                            <th>SOAR</th>
+                            <th>XDR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="feature">Categoria</td><td>Plataforma analítica de logs</td><td>Plataforma de orquestração</td><td>Plataforma de detecção</td></tr>
+                        <tr><td class="feature">Função primária</td><td>Coletar, correlacionar, reter logs</td><td>Orquestrar playbooks de resposta</td><td>Detectar por correlação multi-superfície</td></tr>
+                        <tr><td class="feature">Telemetria típica</td><td>Logs de qualquer fonte (200+)</td><td>Alertas + APIs de outras ferramentas</td><td>Endpoint, rede, e-mail, cloud, identidade</td></tr>
+                        <tr><td class="feature">Retenção de dados</td><td class="yes">Longa (meses-anos)</td><td>Curta (dias-semanas, por caso)</td><td>Curta-média</td></tr>
+                        <tr><td class="feature">Compliance fit</td><td class="yes">Alto (logging regulatório)</td><td class="no">Baixo</td><td>Médio</td></tr>
+                        <tr><td class="feature">Caso de uso primário</td><td>Investigação, hunting, conformidade</td><td>Automação operacional</td><td>Detecção e resposta</td></tr>
+                        <tr><td class="feature">Modelo de regras</td><td>Correlação, queries, ML</td><td>Playbooks (visuais ou as-code)</td><td>Detecções nativas + ML</td></tr>
+                        <tr><td class="feature">Tempo até valor</td><td>Médio-longo</td><td>Curto-médio</td><td>Médio</td></tr>
+                        <tr><td class="feature">Modelo de custo</td><td>Por volume (GB/dia ingeridos)</td><td>Por playbook/usuário/ação</td><td>Por endpoint/superfície</td></tr>
+                        <tr><td class="feature">Integrações típicas</td><td>200+ fontes de log</td><td>300+ ferramentas via API</td><td>30-80 fontes nativas</td></tr>
+                        <tr><td class="feature">Profissionais necessários</td><td>Engenheiro de SIEM, analistas</td><td>Engenheiro SOAR</td><td>Detection engineer, analista SOC</td></tr>
+                        <tr><td class="feature">Falsos positivos</td><td class="no">Altos (depende de tuning)</td><td>Consome FPs, não os gera</td><td>Médios (correlação reduz)</td></tr>
+                        <tr><td class="feature">Conformidade legal (LGPD/PCI)</td><td class="yes">Excelente</td><td>Limitada</td><td>Limitada</td></tr>
+                        <tr><td class="feature">Visibilidade cross-domain</td><td>Depende das fontes ingeridas</td><td>Depende das integrações</td><td class="yes">Nativa</td></tr>
+                        <tr><td class="feature">Threat intelligence</td><td>Via parsers/feeds</td><td>Via APIs CTI</td><td>Embarcada</td></tr>
+                        <tr><td class="feature">Automação de resposta</td><td class="no">Limitada</td><td class="yes">Alta</td><td>Média-alta (cross-domain)</td></tr>
+                        <tr><td class="feature">Lock-in</td><td>Médio (dados portáveis)</td><td class="no">Alto (playbooks proprietários)</td><td class="no">Alto</td></tr>
+                        <tr><td class="feature">Curva de implantação</td><td>Longa (parsers, casos)</td><td>Curta-média</td><td>Média</td></tr>
+                        <tr><td class="feature">Substitui o SOC?</td><td class="no">Não</td><td class="no">Não</td><td class="no">Não</td></tr>
+                        <tr><td class="feature">Onde brilha</td><td>Conformidade, retenção, analítica</td><td>Reduzir MTTR, escalar L1</td><td>Detecção entre silos</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="decision-tree">
+                <h3><i class="fas fa-route"></i> Como decidir</h3>
+                <ul>
+                    <li><strong>Setor regulado (financeiro, saúde, energia):</strong> SIEM é obrigatório. XDR e SOAR vêm em sequência.</li>
+                    <li><strong>SOC pequeno com alto volume de alertas repetitivos:</strong> priorize SOAR para automatizar L1.</li>
+                    <li><strong>Stack fragmentado entre múltiplos fornecedores (EDR, e-mail, identidade):</strong> XDR consolida — mas avalie o lock-in.</li>
+                    <li><strong>Startup ou PME sem time:</strong> XDR + MDR pode atender — SIEM e SOAR ficam para depois.</li>
+                    <li><strong>Cobertura cross-domain necessária:</strong> XDR primeiro, SIEM como camada longa, SOAR conforme volume.</li>
+                </ul>
+            </div>
+
+            <h2 style="color:#E2E8F0;font-family:Montserrat,sans-serif;margin-top:2.5rem">Aprofunde nos conceitos</h2>
+            <ul style="color:#CBD5E1;line-height:1.8">
+                <li><a href="../../blog/siem-vs-soar-vs-xdr-como-escolher-o-stack-do-soc-moderno/" style="color:#60A5FA">Como escolher o stack do SOC moderno (artigo completo)</a></li>
+                <li><a href="../../blog/siem-implementacao-casos-uso/" style="color:#60A5FA">SIEM — implementação e casos de uso</a></li>
+                <li><a href="../../blog/soar-automacao-orquestracao/" style="color:#60A5FA">SOAR — automação e orquestração</a></li>
+                <li><a href="../../blog/xdr-extended-detection-response/" style="color:#60A5FA">XDR — Extended Detection and Response</a></li>
+                <li><a href="../edr-vs-xdr-vs-mdr/" style="color:#60A5FA">Comparador: EDR vs XDR vs MDR</a></li>
+            </ul>
+
+            <div class="faq-block">
+                <h2>Perguntas frequentes</h2>
+                <div class="faq-item"><h3>SIEM, SOAR e XDR são tecnologias concorrentes?</h3><p>Não. SIEM agrega e correlaciona logs com retenção longa. SOAR orquestra playbooks de resposta. XDR detecta entre superfícies. Eles convivem — o XDR moderno pode reduzir, mas não substituir, o SIEM em cenários regulados.</p></div>
+                <div class="faq-item"><h3>Qual a ordem de adoção recomendada?</h3><p>Para um SOC do zero: comece com EDR + SIEM básico, evolua para XDR cobrindo as superfícies de maior risco, e adicione SOAR quando o volume de alertas justificar automação. Pular o SIEM sai caro em compliance e investigação.</p></div>
+                <div class="faq-item"><h3>Como medir ROI de SOAR?</h3><p>Por redução de tempo médio de resposta (MTTR), por automação efetiva de casos repetitivos (% de alertas resolvidos por playbook sem intervenção) e por liberação de tempo do L1 para hunting e melhoria contínua.</p></div>
+                <div class="faq-item"><h3>XDR substitui SIEM em ambiente regulado?</h3><p>Geralmente não. Reguladores e auditorias frequentemente exigem retenção de logs por anos, com integridade e independência da plataforma de detecção. Mantenha o SIEM como camada de conformidade, mesmo que reduzido.</p></div>
+            </div>
+
+            <div class="cta-block">
+                <h3>Modelagem do stack SOC para seu cenário</h3>
+                <p>Avaliamos sua arquitetura, casos de uso e maturidade — e desenhamos o stack certo, com TCO estimado.</p>
+                <a href="../../#contato">Falar com Especialista</a>
+            </div>
+
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Conteúdo</h4>
+                        <ul>
+                            <li><a href="../../blog/">Blog</a></li>
+                            <li><a href="../../ferramentas/">Ferramentas</a></li>
+                            <li><a href="../../recursos/">Recursos</a></li>
+                            <li><a href="../../glossario/">Glossário</a></li>
+                            <li><a href="../">Comparadores</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../sobre/">Sobre</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                        <p><i class="fas fa-phone"></i> +55 11 99361-9947</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados. <a href="../../politica-de-privacidade.html">Política de Privacidade</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/site-common.js"></script>
+    <script>
+    (function(){
+        var table = document.getElementById('comparisonTable');
+        var search = document.getElementById('featureSearch');
+        var diffOnly = document.getElementById('diffOnly');
+        var rows = Array.prototype.slice.call(table.tBodies[0].rows);
+
+        function normalize(s){ return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+        function apply(){
+            var q = normalize(search.value.trim());
+            var onlyDiff = diffOnly.checked;
+            rows.forEach(function(r){
+                var feature = normalize(r.cells[0].textContent);
+                var cells = [r.cells[1].textContent.trim(), r.cells[2].textContent.trim(), r.cells[3].textContent.trim()];
+                var matchQ = !q || feature.indexOf(q) !== -1;
+                var allEqual = cells[0] === cells[1] && cells[1] === cells[2];
+                var matchDiff = !onlyDiff || !allEqual;
+                r.classList.toggle('hidden', !(matchQ && matchDiff));
+            });
+        }
+        search.addEventListener('input', apply);
+        diffOnly.addEventListener('change', apply);
+    })();
+    </script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

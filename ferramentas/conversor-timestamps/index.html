@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Conversor de Timestamps: Unix epoch, ISO 8601, Windows FILETIME, Mac Cocoa epoch, LDAP/Active Directory, JavaScript Date. Forense digital, IR e análise de logs.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="conversor timestamp, unix epoch, iso 8601, windows filetime, mac cocoa epoch, ldap timestamp, active directory time, forense digital, analise de logs">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/conversor-timestamps/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Inteligência Brasil &#8212; RSS" href="../../feed.xml">
+
+    <meta property="og:title" content="Conversor de Timestamps | Inteligência Brasil">
+    <meta property="og:description" content="Converta entre Unix epoch, ISO 8601, Windows FILETIME, Mac Cocoa epoch e LDAP. Para forense, IR e investigação de logs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/conversor-timestamps/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Conversor de Timestamps">
+    <meta name="twitter:description" content="Unix, ISO 8601, FILETIME, Cocoa, LDAP em uma única tela.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Conversor de Timestamps (Unix, FILETIME, LDAP, Cocoa) | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Conversor de Timestamps","description":"Ferramenta online gratuita para converter timestamps entre Unix epoch, ISO 8601, Windows FILETIME, Mac Cocoa epoch e LDAP/Active Directory. Útil em forense, resposta a incidentes e análise de logs.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"Qual a diferença entre Unix epoch e Windows FILETIME?","acceptedAnswer":{"@type":"Answer","text":"Unix epoch conta segundos (ou ms/μs/ns) desde 1970-01-01T00:00:00Z. Windows FILETIME é um inteiro de 64 bits que conta intervalos de 100 nanossegundos desde 1601-01-01T00:00:00Z UTC. A diferença entre as duas épocas é 11644473600 segundos. FILETIME aparece em event logs Windows, NTFS MFT, AD User-Account-Control e atributos como lastLogonTimestamp."}},
+        {"@type":"Question","name":"O que é Mac Cocoa epoch?","acceptedAnswer":{"@type":"Answer","text":"Mac OS X (Cocoa/Core Data) usa épocas baseadas em 2001-01-01T00:00:00Z em vez de 1970. Valores aparecem como segundos (NSDate) em plists, bancos do iOS e Safari history. A diferença para Unix é 978307200 segundos."}},
+        {"@type":"Question","name":"O que é timestamp LDAP / Active Directory?","acceptedAnswer":{"@type":"Answer","text":"Atributos como pwdLastSet, lastLogonTimestamp, accountExpires no AD armazenam tempo no mesmo formato do Windows FILETIME (100ns desde 1601-01-01 UTC). Valores 0 ou 9223372036854775807 (0x7FFFFFFFFFFFFFFF) significam 'nunca' ou 'never expires'. Útil em investigação de identidade e ataques contra AD."}},
+        {"@type":"Question","name":"Por que ISO 8601 é preferida em logs?","acceptedAnswer":{"@type":"Answer","text":"ISO 8601 (YYYY-MM-DDTHH:MM:SS.sssZ) ordena lexicograficamente, é livre de ambiguidade locale (não tem MM/DD vs DD/MM), e o Z indica UTC explicitamente. Sigma rules, OpenTelemetry, syslog RFC 5424, Splunk e ELK normalizam para ISO 8601. Em IR, sempre converta para ISO 8601 UTC antes de correlacionar fontes."}},
+        {"@type":"Question","name":"Como detecto se um timestamp Unix está em segundos, ms, μs ou ns?","acceptedAnswer":{"@type":"Answer","text":"Pela ordem de magnitude para 'hoje' (~2026): segundos ≈ 1,7×10⁹ (10 dígitos); milissegundos ≈ 1,7×10¹² (13 dígitos); microssegundos ≈ 1,7×10¹⁵ (16 dígitos); nanossegundos ≈ 1,7×10¹⁸ (19 dígitos). A ferramenta detecta automaticamente pela quantidade de dígitos."}},
+        {"@type":"Question","name":"A conversão é feita no navegador?","acceptedAnswer":{"@type":"Answer","text":"Sim. Toda a lógica é JavaScript executando localmente. Nenhum dado é enviado ao servidor — você pode usar com timestamps sensíveis de logs internos sem se preocupar com vazamento."}}
+    ]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Ferramentas","item":"https://inteligenciabrasil.seg.br/ferramentas/"},{"@type":"ListItem","position":3,"name":"Conversor de Timestamps"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <style>
+        .tc-wrap{max-width:1100px;margin:0 auto;padding:0 1rem}
+        .tc-wrap p,.tc-wrap h2,.tc-wrap h3,.tc-wrap h4,.tc-wrap strong,.tc-wrap li{color:inherit}
+        .tc-intro{color:#E2E8F0;font-size:1.05rem;line-height:1.65;margin-bottom:1.5rem}
+        .tc-intro p{color:#CBD5E1;margin-bottom:.75rem}
+        .tc-intro code{background:rgba(96,165,250,.12);color:#A5F3FC;padding:.1rem .35rem;border-radius:.25rem;font-family:'JetBrains Mono',monospace;font-size:.92em}
+        .tc-card{background:linear-gradient(145deg,rgba(13,30,56,.65) 0%,rgba(15,23,42,.55) 100%);border:1px solid rgba(96,165,250,.22);border-radius:12px;padding:1.5rem 1.5rem 1.25rem;margin:0 0 1.5rem}
+        .tc-card h2{font-family:Montserrat,sans-serif;color:#F1F5F9;font-size:1.35rem;margin:0 0 .35rem}
+        .tc-card h2 i{color:#60A5FA;margin-right:.4rem}
+        .tc-card .subtitle{color:#94A3B8;font-size:.92rem;margin:0 0 1rem}
+        .tc-input{width:100%;padding:.85rem 1rem;border:1px solid rgba(96,165,250,.3);border-radius:.45rem;background:rgba(2,6,23,.6);color:#E2E8F0;font-family:'JetBrains Mono',monospace;font-size:1rem;outline:none;transition:border-color .15s}
+        .tc-input:focus{border-color:#60A5FA;box-shadow:0 0 0 3px rgba(96,165,250,.18)}
+        .tc-controls{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.85rem 0}
+        .tc-btn{background:linear-gradient(135deg,#1e40af 0%,#1e3a8a 100%);color:#fff;border:0;border-radius:.4rem;padding:.55rem 1rem;font-weight:600;cursor:pointer;font-size:.92rem;transition:opacity .15s}
+        .tc-btn:hover{opacity:.88}
+        .tc-btn.secondary{background:rgba(96,165,250,.12);color:#93C5FD;border:1px solid rgba(96,165,250,.3)}
+        .tc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin-top:1rem}
+        .tc-row{background:rgba(2,6,23,.45);border:1px solid rgba(148,163,184,.18);border-radius:.5rem;padding:.85rem 1rem}
+        .tc-row h4{color:#93C5FD;font-size:.85rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin:0 0 .25rem}
+        .tc-row .val{font-family:'JetBrains Mono',monospace;color:#F1F5F9;font-size:1rem;word-break:break-all;display:block;margin-bottom:.4rem}
+        .tc-row .desc{color:#94A3B8;font-size:.82rem;margin:0}
+        .tc-row button{background:transparent;border:1px solid rgba(96,165,250,.25);color:#93C5FD;border-radius:.3rem;padding:.2rem .5rem;font-size:.75rem;cursor:pointer;float:right;margin-left:.5rem}
+        .tc-row button:hover{background:rgba(96,165,250,.1)}
+        .tc-hint{background:rgba(245,158,11,.08);border-left:3px solid #f59e0b;color:#fcd34d;padding:.6rem .85rem;border-radius:.3rem;margin-top:1rem;font-size:.85rem}
+        .tc-formats{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+        .tc-fmt-badge{background:rgba(96,165,250,.1);color:#A5F3FC;border:1px solid rgba(96,165,250,.25);border-radius:1rem;padding:.2rem .65rem;font-size:.75rem;cursor:pointer;font-family:'JetBrains Mono',monospace}
+        .tc-fmt-badge:hover{background:rgba(96,165,250,.2)}
+        .tc-error{color:#fca5a5;background:rgba(239,68,68,.08);border-left:3px solid #ef4444;padding:.6rem .85rem;border-radius:.3rem;margin-top:.75rem;font-size:.88rem}
+        .tc-detected{color:#86EFAC;font-size:.85rem;margin-top:.5rem;font-family:'JetBrains Mono',monospace}
+        .tc-faq{margin-top:2rem}
+        .tc-faq details{background:rgba(13,30,56,.4);border:1px solid rgba(96,165,250,.18);border-radius:.5rem;padding:1rem 1.25rem;margin-bottom:.6rem}
+        .tc-faq summary{color:#F1F5F9;font-weight:600;cursor:pointer;font-size:1.02rem}
+        .tc-faq details p{color:#CBD5E1;margin:.6rem 0 0;line-height:1.6;font-size:.95rem}
+        .tc-faq details code{background:rgba(96,165,250,.12);color:#A5F3FC;padding:.1rem .35rem;border-radius:.25rem;font-family:'JetBrains Mono',monospace;font-size:.88em}
+    </style>
+</head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVI&Ccedil;OS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">FERRAMENTAS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ferramenta</span>
+            <h1>Conversor de Timestamps</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-clock"></i> 6 formatos</span>
+                <span><i class="fas fa-bolt"></i> Auto-detecção</span>
+                <span><i class="fas fa-lock"></i> 100% local</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Ferramentas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Conversor de Timestamps</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <section class="article-content">
+        <div class="tc-wrap">
+
+            <div class="tc-intro">
+                <p>Converta timestamps entre os formatos mais comuns em forense, resposta a incidentes e análise de logs: <strong>Unix epoch</strong> (s/ms/μs/ns), <strong>ISO 8601</strong>, <strong>Windows FILETIME</strong>, <strong>Mac Cocoa epoch</strong> e <strong>LDAP/Active Directory</strong>.</p>
+                <p>Cole qualquer valor e a ferramenta detecta o formato automaticamente. Toda a lógica roda no navegador — nenhum dado vai para o servidor.</p>
+            </div>
+
+            <div class="tc-card">
+                <h2><i class="fas fa-keyboard"></i> Entrada</h2>
+                <p class="subtitle">Cole um timestamp em qualquer formato. Exemplos abaixo são clicáveis.</p>
+
+                <input type="text" id="tcInput" class="tc-input" placeholder="ex: 1748563200, 2026-05-29T18:00:00Z, 133927920000000000 ..." autocomplete="off">
+
+                <div class="tc-detected" id="tcDetected"></div>
+                <div id="tcError"></div>
+
+                <div class="tc-controls">
+                    <button class="tc-btn" id="tcNow">Agora (UTC)</button>
+                    <button class="tc-btn secondary" id="tcClear">Limpar</button>
+                </div>
+
+                <div class="tc-formats">
+                    <span class="tc-fmt-badge" data-sample="1748563200">Unix s</span>
+                    <span class="tc-fmt-badge" data-sample="1748563200000">Unix ms</span>
+                    <span class="tc-fmt-badge" data-sample="2026-05-29T18:00:00Z">ISO 8601</span>
+                    <span class="tc-fmt-badge" data-sample="133927920000000000">FILETIME</span>
+                    <span class="tc-fmt-badge" data-sample="770255400">Cocoa</span>
+                </div>
+            </div>
+
+            <div class="tc-card">
+                <h2><i class="fas fa-exchange-alt"></i> Conversões</h2>
+                <p class="subtitle">Clique no botão Copiar de cada linha para enviar o valor à área de transferência.</p>
+
+                <div class="tc-grid" id="tcGrid"></div>
+
+                <div class="tc-hint">
+                    <strong>Dica forense:</strong> ao correlacionar fontes (Windows Event Log, syslog, AD, Mac), normalize tudo para <code>ISO 8601 UTC</code> antes de cruzar. Diferenças de fuso horário e de epoch costumam mascarar ataques.
+                </div>
+            </div>
+
+            <div class="tc-faq">
+                <h2 style="color:#F1F5F9;font-family:Montserrat,sans-serif;margin-bottom:1rem"><i class="fas fa-question-circle" style="color:#60A5FA"></i> Perguntas frequentes</h2>
+
+                <details><summary>Qual a diferença entre Unix epoch e Windows FILETIME?</summary>
+                    <p>Unix epoch conta segundos (ou ms/μs/ns) desde <code>1970-01-01T00:00:00Z</code>. Windows FILETIME é um inteiro de 64 bits que conta intervalos de 100 nanossegundos desde <code>1601-01-01T00:00:00Z UTC</code>. A diferença entre as duas épocas é 11.644.473.600 segundos. FILETIME aparece em event logs Windows, NTFS MFT, AD User-Account-Control e atributos como <code>lastLogonTimestamp</code>.</p>
+                </details>
+
+                <details><summary>O que é Mac Cocoa epoch?</summary>
+                    <p>Mac OS X (Cocoa/Core Data) usa épocas baseadas em <code>2001-01-01T00:00:00Z</code> em vez de 1970. Valores aparecem como segundos (NSDate) em plists, bancos do iOS e Safari history. A diferença para Unix é 978.307.200 segundos.</p>
+                </details>
+
+                <details><summary>O que é timestamp LDAP / Active Directory?</summary>
+                    <p>Atributos como <code>pwdLastSet</code>, <code>lastLogonTimestamp</code>, <code>accountExpires</code> no AD armazenam tempo no mesmo formato do Windows FILETIME (100ns desde 1601-01-01 UTC). Valores 0 ou <code>9223372036854775807</code> (<code>0x7FFFFFFFFFFFFFFF</code>) significam "nunca" ou "never expires". Útil em investigação de identidade e ataques contra AD.</p>
+                </details>
+
+                <details><summary>Por que ISO 8601 é preferida em logs?</summary>
+                    <p>ISO 8601 (<code>YYYY-MM-DDTHH:MM:SS.sssZ</code>) ordena lexicograficamente, é livre de ambiguidade locale (não tem MM/DD vs DD/MM), e o <code>Z</code> indica UTC explicitamente. Sigma rules, OpenTelemetry, syslog RFC 5424, Splunk e ELK normalizam para ISO 8601. Em IR, sempre converta para ISO 8601 UTC antes de correlacionar fontes.</p>
+                </details>
+
+                <details><summary>Como detecto se um timestamp Unix está em segundos, ms, μs ou ns?</summary>
+                    <p>Pela ordem de magnitude para "hoje" (~2026): segundos ≈ 1,7×10⁹ (10 dígitos); milissegundos ≈ 1,7×10¹² (13 dígitos); microssegundos ≈ 1,7×10¹⁵ (16 dígitos); nanossegundos ≈ 1,7×10¹⁸ (19 dígitos). A ferramenta detecta automaticamente pela quantidade de dígitos.</p>
+                </details>
+
+                <details><summary>A conversão é feita no navegador?</summary>
+                    <p>Sim. Toda a lógica é JavaScript executando localmente. Nenhum dado é enviado ao servidor — você pode usar com timestamps sensíveis de logs internos sem se preocupar com vazamento.</p>
+                </details>
+            </div>
+
+        </div>
+    </section>
+    </main>
+
+    <footer class="ex-footer">
+        <div class="container">
+            <div class="footer-col first">
+                <h3>Inteligência Brasil</h3>
+                <p>Cibersegurança orientada a inteligência de ameaças e impacto.</p>
+            </div>
+            <div class="footer-col second">
+                <h3>Links</h3>
+                <ul class="list-unstyled li-space-lg p-small">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../">Ferramentas</a></li>
+                    <li><a href="../../blog/">Blog</a></li>
+                    <li><a href="../../sobre/">Sobre</a></li>
+                </ul>
+            </div>
+            <div class="footer-col third">
+                <h3>Contato</h3>
+                <p>contato@inteligenciabrasil.seg.br</p>
+            </div>
+        </div>
+    </footer>
+    <div class="copyright">
+        <div class="container">
+            <p class="p-small">Copyright © Intelig&ecirc;ncia Brasil — Todos os direitos reservados</p>
+        </div>
+    </div>
+
+    <script src="../../js/site-common.js"></script>
+    <script>
+    (function(){
+        var UNIX_EPOCH_TO_FILETIME = 11644473600; // seconds
+        var UNIX_EPOCH_TO_COCOA = 978307200;       // seconds
+        var input = document.getElementById('tcInput');
+        var grid = document.getElementById('tcGrid');
+        var detected = document.getElementById('tcDetected');
+        var errBox = document.getElementById('tcError');
+
+        function fmtISO(d){ return d.toISOString(); }
+        function fmtLocal(d){
+            try { return d.toLocaleString('pt-BR', {timeZone:'America/Sao_Paulo', dateStyle:'short', timeStyle:'medium'}) + ' (BRT)'; }
+            catch(e){ return d.toString(); }
+        }
+        function fmtRFC2822(d){ return d.toUTCString(); }
+
+        function parseInput(v){
+            v = (v||'').trim();
+            if(!v) return null;
+
+            // ISO 8601 (loose) or date-like with separators
+            if(/[T\-\:]/.test(v) && !/^[0-9]+$/.test(v)){
+                var d = new Date(v);
+                if(!isNaN(d.getTime())) return {kind:'iso', date:d, raw:v};
+                return null;
+            }
+
+            // Hex (FILETIME often hex)
+            if(/^0x[0-9a-fA-F]+$/.test(v)){
+                var n = BigInt(v);
+                var ms = Number(n / 10000n) - UNIX_EPOCH_TO_FILETIME * 1000;
+                if(ms > -2208988800000 && ms < 32503680000000) return {kind:'filetime-hex', date:new Date(ms), raw:v};
+                return null;
+            }
+
+            // Pure digits
+            if(/^-?\d+$/.test(v)){
+                var len = v.replace('-','').length;
+                var num = BigInt(v);
+
+                if(len <= 11){
+                    // Unix seconds OR Cocoa seconds
+                    var asUnix = Number(num) * 1000;
+                    var asCocoa = (Number(num) + UNIX_EPOCH_TO_COCOA) * 1000;
+                    return {kind:'unix-s', date:new Date(asUnix), date_cocoa:new Date(asCocoa), raw:v};
+                }
+                if(len === 12 || len === 13){
+                    return {kind:'unix-ms', date:new Date(Number(num)), raw:v};
+                }
+                if(len === 14 || len === 15 || len === 16){
+                    return {kind:'unix-us', date:new Date(Number(num/1000n)), raw:v};
+                }
+                if(len === 17 || len === 18 || len === 19){
+                    // Could be FILETIME (18-19 digits) or Unix ns
+                    // FILETIME ~ 1.3e17 to 1.4e17 for current era; Unix ns ~ 1.7e18
+                    if(num >= 100000000000000000n && num < 200000000000000000n){
+                        var ms2 = Number((num / 10000n)) - UNIX_EPOCH_TO_FILETIME * 1000;
+                        return {kind:'filetime', date:new Date(ms2), raw:v};
+                    }
+                    return {kind:'unix-ns', date:new Date(Number(num/1000000n)), raw:v};
+                }
+                // very long → assume FILETIME
+                var ms3 = Number((num / 10000n)) - UNIX_EPOCH_TO_FILETIME * 1000;
+                return {kind:'filetime', date:new Date(ms3), raw:v};
+            }
+            return null;
+        }
+
+        function renderRow(label, value, desc){
+            var safe = String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+            return '<div class="tc-row"><button onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent);this.textContent=\'Copiado!\';setTimeout(()=>{this.textContent=\'Copiar\'},1200)">Copiar</button><h3>'+label+'</h3><span class="val">'+safe+'</span>'+(desc?'<p class="desc">'+desc+'</p>':'')+'</div>';
+        }
+
+        function unixSeconds(d){ return Math.floor(d.getTime()/1000); }
+        function unixMs(d){ return d.getTime(); }
+        function unixUs(d){ return d.getTime() * 1000; }
+        function filetimeFromDate(d){
+            var ms = BigInt(d.getTime()) + BigInt(UNIX_EPOCH_TO_FILETIME) * 1000n;
+            return (ms * 10000n).toString();
+        }
+        function cocoaFromDate(d){ return Math.floor(d.getTime()/1000) - UNIX_EPOCH_TO_COCOA; }
+
+        function update(){
+            errBox.innerHTML = '';
+            detected.textContent = '';
+            grid.innerHTML = '';
+            var raw = input.value;
+            if(!raw.trim()){ return; }
+            var parsed = parseInput(raw);
+            if(!parsed){
+                errBox.innerHTML = '<div class="tc-error">Não consegui interpretar este valor como timestamp.</div>';
+                return;
+            }
+            var d = parsed.date;
+            if(isNaN(d.getTime())){
+                errBox.innerHTML = '<div class="tc-error">Valor decodificado, mas resultou em data inválida.</div>';
+                return;
+            }
+            detected.textContent = '✓ Formato detectado: ' + ({
+                'iso':'ISO 8601 / data textual',
+                'unix-s':'Unix epoch em segundos (ambíguo com Cocoa — mostrando ambas)',
+                'unix-ms':'Unix epoch em milissegundos',
+                'unix-us':'Unix epoch em microssegundos',
+                'unix-ns':'Unix epoch em nanossegundos',
+                'filetime':'Windows FILETIME (100 ns desde 1601)',
+                'filetime-hex':'Windows FILETIME hexadecimal'
+            }[parsed.kind] || 'desconhecido');
+
+            grid.innerHTML += renderRow('ISO 8601 (UTC)', fmtISO(d), 'Recomendado para correlação de logs');
+            grid.innerHTML += renderRow('Hora local (BRT)', fmtLocal(d), 'America/Sao_Paulo');
+            grid.innerHTML += renderRow('Unix segundos', unixSeconds(d), '10 dígitos para datas atuais');
+            grid.innerHTML += renderRow('Unix milissegundos', unixMs(d), '13 dígitos — JavaScript Date.getTime()');
+            grid.innerHTML += renderRow('Unix microssegundos', unixUs(d).toString(), '16 dígitos — comum em syslog RFC 5424');
+            grid.innerHTML += renderRow('Windows FILETIME (decimal)', filetimeFromDate(d), '18-19 dígitos — Event Log, NTFS MFT');
+            grid.innerHTML += renderRow('Windows FILETIME (hex)', '0x' + BigInt(filetimeFromDate(d)).toString(16).toUpperCase(), 'Memory forensics, kernel structures');
+            grid.innerHTML += renderRow('Mac Cocoa epoch', cocoaFromDate(d), 'Segundos desde 2001-01-01 — iOS plists, Safari history');
+            grid.innerHTML += renderRow('RFC 2822', fmtRFC2822(d), 'HTTP Date header, cabeçalhos de e-mail');
+
+            if(parsed.kind === 'unix-s' && parsed.date_cocoa){
+                grid.innerHTML += renderRow('⚠ Se for Cocoa epoch', fmtISO(parsed.date_cocoa), 'Valor de 10 dígitos pode ser Cocoa em vez de Unix — confirme pelo contexto');
+            }
+        }
+
+        input.addEventListener('input', update);
+
+        document.getElementById('tcNow').addEventListener('click', function(){
+            input.value = new Date().toISOString();
+            update();
+        });
+        document.getElementById('tcClear').addEventListener('click', function(){
+            input.value = '';
+            update();
+        });
+        document.querySelectorAll('.tc-fmt-badge').forEach(function(b){
+            b.addEventListener('click', function(){
+                input.value = b.dataset.sample;
+                update();
+            });
+        });
+
+        // initial: empty (don't pre-fill to keep the page clean)
+    })();
+    </script>
+</body>
+</html>

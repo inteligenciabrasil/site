@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Consulte EPSS (Exploit Prediction Scoring System) de qualquer CVE em tempo real via API FIRST.org. Combine com CVSS e KEV para priorizar patches por risco real de exploração.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="epss, exploit prediction scoring system, cve, priorizacao vulnerabilidade, cvss epss kev, first.org, gestao vulnerabilidades">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/calculadora-epss/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Inteligência Brasil &#8212; RSS" href="../../feed.xml">
+
+    <meta property="og:title" content="Consulta EPSS por CVE | Inteligência Brasil">
+    <meta property="og:description" content="Probabilidade de exploração nos próximos 30 dias para qualquer CVE. Pareado com CVSS e KEV para priorização de patches.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/calculadora-epss/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Consulta EPSS por CVE">
+    <meta name="twitter:description" content="EPSS + CVSS + KEV para priorizar vulnerabilidades.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Consulta EPSS por CVE — Priorização de Patches | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Consulta EPSS por CVE","description":"Ferramenta online gratuita para consultar EPSS (Exploit Prediction Scoring System) de CVEs em tempo real e priorizar patches combinando EPSS com CVSS e o catálogo KEV da CISA.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"O que é EPSS?","acceptedAnswer":{"@type":"Answer","text":"EPSS (Exploit Prediction Scoring System) é um modelo da FIRST.org que estima a probabilidade de uma CVE ser explorada in-the-wild nos próximos 30 dias. Retorna duas métricas: probability (0.0 a 1.0) e percentile (posição relativa entre todas as CVEs). É reavaliado diariamente com base em sinais como código de exploit público, menção em mídia/social, presença em pacotes ofensivos, idade da vulnerabilidade e características do CWE."}},
+        {"@type":"Question","name":"Como combinar EPSS, CVSS e KEV?","acceptedAnswer":{"@type":"Answer","text":"CVSS mede severidade técnica (impacto + facilidade). EPSS estima probabilidade de exploração. KEV (CISA) lista CVEs comprovadamente exploradas no campo. Uma regra prática de priorização: KEV = patch agora (prazo regulatório existe); EPSS ≥ 10% AND CVSS ≥ 7 = janela de uma semana; EPSS ≥ 1% = ciclo padrão; EPSS < 1% AND CVSS < 7 = acompanhar com risco aceito. Use sempre os três juntos para evitar dois erros opostos: priorizar por CVSS sem contexto de exploração, ou ignorar CVSS porque o EPSS é baixo em CVEs de impacto crítico."}},
+        {"@type":"Question","name":"De onde vêm os dados desta página?","acceptedAnswer":{"@type":"Answer","text":"A consulta é feita em tempo real contra a API pública da FIRST.org (api.first.org/data/v1/epss). Não armazenamos nada — a chamada sai do seu navegador. Quando a API está fora do ar ou sua rede bloqueia, é possível colar manualmente o JSON retornado por outra ferramenta (ex.: VulnCheck, Vulners) e a página interpretará o resultado."}},
+        {"@type":"Question","name":"Os percentis EPSS são absolutos ou relativos?","acceptedAnswer":{"@type":"Answer","text":"Relativos. Percentil 97 significa que a CVE consultada tem probabilidade maior do que 97% das CVEs no catálogo. Como o universo de CVEs cresce, percentis tendem a se reorganizar — não use percentil como número absoluto entre datas distantes; use probability se quiser comparar ao longo do tempo."}},
+        {"@type":"Question","name":"Posso consultar várias CVEs de uma vez?","acceptedAnswer":{"@type":"Answer","text":"Sim. Cole uma lista (uma CVE por linha ou separadas por vírgula). A ferramenta agrupa em uma única chamada à API e retorna a tabela ordenada por probability decrescente. Limite prático: ~100 CVEs por consulta para não saturar a URL."}},
+        {"@type":"Question","name":"O EPSS substitui o CVSS?","acceptedAnswer":{"@type":"Answer","text":"Não. EPSS responde 'qual a chance disso ser explorado?' e CVSS responde 'qual o impacto técnico se for explorado?'. Você precisa dos dois para decidir prioridade racional. CVSS sem EPSS sobre-prioriza CVEs altas mas sem indício de exploração. EPSS sem CVSS sub-prioriza vulnerabilidades crítissimas em estágio inicial. A maturidade de programa de gestão de vulnerabilidades hoje exige ambos."}}
+    ]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Ferramentas","item":"https://inteligenciabrasil.seg.br/ferramentas/"},{"@type":"ListItem","position":3,"name":"Consulta EPSS por CVE"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <style>
+        .ep-wrap{max-width:1100px;margin:0 auto;padding:0 1rem}
+        .ep-wrap p,.ep-wrap h2,.ep-wrap h3,.ep-wrap h4,.ep-wrap strong,.ep-wrap li,.ep-wrap td,.ep-wrap th{color:inherit}
+        .ep-intro{color:#E2E8F0;font-size:1.05rem;line-height:1.65;margin-bottom:1.5rem}
+        .ep-intro p{color:#CBD5E1;margin-bottom:.75rem}
+        .ep-intro code{background:rgba(96,165,250,.12);color:#A5F3FC;padding:.1rem .35rem;border-radius:.25rem;font-family:'JetBrains Mono',monospace;font-size:.92em}
+        .ep-card{background:linear-gradient(145deg,rgba(13,30,56,.65) 0%,rgba(15,23,42,.55) 100%);border:1px solid rgba(96,165,250,.22);border-radius:12px;padding:1.5rem 1.5rem 1.25rem;margin:0 0 1.5rem}
+        .ep-card h2{font-family:Montserrat,sans-serif;color:#F1F5F9;font-size:1.35rem;margin:0 0 .35rem}
+        .ep-card h2 i{color:#60A5FA;margin-right:.4rem}
+        .ep-card .subtitle{color:#94A3B8;font-size:.92rem;margin:0 0 1rem}
+        .ep-input{width:100%;padding:.85rem 1rem;border:1px solid rgba(96,165,250,.3);border-radius:.45rem;background:rgba(2,6,23,.6);color:#E2E8F0;font-family:'JetBrains Mono',monospace;font-size:1rem;outline:none;transition:border-color .15s;min-height:90px;resize:vertical}
+        .ep-input:focus{border-color:#60A5FA;box-shadow:0 0 0 3px rgba(96,165,250,.18)}
+        .ep-controls{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.85rem 0}
+        .ep-btn{background:linear-gradient(135deg,#1e40af 0%,#1e3a8a 100%);color:#fff;border:0;border-radius:.4rem;padding:.55rem 1rem;font-weight:600;cursor:pointer;font-size:.92rem;transition:opacity .15s}
+        .ep-btn:hover{opacity:.88}
+        .ep-btn.secondary{background:rgba(96,165,250,.12);color:#93C5FD;border:1px solid rgba(96,165,250,.3)}
+        .ep-table{width:100%;border-collapse:collapse;margin-top:.5rem;font-family:'JetBrains Mono',monospace;font-size:.9rem}
+        .ep-table th{background:rgba(96,165,250,.1);color:#93C5FD;padding:.7rem .85rem;text-align:left;border-bottom:1px solid rgba(96,165,250,.25);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase}
+        .ep-table td{padding:.7rem .85rem;color:#E2E8F0;border-bottom:1px solid rgba(148,163,184,.12)}
+        .ep-table tr:hover td{background:rgba(96,165,250,.05)}
+        .ep-prob-bar{display:inline-block;height:6px;border-radius:3px;background:rgba(148,163,184,.18);width:100px;vertical-align:middle;margin-right:.5rem;position:relative;overflow:hidden}
+        .ep-prob-fill{position:absolute;top:0;left:0;height:100%;border-radius:3px}
+        .ep-bucket{display:inline-block;padding:.15rem .55rem;border-radius:1rem;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+        .ep-bucket-crit{background:rgba(239,68,68,.18);color:#fca5a5;border:1px solid rgba(239,68,68,.35)}
+        .ep-bucket-high{background:rgba(245,158,11,.15);color:#fcd34d;border:1px solid rgba(245,158,11,.3)}
+        .ep-bucket-med{background:rgba(96,165,250,.13);color:#93C5FD;border:1px solid rgba(96,165,250,.3)}
+        .ep-bucket-low{background:rgba(148,163,184,.13);color:#94A3B8;border:1px solid rgba(148,163,184,.25)}
+        .ep-status{margin:.5rem 0;font-size:.88rem;font-family:'JetBrains Mono',monospace}
+        .ep-status.loading{color:#A5F3FC}
+        .ep-status.err{color:#fca5a5}
+        .ep-status.ok{color:#86EFAC}
+        .ep-bucket-guide{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem;margin-top:1rem}
+        .ep-bucket-guide div{background:rgba(2,6,23,.45);border:1px solid rgba(148,163,184,.15);border-radius:.4rem;padding:.7rem .9rem}
+        .ep-bucket-guide div strong{display:block;margin-bottom:.2rem}
+        .ep-bucket-guide div p{font-size:.82rem;color:#94A3B8;margin:0}
+        .ep-faq{margin-top:2rem}
+        .ep-faq details{background:rgba(13,30,56,.4);border:1px solid rgba(96,165,250,.18);border-radius:.5rem;padding:1rem 1.25rem;margin-bottom:.6rem}
+        .ep-faq summary{color:#F1F5F9;font-weight:600;cursor:pointer;font-size:1.02rem}
+        .ep-faq details p{color:#CBD5E1;margin:.6rem 0 0;line-height:1.6;font-size:.95rem}
+        .ep-faq details code{background:rgba(96,165,250,.12);color:#A5F3FC;padding:.1rem .35rem;border-radius:.25rem;font-family:'JetBrains Mono',monospace;font-size:.88em}
+    </style>
+</head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVI&Ccedil;OS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">FERRAMENTAS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ferramenta</span>
+            <h1>Consulta EPSS por CVE</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-chart-line"></i> EPSS v3 (FIRST.org)</span>
+                <span><i class="fas fa-bolt"></i> Tempo real</span>
+                <span><i class="fas fa-layer-group"></i> Em lote</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Ferramentas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Consulta EPSS</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <section class="article-content">
+        <div class="ep-wrap">
+
+            <div class="ep-intro">
+                <p>Consulta em tempo real o <strong>EPSS</strong> (Exploit Prediction Scoring System) de uma ou mais CVEs, com base na API pública da FIRST.org. EPSS estima a probabilidade da CVE ser explorada in-the-wild nos próximos 30 dias — ferramenta-chave para priorizar patches por <em>risco real de exploração</em>, não apenas severidade técnica do CVSS.</p>
+                <p>Use combinando com <a href="../calculadora-cvss/" style="color:#60A5FA">CVSS</a> (severidade) e <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener" style="color:#60A5FA">KEV da CISA</a> (exploração confirmada) para decisões de priorização.</p>
+            </div>
+
+            <div class="ep-card">
+                <h2><i class="fas fa-bug"></i> Consultar CVE(s)</h2>
+                <p class="subtitle">Cole uma CVE por linha ou separadas por vírgula (ex.: <code>CVE-2024-3400, CVE-2023-46604</code>).</p>
+
+                <textarea id="epInput" class="ep-input" placeholder="CVE-2024-3400&#10;CVE-2023-46604&#10;CVE-2021-44228">CVE-2021-44228
+CVE-2024-3400
+CVE-2023-46604</textarea>
+
+                <div class="ep-controls">
+                    <button class="ep-btn" id="epConsult"><i class="fas fa-search"></i> Consultar EPSS</button>
+                    <button class="ep-btn secondary" id="epClear">Limpar</button>
+                </div>
+                <div class="ep-status" id="epStatus"></div>
+            </div>
+
+            <div class="ep-card" id="epResultsCard" style="display:none">
+                <h2><i class="fas fa-table"></i> Resultados</h2>
+                <p class="subtitle">Ordenado por probability decrescente. Score 0–100% representa a chance de exploração nos próximos 30 dias.</p>
+
+                <table class="ep-table" id="epTable">
+                    <thead>
+                        <tr><th>CVE</th><th>Probability</th><th>Percentile</th><th>Bucket</th><th>Data</th></tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <div class="ep-bucket-guide">
+                    <div><strong style="color:#fca5a5">≥ 50% — Crítico</strong><p>Exploração em massa esperada. Patch imediato, idealmente em janela emergencial.</p></div>
+                    <div><strong style="color:#fcd34d">10% – 50% — Alto</strong><p>Exploração provável em semanas. Patch dentro do ciclo de mitigação rápida (7 dias).</p></div>
+                    <div><strong style="color:#93C5FD">1% – 10% — Médio</strong><p>Atenção. Ciclo padrão (30 dias) com revisão se entrar no KEV ou subir.</p></div>
+                    <div><strong style="color:#94A3B8">&lt; 1% — Baixo</strong><p>Acompanhar. Mantém ciclo de patch normal e contexto do ativo decide.</p></div>
+                </div>
+            </div>
+
+            <div class="ep-faq">
+                <h2 style="color:#F1F5F9;font-family:Montserrat,sans-serif;margin-bottom:1rem"><i class="fas fa-question-circle" style="color:#60A5FA"></i> Perguntas frequentes</h2>
+
+                <details><summary>O que é EPSS?</summary>
+                    <p>EPSS (Exploit Prediction Scoring System) é um modelo da FIRST.org que estima a probabilidade de uma CVE ser explorada in-the-wild nos próximos 30 dias. Retorna duas métricas: <code>probability</code> (0.0 a 1.0) e <code>percentile</code> (posição relativa entre todas as CVEs). É reavaliado diariamente.</p>
+                </details>
+
+                <details><summary>Como combinar EPSS, CVSS e KEV?</summary>
+                    <p>CVSS mede severidade técnica. EPSS estima probabilidade de exploração. KEV (CISA) lista CVEs comprovadamente exploradas. Regra prática: <strong>KEV = patch agora</strong>; <strong>EPSS ≥ 10% AND CVSS ≥ 7 = janela de uma semana</strong>; <strong>EPSS ≥ 1% = ciclo padrão</strong>; abaixo disso, acompanhar.</p>
+                </details>
+
+                <details><summary>De onde vêm os dados desta página?</summary>
+                    <p>Consulta em tempo real à API pública da FIRST.org (<code>api.first.org/data/v1/epss</code>). Nenhum dado é armazenado — a chamada sai do seu navegador. Se sua rede bloqueia, é possível usar VulnCheck, Vulners ou a CLI <code>epss-cli</code>.</p>
+                </details>
+
+                <details><summary>Os percentis EPSS são absolutos ou relativos?</summary>
+                    <p>Relativos. Percentil 97 significa probabilidade maior do que 97% das CVEs no catálogo. Como o universo de CVEs cresce, percentis se reorganizam — não use percentil como número absoluto entre datas distantes; use <code>probability</code> para comparar ao longo do tempo.</p>
+                </details>
+
+                <details><summary>Posso consultar várias CVEs de uma vez?</summary>
+                    <p>Sim. Cole uma lista (uma por linha ou separadas por vírgula). A ferramenta agrupa em uma única chamada. Limite prático: ~100 CVEs por consulta.</p>
+                </details>
+
+                <details><summary>O EPSS substitui o CVSS?</summary>
+                    <p>Não. EPSS responde "qual a chance disso ser explorado?" e CVSS responde "qual o impacto técnico se for explorado?". Você precisa dos dois para priorização racional.</p>
+                </details>
+            </div>
+
+        </div>
+    </section>
+    </main>
+
+    <footer class="ex-footer">
+        <div class="container">
+            <div class="footer-col first">
+                <h3>Inteligência Brasil</h3>
+                <p>Cibersegurança orientada a inteligência de ameaças e impacto.</p>
+            </div>
+            <div class="footer-col second">
+                <h3>Links</h3>
+                <ul class="list-unstyled li-space-lg p-small">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../">Ferramentas</a></li>
+                    <li><a href="../../blog/">Blog</a></li>
+                    <li><a href="../../sobre/">Sobre</a></li>
+                </ul>
+            </div>
+            <div class="footer-col third">
+                <h3>Contato</h3>
+                <p>contato@inteligenciabrasil.seg.br</p>
+            </div>
+        </div>
+    </footer>
+    <div class="copyright">
+        <div class="container">
+            <p class="p-small">Copyright © Intelig&ecirc;ncia Brasil — Todos os direitos reservados</p>
+        </div>
+    </div>
+
+    <script src="../../js/site-common.js"></script>
+    <script>
+    (function(){
+        var input = document.getElementById('epInput');
+        var status = document.getElementById('epStatus');
+        var resultsCard = document.getElementById('epResultsCard');
+        var tbody = document.querySelector('#epTable tbody');
+
+        function bucket(p){
+            if(p >= 0.5) return {label:'Crítico', cls:'ep-bucket-crit', color:'#ef4444'};
+            if(p >= 0.1) return {label:'Alto', cls:'ep-bucket-high', color:'#f59e0b'};
+            if(p >= 0.01) return {label:'Médio', cls:'ep-bucket-med', color:'#60A5FA'};
+            return {label:'Baixo', cls:'ep-bucket-low', color:'#94A3B8'};
+        }
+
+        function parseCVEs(text){
+            return (text||'').split(/[,\s\n]+/)
+                .map(function(s){ return s.trim().toUpperCase(); })
+                .filter(function(s){ return /^CVE-\d{4}-\d{4,}$/.test(s); });
+        }
+
+        function render(items){
+            tbody.innerHTML = '';
+            items.sort(function(a,b){ return parseFloat(b.epss||0) - parseFloat(a.epss||0); });
+            items.forEach(function(it){
+                var p = parseFloat(it.epss||0);
+                var pct = parseFloat(it.percentile||0);
+                var b = bucket(p);
+                var bar = '<span class="ep-prob-bar"><span class="ep-prob-fill" style="width:'+(p*100).toFixed(1)+'%;background:'+b.color+'"></span></span>';
+                var prob = (p*100).toFixed(2)+'%';
+                var perc = (pct*100).toFixed(1)+'%';
+                tbody.innerHTML += '<tr><td><a href="https://nvd.nist.gov/vuln/detail/'+it.cve+'" target="_blank" rel="noopener" style="color:#60A5FA;text-decoration:none">'+it.cve+' <i class="fas fa-external-link-alt" style="font-size:.7rem"></i></a></td>'+
+                    '<td>'+bar+prob+'</td>'+
+                    '<td>'+perc+'</td>'+
+                    '<td><span class="ep-bucket '+b.cls+'">'+b.label+'</span></td>'+
+                    '<td>'+(it.date||'—')+'</td></tr>';
+            });
+            resultsCard.style.display = 'block';
+        }
+
+        document.getElementById('epConsult').addEventListener('click', function(){
+            var cves = parseCVEs(input.value);
+            if(cves.length === 0){
+                status.className = 'ep-status err';
+                status.textContent = '✗ Nenhuma CVE válida no formato CVE-AAAA-NNNN encontrada.';
+                return;
+            }
+            status.className = 'ep-status loading';
+            status.textContent = '⟳ Consultando EPSS para ' + cves.length + ' CVE(s)...';
+
+            var url = 'https://api.first.org/data/v1/epss?cve=' + encodeURIComponent(cves.join(','));
+            fetch(url)
+                .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+                .then(function(json){
+                    var data = json.data || [];
+                    var found = {};
+                    data.forEach(function(d){ found[d.cve] = d; });
+                    var combined = cves.map(function(c){
+                        return found[c] || {cve:c, epss:'0', percentile:'0', date:'sem dado'};
+                    });
+                    var foundCount = Object.keys(found).length;
+                    status.className = 'ep-status ok';
+                    status.textContent = '✓ ' + foundCount + ' de ' + cves.length + ' CVE(s) encontrada(s) no catálogo EPSS.';
+                    render(combined);
+                })
+                .catch(function(err){
+                    status.className = 'ep-status err';
+                    status.textContent = '✗ Falha na consulta: ' + err.message + '. Verifique sua conexão ou se a API FIRST.org está disponível.';
+                });
+        });
+
+        document.getElementById('epClear').addEventListener('click', function(){
+            input.value = '';
+            status.textContent = '';
+            resultsCard.style.display = 'none';
+        });
+    })();
+    </script>
+</body>
+</html>

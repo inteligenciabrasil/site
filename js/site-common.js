@@ -338,19 +338,27 @@
             'validador-spf-dkim-dmarc':    { name: 'Validador SPF, DKIM e DMARC', desc: 'Análise de autenticação de e-mail.', icon: 'fa-envelope-open-text', tags: ['email', 'dns', 'phishing'] },
             'codificador-base64-url-hex':  { name: 'Codificador Base64, URL, Hex', desc: 'Encode/decode rápido para pentest.', icon: 'fa-code', tags: ['encoding', 'pentest', 'jwt'] },
             'calculadora-hash':            { name: 'Calculadora de Hash', desc: 'MD5, SHA-1, SHA-256, SHA-512.', icon: 'fa-fingerprint', tags: ['hash', 'integridade', 'ioc'] },
-            'decoder-jwt':                 { name: 'Decoder JWT', desc: 'Decode e análise de segurança.', icon: 'fa-key', tags: ['jwt', 'pentest', 'encoding'] }
+            'decoder-jwt':                 { name: 'Decoder JWT', desc: 'Decode e análise de segurança.', icon: 'fa-key', tags: ['jwt', 'pentest', 'encoding'] },
+            'security-headers':            { name: 'Analisador de Security Headers', desc: 'HSTS, CSP, X-Frame-Options - nota A+ a F.', icon: 'fa-shield-virus', tags: ['headers', 'web', 'hardening', 'csp'] },
+            'conversor-timestamps':        { name: 'Conversor de Timestamps', desc: 'Unix, ISO 8601, FILETIME, Cocoa, LDAP.', icon: 'fa-clock', tags: ['forense', 'ir', 'logs'] },
+            'calculadora-epss':            { name: 'Consulta EPSS por CVE', desc: 'Probabilidade de exploração em 30 dias.', icon: 'fa-chart-line', tags: ['vuln', 'cve', 'priorizacao'] },
+            'parser-iocs':                 { name: 'Parser e Normalizador de IOCs', desc: 'Extração, defang/refang, pivot links.', icon: 'fa-fingerprint', tags: ['cti', 'ioc', 'hunting'] }
         };
 
         // Curated relations by overlap of tags + manual tweaks
         var relations = {
-            'calculadora-cvss':            ['calculadora-risco-owasp', 'calculadora-hash', 'decoder-jwt'],
-            'calculadora-risco-owasp':     ['calculadora-cvss', 'validador-politica-senhas', 'validador-spf-dkim-dmarc'],
+            'calculadora-cvss':            ['calculadora-epss', 'calculadora-risco-owasp', 'calculadora-hash'],
+            'calculadora-risco-owasp':     ['calculadora-cvss', 'calculadora-epss', 'validador-politica-senhas'],
             'gerador-de-senhas':           ['validador-politica-senhas', 'calculadora-hash', 'decoder-jwt'],
             'validador-politica-senhas':   ['gerador-de-senhas', 'calculadora-risco-owasp', 'calculadora-hash'],
-            'validador-spf-dkim-dmarc':    ['decoder-jwt', 'calculadora-risco-owasp', 'codificador-base64-url-hex'],
-            'codificador-base64-url-hex':  ['decoder-jwt', 'calculadora-hash', 'gerador-de-senhas'],
-            'calculadora-hash':            ['codificador-base64-url-hex', 'gerador-de-senhas', 'decoder-jwt'],
-            'decoder-jwt':                 ['codificador-base64-url-hex', 'calculadora-hash', 'validador-spf-dkim-dmarc']
+            'validador-spf-dkim-dmarc':    ['decoder-jwt', 'security-headers', 'codificador-base64-url-hex'],
+            'codificador-base64-url-hex':  ['decoder-jwt', 'calculadora-hash', 'parser-iocs'],
+            'calculadora-hash':            ['codificador-base64-url-hex', 'parser-iocs', 'decoder-jwt'],
+            'decoder-jwt':                 ['codificador-base64-url-hex', 'security-headers', 'validador-spf-dkim-dmarc'],
+            'security-headers':            ['validador-spf-dkim-dmarc', 'decoder-jwt', 'calculadora-cvss'],
+            'conversor-timestamps':        ['parser-iocs', 'calculadora-hash', 'codificador-base64-url-hex'],
+            'calculadora-epss':            ['calculadora-cvss', 'calculadora-risco-owasp', 'parser-iocs'],
+            'parser-iocs':                 ['calculadora-hash', 'conversor-timestamps', 'codificador-base64-url-hex']
         };
 
         var related = relations[current];

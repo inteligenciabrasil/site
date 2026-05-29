@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="EDR vs XDR vs MDR: comparativo completo de tecnologia de endpoint, detecção estendida e serviço gerenciado de detecção e resposta. 18 critérios lado-a-lado.">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="edr vs xdr vs mdr, comparativo edr xdr mdr, detecção e resposta, endpoint detection response, extended detection response, managed detection response">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/comparadores/edr-vs-xdr-vs-mdr/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Intelig&#234;ncia Brasil &#8212; RSS" href="../../feed.xml">
+
+    <meta property="og:title" content="EDR vs XDR vs MDR — Comparativo Completo | Inteligência Brasil">
+    <meta property="og:description" content="Matriz com 18 critérios para escolher entre EDR, XDR e MDR.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/comparadores/edr-vs-xdr-vs-mdr/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EDR vs XDR vs MDR — Comparativo">
+    <meta name="twitter:description" content="Comparativo lado-a-lado para decisão de stack de detecção e resposta.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>EDR vs XDR vs MDR — Comparativo Completo | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"EDR vs XDR vs MDR — Comparativo Completo","description":"Matriz comparativa com 18 critérios para decidir entre EDR, XDR e MDR.","author":{"@type":"Organization","name":"Inteligência Brasil"},"publisher":{"@type":"Organization","name":"Inteligência Brasil","logo":{"@type":"ImageObject","url":"https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},"datePublished":"2026-05-23","inLanguage":"pt-BR","url":"https://inteligenciabrasil.seg.br/comparadores/edr-vs-xdr-vs-mdr/"}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Comparadores","item":"https://inteligenciabrasil.seg.br/comparadores/"},{"@type":"ListItem","position":3,"name":"EDR vs XDR vs MDR","item":"https://inteligenciabrasil.seg.br/comparadores/edr-vs-xdr-vs-mdr/"}]}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"Qual a diferença básica entre EDR, XDR e MDR?","acceptedAnswer":{"@type":"Answer","text":"EDR é tecnologia de detecção e resposta focada no endpoint. XDR é uma plataforma que estende a correlação a endpoint, rede, e-mail, cloud e identidade. MDR é um serviço gerenciado que opera, 24×7, um EDR ou XDR em nome do cliente."}},
+        {"@type":"Question","name":"MDR substitui o SOC interno?","acceptedAnswer":{"@type":"Answer","text":"Não necessariamente. MDR é especialmente útil para empresas sem SOC maduro ou que querem cobertura 24×7 sem montar a operação. Em organizações maiores, é comum o modelo híbrido — SOC interno em horário comercial e MDR fora dele, ou MDR como L2/L3."}},
+        {"@type":"Question","name":"Posso usar XDR sem SIEM?","acceptedAnswer":{"@type":"Answer","text":"Sim em alguns cenários, mas com ressalvas. XDR concentra detecção sobre as superfícies que ele cobre. SIEM continua relevante para retenção longa, compliance, casos de uso de negócio e fontes que o XDR não ingere — como logs de aplicação proprietária e bases de dados."}},
+        {"@type":"Question","name":"Como evitar lock-in com XDR?","acceptedAnswer":{"@type":"Answer","text":"Modele a arquitetura prevendo saída: exporte detecções e telemetria normalizadas (OCSF), mantenha o SIEM como camada de retenção independente e prefira XDRs com APIs abertas e formato de exportação documentado."}}
+    ]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <style>
+        .comparator-wrap{max-width:1200px;margin:0 auto;padding:0 1rem}
+        .verdict-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin:2rem 0}
+        .verdict-card{padding:1.25rem 1.25rem;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.18);border-radius:.6rem}
+        .verdict-card h3{font-family:Montserrat,sans-serif;font-size:1.15rem;color:#60A5FA;margin:0 0 .5rem}
+        .verdict-card p{color:#CBD5E1;margin:0;font-size:.95rem;line-height:1.55}
+        .table-controls{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin:1.5rem 0 .75rem}
+        .table-controls input[type=text]{flex:1;min-width:220px;padding:.55rem .9rem;background:rgba(96,165,250,.05);border:1px solid rgba(96,165,250,.22);border-radius:.4rem;color:#E2E8F0;font:inherit;outline:none}
+        .table-controls input[type=text]:focus{border-color:#60A5FA}
+        .table-controls label{color:#CBD5E1;display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem;cursor:pointer;user-select:none}
+        .comparison-table{width:100%;border-collapse:collapse;background:rgba(13,30,56,.55);border:1px solid rgba(96,165,250,.18);border-radius:.5rem;overflow:hidden;font-size:.92rem}
+        .comparison-table thead th{background:rgba(96,165,250,.12);color:#E2E8F0;text-align:left;padding:.85rem 1rem;font-family:Montserrat,sans-serif;font-weight:600;border-bottom:1px solid rgba(96,165,250,.25);position:sticky;top:80px;z-index:5}
+        .comparison-table thead th:first-child{color:#60A5FA}
+        .comparison-table tbody td{padding:.7rem 1rem;border-bottom:1px solid rgba(148,163,184,.08);color:#CBD5E1;vertical-align:top;line-height:1.5}
+        .comparison-table tbody tr:last-child td{border-bottom:0}
+        .comparison-table tbody tr:hover{background:rgba(96,165,250,.04)}
+        .comparison-table .feature{color:#E2E8F0;font-weight:600;background:rgba(13,30,56,.35)}
+        .comparison-table .yes{color:#10B981;font-weight:600}
+        .comparison-table .no{color:#EF4444;font-weight:600}
+        .comparison-table .partial{color:#F59E0B;font-weight:600}
+        .comparison-table tr.hidden{display:none}
+        .decision-tree{margin:2.5rem 0 1rem;padding:1.5rem 1.75rem;background:rgba(96,165,250,.06);border-left:3px solid #60A5FA;border-radius:.4rem}
+        .decision-tree h3{font-family:Montserrat,sans-serif;color:#60A5FA;margin:0 0 1rem;font-size:1.25rem}
+        .decision-tree ul{margin:0;padding:0 0 0 1.25rem;color:#CBD5E1;line-height:1.7}
+        .decision-tree ul li{margin-bottom:.35rem}
+        .decision-tree strong{color:#E2E8F0}
+        .faq-block{margin:2.5rem 0}
+        .faq-block h2{font-family:Montserrat,sans-serif;color:#E2E8F0;margin-bottom:1rem}
+        .faq-item{margin-bottom:1rem;padding:1rem 1.25rem;background:rgba(96,165,250,.04);border:1px solid rgba(96,165,250,.15);border-radius:.4rem}
+        .faq-item h3{font-family:Montserrat,sans-serif;color:#60A5FA;font-size:1rem;margin:0 0 .4rem}
+        .faq-item p{margin:0;color:#CBD5E1;line-height:1.6;font-size:.95rem}
+        .cta-block{margin:3rem auto 0;padding:2rem;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.2);border-radius:.75rem;text-align:center}
+        .cta-block h3{color:#E2E8F0;margin-bottom:.5rem}
+        .cta-block p{color:#94A3B8;margin-bottom:1.25rem}
+        .cta-block a{display:inline-block;padding:.75rem 1.5rem;background:#60A5FA;color:#0d1e38;border-radius:.375rem;text-decoration:none;font-weight:600}
+        @media (max-width:768px){
+            .comparison-table{font-size:.82rem}
+            .comparison-table thead th,.comparison-table tbody td{padding:.55rem .55rem}
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../">
+            <img src="../../img/logo.svg" title="Logo Inteligência Brasil" alt="Logo Inteligência Brasil" width="196" height="113">
+        </a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">COMPARADORES</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="blog-header">
+        <div class="container">
+            <span class="section-tag"><i class="fas fa-circle"></i> COMPARADOR</span>
+            <h1>EDR vs XDR vs MDR</h1>
+            <p>Tecnologia, escopo de telemetria e modelo operacional — lado a lado, em 18 critérios.</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Comparadores</a></li>
+                <li class="breadcrumb-item active" aria-current="page">EDR vs XDR vs MDR</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <section class="blog-content">
+        <div class="comparator-wrap">
+
+            <h2 style="color:#E2E8F0;font-family:Montserrat,sans-serif;margin-top:2rem">Resumo rápido</h2>
+            <p style="color:#CBD5E1;line-height:1.7">
+                EDR, XDR e MDR não são alternativas concorrentes diretas — são <strong>peças complementares</strong>.
+                EDR é <em>tecnologia</em> que cobre o endpoint. XDR é <em>tecnologia</em> que cobre múltiplas superfícies (endpoint + rede + e-mail + cloud + identidade).
+                MDR é <em>serviço</em> — alguém operando essas tecnologias 24×7 no seu nome. A decisão real é: <strong>quanta superfície quero cobrir</strong> e <strong>quem opera</strong>.
+            </p>
+
+            <div class="verdict-grid">
+                <div class="verdict-card">
+                    <h3>EDR</h3>
+                    <p>Detecção e resposta no endpoint. Equipe própria opera. Bom ponto de partida para quem tem analistas e quer profundidade no host.</p>
+                </div>
+                <div class="verdict-card">
+                    <h3>XDR</h3>
+                    <p>Plataforma que correlaciona telemetria entre superfícies. Reduz silos de alertas e tempo de investigação — mas exige consolidação de fornecedores.</p>
+                </div>
+                <div class="verdict-card">
+                    <h3>MDR</h3>
+                    <p>Serviço gerenciado: provedor opera o EDR/XDR 24×7. Ideal quando não há time para sustentar SOC ou quando se busca aceleração.</p>
+                </div>
+            </div>
+
+            <div class="table-controls">
+                <input type="text" id="featureSearch" placeholder="Filtrar critérios (ex.: SLA, telemetria, custo)..." autocomplete="off">
+                <label><input type="checkbox" id="diffOnly"> Mostrar só onde há diferença</label>
+            </div>
+
+            <div style="overflow-x:auto;border-radius:.5rem">
+                <table class="comparison-table" id="comparisonTable">
+                    <thead>
+                        <tr>
+                            <th style="min-width:180px">Critério</th>
+                            <th>EDR</th>
+                            <th>XDR</th>
+                            <th>MDR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="feature">Categoria</td><td>Tecnologia</td><td>Tecnologia (plataforma)</td><td>Serviço gerenciado</td></tr>
+                        <tr><td class="feature">Telemetria primária</td><td>Endpoint (processos, arquivos, rede local)</td><td>Endpoint + rede + e-mail + cloud + identidade</td><td>Depende do EDR/XDR adotado pelo provedor</td></tr>
+                        <tr><td class="feature">Cobertura por superfície</td><td>Endpoint</td><td>Multi-superfície</td><td>Multi-superfície (gerenciada)</td></tr>
+                        <tr><td class="feature">Operação 24×7</td><td class="no">Cliente</td><td class="no">Cliente</td><td class="yes">Provedor</td></tr>
+                        <tr><td class="feature">Resposta automatizada</td><td>Local (host isolation, kill process)</td><td>Cross-domain orquestrada</td><td>Mix de automação + ação humana</td></tr>
+                        <tr><td class="feature">Triagem de alertas</td><td>Cliente</td><td>Cliente</td><td class="yes">Provedor</td></tr>
+                        <tr><td class="feature">Threat hunting</td><td>Opcional (cliente)</td><td>Opcional (cliente)</td><td class="yes">Frequentemente no contrato</td></tr>
+                        <tr><td class="feature">MTTR esperado</td><td>Médio</td><td>Médio-baixo</td><td class="yes">Baixo</td></tr>
+                        <tr><td class="feature">Maturidade exigida no cliente</td><td>Alta</td><td>Média-alta</td><td class="yes">Baixa-média</td></tr>
+                        <tr><td class="feature">Tratamento de falsos positivos</td><td>Cliente</td><td>Cliente (correlação reduz volume)</td><td class="yes">Provedor</td></tr>
+                        <tr><td class="feature">Integração com SIEM</td><td>Sim (envia alertas/eventos)</td><td>Sim (pode substituir parte do SIEM)</td><td>N/A (provedor opera o stack)</td></tr>
+                        <tr><td class="feature">Cobertura de identidade</td><td class="no">Não nativa</td><td class="yes">Sim (ITDR integrado)</td><td>Conforme XDR usado</td></tr>
+                        <tr><td class="feature">Modelo de custo</td><td>Por endpoint</td><td>Plataforma + módulos</td><td>Mensalidade gerenciada</td></tr>
+                        <tr><td class="feature">Tempo até valor</td><td>Médio</td><td>Médio-longo</td><td class="yes">Curto</td></tr>
+                        <tr><td class="feature">Risco de lock-in</td><td>Médio</td><td class="no">Alto</td><td>Médio (no contrato)</td></tr>
+                        <tr><td class="feature">SLA de resposta</td><td>Definido pelo cliente</td><td>Definido pelo cliente</td><td class="yes">Contratual (ex.: 15 min)</td></tr>
+                        <tr><td class="feature">Skills necessárias no cliente</td><td>Analista SOC, IR</td><td>Analista SOC + arquiteto</td><td>Coordenador de resposta</td></tr>
+                        <tr><td class="feature">Onde brilha</td><td>Endpoint-first, time técnico</td><td>Consolidação de stack</td><td>Sem time / acelerar maturidade</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="decision-tree">
+                <h3><i class="fas fa-route"></i> Como decidir</h3>
+                <ul>
+                    <li><strong>Tem analistas dedicados e quer profundidade no endpoint:</strong> EDR é o ponto de partida natural.</li>
+                    <li><strong>Já tem EDR e está com silo de alertas (e-mail + endpoint + identidade):</strong> evoluir para XDR reduz tempo de investigação.</li>
+                    <li><strong>Não tem time 24×7 ou quer entrar em produção rápido:</strong> MDR é a forma mais rápida de obter resultado defensivo.</li>
+                    <li><strong>Setor regulado com retenção longa:</strong> mantenha SIEM como camada de compliance — XDR não substitui retenção legal.</li>
+                    <li><strong>Operação híbrida (SOC interno + provedor):</strong> MDR como L2/L3 noturno enquanto o time interno cobre horário comercial.</li>
+                </ul>
+            </div>
+
+            <h2 style="color:#E2E8F0;font-family:Montserrat,sans-serif;margin-top:2.5rem">Aprofunde nos conceitos</h2>
+            <ul style="color:#CBD5E1;line-height:1.8">
+                <li><a href="../../blog/xdr-extended-detection-response/" style="color:#60A5FA">XDR: Extended Detection and Response</a></li>
+                <li><a href="../../blog/soc-vs-mdr-vs-mssp-qual-modelo-certo/" style="color:#60A5FA">SOC vs MDR vs MSSP — qual modelo é certo</a></li>
+                <li><a href="../../blog/siem-vs-soar-vs-xdr-como-escolher-o-stack-do-soc-moderno/" style="color:#60A5FA">SIEM vs SOAR vs XDR — como escolher o stack do SOC</a></li>
+                <li><a href="../../blog/detection-engineering-regras-deteccao/" style="color:#60A5FA">Detection Engineering — regras de detecção como código</a></li>
+            </ul>
+
+            <div class="faq-block">
+                <h2>Perguntas frequentes</h2>
+                <div class="faq-item"><h3>Qual a diferença básica entre EDR, XDR e MDR?</h3><p>EDR é tecnologia de detecção e resposta focada no endpoint. XDR é uma plataforma que estende a correlação a endpoint, rede, e-mail, cloud e identidade. MDR é um serviço gerenciado que opera, 24×7, um EDR ou XDR em nome do cliente.</p></div>
+                <div class="faq-item"><h3>MDR substitui o SOC interno?</h3><p>Não necessariamente. MDR é especialmente útil para empresas sem SOC maduro ou que querem cobertura 24×7 sem montar a operação. Em organizações maiores, é comum o modelo híbrido — SOC interno em horário comercial e MDR fora dele, ou MDR como L2/L3.</p></div>
+                <div class="faq-item"><h3>Posso usar XDR sem SIEM?</h3><p>Sim em alguns cenários, mas com ressalvas. XDR concentra detecção sobre as superfícies que ele cobre. SIEM continua relevante para retenção longa, compliance, casos de uso de negócio e fontes que o XDR não ingere — como logs de aplicação proprietária e bases de dados.</p></div>
+                <div class="faq-item"><h3>Como evitar lock-in com XDR?</h3><p>Modele a arquitetura prevendo saída: exporte detecções e telemetria normalizadas (OCSF), mantenha o SIEM como camada de retenção independente e prefira XDRs com APIs abertas e formato de exportação documentado.</p></div>
+            </div>
+
+            <div class="cta-block">
+                <h3>Avaliação de stack EDR/XDR/MDR para seu cenário</h3>
+                <p>Mapeamos sua arquitetura atual, gaps de detecção e maturidade — e construímos a recomendação certa.</p>
+                <a href="../../#contato">Falar com Especialista</a>
+            </div>
+
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Conteúdo</h4>
+                        <ul>
+                            <li><a href="../../blog/">Blog</a></li>
+                            <li><a href="../../ferramentas/">Ferramentas</a></li>
+                            <li><a href="../../recursos/">Recursos</a></li>
+                            <li><a href="../../glossario/">Glossário</a></li>
+                            <li><a href="../">Comparadores</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../sobre/">Sobre</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                        <p><i class="fas fa-phone"></i> +55 11 99361-9947</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados. <a href="../../politica-de-privacidade.html">Política de Privacidade</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/site-common.js"></script>
+    <script>
+    (function(){
+        var table = document.getElementById('comparisonTable');
+        var search = document.getElementById('featureSearch');
+        var diffOnly = document.getElementById('diffOnly');
+        var rows = Array.prototype.slice.call(table.tBodies[0].rows);
+
+        function normalize(s){ return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
+        function apply(){
+            var q = normalize(search.value.trim());
+            var onlyDiff = diffOnly.checked;
+            rows.forEach(function(r){
+                var feature = normalize(r.cells[0].textContent);
+                var cells = [r.cells[1].textContent.trim(), r.cells[2].textContent.trim(), r.cells[3].textContent.trim()];
+                var matchQ = !q || feature.indexOf(q) !== -1;
+                var allEqual = cells[0] === cells[1] && cells[1] === cells[2];
+                var matchDiff = !onlyDiff || !allEqual;
+                r.classList.toggle('hidden', !(matchQ && matchDiff));
+            });
+        }
+        search.addEventListener('input', apply);
+        diffOnly.addEventListener('change', apply);
+    })();
+    </script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

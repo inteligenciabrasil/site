@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Parser de IOCs: extrai, defang/refang e classifica indicadores (IPv4, IPv6, domínios, URLs, e-mails, hashes MD5/SHA1/SHA256, CVEs, BTC) de texto bruto. Para CTI, threat hunting e IR.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="parser ioc, defang refang, indicators of compromise, threat hunting, cti, indicadores comprometimento, sha256 md5 extract, virustotal lookup">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/parser-iocs/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Inteligência Brasil &#8212; RSS" href="../../feed.xml">
+
+    <meta property="og:title" content="Parser e Normalizador de IOCs | Inteligência Brasil">
+    <meta property="og:description" content="Extraia, defang/refang e classifique indicadores de comprometimento direto do navegador.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/parser-iocs/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Parser de IOCs">
+    <meta name="twitter:description" content="Extração e defang/refang de IPs, domínios, URLs, hashes e CVEs.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Parser de IOCs — defang, refang e extração | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Parser de IOCs","description":"Ferramenta online gratuita que extrai, defang/refang e classifica indicadores de comprometimento (IOCs) — IPv4, IPv6, domínios, URLs, e-mails, hashes MD5/SHA1/SHA256, CVEs e Bitcoin addresses — em texto livre, com links de pivot para VirusTotal, urlscan.io e CVE.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"O que é defanging e quando uso?","acceptedAnswer":{"@type":"Answer","text":"Defanging é a transformação de um IOC potencialmente perigoso em forma não clicável/executável. Exemplos: 'malicious[.]example.com', 'hxxp://1.2.3.4/x.exe', 'badmail[@]attacker.tld'. É a forma padrão de compartilhar IOCs em relatórios, e-mails, planilhas e canais que renderizam links, evitando clique acidental no analista que recebe. Padrões mais comuns: . → [.]; http → hxxp; @ → [@]; / → [/]."}},
+        {"@type":"Question","name":"O que é refanging?","acceptedAnswer":{"@type":"Answer","text":"Refanging é o inverso: converter de volta para forma original e funcional. Necessário antes de submeter IOCs em ferramentas (sandbox, scanner, SIEM, EDR) que exigem o valor verdadeiro. Esta ferramenta faz refang automaticamente ao extrair — você nunca deve copiar IOCs com defang direto para campos operacionais sem refazer o refang."}},
+        {"@type":"Question","name":"Quais tipos de IOC esta ferramenta detecta?","acceptedAnswer":{"@type":"Answer","text":"IPv4 (incluindo private/internal), IPv6, domínios (com TLD plausível), URLs HTTP/HTTPS, e-mails, hashes MD5/SHA1/SHA256/SHA512, CVE-AAAA-NNNN, Bitcoin addresses (P2PKH/P2SH/Bech32). Detecção é por regex — falsos positivos podem ocorrer com strings que coincidentemente casam (ex.: versões 'v2.3.4.5' contam como IPv4)."}},
+        {"@type":"Question","name":"Os IOCs detectados são enviados para algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. A extração roda 100% local no navegador. Os links 'pivotar em VirusTotal/urlscan.io/CVE' que aparecem nos resultados só são executados quando você clica — você decide o que sai do navegador."}},
+        {"@type":"Question","name":"Por que IPs privados aparecem destacados?","acceptedAnswer":{"@type":"Answer","text":"IPs RFC1918 (10/8, 172.16/12, 192.168/16), loopback (127/8), link-local (169.254/16) e CGNAT (100.64/10) raramente são IOCs externos válidos — costumam ser ruído. A ferramenta separa em uma lista para que você decida se são relevantes (em um caso interno, sim; num feed de threat intel externo, normalmente não)."}},
+        {"@type":"Question","name":"E quanto a IOCs em codificações alternativas (base64, encoded URLs)?","acceptedAnswer":{"@type":"Answer","text":"Esta versão extrai apenas IOCs em texto plano (incluindo defang). Para conteúdo codificado (base64 dentro de phishing, encoded URL em document.location etc.), decodifique primeiro com nossa ferramenta de Codificador/Decodificador e em seguida cole o resultado aqui."}}
+    ]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Ferramentas","item":"https://inteligenciabrasil.seg.br/ferramentas/"},{"@type":"ListItem","position":3,"name":"Parser de IOCs"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <style>
+        .ic-wrap{max-width:1200px;margin:0 auto;padding:0 1rem}
+        .ic-wrap p,.ic-wrap h2,.ic-wrap h3,.ic-wrap h4,.ic-wrap strong,.ic-wrap li{color:inherit}
+        .ic-intro{color:#E2E8F0;font-size:1.05rem;line-height:1.65;margin-bottom:1.5rem}
+        .ic-intro p{color:#CBD5E1;margin-bottom:.75rem}
+        .ic-intro code{background:rgba(96,165,250,.12);color:#A5F3FC;padding:.1rem .35rem;border-radius:.25rem;font-family:'JetBrains Mono',monospace;font-size:.92em}
+        .ic-card{background:linear-gradient(145deg,rgba(13,30,56,.65) 0%,rgba(15,23,42,.55) 100%);border:1px solid rgba(96,165,250,.22);border-radius:12px;padding:1.5rem 1.5rem 1.25rem;margin:0 0 1.5rem}
+        .ic-card h2{font-family:Montserrat,sans-serif;color:#F1F5F9;font-size:1.35rem;margin:0 0 .35rem}
+        .ic-card h2 i{color:#60A5FA;margin-right:.4rem}
+        .ic-card .subtitle{color:#94A3B8;font-size:.92rem;margin:0 0 1rem}
+        .ic-input{width:100%;padding:.85rem 1rem;border:1px solid rgba(96,165,250,.3);border-radius:.45rem;background:rgba(2,6,23,.6);color:#E2E8F0;font-family:'JetBrains Mono',monospace;font-size:.95rem;outline:none;transition:border-color .15s;min-height:160px;resize:vertical;line-height:1.5}
+        .ic-input:focus{border-color:#60A5FA;box-shadow:0 0 0 3px rgba(96,165,250,.18)}
+        .ic-controls{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.85rem 0}
+        .ic-btn{background:linear-gradient(135deg,#1e40af 0%,#1e3a8a 100%);color:#fff;border:0;border-radius:.4rem;padding:.55rem 1rem;font-weight:600;cursor:pointer;font-size:.92rem;transition:opacity .15s}
+        .ic-btn:hover{opacity:.88}
+        .ic-btn.secondary{background:rgba(96,165,250,.12);color:#93C5FD;border:1px solid rgba(96,165,250,.3)}
+        .ic-toggle{display:inline-flex;align-items:center;gap:.4rem;color:#CBD5E1;font-size:.88rem;cursor:pointer}
+        .ic-toggle input{accent-color:#60A5FA}
+        .ic-stats{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1rem}
+        .ic-stat{background:rgba(96,165,250,.1);color:#A5F3FC;border:1px solid rgba(96,165,250,.25);border-radius:1rem;padding:.25rem .75rem;font-size:.8rem;font-family:'JetBrains Mono',monospace}
+        .ic-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1rem;margin-top:1rem}
+        .ic-cat{background:rgba(2,6,23,.45);border:1px solid rgba(148,163,184,.18);border-radius:.5rem;padding:.95rem 1.1rem}
+        .ic-cat h3{color:#93C5FD;font-size:.85rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin:0 0 .6rem;display:flex;justify-content:space-between;align-items:center}
+        .ic-cat h3 span{background:rgba(96,165,250,.18);color:#A5F3FC;padding:.1rem .55rem;border-radius:1rem;font-size:.7rem;font-weight:700}
+        .ic-cat ul{list-style:none;padding:0;margin:0;max-height:260px;overflow-y:auto}
+        .ic-cat li{padding:.3rem .55rem;border-radius:.3rem;font-family:'JetBrains Mono',monospace;font-size:.85rem;color:#E2E8F0;word-break:break-all;display:flex;justify-content:space-between;align-items:center;gap:.4rem}
+        .ic-cat li:nth-child(odd){background:rgba(96,165,250,.04)}
+        .ic-cat li:hover{background:rgba(96,165,250,.1)}
+        .ic-cat li a{color:#94A3B8;font-size:.72rem;flex-shrink:0;text-decoration:none;padding:.1rem .35rem;border-radius:.2rem;background:rgba(148,163,184,.08)}
+        .ic-cat li a:hover{color:#93C5FD;background:rgba(96,165,250,.15)}
+        .ic-empty{color:#64748B;font-style:italic;font-size:.85rem;padding:.4rem 0}
+        .ic-cat-private h3 span{background:rgba(245,158,11,.18);color:#fcd34d}
+        .ic-output-card{margin-top:1rem}
+        .ic-faq{margin-top:2rem}
+        .ic-faq details{background:rgba(13,30,56,.4);border:1px solid rgba(96,165,250,.18);border-radius:.5rem;padding:1rem 1.25rem;margin-bottom:.6rem}
+        .ic-faq summary{color:#F1F5F9;font-weight:600;cursor:pointer;font-size:1.02rem}
+        .ic-faq details p{color:#CBD5E1;margin:.6rem 0 0;line-height:1.6;font-size:.95rem}
+        .ic-faq details code{background:rgba(96,165,250,.12);color:#A5F3FC;padding:.1rem .35rem;border-radius:.25rem;font-family:'JetBrains Mono',monospace;font-size:.88em}
+    </style>
+</head>
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVI&Ccedil;OS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">FERRAMENTAS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ferramenta</span>
+            <h1>Parser e Normalizador de IOCs</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-fingerprint"></i> 8 categorias</span>
+                <span><i class="fas fa-magic"></i> defang/refang</span>
+                <span><i class="fas fa-lock"></i> 100% local</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Ferramentas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Parser de IOCs</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <section class="article-content">
+        <div class="ic-wrap">
+
+            <div class="ic-intro">
+                <p>Cole qualquer texto (relatório de threat intel, e-mail de phishing, log, mensagem em chat) e a ferramenta extrai, classifica e <strong>refanga automaticamente</strong> os IOCs: IPv4, IPv6, domínios, URLs, e-mails, hashes (MD5/SHA1/SHA256/SHA512), CVEs e endereços Bitcoin. Cada item tem link de pivot para VirusTotal, urlscan.io ou NVD.</p>
+                <p>Pode também <strong>defangar</strong> (transformar IOCs em forma não clicável) — útil para compartilhar em relatórios, e-mails e canais que auto-linkam. Roda 100% local: nada do que você colar sai do navegador, exceto quando você clica explicitamente em um link de pivot.</p>
+            </div>
+
+            <div class="ic-card">
+                <h2><i class="fas fa-keyboard"></i> Texto bruto</h2>
+                <p class="subtitle">Cole o conteúdo. Aceita IOCs em forma defanged (<code>1[.]2[.]3[.]4</code>, <code>hxxp://...</code>, <code>user[@]domain</code>).</p>
+
+                <textarea id="icInput" class="ic-input" placeholder="Cole aqui qualquer texto — relatório APT, header de e-mail, log...">Atividade observada relacionada a CVE-2024-3400 explorada por 192[.]168[.]50.10 e 198.51.100.23 conectando hxxps://malicious-c2[.]example[.]net/beacon.
+Hash do dropper: aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899.
+Contato em phishing user[@]badmail.tld; pagamento solicitado em 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa.</textarea>
+
+                <div class="ic-controls">
+                    <button class="ic-btn" id="icExtract"><i class="fas fa-search"></i> Extrair IOCs</button>
+                    <button class="ic-btn secondary" id="icDefangAll"><i class="fas fa-shield-alt"></i> Defang do texto inteiro</button>
+                    <button class="ic-btn secondary" id="icClear">Limpar</button>
+                    <label class="ic-toggle"><input type="checkbox" id="icPrivate"> Mostrar IPs privados</label>
+                </div>
+                <div class="ic-stats" id="icStats"></div>
+            </div>
+
+            <div class="ic-card ic-output-card" id="icOutputCard" style="display:none">
+                <h2><i class="fas fa-layer-group"></i> IOCs extraídos</h2>
+                <p class="subtitle">Refanged (forma original). Clique nos links de pivot apenas quando estiver pronto para consultar fontes externas.</p>
+                <div class="ic-results" id="icResults"></div>
+            </div>
+
+            <div class="ic-card ic-output-card" id="icDefangedCard" style="display:none">
+                <h2><i class="fas fa-shield-alt"></i> Texto defanged</h2>
+                <p class="subtitle">Versão segura para compartilhar em e-mails, relatórios e chats. Botão "Copiar" abaixo.</p>
+                <textarea id="icDefangedOut" class="ic-input" readonly style="min-height:140px"></textarea>
+                <div class="ic-controls">
+                    <button class="ic-btn" id="icCopyDefanged"><i class="fas fa-copy"></i> Copiar</button>
+                </div>
+            </div>
+
+            <div class="ic-faq">
+                <h2 style="color:#F1F5F9;font-family:Montserrat,sans-serif;margin-bottom:1rem"><i class="fas fa-question-circle" style="color:#60A5FA"></i> Perguntas frequentes</h2>
+
+                <details><summary>O que é defanging e quando uso?</summary>
+                    <p>Defanging é a transformação de um IOC potencialmente perigoso em forma não clicável/executável. Exemplos: <code>malicious[.]example.com</code>, <code>hxxp://1.2.3.4/x.exe</code>, <code>badmail[@]attacker.tld</code>. É a forma padrão de compartilhar IOCs em relatórios, e-mails, planilhas e canais que renderizam links, evitando clique acidental no analista que recebe.</p>
+                </details>
+
+                <details><summary>O que é refanging?</summary>
+                    <p>Refanging é o inverso: converter de volta para forma original e funcional. Necessário antes de submeter IOCs em ferramentas (sandbox, scanner, SIEM, EDR) que exigem o valor verdadeiro. Esta ferramenta faz refang automaticamente ao extrair.</p>
+                </details>
+
+                <details><summary>Quais tipos de IOC esta ferramenta detecta?</summary>
+                    <p>IPv4 (incluindo private/internal), IPv6, domínios, URLs HTTP/HTTPS, e-mails, hashes MD5/SHA1/SHA256/SHA512, <code>CVE-AAAA-NNNN</code> e Bitcoin addresses (P2PKH/P2SH/Bech32). Detecção é por regex — falsos positivos podem ocorrer (ex.: versões <code>v2.3.4.5</code> casam IPv4).</p>
+                </details>
+
+                <details><summary>Os IOCs detectados são enviados para algum servidor?</summary>
+                    <p>Não. A extração roda 100% local no navegador. Os links de pivot (VirusTotal/urlscan.io/CVE) só são executados quando você clica.</p>
+                </details>
+
+                <details><summary>Por que IPs privados aparecem destacados?</summary>
+                    <p>IPs RFC1918, loopback, link-local e CGNAT raramente são IOCs externos válidos — costumam ser ruído. A ferramenta separa em lista própria para você decidir se são relevantes ao caso.</p>
+                </details>
+
+                <details><summary>E quanto a IOCs em codificações alternativas (base64, encoded URLs)?</summary>
+                    <p>Esta versão extrai apenas IOCs em texto plano (incluindo defang). Para conteúdo codificado, decodifique primeiro com a <a href="../codificador-base64-url-hex/" style="color:#60A5FA">ferramenta de Codificador</a> e depois cole o resultado aqui.</p>
+                </details>
+            </div>
+
+        </div>
+    </section>
+    </main>
+
+    <footer class="ex-footer">
+        <div class="container">
+            <div class="footer-col first">
+                <h3>Inteligência Brasil</h3>
+                <p>Cibersegurança orientada a inteligência de ameaças e impacto.</p>
+            </div>
+            <div class="footer-col second">
+                <h3>Links</h3>
+                <ul class="list-unstyled li-space-lg p-small">
+                    <li><a href="../../">Home</a></li>
+                    <li><a href="../">Ferramentas</a></li>
+                    <li><a href="../../blog/">Blog</a></li>
+                    <li><a href="../../sobre/">Sobre</a></li>
+                </ul>
+            </div>
+            <div class="footer-col third">
+                <h3>Contato</h3>
+                <p>contato@inteligenciabrasil.seg.br</p>
+            </div>
+        </div>
+    </footer>
+    <div class="copyright">
+        <div class="container">
+            <p class="p-small">Copyright © Intelig&ecirc;ncia Brasil — Todos os direitos reservados</p>
+        </div>
+    </div>
+
+    <script src="../../js/site-common.js"></script>
+    <script>
+    (function(){
+        var input = document.getElementById('icInput');
+        var statsBox = document.getElementById('icStats');
+        var resultsBox = document.getElementById('icResults');
+        var outputCard = document.getElementById('icOutputCard');
+        var defangedCard = document.getElementById('icDefangedCard');
+        var defangedOut = document.getElementById('icDefangedOut');
+        var togglePriv = document.getElementById('icPrivate');
+
+        // Refang: convert defanged IOC notation back to functional form
+        function refang(s){
+            return s.replace(/\[\.\]/g,'.').replace(/\(\.\)/g,'.')
+                    .replace(/\[\:\]/g,':').replace(/\[\@\]/g,'@')
+                    .replace(/\bhxxp(s?)\:\/\//gi,'http$1://')
+                    .replace(/\bfxp\:\/\//gi,'ftp://');
+        }
+        // Defang: make IOC non-clickable
+        function defang(s){
+            return s.replace(/\bhttps:\/\//gi,'hxxps://')
+                    .replace(/\bhttp:\/\//gi,'hxxp://')
+                    .replace(/\bftp:\/\//gi,'fxp://')
+                    .replace(/\./g,'[.]')
+                    .replace(/@/g,'[@]');
+        }
+
+        function isPrivateIPv4(ip){
+            var p = ip.split('.').map(Number);
+            if(p.length !== 4) return false;
+            if(p[0] === 10) return true;
+            if(p[0] === 172 && p[1] >= 16 && p[1] <= 31) return true;
+            if(p[0] === 192 && p[1] === 168) return true;
+            if(p[0] === 127) return true;
+            if(p[0] === 169 && p[1] === 254) return true;
+            if(p[0] === 100 && p[1] >= 64 && p[1] <= 127) return true;
+            if(p[0] === 0) return true;
+            if(p[0] >= 224) return true; // multicast/reserved
+            return false;
+        }
+
+        function validIPv4(ip){
+            var p = ip.split('.').map(Number);
+            return p.length === 4 && p.every(function(n){ return n >= 0 && n <= 255; });
+        }
+
+        function extract(text){
+            var refanged = refang(text);
+            var found = {ipv4:[], ipv4Priv:[], ipv6:[], domain:[], url:[], email:[], md5:[], sha1:[], sha256:[], sha512:[], cve:[], btc:[]};
+
+            // URLs (capture first to avoid being eaten by domain regex)
+            var urlRe = /\b(?:https?|ftp):\/\/[^\s<>"'`,]+/gi;
+            var urls = refanged.match(urlRe) || [];
+            urls.forEach(function(u){ if(!found.url.includes(u)) found.url.push(u); });
+
+            // Emails
+            var emRe = /\b[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}\b/g;
+            (refanged.match(emRe)||[]).forEach(function(e){ if(!found.email.includes(e)) found.email.push(e); });
+
+            // IPv4
+            var ip4Re = /\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b/g;
+            (refanged.match(ip4Re)||[]).forEach(function(ip){
+                if(!validIPv4(ip)) return;
+                var bucket = isPrivateIPv4(ip) ? found.ipv4Priv : found.ipv4;
+                if(!bucket.includes(ip)) bucket.push(ip);
+            });
+
+            // IPv6 (loose)
+            var ip6Re = /\b(?:[A-Fa-f0-9]{1,4}:){2,7}[A-Fa-f0-9]{1,4}\b/g;
+            (refanged.match(ip6Re)||[]).forEach(function(ip){ if(!found.ipv6.includes(ip)) found.ipv6.push(ip); });
+
+            // CVE
+            var cveRe = /\bCVE-\d{4}-\d{4,7}\b/gi;
+            (refanged.match(cveRe)||[]).forEach(function(c){
+                var up = c.toUpperCase();
+                if(!found.cve.includes(up)) found.cve.push(up);
+            });
+
+            // Hashes (order matters: SHA512 longest first)
+            var sha512Re = /\b[A-Fa-f0-9]{128}\b/g;
+            (refanged.match(sha512Re)||[]).forEach(function(h){ if(!found.sha512.includes(h.toLowerCase())) found.sha512.push(h.toLowerCase()); });
+
+            var sha256Re = /\b[A-Fa-f0-9]{64}\b/g;
+            (refanged.match(sha256Re)||[]).forEach(function(h){ if(!found.sha256.includes(h.toLowerCase())) found.sha256.push(h.toLowerCase()); });
+
+            var sha1Re = /\b[A-Fa-f0-9]{40}\b/g;
+            (refanged.match(sha1Re)||[]).forEach(function(h){ if(!found.sha1.includes(h.toLowerCase())) found.sha1.push(h.toLowerCase()); });
+
+            var md5Re = /\b[A-Fa-f0-9]{32}\b/g;
+            (refanged.match(md5Re)||[]).forEach(function(h){ if(!found.md5.includes(h.toLowerCase())) found.md5.push(h.toLowerCase()); });
+
+            // Bitcoin addresses
+            var btcRe = /\b(?:bc1[a-z0-9]{25,90}|[13][a-zA-Z0-9]{25,34})\b/g;
+            (refanged.match(btcRe)||[]).forEach(function(b){ if(!found.btc.includes(b)) found.btc.push(b); });
+
+            // Domains (avoid matching things already captured as URLs/emails)
+            var domRe = /\b(?=[a-zA-Z0-9-]{1,63}\.)[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+\b/g;
+            (refanged.match(domRe)||[]).forEach(function(d){
+                if(d.length < 4) return;
+                if(/^\d+\.\d+\.\d+\.\d+$/.test(d)) return; // exclude IPv4-shaped
+                if(/^\d+\.\d+(\.\d+)?$/.test(d)) return; // version-like
+                if(!/^[a-zA-Z0-9-]+\.([a-zA-Z]{2,}|xn--[a-zA-Z0-9]+)$/.test(d) && d.split('.').slice(-1)[0].length < 2) return;
+                // exclude if already in URL/email
+                var inUrl = urls.some(function(u){ return u.indexOf(d) >= 0; });
+                var inEmail = found.email.some(function(e){ return e.indexOf(d) >= 0; });
+                if(inUrl || inEmail) return;
+                if(!found.domain.includes(d)) found.domain.push(d);
+            });
+
+            return found;
+        }
+
+        function pivotLink(category, value){
+            var v = encodeURIComponent(value);
+            switch(category){
+                case 'ipv4': case 'ipv6': case 'domain':
+                    return '<a href="https://www.virustotal.com/gui/search/'+v+'" target="_blank" rel="noopener">VT</a>';
+                case 'url':
+                    return '<a href="https://urlscan.io/search/#'+v+'" target="_blank" rel="noopener">urlscan</a>';
+                case 'md5': case 'sha1': case 'sha256': case 'sha512':
+                    return '<a href="https://www.virustotal.com/gui/file/'+v+'" target="_blank" rel="noopener">VT</a>';
+                case 'cve':
+                    return '<a href="https://nvd.nist.gov/vuln/detail/'+v+'" target="_blank" rel="noopener">NVD</a>';
+                case 'email':
+                    return '<a href="https://www.virustotal.com/gui/search/'+v+'" target="_blank" rel="noopener">VT</a>';
+                case 'btc':
+                    return '<a href="https://www.blockchain.com/btc/address/'+v+'" target="_blank" rel="noopener">chain</a>';
+            }
+            return '';
+        }
+
+        function renderCat(title, key, items, options){
+            var opts = options || {};
+            var cls = opts.privateClass ? ' ic-cat-private' : '';
+            var html = '<div class="ic-cat'+cls+'"><h3>'+title+' <span>'+items.length+'</span></h3>';
+            if(items.length === 0){
+                html += '<div class="ic-empty">— nenhum encontrado —</div>';
+            } else {
+                html += '<ul>';
+                items.forEach(function(v){
+                    var safe = v.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+                    html += '<li><span>'+safe+'</span>'+pivotLink(key, v)+'</li>';
+                });
+                html += '</ul>';
+            }
+            html += '</div>';
+            return html;
+        }
+
+        document.getElementById('icExtract').addEventListener('click', function(){
+            var text = input.value;
+            if(!text.trim()){ outputCard.style.display = 'none'; statsBox.innerHTML = ''; return; }
+            var f = extract(text);
+            outputCard.style.display = 'block';
+
+            var html = '';
+            html += renderCat('IPv4', 'ipv4', f.ipv4);
+            if(togglePriv.checked){
+                html += renderCat('IPv4 privados / reservados', 'ipv4', f.ipv4Priv, {privateClass:true});
+            }
+            html += renderCat('IPv6', 'ipv6', f.ipv6);
+            html += renderCat('Domínios', 'domain', f.domain);
+            html += renderCat('URLs', 'url', f.url);
+            html += renderCat('E-mails', 'email', f.email);
+            html += renderCat('SHA-256', 'sha256', f.sha256);
+            html += renderCat('SHA-1', 'sha1', f.sha1);
+            html += renderCat('MD5', 'md5', f.md5);
+            html += renderCat('SHA-512', 'sha512', f.sha512);
+            html += renderCat('CVE', 'cve', f.cve);
+            html += renderCat('Bitcoin addresses', 'btc', f.btc);
+            resultsBox.innerHTML = html;
+
+            var total = f.ipv4.length + f.ipv6.length + f.domain.length + f.url.length + f.email.length + f.sha256.length + f.sha1.length + f.md5.length + f.sha512.length + f.cve.length + f.btc.length;
+            var stats = '<span class="ic-stat">Total: '+total+'</span>';
+            if(f.ipv4.length) stats += '<span class="ic-stat">IPv4: '+f.ipv4.length+'</span>';
+            if(f.ipv4Priv.length) stats += '<span class="ic-stat">privados: '+f.ipv4Priv.length+'</span>';
+            if(f.domain.length) stats += '<span class="ic-stat">domínios: '+f.domain.length+'</span>';
+            if(f.url.length) stats += '<span class="ic-stat">URLs: '+f.url.length+'</span>';
+            if(f.sha256.length) stats += '<span class="ic-stat">SHA-256: '+f.sha256.length+'</span>';
+            if(f.cve.length) stats += '<span class="ic-stat">CVEs: '+f.cve.length+'</span>';
+            statsBox.innerHTML = stats;
+        });
+
+        document.getElementById('icDefangAll').addEventListener('click', function(){
+            defangedCard.style.display = 'block';
+            defangedOut.value = defang(refang(input.value));
+            defangedOut.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+
+        document.getElementById('icCopyDefanged').addEventListener('click', function(){
+            defangedOut.select();
+            navigator.clipboard.writeText(defangedOut.value);
+            var btn = this;
+            btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+            setTimeout(function(){ btn.innerHTML = '<i class="fas fa-copy"></i> Copiar'; }, 1500);
+        });
+
+        document.getElementById('icClear').addEventListener('click', function(){
+            input.value = '';
+            statsBox.innerHTML = '';
+            outputCard.style.display = 'none';
+            defangedCard.style.display = 'none';
+        });
+
+        togglePriv.addEventListener('change', function(){
+            if(outputCard.style.display === 'block') document.getElementById('icExtract').click();
+        });
+    })();
+    </script>
+</body>
+</html>

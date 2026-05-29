@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Analisador online de headers de segurança HTTP. Avalia HSTS, CSP, X-Frame-Options, Permissions-Policy, COOP/COEP e gera nota A+ a F com recomendações práticas.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="security headers, analisador headers, hsts, csp, content security policy, x-frame-options, permissions policy, coop coep, headers seguranca http">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/security-headers/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Inteligência Brasil &#8212; RSS" href="../../feed.xml">
+
+    <meta property="og:title" content="Analisador de Security Headers | Inteligência Brasil">
+    <meta property="og:description" content="Avalie a postura de segurança HTTP do seu site: HSTS, CSP, X-Frame-Options, COOP/COEP e mais. Nota A+ a F com recomendações.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/security-headers/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Analisador de Security Headers">
+    <meta name="twitter:description" content="Avalie a postura de segurança HTTP do seu site.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Analisador de Security Headers | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Analisador de Security Headers","description":"Ferramenta online gratuita para analisar a configuração de headers de segurança HTTP de um site (HSTS, CSP, X-Frame-Options e mais).","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"Quais headers são analisados?","acceptedAnswer":{"@type":"Answer","text":"Strict-Transport-Security (HSTS), Content-Security-Policy (CSP), X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, Cross-Origin-Opener-Policy (COOP), Cross-Origin-Embedder-Policy (COEP), Cross-Origin-Resource-Policy (CORP), Server, X-Powered-By e X-XSS-Protection. Cada header tem peso na nota final conforme o impacto real em segurança."}},
+        {"@type":"Question","name":"Como o analisador chega na nota A+ a F?","acceptedAnswer":{"@type":"Answer","text":"Cada header tem pontuação máxima e regras de avaliação. CSP vale 25 pontos, HSTS 20, X-Frame-Options 10, Permissions-Policy 10, Referrer-Policy 10, COOP 7, X-Content-Type-Options 5, COEP/CORP 4 cada, Server/X-Powered-By são deméritos quando expõem versão. A nota considera a proporção (% obtido vs. máximo) e a presença ou ausência de headers críticos."}},
+        {"@type":"Question","name":"Por que tenho que colar os headers em vez de informar a URL?","acceptedAnswer":{"@type":"Answer","text":"Limitações de CORS no navegador impedem ler diretamente headers de respostas HTTP de outras origens. A ferramenta tenta usar um proxy CORS público quando você informa URL, mas alguns headers podem ser filtrados pelo proxy. O modo confiável é colar o output de curl -I, PowerShell Invoke-WebRequest ou DevTools."}},
+        {"@type":"Question","name":"Qual a diferença entre X-Frame-Options e CSP frame-ancestors?","acceptedAnswer":{"@type":"Answer","text":"X-Frame-Options é o header legacy (DENY/SAMEORIGIN) que evita clickjacking. CSP frame-ancestors é o substituto moderno e mais flexível - permite listar origens, suporta wildcards e está dentro do CSP. Quando ambos estão presentes, navegadores modernos usam frame-ancestors. Recomendado migrar para CSP frame-ancestors mantendo X-Frame-Options apenas para clientes legacy."}},
+        {"@type":"Question","name":"Devo configurar Content-Security-Policy em toda aplicação?","acceptedAnswer":{"@type":"Answer","text":"Sim. CSP é a defesa principal contra XSS no navegador moderno. Comece em modo Report-Only para coletar violações sem quebrar nada, ajuste a política até ficar limpa, então mude para enforcement. Evite unsafe-inline e unsafe-eval - quando inevitáveis, use nonces ou hashes. Adicione frame-ancestors, base-uri e object-src 'none' como camadas extras."}},
+        {"@type":"Question","name":"O que é cross-origin isolation e quando preciso?","acceptedAnswer":{"@type":"Answer","text":"COOP same-origin + COEP require-corp colocam a página em estado cross-origin isolated. Esse estado habilita APIs como SharedArrayBuffer, performance.measureUserAgentSpecificMemory e timers de alta resolução - importantes para WebAssembly e aplicações de performance. Para sites comuns não é necessário, mas é defesa adicional contra Spectre."}}
+    ]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Ferramentas","item":"https://inteligenciabrasil.seg.br/ferramentas/"},{"@type":"ListItem","position":3,"name":"Analisador de Security Headers"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    <link href="headers.css?v=1" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVI&Ccedil;OS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">FERRAMENTAS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ferramenta</span>
+            <h1>Analisador de Security Headers</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-shield-alt"></i> 12 headers</span>
+                <span><i class="fas fa-bolt"></i> Nota A+ a F</span>
+                <span><i class="fas fa-lock"></i> 100% local</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Ferramentas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Security Headers</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <section class="article-content">
+        <div class="sh-wrap">
+
+            <div class="sh-intro">
+                <p>Avalia a configura&ccedil;&atilde;o dos principais headers de seguran&ccedil;a HTTP de um site e gera nota <strong>A+ a F</strong> com recomenda&ccedil;&otilde;es pr&aacute;ticas para cada item. Cobre HSTS, Content-Security-Policy, X-Frame-Options, Permissions-Policy, COOP/COEP/CORP e detec&ccedil;&atilde;o de information disclosure (Server, X-Powered-By).</p>
+                <p>An&aacute;lise 100% no navegador. Cole o output de <code>curl -I</code> ou informe a URL (modo URL usa proxy CORS p&uacute;blico - alguns headers podem ser filtrados).</p>
+            </div>
+
+            <div class="sh-card">
+                <h2><i class="fas fa-search"></i> Analisar headers</h2>
+                <p class="subtitle">Escolha o modo: colar os headers obtidos manualmente (recomendado) ou buscar a URL via proxy.</p>
+
+                <div class="sh-tabs" role="tablist">
+                    <button class="sh-tab active" data-tab="paste" role="tab">Colar headers</button>
+                    <button class="sh-tab" data-tab="url" role="tab">Buscar por URL</button>
+                </div>
+
+                <div class="sh-tab-content active" data-tab="paste">
+                    <textarea id="shPasteArea" class="sh-paste-area" placeholder="Cole aqui o output de curl -I, PowerShell Invoke-WebRequest, ou os headers de resposta do DevTools&#10;&#10;Exemplo:&#10;HTTP/2 200&#10;strict-transport-security: max-age=31536000; includeSubDomains; preload&#10;content-security-policy: default-src 'self'&#10;x-frame-options: DENY"></textarea>
+
+                    <div class="sh-actions">
+                        <button type="button" id="shAnalyzeBtn"><i class="fas fa-play"></i> Analisar</button>
+                        <button type="button" id="shSampleBtn" class="secondary">Carregar exemplo</button>
+                        <button type="button" id="shClearBtn" class="secondary">Limpar</button>
+                    </div>
+
+                    <div class="sh-curl-hint">
+                        <p>Como obter os headers</p>
+                        <p style="color:#CBD5E1;font-weight:400;font-size:.95rem;margin:0 0 .25rem">No terminal, com <em>curl</em>:</p>
+                        <code>curl -I -L https://exemplo.com.br</code>
+                        <button class="copy-btn sh-copy-cmd" type="button">Copiar comando</button>
+
+                        <p>PowerShell (Windows)</p>
+                        <code>(Invoke-WebRequest -Uri https://exemplo.com.br -Method Head).Headers</code>
+                        <button class="copy-btn sh-copy-cmd" type="button">Copiar comando</button>
+
+                        <p>Browser DevTools</p>
+                        <p style="color:#CBD5E1;font-weight:400;font-size:.95rem;margin:0">Aba <em>Network</em> &rarr; selecione a requisi&ccedil;&atilde;o do documento &rarr; aba <em>Headers</em> &rarr; copie a se&ccedil;&atilde;o <em>Response Headers</em>.</p>
+                    </div>
+                </div>
+
+                <div class="sh-tab-content" data-tab="url">
+                    <div class="sh-url-row">
+                        <input type="text" id="shUrlInput" placeholder="https://exemplo.com.br" autocomplete="off" spellcheck="false">
+                        <button type="button" id="shFetchBtn"><i class="fas fa-cloud-download-alt"></i> Buscar e analisar</button>
+                    </div>
+                    <p>
+                        Usa <code>corsproxy.io</code> como relay. Pode falhar em sites com WAF/Cloudflare bloqueando o proxy. Para resultado <strong>autoritativo</strong>, prefira colar o output de <code>curl -I</code>.
+                    </p>
+                </div>
+            </div>
+
+            <div id="shResults" class="sh-results sh-card" style="background:transparent;border:none;padding:0"></div>
+
+            <div class="sh-explained">
+                <h2>Refer&ecirc;ncia r&aacute;pida</h2>
+                <div class="sh-explained-grid">
+                    <div class="sh-explained-card">
+                        <h3>Strict-Transport-Security</h3>
+                        <p>For&ccedil;a HTTPS por per&iacute;odo definido. Recomendado: <code>max-age=31536000; includeSubDomains; preload</code>.</p>
+                    </div>
+                    <div class="sh-explained-card">
+                        <h3>Content-Security-Policy</h3>
+                        <p>Defesa principal contra XSS. Restringe origens de scripts, frames, imagens. Evite <code>unsafe-inline</code> e <code>unsafe-eval</code>.</p>
+                    </div>
+                    <div class="sh-explained-card">
+                        <h3>X-Frame-Options</h3>
+                        <p>Anti-clickjacking. Use <code>DENY</code> ou <code>SAMEORIGIN</code>. CSP <code>frame-ancestors</code> &eacute; o substituto moderno.</p>
+                    </div>
+                    <div class="sh-explained-card">
+                        <h3>X-Content-Type-Options</h3>
+                        <p>Bloqueia MIME sniffing. Sempre configure como <code>nosniff</code>.</p>
+                    </div>
+                    <div class="sh-explained-card">
+                        <h3>Referrer-Policy</h3>
+                        <p>Controla envio do Referer. <code>strict-origin-when-cross-origin</code> &eacute; o equil&iacute;brio recomendado.</p>
+                    </div>
+                    <div class="sh-explained-card">
+                        <h3>Permissions-Policy</h3>
+                        <p>Restringe APIs do navegador (camera, microfone, geolocaliza&ccedil;&atilde;o, USB). Define explicitamente quais s&atilde;o permitidas.</p>
+                    </div>
+                    <div class="sh-explained-card">
+                        <h3>Cross-Origin-Opener-Policy</h3>
+                        <p>Isolamento de browsing context. <code>same-origin</code> mitiga ataques Spectre-class e habilita cross-origin isolation.</p>
+                    </div>
+                    <div class="sh-explained-card">
+                        <h3>Cross-Origin-Embedder-Policy</h3>
+                        <p>Junto com COOP, habilita estado isolado. Use <code>require-corp</code> ou <code>credentialless</code> em apps que precisam.</p>
+                    </div>
+                    <div class="sh-explained-card">
+                        <h3>Cross-Origin-Resource-Policy</h3>
+                        <p>Bloqueia carregamento cross-origin do recurso. Recomendado <code>same-origin</code> ou <code>same-site</code> para a maioria.</p>
+                    </div>
+                    <div class="sh-explained-card">
+                        <h3>Server / X-Powered-By</h3>
+                        <p>Information disclosure. Configure o servidor para <em>n&atilde;o</em> revelar nome/vers&atilde;o (reduz vetor de pesquisa direcionada).</p>
+                    </div>
+                    <div class="sh-explained-card">
+                        <h3>X-XSS-Protection</h3>
+                        <p>Legacy. Hoje recomendado configurar como <code>0</code> e confiar em CSP. Filtros XSS nativos foram removidos dos navegadores.</p>
+                    </div>
+                    <div class="sh-explained-card">
+                        <h3>Boas pr&aacute;ticas</h3>
+                        <p>Comece CSP em <em>Report-Only</em>, monitore violations, depois enforce. Submeta o dom&iacute;nio ao <a href="https://hstspreload.org" target="_blank" rel="noopener" style="color:#60A5FA">hstspreload.org</a> ap&oacute;s HSTS estabilizado.</p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="faq-section">
+                <h2 style="font-family:Montserrat,sans-serif;color:#E2E8F0;margin:2.5rem 0 1rem">Perguntas frequentes</h2>
+                <div class="faq-item">
+                    <div class="faq-question"><span>Quais headers s&atilde;o analisados?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>HSTS, Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, COOP, COEP, CORP, Server, X-Powered-By e X-XSS-Protection. Cada um tem peso na nota final conforme impacto em seguran&ccedil;a.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>Como o analisador chega na nota A+ a F?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>CSP vale 25 pontos, HSTS 20, X-Frame-Options 10, Permissions-Policy 10, Referrer-Policy 10, COOP 7, X-Content-Type-Options 5, COEP/CORP 4 cada. A nota considera percentual do total e penaliza aus&ecirc;ncia de headers cr&iacute;ticos.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>Por que cole-headers em vez de URL direta?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>O navegador bloqueia leitura de headers de respostas de outras origens por CORS. O modo URL usa proxy p&uacute;blico, mas alguns headers podem ser filtrados ou WAFs bloqueiam o proxy. Para resultado autoritativo, sempre prefira colar o output de <code>curl -I</code>.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>Qual diferen&ccedil;a entre X-Frame-Options e CSP frame-ancestors?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>X-Frame-Options &eacute; o header legado (DENY/SAMEORIGIN). CSP frame-ancestors &eacute; o substituto moderno - permite lista de origens, wildcards e est&aacute; integrado ao CSP. Navegadores modernos priorizam frame-ancestors quando ambos est&atilde;o presentes.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>Devo configurar CSP em toda aplica&ccedil;&atilde;o?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>Sim. CSP &eacute; a defesa principal contra XSS. Comece em Report-Only, ajuste at&eacute; ficar limpa, depois enforce. Evite <code>unsafe-inline</code> e <code>unsafe-eval</code> - prefira nonces e hashes. Adicione frame-ancestors, base-uri e object-src 'none'.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><span>O que &eacute; cross-origin isolation e quando preciso?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>COOP same-origin + COEP require-corp colocam a p&aacute;gina em estado isolado. Habilita SharedArrayBuffer, performance.measureUserAgentSpecificMemory e timers de alta resolu&ccedil;&atilde;o. N&atilde;o &eacute; necess&aacute;rio em sites comuns, mas &eacute; defesa adicional contra Spectre.</p></div>
+                </div>
+            </section>
+
+            <div class="cta-box" style="margin:3rem 0 1rem">
+                <h3>Configura&ccedil;&atilde;o de hardening web</h3>
+                <p>Implementamos CSP enforced sem quebrar a aplica&ccedil;&atilde;o, HSTS preload, e o stack completo de defesa em profundidade no servidor web e na borda (Cloudflare/AWS WAF).</p>
+                <a href="../../#contato?utm_source=tool&utm_medium=security-headers&utm_campaign=tool-cta" class="cta-btn">Falar com Especialista</a>
+            </div>
+
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="../../feed.xml" target="_blank" rel="noopener" aria-label="RSS Feed"><i class="fas fa-rss"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Conteúdo</h4>
+                        <ul>
+                            <li><a href="../">Ferramentas</a></li>
+                            <li><a href="../../blog/">Blog</a></li>
+                            <li><a href="../../glossario/">Glossário</a></li>
+                            <li><a href="../../comparadores/">Comparadores</a></li>
+                            <li><a href="../../newsletter/">Newsletter</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../sobre/">Sobre</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                        <p><i class="fas fa-phone"></i> +55 11 99361-9947</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados. <a href="../../politica-de-privacidade.html">Política de Privacidade</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
+
+    <script src="../../js/site-common.min.js"></script>
+    <script src="headers.js?v=1"></script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>
