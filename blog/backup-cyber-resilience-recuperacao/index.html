@@ -10,6 +10,7 @@
     <meta name="author" content="Inteligencia Brasil">
     <meta name="theme-color" content="#0D1E38">
     <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/backup-cyber-resilience-recuperacao/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Intelig&#234;ncia Brasil &#8212; RSS" href="../../feed.xml">
 
     <meta property="og:title" content="Cyber Resilience: Backup e Recuperacao contra Ransomware">
     <meta property="og:description" content="Como construir estrategia de backup que resiste a ransomware e garante recuperacao.">
@@ -91,7 +92,11 @@
     }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- HowTo Schema -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"HowTo","name":"Como aplicar a regra 3-2-1-1-0 de backup","description":"Implantação de estratégia de backup resiliente contra ransomware moderno.","step":[{"@type":"HowToStep","position":1,"name":"Identificar dados críticos e RTO/RPO","text":"Mapeie sistemas críticos, classifique dados e defina objetivos de tempo (RTO) e perda aceitável (RPO) por aplicação."},{"@type":"HowToStep","position":2,"name":"Três cópias em duas mídias","text":"Garanta três cópias dos dados em pelo menos dois tipos de mídia (disco local, fita, cloud, objeto)."},{"@type":"HowToStep","position":3,"name":"Uma cópia offsite","text":"Mantenha uma cópia em geografia/conta cloud separada, protegida de acesso de credenciais primárias."},{"@type":"HowToStep","position":4,"name":"Uma cópia imutável","text":"Configure uma cópia com object lock/WORM que impede alteração ou exclusão durante a retenção, mesmo por admin."},{"@type":"HowToStep","position":5,"name":"Zero erros em testes de restore","text":"Faça restore parcial mensal e completo (DR) semestral. Backup sem restore testado não é backup."},{"@type":"HowToStep","position":6,"name":"Plano de DR e tabletops","text":"Documente runbooks de DR, execute tabletops anuais e meça o tempo real de recuperação contra os RTOs definidos."}]}
+    </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -134,7 +139,7 @@
                     </div>
                 </li>
                 <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
-                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
             </ul>
             <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
         </div>
@@ -410,7 +415,7 @@
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Depende da configuracao. Backup cloud com mesmas credenciais AD corporativo pode ser comprometido junto. Configure: conta cloud separada, MFA dedicado, imutabilidade habilitada (Object Lock), e sem conexao direta com rede de producao alem do agente de backup.</p>
+                            <p>Depende da configuracao. Backup cloud com mesmas credenciais AD corporativo pode ser comprometido junto. Configure: conta cloud separada, <a class="gloss-link" href="/glossario/#mfa" title="Ver no gloss&#225;rio">MFA</a> dedicado, imutabilidade habilitada (Object Lock), e sem conexao direta com rede de producao alem do agente de backup.</p>
                         </div>
                     </div>
 
@@ -451,7 +456,7 @@
 
                 <div class="cta-box">
                     <h3>Precisa de Ajuda com Cyber Resilience?</h3>
-                    <p>Oferecemos assessment de backup, planejamento de DR e implementacao de estrategias resilientes contra ransomware.</p>
+                    <p>Oferecemos assessment de backup, planejamento de DR e implementacao de estrategias resilientes contra <a class="gloss-link" href="/glossario/#ransomware" title="Ver no gloss&#225;rio">ransomware</a>.</p>
                     <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
                 </div>
 
