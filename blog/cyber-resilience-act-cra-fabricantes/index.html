@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Cyber Resilience Act (CRA — Regulamento UE 2024/2847): obrigações, prazos (vulnerability reporting em set/2026 e plena aplicação em dez/2027), classes de produto, SBOM, CE e como fabricantes brasileiros se preparam para exportar à UE.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="cyber resilience act, CRA, regulamento UE 2024/2847, fabricantes software UE, SBOM, marca CE software, vulnerability disclosure, product security, PSIRT, secure by design">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/cyber-resilience-act-cra-fabricantes/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Inteligência Brasil — RSS" href="../../feed.xml">
+
+    <meta property="og:title" content="Cyber Resilience Act (CRA) e Fabricantes de Software: O que Muda">
+    <meta property="og:description" content="Obrigações, prazos, classes de produto, SBOM e marca CE — guia para fabricantes BR que exportam ou disponibilizam software/hardware no mercado da UE.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/cyber-resilience-act-cra-fabricantes/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2026-05-24T12:00:00-03:00">
+    <meta property="article:section" content="Regulação & AppSec">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cyber Resilience Act (CRA) e Fabricantes">
+    <meta name="twitter:description" content="Obrigações, prazos e como fabricantes BR se preparam para o CRA.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Cyber Resilience Act (CRA) e Fabricantes de Software: O que Muda | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Cyber Resilience Act (CRA) e Fabricantes de Software: O que Muda","description":"Obrigações, prazos, classes de produto e SBOM no Regulamento (UE) 2024/2847 — guia prático para fabricantes brasileiros de software e hardware.","image":"https://inteligenciabrasil.seg.br/img/og-image.webp","author":{"@type":"Person","name":"Roberto Lima","url":"https://inteligenciabrasil.seg.br/sobre/"},"publisher":{"@type":"Organization","name":"Inteligência Brasil","logo":{"@type":"ImageObject","url":"https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},"datePublished":"2026-05-24","dateModified":"2026-05-24","mainEntityOfPage":{"@type":"WebPage","@id":"https://inteligenciabrasil.seg.br/blog/cyber-resilience-act-cra-fabricantes/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/","inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"Software open source está sujeito ao CRA?","acceptedAnswer":{"@type":"Answer","text":"Free and open-source software desenvolvido e disponibilizado fora de atividade comercial está fora do escopo do CRA. Quando o open source é monetizado, integrado em produto comercial ou suportado profissionalmente, entra no escopo do fabricante que o coloca no mercado. O CRA cria a figura do open-source software steward, com regime mais leve para fundações e mantenedores que organizam comunidades sem fim lucrativo direto."}},
+        {"@type":"Question","name":"SaaS puro está coberto pelo CRA?","acceptedAnswer":{"@type":"Answer","text":"SaaS puro (sem componente distribuído ao cliente) tende a ficar fora do CRA, sendo objeto de regulações como NIS2. Porém, se o serviço entrega um agente local, plugin, SDK, mobile app, CLI, biblioteca ou qualquer artefato instalado no ambiente do cliente, esse componente é product with digital elements e está dentro do escopo. Provedor que combina SaaS com agentes deve avaliar componente a componente."}},
+        {"@type":"Question","name":"Qual a multa por descumprimento do CRA?","acceptedAnswer":{"@type":"Answer","text":"Para violação dos requisitos essenciais e obrigações de vulnerability handling, a multa pode chegar a 15 milhões de euros ou 2,5% do faturamento global anual, o que for maior. Outras violações administrativas e informações enganosas a notified bodies têm tetos menores (até 10 milhões ou 2% do faturamento). Há também risco de retirada do produto do mercado da UE."}},
+        {"@type":"Question","name":"Como uma empresa brasileira sem entidade na UE pode vender no bloco?","acceptedAnswer":{"@type":"Answer","text":"O CRA exige que o fabricante estabelecido fora da UE designe por escrito um authorized representative dentro da União. Esse representante mantém a documentação técnica à disposição das autoridades, coopera em investigações e atua como ponto de contato. Sem representante autorizado, o produto não pode ser legalmente colocado no mercado europeu — importadores e distribuidores são obrigados a recusar."}},
+        {"@type":"Question","name":"O que é SBOM e em que formato deve ser entregue?","acceptedAnswer":{"@type":"Answer","text":"Software Bill of Materials é o inventário machine-readable dos componentes que compõem o produto, incluindo bibliotecas third-party e dependências transitivas com versões. O CRA exige SBOM em formato legível por máquina; os padrões aceitos pela indústria são SPDX (ISO/IEC 5962) e CycloneDX. O SBOM faz parte da documentação técnica e suporta o handling de vulnerabilidades."}},
+        {"@type":"Question","name":"CRA, NIS2 e GPSR se aplicam ao mesmo produto?","acceptedAnswer":{"@type":"Answer","text":"Sim, em camadas diferentes. CRA regula o produto colocado no mercado (fabricante, ciclo de vida, vulnerability handling). NIS2 regula a postura cibernética de operadores e prestadores de serviços essenciais e importantes (usuários do produto). GPSR cobre segurança geral de produtos não-CRA. Um produto IoT industrial vendido por fabricante brasileiro a um operador essencial alemão pode ativar os três regimes simultaneamente — cada um sobre uma parte distinta da operação."}}
+    ]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inteligenciabrasil.seg.br/blog/"},{"@type":"ListItem","position":3,"name":"Cyber Resilience Act (CRA) e Fabricantes"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Regulação &amp; AppSec</span>
+            <h1>Cyber Resilience Act (CRA) e Fabricantes de Software: O que Muda</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Maio 2026</span>
+                <span><i class="far fa-clock"></i> 15 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligência Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Cyber Resilience Act (CRA)</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+
+                <div class="warning-box" style="border-left-color:#f59e0b;background:linear-gradient(145deg,rgba(245,158,11,.08) 0%,rgba(180,83,9,.04) 100%);border-color:rgba(245,158,11,.4)">
+                    <p class="warning-title" style="margin:0 0 .5rem;color:#fcd34d;font-weight:700;font-size:1.05rem"><i class="fas fa-info-circle"></i> <strong>Sobre este conteúdo</strong></p>
+                    <p style="color:#cbd5e1">Este artigo apresenta uma leitura técnica e operacional do <strong>Regulamento (UE) 2024/2847 — Cyber Resilience Act</strong> com foco em fabricantes brasileiros que exportam ou disponibilizam produtos com elementos digitais no mercado europeu. <em>Não substitui</em> a leitura integral do texto oficial nem parecer jurídico especializado. Datas e tetos sancionatórios refletem o texto publicado no Jornal Oficial da UE em 20 de novembro de 2024.</p>
+                </div>
+
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#contexto">Contexto: o que é o CRA</a></li>
+                        <li><a href="#escopo">Escopo: produtos com elementos digitais</a></li>
+                        <li><a href="#classes">Classes de produto e conformity assessment</a></li>
+                        <li><a href="#essenciais">Requisitos essenciais de segurança</a></li>
+                        <li><a href="#vulnerabilidades">Vulnerability handling e notificação</a></li>
+                        <li><a href="#documentacao">Documentação técnica, declaração UE e marca CE</a></li>
+                        <li><a href="#atores">Atores: fabricante, importador, distribuidor</a></li>
+                        <li><a href="#brasil">Como fabricantes BR se preparam</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="contexto">Contexto: o que é o CRA</h2>
+
+                <p>
+                    O <strong>Cyber Resilience Act</strong> é o Regulamento (UE) 2024/2847, publicado no Jornal Oficial da União Europeia em 20 de novembro de 2024 e em vigor desde <strong>10 de dezembro de 2024</strong>. É a primeira legislação horizontal do bloco que impõe requisitos cibernéticos a fabricantes de produtos com elementos digitais — software embarcado, software standalone, hardware conectado e suas dependências — como condição para entrada no mercado europeu.
+                </p>
+
+                <p>
+                    A motivação declarada pelos legisladores europeus é direta: a maior parte dos produtos digitais chega ao mercado com vulnerabilidades exploráveis conhecidas, sem suporte de segurança previsível e sem transparência sobre composição. Incidentes como SolarWinds, Log4Shell e MOVEit demonstraram que o ônus do risco recai sobre operadores, governos e cidadãos — não sobre quem fabrica. O CRA reverte essa lógica: a obrigação primária de produzir software seguro é do fabricante.
+                </p>
+
+                <p>
+                    A maioria das obrigações entra em vigor em <strong>11 de dezembro de 2027</strong> — 36 meses após a entrada em vigor do regulamento, com 24 meses dedicados à transição operacional dos fabricantes. Há uma data intermediária crítica: a <strong>obrigação de notificar vulnerabilidades ativamente exploradas e incidentes graves passa a valer em 11 de setembro de 2026</strong>, 21 meses após entrada em vigor. Fabricantes que esperarem 2027 para começar perderão essa janela.
+                </p>
+
+                <div class="warning-box">
+                    <h3><i class="fas fa-gavel"></i> Penalidades</h3>
+                    <p>Para violações dos requisitos essenciais e das obrigações de tratamento de vulnerabilidades, multas de até <strong>€15 milhões ou 2,5% do faturamento global anual</strong>, o que for maior. Outras violações administrativas têm teto de €10 milhões ou 2%. Informações incorretas a notified bodies podem custar até €5 milhões ou 1%. Autoridades de fiscalização ainda podem ordenar retirada do produto do mercado.</p>
+                </div>
+
+                <p>
+                    Para fabricantes brasileiros de software, o CRA não é assunto exclusivamente europeu. Empresas que distribuem produto baixável globalmente (ferramentas SaaS com agente, dispositivos IoT, bibliotecas comerciais, firmware para hardware embarcado, plugins, SDKs) provavelmente colocam seu produto no mercado da UE — e portanto se enquadram. O modelo de negócio "vendo de qualquer lugar para qualquer um" precisa de uma camada de governance regulatória que a maioria das empresas BR ainda não tem.
+                </p>
+
+                <h2 id="escopo">Escopo: produtos com elementos digitais</h2>
+
+                <p>
+                    O CRA define <em>product with digital elements</em> (PDE) como qualquer produto de software ou hardware e suas soluções de processamento de dados remoto, cuja utilização pretendida ou razoavelmente previsível inclui conexão direta ou indireta a um dispositivo ou rede. A definição é ampla intencionalmente. Em prática:
+                </p>
+
+                <ul>
+                    <li><strong>Software standalone</strong> — sistemas operacionais, suítes de produtividade, ferramentas de desenvolvimento, antivírus, plataformas locais;</li>
+                    <li><strong>Software embarcado</strong> — firmware de dispositivos, sistemas embedded, RTOS, bootloaders;</li>
+                    <li><strong>Hardware conectado</strong> — IoT consumer e industrial, roteadores, smart cards, smart meters, wearables, controladores industriais;</li>
+                    <li><strong>Bibliotecas e componentes comerciais</strong> — SDKs, middleware, frameworks distribuídos sob licença comercial;</li>
+                    <li><strong>Aplicativos móveis</strong> instalados em dispositivos do cliente final.</li>
+                </ul>
+
+                <p>
+                    <strong>Fora do escopo</strong>: produtos cobertos por regulações setoriais específicas (dispositivos médicos sob MDR/IVDR, aeronaves sob EASA, veículos sob UNECE WP.29, certos itens de defesa), SaaS puro sem componente entregue ao cliente (que continua sob NIS2 quando aplicável), e — pontualmente importante — <em>free and open-source software developed or supplied outside the course of a commercial activity</em>.
+                </p>
+
+                <p>
+                    A exceção do open source é mais sutil do que parece. Quando o componente open source é monetizado, integrado em um produto comercial ou suportado profissionalmente, o fabricante que o coloca no mercado é responsável pelo cumprimento — não pode "esconder atrás" da licença upstream. O CRA cria a figura do <em>open-source software steward</em>, com regime mais leve para fundações e mantenedores que organizam comunidades em base não lucrativa, mas isso não desonera o vendor downstream.
+                </p>
+
+                <p>
+                    Sobre SaaS puro: a distinção operacional é se há componente entregue ao ambiente do cliente. Plataforma 100% browser-based, sem agente, plugin, mobile app ou CLI, fica fora do CRA — sujeita a NIS2 enquanto provedor de serviços. Mas a maioria dos SaaS B2B modernos tem componentes locais: agente de log, conector on-premises, extensão de IDE, mobile companion, CLI. Cada componente entregue é um PDE que precisa ser avaliado individualmente.
+                </p>
+
+                <h2 id="classes">Classes de produto e conformity assessment</h2>
+
+                <p>
+                    O CRA classifica produtos em quatro níveis de criticidade, e o nível determina o procedimento de avaliação de conformidade exigido antes da entrada no mercado:
+                </p>
+
+                <div class="comparison-table">
+                    <table style="width:100%;border-collapse:collapse">
+                        <thead>
+                            <tr><th>Categoria</th><th>Exemplos típicos</th><th>Avaliação exigida</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Default</strong> (maioria)</td><td>Apps de produtividade, jogos, ferramentas de produtividade, IoT consumer simples</td><td>Self-assessment (Módulo A): fabricante declara conformidade sob sua responsabilidade</td></tr>
+                            <tr><td><strong>Important — Class I</strong></td><td>Gerenciadores de senha, antivírus, VPN, browser, sistemas de presença física, microcontroladores, smart home assistants</td><td>Aplicação de norma harmonizada permite self-assessment; caso contrário, Módulo B+C (notified body) ou esquema europeu de certificação</td></tr>
+                            <tr><td><strong>Important — Class II</strong></td><td>Firewalls, IDS/IPS, gerenciadores de sistema, microprocessadores de uso geral, hypervisors, container runtimes, PKI</td><td>Módulo B+C com notified body ou esquema de certificação europeu — self-assessment não é opção</td></tr>
+                            <tr><td><strong>Critical</strong></td><td>Hardware devices with security boxes, smart cards e elementos seguros, smart meter gateways em sistemas inteligentes</td><td>Esquema europeu de certificação obrigatório (nível "substancial" ou superior, conforme EU Cybersecurity Act)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    A Comissão Europeia tem poder delegado para atualizar as listas das classes Important e Critical via acts of execution, e isso vai acontecer. Fabricantes de produtos em zona cinzenta (gerência de identidades, observability, ferramentas de DevOps) precisam acompanhar a lista oficial — produtos podem subir de classe sem que o fabricante tenha desenhado o produto para o assessment correspondente.
+                </p>
+
+                <p>
+                    O <strong>notified body</strong> é um organismo independente autorizado pelos Estados-Membros para certificar produtos contra os requisitos do CRA. Ele cobra, leva meses para auditar e tem capacidade limitada. Não dá para começar a buscar notified body em outubro de 2027 — fabricantes de Class II precisam iniciar o engajamento <em>agora</em>.
+                </p>
+
+                <h2 id="essenciais">Requisitos essenciais de segurança</h2>
+
+                <p>
+                    O Anexo I do CRA lista requisitos essenciais que se dividem em dois blocos: (1) propriedades de segurança do produto, e (2) requisitos sobre o processo de vulnerability handling do fabricante. Os requisitos do bloco 1 são:
+                </p>
+
+                <div class="pillar-cards">
+                    <div class="pillar-card confidentiality">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Secure by design</h3>
+                        <p>Produto desenvolvido, produzido e entregue sem vulnerabilidades exploráveis conhecidas. Avaliação de risco cibernético documentada e refletida no design.</p>
+                    </div>
+                    <div class="pillar-card integrity">
+                        <div class="icon"><i class="fas fa-lock"></i></div>
+                        <h3>Configuração segura por padrão</h3>
+                        <p>Default seguro out-of-the-box: senhas únicas/iniciais forçadas, telas administrativas não expostas, serviços desnecessários desligados.</p>
+                    </div>
+                    <div class="pillar-card availability">
+                        <div class="icon"><i class="fas fa-key"></i></div>
+                        <h3>Proteção de acesso e dados</h3>
+                        <p>Autenticação, autorização e integridade dos dados em uso, em trânsito e em repouso. Mínimo privilégio aplicado a componentes internos.</p>
+                    </div>
+                    <div class="pillar-card" style="border-color:rgba(139,92,246,.4);border-left:4px solid #8b5cf6">
+                        <div class="icon" style="color:#8b5cf6"><i class="fas fa-compress-arrows-alt"></i></div>
+                        <h3>Minimização da superfície de ataque</h3>
+                        <p>Componentes, interfaces e dependências limitados ao necessário. Funções externas controladas, attack surface inventariada.</p>
+                    </div>
+                </div>
+
+                <p>
+                    Os demais requisitos do bloco 1: proteção contra acessos não autorizados, integridade de dados, minimização de dados, disponibilidade de funções essenciais incluindo resistência a DoS, redução do impacto de incidentes em outros serviços, logs de segurança, e capacidade de aplicar updates de segurança incluindo automatic updates quando apropriado.
+                </p>
+
+                <p>
+                    O bloco 2 — processo de vulnerability handling — é onde a maioria dos fabricantes precisará investir mais. Inclui:
+                </p>
+
+                <ul>
+                    <li><strong>Identificação e documentação</strong> de vulnerabilidades e componentes contidos no produto, com <strong>SBOM</strong> em formato machine-readable;</li>
+                    <li><strong>Tratamento sem atraso</strong> de vulnerabilidades, incluindo fornecimento de patches gratuitos para vulnerabilidades durante o período de suporte;</li>
+                    <li><strong>Testes regulares</strong> e revisões de segurança do produto;</li>
+                    <li><strong>Política de vulnerability disclosure</strong> pública, com canal de contato e processo coordenado;</li>
+                    <li><strong>Distribuição de informações</strong> sobre vulnerabilidades corrigidas (advisories, CVE quando aplicável), incluindo descrição, impacto, severidade — preferencialmente alinhada a <a class="gloss-link" href="/glossario/#cvss" title="Ver no glossário">CVSS</a> — e remediação;</li>
+                    <li><strong>Mecanismos seguros</strong> de distribuição de updates, com integridade verificável, sem atraso.</li>
+                </ul>
+
+                <h2 id="vulnerabilidades">Vulnerability handling e notificação</h2>
+
+                <p>
+                    O CRA estabelece um regime de notificação assimétrico ao que existe em LGPD ou GDPR: a obrigação primária é para com a <a class="gloss-link" href="/glossario/#enisa" title="Ver no glossário">ENISA</a> e o <a class="gloss-link" href="/glossario/#csirt" title="Ver no glossário">CSIRT</a> nacional do Estado-Membro coordenador, não para titulares de dados. Os marcos temporais são:
+                </p>
+
+                <div class="phase-card">
+                    <div class="phase-number">1</div>
+                    <h3>Early warning — até 24 horas</h3>
+                    <p>Após tomada de conhecimento de vulnerabilidade ativamente explorada ou incidente grave que afete a segurança do produto, o fabricante envia notificação inicial ao CSIRT designado e em paralelo à ENISA, identificando produto e Estados-Membros afetados onde tiver conhecimento.</p>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">2</div>
+                    <h3>Notificação de vulnerabilidade — até 72 horas</h3>
+                    <p>Atualização com avaliação de severidade e impacto, ações corretivas ou de mitigação adotadas ou planejadas, indicação se a vulnerabilidade pode ter sido explorada por atores maliciosos. Para incidentes graves, comunicação aos usuários afetados sem atraso indevido.</p>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">3</div>
+                    <h3>Relatório final — até 14 dias após patch disponível</h3>
+                    <p>Descrição da vulnerabilidade, severidade, impacto, root cause, correções aplicadas. O fabricante deve disponibilizar patches gratuitos sem atraso, e — quando tecnicamente possível — habilitar atualizações automáticas com opção de desligamento pelo usuário.</p>
+                </div>
+
+                <p>
+                    O <strong>período de suporte</strong> deve ser ao menos equivalente ao expected product lifetime e em geral <strong>não inferior a 5 anos</strong>, exceto quando a expectativa de uso seja comprovadamente menor. Durante esse período, o fabricante é obrigado a fornecer atualizações de segurança gratuitamente. Para produtos de hardware com longo lifecycle (equipamentos industriais, controladores), o período pode chegar a 10 ou 15 anos — algo que precisa ser planejado financeiramente no momento da venda.
+                </p>
+
+                <p>
+                    Existe um princípio crítico embutido: <strong>updates de segurança devem ser separados de updates de funcionalidade</strong>. O cliente que opta por não atualizar features novas continua tendo direito ao patch de segurança. Isso colide com o modelo de muitos vendors que entregam tudo em release única — exige refatoração do pipeline de delivery.
+                </p>
+
+                <h2 id="documentacao">Documentação técnica, declaração UE e marca CE</h2>
+
+                <p>
+                    Antes de colocar o produto no mercado, o fabricante elabora a <strong>technical documentation</strong> exigida pelo Anexo VII do CRA. O conteúdo mínimo inclui:
+                </p>
+
+                <ul>
+                    <li>Descrição geral do produto, sua utilização pretendida e funcionalidades cibersegurança-relevantes;</li>
+                    <li>Design, especificações de desenvolvimento e fabricação, incluindo documentação arquitetural;</li>
+                    <li><strong>Avaliação de risco cibernético</strong> formal, ligando riscos identificados aos controles implementados;</li>
+                    <li>Lista das normas harmonizadas aplicadas (total ou parcialmente) ou esquemas de certificação;</li>
+                    <li>Resultados dos testes de segurança realizados pelo fabricante ou por laboratórios independentes;</li>
+                    <li>Cópia da <strong>declaração UE de conformidade</strong>;</li>
+                    <li><strong>SBOM</strong> em formato machine-readable;</li>
+                    <li>Descrição do processo de vulnerability handling e do período de suporte.</li>
+                </ul>
+
+                <p>
+                    A documentação técnica deve ser mantida pelo fabricante por 10 anos após colocar o produto no mercado e disponibilizada à autoridade competente sob solicitação. Não é exigido envio prévio — mas o fabricante precisa conseguir entregar em tempo razoável (geralmente dias) sob pena de presunção de não conformidade.
+                </p>
+
+                <p>
+                    A <strong>declaração UE de conformidade</strong> é um documento assinado pelo fabricante (ou representante autorizado) afirmando que o produto atende a todos os requisitos aplicáveis do CRA. Para produtos físicos, a <strong>marca CE</strong> é aposta no produto, embalagem ou documentação. Para software puramente digital, a indicação CE pode estar embarcada nos metadados do produto, na tela "Sobre" ou no site oficial — desde que claramente associada à versão específica.
+                </p>
+
+                <p>
+                    O SBOM merece atenção especial. Não é um documento opcional ou um nice-to-have. O Anexo I exige que o fabricante <em>documente as vulnerabilidades e componentes contidos no produto</em>, e a interpretação operacional alinhada com as melhores práticas internacionais e com os recentes Executive Orders dos EUA é entregar SBOM em <strong>SPDX</strong> (ISO/IEC 5962) ou <strong>CycloneDX</strong>. Esses são os formatos padronizados que sustentam o ecossistema de ferramentas de análise. Geração manual não escala — precisa estar integrada ao pipeline de build. Para uma introdução prática ao tema, veja nosso comparativo de técnicas de teste de segurança em <a href="../../comparadores/sast-vs-dast-vs-iast/">SAST vs DAST vs IAST</a>.
+                </p>
+
+                <h2 id="atores">Atores: fabricante, importador, distribuidor</h2>
+
+                <p>
+                    O CRA reconhece três atores principais na cadeia, com obrigações graduadas. Entender em qual papel sua empresa atua (frequentemente, em vários simultaneamente) é o ponto de partida da análise:
+                </p>
+
+                <div class="comparison-table">
+                    <table style="width:100%;border-collapse:collapse">
+                        <thead>
+                            <tr><th>Ator</th><th>Obrigações principais</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Fabricante</strong> (manufacturer)</td><td>Desenvolve, integra, ou tem o produto desenvolvido para colocação no mercado sob seu nome ou marca. Responde por <em>todos</em> os requisitos do CRA: design seguro, documentação técnica, conformity assessment, declaração UE, marca CE, vulnerability handling, suporte 5+ anos, notificação à ENISA.</td></tr>
+                            <tr><td><strong>Authorized representative</strong></td><td>Pessoa singular ou coletiva estabelecida na UE designada por escrito pelo fabricante não-UE para atuar em seu nome. Mantém a documentação técnica, coopera com autoridades, pode encaminhar notificações.</td></tr>
+                            <tr><td><strong>Importer</strong> (importador)</td><td>Estabelecido na UE; coloca no mercado europeu produto de fabricante de fora da UE. Verifica conformidade documental antes de importar, garante que o nome do fabricante e do importador apareçam no produto/embalagem, conserva documentação e coopera com autoridades.</td></tr>
+                            <tr><td><strong>Distributor</strong> (distribuidor)</td><td>Disponibiliza o produto na UE sem ser fabricante ou importador. Verifica visualmente a presença de marca CE, declaração UE, e nome do fabricante/importador antes de disponibilizar. Encaminha reclamações e cessa a disponibilização se descobrir não conformidade.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    Para a empresa brasileira média, o enquadramento é claro: <strong>é fabricante</strong>. Vende sob sua marca, controla o ciclo de desenvolvimento, integra componentes próprios e third-party. A pergunta operacional é: quem será o <em>authorized representative</em> na UE? Opções práticas incluem subsidiária europeia (se existir), empresa de relacionamento (lawyer, consultoria, parceiro comercial estabelecido) com mandato formal, ou serviço especializado de EU rep. Sem esse representante designado por escrito, o produto não pode ser legalmente colocado no mercado europeu — importadores e distribuidores são proibidos de disponibilizá-lo.
+                </p>
+
+                <p>
+                    Atenção: <strong>integrar componente third-party num produto e vendê-lo sob sua marca faz de você o fabricante daquele produto integrado</strong>, mesmo que o componente subjacente seja de outro vendor. O upstream não absorve sua responsabilidade. Por outro lado, o CRA estabelece que se você integra componente substantialmente modificado, é fabricante do produto modificado.
+                </p>
+
+                <h2 id="brasil">Como fabricantes BR se preparam</h2>
+
+                <p>
+                    A preparação operacional para o CRA atravessa engenharia, jurídico, suporte e governance. Plano sugerido em três horizontes, partindo de hoje:
+                </p>
+
+                <div class="phase-card">
+                    <div class="phase-number">1</div>
+                    <h3>Horizonte curto (próximos 6 meses)</h3>
+                    <p>Inventário de produtos exportados ou disponibilizados no mercado UE; identificação preliminar da classe regulatória de cada produto; designação de authorized representative; instituição formal de PSIRT com email público (security@) e PGP key; publicação de vulnerability disclosure policy; início da geração automatizada de <strong>SBOM</strong> (SPDX ou CycloneDX) no pipeline de build.</p>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">2</div>
+                    <h3>Horizonte médio (até setembro/2026)</h3>
+                    <p>Processo formal de vulnerability handling operacional, com SLAs internos para triagem, fix, advisory; integração de threat intelligence para detectar exploitation; canais e modelos prontos para notificação à ENISA/CSIRT (24h, 72h, 14 dias); avaliação de risco cibernético formal por produto; revisão de contratos com canais e revendedores europeus.</p>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-number">3</div>
+                    <h3>Horizonte longo (até dezembro/2027)</h3>
+                    <p>Documentação técnica completa por produto (Anexo VII); conformity assessment concluído conforme classe; declaração UE assinada; marca CE aposta; processo de updates automáticos com separação security/feature; pipeline DevSecOps maduro; commitment formal de support period com plano de capacidade para 5+ anos.</p>
+                </div>
+
+                <p>
+                    Práticas auxiliares fundamentais e leituras complementares:
+                </p>
+
+                <ul>
+                    <li><strong>SBOM como produto da build</strong> — gerado automaticamente, versionado junto com o release, publicado para clientes regulados sob NDA ou abertamente. Ver <a href="../sbom-software-bill-of-materials/">SBOM e segurança de supply chain</a>;</li>
+                    <li><strong>Secure SDLC e shift-left</strong> — SAST, SCA, DAST no pipeline; threat modeling em design; security gates antes do release. Ver <a href="../devsecops-seguranca-desenvolvimento/">DevSecOps shift-left prático</a>;</li>
+                    <li><strong>Gestão estruturada de vulnerabilidades</strong> — triagem com CVSS, priorização por exploitability, SLA por severidade, métricas para diretoria. Ver <a href="../gestao-vulnerabilidades-processo-completo/">processo de gestão de vulnerabilidades</a>;</li>
+                    <li><strong>PSIRT funcional</strong> — pessoas treinadas, runbook, FIRST PSIRT Services Framework como referência, comunicação coordenada com pesquisadores;</li>
+                    <li><strong>Capacidade de notificação rápida</strong> — não dá para descobrir como notificar a ENISA no momento do incidente; pré-cadastros, modelos, escalada definida;</li>
+                    <li><strong>Cláusulas contratuais</strong> com fornecedores upstream que permitam cumprir suas obrigações: SBOM, vulnerability advisories tempestivos, patches gratuitos, suporte alinhado ao seu period.</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Erro recorrente em fabricantes médios</h3>
+                    <p>Tratar o CRA como questão jurídica delegada a um escritório europeu. O CRA é primariamente uma transformação de engenharia: SBOM exige tooling; vulnerability handling exige PSIRT; secure-by-design exige threat modeling; updates separados exigem refactor do delivery. <strong>Não há atalho documental.</strong> A documentação técnica é consequência de práticas operacionais reais, não substituto delas.</p>
+                </div>
+
+                <h2 id="faq">Perguntas frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Software open source está sujeito ao CRA?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Free and open-source software desenvolvido e disponibilizado fora de atividade comercial está fora do escopo. Quando o open source é monetizado, integrado em produto comercial ou suportado profissionalmente, entra no escopo do fabricante que o coloca no mercado. O CRA cria a figura do open-source software steward, com regime mais leve para fundações e mantenedores não lucrativos.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>SaaS puro está coberto pelo CRA?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>SaaS puro (sem componente distribuído ao cliente) tende a ficar fora do CRA, sob NIS2 enquanto provedor de serviço. Mas se o serviço entrega agente local, plugin, SDK, mobile app, CLI ou biblioteca, esse componente é product with digital elements e está no escopo. Avalie componente a componente.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Qual a multa por descumprimento do CRA?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Até €15 milhões ou 2,5% do faturamento global anual (o maior) para violação de requisitos essenciais e vulnerability handling. Tetos menores para outras violações administrativas (€10M/2%) e para informações enganosas a notified bodies (€5M/1%). Há também risco de retirada do produto do mercado europeu.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como uma empresa BR sem entidade na UE pode vender no bloco?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O CRA exige designação por escrito de um authorized representative estabelecido na UE. Ele mantém a documentação técnica, coopera com autoridades e é ponto de contato. Sem authorized representative, importadores e distribuidores estão proibidos de disponibilizar o produto no mercado europeu.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que é SBOM e em que formato deve ser entregue?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Software Bill of Materials é o inventário machine-readable dos componentes do produto, incluindo bibliotecas third-party e dependências transitivas com versões. Os padrões da indústria são SPDX (ISO/IEC 5962) e CycloneDX. O SBOM integra a documentação técnica e sustenta o vulnerability handling.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>CRA, NIS2 e GPSR se aplicam ao mesmo produto?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Sim, em camadas distintas. CRA regula o produto colocado no mercado (fabricante, ciclo de vida, vulnerability handling). NIS2 regula operadores e prestadores essenciais e importantes (usuários do produto). GPSR cobre segurança geral de produtos não cobertos por regulação específica. Um produto IoT industrial de fabricante BR vendido a operador essencial alemão pode ativar os três regimes simultaneamente.</p></div>
+                    </div>
+                </div>
+
+                <h2 id="conclusao">Conclusão</h2>
+
+                <p>
+                    O Cyber Resilience Act é a regulação cibernética mais ambiciosa já aplicada a fabricantes de software e hardware, e tem efeito extraterritorial real sobre empresas brasileiras que vendem no mercado europeu. Não se trata de mais um checklist de compliance — é uma redefinição da responsabilidade do fabricante sobre o ciclo de vida do produto, sustentada por sanções financeiras significativas e pela capacidade das autoridades europeias de retirar produtos do mercado.
+                </p>
+
+                <p>
+                    O fabricante BR que quiser manter ou expandir presença na UE tem três tarefas centrais nos próximos meses: <strong>(1)</strong> mapear quais produtos da sua linha são PDE no escopo do CRA e em qual classe se encaixam; <strong>(2)</strong> instalar — não documentar, instalar — os processos de vulnerability handling, SBOM e secure SDLC que sustentarão o cumprimento; <strong>(3)</strong> resolver a representação jurídica europeia. A janela de 11 de setembro de 2026, quando começa a obrigação de notificação de vulnerabilidades exploradas, é curta demais para tratamentos reativos. Quem começa hoje chega; quem espera 2027 vira case de remediação acelerada — ou perde o mercado.
+                </p>
+
+                <p>
+                    Para aprofundar termos relacionados, consulte o <a href="../../glossario/">glossário</a>; para o ecossistema de testes de segurança aplicado ao secure SDLC, veja o comparativo <a href="../../comparadores/sast-vs-dast-vs-iast/">SAST vs DAST vs IAST</a>; para gestão estruturada de descobertas de segurança, o guia de <a href="../gestao-vulnerabilidades-processo-completo/">gestão de vulnerabilidades</a>.
+                </p>
+
+                <h2 id="referencias">Referências</h2>
+
+                <ul class="references-list">
+                    <li>União Europeia. <em>Regulation (EU) 2024/2847 — Cyber Resilience Act</em>. EUR-Lex. Disponível em: <a href="https://eur-lex.europa.eu/eli/reg/2024/2847/oj" target="_blank" rel="noopener nofollow">eur-lex.europa.eu/eli/reg/2024/2847/oj</a>.</li>
+                    <li>European Commission. <em>Cyber Resilience Act — policy page</em>. Disponível em: <a href="https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act" target="_blank" rel="noopener nofollow">digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act</a>.</li>
+                    <li>European Union Agency for Cybersecurity (ENISA). <em>Guidance on coordinated vulnerability disclosure and incident notification</em>. Disponível em: <a href="https://www.enisa.europa.eu/topics/vulnerabilities-and-exploits" target="_blank" rel="noopener nofollow">enisa.europa.eu/topics/vulnerabilities-and-exploits</a>.</li>
+                    <li>Linux Foundation / SPDX. <em>Software Package Data Exchange — SBOM specification</em>. Disponível em: <a href="https://spdx.dev/" target="_blank" rel="noopener nofollow">spdx.dev</a>.</li>
+                    <li>OWASP. <em>CycloneDX — SBOM Standard</em>. Disponível em: <a href="https://cyclonedx.org/" target="_blank" rel="noopener nofollow">cyclonedx.org</a>.</li>
+                    <li>Eclipse Foundation. <em>Open Source Stewards under the CRA — guidance and recommendations</em>. Disponível em: <a href="https://www.eclipse.org/policy/" target="_blank" rel="noopener nofollow">eclipse.org/policy</a>.</li>
+                    <li>National Institute of Standards and Technology (NIST). <em>Secure Software Development Framework (SSDF) — SP 800-218</em>. Disponível em: <a href="https://csrc.nist.gov/Projects/ssdf" target="_blank" rel="noopener nofollow">csrc.nist.gov/Projects/ssdf</a>.</li>
+                </ul>
+
+                <div class="cta-box">
+                    <h3>Avaliação de prontidão para o CRA</h3>
+                    <p>Diagnóstico independente da maturidade do seu produto e processos frente aos requisitos essenciais do Cyber Resilience Act. Identifica gaps por produto, prioriza ações e prepara a documentação técnica para os marcos de 2026 e 2027.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+            </div>
+        </div>
+    </article>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="../../feed.xml" target="_blank" rel="noopener" aria-label="RSS Feed"><i class="fas fa-rss"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Conteúdo</h4>
+                        <ul>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../ferramentas/">Ferramentas</a></li>
+                            <li><a href="../../glossario/">Glossário</a></li>
+                            <li><a href="../../comparadores/">Comparadores</a></li>
+                            <li><a href="../../newsletter/">Newsletter</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../sobre/">Sobre</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                        <p><i class="fas fa-phone"></i> +55 11 99361-9947</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados. <a href="../../politica-de-privacidade.html">Política de Privacidade</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/site-common.js"></script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

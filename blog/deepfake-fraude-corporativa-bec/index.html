@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Deepfake em fraude corporativa: como vishing com voz clonada e deepfake de vídeo estão sendo usados em BEC e fraude de pagamento. Vetores, casos reais e defesa em camadas.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="deepfake fraude, voz clonada, BEC, business email compromise, vishing corporativo, fraude executivo, CEO fraud, deepfake video, voice cloning attack">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/deepfake-fraude-corporativa-bec/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Inteligência Brasil — RSS" href="../../feed.xml">
+
+    <meta property="og:title" content="Deepfake em Fraude Corporativa: Voz Clonada, BEC e a Defesa em Camadas">
+    <meta property="og:description" content="Voz e vídeo clonados estão sendo usados em fraudes de pagamento e BEC. Vetores, casos e como defender sua organização.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/deepfake-fraude-corporativa-bec/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2026-05-23T11:00:00-03:00">
+    <meta property="article:section" content="Ameaças Cibernéticas">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Deepfake em Fraude Corporativa: Defesa em Camadas">
+    <meta name="twitter:description" content="Voz clonada e deepfake em BEC: como reconhecer e defender.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Deepfake em Fraude Corporativa: Voz Clonada, BEC e Defesa em Camadas | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Article","headline":"Deepfake em Fraude Corporativa: Voz Clonada, BEC e Defesa em Camadas","description":"Voz e vídeo clonados estão sendo usados em fraudes de pagamento e BEC. Vetores, casos e como defender sua organização.","image":"https://inteligenciabrasil.seg.br/img/og-image.webp","author":{"@type":"Person","name":"Roberto Lima","url":"https://inteligenciabrasil.seg.br/sobre/"},"publisher":{"@type":"Organization","name":"Inteligência Brasil","logo":{"@type":"ImageObject","url":"https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},"datePublished":"2026-05-23","dateModified":"2026-05-23","mainEntityOfPage":{"@type":"WebPage","@id":"https://inteligenciabrasil.seg.br/blog/deepfake-fraude-corporativa-bec/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/","inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"Como é feita a clonagem de voz para fraude?","acceptedAnswer":{"@type":"Answer","text":"Atualmente, 10 a 30 segundos de áudio limpo (extraídos de entrevistas, podcasts, vídeos públicos no LinkedIn ou YouTube) são suficientes para clonar uma voz convincente em ferramentas como ElevenLabs e variantes open source. O atacante então usa a voz sintética em ligação telefônica ou em deepfake de vídeo."}},
+        {"@type":"Question","name":"Quais são os principais alvos de fraude com deepfake?","acceptedAnswer":{"@type":"Answer","text":"Departamentos financeiros (transferências urgentes solicitadas pelo CEO/CFO), atendimento bancário (vishing para resetar senha ou autorizar operação), onboarding KYC (fraudes com identidade sintética), aprovação de contratos via Zoom/Teams falsificado e equipes de TI (engenharia social para acesso emergencial)."}},
+        {"@type":"Question","name":"Como detectar deepfake em uma chamada ao vivo?","acceptedAnswer":{"@type":"Answer","text":"Sinais incluem latência incomum, dificuldade do interlocutor em falar palavras complexas ou em outro idioma, falta de expressividade emocional, sincronização labial estranha em vídeo, pedido para evitar canais oficiais, urgência atípica e relutância em mudar para outro canal de verificação."}},
+        {"@type":"Question","name":"Qual o controle mais efetivo contra fraude por deepfake?","acceptedAnswer":{"@type":"Answer","text":"Verificação out-of-band: para qualquer solicitação financeira ou crítica recebida por voz ou vídeo, contatar o solicitante de volta por canal independente (número conhecido, e-mail corporativo, mensagem por outro meio). Code-words conhecidas apenas internamente e política de aprovação dupla fecham o ciclo."}},
+        {"@type":"Question","name":"Existem ferramentas de detecção de deepfake?","acceptedAnswer":{"@type":"Answer","text":"Sim — produtos como Reality Defender, Pindrop, Sensity, Microsoft Video Authenticator e mecanismos integrados a plataformas de conferência oferecem detecção em tempo real. Acurácia varia (70-95% em laboratório, menor em condições reais) e o gato-e-rato com modelos generativos é constante. Use como camada, não como controle único."}}
+    ]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inteligenciabrasil.seg.br/blog/"},{"@type":"ListItem","position":3,"name":"Deepfake em Fraude Corporativa"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ameaças Cibernéticas</span>
+            <h1>Deepfake em Fraude Corporativa: Voz Clonada, BEC e Defesa em Camadas</h1>
+            <div class="article-meta">
+                <span><i class="far fa-calendar"></i> Maio 2026</span>
+                <span><i class="far fa-clock"></i> 12 min de leitura</span>
+                <span><i class="far fa-building"></i> Inteligência Brasil</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Blog</a></li>
+                <li class="breadcrumb-item active">Deepfake em Fraude Corporativa</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#contexto">O salto de qualidade em 2026</a></li>
+                        <li><a href="#como-funciona">Como funciona tecnicamente</a></li>
+                        <li><a href="#vetores">Vetores de fraude corporativa</a></li>
+                        <li><a href="#casos">Casos emblemáticos</a></li>
+                        <li><a href="#deteccao">Sinais de detecção</a></li>
+                        <li><a href="#defesa">Defesa em camadas</a></li>
+                        <li><a href="#resposta">Resposta ao incidente</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="contexto">O salto de qualidade em 2026</h2>
+
+                <p>
+                    Até 2023, clonar uma voz exigia minutos de áudio limpo e horas de processamento. Resultado: identificável por um ouvido atento. Em 2026, <strong>10 a 30 segundos</strong> de áudio (qualquer entrevista, podcast ou vídeo público no LinkedIn) bastam para produzir voz sintética indistinguível em uma ligação telefônica. Deepfake de vídeo em tempo real para Zoom/Teams ficou acessível por algumas centenas de dólares de hardware.
+                </p>
+
+                <p>
+                    O efeito é direto sobre fraude corporativa. <strong>BEC (Business Email Compromise)</strong>, que historicamente custou às empresas globais mais de US$ 50 bi acumulados, ganhou uma nova superfície: o atacante não precisa mais convencer por e-mail — ele liga, e a voz é a do seu CFO. Para o operador de TED no setor financeiro, isso muda o cálculo de risco.
+                </p>
+
+                <p>
+                    Este artigo descreve como esses ataques são executados tecnicamente, quais vetores específicos já vimos em produção, sinais práticos de detecção e — o mais importante — quais controles funcionam para reduzir o risco a níveis aceitáveis sem paralisar a operação.
+                </p>
+
+                <h2 id="como-funciona">Como funciona tecnicamente</h2>
+
+                <h3>Voice cloning</h3>
+                <p>
+                    Ferramentas comerciais (ElevenLabs, Resemble.AI) e modelos open source (XTTS, Tortoise) usam few-shot learning: o modelo aprende características da voz a partir de amostra curta e gera fala arbitrária mantendo timbre, prosódia e estilo. Em 2026, a qualidade é alta o bastante para confundir familiares próximos em chamadas curtas.
+                </p>
+
+                <div class="code-block">
+                    <h4>Pipeline típico de fraude com voz clonada</h4>
+                    <pre>
+1. RECONHECIMENTO
+   - Identifica alvos no LinkedIn (CEO, CFO, financeiro)
+   - Coleta amostras de áudio público (entrevistas, panels)
+
+2. CLONAGEM
+   - 15-30s de áudio limpo -&gt; modelo de TTS personalizado
+   - Custo: USD 5-50 em serviços comerciais
+
+3. PREPARO DE CENÁRIO
+   - Spoofing de caller ID (VoIP)
+   - Pretexto plausível (M&amp;A, auditoria fiscal, emergência)
+
+4. EXECUÇÃO
+   - Liga para o alvo (operador financeiro, RH, TI)
+   - Voz clonada solicita transferência / acesso / reset
+   - Pressão temporal + autoridade hierárquica
+
+5. EXFILTRAÇÃO
+   - Transferência para mula / cripto / fornecedor falso
+   - Cadeia de saques rápida (horas, não dias)
+                    </pre>
+                </div>
+
+                <h3>Deepfake de vídeo em tempo real</h3>
+                <p>
+                    Ferramentas como DeepFaceLive, Avatarify e variantes comerciais permitem swap facial em chamadas Zoom/Teams ao vivo, com latência sub-segundo em GPU de gamer. Combinado com voz clonada, produz uma "reunião" com um executivo que nunca esteve lá.
+                </p>
+
+                <h2 id="vetores">Vetores de fraude corporativa</h2>
+
+                <h3>1. CEO/CFO Fraud por voz clonada</h3>
+                <p>
+                    Variante moderna do clássico BEC. Atacante liga para o financeiro fora do horário comercial, usa a voz do CEO/CFO, pede transferência urgente para "fechar M&amp;A confidencial" ou "evitar autuação fiscal". O elemento de pressão é o vetor — autoridade + urgência + sigilo.
+                </p>
+
+                <h3>2. Vishing em call center bancário</h3>
+                <p>
+                    Atacante usa voz clonada do correntista (extraída de áudio público) para autenticação por voiceprint no IVR ou para convencer atendentes humanos a resetar credenciais. Bancos que adotaram autenticação por voz estão revertendo ou adicionando segundo fator forte.
+                </p>
+
+                <h3>3. Aprovação falsa em videoconferência</h3>
+                <p>
+                    Reunião Zoom/Teams agendada (às vezes invasão de calendário, às vezes link malicioso). Vários "executivos" presentes — todos deepfakes. O alvo aprova pagamento, exposição, contratação por se ver "diante" da liderança.
+                </p>
+
+                <h3>4. Onboarding KYC fraudulento</h3>
+                <p>
+                    Abertura de contas em banco/fintech por verificação de vídeo — atacante usa identidade sintética com deepfake passando pelos checks de vivacidade (liveness). Cresceu em fraude de empréstimo e cripto.
+                </p>
+
+                <h3>5. Engenharia social de TI/Help desk</h3>
+                <p>
+                    Atacante imita voz de funcionário (especialmente recém-contratados, cuja voz é menos familiar ao help desk) para obter reset de senha, <a class="gloss-link" href="/glossario/#mfa" title="Ver no gloss&#225;rio">MFA</a> push, ou acesso de emergência fora do processo padrão.
+                </p>
+
+                <h2 id="casos">Casos emblemáticos</h2>
+
+                <div class="concept-card">
+                    <p><strong>Arup, Hong Kong (2024)</strong></p>
+                    <p>Funcionário do financeiro participou de videoconferência com vários "executivos" da empresa — todos deepfakes — e autorizou transferências que totalizaram US$ 25,6 milhões. Caso público mais conhecido do uso de deepfake em vídeo para fraude corporativa.</p>
+                </div>
+
+                <div class="concept-card">
+                    <p><strong>Energia UK (2019)</strong></p>
+                    <p>Diretor de uma subsidiária britânica recebeu ligação do "CEO da matriz alemã" pedindo transferência de €220 mil para um fornecedor húngaro. A voz era clonada. Marco do primeiro caso público documentado.</p>
+                </div>
+
+                <div class="concept-card">
+                    <p><strong>Setor financeiro Brasil (2024-2026)</strong></p>
+                    <p>Múltiplos casos não-divulgados de vishing com voz clonada em transferências PIX e em call centers. Padrão: ligação fora do horário, autoridade hierárquica, pressão por urgência.</p>
+                </div>
+
+                <h2 id="deteccao">Sinais de detecção</h2>
+
+                <h3>Sinais técnicos (em vídeo/áudio)</h3>
+                <ul>
+                    <li>Latência elevada e dessincronia labial em vídeo;</li>
+                    <li>Falta de micro-expressões e piscadas naturais;</li>
+                    <li>Áudio com leve ruído digital, falta de respiração natural;</li>
+                    <li>Sotaque ou pronúncia que escorrega em palavras complexas, números, nomes próprios;</li>
+                    <li>Iluminação inconsistente nas bordas do rosto;</li>
+                    <li>Resposta atrasada a interrupções ou perguntas inesperadas (modelos são autoregressivos).</li>
+                </ul>
+
+                <h3>Sinais comportamentais (no pedido)</h3>
+                <ul>
+                    <li><strong>Urgência atípica</strong> — "tem que ser agora", "não posso explicar pelo e-mail";</li>
+                    <li><strong>Sigilo solicitado</strong> — "não comente com ninguém", "fora do canal habitual";</li>
+                    <li><strong>Mudança de canal de comunicação</strong> — pede para sair do Teams oficial para WhatsApp pessoal;</li>
+                    <li><strong>Fora do processo</strong> — pula etapas conhecidas de aprovação;</li>
+                    <li><strong>Beneficiário desconhecido</strong> — conta de destino nunca vista antes;</li>
+                    <li><strong>Resistência a verificação</strong> — recusa-se a confirmar por outro canal.</li>
+                </ul>
+
+                <h2 id="defesa">Defesa em camadas</h2>
+
+                <div class="tip-card">
+                    <h3><i class="fas fa-phone-volume"></i> Verificação out-of-band obrigatória</h3>
+                    <p>Para <em>qualquer</em> solicitação financeira ou crítica vinda por voz/vídeo, contate o solicitante de volta por canal independente conhecido (número direto do diretório corporativo, não o que apareceu na chamada). Política deve ser explícita e treinada.</p>
+                </div>
+
+                <div class="tip-card">
+                    <h3><i class="fas fa-key"></i> Code-words conhecidas internamente</h3>
+                    <p>Estabeleça palavra-chave rotativa conhecida apenas por executivos e equipe-chave. Em qualquer pedido fora do padrão, exigir a code-word. Custa zero implantar e bloqueia 80% do cenário voz clonada.</p>
+                </div>
+
+                <div class="tip-card">
+                    <h3><i class="fas fa-users"></i> Aprovação dupla por canais distintos</h3>
+                    <p>Transferências acima de threshold exigem aprovação de duas pessoas, em dois canais diferentes (e-mail corporativo + sistema ERP), com timestamps independentes. Quebra cadeia atacante-único.</p>
+                </div>
+
+                <div class="tip-card">
+                    <h3><i class="fas fa-file-shield"></i> Hardening de identidade e e-mail</h3>
+                    <p>BEC frequentemente combina vetores: <a href="../dmarc-dkim-spf-autenticacao-email/">DMARC/DKIM/SPF</a> reduz spoofing de e-mail, <a href="../autenticacao-multifator-mfa-tipos-fatores-ataques-comuns/">MFA</a> forte protege caixas postais executivas, <a href="../pam-gestao-acessos-privilegiados/">PAM</a> isola contas críticas.</p>
+                </div>
+
+                <div class="tip-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Treinamento contextualizado</h3>
+                    <p>Simule cenários reais com a equipe financeira e TI: ligação inesperada do "CFO", videoconferência com "executivos", pressão por urgência. Mede-se taxa de adesão ao protocolo, não taxa de erro.</p>
+                </div>
+
+                <div class="tip-card">
+                    <h3><i class="fas fa-microchip"></i> Tecnologias de detecção (camada complementar)</h3>
+                    <p>Produtos como Reality Defender, Pindrop e Sensity oferecem detecção em tempo real. Acurácia não é 100% — use como sinal, não como veto. Bancos integram em IVR para flagar vishing.</p>
+                </div>
+
+                <h3>Política mínima por papel</h3>
+
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr><th>Papel</th><th>Controle mandatório</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Financeiro / Tesouraria</td><td>Verificação out-of-band + aprovação dupla + code-word em pedidos &gt; R$ 50k</td></tr>
+                            <tr><td>RH</td><td>Onboarding com verificação presencial ou MFA federado, nunca apenas video-call</td></tr>
+                            <tr><td>TI / Help desk</td><td>Reset de credencial nunca por ligação — token via canal verificado ou presencial</td></tr>
+                            <tr><td>Atendimento bancário</td><td>Autenticação por voz com second factor forte; nunca voiceprint sozinho</td></tr>
+                            <tr><td>Diretoria / CEOs</td><td>Code-word própria + canal verificado para qualquer pedido em nome dela</td></tr>
+                            <tr><td>Comunicação / RP</td><td>Política sobre amostras de áudio público; minimizar exposição vocal de execs em mídia</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="resposta">Resposta a incidente de fraude por deepfake</h2>
+
+                <p>
+                    Quando o pedido suspeito é detectado <em>antes</em> da execução:
+                </p>
+
+                <ol>
+                    <li>Não corte a chamada bruscamente — peça para retornar por canal verificado e desligue;</li>
+                    <li>Acione área de fraude / SOC imediatamente;</li>
+                    <li>Preserve gravação se houver (algumas plataformas gravam por default);</li>
+                    <li>Comunique outros possíveis alvos no time;</li>
+                    <li>Reporte ao banco se houve atualização cadastral suspeita.</li>
+                </ol>
+
+                <p>
+                    Quando o pagamento já saiu:
+                </p>
+
+                <ol>
+                    <li>Aciona o banco em até 30 minutos — janela de reversão é curta;</li>
+                    <li>Aciona <a href="../resposta-incidentes-guia-pratico/">resposta a incidentes</a> formal;</li>
+                    <li>Comunica polícia (delegacia especializada em crime cibernético);</li>
+                    <li>Preserva evidências (gravações, logs de e-mail, calendário, IPs);</li>
+                    <li>Avalia notificação à ANPD se dados pessoais foram expostos;</li>
+                    <li>Aciona o seguro cibernético (cláusula social engineering).</li>
+                </ol>
+
+                <h2 id="faq">Perguntas frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como é feita a clonagem de voz para fraude?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>10 a 30 segundos de áudio limpo (extraídos de entrevistas, podcasts, vídeos públicos no LinkedIn ou YouTube) são suficientes para clonar uma voz convincente em ferramentas como ElevenLabs e variantes open source. O atacante então usa a voz sintética em ligação telefônica ou em deepfake de vídeo.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quais são os principais alvos de fraude com deepfake?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Departamentos financeiros (transferências urgentes), atendimento bancário (vishing), onboarding KYC (fraude com identidade sintética), aprovação de contratos via videoconferência falsificada e equipes de TI (engenharia social para acesso emergencial).</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como detectar deepfake em uma chamada ao vivo?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Sinais incluem latência incomum, dificuldade com palavras complexas, falta de expressividade emocional, sincronização labial estranha em vídeo, pedido para evitar canais oficiais, urgência atípica e relutância em mudar para outro canal de verificação.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Qual o controle mais efetivo contra fraude por deepfake?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Verificação out-of-band: para qualquer solicitação financeira ou crítica recebida por voz ou vídeo, contatar o solicitante por canal independente. Code-words internas e aprovação dupla fecham o ciclo.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Existem ferramentas de detecção de deepfake?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Sim — Reality Defender, Pindrop, Sensity, Microsoft Video Authenticator. Acurácia varia (70-95% em laboratório) e o gato-e-rato com modelos generativos é constante. Use como camada complementar, não como controle único.</p></div>
+                    </div>
+                </div>
+
+                <h2 id="conclusao">Conclusão</h2>
+
+                <p>
+                    Deepfake em fraude corporativa não é cenário futurista — é operação corrente em 2026. A defesa, por outro lado, é boring: <strong>processo bem definido vence tecnologia mal usada</strong>. Verificação out-of-band, code-words, aprovação dupla, treinamento contextualizado e endurecimento de canais de e-mail e identidade reduzem o risco a níveis que cabem no apetite da maioria das organizações.
+                </p>
+
+                <p>
+                    O ponto-chave para o CISO: trate cenários de deepfake como um caso de uso de fraude — não como um problema só de "IA". O atacante usa a voz clonada porque o que ele realmente quer é o dinheiro ou o acesso. Os controles que reduzem o sucesso de qualquer <a class="gloss-link" href="/glossario/#engenharia-social" title="Ver no gloss&#225;rio">engenharia social</a> — protocolos, aprovações, verificação — também derrubam a fraude por deepfake. Diferencie no treinamento; padronize no processo.
+                </p>
+
+                <div class="cta-box">
+                    <h3>Programa de defesa contra fraude moderna</h3>
+                    <p>Avaliação dos seus protocolos financeiros, RH e TI contra cenários de deepfake e BEC. Treinamento, simulação e revisão de política.</p>
+                    <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
+                </div>
+
+            </div>
+        </div>
+    </article>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <picture>
+                            <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                        </picture>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
+                        <div class="footer-social">
+                            <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="../../feed.xml" target="_blank" rel="noopener" aria-label="RSS Feed"><i class="fas fa-rss"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Conteúdo</h4>
+                        <ul>
+                            <li><a href="../">Blog</a></li>
+                            <li><a href="../../ferramentas/">Ferramentas</a></li>
+                            <li><a href="../../glossario/">Glossário</a></li>
+                            <li><a href="../../comparadores/">Comparadores</a></li>
+                            <li><a href="../../newsletter/">Newsletter</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-links">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../sobre/">Sobre</a></li>
+                            <li><a href="../../#contato">Contato</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-contact">
+                        <h4>Contato</h4>
+                        <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
+                        <p><i class="fas fa-phone"></i> +55 11 99361-9947</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados. <a href="../../politica-de-privacidade.html">Política de Privacidade</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/site-common.js"></script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

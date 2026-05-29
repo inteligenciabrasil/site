@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
@@ -10,6 +10,7 @@
     <meta name="author" content="Inteligencia Brasil">
     <meta name="theme-color" content="#0D1E38">
     <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/itdr-deteccao-ameacas-identidade/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Intelig&#234;ncia Brasil &#8212; RSS" href="../../feed.xml">
 
     <meta property="og:title" content="ITDR: Guia Completo de Detecção é Resposta a Ameaças de Identidade">
     <meta property="og:description" content="Como implementar ITDR para detectar é responder a ataques baseados em identidade, proteger Active Directory édefender contra técnicas avançadas de comprometimento de credenciais.">
@@ -107,7 +108,11 @@
     }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- HowTo Schema -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"HowTo","name":"Como adotar ITDR","description":"Implantação de Identity Threat Detection and Response.","step":[{"@type":"HowToStep","position":1,"name":"Hardening de identidade","text":"Aplique hardening em AD e IdP: tier model, contas administrativas dedicadas, MFA forte, redução de privilégios."},{"@type":"HowToStep","position":2,"name":"Telemetria de identidade","text":"Envie logs de AD, IdP, MFA, OAuth e PAM para o SIEM/XDR; enriqueça com risco contextual de cada identidade."},{"@type":"HowToStep","position":3,"name":"Casos de uso prioritários","text":"Implemente detecções para Kerberoasting, AS-REP Roasting, Pass-the-Ticket, Golden Ticket, MFA fatigue e OAuth abuse."},{"@type":"HowToStep","position":4,"name":"Integração com IAM/PAM","text":"Conecte ITDR ao IAM/PAM para correlacionar eventos com mudanças de privilégio e fluxos JIT."},{"@type":"HowToStep","position":5,"name":"Resposta automatizada","text":"Implemente playbooks de bloqueio de conta, revogação de tokens e isolamento por SOAR."},{"@type":"HowToStep","position":6,"name":"Threat hunting de identidade","text":"Rode hunts periódicos por sinais sutis (logon impossível, fallback de MFA, abuso de OAuth em pastas internas)."}]}
+    </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -150,7 +155,7 @@
                     </div>
                 </li>
                 <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
-                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
             </ul>
             <span class="nav-item social-icons"><span class="fa-stack"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener"><span class="hexagon"></span><i class="fab fa-linkedin-in fa-stack-1x"></i></a></span></span>
         </div>
@@ -779,7 +784,7 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
                     </div>
                     <div class="vendor-card">
                         <h4><i class="fas fa-lock" style="color:#60A5FA;margin-right:8px"></i> Silverfort</h4>
-                        <p>MFA adaptativo éITDR unificado.</p>
+                        <p><a class="gloss-link" href="/glossario/#mfa" title="Ver no gloss&#225;rio">MFA</a> adaptativo éITDR unificado.</p>
                         <div class="strength">Forte em: MFA Universal</div>
                     </div>
                     <div class="vendor-card">
@@ -822,7 +827,7 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>ITDR (Identity Threat Detection and Response) éuma categoria de segurança focada em detectar é responder a ameaças baseadas em identidade. E importante porque 80% dos ataques modernos envolvem comprometimento de credenciais, ésoluções tradicionais como EDR éSIEM nãosao otimizadas para detectar técnicas específicas de ataque a identidade como Kerberoasting, DCSync ou Golden Ticket.</p>
+                            <p>ITDR (Identity Threat Detection and Response) éuma categoria de segurança focada em detectar é responder a ameaças baseadas em identidade. E importante porque 80% dos ataques modernos envolvem comprometimento de credenciais, ésoluções tradicionais como <a class="gloss-link" href="/glossario/#edr" title="Ver no gloss&#225;rio">EDR</a> éSIEM nãosao otimizadas para detectar técnicas específicas de ataque a identidade como Kerberoasting, DCSync ou Golden Ticket.</p>
                         </div>
                     </div>
 
@@ -832,7 +837,7 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>IAM e PAM são soluções preventivas que controlam quem tem acesso a quê. ITDR é uma solução de detecção e resposta que monitora o comportamento das identidades em tempo real, detecta anomalias e ataques em andamento, e permite resposta rápida a incidentes. São complementares - IAM/PAM reduzem a superfície de ataque, ITDR detecta quando as defesas são contornadas.</p>
+                            <p>IAM e <a class="gloss-link" href="/glossario/#pam" title="Ver no gloss&#225;rio">PAM</a> são soluções preventivas que controlam quem tem acesso a quê. ITDR é uma solução de detecção e resposta que monitora o comportamento das identidades em tempo real, detecta anomalias e ataques em andamento, e permite resposta rápida a incidentes. São complementares - IAM/PAM reduzem a superfície de ataque, ITDR detecta quando as defesas são contornadas.</p>
                         </div>
                     </div>
 
@@ -852,7 +857,7 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Nao. ITDR complementa EDR éSIEM. EDR foca em ameaças em endpoints (malware, exploits), SIEM correlaciona eventos de múltiplas fontes. ITDR especializa-se em ameaças de identidade com entendimento profundo de protocolos como Kerberos éLDAP. A integração entre as tres soluções fornece visibilidade completa émelhor detecção.</p>
+                            <p>Nao. ITDR complementa EDR éSIEM. EDR foca em ameaças em endpoints (malware, exploits), SIEM correlaciona eventos de múltiplas fontes. ITDR especializa-se em ameaças de identidade com entendimento profundo de protocolos como <a class="gloss-link" href="/glossario/#kerberos" title="Ver no gloss&#225;rio">Kerberos</a> éLDAP. A integração entre as tres soluções fornece visibilidade completa émelhor detecção.</p>
                         </div>
                     </div>
 
@@ -871,13 +876,13 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 
                 <p>A identidade tornou-se o vetor de ataque mais explorado na cibersegurança moderna. Atacantes perceberam que é mais eficiente roubar credenciais do que desenvolver exploits sofisticados. Nesse contexto, ITDR não é mais opcional - é uma camada essencial de defesa.</p>
 
-                <p>A implementação eficaz de ITDR requer uma abordagem em fases: começando pelo assessment da postura atual, passando por quick wins de hardening do Active Directory, e evoluindo para detecção comportamental e resposta automatizada. A integração com o ecossistema existente - SIEM, SOAR, XDR, PAM - potencializa o valor de cada solução.</p>
+                <p>A implementação eficaz de ITDR requer uma abordagem em fases: começando pelo assessment da postura atual, passando por quick wins de <a class="gloss-link" href="/glossario/#hardening" title="Ver no gloss&#225;rio">hardening</a> do Active Directory, e evoluindo para detecção comportamental e resposta automatizada. A integração com o ecossistema existente - SIEM, SOAR, XDR, PAM - potencializa o valor de cada solução.</p>
 
                 <p>Organizações que investem em ITDR conseguem reduzir drasticamente o tempo de detecção de comprometimento de credenciais, limitar o impacto de ataques bem-sucedidos, e manter visibilidade sobre uma das áreas mais críticas e frequentemente negligenciadas da segurança: a identidade.</p>
 
                 <div class="cta-box">
                     <h3>Fortaleça sua Segurança de Identidade</h3>
-                    <p>Precisa de ajuda para avaliar sua postura de segurança de identidade, implementar ITDR ou proteger seu Active Directory? Entre em contato para uma consultoria especializada.</p>
+                    <p>Precisa de ajuda para avaliar sua postura de segurança de identidade, implementar ITDR ou proteger seu <a class="gloss-link" href="/glossario/#active-directory" title="Ver no gloss&#225;rio">Active Directory</a>? Entre em contato para uma consultoria especializada.</p>
                     <a href="../../#contato" class="cta-btn">Solicitar Avaliação</a>
                 </div>
 

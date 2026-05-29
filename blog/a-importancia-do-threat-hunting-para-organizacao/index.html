@@ -14,6 +14,7 @@
     <meta name="author" content="Roberto Lima">
     <meta name="theme-color" content="#0D1E38">
     <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/a-importancia-do-threat-hunting-para-organizacao/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Intelig&#234;ncia Brasil &#8212; RSS" href="../../feed.xml">
 
     <!-- Open Graph -->
     <meta property="og:title" content="A Importância do Threat Hunting para Organizações">
@@ -122,7 +123,11 @@
     }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- HowTo Schema -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"HowTo","name":"Como conduzir Threat Hunting","description":"Ciclo prático de uma caçada proativa por adversários no ambiente.","step":[{"@type":"HowToStep","position":1,"name":"Selecionar TTP alvo","text":"Escolha uma técnica do MITRE ATT&CK relevante ao seu cenário (ex.: Kerberoasting, OAuth abuse, LOLBin)."},{"@type":"HowToStep","position":2,"name":"Formular hipótese","text":"Estruture a hipótese: o que esperaria observar se o adversário estivesse usando essa técnica no seu ambiente?"},{"@type":"HowToStep","position":3,"name":"Construir queries","text":"Traduza a hipótese em queries sobre EDR, SIEM, identidade e rede; defina janela e escopo."},{"@type":"HowToStep","position":4,"name":"Validar achados","text":"Analise resultados, separe ruído de sinal, investigue casos suspeitos com profundidade até confirmar ou negar."},{"@type":"HowToStep","position":5,"name":"Documentar resultados","text":"Registre hipótese, queries, achados e ações tomadas. Hunting que não vira artefato se perde."},{"@type":"HowToStep","position":6,"name":"Converter em detecção","text":"Transforme aprendizados em regras de detecção contínua e playbooks de resposta."}]}
+    </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -171,7 +176,7 @@
                     </div>
                 </li>
                 <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
-                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
             </ul>
             <span class="nav-item social-icons">
                 <span class="fa-stack">
@@ -351,7 +356,7 @@
                         ajuda as organizações a cumprir essas regulamentações.
                     </p>
                     <p>
-                        Regulamentações como o GDPR na União Europeia e a LGPD no Brasil exigem que as organizações implementem
+                        Regulamentações como o GDPR na União Europeia e a <a class="gloss-link" href="/glossario/#lgpd" title="Ver no gloss&#225;rio">LGPD</a> no Brasil exigem que as organizações implementem
                         medidas adequadas de segurança. O Threat Hunting demonstra uma postura proativa de proteção.
                     </p>
                 </div>
