@@ -342,7 +342,9 @@
             'security-headers':            { name: 'Analisador de Security Headers', desc: 'HSTS, CSP, X-Frame-Options - nota A+ a F.', icon: 'fa-shield-virus', tags: ['headers', 'web', 'hardening', 'csp'] },
             'conversor-timestamps':        { name: 'Conversor de Timestamps', desc: 'Unix, ISO 8601, FILETIME, Cocoa, LDAP.', icon: 'fa-clock', tags: ['forense', 'ir', 'logs'] },
             'calculadora-epss':            { name: 'Consulta EPSS por CVE', desc: 'Probabilidade de exploração em 30 dias.', icon: 'fa-chart-line', tags: ['vuln', 'cve', 'priorizacao'] },
-            'parser-iocs':                 { name: 'Parser e Normalizador de IOCs', desc: 'Extração, defang/refang, pivot links.', icon: 'fa-fingerprint', tags: ['cti', 'ioc', 'hunting'] }
+            'parser-iocs':                 { name: 'Parser e Normalizador de IOCs', desc: 'Extração, defang/refang, pivot links.', icon: 'fa-fingerprint', tags: ['cti', 'ioc', 'hunting'] },
+            'validador-dns':               { name: 'Validador DNS e DNSSEC', desc: 'A/AAAA/MX/NS/SOA/TXT/CAA + DNSKEY/DS via DoH.', icon: 'fa-network-wired', tags: ['dns', 'dnssec', 'caa', 'doh'] },
+            'parser-x509':                 { name: 'Parser de Certificados X.509', desc: 'Subject/issuer/SAN/extensões + fingerprint SHA-256.', icon: 'fa-certificate', tags: ['x509', 'tls', 'pki', 'certificado'] }
         };
 
         // Curated relations by overlap of tags + manual tweaks
@@ -351,14 +353,16 @@
             'calculadora-risco-owasp':     ['calculadora-cvss', 'calculadora-epss', 'validador-politica-senhas'],
             'gerador-de-senhas':           ['validador-politica-senhas', 'calculadora-hash', 'decoder-jwt'],
             'validador-politica-senhas':   ['gerador-de-senhas', 'calculadora-risco-owasp', 'calculadora-hash'],
-            'validador-spf-dkim-dmarc':    ['decoder-jwt', 'security-headers', 'codificador-base64-url-hex'],
+            'validador-spf-dkim-dmarc':    ['validador-dns', 'security-headers', 'decoder-jwt'],
             'codificador-base64-url-hex':  ['decoder-jwt', 'calculadora-hash', 'parser-iocs'],
-            'calculadora-hash':            ['codificador-base64-url-hex', 'parser-iocs', 'decoder-jwt'],
+            'calculadora-hash':            ['codificador-base64-url-hex', 'parser-iocs', 'parser-x509'],
             'decoder-jwt':                 ['codificador-base64-url-hex', 'security-headers', 'validador-spf-dkim-dmarc'],
-            'security-headers':            ['validador-spf-dkim-dmarc', 'decoder-jwt', 'calculadora-cvss'],
+            'security-headers':            ['validador-spf-dkim-dmarc', 'validador-dns', 'parser-x509'],
             'conversor-timestamps':        ['parser-iocs', 'calculadora-hash', 'codificador-base64-url-hex'],
             'calculadora-epss':            ['calculadora-cvss', 'calculadora-risco-owasp', 'parser-iocs'],
-            'parser-iocs':                 ['calculadora-hash', 'conversor-timestamps', 'codificador-base64-url-hex']
+            'parser-iocs':                 ['calculadora-hash', 'conversor-timestamps', 'codificador-base64-url-hex'],
+            'validador-dns':               ['validador-spf-dkim-dmarc', 'security-headers', 'parser-x509'],
+            'parser-x509':                 ['validador-dns', 'security-headers', 'calculadora-hash']
         };
 
         var related = relations[current];

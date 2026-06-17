@@ -29,7 +29,41 @@
 <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
 
-<link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+<!-- ASYNC-CSS-V1 -->
+    <style>
+    /* ASYNC-CSS-V1 critical: shell (navbar + body + container + FA placeholders) */
+    @font-face{font-family:'Fira Sans Fallback';src:local('Arial'),local('Helvetica');size-adjust:100%}
+    *,*::before,*::after{box-sizing:border-box}
+    html{overflow-x:clip}
+    body{margin:0;background:#0a1628;color:#F1F5F9;font-family:'Fira Sans','Fira Sans Fallback',sans-serif;font-size:1rem;line-height:1.6;overflow-x:clip;width:100%;max-width:100vw}
+    a{text-decoration:none}
+    .container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
+    @media(min-width:576px){.container{max-width:540px}}
+    @media(min-width:768px){.container{max-width:720px}}
+    @media(min-width:992px){.container{max-width:960px}}
+    @media(min-width:1200px){.container{max-width:1140px}}
+    .fa,.fas,.far,.fab{display:inline-block;width:1em;min-width:1em;text-align:center;font-style:normal}
+    .fa-fw{width:1.25em}
+    .fa-stack{position:relative;display:inline-block;width:2em;height:2em;line-height:2em;vertical-align:middle}
+    .fa-stack-1x{position:absolute;left:0;top:0;width:100%;text-align:center}
+    .fixed-top{position:fixed;top:0;right:0;left:0;z-index:1030}
+    .navbar{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:.5rem 1rem}
+    .navbar-custom{padding:0;background:rgba(13,30,56,0.95)!important;border-bottom:1px solid rgba(96,165,250,0.1);font:600 .875rem/.875rem 'Fira Sans','Fira Sans Fallback',sans-serif;backdrop-filter:blur(20px);box-shadow:0 .0625rem .375rem 0 rgba(0,0,0,.1)}
+    .navbar-custom .navbar-brand{font-size:0}
+    .navbar-custom .navbar-brand img{width:7.0625rem;height:auto;aspect-ratio:196/113}
+    .navbar-custom .navbar-toggler{border:none;color:#fff;font-size:2rem;padding:.25rem .75rem;background:transparent}
+    .navbar-custom .navbar-toggler-awesome.fas.fa-times,.navbar-custom button[aria-expanded=false] .navbar-toggler-awesome.fas.fa-times,.navbar-custom button[aria-expanded=true] .navbar-toggler-awesome.fas.fa-bars{display:none}
+    .navbar-custom button[aria-expanded=false] .navbar-toggler-awesome.fas.fa-bars{display:inline-block}
+    .navbar-custom button[aria-expanded=true] .navbar-toggler-awesome.fas.fa-times{display:inline-block}
+    .navbar-custom .navbar-nav{display:flex;flex-direction:column;padding-left:0;margin:.75rem 0 .5rem;list-style:none}
+    .navbar-custom .nav-item .nav-link{padding:.625rem .75rem;color:#F1F5F9!important;text-decoration:none}
+    .navbar-collapse{flex-basis:100%;flex-grow:1;align-items:center}
+    .collapse:not(.show){display:none}
+    .navbar-custom .social-icons{display:none}
+    @media(min-width:768px){.navbar-expand-md{flex-flow:row nowrap;justify-content:flex-start}.navbar-expand-md .navbar-nav{flex-direction:row;margin-top:0;margin-left:auto!important}.navbar-expand-md .navbar-toggler{display:none}.navbar-expand-md .navbar-collapse{display:flex!important;flex-basis:auto}}
+    </style>
+    <link href="../../css/fontawesome-subset.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="../../css/fontawesome-subset.min.css" rel="stylesheet"></noscript>
 
 <title>Grafo de Event IDs do Windows | Inteligencia Brasil</title>
 
@@ -91,7 +125,7 @@ button,input,select{font-family:inherit;}
 
 /* LAYER SIDEBAR */
 .layer-sidebar{width:180px;background:linear-gradient(180deg,var(--bg) 0%,#080F1F 100%);border-right:1px solid var(--border);overflow-y:auto;flex-shrink:0;padding:0.75rem 0 1rem;}
-.layer-sidebar h3{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;padding:0 0.75rem 0.5rem;display:flex;align-items:center;gap:6px;}
+.layer-sidebar h3,.layer-sidebar-title{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;padding:0 0.75rem 0.5rem;display:flex;align-items:center;gap:6px;margin:0;}
 .layer-btn{display:flex;align-items:center;gap:8px;padding:8px 0.75rem;cursor:pointer;font-size:12px;color:var(--text2);border-left:3px solid transparent;transition:all 0.15s;width:100%;background:none;border-top:none;border-right:none;border-bottom:none;text-align:left;font-family:inherit;}
 .layer-btn:hover{background:var(--bg2);color:var(--text);}
 .layer-btn.active{background:var(--blue-bg);color:var(--blue);}
@@ -176,7 +210,7 @@ button,input,select{font-family:inherit;}
 
 /* SCENARIO PANEL */
 .scenario-bar{background:var(--bg);border-bottom:1px solid var(--border);padding:0.45rem 1rem;display:flex;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap;}
-.scenario-bar h4{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;}
+.scenario-bar h4,.scenario-bar-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;}
 #scenario-btns{display:flex;gap:6px;flex-wrap:wrap;}
 .scenario-btn{font-size:11px;padding:5px 11px;border:1px solid var(--border2);border-radius:20px;background:var(--bg2);color:var(--text2);cursor:pointer;white-space:nowrap;transition:all 0.15s;font-weight:500;font-family:inherit;}
 .scenario-btn:hover{background:var(--bg3);color:var(--text);border-color:var(--blue);}
@@ -301,7 +335,7 @@ button,input,select{font-family:inherit;}
 
 <header class="site-topbar" role="banner">
   <a href="../../" class="site-topbar-logo" aria-label="Inteligencia Brasil - Pagina inicial">
-    <img src="../../img/logo.svg" alt="Inteligencia Brasil" width="120" height="28">
+    <img loading="lazy" decoding="async" src="../../img/logo.svg" alt="Inteligencia Brasil" width="120" height="28">
   </a>
   <a href="../" class="site-topbar-back" aria-label="Voltar para a lista de Ferramentas">
     <span aria-hidden="true">&larr;</span> Ferramentas
@@ -340,13 +374,13 @@ button,input,select{font-family:inherit;}
 </div>
 
 <div class="scenario-bar" id="scenario-bar">
-  <h4>⚔ Cenários de Ataque</h4>
-  <div id="scenario-btns"></div>
+  <span class="scenario-bar-label" aria-hidden="true">⚔ Cenários de Ataque</span>
+  <div id="scenario-btns" role="group" aria-label="Cenários de ataque"></div>
   <button type="button" class="scenario-clear" id="scenario-clear" onclick="clearScenario()" style="display:none" aria-label="Limpar cenário ativo">✕ Limpar</button>
 </div>
 <div class="workspace">
   <aside class="layer-sidebar" aria-label="Camadas de eventos">
-    <h3><span aria-hidden="true">▤</span> Camadas</h3>
+    <p class="layer-sidebar-title" role="heading" aria-level="2"><span aria-hidden="true">▤</span> Camadas</p>
     <div id="layer-nav"></div>
   </aside>
 
