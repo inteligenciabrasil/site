@@ -1,41 +1,36 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Kubernetes Pod Security Standards (PSS) com Kyverno: migração da PSP descontinuada, baseline vs restricted, audit/warn/enforce, exemplos práticos de policies e troubleshooting.">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="keywords" content="kubernetes pod security standards, pss kubernetes, kyverno, psp descontinuada, baseline restricted, admission controller, kubernetes hardening, kspm">
-    <meta name="author" content="Inteligência Brasil">
-    <meta name="theme-color" content="#0D1E38">
-    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/kubernetes-pod-security-standards-kyverno/">
-    <link rel="alternate" type="application/rss+xml" title="Blog Inteligência Brasil — RSS" href="../../feed.xml">
-
-    <meta property="og:title" content="Kubernetes Pod Security Standards (PSS) com Kyverno: Migração da PSP na Prática">
-    <meta property="og:description" content="Como sair da PSP descontinuada para Pod Security Standards + Kyverno, com exemplos baseline e restricted.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/kubernetes-pod-security-standards-kyverno/">
-    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
-    <meta property="og:locale" content="pt_BR">
-    <meta property="og:site_name" content="Inteligência Brasil">
-    <meta property="article:published_time" content="2026-05-29T12:30:00-03:00">
-    <meta property="article:section" content="Cloud-Native Security">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="K8s Pod Security Standards com Kyverno">
-    <meta name="twitter:description" content="Migração prática de PSP para PSS + Kyverno.">
-
-    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
-    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
-
-    <title>Kubernetes Pod Security Standards com Kyverno: Migração da PSP | Inteligência Brasil</title>
-
-    <script type="application/ld+json">
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<meta content="Kubernetes Pod Security Standards (PSS) com Kyverno: migração da PSP descontinuada, baseline vs restricted, audit/warn/enforce, exemplos práticos de policies e troubleshooting." name="description"/>
+<meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/>
+<meta content="kubernetes pod security standards, pss kubernetes, kyverno, psp descontinuada, baseline restricted, admission controller, kubernetes hardening, kspm" name="keywords"/>
+<meta content="Inteligência Brasil" name="author"/>
+<meta content="#0D1E38" name="theme-color"/>
+<link href="https://inteligenciabrasil.seg.br/blog/kubernetes-pod-security-standards-kyverno/" rel="canonical"/>
+<link href="../../feed.xml" rel="alternate" title="Blog Inteligência Brasil — RSS" type="application/rss+xml"/>
+<meta content="Kubernetes Pod Security Standards (PSS) com Kyverno: Migração da PSP na Prática" property="og:title"/>
+<meta content="Como sair da PSP descontinuada para Pod Security Standards + Kyverno, com exemplos baseline e restricted." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://inteligenciabrasil.seg.br/blog/kubernetes-pod-security-standards-kyverno/" property="og:url"/>
+<meta content="https://inteligenciabrasil.seg.br/img/og-image.webp" property="og:image"/>
+<meta content="pt_BR" property="og:locale"/>
+<meta content="Inteligência Brasil" property="og:site_name"/>
+<meta content="2026-05-29T12:30:00-03:00" property="article:published_time"/>
+<meta content="Cloud-Native Security" property="article:section"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="K8s Pod Security Standards com Kyverno" name="twitter:title"/>
+<meta content="Migração prática de PSP para PSS + Kyverno." name="twitter:description"/>
+<link href="../../img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<title>Kubernetes Pod Security Standards com Kyverno: Migração da PSP | Inteligência Brasil</title>
+<script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Article","headline":"Kubernetes Pod Security Standards (PSS) com Kyverno: Migração da PSP na Prática","description":"Como migrar de PodSecurityPolicy descontinuada para Pod Security Standards + Kyverno, com exemplos de baseline e restricted, modos audit/warn/enforce e troubleshooting.","image":"https://inteligenciabrasil.seg.br/img/og-image.webp","author":{"@type":"Person","name":"Roberto Lima","url":"https://inteligenciabrasil.seg.br/sobre/"},"publisher":{"@type":"Organization","name":"Inteligência Brasil","logo":{"@type":"ImageObject","url":"https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},"datePublished":"2026-05-29","dateModified":"2026-05-29","mainEntityOfPage":{"@type":"WebPage","@id":"https://inteligenciabrasil.seg.br/blog/kubernetes-pod-security-standards-kyverno/"},"inLanguage":"pt-BR"}
     </script>
-
-    <script type="application/ld+json">
+<script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
         {"@type":"Question","name":"PSP foi removida em qual versão do Kubernetes?","acceptedAnswer":{"@type":"Answer","text":"PodSecurityPolicy (PSP) foi deprecada em 1.21 (abril/2021) e removida em 1.25 (agosto/2022). Quem está em 1.25+ e ainda dependia de PSP precisou migrar para Pod Security Standards (built-in) ou para policy engines como Kyverno, OPA Gatekeeper ou Cilium Network Policies. A maioria das organizações escolhe PSS + Kyverno por combinar simplicidade do PSS para o caso comum e flexibilidade do Kyverno para regras custom."}},
         {"@type":"Question","name":"Qual a diferença entre baseline e restricted?","acceptedAnswer":{"@type":"Answer","text":"São dois dos três perfis do Pod Security Standards (o terceiro é privileged, que essencialmente desativa restrições). Baseline previne escalações conhecidas — bloqueia hostNetwork, hostPID, hostIPC, hostPath, privileged containers, capabilities perigosas (CAP_NET_ADMIN, CAP_SYS_ADMIN), e exige seccomp default. É o mínimo aceitável em produção. Restricted vai além: exige runAsNonRoot, runAsUser não-0, allowPrivilegeEscalation false, readOnlyRootFilesystem, seccomp RuntimeDefault, drop ALL capabilities. Use baseline em workloads legados que não conseguem rodar restricted (alguns DBs, software legacy) e restricted em tudo que for desenvolvido novo."}},
@@ -45,12 +40,10 @@
         {"@type":"Question","name":"O que fazer com workloads que genuinamente precisam de privilégio?","acceptedAnswer":{"@type":"Answer","text":"Alguns workloads (CSI drivers, ingress controllers, agentes de segurança como Falco, Cilium) precisam genuinamente de capabilities elevadas. Padrão: isole em namespaces dedicados com label privileged (em produção, restrito a operações), audite uso, e prefira providers que conseguem rodar restricted (Calico Apiserver, projetos cloud-native modernos já contemplam). Documente cada exceção com responsável e revisão semestral. Privilegiado por descuido é o caminho para CVE-2022-0492 e variantes."}}
     ]}
     </script>
-
-    <script type="application/ld+json">
+<script type="application/ld+json">
     {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inteligenciabrasil.seg.br/blog/"},{"@type":"ListItem","position":3,"name":"K8s Pod Security Standards"}]}
     </script>
-
-    <script type="application/ld+json">
+<script type="application/ld+json">
     {"@context":"https://schema.org","@type":"HowTo","name":"Como migrar de PSP para Pod Security Standards + Kyverno","description":"Procedimento prático para sair de PodSecurityPolicy descontinuada e adotar Pod Security Standards com Kyverno para regras custom.","step":[
         {"@type":"HowToStep","position":1,"name":"Inventário de workloads e PSPs existentes","text":"Liste todas as PodSecurityPolicies em uso e mapeie quais workloads casam com cada uma. Isso é a base para decidir quais namespaces vão para baseline e quais para restricted."},
         {"@type":"HowToStep","position":2,"name":"Habilite PSS em audit nos namespaces","text":"Adicione labels pod-security.kubernetes.io/audit=restricted e pod-security.kubernetes.io/warn=baseline. Apenas registra violações sem bloquear."},
@@ -60,12 +53,13 @@
         {"@type":"HowToStep","position":6,"name":"Instale Kyverno para regras custom","text":"PSS cobre o piso de segurança; instale Kyverno para regras específicas da organização — labels obrigatórios, registry corporativo, verificação Cosign, mutação de defaults."}
     ]}
     </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- ASYNC-CSS-V1 -->
-    <style>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&amp;display=swap" rel="preload"/>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/></noscript>
+<!-- ASYNC-CSS-V1 -->
+<style>
     /* ASYNC-CSS-V1 critical: blog article above-the-fold */
     @font-face{font-family:'Fira Sans Fallback';src:local('Arial'),local('Helvetica');size-adjust:100%}
     *,*::before,*::after{box-sizing:border-box}
@@ -109,104 +103,92 @@
     .breadcrumb-item+.breadcrumb-item::before{display:inline-block;padding-right:.5rem;color:#6c757d;content:"/"}
     @media(max-width:767px){.article-header{padding:120px 0 40px}.article-header h1{font-size:1.75rem}.article-meta{font-size:.85rem;gap:12px}}
     </style>
-    <link href="../../css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="../../css/bootstrap.min.css" rel="stylesheet"></noscript>
-    <link href="../../css/fontawesome-all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="../../css/fontawesome-all.min.css" rel="stylesheet"></noscript>
-    <link href="../../css/styles.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="../../css/styles.min.css" rel="stylesheet"></noscript>
-    <link href="../../css/servico.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="../../css/servico.min.css" rel="stylesheet"></noscript>
-    <link href="../../css/blog-article.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="../../css/blog-article.min.css" rel="stylesheet"></noscript>
+<link href="../../css/bootstrap.min.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="../../css/bootstrap.min.css" rel="stylesheet"/></noscript>
+<link href="../../css/fontawesome-subset.min.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="../../css/fontawesome-subset.min.css" rel="stylesheet"/></noscript>
+<link href="../../css/styles.min.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="../../css/styles.min.css" rel="stylesheet"/></noscript>
+<link href="../../css/servico.min.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="../../css/servico.min.css" rel="stylesheet"/></noscript>
+<link href="../../css/blog-article.min.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="../../css/blog-article.min.css" rel="stylesheet"/></noscript>
 </head>
 <body>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
-        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
-                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
-                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
-                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <header class="article-header">
-        <div class="container">
-            <span class="article-category">Cloud-Native Security</span>
-            <h1>Kubernetes Pod Security Standards com Kyverno: Migração da PSP</h1>
-            <div class="article-meta">
-                <span><i class="far fa-calendar"></i> Maio 2026</span>
-                <span><i class="far fa-clock"></i> 13 min de leitura</span>
-                <span><i class="far fa-building"></i> Inteligência Brasil</span>
-            </div>
-        </div>
-    </header>
-
-    <nav class="breadcrumb-nav" aria-label="breadcrumb">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../../">Home</a></li>
-                <li class="breadcrumb-item"><a href="../">Blog</a></li>
-                <li class="breadcrumb-item active">K8s Pod Security Standards</li>
-            </ol>
-        </div>
-    </nav>
-
-    <main id="main-content">
-    <article class="article-content">
-        <div class="container">
-            <div class="article-body">
-
-                <div class="warning-box" style="border-left-color:#f59e0b;background:linear-gradient(145deg,rgba(245,158,11,.08) 0%,rgba(180,83,9,.04) 100%);border-color:rgba(245,158,11,.4)">
-                    <p class="warning-title" style="margin:0 0 .5rem;color:#fcd34d;font-weight:700;font-size:1.05rem"><i class="fas fa-info-circle"></i> <strong>Sobre este conteúdo</strong></p>
-                    <p style="color:#cbd5e1">Guia prático para sair de <strong>PodSecurityPolicy (PSP)</strong> — removida no Kubernetes 1.25 — e adotar <strong>Pod Security Standards (PSS)</strong> nativos complementados por <strong>Kyverno</strong> para regras custom da organização. Pressupõe familiaridade com manifests Kubernetes e RBAC.</p>
-                </div>
-
-                <div class="toc">
-                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
-                    <ul>
-                        <li><a href="#contexto">Por que PSP foi removida</a></li>
-                        <li><a href="#pss">Pod Security Standards: 3 perfis</a></li>
-                        <li><a href="#modos">Modos audit, warn e enforce</a></li>
-                        <li><a href="#exemplo-baseline">Exemplo baseline na prática</a></li>
-                        <li><a href="#exemplo-restricted">Exemplo restricted</a></li>
-                        <li><a href="#kyverno">Quando entra o Kyverno</a></li>
-                        <li><a href="#troubleshooting">Troubleshooting comum</a></li>
-                        <li><a href="#roadmap">Roadmap de migração</a></li>
-                        <li><a href="#faq">Perguntas frequentes</a></li>
-                    </ul>
-                </div>
-
-                <h2 id="contexto">Por que PSP foi removida</h2>
-                <p><strong>PodSecurityPolicy</strong> foi a primeira tentativa do Kubernetes de impor controles de segurança em pods (privilégios, hostPath, capabilities). Foi deprecada em 1.21 (abril/2021) e removida em <strong>1.25</strong> (agosto/2022). Por quê? PSP tinha três problemas operacionais sérios: (1) ordem de avaliação imprevisível quando havia várias políticas, (2) RBAC complexo — você precisava conceder <em>use</em> da PSP ao service account, com efeitos colaterais perversos, (3) sem mutação fácil para corrigir manifests, só rejeitar.</p>
-
-                <p>A substituição nativa é <strong>Pod Security Standards (PSS)</strong>, que padroniza três perfis simples aplicados por namespace, sem RBAC custom. Para tudo que PSS não cobre — regras específicas da organização, mutações, validações ricas — entra um <em>policy engine</em> como <strong>Kyverno</strong> (ou OPA Gatekeeper). Esta é a combinação dominante em 2026.</p>
-
-                <h2 id="pss">Pod Security Standards: 3 perfis</h2>
-                <p>PSS define três níveis cumulativos, em ordem de restrição crescente:</p>
-
-                <div class="comparison-table">
-                    <table style="width:100%;border-collapse:collapse">
-                        <thead><tr><th>Perfil</th><th>O que permite/exige</th><th>Quando usar</th></tr></thead>
-                        <tbody>
-                            <tr><td><strong>privileged</strong></td><td>Sem restrições. Acesso a hostPath, hostNetwork, capabilities, runAsRoot.</td><td>Componentes do cluster (CSI, ingress, agentes de segurança) em namespaces isolados.</td></tr>
-                            <tr><td><strong>baseline</strong></td><td>Bloqueia escalações conhecidas: hostNetwork, hostPID, hostIPC, hostPath, privileged, capabilities perigosas. Exige seccomp default.</td><td>Mínimo aceitável em produção. Workloads legados que ainda não rodam restricted.</td></tr>
-                            <tr><td><strong>restricted</strong></td><td>Tudo de baseline + runAsNonRoot, runAsUser != 0, allowPrivilegeEscalation false, readOnlyRootFilesystem, seccomp RuntimeDefault, drop ALL capabilities.</td><td>Aplicações novas e workloads modernos. Meta para todo desenvolvimento greenfield.</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h2 id="modos">Modos audit, warn e enforce</h2>
-                <p>Cada perfil pode ser aplicado em três modos via labels no namespace. Eles podem coexistir com versões diferentes do perfil:</p>
-
-                <pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>apiVersion: v1
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+<a class="navbar-brand logo-image" href="../../"><img alt="Logo Inteligência Brasil" height="113" src="../../img/logo.svg" width="196"/></a>
+<button aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler collapsed" data-target="#navbarsExampleDefault" data-toggle="collapse" type="button"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+<ul class="navbar-nav ml-auto">
+<li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+<li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+<li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+<li class="nav-item dropdown"><a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button">PARA VOCÊ</a><div aria-labelledby="navParaVoce" class="dropdown-menu"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+<li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+</ul>
+</div>
+</nav>
+<header class="article-header">
+<div class="container">
+<span class="article-category">Cloud-Native Security</span>
+<h1>Kubernetes Pod Security Standards com Kyverno: Migração da PSP</h1>
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> Maio 2026</span>
+<span><i class="far fa-clock"></i> 13 min de leitura</span>
+<span><i class="far fa-building"></i> Inteligência Brasil</span>
+</div>
+</div>
+</header>
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+<div class="container">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="../../">Home</a></li>
+<li class="breadcrumb-item"><a href="../">Blog</a></li>
+<li class="breadcrumb-item active">K8s Pod Security Standards</li>
+</ol>
+</div>
+</nav>
+<main id="main-content">
+<article class="article-content">
+<div class="container">
+<div class="article-body">
+<div class="warning-box" style="border-left-color:#f59e0b;background:linear-gradient(145deg,rgba(245,158,11,.08) 0%,rgba(180,83,9,.04) 100%);border-color:rgba(245,158,11,.4)">
+<p class="warning-title" style="margin:0 0 .5rem;color:#fcd34d;font-weight:700;font-size:1.05rem"><i class="fas fa-info-circle"></i> <strong>Sobre este conteúdo</strong></p>
+<p style="color:#cbd5e1">Guia prático para sair de <strong>PodSecurityPolicy (PSP)</strong> — removida no Kubernetes 1.25 — e adotar <strong>Pod Security Standards (PSS)</strong> nativos complementados por <strong>Kyverno</strong> para regras custom da organização. Pressupõe familiaridade com manifests Kubernetes e RBAC.</p>
+</div>
+<div class="toc">
+<h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+<ul>
+<li><a href="#contexto">Por que PSP foi removida</a></li>
+<li><a href="#pss">Pod Security Standards: 3 perfis</a></li>
+<li><a href="#modos">Modos audit, warn e enforce</a></li>
+<li><a href="#exemplo-baseline">Exemplo baseline na prática</a></li>
+<li><a href="#exemplo-restricted">Exemplo restricted</a></li>
+<li><a href="#kyverno">Quando entra o Kyverno</a></li>
+<li><a href="#troubleshooting">Troubleshooting comum</a></li>
+<li><a href="#roadmap">Roadmap de migração</a></li>
+<li><a href="#faq">Perguntas frequentes</a></li>
+</ul>
+</div>
+<h2 id="contexto">Por que PSP foi removida</h2>
+<p><strong>PodSecurityPolicy</strong> foi a primeira tentativa do Kubernetes de impor controles de segurança em pods (privilégios, hostPath, capabilities). Foi deprecada em 1.21 (abril/2021) e removida em <strong>1.25</strong> (agosto/2022). Por quê? PSP tinha três problemas operacionais sérios: (1) ordem de avaliação imprevisível quando havia várias políticas, (2) RBAC complexo — você precisava conceder <em>use</em> da PSP ao service account, com efeitos colaterais perversos, (3) sem mutação fácil para corrigir manifests, só rejeitar.</p>
+<p>A substituição nativa é <strong>Pod Security Standards (PSS)</strong>, que padroniza três perfis simples aplicados por namespace, sem RBAC custom. Para tudo que PSS não cobre — regras específicas da organização, mutações, validações ricas — entra um <em>policy engine</em> como <strong>Kyverno</strong> (ou OPA Gatekeeper). Esta é a combinação dominante em 2026.</p>
+<h2 id="pss">Pod Security Standards: 3 perfis</h2>
+<p>PSS define três níveis cumulativos, em ordem de restrição crescente:</p>
+<div class="comparison-table">
+<table style="width:100%;border-collapse:collapse">
+<thead><tr><th>Perfil</th><th>O que permite/exige</th><th>Quando usar</th></tr></thead>
+<tbody>
+<tr><td><strong>privileged</strong></td><td>Sem restrições. Acesso a hostPath, hostNetwork, capabilities, runAsRoot.</td><td>Componentes do cluster (CSI, ingress, agentes de segurança) em namespaces isolados.</td></tr>
+<tr><td><strong>baseline</strong></td><td>Bloqueia escalações conhecidas: hostNetwork, hostPID, hostIPC, hostPath, privileged, capabilities perigosas. Exige seccomp default.</td><td>Mínimo aceitável em produção. Workloads legados que ainda não rodam restricted.</td></tr>
+<tr><td><strong>restricted</strong></td><td>Tudo de baseline + runAsNonRoot, runAsUser != 0, allowPrivilegeEscalation false, readOnlyRootFilesystem, seccomp RuntimeDefault, drop ALL capabilities.</td><td>Aplicações novas e workloads modernos. Meta para todo desenvolvimento greenfield.</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="modos">Modos audit, warn e enforce</h2>
+<p>Cada perfil pode ser aplicado em três modos via labels no namespace. Eles podem coexistir com versões diferentes do perfil:</p>
+<pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>apiVersion: v1
 kind: Namespace
 metadata:
   name: payments-api
@@ -220,18 +202,15 @@ metadata:
     # Registra violações de restricted no audit log
     pod-security.kubernetes.io/audit: restricted
     pod-security.kubernetes.io/audit-version: v1.29</code></pre>
-
-                <p>Padrão de adoção:</p>
-                <ul style="color:#CBD5E1;line-height:1.75">
-                    <li><strong>Fase 1:</strong> audit + warn em todos os namespaces. Observe o audit log por 1-2 semanas.</li>
-                    <li><strong>Fase 2:</strong> enforce baseline. Pods que violam baseline são rejeitados.</li>
-                    <li><strong>Fase 3:</strong> enforce restricted onde for possível. Workloads legados ficam em baseline.</li>
-                </ul>
-
-                <h2 id="exemplo-baseline">Exemplo baseline na prática</h2>
-                <p>Considere um Pod que tenta rodar com privilégios elevados:</p>
-
-                <pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>apiVersion: v1
+<p>Padrão de adoção:</p>
+<ul style="color:#CBD5E1;line-height:1.75">
+<li><strong>Fase 1:</strong> audit + warn em todos os namespaces. Observe o audit log por 1-2 semanas.</li>
+<li><strong>Fase 2:</strong> enforce baseline. Pods que violam baseline são rejeitados.</li>
+<li><strong>Fase 3:</strong> enforce restricted onde for possível. Workloads legados ficam em baseline.</li>
+</ul>
+<h2 id="exemplo-baseline">Exemplo baseline na prática</h2>
+<p>Considere um Pod que tenta rodar com privilégios elevados:</p>
+<pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>apiVersion: v1
 kind: Pod
 metadata:
   name: legacy-app
@@ -245,19 +224,15 @@ spec:
       privileged: true     # &lt;- bloqueado em baseline
       capabilities:
         add: [ "SYS_ADMIN" ]  # &lt;- bloqueado em baseline</code></pre>
-
-                <p>Com enforce=baseline no namespace, o API server rejeita imediatamente:</p>
-
-                <pre style="background:rgba(0,0,0,.35);color:#fca5a5;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.85rem;line-height:1.55"><code>Error from server (Forbidden): error when creating "legacy-app.yaml":
+<p>Com enforce=baseline no namespace, o API server rejeita imediatamente:</p>
+<pre style="background:rgba(0,0,0,.35);color:#fca5a5;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.85rem;line-height:1.55"><code>Error from server (Forbidden): error when creating "legacy-app.yaml":
 pods "legacy-app" is forbidden: violates PodSecurity "baseline:v1.29":
   host namespaces (hostNetwork=true),
   privileged (container "app" must not set securityContext.privileged=true),
   non-default capabilities (container "app" must not include "SYS_ADMIN" in securityContext.capabilities.add)</code></pre>
-
-                <h2 id="exemplo-restricted">Exemplo restricted</h2>
-                <p>Um Pod que passa em restricted típico:</p>
-
-                <pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>apiVersion: v1
+<h2 id="exemplo-restricted">Exemplo restricted</h2>
+<p>Um Pod que passa em restricted típico:</p>
+<pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>apiVersion: v1
 kind: Pod
 metadata:
   name: api
@@ -284,33 +259,28 @@ spec:
   volumes:
   - name: cache
     emptyDir: {}</code></pre>
-
-                <p>Note que <code>readOnlyRootFilesystem: true</code> exige montar volumes emptyDir/PVC para qualquer escrita (tmp, cache, logs).</p>
-
-                <h2 id="kyverno">Quando entra o Kyverno</h2>
-                <p>PSS resolve o piso de segurança comum. Kyverno entra em três cenários:</p>
-
-                <div class="pillar-cards">
-                    <div class="pillar-card confidentiality">
-                        <div class="icon"><i class="fas fa-check-square"></i></div>
-                        <h3>Regras custom da organização</h3>
-                        <p>Exigir labels (centro de custo, dono), forçar registry corporativo, exigir limits de CPU/memória, verificar assinatura Cosign de imagens.</p>
-                    </div>
-                    <div class="pillar-card integrity">
-                        <div class="icon"><i class="fas fa-wand-magic-sparkles"></i></div>
-                        <h3>Mutação automática</h3>
-                        <p>PSS só valida — não consegue corrigir manifests. Kyverno injeta defaults: securityContext mínimo, label de team faltando, sidecars padrão.</p>
-                    </div>
-                    <div class="pillar-card availability">
-                        <div class="icon"><i class="fas fa-network-wired"></i></div>
-                        <h3>Validações ricas</h3>
-                        <p>Políticas que cruzam estado de outros recursos (ClusterPolicy referencia ConfigMap), verificação de assinatura via Cosign, exigir <a class="gloss-link" href="/glossario/#sbom" title="Ver no gloss&#225;rio">SBOM</a> anexado, etc.</p>
-                    </div>
-                </div>
-
-                <p>Exemplo de ClusterPolicy Kyverno que exige imagens vindas apenas do registry corporativo:</p>
-
-                <pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>apiVersion: kyverno.io/v1
+<p>Note que <code>readOnlyRootFilesystem: true</code> exige montar volumes emptyDir/PVC para qualquer escrita (tmp, cache, logs).</p>
+<h2 id="kyverno">Quando entra o Kyverno</h2>
+<p>PSS resolve o piso de segurança comum. Kyverno entra em três cenários:</p>
+<div class="pillar-cards">
+<div class="pillar-card confidentiality">
+<div class="icon"><i class="fas fa-check-square"></i></div>
+<h3>Regras custom da organização</h3>
+<p>Exigir labels (centro de custo, dono), forçar registry corporativo, exigir limits de CPU/memória, verificar assinatura Cosign de imagens.</p>
+</div>
+<div class="pillar-card integrity">
+<div class="icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+<h3>Mutação automática</h3>
+<p>PSS só valida — não consegue corrigir manifests. Kyverno injeta defaults: securityContext mínimo, label de team faltando, sidecars padrão.</p>
+</div>
+<div class="pillar-card availability">
+<div class="icon"><i class="fas fa-network-wired"></i></div>
+<h3>Validações ricas</h3>
+<p>Políticas que cruzam estado de outros recursos (ClusterPolicy referencia ConfigMap), verificação de assinatura via Cosign, exigir <a class="gloss-link" href="/glossario/#sbom" title="Ver no glossário">SBOM</a> anexado, etc.</p>
+</div>
+</div>
+<p>Exemplo de ClusterPolicy Kyverno que exige imagens vindas apenas do registry corporativo:</p>
+<pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: require-corp-registry
@@ -330,10 +300,8 @@ spec:
         spec:
           containers:
           - image: "registry.corp.example.com/*"</code></pre>
-
-                <p>Para combinar com SLSA/Cosign (ver <a href="../slsa-sigstore-cosign-supply-chain/" style="color:#60A5FA">artigo dedicado</a>):</p>
-
-                <pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>apiVersion: kyverno.io/v1
+<p>Para combinar com SLSA/Cosign (ver <a href="../slsa-sigstore-cosign-supply-chain/" style="color:#60A5FA">artigo dedicado</a>):</p>
+<pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: verify-image-signature
@@ -353,91 +321,77 @@ spec:
         - keyless:
             subject: "https://github.com/corp/*/.github/workflows/release.yml@refs/heads/main"
             issuer: "https://token.actions.githubusercontent.com"</code></pre>
-
-                <h2 id="troubleshooting">Troubleshooting comum</h2>
-
-                <div class="comparison-table">
-                    <table style="width:100%;border-collapse:collapse">
-                        <thead><tr><th>Sintoma</th><th>Causa provável</th><th>Resolução</th></tr></thead>
-                        <tbody>
-                            <tr><td>Pod rejeitado por restricted, mas o app precisa escrever em <code>/var/log</code></td><td>readOnlyRootFilesystem bloqueia escrita</td><td>Montar emptyDir ou PVC em <code>/var/log</code></td></tr>
-                            <tr><td>"Cannot run as root" mas a imagem oficial roda como root</td><td>restricted exige runAsNonRoot</td><td>Usar imagem distroless/non-root ou fazer rebuild com USER 10001</td></tr>
-                            <tr><td>Workload precisa de CAP_NET_BIND para porta &lt;1024</td><td>restricted dropa ALL capabilities</td><td>Mover para porta &gt;=1024 ou expor via Service NodePort/Ingress</td></tr>
-                            <tr><td>Agente de segurança (Falco, NewRelic, Datadog) rejeitado</td><td>Precisa de hostPath, hostPID ou capabilities</td><td>Namespace dedicado com enforce=privileged; isolar RBAC</td></tr>
-                            <tr><td>kubectl apply sem erro mas pod não inicia</td><td>warn não bloqueia, mas violação real bloqueia</td><td>Verifique <code>kubectl get events -n &lt;ns&gt;</code> e ajuste para o nível efetivo</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h2 id="roadmap">Roadmap de migração</h2>
-                <p>Para clusters que ainda dependem de PSP ou estão sem qualquer admission de segurança:</p>
-
-                <div class="phase-card">
-                    <div class="phase-number">1</div>
-                    <h3>Inventário (1 semana)</h3>
-                    <p>Liste todas PSPs em uso (se ainda em &lt;1.25), e workloads por namespace. Decida quais namespaces vão para baseline e quais para restricted.</p>
-                </div>
-
-                <div class="phase-card">
-                    <div class="phase-number">2</div>
-                    <h3>Audit + warn (1-2 semanas)</h3>
-                    <p>Habilite PSS em modo audit (restricted) + warn (baseline) em todos os namespaces. Colete violações sem bloquear.</p>
-                </div>
-
-                <div class="phase-card">
-                    <div class="phase-number">3</div>
-                    <h3>Enforce baseline (2-4 semanas)</h3>
-                    <p>Corrija manifests dos workloads que violavam baseline. Suba para enforce=baseline namespace a namespace.</p>
-                </div>
-
-                <div class="phase-card">
-                    <div class="phase-number">4</div>
-                    <h3>Enforce restricted (gradual)</h3>
-                    <p>Em namespaces de aplicações novas, vá direto para enforce=restricted. Para legados, plano por workload — algumas migrações exigem rebuild de imagens base.</p>
-                </div>
-
-                <div class="phase-card">
-                    <div class="phase-number">5</div>
-                    <h3>Kyverno para regras custom</h3>
-                    <p>Instale Kyverno e implemente políticas específicas: registry corporativo, labels obrigatórios, verificação Cosign, mutação de defaults.</p>
-                </div>
-
-                <h2 id="faq">Perguntas frequentes</h2>
-
-                <div class="faq-section">
-                    <div class="faq-item"><h3>PSP foi removida em qual versão do Kubernetes?</h3><p>Deprecada em 1.21 (abril/2021) e removida em 1.25 (agosto/2022). Quem está em 1.25+ precisou migrar para Pod Security Standards (built-in) ou policy engines como Kyverno e OPA Gatekeeper.</p></div>
-                    <div class="faq-item"><h3>Qual a diferença entre baseline e restricted?</h3><p>Baseline previne escalações conhecidas (hostNetwork, privileged, capabilities perigosas) — é o mínimo em produção. Restricted vai além: runAsNonRoot, readOnlyRootFilesystem, drop ALL capabilities, seccomp RuntimeDefault. Use baseline em legados e restricted em tudo novo.</p></div>
-                    <div class="faq-item"><h3>Qual o papel dos modos audit, warn e enforce?</h3><p>Enforce bloqueia. Warn avisa no kubectl mas permite. Audit registra no log do API server sem bloquear. Estratégia: audit+warn primeiro, depois enforce baseline, depois enforce restricted onde possível.</p></div>
-                    <div class="faq-item"><h3>PSS substitui Kyverno?</h3><p>Não. PSS cobre as restrições padronizadas. Kyverno entra em (1) regras custom da organização, (2) mutação, (3) validações ricas (<a class="gloss-link" href="/glossario/#sigstore" title="Ver no gloss&#225;rio">Cosign</a>, cross-resource). A combinação é o padrão moderno.</p></div>
-                    <div class="faq-item"><h3>Como descobrir o que vai quebrar antes do enforce?</h3><p>Use modo audit nos namespaces antes de enforce. Os eventos vão para o audit log do API server. Polaris, kubescape, kube-score rodam validação offline contra manifests. Integre no CI/CD para quebrar PR antes de chegar em prod.</p></div>
-                    <div class="faq-item"><h3>O que fazer com workloads que precisam de privilégio?</h3><p>CSI drivers, ingress controllers, agentes de segurança precisam genuinamente de capabilities elevadas. Isole em namespaces dedicados privileged, audite uso, e prefira providers que rodam restricted. Documente exceções com responsável e revisão semestral.</p></div>
-                </div>
-
-                <h2 id="referencias" style="margin-top:3rem">Referências</h2>
-                <div class="references-list">
-                    <ul>
-                        <li>Kubernetes — Pod Security Standards — <a href="https://kubernetes.io/docs/concepts/security/pod-security-standards/" target="_blank" rel="noopener">kubernetes.io/docs/concepts/security/pod-security-standards/</a></li>
-                        <li>Kubernetes — Pod Security Admission — <a href="https://kubernetes.io/docs/concepts/security/pod-security-admission/" target="_blank" rel="noopener">kubernetes.io/docs/concepts/security/pod-security-admission/</a></li>
-                        <li>Kyverno — Documentação oficial — <a href="https://kyverno.io/docs/" target="_blank" rel="noopener">kyverno.io/docs/</a></li>
-                        <li>CNCF — Cloud Native Security Whitepaper v2 — <a href="https://www.cncf.io" target="_blank" rel="noopener">cncf.io</a></li>
-                        <li>NSA/CISA — Kubernetes Hardening Guide</li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </article>
-    </main>
-
-    <footer class="ex-footer">
-        <div class="container">
-            <div class="footer-col first"><h4>Inteligência Brasil</h4><p>Cibersegurança orientada a inteligência de ameaças e impacto.</p></div>
-            <div class="footer-col second"><h4>Links</h4><ul class="list-unstyled li-space-lg p-small"><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../ferramentas/">Ferramentas</a></li><li><a href="../../sobre/">Sobre</a></li></ul></div>
-            <div class="footer-col third"><h4>Contato</h4><p>contato@inteligenciabrasil.seg.br</p></div>
-        </div>
-    </footer>
-    <div class="copyright"><div class="container"><p class="p-small">Copyright © Intelig&ecirc;ncia Brasil — Todos os direitos reservados</p></div></div>
-
-    <script src="../../js/site-common.js"></script>
+<h2 id="troubleshooting">Troubleshooting comum</h2>
+<div class="comparison-table">
+<table style="width:100%;border-collapse:collapse">
+<thead><tr><th>Sintoma</th><th>Causa provável</th><th>Resolução</th></tr></thead>
+<tbody>
+<tr><td>Pod rejeitado por restricted, mas o app precisa escrever em <code>/var/log</code></td><td>readOnlyRootFilesystem bloqueia escrita</td><td>Montar emptyDir ou PVC em <code>/var/log</code></td></tr>
+<tr><td>"Cannot run as root" mas a imagem oficial roda como root</td><td>restricted exige runAsNonRoot</td><td>Usar imagem distroless/non-root ou fazer rebuild com USER 10001</td></tr>
+<tr><td>Workload precisa de CAP_NET_BIND para porta &lt;1024</td><td>restricted dropa ALL capabilities</td><td>Mover para porta &gt;=1024 ou expor via Service NodePort/Ingress</td></tr>
+<tr><td>Agente de segurança (Falco, NewRelic, Datadog) rejeitado</td><td>Precisa de hostPath, hostPID ou capabilities</td><td>Namespace dedicado com enforce=privileged; isolar RBAC</td></tr>
+<tr><td>kubectl apply sem erro mas pod não inicia</td><td>warn não bloqueia, mas violação real bloqueia</td><td>Verifique <code>kubectl get events -n &lt;ns&gt;</code> e ajuste para o nível efetivo</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="roadmap">Roadmap de migração</h2>
+<p>Para clusters que ainda dependem de PSP ou estão sem qualquer admission de segurança:</p>
+<div class="phase-card">
+<div class="phase-number">1</div>
+<h3>Inventário (1 semana)</h3>
+<p>Liste todas PSPs em uso (se ainda em &lt;1.25), e workloads por namespace. Decida quais namespaces vão para baseline e quais para restricted.</p>
+</div>
+<div class="phase-card">
+<div class="phase-number">2</div>
+<h3>Audit + warn (1-2 semanas)</h3>
+<p>Habilite PSS em modo audit (restricted) + warn (baseline) em todos os namespaces. Colete violações sem bloquear.</p>
+</div>
+<div class="phase-card">
+<div class="phase-number">3</div>
+<h3>Enforce baseline (2-4 semanas)</h3>
+<p>Corrija manifests dos workloads que violavam baseline. Suba para enforce=baseline namespace a namespace.</p>
+</div>
+<div class="phase-card">
+<div class="phase-number">4</div>
+<h3>Enforce restricted (gradual)</h3>
+<p>Em namespaces de aplicações novas, vá direto para enforce=restricted. Para legados, plano por workload — algumas migrações exigem rebuild de imagens base.</p>
+</div>
+<div class="phase-card">
+<div class="phase-number">5</div>
+<h3>Kyverno para regras custom</h3>
+<p>Instale Kyverno e implemente políticas específicas: registry corporativo, labels obrigatórios, verificação Cosign, mutação de defaults.</p>
+</div>
+<h2 id="faq">Perguntas frequentes</h2>
+<div class="faq-section">
+<div class="faq-item"><h3>PSP foi removida em qual versão do Kubernetes?</h3><p>Deprecada em 1.21 (abril/2021) e removida em 1.25 (agosto/2022). Quem está em 1.25+ precisou migrar para Pod Security Standards (built-in) ou policy engines como Kyverno e OPA Gatekeeper.</p></div>
+<div class="faq-item"><h3>Qual a diferença entre baseline e restricted?</h3><p>Baseline previne escalações conhecidas (hostNetwork, privileged, capabilities perigosas) — é o mínimo em produção. Restricted vai além: runAsNonRoot, readOnlyRootFilesystem, drop ALL capabilities, seccomp RuntimeDefault. Use baseline em legados e restricted em tudo novo.</p></div>
+<div class="faq-item"><h3>Qual o papel dos modos audit, warn e enforce?</h3><p>Enforce bloqueia. Warn avisa no kubectl mas permite. Audit registra no log do API server sem bloquear. Estratégia: audit+warn primeiro, depois enforce baseline, depois enforce restricted onde possível.</p></div>
+<div class="faq-item"><h3>PSS substitui Kyverno?</h3><p>Não. PSS cobre as restrições padronizadas. Kyverno entra em (1) regras custom da organização, (2) mutação, (3) validações ricas (<a class="gloss-link" href="/glossario/#sigstore" title="Ver no glossário">Cosign</a>, cross-resource). A combinação é o padrão moderno.</p></div>
+<div class="faq-item"><h3>Como descobrir o que vai quebrar antes do enforce?</h3><p>Use modo audit nos namespaces antes de enforce. Os eventos vão para o audit log do API server. Polaris, kubescape, kube-score rodam validação offline contra manifests. Integre no CI/CD para quebrar PR antes de chegar em prod.</p></div>
+<div class="faq-item"><h3>O que fazer com workloads que precisam de privilégio?</h3><p>CSI drivers, ingress controllers, agentes de segurança precisam genuinamente de capabilities elevadas. Isole em namespaces dedicados privileged, audite uso, e prefira providers que rodam restricted. Documente exceções com responsável e revisão semestral.</p></div>
+</div>
+<h2 id="referencias" style="margin-top:3rem">Referências</h2>
+<div class="references-list">
+<ul>
+<li>Kubernetes — Pod Security Standards — <a href="https://kubernetes.io/docs/concepts/security/pod-security-standards/" rel="noopener" target="_blank">kubernetes.io/docs/concepts/security/pod-security-standards/</a></li>
+<li>Kubernetes — Pod Security Admission — <a href="https://kubernetes.io/docs/concepts/security/pod-security-admission/" rel="noopener" target="_blank">kubernetes.io/docs/concepts/security/pod-security-admission/</a></li>
+<li>Kyverno — Documentação oficial — <a href="https://kyverno.io/docs/" rel="noopener" target="_blank">kyverno.io/docs/</a></li>
+<li>CNCF — Cloud Native Security Whitepaper v2 — <a href="https://www.cncf.io" rel="noopener" target="_blank">cncf.io</a></li>
+<li>NSA/CISA — Kubernetes Hardening Guide</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</main>
+<footer class="ex-footer">
+<div class="container">
+<div class="footer-col first"><p class="footer-col-title"><strong>Inteligência Brasil</strong></p><p>Cibersegurança orientada a inteligência de ameaças e impacto.</p></div>
+<div class="footer-col second"><p class="footer-col-title"><strong>Links</strong></p><ul class="list-unstyled li-space-lg p-small"><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../ferramentas/">Ferramentas</a></li><li><a href="../../sobre/">Sobre</a></li></ul></div>
+<div class="footer-col third"><p class="footer-col-title"><strong>Contato</strong></p><p>contato@inteligenciabrasil.seg.br</p></div>
+</div>
+</footer>
+<div class="copyright"><div class="container"><p class="p-small">Copyright © Inteligência Brasil — Todos os direitos reservados</p></div></div>
+<script src="../../js/site-common.js"></script>
 </body>
 </html>

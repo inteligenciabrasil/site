@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="NHIs (service accounts, API keys, OAuth tokens) superam humanos 45:1 a 144:1 e respondem por 89% das investigações Unit 42 2026. Como governar em 90 dias.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="NHI, non-human identity, machine identity, service account, OAuth token, API key, OWASP NHI Top 10, secrets management, workload identity, SPIFFE, CIEM, governança identidade, ITDR, Resolução BCB 538">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/nhi-non-human-identity-governanca/">
+
+    <meta property="og:title" content="Non-Human Identity (NHI): governança no perímetro de identidade">
+    <meta property="og:description" content="Por que NHI virou o vetor #1 em 2026, OWASP NHI Top 10, casos (Salesloft-Drift, Snowflake, Sisense) e playbook de governança em 90 dias.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/nhi-non-human-identity-governanca/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-06-16T11:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Identidade e Acesso">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Non-Human Identity (NHI): governança no perímetro de identidade">
+    <meta name="twitter:description" content="Por que NHI virou o vetor #1 em 2026, OWASP NHI Top 10, casos (Salesloft-Drift, Snowflake, Sisense) e playbook de governança em 90 dias.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Non-Human Identity (NHI): governança no perímetro de identidade | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "articleSection": "Identidade e Acesso", "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"}, "copyrightHolder": {"@type": "Organization", "name": "Intelig\u00eancia Brasil", "url": "https://inteligenciabrasil.seg.br"}, "copyrightYear": 2026, "dateModified": "2026-06-16", "datePublished": "2026-06-16", "description": "NHIs (service accounts, API keys, OAuth tokens) superam humanos 45:1 a 144:1 e respondem por 89% das investiga\u00e7\u00f5es Unit 42 2026. Como governar em 90 dias.", "headline": "Non-Human Identity (NHI): governan\u00e7a no per\u00edmetro de identidade", "image": "https://inteligenciabrasil.seg.br/img/og-image.webp", "inLanguage": "pt-BR", "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/", "mainEntityOfPage": {"@id": "https://inteligenciabrasil.seg.br/blog/nhi-non-human-identity-governanca/", "@type": "WebPage"}, "publisher": {"@type": "Organization", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}, "name": "Intelig\u00eancia Brasil"}}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "N\u00e3o. S\u00e3o camadas distintas: NHI cresce em volume e em superf\u00edcie de ataque, mas SSO, MFA e governan\u00e7a de acesso humano continuam essenciais. O programa correto trata humanos e n\u00e3o-humanos como popula\u00e7\u00f5es paralelas, com lifecycle, ownership e auditoria pr\u00f3prios \u2014 frequentemente unificados sob plataformas CIEM ou ITDR."}, "name": "NHI substitui a gest\u00e3o de identidade humana?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "O protocolo OAuth 2.0 n\u00e3o \u00e9 inseguro \u2014 o fluxo est\u00e1 correto. O risco est\u00e1 no uso indevido: refresh tokens de longa dura\u00e7\u00e3o, scopes amplos, aus\u00eancia de revoga\u00e7\u00e3o ap\u00f3s offboarding e armazenamento inseguro em bancos de dados. O caso Salesloft-Drift mostrou como um token OAuth de um app SaaS de terceiros pode propagar exfiltra\u00e7\u00e3o para centenas de organiza\u00e7\u00f5es sem disparar alertas."}, "name": "Por que OAuth virou o vetor preferido em 2025-2026?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Elimina secrets persistentes para workloads que rodam em ambientes attestables \u2014 GitHub Actions, GitLab CI, Kubernetes, m\u00e1quinas virtuais cloud com IMDS. N\u00e3o cobre credenciais de APIs SaaS de terceiros nem integra\u00e7\u00f5es com sistemas legados sem suporte a OIDC. Para o resto, ainda \u00e9 necess\u00e1rio rota\u00e7\u00e3o e gest\u00e3o via vault."}, "name": "Workload Identity Federation elimina todos os secrets persistentes?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "A recomenda\u00e7\u00e3o OWASP NHI7 \u00e9 eliminar long-lived sempre que vi\u00e1vel. Quando inevit\u00e1veis (sistemas legados, APIs sem federa\u00e7\u00e3o), rota\u00e7\u00e3o trimestral \u00e9 refer\u00eancia comum, com revoga\u00e7\u00e3o imediata em offboarding do owner humano associado. Mais importante que o intervalo \u00e9 ter um invent\u00e1rio que torne a rota\u00e7\u00e3o execut\u00e1vel."}, "name": "Com que frequ\u00eancia rotacionar secrets de NHI long-lived?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Depende do escopo da credencial. Se a API key dava acesso a dados pessoais com potencial de risco ou dano relevante, o incidente \u00e9 report\u00e1vel nos termos do art. 48 da LGPD \u2014 independentemente de haver evid\u00eancia confirmada de exfiltra\u00e7\u00e3o. Para IFs supervisionadas, a Resolu\u00e7\u00e3o BCB n\u00ba 538/2025 adiciona obriga\u00e7\u00f5es espec\u00edficas de comunica\u00e7\u00e3o ao Banco Central."}, "name": "Vazamento de API key precisa ser notificado \u00e0 ANPD?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Discovery cont\u00ednuo via CIEM ou plataforma de NHI governance \u00e9 o caminho escal\u00e1vel; alternativa b\u00e1sica \u00e9 exportar IAM de cada cloud (AWS Access Analyzer, GCP IAM Recommender, Azure Identity Insights), correlacionar com invent\u00e1rio de owners humanos e marcar como \u00f3rf\u00e3 toda NHI sem owner identific\u00e1vel ou com mais de 90 dias sem uso. A classifica\u00e7\u00e3o dispara o fluxo de revoga\u00e7\u00e3o."}, "name": "Como detectar NHIs \u00f3rf\u00e3s em ambiente multi-cloud?"}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/", "name": "Blog", "position": 2}, {"@type": "ListItem", "name": "Non-Human Identity (NHI)", "position": 3}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Identidade e Acesso</span>
+            <h1>Non-Human Identity (NHI): governança no perímetro de identidade</h1>
+            <div class="article-meta">
+                <span><i class="far fa-user"></i> Roberto Lima</span>
+                <span><i class="far fa-calendar"></i> Junho 2026</span>
+                <span><i class="far fa-clock"></i> 10 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">Non-Human Identity (NHI)</li></ol></div></nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <figure class="article-hero">
+                    <img src="../../img/og-image.webp" alt="Non-Human Identity NHI no perímetro de identidade corporativa" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async">
+                </figure>
+
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#por-que-nhi-vetor-numero-um">Por que NHIs viraram o vetor número um em 2026</a></li>
+                        <li><a href="#nhi-vs-humano-assimetria">NHI vs identidade humana: assimetria de governança</a></li>
+                        <li><a href="#anatomia-vetores">Anatomia dos vetores de NHI em 2026</a></li>
+                        <li><a href="#owasp-top-10-nhi">OWASP NHI Top 10 e referências oficiais</a></li>
+                        <li><a href="#categorias-tecnologia">Categorias de tecnologia: como o mercado se organiza</a></li>
+                        <li><a href="#playbook-90-dias-nhi">Playbook de 90 dias para governar NHI</a></li>
+                        <li><a href="#brasil-anpd-bcb">Brasil: ANPD, BCB nº 538/2025 e quando NHI vira incidente</a></li>
+                    </ul>
+                </div>
+
+                <p>Em 2026, identidades não-humanas, service accounts, API keys, OAuth tokens, certificados, credenciais de CI/CD, workloads em nuvem e, mais recentemente, agentes de IA, superam usuários humanos em uma proporção que vai de 45:1 a 144:1 em ambientes cloud-native. Não é mais um problema teórico de arquitetura: o relatório Unit 42 Global IR 2026 indica que fraquezas de identidade aparecem em 89% das investigações conduzidas pela equipe entre out/2024 e set/2025, e Verizon DBIR 2025 mantém credenciais como vetor inicial em 22% das breaches analisadas.</p>
+
+<p>Este artigo é um guia operacional para CISOs e times técnicos entenderem por que NHI virou o vetor número um, como governar essa população crescente sem inflar headcount, e o que muda no Brasil com a Resolução BCB nº 538/2025 e a obrigação de notificação à ANPD em vazamentos com risco relevante. O foco é arquitetura defensiva, não catálogo de produtos.</p>
+
+<div class="stat-highlight">
+<div class="number">89%</div>
+<div class="label">das investigações conduzidas pela Unit 42 (Palo Alto) entre out/2024 e set/2025 envolveram exploração de fraquezas de identidade, service accounts, OAuth tokens e API keys aparecem em cima da lista.</div>
+</div>
+
+<h2 id="por-que-nhi-vetor-numero-um">Por que NHIs viraram o vetor número um em 2026</h2>
+
+<p>A virada não foi acidental. Por uma década, o foco de IAM corporativo esteve em SSO, MFA e governança de acesso humano. Service accounts e API keys eram tratados como "configuração de plataforma", atribuídos a tickets, raramente inventariados, quase nunca rotacionados. Enquanto isso, a superfície explodiu: cada microsserviço, cada workflow de CI/CD, cada integração SaaS criou novas credenciais não-humanas. Os números refletem essa explosão.</p>
+
+<p>O ataque também migrou. Atacantes seguem o caminho de menor resistência: NHIs são, nas palavras do Unit 42, "higher leverage and quieter", têm escopos amplos, são long-lived, raramente passam por offboarding, e quase nunca têm MFA. Um token OAuth válido obtido por adversário não dispara alerta de "login suspeito" porque, do ponto de vista do receptor, é uma chamada legítima.</p>
+
+<h3>O sinal de 2024-2025 nos números</h3>
+
+<p>Além do dado da Unit 42, três indicadores convergem. O GitGuardian State of Secrets Sprawl 2025 reportou 23,8 milhões de secrets vazados em repositórios públicos do GitHub em 2024, alta de aproximadamente 25% ano sobre ano, e estima que 35% dos repositórios privados também expõem credenciais. Pior: 70% dos secrets vazados em 2022 permanecem ativos. Verizon DBIR 2025 atribui 22% das breaches a credenciais comprometidas como acesso inicial; em ataques web básicos, o percentual sobe para 88%.</p>
+
+<p>O ratio NHI:humano varia por ambiente. Pesquisa do Rubrik Zero Labs aponta 45:1 em ambientes corporativos mistos. Em ambientes cloud-native (Kubernetes + serverless + multi-cloud), Entro Labs reporta 144:1 no primeiro semestre de 2025. Quando se incluem agentes de IA com escopo de execução próprio, Rubrik estima 82:1 como média ajustada.</p>
+
+<h3>Os casos que mudaram o jogo</h3>
+
+<p>Quatro incidentes públicos consolidaram a categoria. O caso Salesloft-Drift (ago/2025, atribuído pelo Google Cloud Threat Intelligence ao cluster UNC6395) materializou o risco de OAuth supply chain: o roubo de tokens OAuth de um app SaaS de terceiros, Drift, integrado a Salesforce, propagou exfiltração para mais de 700 organizações que tinham Drift conectado ao seu CRM. O caso Snowflake (2024, UNC5537) atingiu 165+ organizações por uma combinação de credenciais via infostealer e ausência de MFA em contas técnicas. Sisense (abr/2024) viu chaves AWS hardcoded em repositório GitLab self-hosted comprometido, gerando alerta da CISA. Okta support (set/out/2023) teve uma service account de suporte sequestrada com impacto em 134 clientes.</p>
+
+<p>Em 2025, dois ataques de supply chain em GitHub Actions ampliaram o cenário: tj-actions/changed-files (CVE-2025-30066, mar/2025) expôs aproximadamente 23.000 repositórios; GhostAction (set/2025) exfiltrou 3.325 secrets em 817 repositórios via workflows maliciosos.</p>
+
+<h2 id="nhi-vs-humano-assimetria">NHI vs identidade humana: a assimetria de governança</h2>
+
+<p>Para entender o problema, é preciso parar de tratar NHI como "conta especial" e começar a tratar como população primária, com lifecycle, ownership e auditoria próprios. A assimetria contra IAM humano é estrutural.</p>
+
+<h3>O que é NHI na prática</h3>
+
+<p>NHI é qualquer identidade não-humana usada para autenticar ou autorizar: service accounts em cloud (IAM AWS, GCP Service Accounts, Azure Service Principals), API keys de SaaS, OAuth client credentials, certificados mTLS, SPIFFE IDs, managed identities, secrets de CI/CD e, desde 2024, agentes de IA com permissão de execução. Workload identity é um subconjunto: associa identidade a um runtime (pod, função, máquina virtual) sem secret persistente.</p>
+
+<h3>Por que controles humanos não cobrem NHI</h3>
+
+<p>Governança de identidade humana se apoia em SSO, MFA, joiner-mover-leaver, certificação de acesso periódica e behavior analytics. Nada disso aplica diretamente a NHI. Não há "MFA" em uma chamada de API; offboarding é manual e frequentemente esquecido quando o owner humano deixa a empresa; certificação de acesso assume um humano revisando o que outro humano usa, service accounts ficam fora desse processo.</p>
+
+<table class="comparison-table">
+<thead>
+<tr><th>Dimensão</th><th>Identidade humana</th><th>Non-Human Identity (NHI)</th></tr>
+</thead>
+<tbody>
+<tr><td>Volume típico em ambiente cloud-native</td><td>Base estável</td><td>45:1 a 144:1 em relação a humanos</td></tr>
+<tr><td>MFA</td><td>Padrão (SSO + segundo fator)</td><td>Inexistente, autenticação por secret</td></tr>
+<tr><td>Lifecycle (joiner-mover-leaver)</td><td>Integrado a HR</td><td>Manual, sem dono claro em 30-50% dos casos</td></tr>
+<tr><td>Rotação de credencial</td><td>Senha sazonal + MFA dinâmico</td><td>Frequentemente "nunca", long-lived secrets</td></tr>
+<tr><td>Visibilidade de uso</td><td>UEBA, login anomaly</td><td>Logs de API espalhados por sistema</td></tr>
+<tr><td>Offboarding</td><td>Disparo automático (HR-driven)</td><td>Depende de inventário; órfãs comuns</td></tr>
+<tr><td>Privilégio típico</td><td>Necessidade do papel</td><td>Over-privileged por padrão (escopo amplo "para garantir")</td></tr>
+</tbody>
+</table>
+
+<h2 id="anatomia-vetores">Anatomia dos vetores de NHI em 2026</h2>
+
+<p>Os ataques se agrupam em quatro vetores principais, todos com casos públicos verificáveis e técnicas catalogadas no MITRE ATT&CK.</p>
+
+<h3>OAuth tokens roubados (T1528)</h3>
+
+<p>OAuth 2.0 distingue três tipos de token: access (curta duração, scope-limited), refresh (longa duração, renova o access) e ID (OIDC, identifica o usuário). O alvo primário do atacante é o refresh token, persistente, frequentemente armazenado em bancos de dados ou logs, e raramente revogado mesmo após offboarding humano. Salesloft-Drift é o caso de referência: tokens OAuth de um app SaaS integrado a Salesforce foram exfiltrados e usados para extrair dados de mais de 700 organizações sem disparar nenhum login anomaly. A técnica está catalogada como MITRE ATT&CK T1528, Steal Application Access Token.</p>
+
+<h3>API keys e secrets hardcoded em CI/CD</h3>
+
+<p>O caso Sisense de abril de 2024 é exemplar: chaves AWS hardcoded em um repositório GitLab self-hosted comprometido. O alerta foi da CISA, e a mitigação envolveu reset massivo de credenciais. Em 2025, supply chain attacks em GitHub Actions amplificaram o problema: o ataque a tj-actions/changed-files (CVE-2025-30066) expôs aproximadamente 23.000 repositórios; a campanha GhostAction exfiltrou 3.325 secrets em 817 repositórios. O ponto importante: nesses casos, a empresa-alvo não foi diretamente comprometida, foi um workflow legítimo que ela usava que vazou credenciais.</p>
+
+<h3>Service accounts cloud over-privileged</h3>
+
+<p>Service accounts em AWS, GCP e Azure são frequentemente provisionados com escopo amplo "para garantir que funcione". O caso Snowflake de 2024 (UNC5537, 165+ orgs) ilustra: contas técnicas sem MFA, com credenciais reutilizadas em workloads, foram comprometidas via infostealers em workstations de desenvolvedores. A técnica catalogada é T1078.004, Valid Accounts: Cloud Accounts.</p>
+
+<h3>Secrets vazados em repositórios públicos</h3>
+
+<p>GitGuardian estima 23,8 milhões de secrets vazados em repositórios públicos em 2024, com 70% dos vazamentos de 2022 ainda ativos. A janela entre commit e exploração caiu para minutos em alvos de alto valor (chaves AWS, GitHub PATs, OpenAI keys). Secret scanning no fluxo de commit (pre-commit hooks, push protection) é o controle de primeira linha.</p>
+
+<h2 id="owasp-top-10-nhi">OWASP NHI Top 10 e referências oficiais</h2>
+
+<p>Em 2025, o OWASP publicou a Non-Human Identities Top 10, consolidando as falhas mais comuns observadas em organizações. A lista funciona como guidance comunitário, não é norma vinculante, mas é o vocabulário compartilhado pela indústria.</p>
+
+<div class="annexa-grid">
+<div class="annexa-item"><strong>NHI1, Improper Offboarding</strong><p>NHIs órfãs após saída do owner humano ou descomissionamento do serviço associado.</p></div>
+<div class="annexa-item"><strong>NHI2, Secret Leakage</strong><p>Secrets em código, logs, configs ou repositórios públicos.</p></div>
+<div class="annexa-item"><strong>NHI3, Vulnerable Third-Party NHI</strong><p>Risco herdado de NHIs em integrações SaaS (caso Salesloft-Drift).</p></div>
+<div class="annexa-item"><strong>NHI4, Insecure Authentication</strong><p>Mecanismos legados (basic auth, secrets compartilhados) onde existem alternativas modernas.</p></div>
+<div class="annexa-item"><strong>NHI5, Overprivileged NHI</strong><p>Escopos amplos demais sem justificativa de menor privilégio.</p></div>
+<div class="annexa-item"><strong>NHI6, Insecure Cloud Deployment Config</strong><p>Configurações de IaC e deploy que expõem credenciais.</p></div>
+<div class="annexa-item"><strong>NHI7, Long-Lived Secrets</strong><p>Tokens e chaves sem rotação efetiva.</p></div>
+<div class="annexa-item"><strong>NHI8, Environment Isolation</strong><p>Mesma credencial em dev/staging/produção.</p></div>
+<div class="annexa-item"><strong>NHI9, NHI Reuse</strong><p>Compartilhamento de uma NHI entre serviços ou times.</p></div>
+<div class="annexa-item"><strong>NHI10, Human Use of NHI</strong><p>Humanos usando NHIs interativamente, contornando trilha de auditoria humana.</p></div>
+</div>
+
+<p>Outras referências canônicas: NIST SP 800-207 (Zero Trust Architecture) trata Non-Person Entities (NPE) como equivalentes a usuários humanos no modelo Zero Trust; MITRE ATT&CK cataloga as técnicas-chave em T1528, T1078.004, T1098.001 e T1552 (Unsecured Credentials); CIS Controls v8 Control 6 (Access Management) inclui safeguards para contas de serviço; e o Cloud Security Alliance trata identidade como "weakest link" em cloud no Top Threats 2025.</p>
+
+<h2 id="categorias-tecnologia">Categorias de tecnologia: como o mercado se organiza</h2>
+
+<p>O mercado fragmentou em cinco categorias funcionais. Vale conhecer cada uma sem se prender a fornecedor, a escolha depende de stack, maturidade e regulação.</p>
+
+<h3>Secret scanning</h3>
+
+<p>Detecção de secrets em código, commits, logs e tickets. Inclui open source (Gitleaks, TruffleHog) e comercial (GitGuardian). Posição típica: pre-commit hook, push protection no Git provider e varredura contínua de repositórios. É o controle de primeira linha contra NHI2 (Secret Leakage).</p>
+
+<h3>NHI discovery e governance</h3>
+
+<p>Categoria nova, com vendors como Astrix, Entro, Token Security, Aembit, Oasis Security e Akeyless. Foco em discovery cross-cloud, atribuição de ownership, classificação de risco e remediação. Sobrepõe parcialmente com CIEM, mas com lente específica em NHI lifecycle.</p>
+
+<h3>Workload Identity (SPIFFE e WIF)</h3>
+
+<p>A arquitetura mais sólida para eliminar secrets persistentes. SPIFFE/SPIRE (CNCF graduated) emite SVIDs (Secure Verifiable Identity Documents) short-lived a workloads via attestation. Workload Identity Federation cloud-native (Google Workload Identity Pools, AWS IAM IdP + AssumeRoleWithWebIdentity, Microsoft Entra federated credentials) permite que um workload em GitHub Actions, GitLab CI ou Kubernetes troque seu token nativo (OIDC) por uma credencial cloud short-lived, sem secret persistente.</p>
+
+<div class="highlight-box info">
+<p><strong>Por que Workload Identity Federation é estratégico:</strong> elimina a categoria inteira "long-lived secret em CI/CD". Em vez de armazenar uma chave AWS no GitHub Secrets, o workflow troca o OIDC do GitHub por credenciais AWS válidas por minutos. Sisense, tj-actions e GhostAction seriam materialmente menos impactantes se as integrações estivessem em WIF.</p>
+</div>
+
+<h3>Secrets management</h3>
+
+<p>Vault managers (HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager, CyberArk Conjur) oferecem armazenamento centralizado, audit log e, crucialmente, emissão de credenciais dinâmicas (database creds, cloud STS) com TTL curto. A função moderna não é só "guardar o secret", é eliminar o secret estático.</p>
+
+<h3>CIEM (Cloud Infrastructure Entitlement Management)</h3>
+
+<p>Plataformas como Wiz, Permiso, Sonrai e Microsoft Entra Permissions Management mapeiam quem tem permissão para fazer o quê em cloud, humanos e NHIs juntos. Para NHI, o valor é identificar over-privilege (NHI5) e recomendar least privilege. Vale para empresas com superfície cloud significativa.</p>
+
+<h2 id="playbook-90-dias-nhi">Playbook de 90 dias para governar NHI</h2>
+
+<p>Um programa realista para CISO entrega em 90 dias. Três passos com entregáveis claros.</p>
+
+<div class="phase-card" data-phase="Passo 1">
+<h3>Discovery e inventário (dias 1-30)</h3>
+<p>Rode <a href="../secrets-management-corporativo-comparativo/">secret scanning</a> em todos os repositórios (Git provider + repos privados), execute discovery cross-cloud (CIEM ou exportação nativa IAM AWS/GCP/Azure) e mapeie integrações SaaS via OAuth (Google Workspace, Microsoft Entra, Salesforce). O entregável é uma planilha (ou item em CMDB) listando cada NHI: tipo, escopo, owner humano associado, último uso, classificação de risco.</p>
+<p>Marque três campos críticos: NHIs órfãs (sem owner identificável), over-privileged (escopo > necessidade documentada) e long-lived (mais de 90 dias sem rotação). Esses três grupos são a fila de hardening.</p>
+</div>
+
+<div class="phase-card" data-phase="Passo 2">
+<h3>Hardening: revogar, rotacionar, federar (dias 30-60)</h3>
+<p>Revogue NHIs órfãs com janela de 7 dias (alerta + freeze + revoke). Para over-privileged, reduza ao escopo mínimo verificável por uso real (CIEM mostra "permissions used vs granted"). Para long-lived, defina rotação trimestral como mínimo, e migre integrações elegíveis para Workload Identity Federation, eliminando o secret persistente. Priorize CI/CD pipelines (alto risco de leak) e integrações SaaS críticas via OAuth.</p>
+<p>Documente uma política de NHI ownership: toda NHI tem que ter um owner humano nomeado, com responsabilidade de revisão trimestral. O CISO valida a política; jurídico e RH adicionam o passo "transferência de ownership" ao processo de offboarding humano. Essa política se integra naturalmente com programas existentes de <a href="../pam-gestao-acessos-privilegiados/">gestão de acessos privilegiados (PAM)</a>.</p>
+</div>
+
+<div class="phase-card" data-phase="Passo 3">
+<h3>Monitoração contínua e detecção (dias 60-90)</h3>
+<p>Configure detecção de anomalias em uso de NHI: chamadas de API fora do horário do owner, novos IPs, novos endpoints chamados, volume incomum. Plataformas de <a href="../itdr-deteccao-ameacas-identidade/">ITDR (Identity Threat Detection and Response)</a> cobrem essa camada para humanos e NHIs juntos, mas é viável implementar a versão básica com SIEM existente correlacionando audit logs cloud + Git provider + SaaS.</p>
+<p>Inclua um playbook de resposta a comprometimento de NHI: revogação imediata, rotação em cascata (qualquer credencial derivada), comunicação a downstream services impactados, post-mortem e atualização do inventário. Pratique uma simulação de mesa por trimestre.</p>
+</div>
+
+<h2 id="brasil-anpd-bcb">Brasil: ANPD, BCB nº 538/2025 e quando NHI vira incidente reportável</h2>
+
+<p>O cenário regulatório brasileiro impacta diretamente a governança NHI em dois pontos: notificação à ANPD por vazamento de dado pessoal e exigências específicas a instituições financeiras supervisionadas pelo Banco Central.</p>
+
+<h3>LGPD art. 48 e o limiar de notificação</h3>
+
+<p>A LGPD exige notificação à ANPD quando incidente puder gerar "risco ou dano relevante" a titulares. Vazamento de uma API key isolada normalmente não dispara, mas quando essa credencial dá acesso a dados pessoais (CRM com base de clientes, integração com Snowflake contendo dados PII, OAuth token a Google Workspace), o vazamento da credencial é o incidente a comunicar, mesmo sem evidência ainda de exfiltração. Critério prático: classifique cada NHI também por sensibilidade dos dados acessíveis, não só por privilégio técnico.</p>
+
+<h3>BCB nº 538/2025 e CMN nº 5.274/2025</h3>
+
+<p>A Resolução BCB nº 538/2025 e a Resolução CMN nº 5.274/2025 (em vigor desde março de 2026) atualizam o arcabouço de segurança cibernética para instituições financeiras e cooperativas. Entre os requisitos: gestão de acessos privilegiados, MFA, gestão de fornecedores (incluindo OAuth e integrações via API) e resposta a incidentes em prazos definidos. Service accounts e integrações são explicitamente cobertas.</p>
+
+<h3>Caminho prático para conformidade</h3>
+
+<p>Para IFs supervisionadas, o programa NHI de 90 dias precisa entregar três artefatos auditáveis: política de NHI, inventário com classificação por sensibilidade e plano de resposta a incidente envolvendo credenciais. Para empresas fora do setor financeiro, o eixo é LGPD: o nível de governança deve ser proporcional à sensibilidade dos dados acessíveis pelas NHIs.</p>
+
+<div class="cta-box">
+<h3>Quer apoio para implantar governança NHI na sua organização?</h3>
+<p>Nossa consultoria executa o inventário cross-cloud de NHI, prioriza hardening por risco real, migra integrações elegíveis para Workload Identity Federation e prepara a documentação exigida pela ANPD e pelo Banco Central. <a href="../../#contato">Fale com a Inteligência Brasil</a> para um diagnóstico inicial.</p>
+</div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>NHI substitui a gestão de identidade humana?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Não. São camadas distintas: NHI cresce em volume e em superfície de ataque, mas SSO, MFA e governança de acesso humano continuam essenciais. O programa correto trata humanos e não-humanos como populações paralelas, com lifecycle, ownership e auditoria próprios, frequentemente unificados sob plataformas CIEM ou ITDR.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Por que OAuth virou o vetor preferido em 2025-2026?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O protocolo OAuth 2.0 não é inseguro, o fluxo está correto. O risco está no uso indevido: refresh tokens de longa duração, scopes amplos, ausência de revogação após offboarding e armazenamento inseguro em bancos de dados. O caso Salesloft-Drift mostrou como um token OAuth de um app SaaS de terceiros pode propagar exfiltração para centenas de organizações sem disparar alertas.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Workload Identity Federation elimina todos os secrets persistentes?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Elimina secrets persistentes para workloads que rodam em ambientes attestables, GitHub Actions, GitLab CI, Kubernetes, máquinas virtuais cloud com IMDS. Não cobre credenciais de APIs SaaS de terceiros nem integrações com sistemas legados sem suporte a OIDC. Para o resto, ainda é necessário rotação e gestão via vault.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Com que frequência rotacionar secrets de NHI long-lived?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>A recomendação OWASP NHI7 é eliminar long-lived sempre que viável. Quando inevitáveis (sistemas legados, APIs sem federação), rotação trimestral é referência comum, com revogação imediata em offboarding do owner humano associado. Mais importante que o intervalo é ter um inventário que torne a rotação executável.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Vazamento de API key precisa ser notificado à ANPD?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Depende do escopo da credencial. Se a API key dava acesso a dados pessoais com potencial de risco ou dano relevante, o incidente é reportável nos termos do art. 48 da LGPD, independentemente de haver evidência confirmada de exfiltração. Para IFs supervisionadas, a Resolução BCB nº 538/2025 adiciona obrigações específicas de comunicação ao Banco Central.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como detectar NHIs órfãs em ambiente multi-cloud?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Discovery contínuo via CIEM ou plataforma de NHI governance é o caminho escalável; alternativa básica é exportar IAM de cada cloud (AWS Access Analyzer, GCP IAM Recommender, Azure Identity Insights), correlacionar com inventário de owners humanos e marcar como órfã toda NHI sem owner identificável ou com mais de 90 dias sem uso. A classificação dispara o fluxo de revogação.</p></div>
+                    </div>
+                </div>
+
+                <h2>Conclusao</h2>
+
+                <p>NHI deixou de ser categoria nicho para se tornar o perímetro de identidade primário em empresas cloud-native. Ratios de 45:1 a 144:1 contra usuários humanos, casos como Salesloft-Drift e Snowflake, e o reconhecimento via OWASP NHI Top 10 e Resolução BCB nº 538/2025 indicam que o tema saiu definitivamente do nicho técnico. Para o CISO, a tese prática é direta: governança NHI precisa ser tratada como população primária, com inventário, ownership e lifecycle próprios, não como configuração de plataforma esquecida em ticket antigo.</p>
+<p>O programa de 90 dias descrito aqui entrega o mínimo viável: discovery, hardening prioritizado por risco, federação para eliminar secrets persistentes em CI/CD e monitoração contínua. A janela para construir esse programa antes de um incidente público está aberta, e os adversários já sabem que NHI é o caminho mais quieto.</p>
+
+                <div class="module-sources" style="margin-top:2rem;padding:1.5rem;background:rgba(96,165,250,.04);border-left:3px solid #60A5FA;border-radius:8px">
+                    <div style="font-weight:700;color:#60A5FA;margin-bottom:.75rem"><i class="fas fa-bookmark"></i> Fontes e referencias tecnicas</div>
+                    <ul style="margin:0;padding-left:1.2rem">
+                        <li><a href="https://www.paloaltonetworks.com/resources/research/unit-42-incident-response-report" target="_blank" rel="noopener">Unit 42, Global Incident Response Report 2026 (Palo Alto Networks)</a></li>
+                        <li><a href="https://owasp.org/www-project-non-human-identities-top-10/2025/top-10-2025/" target="_blank" rel="noopener">OWASP Non-Human Identities Top 10 (2025)</a></li>
+                        <li><a href="https://www.gitguardian.com/state-of-secrets-sprawl-report-2025" target="_blank" rel="noopener">GitGuardian, State of Secrets Sprawl Report 2025</a></li>
+                        <li><a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" rel="noopener">Verizon, 2025 Data Breach Investigations Report</a></li>
+                        <li><a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-207.pdf" target="_blank" rel="noopener">NIST SP 800-207, Zero Trust Architecture (Non-Person Entities)</a></li>
+                        <li><a href="https://attack.mitre.org/techniques/T1528/" target="_blank" rel="noopener">MITRE ATT&CK T1528, Steal Application Access Token</a></li>
+                        <li><a href="https://attack.mitre.org/techniques/T1078/004/" target="_blank" rel="noopener">MITRE ATT&CK T1078.004, Valid Accounts: Cloud Accounts</a></li>
+                        <li><a href="https://attack.mitre.org/techniques/T1552/" target="_blank" rel="noopener">MITRE ATT&CK T1552, Unsecured Credentials</a></li>
+                        <li><a href="https://cloud.google.com/blog/topics/threat-intelligence/data-theft-salesforce-instances-via-salesloft-drift" target="_blank" rel="noopener">Google Cloud Threat Intelligence, Salesloft-Drift OAuth campaign (UNC6395)</a></li>
+                        <li><a href="https://unit42.paloaltonetworks.com/threat-brief-compromised-salesforce-instances/" target="_blank" rel="noopener">Unit 42, Threat Brief: Compromised Salesforce instances via Salesloft-Drift</a></li>
+                        <li><a href="https://www.securityweek.com/sisense-data-breach-triggers-cisa-alert-and-urgent-calls-for-credential-resets/" target="_blank" rel="noopener">SecurityWeek, Sisense breach triggers CISA alert (2024)</a></li>
+                        <li><a href="https://unit42.paloaltonetworks.com/github-actions-supply-chain-attack/" target="_blank" rel="noopener">Unit 42, GitHub Actions supply chain attack (tj-actions/changed-files, CVE-2025-30066)</a></li>
+                        <li><a href="https://blog.gitguardian.com/ghostaction-campaign-3-325-secrets-stolen/" target="_blank" rel="noopener">GitGuardian, GhostAction campaign: 3,325 secrets stolen</a></li>
+                        <li><a href="https://spiffe.io/" target="_blank" rel="noopener">SPIFFE / SPIRE, Secure Production Identity Framework</a></li>
+                        <li><a href="https://cloudsecurityalliance.org/press-releases/2025/04/29/cloud-security-alliance-issues-top-threats-to-cloud-computing-deep-dive-2025" target="_blank" rel="noopener">Cloud Security Alliance, Top Threats to Cloud Computing 2025</a></li>
+                        <li><a href="https://ndmadvogados.com.br/artigo/seguranca-cibernetica-bcb-538-cmn-5274/" target="_blank" rel="noopener">Análise jurídica, Resolução BCB nº 538/2025 e CMN nº 5.274/2025</a></li>
+                    </ul>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/nhi-non-human-identity-governanca/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/nhi-non-human-identity-governanca/" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Non-Human%20Identity%20%28NHI%29%3A%20governan%C3%A7a%20no%20per%C3%ADmetro%20de%20identidade https://inteligenciabrasil.seg.br/blog/nhi-non-human-identity-governanca/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h3>Roberto Lima</h3>
+                        <p>Especialista em Seguranca Ofensiva, Threat Intelligence e Detection Engineering na Inteligencia Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

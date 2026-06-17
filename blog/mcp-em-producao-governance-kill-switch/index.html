@@ -1,41 +1,36 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="MCP em produção: governance, audit logging, kill switch, allow-listing de servidores, rate limiting e human-in-the-loop para colocar agentes autônomos em operação sem perder controle.">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="keywords" content="mcp em producao, model context protocol governance, agentic ai governance, kill switch agente, audit log mcp, human in the loop, allow list mcp server, agente autonomo seguro">
-    <meta name="author" content="Inteligência Brasil">
-    <meta name="theme-color" content="#0D1E38">
-    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/mcp-em-producao-governance-kill-switch/">
-    <link rel="alternate" type="application/rss+xml" title="Blog Inteligência Brasil — RSS" href="../../feed.xml">
-
-    <meta property="og:title" content="MCP em Produção: Governance, Audit e Kill Switch para Agentes Autônomos">
-    <meta property="og:description" content="Os controles operacionais que separam piloto de MCP de uso real: allow-listing, audit, kill switch e human-in-the-loop.">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/mcp-em-producao-governance-kill-switch/">
-    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
-    <meta property="og:locale" content="pt_BR">
-    <meta property="og:site_name" content="Inteligência Brasil">
-    <meta property="article:published_time" content="2026-05-29T12:00:00-03:00">
-    <meta property="article:section" content="AI Security &amp; Governance">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MCP em Produção — Governance e Kill Switch">
-    <meta name="twitter:description" content="Controles operacionais para colocar agentes MCP em uso real sem perder controle.">
-
-    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
-    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
-
-    <title>MCP em Produção: Governance, Audit e Kill Switch | Inteligência Brasil</title>
-
-    <script type="application/ld+json">
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WCL38PDP');</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<meta content="MCP em produção: governance, audit logging, kill switch, allow-listing de servidores, rate limiting e human-in-the-loop para colocar agentes autônomos em operação sem perder controle." name="description"/>
+<meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/>
+<meta content="mcp em producao, model context protocol governance, agentic ai governance, kill switch agente, audit log mcp, human in the loop, allow list mcp server, agente autonomo seguro" name="keywords"/>
+<meta content="Inteligência Brasil" name="author"/>
+<meta content="#0D1E38" name="theme-color"/>
+<link href="https://inteligenciabrasil.seg.br/blog/mcp-em-producao-governance-kill-switch/" rel="canonical"/>
+<link href="../../feed.xml" rel="alternate" title="Blog Inteligência Brasil — RSS" type="application/rss+xml"/>
+<meta content="MCP em Produção: Governance, Audit e Kill Switch para Agentes Autônomos" property="og:title"/>
+<meta content="Os controles operacionais que separam piloto de MCP de uso real: allow-listing, audit, kill switch e human-in-the-loop." property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://inteligenciabrasil.seg.br/blog/mcp-em-producao-governance-kill-switch/" property="og:url"/>
+<meta content="https://inteligenciabrasil.seg.br/img/og-image.webp" property="og:image"/>
+<meta content="pt_BR" property="og:locale"/>
+<meta content="Inteligência Brasil" property="og:site_name"/>
+<meta content="2026-05-29T12:00:00-03:00" property="article:published_time"/>
+<meta content="AI Security &amp; Governance" property="article:section"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="MCP em Produção — Governance e Kill Switch" name="twitter:title"/>
+<meta content="Controles operacionais para colocar agentes MCP em uso real sem perder controle." name="twitter:description"/>
+<link href="../../img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+<title>MCP em Produção: Governance, Audit e Kill Switch | Inteligência Brasil</title>
+<script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Article","headline":"MCP em Produção: Governance, Audit e Kill Switch para Agentes Autônomos","description":"Os controles operacionais que separam piloto de MCP de uso real: allow-listing de servidores, audit log imutável, kill switch, rate limiting e human-in-the-loop.","image":"https://inteligenciabrasil.seg.br/img/og-image.webp","author":{"@type":"Person","name":"Roberto Lima","url":"https://inteligenciabrasil.seg.br/sobre/"},"publisher":{"@type":"Organization","name":"Inteligência Brasil","logo":{"@type":"ImageObject","url":"https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},"datePublished":"2026-05-29","dateModified":"2026-05-29","mainEntityOfPage":{"@type":"WebPage","@id":"https://inteligenciabrasil.seg.br/blog/mcp-em-producao-governance-kill-switch/"},"inLanguage":"pt-BR"}
     </script>
-
-    <script type="application/ld+json">
+<script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
         {"@type":"Question","name":"Por que MCP em produção é diferente de MCP em piloto?","acceptedAnswer":{"@type":"Answer","text":"Em piloto o impacto é contido (um usuário, ambiente isolado, baixa frequência de chamadas). Em produção o agente passa a atuar com identidades reais, sobre dados reais, em frequência alta e sem o operador acompanhando cada turn. Isso transforma classes de risco antes toleráveis — confused deputy, tool poisoning, excessive agency — em incidentes potencialmente caros. Os controles que diferenciam piloto de produção são governance (quem aprovou cada MCP server e ação), audit (rastro imutável de tudo que o agente fez), kill switch (capacidade de matar agente e revogar tokens em segundos) e human-in-the-loop nos pontos de impacto irreversível."}},
         {"@type":"Question","name":"O que deve estar no audit log de um agente MCP?","acceptedAnswer":{"@type":"Answer","text":"Mínimo: timestamp UTC, identidade do principal humano que originou a sessão, identidade do agente, prompt do usuário (ou referência), modelo + versão, server MCP invocado, tool chamada com argumentos, resposta retornada (truncada com hash da resposta completa), decisão final do modelo, e ação executada (incluindo identificadores de recursos modificados). Tudo isso em log imutável (WORM, append-only) com integridade verificável (hash chain) e retenção alinhada à regulação (LGPD: pelo menos durante o tempo de vida do tratamento; setor financeiro/saúde: cinco anos ou mais). Sem essa fundação, qualquer investigação de incidente esbarra em 'não temos como saber'."}},
@@ -45,16 +40,16 @@
         {"@type":"Question","name":"Como medir se a governance de MCP está funcionando?","acceptedAnswer":{"@type":"Answer","text":"Métricas operacionais que importam: (a) percentual de ações irreversíveis com aprovação humana (meta: 100%); (b) tempo médio entre incidente e kill switch acionado (meta: &lt; 30s); (c) cobertura de audit (100% de chamadas a tools logadas); (d) número de MCP servers fora da allow-list bloqueados pelo gateway por semana (sinaliza tentativas de uso shadow); (e) percentual de prompts que disparam guardrail (alto demais = guardrails ruins; baixo demais = guardrails permissivos); (f) MTTR de revisão de incidente (consegue reconstruir cadeia de ações? quanto tempo?). Acompanhe semanalmente até estabilizar."}}
     ]}
     </script>
-
-    <script type="application/ld+json">
+<script type="application/ld+json">
     {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inteligenciabrasil.seg.br/blog/"},{"@type":"ListItem","position":3,"name":"MCP em Produção"}]}
     </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- ASYNC-CSS-V1 -->
-    <style>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&amp;display=swap" rel="preload"/>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/></noscript>
+<!-- ASYNC-CSS-V1 -->
+<style>
     /* ASYNC-CSS-V1 critical: blog article above-the-fold */
     @font-face{font-family:'Fira Sans Fallback';src:local('Arial'),local('Helvetica');size-adjust:100%}
     *,*::before,*::after{box-sizing:border-box}
@@ -98,270 +93,233 @@
     .breadcrumb-item+.breadcrumb-item::before{display:inline-block;padding-right:.5rem;color:#6c757d;content:"/"}
     @media(max-width:767px){.article-header{padding:120px 0 40px}.article-header h1{font-size:1.75rem}.article-meta{font-size:.85rem;gap:12px}}
     </style>
-    <link href="../../css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="../../css/bootstrap.min.css" rel="stylesheet"></noscript>
-    <link href="../../css/fontawesome-all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="../../css/fontawesome-all.min.css" rel="stylesheet"></noscript>
-    <link href="../../css/styles.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="../../css/styles.min.css" rel="stylesheet"></noscript>
-    <link href="../../css/servico.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="../../css/servico.min.css" rel="stylesheet"></noscript>
-    <link href="../../css/blog-article.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="../../css/blog-article.min.css" rel="stylesheet"></noscript>
+<link href="../../css/bootstrap.min.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="../../css/bootstrap.min.css" rel="stylesheet"/></noscript>
+<link href="../../css/fontawesome-subset.min.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="../../css/fontawesome-subset.min.css" rel="stylesheet"/></noscript>
+<link href="../../css/styles.min.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="../../css/styles.min.css" rel="stylesheet"/></noscript>
+<link href="../../css/servico.min.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="../../css/servico.min.css" rel="stylesheet"/></noscript>
+<link href="../../css/blog-article.min.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<noscript><link href="../../css/blog-article.min.css" rel="stylesheet"/></noscript>
 </head>
 <body>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
-        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
-        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
-                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
-                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
-                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <header class="article-header">
-        <div class="container">
-            <span class="article-category">AI Security &amp; Governance</span>
-            <h1>MCP em Produção: Governance, Audit e Kill Switch</h1>
-            <div class="article-meta">
-                <span><i class="far fa-calendar"></i> Maio 2026</span>
-                <span><i class="far fa-clock"></i> 14 min de leitura</span>
-                <span><i class="far fa-building"></i> Inteligência Brasil</span>
-            </div>
-        </div>
-    </header>
-
-    <nav class="breadcrumb-nav" aria-label="breadcrumb">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../../">Home</a></li>
-                <li class="breadcrumb-item"><a href="../">Blog</a></li>
-                <li class="breadcrumb-item active">MCP em Produção</li>
-            </ol>
-        </div>
-    </nav>
-
-    <main id="main-content">
-    <article class="article-content">
-        <div class="container">
-            <div class="article-body">
-
-                <div class="warning-box" style="border-left-color:#f59e0b;background:linear-gradient(145deg,rgba(245,158,11,.08) 0%,rgba(180,83,9,.04) 100%);border-color:rgba(245,158,11,.4)">
-                    <p class="warning-title" style="margin:0 0 .5rem;color:#fcd34d;font-weight:700;font-size:1.05rem"><i class="fas fa-info-circle"></i> <strong>Sobre este conteúdo</strong></p>
-                    <p style="color:#cbd5e1">Este artigo é um guia operacional para colocar agentes baseados em <strong>MCP (Model Context Protocol)</strong> em produção sem perder controle. Pressupõe familiaridade com os vetores de ataque cobertos em <a href="../mcp-agentic-ai-security/" style="color:#60A5FA">MCP e Agentic AI Security</a>. Aqui o foco é o que muda do piloto para o uso real e quais controles passam de "nice to have" para indispensáveis.</p>
-                </div>
-
-                <div class="toc">
-                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
-                    <ul>
-                        <li><a href="#delta-piloto">O delta entre piloto e produção</a></li>
-                        <li><a href="#governance">Governance: quem aprova o quê</a></li>
-                        <li><a href="#allow-list">Allow-listing de MCP servers</a></li>
-                        <li><a href="#audit">Audit log imutável: o que registrar</a></li>
-                        <li><a href="#kill-switch">Kill switch operacional</a></li>
-                        <li><a href="#hitl">Human-in-the-loop nos pontos certos</a></li>
-                        <li><a href="#rate-limit">Rate limiting e quotas</a></li>
-                        <li><a href="#metricas">Métricas que importam</a></li>
-                        <li><a href="#faq">Perguntas frequentes</a></li>
-                    </ul>
-                </div>
-
-                <h2 id="delta-piloto">O delta entre piloto e produção</h2>
-                <p>Pilotos de agentes baseados em <a href="../mcp-agentic-ai-security/" style="color:#60A5FA">MCP</a> escondem o problema operacional: um usuário, um ambiente isolado, baixa frequência de chamadas, alguém observando cada turn. Em produção essas quatro variáveis viram outras quatro: <strong>muitos usuários simultâneos</strong>, <strong>dados e identidades reais</strong>, <strong>frequência alta</strong> e <strong>ninguém olhando ao vivo</strong>. Classes de risco antes toleráveis — confused deputy, tool poisoning, excessive agency — viram incidentes potencialmente caros.</p>
-
-                <p>A diferença é exatamente a mesma do que separa um modelo ML em notebook de um modelo em <em>online serving</em>: observabilidade, controle de mudanças, capacidade de rollback, gestão de versões, e — crucial — a habilidade de parar tudo rápido quando algo dá errado. Os controles abaixo são o equivalente operacional para MCP.</p>
-
-                <h2 id="governance">Governance: quem aprova o quê</h2>
-                <p>Antes de qualquer controle técnico, defina três artefatos por escrito:</p>
-
-                <div class="pillar-cards">
-                    <div class="pillar-card confidentiality">
-                        <div class="icon"><i class="fas fa-stamp"></i></div>
-                        <h3>Catálogo de MCP servers aprovados</h3>
-                        <p>Lista versionada de quais servidores externos seu agente pode falar. Cada entrada: URL canônica, hash do binário (se self-hosted), responsável interno, data de aprovação, escopo das tools expostas.</p>
-                    </div>
-                    <div class="pillar-card integrity">
-                        <div class="icon"><i class="fas fa-tasks"></i></div>
-                        <h3>Política de ações permitidas</h3>
-                        <p>Para cada combinação (agente × tool × cenário), o que pode ser feito autonomamente, o que precisa human-in-the-loop e o que está vetado. Documente como código (YAML/JSON), não em wiki.</p>
-                    </div>
-                    <div class="pillar-card availability">
-                        <div class="icon"><i class="fas fa-users-cog"></i></div>
-                        <h3>RACI de incidentes</h3>
-                        <p>Quem aciona o kill switch, quem reverte ações, quem comunica usuários afetados, quem decide retomar operação. Sem RACI, em incidente todos olham um para o outro enquanto o agente continua agindo.</p>
-                    </div>
-                </div>
-
-                <p>O catálogo de MCP servers e a política de ações são versionados em Git, revisados por pares, e as mudanças geram trilha de auditoria. Servidores ou tools não listadas no catálogo são <em>rejeitadas no gateway</em> — não dependem de boa-fé do agente.</p>
-
-                <h2 id="allow-list">Allow-listing de MCP servers</h2>
-                <p>O modelo de ameaça mais subestimado é <strong>tool poisoning</strong>: um atacante registra (ou compromete) um MCP server, expõe tools que parecem inocentes (<code>get_user_preferences</code>, <code>format_output</code>) mas que carregam comportamento malicioso — exfiltração, injeção de prompts indiretos, side effects em recursos externos. Sem allow-listing, qualquer prompt malicioso ou bug pode levar o agente a invocar essas tools.</p>
-
-                <p>Implemente em <strong>quatro camadas</strong>:</p>
-
-                <ol style="color:#CBD5E1;line-height:1.75;font-size:1rem">
-                    <li><strong>Gateway de saída:</strong> o cliente do agente nunca fala direto com o MCP server externo. Sempre via proxy que valida o destino contra a allow-list (URL exata, hash de TLS pin, certificado esperado).</li>
-                    <li><strong>Verificação de identidade do server:</strong> além de URL, exija assinatura ou mTLS. URL pode ser sequestrada; chave criptográfica do server, não.</li>
-                    <li><strong>Mapeamento explícito de tools:</strong> nem todas as tools que um server expõe estão habilitadas. Mantenha por server uma lista de tools permitidas — se o server expor uma <code>delete_everything</code>, ela continua bloqueada.</li>
-                    <li><strong>Pinning de versão:</strong> a allow-list referencia versão (semver ou commit hash) do server. Quando o server upgrada, o gateway bloqueia até alguém revisar o changelog e aprovar a nova versão.</li>
-                </ol>
-
-                <h2 id="audit">Audit log imutável: o que registrar</h2>
-                <p>O audit log é o seu único recurso quando algo dá errado. Sem ele, qualquer investigação esbarra em "não temos como saber". Registre, por chamada:</p>
-
-                <div class="comparison-table">
-                    <table style="width:100%;border-collapse:collapse">
-                        <thead><tr><th>Campo</th><th>Conteúdo</th><th>Por quê</th></tr></thead>
-                        <tbody>
-                            <tr><td><code>ts</code></td><td>Timestamp UTC ISO 8601 com ms</td><td>Correlação com outros logs</td></tr>
-                            <tr><td><code>session_id</code></td><td>UUID por sessão de agente</td><td>Reconstruir cadeia de turns</td></tr>
-                            <tr><td><code>principal</code></td><td>Identidade do humano que originou (Entra ID / Okta sub)</td><td>Accountability — quem pediu</td></tr>
-                            <tr><td><code>agent_id</code></td><td>Nome + versão do agente</td><td>Rastreio de regressões</td></tr>
-                            <tr><td><code>model</code></td><td>Provider + modelo + versão</td><td>Reproduzir comportamento</td></tr>
-                            <tr><td><code>prompt_hash</code></td><td>SHA-256 do prompt do usuário</td><td>Privacidade + auditoria</td></tr>
-                            <tr><td><code>mcp_server</code></td><td>URL canônica + versão</td><td>Mapear chamada à allow-list</td></tr>
-                            <tr><td><code>tool</code></td><td>Nome da tool invocada</td><td>Análise de uso</td></tr>
-                            <tr><td><code>tool_args</code></td><td>Argumentos finais enviados (com redação de PII)</td><td>Reproduzir ou refutar comportamento</td></tr>
-                            <tr><td><code>tool_result_hash</code></td><td>SHA-256 do resultado completo</td><td>Provar o que voltou sem armazenar tudo</td></tr>
-                            <tr><td><code>action_taken</code></td><td>Mudança de estado efetuada (criar, deletar, atualizar) + IDs dos recursos</td><td>Possibilita rollback e investigação</td></tr>
-                            <tr><td><code>approval</code></td><td>ID de aprovação humana (se HITL acionado)</td><td>Prova de governance</td></tr>
-                            <tr><td><code>chain_hash</code></td><td>SHA-256 (linha atual + chain_hash anterior)</td><td>Integridade do log</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <p>Armazene em backend WORM (write-once-read-many) ou append-only com integridade verificável: AWS CloudWatch Logs com lock, Azure Immutable Blob Storage, GCP Bucket Lock, ou Object Lock S3 em compliance mode. O <code>chain_hash</code> em cadeia (cada linha referencia a anterior) detecta manipulação retroativa mesmo se o storage for comprometido.</p>
-
-                <div class="warning-box" style="border-left-color:#ef4444;background:rgba(239,68,68,.06)">
-                    <h3 style="color:#fca5a5"><i class="fas fa-exclamation-triangle"></i> Pegadinha de privacidade</h3>
-                    <p style="color:#cbd5e1">Logue <em>hashes</em> de prompts e resultados, não o conteúdo bruto. Em incidente, você pode pedir consentimento específico para reconstruir, mas o log padrão não deve ter PII em texto claro — caso contrário você criou uma nova superfície de vazamento.</p>
-                </div>
-
-                <h2 id="kill-switch">Kill switch operacional</h2>
-                <p>Kill switch precisa funcionar em quatro camadas em paralelo, porque cada uma falha sozinha:</p>
-
-                <div class="phase-card">
-                    <div class="phase-number">1</div>
-                    <h3>Endpoint /kill no orchestrator</h3>
-                    <p>Sessões em curso são interrompidas. Implementação simples: flag em Redis ou tabela, verificada a cada turn. Se flag setada para o agente, o orchestrator retorna erro controlado e não chama mais tools.</p>
-                </div>
-
-                <div class="phase-card">
-                    <div class="phase-number">2</div>
-                    <h3>Revogação imediata de credenciais</h3>
-                    <p>Sessão morta no orchestrator não impede que execuções pendentes em tools terminem. Revogar tokens OAuth, rotacionar API keys e expirar service principals em paralelo ao kill é o que realmente interrompe o blast radius.</p>
-                </div>
-
-                <div class="phase-card">
-                    <div class="phase-number">3</div>
-                    <h3>Circuit breaker no gateway</h3>
-                    <p>O gateway de MCP servers recusa novas chamadas para os destinos afetados (por server, por tool ou por agente). Independente do estado do orchestrator.</p>
-                </div>
-
-                <div class="phase-card">
-                    <div class="phase-number">4</div>
-                    <h3>Feature flag global</h3>
-                    <p>Flag em config central (Redis pub/sub, Consul, AWS AppConfig, LaunchDarkly) que desativa o agente inteiro. Propagação em segundos. Esta é sua "estrela vermelha" — quando todo o resto falha, o agente para de iniciar sessões novas.</p>
-                </div>
-
-                <p>Teste o kill switch periodicamente em stage. Sem teste, ele falha justo quando você precisa — credenciais não revogam porque o secrets manager perdeu permissão, flag não propaga porque alguém mudou a chave, circuit breaker está em config errada. <strong>Faça GameDay trimestral de kill switch.</strong></p>
-
-                <h2 id="hitl">Human-in-the-loop nos pontos certos</h2>
-                <p>HITL em tudo mata produtividade. HITL em nada mata o negócio. A linha está em <em>impacto irreversível ou alto custo</em>:</p>
-
-                <ul style="color:#CBD5E1;line-height:1.75">
-                    <li><strong>Ação que muda estado externo persistente:</strong> criar fatura, aprovar pagamento, deletar recurso, abrir ticket externo, enviar comunicação a cliente.</li>
-                    <li><strong>Custo de erro &gt; custo de revisão:</strong> regra simples — se reverter custa muito mais do que aprovar custa, peça aprovação.</li>
-                    <li><strong>Primeira execução de tool nova naquele contexto:</strong> mesmo se aprovada no catálogo, primeira invocação por aquele agente em produção justifica revisão.</li>
-                    <li><strong>Ação fora dos guardrails da sessão:</strong> se o usuário definiu escopo (apenas relatórios de leitura), tentativas de sair desse escopo viram pedido de aprovação.</li>
-                </ul>
-
-                <p>Implementação típica: o agente apresenta a ação proposta com argumentos finais, o humano vê (UI dedicada, e-mail com link, mensagem no Slack/Teams), aprova/rejeita/edita. A aprovação é o gatilho da execução. <em>Logue a aprovação no audit junto com a ação</em> — quem aprovou, quando, qual delta entre proposto e executado.</p>
-
-                <h2 id="rate-limit">Rate limiting e quotas</h2>
-                <p>Agentes têm padrão de uso bursty e podem entrar em loops degenerados (o modelo "convence a si mesmo" que precisa chamar a mesma tool dez vezes seguidas). Sem quotas, isso vira incidente de custo e de carga em sistemas downstream.</p>
-
-                <ul style="color:#CBD5E1;line-height:1.75">
-                    <li><strong>Quota por sessão:</strong> N tools no total, M por tipo. Excedeu? Para a sessão e exige novo turn humano.</li>
-                    <li><strong>Quota por usuário/dia:</strong> contém shadow usage e abuso de credencial.</li>
-                    <li><strong>Quota por MCP server:</strong> protege o destino. Útil quando o server externo cobra por chamada.</li>
-                    <li><strong>Loop detection:</strong> se a mesma tool é chamada com argumentos idênticos N vezes em janela curta, intercepte e exija HITL.</li>
-                </ul>
-
-                <h2 id="metricas">Métricas que importam</h2>
-                <p>Acompanhe semanalmente:</p>
-
-                <div class="comparison-table">
-                    <table style="width:100%;border-collapse:collapse">
-                        <thead><tr><th>Métrica</th><th>Meta</th><th>Sinal de alerta</th></tr></thead>
-                        <tbody>
-                            <tr><td>% ações irreversíveis com HITL</td><td>100%</td><td>Qualquer queda — significa que alguma rota está bypass</td></tr>
-                            <tr><td>Tempo médio kill switch → todas as execuções paradas</td><td>&lt; 30s</td><td>Aumento sinaliza tokens não revogando</td></tr>
-                            <tr><td>Cobertura de audit</td><td>100% das chamadas a tools</td><td>Drop indica logger fora do ar ou caminho não instrumentado</td></tr>
-                            <tr><td>MCP servers fora da allow-list bloqueados/semana</td><td>Próximo de zero (depois de estabilizado)</td><td>Alto = tentativas de shadow MCP, investigar</td></tr>
-                            <tr><td>% prompts que disparam guardrail</td><td>Estável (depende do uso)</td><td>Alto demais: guardrails ruins; baixo demais: permissivos</td></tr>
-                            <tr><td>MTTR de revisão de incidente</td><td>Tempo curto para reconstruir cadeia</td><td>Crescente = audit ou correlação degradados</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h2 id="faq">Perguntas frequentes</h2>
-
-                <div class="faq-section">
-                    <div class="faq-item"><h3>Por que MCP em produção é diferente de MCP em piloto?</h3><p>Em piloto o impacto é contido (um usuário, ambiente isolado, baixa frequência). Em produção o agente atua sobre identidades e dados reais, em alta frequência e sem operador acompanhando. Confused deputy, tool poisoning e excessive agency saem do plano teórico e viram incidentes potencialmente caros.</p></div>
-                    <div class="faq-item"><h3>O que deve estar no audit log?</h3><p>Timestamp, identidade do principal humano, identidade do agente, modelo+versão, server MCP, tool chamada com argumentos, hash da resposta, ação executada (com IDs dos recursos), aprovação HITL quando aplicável. Em log imutável com integridade verificável (hash chain) e retenção alinhada à regulação.</p></div>
-                    <div class="faq-item"><h3>Como implementar kill switch?</h3><p>Quatro camadas em paralelo: endpoint /kill no orchestrator, revogação imediata de tokens <a class="gloss-link" href="/glossario/#oauth" title="Ver no gloss&#225;rio">OAuth</a>/credenciais, circuit breaker no gateway, feature flag global. Teste em GameDay trimestral — sem teste, ele falha quando você precisa.</p></div>
-                    <div class="faq-item"><h3>O que é allow-listing de MCP server?</h3><p>Lista de servidores MCP aprovados pela organização, validada no gateway. Inclui URL canônica, identidade (mTLS/assinatura), tools permitidas por server e pinning de versão. Bloqueia tool poisoning e contém blast radius quando um server legítimo é comprometido.</p></div>
-                    <div class="faq-item"><h3>Quando exigir human-in-the-loop?</h3><p>Em pontos de impacto irreversível ou alto custo: criar/aprovar/deletar recurso externo, enviar comunicação a cliente, primeira execução de tool nova, ação fora dos guardrails da sessão. O humano aprova/edita, a aprovação é o gatilho da execução, e tudo é logado.</p></div>
-                    <div class="faq-item"><h3>Como medir se a governance está funcionando?</h3><p>% ações irreversíveis com HITL (meta 100%), tempo até kill switch propagar, cobertura de audit, bloqueios de MCP fora da allow-list, taxa de guardrail acionado, MTTR de revisão de incidente. Acompanhe semanal até estabilizar.</p></div>
-                </div>
-
-                <h2 id="referencias" style="margin-top:3rem">Referências</h2>
-                <div class="references-list">
-                    <ul>
-                        <li>Anthropic — Model Context Protocol specification — <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">modelcontextprotocol.io</a></li>
-                        <li>OWASP Top 10 for LLM Applications (2025) — <a href="https://genai.owasp.org" target="_blank" rel="noopener">genai.owasp.org</a></li>
-                        <li>NIST AI Risk Management Framework — Generative AI Profile (NIST AI 600-1)</li>
-                        <li>MITRE ATLAS — Adversarial Threat Landscape for AI Systems — <a href="https://atlas.mitre.org" target="_blank" rel="noopener">atlas.mitre.org</a></li>
-                        <li>EU AI Act — texto consolidado em <a href="https://eur-lex.europa.eu" target="_blank" rel="noopener">eur-lex.europa.eu</a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </article>
-    </main>
-
-    <footer class="ex-footer">
-        <div class="container">
-            <div class="footer-col first">
-                <h4>Inteligência Brasil</h4>
-                <p>Cibersegurança orientada a inteligência de ameaças e impacto.</p>
-            </div>
-            <div class="footer-col second">
-                <h4>Links</h4>
-                <ul class="list-unstyled li-space-lg p-small">
-                    <li><a href="../../">Home</a></li>
-                    <li><a href="../">Blog</a></li>
-                    <li><a href="../../ferramentas/">Ferramentas</a></li>
-                    <li><a href="../../sobre/">Sobre</a></li>
-                </ul>
-            </div>
-            <div class="footer-col third">
-                <h4>Contato</h4>
-                <p>contato@inteligenciabrasil.seg.br</p>
-            </div>
-        </div>
-    </footer>
-    <div class="copyright"><div class="container"><p class="p-small">Copyright © Intelig&ecirc;ncia Brasil — Todos os direitos reservados</p></div></div>
-
-    <script src="../../js/site-common.js"></script>
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+<a class="navbar-brand logo-image" href="../../"><img alt="Logo Inteligência Brasil" height="113" src="../../img/logo.svg" width="196"/></a>
+<button aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler collapsed" data-target="#navbarsExampleDefault" data-toggle="collapse" type="button"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+<ul class="navbar-nav ml-auto">
+<li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+<li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+<li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+<li class="nav-item dropdown"><a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button">PARA VOCÊ</a><div aria-labelledby="navParaVoce" class="dropdown-menu"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+<li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+</ul>
+</div>
+</nav>
+<header class="article-header">
+<div class="container">
+<span class="article-category">AI Security &amp; Governance</span>
+<h1>MCP em Produção: Governance, Audit e Kill Switch</h1>
+<div class="article-meta">
+<span><i class="far fa-calendar"></i> Maio 2026</span>
+<span><i class="far fa-clock"></i> 14 min de leitura</span>
+<span><i class="far fa-building"></i> Inteligência Brasil</span>
+</div>
+</div>
+</header>
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+<div class="container">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="../../">Home</a></li>
+<li class="breadcrumb-item"><a href="../">Blog</a></li>
+<li class="breadcrumb-item active">MCP em Produção</li>
+</ol>
+</div>
+</nav>
+<main id="main-content">
+<article class="article-content">
+<div class="container">
+<div class="article-body">
+<div class="warning-box" style="border-left-color:#f59e0b;background:linear-gradient(145deg,rgba(245,158,11,.08) 0%,rgba(180,83,9,.04) 100%);border-color:rgba(245,158,11,.4)">
+<p class="warning-title" style="margin:0 0 .5rem;color:#fcd34d;font-weight:700;font-size:1.05rem"><i class="fas fa-info-circle"></i> <strong>Sobre este conteúdo</strong></p>
+<p style="color:#cbd5e1">Este artigo é um guia operacional para colocar agentes baseados em <strong>MCP (Model Context Protocol)</strong> em produção sem perder controle. Pressupõe familiaridade com os vetores de ataque cobertos em <a href="../mcp-agentic-ai-security/" style="color:#60A5FA">MCP e Agentic AI Security</a>. Aqui o foco é o que muda do piloto para o uso real e quais controles passam de "nice to have" para indispensáveis.</p>
+</div>
+<div class="toc">
+<h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+<ul>
+<li><a href="#delta-piloto">O delta entre piloto e produção</a></li>
+<li><a href="#governance">Governance: quem aprova o quê</a></li>
+<li><a href="#allow-list">Allow-listing de MCP servers</a></li>
+<li><a href="#audit">Audit log imutável: o que registrar</a></li>
+<li><a href="#kill-switch">Kill switch operacional</a></li>
+<li><a href="#hitl">Human-in-the-loop nos pontos certos</a></li>
+<li><a href="#rate-limit">Rate limiting e quotas</a></li>
+<li><a href="#metricas">Métricas que importam</a></li>
+<li><a href="#faq">Perguntas frequentes</a></li>
+</ul>
+</div>
+<h2 id="delta-piloto">O delta entre piloto e produção</h2>
+<p>Pilotos de agentes baseados em <a href="../mcp-agentic-ai-security/" style="color:#60A5FA">MCP</a> escondem o problema operacional: um usuário, um ambiente isolado, baixa frequência de chamadas, alguém observando cada turn. Em produção essas quatro variáveis viram outras quatro: <strong>muitos usuários simultâneos</strong>, <strong>dados e identidades reais</strong>, <strong>frequência alta</strong> e <strong>ninguém olhando ao vivo</strong>. Classes de risco antes toleráveis — confused deputy, tool poisoning, excessive agency — viram incidentes potencialmente caros.</p>
+<p>A diferença é exatamente a mesma do que separa um modelo ML em notebook de um modelo em <em>online serving</em>: observabilidade, controle de mudanças, capacidade de rollback, gestão de versões, e — crucial — a habilidade de parar tudo rápido quando algo dá errado. Os controles abaixo são o equivalente operacional para MCP.</p>
+<h2 id="governance">Governance: quem aprova o quê</h2>
+<p>Antes de qualquer controle técnico, defina três artefatos por escrito:</p>
+<div class="pillar-cards">
+<div class="pillar-card confidentiality">
+<div class="icon"><i class="fas fa-stamp"></i></div>
+<h3>Catálogo de MCP servers aprovados</h3>
+<p>Lista versionada de quais servidores externos seu agente pode falar. Cada entrada: URL canônica, hash do binário (se self-hosted), responsável interno, data de aprovação, escopo das tools expostas.</p>
+</div>
+<div class="pillar-card integrity">
+<div class="icon"><i class="fas fa-tasks"></i></div>
+<h3>Política de ações permitidas</h3>
+<p>Para cada combinação (agente × tool × cenário), o que pode ser feito autonomamente, o que precisa human-in-the-loop e o que está vetado. Documente como código (YAML/JSON), não em wiki.</p>
+</div>
+<div class="pillar-card availability">
+<div class="icon"><i class="fas fa-users-cog"></i></div>
+<h3>RACI de incidentes</h3>
+<p>Quem aciona o kill switch, quem reverte ações, quem comunica usuários afetados, quem decide retomar operação. Sem RACI, em incidente todos olham um para o outro enquanto o agente continua agindo.</p>
+</div>
+</div>
+<p>O catálogo de MCP servers e a política de ações são versionados em Git, revisados por pares, e as mudanças geram trilha de auditoria. Servidores ou tools não listadas no catálogo são <em>rejeitadas no gateway</em> — não dependem de boa-fé do agente.</p>
+<h2 id="allow-list">Allow-listing de MCP servers</h2>
+<p>O modelo de ameaça mais subestimado é <strong>tool poisoning</strong>: um atacante registra (ou compromete) um MCP server, expõe tools que parecem inocentes (<code>get_user_preferences</code>, <code>format_output</code>) mas que carregam comportamento malicioso — exfiltração, injeção de prompts indiretos, side effects em recursos externos. Sem allow-listing, qualquer prompt malicioso ou bug pode levar o agente a invocar essas tools.</p>
+<p>Implemente em <strong>quatro camadas</strong>:</p>
+<ol style="color:#CBD5E1;line-height:1.75;font-size:1rem">
+<li><strong>Gateway de saída:</strong> o cliente do agente nunca fala direto com o MCP server externo. Sempre via proxy que valida o destino contra a allow-list (URL exata, hash de TLS pin, certificado esperado).</li>
+<li><strong>Verificação de identidade do server:</strong> além de URL, exija assinatura ou mTLS. URL pode ser sequestrada; chave criptográfica do server, não.</li>
+<li><strong>Mapeamento explícito de tools:</strong> nem todas as tools que um server expõe estão habilitadas. Mantenha por server uma lista de tools permitidas — se o server expor uma <code>delete_everything</code>, ela continua bloqueada.</li>
+<li><strong>Pinning de versão:</strong> a allow-list referencia versão (semver ou commit hash) do server. Quando o server upgrada, o gateway bloqueia até alguém revisar o changelog e aprovar a nova versão.</li>
+</ol>
+<h2 id="audit">Audit log imutável: o que registrar</h2>
+<p>O audit log é o seu único recurso quando algo dá errado. Sem ele, qualquer investigação esbarra em "não temos como saber". Registre, por chamada:</p>
+<div class="comparison-table">
+<table style="width:100%;border-collapse:collapse">
+<thead><tr><th>Campo</th><th>Conteúdo</th><th>Por quê</th></tr></thead>
+<tbody>
+<tr><td><code>ts</code></td><td>Timestamp UTC ISO 8601 com ms</td><td>Correlação com outros logs</td></tr>
+<tr><td><code>session_id</code></td><td>UUID por sessão de agente</td><td>Reconstruir cadeia de turns</td></tr>
+<tr><td><code>principal</code></td><td>Identidade do humano que originou (Entra ID / Okta sub)</td><td>Accountability — quem pediu</td></tr>
+<tr><td><code>agent_id</code></td><td>Nome + versão do agente</td><td>Rastreio de regressões</td></tr>
+<tr><td><code>model</code></td><td>Provider + modelo + versão</td><td>Reproduzir comportamento</td></tr>
+<tr><td><code>prompt_hash</code></td><td>SHA-256 do prompt do usuário</td><td>Privacidade + auditoria</td></tr>
+<tr><td><code>mcp_server</code></td><td>URL canônica + versão</td><td>Mapear chamada à allow-list</td></tr>
+<tr><td><code>tool</code></td><td>Nome da tool invocada</td><td>Análise de uso</td></tr>
+<tr><td><code>tool_args</code></td><td>Argumentos finais enviados (com redação de PII)</td><td>Reproduzir ou refutar comportamento</td></tr>
+<tr><td><code>tool_result_hash</code></td><td>SHA-256 do resultado completo</td><td>Provar o que voltou sem armazenar tudo</td></tr>
+<tr><td><code>action_taken</code></td><td>Mudança de estado efetuada (criar, deletar, atualizar) + IDs dos recursos</td><td>Possibilita rollback e investigação</td></tr>
+<tr><td><code>approval</code></td><td>ID de aprovação humana (se HITL acionado)</td><td>Prova de governance</td></tr>
+<tr><td><code>chain_hash</code></td><td>SHA-256 (linha atual + chain_hash anterior)</td><td>Integridade do log</td></tr>
+</tbody>
+</table>
+</div>
+<p>Armazene em backend WORM (write-once-read-many) ou append-only com integridade verificável: AWS CloudWatch Logs com lock, Azure Immutable Blob Storage, GCP Bucket Lock, ou Object Lock S3 em compliance mode. O <code>chain_hash</code> em cadeia (cada linha referencia a anterior) detecta manipulação retroativa mesmo se o storage for comprometido.</p>
+<div class="warning-box" style="border-left-color:#ef4444;background:rgba(239,68,68,.06)">
+<h3 style="color:#fca5a5"><i class="fas fa-exclamation-triangle"></i> Pegadinha de privacidade</h3>
+<p style="color:#cbd5e1">Logue <em>hashes</em> de prompts e resultados, não o conteúdo bruto. Em incidente, você pode pedir consentimento específico para reconstruir, mas o log padrão não deve ter PII em texto claro — caso contrário você criou uma nova superfície de vazamento.</p>
+</div>
+<h2 id="kill-switch">Kill switch operacional</h2>
+<p>Kill switch precisa funcionar em quatro camadas em paralelo, porque cada uma falha sozinha:</p>
+<div class="phase-card">
+<div class="phase-number">1</div>
+<h3>Endpoint /kill no orchestrator</h3>
+<p>Sessões em curso são interrompidas. Implementação simples: flag em Redis ou tabela, verificada a cada turn. Se flag setada para o agente, o orchestrator retorna erro controlado e não chama mais tools.</p>
+</div>
+<div class="phase-card">
+<div class="phase-number">2</div>
+<h3>Revogação imediata de credenciais</h3>
+<p>Sessão morta no orchestrator não impede que execuções pendentes em tools terminem. Revogar tokens OAuth, rotacionar API keys e expirar service principals em paralelo ao kill é o que realmente interrompe o blast radius.</p>
+</div>
+<div class="phase-card">
+<div class="phase-number">3</div>
+<h3>Circuit breaker no gateway</h3>
+<p>O gateway de MCP servers recusa novas chamadas para os destinos afetados (por server, por tool ou por agente). Independente do estado do orchestrator.</p>
+</div>
+<div class="phase-card">
+<div class="phase-number">4</div>
+<h3>Feature flag global</h3>
+<p>Flag em config central (Redis pub/sub, Consul, AWS AppConfig, LaunchDarkly) que desativa o agente inteiro. Propagação em segundos. Esta é sua "estrela vermelha" — quando todo o resto falha, o agente para de iniciar sessões novas.</p>
+</div>
+<p>Teste o kill switch periodicamente em stage. Sem teste, ele falha justo quando você precisa — credenciais não revogam porque o secrets manager perdeu permissão, flag não propaga porque alguém mudou a chave, circuit breaker está em config errada. <strong>Faça GameDay trimestral de kill switch.</strong></p>
+<h2 id="hitl">Human-in-the-loop nos pontos certos</h2>
+<p>HITL em tudo mata produtividade. HITL em nada mata o negócio. A linha está em <em>impacto irreversível ou alto custo</em>:</p>
+<ul style="color:#CBD5E1;line-height:1.75">
+<li><strong>Ação que muda estado externo persistente:</strong> criar fatura, aprovar pagamento, deletar recurso, abrir ticket externo, enviar comunicação a cliente.</li>
+<li><strong>Custo de erro &gt; custo de revisão:</strong> regra simples — se reverter custa muito mais do que aprovar custa, peça aprovação.</li>
+<li><strong>Primeira execução de tool nova naquele contexto:</strong> mesmo se aprovada no catálogo, primeira invocação por aquele agente em produção justifica revisão.</li>
+<li><strong>Ação fora dos guardrails da sessão:</strong> se o usuário definiu escopo (apenas relatórios de leitura), tentativas de sair desse escopo viram pedido de aprovação.</li>
+</ul>
+<p>Implementação típica: o agente apresenta a ação proposta com argumentos finais, o humano vê (UI dedicada, e-mail com link, mensagem no Slack/Teams), aprova/rejeita/edita. A aprovação é o gatilho da execução. <em>Logue a aprovação no audit junto com a ação</em> — quem aprovou, quando, qual delta entre proposto e executado.</p>
+<h2 id="rate-limit">Rate limiting e quotas</h2>
+<p>Agentes têm padrão de uso bursty e podem entrar em loops degenerados (o modelo "convence a si mesmo" que precisa chamar a mesma tool dez vezes seguidas). Sem quotas, isso vira incidente de custo e de carga em sistemas downstream.</p>
+<ul style="color:#CBD5E1;line-height:1.75">
+<li><strong>Quota por sessão:</strong> N tools no total, M por tipo. Excedeu? Para a sessão e exige novo turn humano.</li>
+<li><strong>Quota por usuário/dia:</strong> contém shadow usage e abuso de credencial.</li>
+<li><strong>Quota por MCP server:</strong> protege o destino. Útil quando o server externo cobra por chamada.</li>
+<li><strong>Loop detection:</strong> se a mesma tool é chamada com argumentos idênticos N vezes em janela curta, intercepte e exija HITL.</li>
+</ul>
+<h2 id="metricas">Métricas que importam</h2>
+<p>Acompanhe semanalmente:</p>
+<div class="comparison-table">
+<table style="width:100%;border-collapse:collapse">
+<thead><tr><th>Métrica</th><th>Meta</th><th>Sinal de alerta</th></tr></thead>
+<tbody>
+<tr><td>% ações irreversíveis com HITL</td><td>100%</td><td>Qualquer queda — significa que alguma rota está bypass</td></tr>
+<tr><td>Tempo médio kill switch → todas as execuções paradas</td><td>&lt; 30s</td><td>Aumento sinaliza tokens não revogando</td></tr>
+<tr><td>Cobertura de audit</td><td>100% das chamadas a tools</td><td>Drop indica logger fora do ar ou caminho não instrumentado</td></tr>
+<tr><td>MCP servers fora da allow-list bloqueados/semana</td><td>Próximo de zero (depois de estabilizado)</td><td>Alto = tentativas de shadow MCP, investigar</td></tr>
+<tr><td>% prompts que disparam guardrail</td><td>Estável (depende do uso)</td><td>Alto demais: guardrails ruins; baixo demais: permissivos</td></tr>
+<tr><td>MTTR de revisão de incidente</td><td>Tempo curto para reconstruir cadeia</td><td>Crescente = audit ou correlação degradados</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="faq">Perguntas frequentes</h2>
+<div class="faq-section">
+<div class="faq-item"><h3>Por que MCP em produção é diferente de MCP em piloto?</h3><p>Em piloto o impacto é contido (um usuário, ambiente isolado, baixa frequência). Em produção o agente atua sobre identidades e dados reais, em alta frequência e sem operador acompanhando. Confused deputy, tool poisoning e excessive agency saem do plano teórico e viram incidentes potencialmente caros.</p></div>
+<div class="faq-item"><h3>O que deve estar no audit log?</h3><p>Timestamp, identidade do principal humano, identidade do agente, modelo+versão, server MCP, tool chamada com argumentos, hash da resposta, ação executada (com IDs dos recursos), aprovação HITL quando aplicável. Em log imutável com integridade verificável (hash chain) e retenção alinhada à regulação.</p></div>
+<div class="faq-item"><h3>Como implementar kill switch?</h3><p>Quatro camadas em paralelo: endpoint /kill no orchestrator, revogação imediata de tokens <a class="gloss-link" href="/glossario/#oauth" title="Ver no glossário">OAuth</a>/credenciais, circuit breaker no gateway, feature flag global. Teste em GameDay trimestral — sem teste, ele falha quando você precisa.</p></div>
+<div class="faq-item"><h3>O que é allow-listing de MCP server?</h3><p>Lista de servidores MCP aprovados pela organização, validada no gateway. Inclui URL canônica, identidade (mTLS/assinatura), tools permitidas por server e pinning de versão. Bloqueia tool poisoning e contém blast radius quando um server legítimo é comprometido.</p></div>
+<div class="faq-item"><h3>Quando exigir human-in-the-loop?</h3><p>Em pontos de impacto irreversível ou alto custo: criar/aprovar/deletar recurso externo, enviar comunicação a cliente, primeira execução de tool nova, ação fora dos guardrails da sessão. O humano aprova/edita, a aprovação é o gatilho da execução, e tudo é logado.</p></div>
+<div class="faq-item"><h3>Como medir se a governance está funcionando?</h3><p>% ações irreversíveis com HITL (meta 100%), tempo até kill switch propagar, cobertura de audit, bloqueios de MCP fora da allow-list, taxa de guardrail acionado, MTTR de revisão de incidente. Acompanhe semanal até estabilizar.</p></div>
+</div>
+<h2 id="referencias" style="margin-top:3rem">Referências</h2>
+<div class="references-list">
+<ul>
+<li>Anthropic — Model Context Protocol specification — <a href="https://modelcontextprotocol.io" rel="noopener" target="_blank">modelcontextprotocol.io</a></li>
+<li>OWASP Top 10 for LLM Applications (2025) — <a href="https://genai.owasp.org" rel="noopener" target="_blank">genai.owasp.org</a></li>
+<li>NIST AI Risk Management Framework — Generative AI Profile (NIST AI 600-1)</li>
+<li>MITRE ATLAS — Adversarial Threat Landscape for AI Systems — <a href="https://atlas.mitre.org" rel="noopener" target="_blank">atlas.mitre.org</a></li>
+<li>EU AI Act — texto consolidado em <a href="https://eur-lex.europa.eu" rel="noopener" target="_blank">eur-lex.europa.eu</a></li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+</main>
+<footer class="ex-footer">
+<div class="container">
+<div class="footer-col first">
+<p class="footer-col-title"><strong>Inteligência Brasil</strong></p>
+<p>Cibersegurança orientada a inteligência de ameaças e impacto.</p>
+</div>
+<div class="footer-col second">
+<p class="footer-col-title"><strong>Links</strong></p>
+<ul class="list-unstyled li-space-lg p-small">
+<li><a href="../../">Home</a></li>
+<li><a href="../">Blog</a></li>
+<li><a href="../../ferramentas/">Ferramentas</a></li>
+<li><a href="../../sobre/">Sobre</a></li>
+</ul>
+</div>
+<div class="footer-col third">
+<p class="footer-col-title"><strong>Contato</strong></p>
+<p>contato@inteligenciabrasil.seg.br</p>
+</div>
+</div>
+</footer>
+<div class="copyright"><div class="container"><p class="p-small">Copyright © Inteligência Brasil — Todos os direitos reservados</p></div></div>
+<script src="../../js/site-common.js"></script>
 </body>
 </html>
