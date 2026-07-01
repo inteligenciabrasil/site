@@ -324,7 +324,7 @@
 
     // ========== 9b. RELATED TOOLS (auto-injected on /ferramentas/<tool>/) ==========
     // Detects tool pages and appends a "Ferramentas Relacionadas" block before the footer.
-    (function () {
+    function injectRelatedTools() {
         var m = location.pathname.match(/^\/ferramentas\/([^\/]+)\/?$/);
         if (!m) return;
         var current = m[1];
@@ -386,7 +386,13 @@
         } else {
             document.body.appendChild(section);
         }
-    })();
+    }
+    // Defer related-tools DOM injection to idle (DIAG-PERF-004: ~199ms long-task).
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(injectRelatedTools, { timeout: 500 });
+    } else {
+        setTimeout(injectRelatedTools, 200);
+    }
 
     // ========== 10. NEWSLETTER FORM (kebab-case ids) ==========
     // Targets blog-article markup: #newsletter-form / #newsletter-email / #newsletter-message
