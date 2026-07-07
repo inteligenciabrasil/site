@@ -3504,6 +3504,12 @@
 
         // Init
         showPage(1);
+        // SearchAction (schema WebSite no index): pre-executa busca vinda de /blog/?q=
+        var initialQ = new URLSearchParams(location.search).get('q');
+        if(initialQ){
+            document.getElementById('blogSearch').value = initialQ;
+            searchBlog();
+        }
     })();
     </script>
 <!-- Newsletter Script -->
