@@ -394,6 +394,37 @@
         setTimeout(injectRelatedTools, 200);
     }
 
+    // ========== 9c. ARTICLE CLUSTER RELATIONS (documenta cluster graph per CONT-05) ==========
+    // Curated map of the 12 content clusters (Phase 5) to their pillar + top supporting articles.
+    // Not injected into DOM (docs-only per CONT-05); exposed on window for future navigation widgets.
+    // Pillar slug format: 'lp:<slug>' for service LPs, '<slug>' for article pillars, null for a gap pillar not yet published.
+    var articleClusters = {
+        'seguranca-pmes':           { pillar: 'checklist-seguranca-pmes-pequenas-empresas', persona: 'PME',      service: 'analise-presenca-digital',    supporting: ['seguranca-presenca-digital-executiva-pme', 'melhores-servicos-ciberseguranca-pequenas-empresas-brasil'] },
+        'pentest-ofensivo':         { pillar: 'lp:pentest',                                  persona: 'CISO',     service: 'pentest',                     supporting: ['c2-redirectors-como-funcionam-defesa', 'pentest-vs-bug-bounty-qual-protege-empresa', 'maturidade-seguranca-informacao-avaliacao'] },
+        'resposta-incidentes':      { pillar: 'lp:resposta-incidentes',                      persona: 'CISO',     service: 'resposta-incidentes',         supporting: ['shadow-ai-uso-nao-autorizado-empresas', 'jaguar-land-rover-ataque-ot-licoes-ciso', 'computacao-forense-digital-organizacoes'] },
+        'lgpd-grc':                 { pillar: 'lp:grc',                                      persona: 'CISO',     service: 'grc',                         supporting: ['nhi-non-human-identity-governanca', 'mcp-em-producao-governance-kill-switch', 'dora-ue-cadeias-fornecedores-brasil'] },
+        'cti-vazamento':            { pillar: 'lp:cti-monitoramento',                        persona: 'CISO',     service: 'cti-monitoramento',           supporting: ['salt-typhoon-espionagem-telecom-infraestrutura-critica', 'slsa-sigstore-cosign-supply-chain', 'mitre-attack-v19-novidades-mudancas'] },
+        'cloud':                    { pillar: 'lp:cloud-security',                           persona: 'CISO',     service: 'cloud-security',              supporting: ['dspm-avancado-classificacao-ia-lineage', 'kubernetes-pod-security-standards-kyverno', 'ebpf-seguranca-falco-cilium-tetragon'] },
+        'appsec':                   { pillar: 'lp:application-security',                     persona: 'CISO',     service: 'application-security',        supporting: ['cyber-resilience-act-cra-fabricantes', 'sbom-software-bill-of-materials', 'supply-chain-security-cadeia-suprimentos'] },
+        'conscientizacao-phishing': { pillar: 'lp:conscientizacao-treinamento',               persona: 'CISO',     service: 'conscientizacao-treinamento', supporting: ['deepfake-fraude-corporativa-bec', 'seguranca-smartphones-ios-android', 'mfa-fatigue-bypass-attacks'] },
+        'conselho-executivos':      { pillar: 'board-reporting-ciberseguranca',               persona: 'Conselho', service: 'grc',                         supporting: ['as-10-exigencias-que-um-ciso-deve-fazer-ao-seu-time'] },
+        'terceiros-supply-chain':   { pillar: 'lp:gestao-riscos-terceiros',                   persona: 'CISO',     service: 'gestao-riscos-terceiros',     supporting: ['web3-blockchain-impacto-seguranca-organizacoes'] },
+        'ia-deepfake':              { pillar: null,                                          persona: 'CISO',     service: 'analise-presenca-digital',    supporting: ['mcp-agentic-ai-security'] },
+        'ot-ics':                   { pillar: 'lp:seguranca-ot-ics',                          persona: 'CISO',     service: 'seguranca-ot-ics',            supporting: ['ipv8-protocolo-internet-evolucao-ipv6', 'seguranca-ot-ics-scada', 'industria-4-0'] }
+    };
+    // Reverse index: slug -> cluster (for O(1) lookup from an article page)
+    var articleToCluster = {};
+    Object.keys(articleClusters).forEach(function (c) {
+        var entry = articleClusters[c];
+        if (entry.pillar) { articleToCluster[entry.pillar] = c; }
+        (entry.supporting || []).forEach(function (s) { articleToCluster[s] = c; });
+    });
+    // Expose for future use (analytics, in-page nav, cluster badges). No DOM mutation yet.
+    if (typeof window !== 'undefined') {
+        window.__ibClusters = articleClusters;
+        window.__ibArticleToCluster = articleToCluster;
+    }
+
     // ========== 10. NEWSLETTER FORM (kebab-case ids) ==========
     // Targets blog-article markup: #newsletter-form / #newsletter-email / #newsletter-message
     // Posts to the same Google Apps Script endpoint used elsewhere.
