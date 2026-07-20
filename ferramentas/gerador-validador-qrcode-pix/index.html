@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- CONSENT-MODE-V2 -->
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','analytics_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','personalization_storage':'denied','functionality_storage':'granted','security_storage':'granted','wait_for_update':500});</script>
+    <!-- Google Tag Manager --><!-- GTM-DEFERRED-V1 -->
+    <script>window.dataLayer=window.dataLayer||[];dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});function __gtmBoot(){var d=document,s='script',l='dataLayer',i='GTM-WCL38PDP',f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',__gtmBoot);}else{setTimeout(__gtmBoot,0);}</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Gere e valide QR Code Pix (BR Code) online. Verifique integridade via CRC16 e detecte fraude de QR Code Pix adulterado. 100% local, sem envio de dados.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="qr code pix, br code, gerador pix, validador pix, copia e cola pix, crc16, golpe qr code pix, fraude pix, antifraude pix, decodificador pix">
+    <meta name="author" content="Inteligencia Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/gerador-validador-qrcode-pix/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Intelig&#234;ncia Brasil &#8212; RSS" href="../../feed.xml">
+
+    <meta property="og:title" content="Gerador e Validador de QR Code Pix (BR Code) | Inteligencia Brasil">
+    <meta property="og:description" content="Gere e valide QR Code Pix (BR Code). Verifique integridade via CRC16 e detecte QR Code Pix adulterado. 100% local.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/gerador-validador-qrcode-pix/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Intelig&#234;ncia Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gerador e Validador de QR Code Pix">
+    <meta name="twitter:description" content="Gere e valide BR Code Pix com verificacao de integridade CRC16. 100% local no navegador.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Gerador e Validador QR Code Pix | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Gerador e Validador de QR Code Pix","description":"Ferramenta online para gerar e validar QR Code Pix (BR Code, padrao EMV Merchant-Presented do Banco Central). Verifica integridade via CRC16 e ajuda a identificar QR Code Pix adulterado.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligencia Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"O que e QR Code Pix (BR Code)?","acceptedAnswer":{"@type":"Answer","text":"BR Code e o nome tecnico do padrao usado nos QR Codes e no Pix Copia e Cola. E uma sequencia de texto no formato EMV Merchant-Presented (o mesmo padrao internacional usado em QR Codes de pagamento) que carrega a chave Pix do recebedor, nome, cidade, valor opcional e um codigo de verificacao (CRC16) ao final."}},
+        {"@type":"Question","name":"Como funciona o golpe do QR Code Pix adulterado?","acceptedAnswer":{"@type":"Answer","text":"Golpistas trocam fisicamente o adesivo do QR Code em estabelecimentos, ou enviam um BR Code manipulado por WhatsApp/e-mail, redirecionando o pagamento para uma chave Pix diferente da do recebedor legitimo. Como o BR Code e apenas texto, editar a chave Pix dentro dele e trivial - o que dificulta a deteccao a olho nu."}},
+        {"@type":"Question","name":"O que o CRC16 verifica exatamente?","acceptedAnswer":{"@type":"Answer","text":"O CRC16 e um codigo de verificacao de integridade calculado sobre todos os campos do BR Code. Ele detecta corrupcao ou adulteracao no texto do codigo - se um unico caractere for alterado, o CRC recalculado nao bate mais com o CRC original. Isso NAO impede o golpe de troca de chave Pix desde a origem (o CRC seria recalculado corretamente pelo golpista), mas detecta corrupcao acidental e ajuda a validar que um codigo nao foi truncado ou editado incorretamente apos ser gerado."}},
+        {"@type":"Question","name":"Meus dados sao enviados para algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Nao. A geracao e a decodificacao rodam 100% no seu navegador via JavaScript. Nenhuma chave Pix, valor ou BR Code colado e enviado aos nossos servidores ou a terceiros."}},
+        {"@type":"Question","name":"Por que o nome e a cidade aparecem em maiusculas sem acento no codigo gerado?","acceptedAnswer":{"@type":"Answer","text":"O padrao BR Code do Banco Central exige texto ASCII nesses campos. A ferramenta normaliza automaticamente (remove acentos e converte para maiusculas) antes de montar o codigo, seguindo a mesma regra aplicada por bancos e adquirentes."}},
+        {"@type":"Question","name":"Esta ferramenta gera QR Code Pix real para receber pagamentos?","acceptedAnswer":{"@type":"Answer","text":"Sim, o texto Pix Copia e Cola gerado segue o padrao oficial e pode ser usado em apps bancarios. Esta ferramenta gera apenas o texto - nao renderiza a imagem do QR Code. Sempre confira os dados do BR Code (chave, nome, valor) antes de compartilhar ou pagar."}}
+    ]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Ferramentas","item":"https://inteligenciabrasil.seg.br/ferramentas/"},{"@type":"ListItem","item":"https://inteligenciabrasil.seg.br/ferramentas/gerador-validador-qrcode-pix/","position":3,"name":"Gerador e Validador de QR Code Pix"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+    <!-- ASYNC-CSS-V1 -->
+    <style>
+    /* ASYNC-CSS-V1 critical: shell (navbar + body + container + FA placeholders) */
+    @font-face{font-family:'Fira Sans Fallback';src:local('Arial'),local('Helvetica');size-adjust:100%}
+    *,*::before,*::after{box-sizing:border-box}
+    html{overflow-x:clip}
+    body{margin:0;background:#0a1628;color:#F1F5F9;font-family:'Fira Sans','Fira Sans Fallback',sans-serif;font-size:1rem;line-height:1.6;overflow-x:clip;width:100%;max-width:100vw}
+    a{text-decoration:none}
+    .container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
+    @media(min-width:576px){.container{max-width:540px}}
+    @media(min-width:768px){.container{max-width:720px}}
+    @media(min-width:992px){.container{max-width:960px}}
+    @media(min-width:1200px){.container{max-width:1140px}}
+    .fa,.fas,.far,.fab{display:inline-block;width:1em;min-width:1em;text-align:center;font-style:normal}
+    .fa-fw{width:1.25em}
+    .fa-stack{position:relative;display:inline-block;width:2em;height:2em;line-height:2em;vertical-align:middle}
+    .fa-stack-1x{position:absolute;left:0;top:0;width:100%;text-align:center}
+    .fixed-top{position:fixed;top:0;right:0;left:0;z-index:1030}
+    .navbar{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:.5rem 1rem}
+    .navbar-custom{padding:0;background:rgba(13,30,56,0.95)!important;border-bottom:1px solid rgba(96,165,250,0.1);font:600 .875rem/.875rem 'Fira Sans','Fira Sans Fallback',sans-serif;backdrop-filter:blur(20px);box-shadow:0 .0625rem .375rem 0 rgba(0,0,0,.1)}
+    .navbar-custom .navbar-brand{font-size:0}
+    .navbar-custom .navbar-brand img{width:7.0625rem;height:auto;aspect-ratio:196/113}
+    .navbar-custom .navbar-toggler{border:none;color:#fff;font-size:2rem;padding:.25rem .75rem;background:transparent}
+    .navbar-custom .navbar-toggler-awesome.fas.fa-times,.navbar-custom button[aria-expanded=false] .navbar-toggler-awesome.fas.fa-times,.navbar-custom button[aria-expanded=true] .navbar-toggler-awesome.fas.fa-bars{display:none}
+    .navbar-custom button[aria-expanded=false] .navbar-toggler-awesome.fas.fa-bars{display:inline-block}
+    .navbar-custom button[aria-expanded=true] .navbar-toggler-awesome.fas.fa-times{display:inline-block}
+    .navbar-custom .navbar-nav{display:flex;flex-direction:column;padding-left:0;margin:.75rem 0 .5rem;list-style:none}
+    .navbar-custom .nav-item .nav-link{padding:.625rem .75rem;color:#F1F5F9!important;text-decoration:none}
+    .navbar-collapse{flex-basis:100%;flex-grow:1;align-items:center}
+    .collapse:not(.show){display:none}
+    .navbar-custom .social-icons{display:none}
+    @media(min-width:768px){.navbar-expand-md{flex-flow:row nowrap;justify-content:flex-start}.navbar-expand-md .navbar-nav{flex-direction:row;margin-top:0;margin-left:auto!important}.navbar-expand-md .navbar-toggler{display:none}.navbar-expand-md .navbar-collapse{display:flex!important;flex-basis:auto}}
+    </style>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="../../css/bootstrap.min.css" rel="stylesheet"></noscript>
+    <link href="../../css/fontawesome-subset.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="../../css/fontawesome-subset.min.css" rel="stylesheet"></noscript>
+    <link href="../../css/styles.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="../../css/styles.min.css" rel="stylesheet"></noscript>
+    <link href="../../css/servico.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="../../css/servico.min.css" rel="stylesheet"></noscript>
+    <link href="../../css/blog-article.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="../../css/blog-article.min.css" rel="stylesheet"></noscript>
+    <style>
+        .article-header strong,.highlight-box strong,.pix-tool strong,.pix-tool p strong{color:inherit;font-weight:700}
+        .pix-tool{padding:2rem 0 3rem}
+        .pix-card{background:rgba(96,165,250,.04);border:1px solid rgba(96,165,250,.15);border-radius:16px;padding:1.75rem;margin-bottom:1.5rem}
+        .pix-card h2{margin:0 0 .5rem;color:#F1F5F9;font-size:1.3rem}
+        .pix-card h2 i{color:#60A5FA;margin-right:8px}
+        .pix-card .subtitle{color:#94A3B8;font-size:.9rem;margin:0 0 1.25rem;line-height:1.5}
+        .pix-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+        .pix-grid .full{grid-column:1/-1}
+        .form-label{display:block;color:#F1F5F9;font-weight:600;margin-bottom:8px;font-size:.9rem}
+        .form-input,.form-textarea{width:100%;background:rgba(13,30,56,.6);border:1px solid rgba(96,165,250,.2);border-radius:10px;color:#F1F5F9;padding:12px 16px;font-family:inherit;font-size:.95rem;outline:none}
+        .form-input:focus,.form-textarea:focus{border-color:#60A5FA}
+        .form-input::placeholder,.form-textarea::placeholder{color:#64748B}
+        .form-textarea{min-height:120px;font-family:'JetBrains Mono',monospace;font-size:.82rem;resize:vertical;line-height:1.5}
+        .form-help{margin-top:6px;color:#64748B;font-size:.8rem}
+        .pix-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.25rem}
+        .form-btn{background:linear-gradient(135deg,#60A5FA,#3B82F6);border:none;border-radius:10px;color:#fff;padding:12px 22px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.95rem;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+        .form-btn:hover{box-shadow:0 4px 15px rgba(96,165,250,.4);transform:translateY(-1px)}
+        .form-btn-secondary{background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.25);color:#60A5FA}
+        .form-btn-secondary:hover{background:rgba(96,165,250,.15);box-shadow:none;transform:none}
+        .pix-warning{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);border-radius:10px;padding:10px 14px;color:#FCD34D;font-size:.85rem;margin-top:1rem;display:none}
+        .pix-warning.show{display:block}
+        .pix-output{margin-top:1.25rem;display:none}
+        .pix-output.show{display:block}
+        .pix-output-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+        .pix-output-label span{color:#94A3B8;font-size:.85rem;font-weight:600}
+        .pix-copy-btn{background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.25);color:#60A5FA;border-radius:8px;padding:6px 12px;font-size:.8rem;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
+        .pix-copy-btn:hover{background:rgba(96,165,250,.18)}
+        .pix-output-code{background:rgba(13,30,56,.6);border:1px solid rgba(96,165,250,.15);border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:#E2E8F0;word-break:break-all;line-height:1.6}
+        .pix-error{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 18px;color:#FCA5A5;margin-top:1rem;font-size:.9rem;display:none}
+        .pix-error.show{display:block}
+        .pix-status-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:10px;font-weight:700;font-size:.95rem;margin-bottom:1rem}
+        .pix-status-badge.ok{background:rgba(16,185,129,.12);color:#10B981;border:1px solid rgba(16,185,129,.3)}
+        .pix-status-badge.bad{background:rgba(239,68,68,.12);color:#EF4444;border:1px solid rgba(239,68,68,.3)}
+        .pix-kv{display:grid;grid-template-columns:160px 1fr;gap:10px 16px;font-size:.9rem;margin-top:.5rem}
+        .pix-kv dt{color:#94A3B8;font-weight:500}
+        .pix-kv dd{color:#E2E8F0;margin:0;word-break:break-all;font-family:'JetBrains Mono',monospace;font-size:.85rem}
+        .pix-advanced{margin-top:1.25rem;border:1px solid rgba(96,165,250,.15);border-radius:10px;padding:.75rem 1rem}
+        .pix-advanced summary{cursor:pointer;color:#60A5FA;font-weight:600;font-size:.9rem;list-style:none}
+        .pix-advanced summary::-webkit-details-marker{display:none}
+        .pix-advanced summary:before{content:'\25B8';display:inline-block;margin-right:6px;transition:transform .15s}
+        .pix-advanced[open] summary:before{transform:rotate(90deg)}
+        @media(max-width:768px){
+            .pix-grid{grid-template-columns:1fr}
+            .pix-kv{grid-template-columns:1fr}
+            .pix-kv dt{margin-top:6px}
+        }
+    </style>
+</head>
+
+<body><a class="skip-link" href="#main-content">Pular para conte&uacute;do</a>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVI&Ccedil;OS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">FERRAMENTAS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ferramenta</span>
+            <h1>Gerador e Validador de QR Code Pix (BR Code)</h1>
+            <p style="color:#94A3B8;font-size:1.1rem;max-width:720px;margin:1rem auto 0">Gere o texto Pix Copia e Cola ou cole um BR Code para verificar sua integridade via CRC16 e identificar sinais de adulteração. 100% local no navegador.</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Ferramentas</a></li><li class="breadcrumb-item active" aria-current="page">Gerador/Validador QR Code Pix</li></ol></div></nav>
+
+    <main id="main-content">
+    <section class="pix-tool">
+        <div class="container">
+
+            <div class="pix-card">
+                <h2><i class="fas fa-qrcode"></i> Gerar QR Code Pix (BR Code)</h2>
+                <p class="subtitle">Preencha os dados do recebedor. O texto gerado (Pix Copia e Cola) pode ser colado em qualquer app bancário. Nenhum dado sai do seu navegador.</p>
+
+                <div class="pix-grid">
+                    <div>
+                        <label for="pixChave" class="form-label">Chave Pix</label>
+                        <input type="text" id="pixChave" class="form-input" placeholder="email@exemplo.com, CPF, telefone ou chave aleatória" autocomplete="off" spellcheck="false">
+                    </div>
+                    <div>
+                        <label for="pixValor" class="form-label">Valor em R$ (opcional)</label>
+                        <input type="text" id="pixValor" class="form-input" placeholder="25.00" inputmode="decimal" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="pixNome" class="form-label">Nome do recebedor</label>
+                        <input type="text" id="pixNome" class="form-input" placeholder="Nome ou razão social" maxlength="60" autocomplete="off">
+                        <div class="form-help">Máx. 25 caracteres no BR Code. Acentos são removidos automaticamente.</div>
+                    </div>
+                    <div>
+                        <label for="pixCidade" class="form-label">Cidade</label>
+                        <input type="text" id="pixCidade" class="form-input" placeholder="Cidade do recebedor" maxlength="40" autocomplete="off">
+                        <div class="form-help">Máx. 15 caracteres no BR Code.</div>
+                    </div>
+                    <div class="full">
+                        <label for="pixTxid" class="form-label">Identificador / descrição (opcional)</label>
+                        <input type="text" id="pixTxid" class="form-input" placeholder="Ex: pedido123 (deixe em branco para usar ***)" autocomplete="off">
+                    </div>
+                </div>
+
+                <details class="pix-advanced">
+                    <summary>Campos opcionais avançados (fatura, celular, loja, terminal, finalidade, tipo de código)</summary>
+                    <div class="pix-grid" style="margin-top:1rem">
+                        <div>
+                            <label for="pixPontoIniciacao" class="form-label">Tipo de código</label>
+                            <select id="pixPontoIniciacao" class="form-input">
+                                <option value="">Não informar</option>
+                                <option value="11">Estático (reutilizável)</option>
+                                <option value="12">Dinâmico (uso único)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="pixFatura" class="form-label">Número da fatura</label>
+                            <input type="text" id="pixFatura" class="form-input" placeholder="Opcional" autocomplete="off">
+                        </div>
+                        <div>
+                            <label for="pixCelular" class="form-label">Celular do recebedor</label>
+                            <input type="text" id="pixCelular" class="form-input" placeholder="Ex: 5511999999999" autocomplete="off">
+                        </div>
+                        <div>
+                            <label for="pixLoja" class="form-label">Nome da loja / estabelecimento</label>
+                            <input type="text" id="pixLoja" class="form-input" placeholder="Opcional" autocomplete="off">
+                        </div>
+                        <div>
+                            <label for="pixTerminal" class="form-label">Identificação do terminal</label>
+                            <input type="text" id="pixTerminal" class="form-input" placeholder="Opcional" autocomplete="off">
+                        </div>
+                        <div class="full">
+                            <label for="pixFinalidade" class="form-label">Finalidade da transação</label>
+                            <input type="text" id="pixFinalidade" class="form-input" placeholder="Opcional" autocomplete="off">
+                        </div>
+                    </div>
+                </details>
+
+                <div class="pix-warning" id="pixTruncWarning"></div>
+
+                <div class="pix-actions">
+                    <button type="button" id="pixGerarBtn" class="form-btn"><i class="fas fa-cogs"></i> Gerar BR Code</button>
+                    <button type="button" id="pixGerarLimpar" class="form-btn form-btn-secondary"><i class="fas fa-eraser"></i> Limpar</button>
+                </div>
+
+                <div class="pix-error" id="pixGerarError"></div>
+
+                <div class="pix-output" id="pixGerarOutput">
+                    <div class="pix-output-label">
+                        <span>Pix Copia e Cola (BR Code)</span>
+                        <button type="button" class="pix-copy-btn" id="pixCopyBtn"><i class="fas fa-copy"></i> Copiar</button>
+                    </div>
+                    <div class="pix-output-code" id="pixOutputCode"></div>
+                </div>
+            </div>
+
+            <div class="pix-card">
+                <h2><i class="fas fa-search"></i> Validar / Decodificar BR Code</h2>
+                <p class="subtitle">Cole um código Pix Copia e Cola para extrair os campos e verificar a integridade via CRC16 — útil para checar se um QR Code Pix foi corrompido ou adulterado antes de pagar.</p>
+
+                <label for="pixDecodeInput" class="form-label">BR Code para validar</label>
+                <textarea id="pixDecodeInput" class="form-textarea" spellcheck="false" autocomplete="off" placeholder="00020126390014br.gov.bcb.pix..."></textarea>
+
+                <div class="pix-actions">
+                    <button type="button" id="pixValidarBtn" class="form-btn"><i class="fas fa-shield-alt"></i> Validar</button>
+                    <button type="button" id="pixValidarLimpar" class="form-btn form-btn-secondary"><i class="fas fa-eraser"></i> Limpar</button>
+                </div>
+
+                <div class="pix-error" id="pixValidarError"></div>
+
+                <div class="pix-output" id="pixValidarOutput">
+                    <div id="pixStatusBadge"></div>
+                    <dl class="pix-kv" id="pixKV"></dl>
+                    <div class="pix-warning" id="pixDinamicoNote">Este é um Pix Dinâmico: a chave real, o valor exato e o vencimento não vêm no QR Code — ficam no servidor do banco/PSP e só são obtidos consultando a URL acima. Esta ferramenta não faz essa consulta (nenhuma chamada de API é feita). Confira os dados diretamente no app do seu banco antes de pagar.</div>
+                </div>
+            </div>
+
+            <div class="highlight-box info" style="margin-top:2rem">
+                <div class="highlight-box-title"><i class="fas fa-lock"></i> 100% local</div>
+                <p>A geração e a validação do BR Code rodam inteiramente no seu navegador via JavaScript. Nenhuma chave Pix, valor ou código colado é enviado aos nossos servidores — você pode conferir dados sensíveis com segurança.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="article-content">
+        <div class="container">
+            <div class="article-body">
+
+                <h2 id="oque-brcode">O Que é QR Code Pix (BR Code)?</h2>
+                <p>BR Code é o nome técnico do padrão por trás de todo QR Code Pix e do "Pix Copia e Cola". Definido pelo Banco Central com base no padrão internacional <strong>EMV Merchant-Presented QR Code</strong>, é uma sequência de texto estruturada em campos (chave Pix, nome do recebedor, cidade, valor, identificador da transação) terminada por um código de verificação de integridade.</p>
+
+                <p>Quando você aponta a câmera para um QR Code Pix, o app do banco decodifica exatamente esse texto — não existe "mágica" na imagem, ela apenas carrega essa string de forma compacta e legível por câmera. É por isso que o mesmo pagamento pode ser feito colando o texto diretamente ("Copia e Cola"), sem escanear nada.</p>
+
+                <h2 id="golpe">O Golpe do QR Code Pix Adulterado</h2>
+                <p>Como o BR Code é apenas texto plano, alterar a chave Pix dentro dele é trivial para quem tem as ferramentas certas. Esse é o princípio por trás de golpes reais e recorrentes:</p>
+                <ul>
+                    <li><strong>Troca física do adesivo</strong> — golpistas colam um adesivo com QR Code próprio por cima do QR Code legítimo em estabelecimentos, comércios de rua e até em boletos/carnês impressos.</li>
+                    <li><strong>BR Code adulterado por mensagem</strong> — o texto "Copia e Cola" é reenviado por WhatsApp ou e-mail com a chave Pix trocada, geralmente em golpes de falso vendedor ou falso boleto.</li>
+                    <li><strong>Phishing com QR Code</strong> — imagens de QR Code em sites falsos ou anúncios fraudulentos redirecionam o pagamento para uma conta controlada pelo golpista.</li>
+                </ul>
+
+                <div class="highlight-box warning">
+                    <div class="highlight-box-title"><i class="fas fa-exclamation-triangle"></i> O que o CRC16 detecta — e o que não detecta</div>
+                    <p>O CRC16 ao final do BR Code é um <strong>checksum de integridade do texto</strong>, não uma assinatura digital. Ele confirma que o código não foi corrompido ou truncado após ser gerado (ex: erro de cópia, corte de caracteres). Se um golpista gera um BR Code do zero com a própria chave Pix, o CRC dele estará matematicamente correto — o código "passa" na validação porque é internamente consistente, só que aponta para a conta errada. <strong>Use a validação de integridade combinada com a conferência visual do nome do recebedor e da chave Pix exibidos pelo app do banco antes de confirmar qualquer pagamento.</strong></p>
+                </div>
+
+                <h2 id="como-funciona">Como Funciona a Verificação de Integridade (CRC16)</h2>
+                <p>O BR Code é montado em campos no formato <strong>TLV</strong> (Tag-Length-Value): um identificador de 2 dígitos, o tamanho do valor em 2 dígitos, e o valor em si. Os principais campos são o GUI fixo <code>br.gov.bcb.pix</code>, a chave Pix, o valor (opcional), o nome e a cidade do recebedor.</p>
+                <p>Ao final de tudo, é calculado um <strong>CRC-16/CCITT-FALSE</strong> (polinômio <code>0x1021</code>) sobre o texto completo do código. Esse valor de 4 dígitos hexadecimais é anexado ao BR Code. Ao validar um código, esta ferramenta recalcula o CRC16 sobre o texto recebido e compara com o valor informado: se não baterem, o código foi alterado, truncado ou corrompido em algum ponto após a geração.</p>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que é QR Code Pix (BR Code)?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>BR Code é o nome técnico do padrão usado nos QR Codes e no Pix Copia e Cola. É uma sequência de texto no formato EMV Merchant-Presented que carrega a chave Pix do recebedor, nome, cidade, valor opcional e um código de verificação (CRC16) ao final.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como funciona o golpe do QR Code Pix adulterado?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Golpistas trocam fisicamente o adesivo do QR Code em estabelecimentos, ou enviam um BR Code manipulado por WhatsApp/e-mail, redirecionando o pagamento para uma chave Pix diferente da do recebedor legítimo. Como o BR Code é apenas texto, editar a chave Pix dentro dele é trivial.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que o CRC16 verifica exatamente?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Detecta corrupção ou adulteração acidental no texto do código — se um caractere for alterado, o CRC recalculado não bate mais. Não impede o golpe de troca de chave Pix desde a origem, pois um código gerado do zero pelo golpista terá CRC correto para os dados errados que ele escolheu.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Meus dados são enviados para algum servidor?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Não. A geração e a decodificação rodam 100% no seu navegador via JavaScript. Nenhuma chave Pix, valor ou BR Code colado é enviado aos nossos servidores ou a terceiros.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Por que nome e cidade aparecem em maiúsculas sem acento?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O padrão BR Code do Banco Central exige texto ASCII nesses campos. A ferramenta normaliza automaticamente (remove acentos e converte para maiúsculas) antes de montar o código, seguindo a mesma regra aplicada por bancos e adquirentes.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Esta ferramenta gera QR Code Pix real para receber pagamentos?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Sim, o texto Pix Copia e Cola gerado segue o padrão oficial e pode ser usado em apps bancários. Esta ferramenta gera apenas o texto — não renderiza a imagem do QR Code. Sempre confira os dados antes de compartilhar ou pagar.</p></div>
+                    </div>
+                </div>
+
+                <h2 id="cta">Sua empresa precisa de proteção antifraude?</h2>
+                <div class="cta-box">
+                    <h3>Prevenção e resposta a fraudes financeiras</h3>
+                    <p>Ajudamos empresas a estruturar controles antifraude em pagamentos digitais, treinar equipes contra engenharia social e responder a incidentes de golpes financeiros (Pix, boleto, cartão).</p>
+                    <a href="../../#contato" class="cta-btn">Solicitar Proposta</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Ferramentas</h4><ul><li><a href="../calculadora-hash/">Calculadora de Hash</a></li><li><a href="../parser-iocs/">Parser de IOCs</a></li><li><a href="../">Todas</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
+
+    <script src="../../js/site-common.min.js"></script>
+    <script>
+    (function(){
+        // ---- BR Code (Pix) helpers ----
+        function tlv(id, value) {
+            return id + String(value.length).padStart(2, '0') + value;
+        }
+
+        function crc16ccitt(str) {
+            var crc = 0xFFFF;
+            for (var i = 0; i < str.length; i++) {
+                crc ^= (str.charCodeAt(i) << 8);
+                for (var j = 0; j < 8; j++) {
+                    crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) & 0xFFFF : (crc << 1) & 0xFFFF;
+                }
+            }
+            return crc.toString(16).toUpperCase().padStart(4, '0');
+        }
+
+        function stripAccents(s) {
+            return s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+        }
+
+        function readTLV(str) {
+            var out = {};
+            var p = 0;
+            while (p < str.length - 3) {
+                var id = str.substr(p, 2);
+                var len = parseInt(str.substr(p + 2, 2), 10);
+                if (isNaN(len)) break;
+                var val = str.substr(p + 4, len);
+                out[id] = val;
+                p += 4 + len;
+            }
+            return out;
+        }
+
+        function buildPayload(opts) {
+            var chave = opts.chave.trim();
+            if (chave.length > 77) throw new Error('Chave Pix inválida: excede o limite de 77 caracteres definido pelo Banco Central.');
+            var nomeRaw = stripAccents(opts.nome.trim()).toUpperCase();
+            var cidadeRaw = stripAccents(opts.cidade.trim()).toUpperCase();
+            var nome = nomeRaw.slice(0, 25);
+            var cidade = cidadeRaw.slice(0, 15);
+            var truncated = (nomeRaw.length > 25) || (cidadeRaw.length > 15);
+            var valor = '';
+            if (opts.valor && opts.valor.trim()) {
+                var n = Number(opts.valor.replace(',', '.'));
+                if (isNaN(n) || n <= 0) throw new Error('Valor inválido. Use um número positivo (ex: 25.00).');
+                valor = n.toFixed(2);
+            }
+            var txid = (opts.txid && opts.txid.trim()) ? opts.txid.trim().replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***' : '***';
+
+            var mai = tlv('00', 'br.gov.bcb.pix') + tlv('01', chave);
+            var payload = tlv('00', '01');
+            if (opts.pontoIniciacao === '11' || opts.pontoIniciacao === '12') {
+                payload += tlv('01', opts.pontoIniciacao);
+            }
+            payload += tlv('26', mai) + tlv('52', '0000') + tlv('53', '986');
+            if (valor) payload += tlv('54', valor);
+            payload += tlv('58', 'BR') + tlv('59', nome) + tlv('60', cidade);
+
+            var add = '';
+            if (opts.fatura && opts.fatura.trim()) add += tlv('01', opts.fatura.trim().slice(0, 25));
+            if (opts.celular && opts.celular.trim()) add += tlv('02', opts.celular.trim().replace(/[^0-9]/g, '').slice(0, 15));
+            if (opts.loja && opts.loja.trim()) add += tlv('03', stripAccents(opts.loja.trim()).slice(0, 40));
+            add += tlv('05', txid);
+            if (opts.terminal && opts.terminal.trim()) add += tlv('07', stripAccents(opts.terminal.trim()).slice(0, 25));
+            if (opts.finalidade && opts.finalidade.trim()) add += tlv('08', stripAccents(opts.finalidade.trim()).slice(0, 25));
+            if (add.length > 99) throw new Error('Os campos avançados somados excedem o limite do BR Code (99 caracteres no bloco de dados adicionais). Reduza o texto de um ou mais campos (fatura, celular, loja, terminal, finalidade).');
+            payload += tlv('62', add);
+
+            var withCrcTag = payload + '6304';
+            var crc = crc16ccitt(withCrcTag);
+            return { code: withCrcTag + crc, truncated: truncated };
+        }
+
+        function parsePayload(code) {
+            // Only strip surrounding whitespace/line breaks — internal spaces are
+            // significant data (e.g. inside the merchant name field).
+            code = code.replace(/[\r\n]+/g, '').trim();
+            if (!/^\d{4}/.test(code)) throw new Error('Código não parece um BR Code válido (deve começar com "0002...").');
+            var top = readTLV(code);
+            if (!top['26']) throw new Error('Dados da chave Pix não encontrados — este código não parece ser um BR Code Pix válido.');
+            var mai = readTLV(top['26']);
+            var pixDinamico = !mai['01'] && !!mai['25'];
+            var result = {
+                chave: mai['01'] || (pixDinamico ? '' : '(não encontrada)'),
+                pixDinamico: pixDinamico,
+                pixUrl: mai['25'] || '',
+                descricao: mai['02'] || '',
+                nome: top['59'] || '(não encontrado)',
+                cidade: top['60'] || '(não encontrada)',
+                valor: top['54'] || '',
+                moeda: top['53'] === '986' ? 'BRL (986)' : (top['53'] || '-'),
+                pais: top['58'] || '-'
+            };
+            if (top['01'] === '11') result.pontoIniciacao = 'Estático (reutilizável)';
+            else if (top['01'] === '12') result.pontoIniciacao = 'Dinâmico (uso único)';
+            else result.pontoIniciacao = '';
+            if (top['62']) {
+                var add = readTLV(top['62']);
+                result.txid = add['05'] || '';
+                result.fatura = add['01'] || '';
+                result.celular = add['02'] || '';
+                result.loja = add['03'] || '';
+                result.terminal = add['07'] || '';
+                result.finalidade = add['08'] || '';
+            } else {
+                result.txid = '';
+                result.fatura = '';
+                result.celular = '';
+                result.loja = '';
+                result.terminal = '';
+                result.finalidade = '';
+            }
+            result.crcInformado = top['63'] || '';
+
+            var idx = code.lastIndexOf('6304');
+            if (idx === -1) throw new Error('Campo de verificação CRC16 não encontrado ao final do código — o código pode estar incompleto.');
+            var base = code.substring(0, idx + 4);
+            result.crcCalculado = crc16ccitt(base);
+            result.crcValido = result.crcInformado.length === 4 && result.crcCalculado === result.crcInformado.toUpperCase();
+            return result;
+        }
+
+        // ---- Gerar ----
+        var genBtn = document.getElementById('pixGerarBtn');
+        var genClear = document.getElementById('pixGerarLimpar');
+        var genError = document.getElementById('pixGerarError');
+        var genOutput = document.getElementById('pixGerarOutput');
+        var genCode = document.getElementById('pixOutputCode');
+        var genWarning = document.getElementById('pixTruncWarning');
+        var copyBtn = document.getElementById('pixCopyBtn');
+
+        genBtn.addEventListener('click', function () {
+            genError.classList.remove('show');
+            genWarning.classList.remove('show');
+            genOutput.classList.remove('show');
+
+            var chave = document.getElementById('pixChave').value;
+            var nome = document.getElementById('pixNome').value;
+            var cidade = document.getElementById('pixCidade').value;
+
+            if (!chave.trim()) { genError.textContent = 'Informe a chave Pix.'; genError.classList.add('show'); return; }
+            if (!nome.trim()) { genError.textContent = 'Informe o nome do recebedor.'; genError.classList.add('show'); return; }
+            if (!cidade.trim()) { genError.textContent = 'Informe a cidade.'; genError.classList.add('show'); return; }
+
+            try {
+                var res = buildPayload({
+                    chave: chave,
+                    nome: nome,
+                    cidade: cidade,
+                    valor: document.getElementById('pixValor').value,
+                    txid: document.getElementById('pixTxid').value,
+                    pontoIniciacao: document.getElementById('pixPontoIniciacao').value,
+                    fatura: document.getElementById('pixFatura').value,
+                    celular: document.getElementById('pixCelular').value,
+                    loja: document.getElementById('pixLoja').value,
+                    terminal: document.getElementById('pixTerminal').value,
+                    finalidade: document.getElementById('pixFinalidade').value
+                });
+                genCode.textContent = res.code;
+                genOutput.classList.add('show');
+                if (res.truncated) {
+                    genWarning.textContent = 'Nome e/ou cidade excediam o limite (25/15 caracteres) e foram truncados no código gerado.';
+                    genWarning.classList.add('show');
+                }
+            } catch (e) {
+                genError.textContent = e.message;
+                genError.classList.add('show');
+            }
+        });
+
+        genClear.addEventListener('click', function () {
+            ['pixChave', 'pixValor', 'pixNome', 'pixCidade', 'pixTxid', 'pixPontoIniciacao', 'pixFatura', 'pixCelular', 'pixLoja', 'pixTerminal', 'pixFinalidade'].forEach(function (id) {
+                document.getElementById(id).value = '';
+            });
+            genError.classList.remove('show');
+            genWarning.classList.remove('show');
+            genOutput.classList.remove('show');
+        });
+
+        copyBtn.addEventListener('click', function () {
+            var text = genCode.textContent;
+            if (!text) return;
+            navigator.clipboard.writeText(text).then(function () {
+                var original = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                setTimeout(function () { copyBtn.innerHTML = original; }, 1800);
+            });
+        });
+
+        // ---- Validar ----
+        var valInput = document.getElementById('pixDecodeInput');
+        var valBtn = document.getElementById('pixValidarBtn');
+        var valClear = document.getElementById('pixValidarLimpar');
+        var valError = document.getElementById('pixValidarError');
+        var valOutput = document.getElementById('pixValidarOutput');
+        var statusBadge = document.getElementById('pixStatusBadge');
+        var kvList = document.getElementById('pixKV');
+        var dinamicoNote = document.getElementById('pixDinamicoNote');
+
+        function escapeHtml(s) {
+            var d = document.createElement('div');
+            d.textContent = s;
+            return d.innerHTML;
+        }
+
+        function kvRow(label, value) {
+            return '<dt>' + label + '</dt><dd>' + (value ? escapeHtml(value) : '-') + '</dd>';
+        }
+
+        valBtn.addEventListener('click', function () {
+            valError.classList.remove('show');
+            valOutput.classList.remove('show');
+            dinamicoNote.classList.remove('show');
+
+            var code = valInput.value.trim();
+            if (!code) { valError.textContent = 'Cole um BR Code para validar.'; valError.classList.add('show'); return; }
+
+            try {
+                var r = parsePayload(code);
+                if (r.crcValido) {
+                    statusBadge.innerHTML = '<div class="pix-status-badge ok"><i class="fas fa-check-circle"></i> Íntegro — CRC16 confere (' + r.crcInformado + ')</div>';
+                } else {
+                    statusBadge.innerHTML = '<div class="pix-status-badge bad"><i class="fas fa-exclamation-triangle"></i> CRC inválido — código pode estar corrompido ou adulterado (informado: ' + (r.crcInformado || '-') + ', calculado: ' + r.crcCalculado + ')</div>';
+                }
+                var rows = '';
+                if (r.pixDinamico) {
+                    rows += kvRow('Tipo', 'Pix Dinâmico (QR Code de cobrança)');
+                    rows += kvRow('URL de consulta', r.pixUrl);
+                    dinamicoNote.classList.add('show');
+                } else {
+                    rows += kvRow('Chave Pix', r.chave);
+                }
+                rows += kvRow('Nome do recebedor', r.nome);
+                rows += kvRow('Cidade', r.cidade);
+                rows += kvRow('Valor', r.valor ? ('R$ ' + r.valor) : '(não informado)');
+                rows += kvRow('Moeda', r.moeda);
+                rows += kvRow('País', r.pais);
+                rows += kvRow('Identificador (txid)', r.txid || '(não informado)');
+                if (r.descricao) rows += kvRow('Descrição', r.descricao);
+                if (r.pontoIniciacao) rows += kvRow('Tipo de código', r.pontoIniciacao);
+                if (r.fatura) rows += kvRow('Número da fatura', r.fatura);
+                if (r.celular) rows += kvRow('Celular do recebedor', r.celular);
+                if (r.loja) rows += kvRow('Nome da loja', r.loja);
+                if (r.terminal) rows += kvRow('Identificação do terminal', r.terminal);
+                if (r.finalidade) rows += kvRow('Finalidade da transação', r.finalidade);
+                kvList.innerHTML = rows;
+                valOutput.classList.add('show');
+            } catch (e) {
+                valError.textContent = e.message;
+                valError.classList.add('show');
+            }
+        });
+
+        valClear.addEventListener('click', function () {
+            valInput.value = '';
+            valError.classList.remove('show');
+            valOutput.classList.remove('show');
+            dinamicoNote.classList.remove('show');
+        });
+    })();
+    </script>
+<script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+</html>
