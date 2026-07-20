@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="O split payment do IBS e CBS entra em teste em 2026 e no modelo B2B em 2027. Entenda o mecanismo, a base legal e os riscos que ele cria para o CISO.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="split payment, IBS, CBS, reforma tributária, LC 214/2025, Decreto 12.955/2026, Resolução CGIBS 6, Plataforma Pública do Split Payment, PSP, mTLS, HSM, ISO 20022, segurança de pagamentos, GRC, CISO">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/split-payment-ibs-cbs-seguranca-pagamentos/">
+
+    <meta property="og:title" content="Split Payment do IBS e CBS: a nova segurança dos pagamentos">
+    <meta property="og:description" content="Instituições de pagamento vão reter IBS e CBS em tempo real a partir de 2027. Veja como funciona o split payment, a base legal e o que muda na segurança.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/split-payment-ibs-cbs-seguranca-pagamentos/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-07-20T09:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Governança e GRC">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Split Payment do IBS e CBS: a nova segurança dos pagamentos">
+    <meta name="twitter:description" content="Instituições de pagamento vão reter IBS e CBS em tempo real a partir de 2027. Veja como funciona o split payment, a base legal e o que muda na segurança.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Split Payment do IBS e CBS: a nova segurança dos pagamentos | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "articleSection": "Governan\u00e7a e GRC", "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"}, "copyrightHolder": {"@type": "Organization", "name": "Intelig\u00eancia Brasil", "url": "https://inteligenciabrasil.seg.br"}, "copyrightYear": 2026, "dateModified": "2026-07-20T09:00:00-03:00", "datePublished": "2026-07-20T09:00:00-03:00", "description": "O split payment do IBS e CBS entra em teste em 2026 e no modelo B2B em 2027. Entenda o mecanismo, a base legal e os riscos que ele cria para o CISO.", "headline": "Split Payment do IBS e CBS: a nova seguran\u00e7a dos pagamentos", "image": "https://inteligenciabrasil.seg.br/img/og-image.webp", "inLanguage": "pt-BR", "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/", "mainEntityOfPage": {"@id": "https://inteligenciabrasil.seg.br/blog/split-payment-ibs-cbs-seguranca-pagamentos/", "@type": "WebPage"}, "publisher": {"@type": "Organization", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}, "name": "Intelig\u00eancia Brasil"}}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "N\u00e3o. 2026 \u00e9 ano de teste, com al\u00edquota simb\u00f3lica de 1% para CBS e IBS; a fase operacional 1 tem expectativa para 2027, e mesmo essa \u00e9 inicialmente opcional e restrita a opera\u00e7\u00f5es B2B."}, "name": "O split payment j\u00e1 \u00e9 obrigat\u00f3rio em 2026?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Prestadores de servi\u00e7o de pagamento eletr\u00f4nico e institui\u00e7\u00f5es operadoras de arranjos de pagamento, conforme o art. 31 da Lei Complementar n\u00ba 214/2025. Eles n\u00e3o respondem tributariamente pelo imposto em si, apenas pela correta execu\u00e7\u00e3o t\u00e9cnica da segrega\u00e7\u00e3o e transfer\u00eancia."}, "name": "Quem \u00e9 respons\u00e1vel por reter e recolher o IBS e a CBS no split payment?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Os arranjos listados no art. 28, \u00a75\u00ba do Decreto n\u00ba 12.955/2026: boleto, quatro modalidades de Pix, TED, TEF, cart\u00e3o de cr\u00e9dito, d\u00e9bito, pr\u00e9-pago e voucher. Na fase inicial prevista para 2027, a expectativa \u00e9 come\u00e7ar por Pix, boleto, TED e TEF; cart\u00f5es e vouchers ficam para etapas seguintes."}, "name": "Quais meios de pagamento entram no split payment?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "A empresa perde o float tribut\u00e1rio: hoje, o valor do imposto embutido no pre\u00e7o fica temporariamente dispon\u00edvel em caixa at\u00e9 a apura\u00e7\u00e3o e o recolhimento. Com split payment, o valor l\u00edquido chega imediatamente sem essa parcela, o que exige reprojetar o capital de giro."}, "name": "O que muda no fluxo de caixa das empresas?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Ataques a APIs de integra\u00e7\u00e3o mal desenvolvidas, spoofing na aus\u00eancia de mTLS, man-in-the-middle em ordens de split sem prote\u00e7\u00e3o de HSM, e falhas de reconcilia\u00e7\u00e3o por diverg\u00eancia de dados entre sistemas. A mitiga\u00e7\u00e3o exige arquitetura de seguran\u00e7a dedicada, n\u00e3o apenas ajuste de sistemas fiscais."}, "name": "Quais os principais riscos de seguran\u00e7a do split payment?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "\u00c9 um ponto ainda pouco regulado: o informe de segrega\u00e7\u00e3o continua apontando para o CNPJ do vendedor original mesmo depois de ele ceder o receb\u00edvel a um fundo, o que pode gerar descompasso de precifica\u00e7\u00e3o para quem compra receb\u00edveis e confus\u00e3o em fluxos de estorno."}, "name": "Como fica a cess\u00e3o de receb\u00edveis no split payment?"}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/", "name": "Blog", "position": 2}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/split-payment-ibs-cbs-seguranca-pagamentos/", "name": "Split Payment IBS/CBS", "position": 3}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Governança e GRC</span>
+            <h1>Split Payment do IBS e CBS: a nova segurança dos pagamentos</h1>
+            <div class="article-meta">
+                <span><i class="far fa-user"></i> Roberto Lima</span>
+                <span><i class="far fa-calendar"></i> Julho 2026</span>
+                <span><i class="far fa-clock"></i> 13 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">Split Payment IBS/CBS</li></ol></div></nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <figure class="article-hero">
+                    <img src="../../img/og-image.webp" alt="Fluxo de pagamento digital representando o split payment do IBS e CBS na reforma tributária" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async">
+                </figure>
+
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#o-que-e">O que é o split payment</a></li>
+                        <li><a href="#como-funciona">Como funciona: modelos padrão, simplificado e contingencial</a></li>
+                        <li><a href="#base-legal">Base legal: da Emenda 132 aos regulamentos de abril de 2026</a></li>
+                        <li><a href="#cronograma">Cronograma: teste em 2026, fase 1 em 2027</a></li>
+                        <li><a href="#superficie-ataque">A superfície de ataque que o split payment cria</a></li>
+                        <li><a href="#riscos-juridicos">Riscos jurídicos emergentes: cessão de recebíveis e o informe de segregação</a></li>
+                        <li><a href="#checklist">Checklist: o que empresas e times de segurança devem fazer agora</a></li>
+                    </ul>
+                </div>
+
+                <p>O Decreto nº 12.955, de 29 de abril de 2026, que regulamenta a CBS, e a Resolução CGIBS nº 6, de 30 de abril de 2026, que regulamenta o IBS, já estão em vigor e detalham o "split payment": o mecanismo que segrega e recolhe o IBS e a CBS diretamente aos cofres públicos no momento da liquidação financeira do pagamento, interceptando o valor do tributo na instituição financeira ou no meio de pagamento antes mesmo de o valor líquido chegar ao vendedor.</p>
+
+<p>Para a maioria das empresas, isso não muda a substância tributária hoje: a alíquota, a base de cálculo e as obrigações acessórias seguem regidas pela reforma tributária. O que muda é a infraestrutura técnica de cada fluxo de pagamento, o desaparecimento do "float" que hoje mantém o valor do imposto em caixa por algum tempo, e o surgimento de exigências novas de integração e de segurança.</p>
+
+<p>Este artigo explica o que é o split payment, como ele funciona na prática, qual a base legal, o cronograma real de implementação, a superfície de ataque que ele cria, uma zona cinzenta jurídica que já preocupa o mercado de recebíveis, e um checklist para empresas e times de segurança se prepararem.</p>
+
+<h2 id="o-que-e">O que é o split payment</h2>
+
+<p>Na prática, o fluxo funciona assim: o fornecedor emite o documento fiscal da operação; o sistema identifica os tributos incidentes (IBS e CBS); essa informação é transmitida ao meio de pagamento utilizado; antes de liberar o valor ao vendedor, a instituição financeira consulta a Plataforma Pública do Split Payment, apoiada no Registro de Operações de Consumo (ROC), para saber quanto reter; o valor de IBS e CBS é segregado e repassado diretamente ao Comitê Gestor do IBS (CGIBS) e à Receita Federal; e só então o valor líquido, já sem o tributo, é depositado na conta do fornecedor.</p>
+
+<p>A base legal central é o art. 31 da Lei Complementar nº 214/2025, que atribui a prestadores de serviço de pagamento e instituições operadoras de arranjos de pagamento a obrigação de segregar e recolher o IBS e a CBS no momento da liquidação financeira das operações.</p>
+
+<p>O modelo é uma ruptura em relação ao regime anterior. Hoje, o tributo é apenas destacado na nota fiscal, mas o próprio contribuinte é quem recolhe o valor depois, dentro do prazo de apuração. No split payment, a arrecadação acontece automaticamente, dentro do próprio fluxo de pagamento, sem depender de uma ação posterior do contribuinte.</p>
+
+<h2 id="como-funciona">Como funciona: modelos padrão, simplificado e contingencial</h2>
+
+<p>A Lei Complementar nº 214/2025 prevê três modelos operacionais de split payment. No modelo <strong>padrão</strong>, a informação é individualizada por operação, com o valor exato do tributo calculado para cada transação. No modelo <strong>simplificado</strong>, aplica-se um percentual pré-definido quando o adquirente não é contribuinte regular do IBS e da CBS, o que evita a complexidade de calcular o tributo operação a operação em cenários de varejo massivo. No modelo <strong>contingencial</strong>, entra em ação um fallback para quando o sistema principal está indisponível, garantindo que a venda não trave por causa de uma falha de infraestrutura.</p>
+
+<p>Para compras parceladas, o art. 34, inciso II, da Lei Complementar nº 214/2025 determina que a segregação seja proporcional a cada parcela, calculada no momento da liquidação financeira de cada uma, e não de uma só vez na venda.</p>
+
+<div class="stat-highlight">
+<div class="number">617 artigos</div>
+<div class="label">é o tamanho da Resolução CGIBS nº 6/2026, que regulamenta o IBS e espelha a estrutura do Decreto nº 12.955/2026, que regulamenta a CBS.</div>
+</div>
+
+<p>O Decreto nº 12.955/2026, no art. 28, §5º, lista oficialmente os arranjos de pagamento sujeitos ao split: boleto; Pix mediante QR Code Dinâmico; Pix automático; Pix mediante QR Code Estático; Pix mediante chave ou dados de agência e conta; TED; TEF; cartão de crédito; cartão de débito; cartão pré-pago; voucher, tanto em arranjo aberto quanto fechado; e outros meios que venham a ser incluídos por ato conjunto da Receita Federal e do Comitê Gestor do IBS.</p>
+
+<h2 id="base-legal">Base legal: da Emenda 132 aos regulamentos de abril de 2026</h2>
+
+<p>A linha do tempo normativa começa na Emenda Constitucional nº 132/2023, que promoveu a reforma tributária e criou o IBS e a CBS. Em seguida veio a Lei Complementar nº 214/2025, que instituiu os dois tributos e definiu o split payment como mecanismo de arrecadação. Em 29 de abril de 2026, o Decreto nº 12.955/2026 regulamentou a CBS, o tributo federal que substitui o PIS e a Cofins, estruturado em três livros, sendo o Livro I dedicado às normas comuns à CBS e ao IBS, incluindo o split payment. Um dia depois, em 30 de abril de 2026, a Resolução CGIBS nº 6/2026, editada pelo Comitê Gestor do IBS, regulamentou o IBS em 617 artigos, espelhando a mesma estrutura de três livros do decreto federal.</p>
+
+<p>Ambos os atos entraram em vigor imediatamente na data de publicação, mas a produção de efeitos de diversos dispositivos é escalonada. Há também uma carência de multas: penalidades por falta de destaque do IBS e da CBS em documentos fiscais, ou por erros de escrituração acessória, só passam a ser aplicadas a partir do primeiro dia do quarto mês subsequente à publicação do respectivo regulamento.</p>
+
+<h2 id="cronograma">Cronograma: teste em 2026, fase 1 em 2027</h2>
+
+<p>2026 é um ano de teste operacional, com alíquota simbólica de 1% para o IBS e para a CBS. Empresas que cumprem corretamente as obrigações acessórias durante esse período geralmente ficam dispensadas de efetivamente recolher o valor teste. Em junho de 2026, a Receita Federal e o Comitê Gestor do IBS publicaram a documentação técnica da Plataforma Pública do Split Payment, padronizando como instituições financeiras e prestadores de serviço de pagamento devem se integrar a ela.</p>
+
+<p>A expectativa é que a fase operacional 1 comece em 2027, inicialmente de forma <strong>opcional</strong> e restrita a operações B2B, com um conjunto limitado de meios de pagamento: Pix, boleto, TED e TEF. Cartões e vouchers entram apenas em etapas posteriores. É importante ser preciso aqui: não é tecnicamente correto afirmar que o split payment será obrigatório para todas as empresas já em 1º de janeiro de 2027. O início efetivo da fase operacional depende de ato conjunto ainda a ser publicado pela Receita Federal e pelo Comitê Gestor do IBS, e o próprio decreto prevê no mínimo duas etapas de implementação. O IBS, de forma geral, segue uma transição gradual que só se completa em 2032, quando substitui integralmente o ICMS e o ISS.</p>
+
+<h2 id="superficie-ataque">A superfície de ataque que o split payment cria</h2>
+
+<p>Este é o ponto que interessa diretamente a quem cuida de segurança. O split payment cria um novo ponto de integração obrigatório entre o fluxo de pagamento de cada empresa e dois sistemas de governo, o CGIBS e a Receita Federal, por meio da Plataforma Pública do Split Payment e do ROC.</p>
+
+<p>A documentação técnica já publicada para instituições financeiras e prestadores de serviço de pagamento, e que impacta por extensão qualquer empresa que integra com eles, estabelece requisitos concretos de arquitetura e segurança:</p>
+
+<ul>
+<li><strong>mTLS (Mutual TLS) obrigatório</strong>: cliente e servidor precisam apresentar certificados digitais válidos antes de trocar qualquer informação, o que elimina spoofing e injeção de dados falsos na comunicação com a plataforma pública.</li>
+<li><strong>Padrão ISO 20022</strong> para mensageria financeira, reduzindo falhas de reconciliação entre os sistemas dos diferentes participantes do fluxo.</li>
+<li><strong>Uso de HSM (Hardware Security Module)</strong> para proteger as chaves criptográficas que assinam as ordens de split, mitigando ataques man-in-the-middle capazes de alterar o valor ou o destino do pagamento. É o mesmo tipo de controle que já discutimos na análise comparativa de <a href="../secrets-management-corporativo-comparativo/">gestão de segredos e chaves criptográficas</a> corporativas.</li>
+<li><strong>Monitoramento antifraude em tempo real</strong> com machine learning, para detectar padrões anômalos de evasão fiscal ou de comprometimento da infraestrutura.</li>
+<li><strong>Arquitetura de contingência local</strong> para quedas do barramento público, já que a venda não pode travar porque o sistema do governo está indisponível.</li>
+</ul>
+
+<p>Especialistas já apontam riscos concretos nessa corrida de integração: desenvolvimento apressado de APIs abrindo brechas de segurança, falhas de reconciliação por divergência sintática de dados entre sistemas diferentes, e erros de parametrização no motor de cálculo do split. Para o comerciante, e não apenas para o PSP, isso significa uma nova dependência da disponibilidade e da correção do sistema de um terceiro: qualquer erro de configuração agora reduz diretamente o caixa recebido, não é mais só uma multa a ser discutida depois.</p>
+
+<p>Vale um paralelo direto: o sistema financeiro brasileiro já opera sob exigências de resiliência cibernética impostas pelo <a href="../resolucao-bcb-6-resiliencia-cibernetica/">Banco Central</a>. O split payment estende esse mesmo tipo de exigência regulatória, na prática, para toda a cadeia de meios de pagamento envolvida em uma venda.</p>
+
+<h2 id="riscos-juridicos">Riscos jurídicos emergentes: cessão de recebíveis e o informe de segregação</h2>
+
+<p>Quando uma empresa vende seus recebíveis a um fundo ou a uma instituição financeira, prática comum para obter capital de giro, o "informe de segregação" do split payment continua apontando para o CNPJ do vendedor original como recebedor da operação. A cessão do recebível é um negócio jurídico autônomo, que não desloca a sujeição tributária da operação originária.</p>
+
+<p>Isso cria pelo menos dois pontos de atrito ainda pouco resolvidos. O primeiro é de precificação: fundos que compram recebíveis precisam descontar o efeito de uma segregação tributária que eles próprios não vão absorver economicamente, já que o valor do imposto não é deles. O segundo é operacional: pode haver descompasso em fluxos de estorno e cancelamento, já que o tributo eventualmente devolvido pode acabar sendo direcionado a quem já não é mais o titular do recebível na data do estorno.</p>
+
+<p>Analistas jurídicos descrevem esse cenário como uma zona ainda pouco regulada, na interseção entre direito tributário, mercado de crédito e infraestrutura de pagamentos. Vale monitorar de perto: o tema ainda não está definitivamente resolvido na regulamentação.</p>
+
+<h2 id="checklist">Checklist: o que empresas e times de segurança devem fazer agora</h2>
+
+<ol>
+<li><strong>Mapear a exposição fiscal e operacional</strong>: levantar quais operações, sistemas e meios de pagamento da empresa serão afetados pelo split payment, hoje e nas próximas fases.</li>
+<li><strong>Reprojetar o fluxo de caixa</strong>: assumir que o valor do tributo deixa de ficar disponível como capital de giro temporário, e ajustar o planejamento financeiro para essa nova realidade.</li>
+<li><strong>Integrar sistemas com dados consistentes</strong>: ERP, PDV, gateway de pagamento, NF-e e a Plataforma Pública do Split Payment precisam trocar número da nota, valor do tributo e identificação do pagamento sem divergência.</li>
+<li><strong>Auditar o cadastro fiscal</strong>: erros de classificação por NCM ou de enquadramento em benefícios fiscais agora afetam diretamente o valor líquido recebido na venda, não apenas a apuração posterior.</li>
+<li><strong>Exigir due diligence de PSPs e adquirentes</strong>: cobrar evidência de arquitetura mTLS, uso de HSM e monitoramento antifraude, no mesmo espírito de qualquer programa maduro de governança, risco e conformidade.</li>
+<li><strong>Construir reconciliação diária automatizada</strong>: cruzar valor da nota, tributo segregado, pagamento do cliente e valor líquido recebido, para identificar discrepâncias no mesmo dia em que ocorrem.</li>
+<li><strong>Desenhar um plano de contingência</strong>: prever o que fazer quando a plataforma pública ficar indisponível, já que a venda não pode parar por causa de uma falha do sistema do governo.</li>
+<li><strong>Envolver todas as áreas desde já</strong>: TI, segurança, financeiro, jurídico e comercial precisam estar na mesma mesa; split payment não é um projeto isolado do time fiscal.</li>
+</ol>
+
+<div class="cta-box">
+<h3>Sua empresa já está se preparando para o split payment?</h3>
+<p>Ajudamos empresas a mapear a exposição ao split payment do IBS e da CBS e a estruturar a segurança dos novos fluxos de integração: due diligence de PSPs, reconciliação, contingência e governança de todo o processo.</p>
+<a href="../../lp/grc/" class="cta-btn">Falar com Especialista</a>
+</div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O split payment já é obrigatório em 2026?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Não. 2026 é ano de teste, com alíquota simbólica de 1% para CBS e IBS; a fase operacional 1 tem expectativa para 2027, e mesmo essa é inicialmente opcional e restrita a operações B2B.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quem é responsável por reter e recolher o IBS e a CBS no split payment?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Prestadores de serviço de pagamento eletrônico e instituições operadoras de arranjos de pagamento, conforme o art. 31 da Lei Complementar nº 214/2025. Eles não respondem tributariamente pelo imposto em si, apenas pela correta execução técnica da segregação e transferência.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quais meios de pagamento entram no split payment?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Os arranjos listados no art. 28, §5º do Decreto nº 12.955/2026: boleto, quatro modalidades de Pix, TED, TEF, cartão de crédito, débito, pré-pago e voucher. Na fase inicial prevista para 2027, a expectativa é começar por Pix, boleto, TED e TEF; cartões e vouchers ficam para etapas seguintes.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que muda no fluxo de caixa das empresas?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>A empresa perde o float tributário: hoje, o valor do imposto embutido no preço fica temporariamente disponível em caixa até a apuração e o recolhimento. Com split payment, o valor líquido chega imediatamente sem essa parcela, o que exige reprojetar o capital de giro.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quais os principais riscos de segurança do split payment?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Ataques a APIs de integração mal desenvolvidas, spoofing na ausência de mTLS, man-in-the-middle em ordens de split sem proteção de HSM, e falhas de reconciliação por divergência de dados entre sistemas. A mitigação exige arquitetura de segurança dedicada, não apenas ajuste de sistemas fiscais.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como fica a cessão de recebíveis no split payment?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>É um ponto ainda pouco regulado: o informe de segregação continua apontando para o CNPJ do vendedor original mesmo depois de ele ceder o recebível a um fundo, o que pode gerar descompasso de precificação para quem compra recebíveis e confusão em fluxos de estorno.</p></div>
+                    </div>
+                </div>
+
+                <h2>Conclusao</h2>
+
+                <p>O split payment é uma transformação de infraestrutura e de segurança disfarçada de mecanismo de arrecadação. Empresas que tratarem o tema apenas como "um problema fiscal" vão ser pegas de surpresa por falhas de fluxo de caixa e de integração técnica que o time fiscal, sozinho, não tem como resolver.</p>
+
+<p>Quem começar agora a construir a arquitetura de mTLS, HSM, reconciliação diária e contingência reduz, ao mesmo tempo, o risco de fraude e o custo de adaptação quando a fase de 2027 se tornar obrigatória para a sua operação.</p>
+
+                <div class="module-sources" style="margin-top:2rem;padding:1.5rem;background:rgba(96,165,250,.04);border-left:3px solid #60A5FA;border-radius:8px">
+                    <div style="font-weight:700;color:#60A5FA;margin-bottom:.75rem"><i class="fas fa-bookmark"></i> Fontes e referencias tecnicas</div>
+                    <ul style="margin:0;padding-left:1.2rem">
+                        <li><a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp214.htm" target="_blank" rel="noopener">Planalto - Lei Complementar nº 214/2025 (institui IBS, CBS e o split payment)</a></li>
+                        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/decreto/d12955.htm" target="_blank" rel="noopener">Planalto - Decreto nº 12.955, de 29 de abril de 2026 (regulamenta a CBS)</a></li>
+                        <li><a href="https://www.cgibs.gov.br/upload/arquivos/202604/30084927-res-cgibs-n-6-30-abr-2026-regulamenta-o-ibs.pdf" target="_blank" rel="noopener">CGIBS - Resolução CGIBS nº 6, de 30 de abril de 2026 (regulamenta o IBS)</a></li>
+                        <li><a href="https://www.gov.br/fazenda/pt-br/assuntos/noticias/2026/junho/receita-federal-e-comite-gestor-do-ibs-publicam-documentacao-tecnica-da-plataforma-publica-do-split-payment" target="_blank" rel="noopener">Ministério da Fazenda - Receita Federal e Comitê Gestor do IBS publicam documentação técnica da Plataforma Pública do Split Payment</a></li>
+                        <li><a href="https://www.conjur.com.br/2026-jun-27/informe-de-segregacao-no-split-payment-e-antecipacao-de-recebiveis/" target="_blank" rel="noopener">ConJur - Informe de segregação no split payment e antecipação de recebíveis</a></li>
+                        <li><a href="https://cryptoid.com.br/mercado-financeiro/split-payment-a-engenharia-de-dados-e-ciberseguranca-por-tras-da-nova-era-fiscal-brasileira/" target="_blank" rel="noopener">CryptoID - Split Payment: a engenharia de dados e cibersegurança por trás da nova era fiscal brasileira</a></li>
+                        <li><a href="https://www.juscon.com.br/split-payment-na-reforma-tributaria-quando-sera-obrigatorio-e-como-proteger-o-fluxo-de-caixa/" target="_blank" rel="noopener">Juscon - Split payment na reforma tributária: quando será obrigatório e como proteger o fluxo de caixa</a></li>
+                        <li><a href="https://radardareformatributaria.com/decreto-12955-2026-cbs-split-payment-o-que-muda/" target="_blank" rel="noopener">Radar da Reforma Tributária - Decreto 12.955/2026: o que muda no split payment</a></li>
+                    </ul>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/split-payment-ibs-cbs-seguranca-pagamentos/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/split-payment-ibs-cbs-seguranca-pagamentos/" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Split%20Payment%20do%20IBS%20e%20CBS%3A%20a%20nova%20seguran%C3%A7a%20dos%20pagamentos https://inteligenciabrasil.seg.br/blog/split-payment-ibs-cbs-seguranca-pagamentos/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h3>Roberto Lima</h3>
+                        <p>Especialista em Seguranca Ofensiva, Threat Intelligence e Detection Engineering na Inteligencia Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>
