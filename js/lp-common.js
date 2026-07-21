@@ -37,14 +37,17 @@
             question.addEventListener('click', function() {
                 const isActive = item.classList.contains('active');
 
-                // Close all items
+                // Close all items (class + aria-expanded stay in sync — A11Y-06)
                 faqItems.forEach(function(faq) {
                     faq.classList.remove('active');
+                    var q = faq.querySelector('.faq-question');
+                    if (q) q.setAttribute('aria-expanded', 'false');
                 });
 
                 // Open clicked item if it wasn't active
                 if (!isActive) {
                     item.classList.add('active');
+                    question.setAttribute('aria-expanded', 'true');
                 }
             });
         });

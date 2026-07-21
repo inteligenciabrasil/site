@@ -141,34 +141,42 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Qual a diferenca entre SAST e DAST?",
+                "name": "AppSec substitui pentest anual?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "SAST (Static Application Security Testing) analisa o código-fonte sem executar a aplicação, identificando vulnerabilidades no desenvolvimento. DAST (Dynamic Application Security Testing) testa a aplicação em execução, simulando ataques reais para encontrar falhas em tempo de runtime. O ideal e combinar ambos para cobertura completa."
+                    "text": "Nao. Pentest e fotografia point-in-time; AppSec e filme continuo dentro do CI/CD (gate em PR, SBOM em build, threat model em design review). Sao complementares: AppSec reduz o volume de findings que o pentest anual encontraria, e o pentest valida cenarios de ataque que scanners automatizados nao capturam."
                 }
             },
             {
                 "@type": "Question",
-                "name": "O que e DevSecOps e por que minha empresa precisa?",
+                "name": "Qual scanner SAST voces recomendam para Node/Python/Java?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "DevSecOps integra segurança em todas as etapas do ciclo de desenvolvimento (CI/CD). Em vez de testar apenas no final, vulnerabilidades são detectadas e corrigidas durante o desenvolvimento, reduzindo custos em até 100x comparado a correcoes em producao."
+                    "text": "Depende da stack: Semgrep para JS/Python, CodeQL para Java, Trivy para scan de container e dependencias. Escolhemos o tool right-sized para cada linguagem do time, nao uma ferramenta unica que faz tudo mal."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Quanto tempo leva uma avaliação de segurança de aplicação?",
+                "name": "Como funciona a integracao com CI/CD (GitHub Actions, GitLab, Jenkins)?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Depende do escopo e complexidade. Um code review focado leva de 5 a 10 dias uteis. Um pentest completo de aplicação web leva de 10 a 20 dias uteis. A implementação de pipeline DevSecOps pode levar de 4 a 8 semanas."
+                    "text": "Configuramos o scanner como step do pipeline existente, com security gate que bloqueia merge em findings criticos e reporta o resto como comentario no PR. SBOM e gerado a cada build."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Voces trabalham com quais linguagens e frameworks?",
+                "name": "Voces fazem threat modeling ou e so teste de codigo?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Trabalhamos com todas as principais linguagens e frameworks: Java, Python, Node.js, .NET, PHP, Go, Ruby, React, Angular, Vue.js, Spring Boot, Django, Laravel, entre outros. Nossa equipe tem experiência em aplicações web, mobile (iOS/Android) e APIs REST/GraphQL."
+                    "text": "Fazemos threat modeling por feature grande, nao so teste de codigo pronto. Mapeamos superficie de ataque na fase de design, antes da primeira linha de codigo."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como tratamos vulns em dependencias transitive (npm/pip/maven)?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "SBOM automatizado mapeia toda a arvore de dependencias (diretas e transitive) e monitora CVEs continuamente. Findings entram no mesmo backlog priorizado do SAST/DAST."
                 }
             }
         ]
@@ -197,6 +205,10 @@
         /* PAGE-SPECIFIC STYLES */
         /* Unique overrides only */
     </style>
+    <!-- SCHEMA-SERVICE-V1 -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Service","name":"Application Security","provider":{"@type":"Organization","name":"Inteligência Brasil"},"areaServed":"BR","serviceType":"Application Security","description":"Seguranca integrada ao ciclo de desenvolvimento de software, com revisao de codigo, testes automatizados e treinamento de desenvolvedores. Reduz vulnerabilidades introduzidas antes do deploy em producao."}
+    </script>
 </head>
 
 <body>
@@ -312,6 +324,30 @@
             </div>
         </section>
 
+        <!-- Audience Section -->
+        <section class="audience">
+            <div class="container">
+                <h2 class="section-title">Para quem é <span class="highlight">Application Security</span></h2>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></div>
+                        <h3>Head de Engenharia com produto SaaS em release semanal</h3>
+                        <p>CI/CD acelerou entrega mas SAST/DAST não acompanham; código com vulns clássicas (SQLi, IDOR) vazando para produção sem gate automatizado.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg></div>
+                        <h3>CTO de fintech com APIs abertas a integradores</h3>
+                        <p>OWASP API Top 10 é agenda do trimestre — precisa de threat model + testes de autz por endpoint antes da próxima integração enterprise.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg></div>
+                        <h3>Head de Segurança que herdou monolito legado + microserviços</h3>
+                        <p>Legacy Java + Node moderno + Python de dados: nenhum scanner único cobre tudo; time interno não escala para review manual.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Problem Section -->
         <section class="problem">
             <div class="container">
@@ -348,9 +384,9 @@
         <!-- Services Section -->
         <section class="services" id="servicos">
             <div class="container">
-                <h2 class="section-title">Serviços de <span class="highlight">Application Security</span></h2>
+                <h2 class="section-title">Entregáveis de <span class="highlight">Application Security</span></h2>
                 <p class="section-subtitle">
-                    Proteção completa do ciclo de vida do software, do código-fonte ao ambiente de producao
+                    SAST config, DAST scan, SBOM automatizado, threat model e workshops de dev — artefatos concretos, não relatório genérico
                 </p>
 
                 <div class="services-grid">
@@ -388,6 +424,51 @@
                             <li>Security gates automatizados</li>
                             <li>Treinamento para desenvolvedores</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits">
+            <div class="container">
+                <h2 class="section-title">Resultados de <span class="highlight">Application Security</span></h2>
+                <div class="benefits-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-sm)">
+                    <ul class="service-list">
+                        <li>SAST/DAST/SCA integrados ao CI/CD — gate automatizado, não relatório periódico</li>
+                        <li>Redução mensurável de vulns críticas por sprint (baseline + delta)</li>
+                        <li>Threat modeling por feature grande (não apenas por release major)</li>
+                        <li>Developer training targeted por linguagem/framework do time</li>
+                    </ul>
+                    <ul class="service-list">
+                        <li>OWASP ASVS Level 2 como baseline auditável do produto</li>
+                        <li>SBOM automatizado + monitoring de CVE em dependencies transitive</li>
+                        <li>Playbook de resposta a vuln reportada por bug bounty ou disclosure</li>
+                        <li>Code review de PRs high-risk (auth, crypto, deserialization) por revisor externo</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Differentiators Section -->
+        <section class="differentiators">
+            <div class="container">
+                <h2 class="section-title">Por que <span class="highlight">Application Security com a Inteligência Brasil</span></h2>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg></div>
+                        <h3>AppSec no SDLC — não é Pentest agendado</h3>
+                        <p>Pentest é fotografia; AppSec é filme. Trabalhamos dentro do CI/CD: gate em PR, SBOM em build, threat model em design review. Correção antes do merge, não depois de vazamento.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+                        <h3>Cobertura poliglota real — SAST/DAST/SCA por stack específico</h3>
+                        <p>Semgrep para JS/Python, CodeQL para Java, Trivy para container, OWASP ZAP para API. Não empurramos uma ferramenta "faz tudo mal" — escolhemos o tool right-sized para cada linguagem do time.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M5 13l4 4L19 7"></path></svg></div>
+                        <h3>Developer enablement em vez de bloqueio</h3>
+                        <p>Cada finding vira workshop de 30min: código real do time, correção pareada, PR aberto. Time interno aprende — não fica dependente de consultor externo para próxima vez.</p>
                     </div>
                 </div>
             </div>
@@ -560,87 +641,106 @@
 
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Qual a diferenca entre SAST e DAST?</span>
+                        <button class="faq-question" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">
+                            <span>AppSec substitui pentest anual?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
                             <div class="faq-answer-inner">
-                                <strong>SAST (Static Application Security Testing)</strong> analisa o código-fonte sem executar a aplicação, identificando vulnerabilidades durante o desenvolvimento. E como uma "revisão de código" automatizada focada em segurança.
-                                <br><br>
-                                <strong>DAST (Dynamic Application Security Testing)</strong> testa a aplicação em execução, simulando ataques reais para encontrar falhas em runtime. O ideal e combinar ambos para cobertura completa de segurança.
+                                Não. Pentest é fotografia point-in-time; AppSec é filme contínuo dentro do CI/CD (gate em PR, SBOM em build, threat model em design review). São complementares: AppSec reduz o volume de findings que o pentest anual encontraria, e o pentest valida cenários de ataque que scanners automatizados não capturam (lógica de negócio, chained exploits).
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>O que e DevSecOps e por que minha empresa precisa?</span>
+                        <button class="faq-question" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
+                            <span>Qual scanner SAST vocês recomendam para Node/Python/Java?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
                             <div class="faq-answer-inner">
-                                <strong>DevSecOps</strong> integra segurança em todas as etapas do ciclo de desenvolvimento (CI/CD). Em vez de testar apenas no final, vulnerabilidades são detectadas e corrigidas durante o desenvolvimento.
-                                <br><br>
-                                Benefícios concretos:<br>
-                                &bull; Redução de até 100x no custo de correcao vs. producao<br>
-                                &bull; Detecção automática a cada commit/pull request<br>
-                                &bull; Menor tempo de exposição a vulnerabilidades<br>
-                                &bull; Cultura de segurança no time de desenvolvimento
+                                Depende da stack: Semgrep para JS/Python (regras customizáveis, baixo falso-positivo), CodeQL para Java (motor semântico do GitHub), Trivy para scan de container e dependências. Não empurramos uma ferramenta "faz tudo mal" — escolhemos o tool right-sized para cada linguagem do time.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Quanto tempo leva uma avaliação de segurança de aplicação?</span>
+                        <button class="faq-question" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
+                            <span>Como funciona a integração com CI/CD (GitHub Actions, GitLab, Jenkins)?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
                             <div class="faq-answer-inner">
-                                Depende do escopo e complexidade. Em geral:
-                                <br><br>
-                                &bull; <strong>Code review focado:</strong> 5 a 10 dias uteis<br>
-                                &bull; <strong>Pentest de aplicação web:</strong> 10 a 20 dias uteis<br>
-                                &bull; <strong>Pentest de API:</strong> 7 a 15 dias uteis<br>
-                                &bull; <strong>Implementação DevSecOps:</strong> 4 a 8 semanas<br>
-                                <br>
-                                Fornecemos cronograma detalhado na proposta, com marcos e entregaveis claros.
+                                Configuramos o scanner como step do pipeline existente (GitHub Actions, GitLab CI, Jenkins), com security gate que bloqueia merge em findings críticos e reporta o resto como comentário no PR. SBOM é gerado a cada build. Sem mudar a ferramenta de CI que o time já usa.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Voces trabalham com quais linguagens e frameworks?</span>
+                        <button class="faq-question" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">
+                            <span>Vocês fazem threat modeling ou é só teste de código?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
                             <div class="faq-answer-inner">
-                                Trabalhamos com todas as principais linguagens e frameworks do mercado:
-                                <br><br>
-                                &bull; <strong>Backend:</strong> Java, Python, Node.js, .NET, PHP, Go, Ruby<br>
-                                &bull; <strong>Frontend:</strong> React, Angular, Vue.js, Next.js<br>
-                                &bull; <strong>Mobile:</strong> iOS (Swift), Android (Kotlin/Java), React Native, Flutter<br>
-                                &bull; <strong>APIs:</strong> REST, GraphQL, gRPC, WebSocket<br>
-                                &bull; <strong>Frameworks:</strong> Spring Boot, Django, Laravel, Express, FastAPI<br>
-                                <br>
-                                Nossa equipe tem experiência em arquiteturas monoliticas, microsservicos e serverless.
+                                Fazemos threat modeling por feature grande — não só teste de código pronto. Mapeamos superfície de ataque na fase de design, antes da primeira linha de código, para priorizar onde o SAST/DAST deve focar depois.
                             </div>
                         </div>
                     </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">
+                            <span>Como tratamos vulns em dependências transitive (npm/pip/maven)?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
+                            <div class="faq-answer-inner">
+                                SBOM automatizado mapeia toda a árvore de dependências (diretas e transitive) e monitora CVEs continuamente via npm/pip/maven. Findings entram no mesmo backlog priorizado do SAST/DAST, com sugestão de upgrade path quando disponível.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Links Section -->
+        <section class="related-links">
+            <div class="container">
+                <h2 class="section-title">Conteúdo <span class="highlight">relacionado</span></h2>
+                <div class="problem-grid">
+                    <a class="service-card" href="../../blog/devsecops-seguranca-desenvolvimento/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg></div>
+                        <h3>DevSecOps — segurança embutida no desenvolvimento</h3>
+                        <p>Shift-left prático: gates no PR, SBOM no build, secret scanning no commit.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/seguranca-apis-owasp-top-10/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg></div>
+                        <h3>Segurança de APIs e OWASP API Top 10</h3>
+                        <p>Os 10 riscos da lista API e como cada um se traduz em teste concreto.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/graphql-api-security/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+                        <h3>GraphQL API Security</h3>
+                        <p>Introspection, batching, depth limits — o que muda quando a API é GraphQL.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -797,7 +897,7 @@
                 email: document.getElementById('email').value.trim(),
                 phone: document.getElementById('telefone').value.replace(/\D/g, ''),
                 empresa: document.getElementById('empresa').value.trim(),
-                serviço: document.getElementById('serviço').value,
+                serviço: document.getElementById('servico').value,
                 message: document.getElementById('mensagem').value.trim(),
                 terms: 'Aceito',
                 origem: 'Landing Page Application Security',

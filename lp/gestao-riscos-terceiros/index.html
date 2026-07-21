@@ -153,10 +153,10 @@
             },
             {
                 "@type": "Question",
-                "name": "Como funciona o scoring de risco de terceiros?",
+                "name": "Como funciona o tiering?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "O scoring de risco classifica cada fornecedor com base em critérios como: tipo de dados acessados, criticidade do serviço, maturidade de segurança, histórico de incidentes, certificações e compliance regulatório. Cada fornecedor recebe uma pontuação que determina o nível de monitoramento e as ações de mitigação necessárias."
+                    "text": "Fornecedor é classificado por (a) criticidade da função (interrompe operação?), (b) sensibilidade de dado (LGPD-crítico?), (c) acesso ao ambiente. Tier 1 = due diligence completa + rating contínuo. Tier 3 = questionário simplificado + revalidação bianual."
                 }
             },
             {
@@ -165,6 +165,30 @@
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "Sim. Nosso programa de TPRM é estruturado para atender os requisitos da LGPD relativos a operadores de dados, incluindo cláusulas contratuais de proteção de dados, avaliação de impacto, registro de atividades de tratamento por terceiros e mecanismos de resposta a incidentes envolvendo fornecedores."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Vocês trocam nossa ferramenta atual de rating (BitSight, SecurityScorecard)?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. Somos agnósticos — se você já paga por rating, integramos ao seu processo. Se ainda não usa, ajudamos a escolher baseado no perfil do parque de fornecedores."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Cobrem cláusulas contratuais em jurisdições internacionais (EU/US)?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim — biblioteca inclui base LGPD + GDPR SCC + DORA (para fornecedores de serviço financeiro europeu). Revisão final com jurídico do cliente sempre; nós entregamos template técnico."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que acontece se o fornecedor recusar auditoria?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Depende do tier e do contrato. Para Tier 1, right-to-audit é cláusula pétrea — recusa vira gatilho de rescisão ou de compensating control. Para Tier 3, self-attestation basta."
                 }
             }
         ]
@@ -194,6 +218,10 @@
         /* PAGE-SPECIFIC STYLES */
         /* Unique overrides only */
     </style>
+    <!-- SCHEMA-SERVICE-V1 -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Service","name":"Gestao de Terceiros","provider":{"@type":"Organization","name":"Inteligência Brasil"},"areaServed":"BR","serviceType":"Third-Party Risk Management","description":"Framework de TPRM baseado em ISO 27036, NIST SP 800-161r1 e DORA: tiering, due diligence tecnica, contratos com clausula auditavel, monitoramento continuo de rating externo e resposta a incidente em cascata para cadeia de fornecedores criticos."}
+    </script>
 </head>
 
 <body>
@@ -310,6 +338,33 @@
             </div>
         </section>
 
+        <!-- Audience Section -->
+        <section class="audience">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Para quem é Gestão de Terceiros</h2>
+                    <p class="section-subtitle">Empresas com cadeia crítica de fornecedores que precisam de due diligence cyber padronizada e contínua.</p>
+                </div>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+                        <h3>CISO de banco/fintech com 200+ fornecedores críticos</h3>
+                        <p>BCB 6/2020, Res. 4.658, DORA transfronteiriço — precisa evidência de tiering de fornecedores + reavaliação anual + monitoramento contínuo de postura.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+                        <h3>Head de Compras que quer padronizar due diligence cyber</h3>
+                        <p>Cada compra hoje é reinvenção. Precisa checklist técnico + questionário padronizado (SIG/CAIQ/VSAQ) + integração ao workflow de contratação.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
+                        <h3>DPO de empresa com muitos operadores LGPD</h3>
+                        <p>LGPD Art. 39-42 responsabiliza controlador por operador; precisa contrato + auditoria + notificação de incidente em cascata.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Problem Section -->
         <section class="problem">
             <div class="container">
@@ -386,6 +441,57 @@
                             <li>Direito de auditoria e inspeção</li>
                             <li>Adequação à LGPD e normas setoriais</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Benefícios para sua gestão de fornecedores</h2>
+                    <p class="section-subtitle">Trilha auditável e monitoramento contínuo, não planilha estática.</p>
+                </div>
+                <div class="benefits-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-sm)">
+                    <ul class="service-list">
+                        <li>Tiering objetivo por criticidade (não "importante" vs "não-importante")</li>
+                        <li>Questionário TPRM reutilizável — cada fornecedor responde uma vez por ano</li>
+                        <li>Rating externo contínuo (não snapshot anual)</li>
+                        <li>Trilha auditável para BCB/ANPD/DORA — resposta a inspeção em minutos</li>
+                    </ul>
+                    <ul class="service-list">
+                        <li>Cláusulas contratuais reutilizáveis (biblioteca ISO 27036)</li>
+                        <li>Notificação em cascata testada em tabletop</li>
+                        <li>Redução de fornecedores fonte-única em posições críticas</li>
+                        <li>Downgrade de fornecedor com evidência — não decisão emocional</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Differentiators Section -->
+        <section class="differentiators">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Por que Inteligência Brasil em TPRM</h2>
+                    <p class="section-subtitle">O que diferencia nossa entrega em gestão de terceiros.</p>
+                </div>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <h3>Framework baseado em ISO 27036 + NIST SP 800-161r1 + DORA</h3>
+                        <p>Não reinventamos processo; herdamos vocabulário público que fornecedor internacional já entende — reduz atrito e retrabalho.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                        <h3>Rating contínuo integrado — não snapshot em Excel</h3>
+                        <p>BitSight/SecurityScorecard/Panorays-agnostic. Você escolhe (ou usamos o seu existente); tratamento de exceção fica documentado.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                        <h3>Cláusulas contratuais prontas + revisão jurídica coordenada</h3>
+                        <p>Biblioteca de cláusulas técnicas (right-to-audit, notification-of-breach, sub-processor-approval) revisadas com jurídico — zero briga com procurement na próxima renovação.</p>
                     </div>
                 </div>
             </div>
@@ -554,14 +660,14 @@
 
                 <div class="faq-grid">
                     <div class="faq-item fade-in">
-                        <button class="faq-question">
+                        <button class="faq-question" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">
                             <span>O que é gestão de riscos de terceiros?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
                             <div class="faq-answer-inner">
                                 Gestão de Riscos de Terceiros (TPRM - <em>Third-Party Risk Management</em>) é o processo de <strong>identificar, avaliar e mitigar riscos</strong> associados a fornecedores, parceiros e prestadores de serviço que têm acesso a dados, sistemas ou processos da sua empresa.
                                 <br><br>
@@ -571,14 +677,14 @@
                     </div>
 
                     <div class="faq-item fade-in delay-1">
-                        <button class="faq-question">
+                        <button class="faq-question" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
                             <span>Por que preciso avaliar a segurança dos meus fornecedores?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
                             <div class="faq-answer-inner">
                                 Os números mostram por que a avaliação de fornecedores é essencial:
                                 <br><br>
@@ -592,36 +698,31 @@
                     </div>
 
                     <div class="faq-item fade-in delay-2">
-                        <button class="faq-question">
-                            <span>Como funciona o scoring de risco de terceiros?</span>
+                        <button class="faq-question" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
+                            <span>Como funciona o tiering?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
                             <div class="faq-answer-inner">
-                                O scoring de risco classifica cada fornecedor com base em múltiplos critérios:
+                                Fornecedor é classificado por <strong>(a) criticidade da função</strong> (interrompe operação?), <strong>(b) sensibilidade de dado</strong> (LGPD-crítico?), <strong>(c) acesso ao ambiente</strong>.
                                 <br><br>
-                                <strong>Tipo de dados acessados:</strong> Dados pessoais, financeiros, estratégicos ou operacionais.<br>
-                                <strong>Criticidade do serviço:</strong> Impacto na operação caso o fornecedor seja comprometido.<br>
-                                <strong>Maturidade de segurança:</strong> Políticas, controles, certificações (ISO 27001, SOC 2, etc.).<br>
-                                <strong>Histórico de incidentes:</strong> Ocorrências passadas de vazamentos ou violações.
-                                <br><br>
-                                Cada fornecedor recebe uma pontuação (Crítico, Alto, Médio, Baixo) que determina a frequência de reavaliação e as ações de mitigação necessárias.
+                                Tier 1 = due diligence completa + rating contínuo. Tier 3 = questionário simplificado + revalidação bianual.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item fade-in delay-3">
-                        <button class="faq-question">
+                        <button class="faq-question" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">
                             <span>O programa de TPRM atende requisitos da LGPD?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
                             <div class="faq-answer-inner">
                                 Sim. Nosso programa de TPRM é <strong>estruturado para atender plenamente os requisitos da LGPD</strong> relativos a operadores e suboperadores de dados:
                                 <br><br>
@@ -632,6 +733,81 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="faq-item fade-in">
+                        <button class="faq-question" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">
+                            <span>Vocês trocam nossa ferramenta atual de rating (BitSight, SecurityScorecard)?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
+                            <div class="faq-answer-inner">
+                                <strong>Não.</strong> Somos agnósticos — se você já paga por rating, integramos ao seu processo. Se ainda não usa, ajudamos a escolher baseado no perfil do parque de fornecedores.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in delay-1">
+                        <button class="faq-question" id="faq-q-6" aria-expanded="false" aria-controls="faq-a-6">
+                            <span>Cobrem cláusulas contratuais em jurisdições internacionais (EU/US)?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer" id="faq-a-6" role="region" aria-labelledby="faq-q-6">
+                            <div class="faq-answer-inner">
+                                <strong>Sim</strong> — biblioteca inclui base LGPD + GDPR SCC + DORA (para fornecedores de serviço financeiro europeu). Revisão final com jurídico do cliente sempre; nós entregamos template técnico.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in delay-2">
+                        <button class="faq-question" id="faq-q-7" aria-expanded="false" aria-controls="faq-a-7">
+                            <span>O que acontece se o fornecedor recusar auditoria?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer" id="faq-a-7" role="region" aria-labelledby="faq-q-7">
+                            <div class="faq-answer-inner">
+                                Depende do tier e do contrato. Para Tier 1, right-to-audit é cláusula pétrea — recusa vira gatilho de rescisão ou de compensating control (segregação de dados, log adicional). Para Tier 3, self-attestation basta.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Links Section -->
+        <section class="related-links">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Aprofunde-se em gestão de terceiros</h2>
+                    <p class="section-subtitle">Artigos técnicos do blog sobre TPRM e supply chain security.</p>
+                </div>
+                <div class="services-grid">
+                    <a class="service-card" href="../../blog/tprm-gestao-risco-terceiros/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                        <h3>TPRM — Gestão de Risco de Terceiros na prática</h3>
+                        <p>Framework completo de tiering, due diligence e monitoramento contínuo de fornecedores.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/supply-chain-security-cadeia-suprimentos/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="12" cy="12" r="10"></circle><path d="M9 12l2 2 4-4"></path></svg></div>
+                        <h3>Supply Chain Security — cadeia de suprimentos de software</h3>
+                        <p>Do SBOM ao SLSA/Sigstore: como reduzir risco de fornecedor de software crítico.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/dora-ue-cadeias-fornecedores-brasil/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7-5.4-4.7 7.1-.6z"></path></svg></div>
+                        <h3>DORA UE — cadeias de fornecedores e impacto no Brasil</h3>
+                        <p>Como regulação europeia de resiliência operacional financeira afeta fornecedores brasileiros de bancos EU.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
                 </div>
             </div>
         </section>

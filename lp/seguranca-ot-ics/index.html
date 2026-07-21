@@ -153,18 +153,42 @@
             },
             {
                 "@type": "Question",
-                "name": "O assessment de OT causa parada na operação?",
+                "name": "Vocês trabalham em ambientes de produção sem janela de parada?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Não. Nosso assessment utiliza técnicas passivas e não intrusivas, como análise de tráfego de rede espelhado (SPAN/TAP), inventário passivo de ativos e revisão de configurações. Não realizamos varreduras ativas ou testes que possam impactar a disponibilidade dos sistemas industriais em produção."
+                    "text": "Sim — a fase de descoberta é 100% passiva (TAP/SPAN, sem ativo). Coleta ativa só em janela negociada, com CLP em modo test/backup validado."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Quais frameworks e normas de segurança OT vocês seguem?",
+                "name": "Quais normas e frameworks de segurança OT vocês seguem?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Trabalhamos com os principais frameworks e normas do setor: IEC 62443 (segurança de automação industrial), NIST SP 800-82 (Guide to ICS Security), NERC CIP (infraestrutura elétrica), modelo Purdue/ISA-95 para arquitetura de rede e MITRE ATT&CK for ICS para mapeamento de ameaças."
+                    "text": "IEC 62443 (2-1, 3-3, 4-1), NIST SP 800-82r3, NERC CIP para setor elétrico, ONS RES-964 no Brasil. Se você opera saneamento, ANA + roteiro CGE."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Vocês vendem SCADA/OT-IDS ou são agnósticos?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Agnósticos. Trabalhamos com Nozomi, Claroty, Dragos, Tenable.ot. Se você não tem nenhum, ajudamos a escolher baseado no seu parque — mas quem compra e opera é o cliente."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como funciona o assessment em legados fim-de-vida (Win XP/Server 2003)?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Mapeamos, documentamos risco, propomos compensating controls (segmentação, allow-list, jump-server) — porque trocar CLP com Windows embutido custa milhões de reais e paralisa produção. Segurança pragmática, não perfeccionista."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Fazem exercício de tabletop OT com o time de automação e IT juntos?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim — é diferencial obrigatório. Rodamos cenário OT (ex: ransomware em EWS engineering) com automação, IT e operação na sala — quem for parar linha decide na hora, não em reunião."
                 }
             }
         ]
@@ -194,6 +218,10 @@
         /* PAGE-SPECIFIC STYLES */
         /* Unique overrides only */
     </style>
+    <!-- SCHEMA-SERVICE-V1 -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Service","name":"Seguranca OT/ICS","provider":{"@type":"Organization","name":"Inteligência Brasil"},"areaServed":"BR","serviceType":"Industrial Control Systems Security","description":"Assessment, segmentacao IT/OT e resposta a incidente em ambientes SCADA/DCS/CLP com base em IEC 62443, NIST SP 800-82 e ONS RES-964. Descoberta passiva (TAP/SPAN), sem parada de producao, agnostica a plataforma OT-IDS (Nozomi/Claroty/Dragos)."}
+    </script>
 </head>
 
 <body>
@@ -310,6 +338,33 @@
             </div>
         </section>
 
+        <!-- Audience Section -->
+        <section class="audience">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Para quem é Segurança OT/ICS</h2>
+                    <p class="section-subtitle">Operações industriais que precisam proteger ambientes de tecnologia operacional sem paralisar produção.</p>
+                </div>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+                        <h3>CISO de operadora elétrica ou saneamento</h3>
+                        <p>Regulação ANEEL/ONS e ANA exige evidência de segregação IT/OT, controle de acesso remoto e resposta a incidente em SCADA — sem parar geração/distribuição.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+                        <h3>Gerente de manufatura discreta ou processos contínuos</h3>
+                        <p>MES/SCADA legados rodam em Windows fim-de-vida; parada não-programada custa turno inteiro — não pode aceitar patch/reboot durante campanha.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></div>
+                        <h3>Head de Segurança de operadora de oil & gas ou mineração</h3>
+                        <p>TSA / NIS2 / CIP-014 pressionam maturidade OT; equipe de segurança sabe IT mas não fala com automação — precisa de tradutor técnico.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Problem Section -->
         <section class="problem">
             <div class="container">
@@ -386,6 +441,57 @@
                             <li>Resposta a incidentes para ambientes ICS</li>
                             <li>Threat intelligence específica para OT</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Benefícios para sua operação industrial</h2>
+                    <p class="section-subtitle">Resultados mensuráveis sem interromper produção.</p>
+                </div>
+                <div class="benefits-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-sm)">
+                    <ul class="service-list">
+                        <li>Inventário completo de ativos OT (nível 0-3 Purdue) sem varredura ativa que derrube CLP</li>
+                        <li>Segmentação IT/OT auditável — não firewall genérico com 200 regras "any-any"</li>
+                        <li>Controle de acesso remoto via jump-server hardened (jamais RDP direto no CCM)</li>
+                        <li>Detecção passiva via TAP/SPAN — zero impacto em tráfego OT existente</li>
+                    </ul>
+                    <ul class="service-list">
+                        <li>Playbook de resposta a incidente OT (contenção sem parar linha)</li>
+                        <li>Aderência a IEC 62443, NIST SP 800-82, ONS RES-964 (setor elétrico)</li>
+                        <li>Baseline documentado de firmwares/versões para próximo audit</li>
+                        <li>Redução de superfície de ataque em legados sem substituir CLP</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Differentiators Section -->
+        <section class="differentiators">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Por que Inteligência Brasil em OT/ICS</h2>
+                    <p class="section-subtitle">O que diferencia nossa entrega em ambientes industriais.</p>
+                </div>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <h3>Consultores com background em automação, não só IT</h3>
+                        <p>Quem conduz o assessment fala CLP/DCS/RTU e IT/redes — não é auditor genérico rodando checklist em ambiente que nunca viu.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+                        <h3>Metodologia baseada em IEC 62443 zone/conduit</h3>
+                        <p>Todo escopo mapeia zonas de segurança + conduits antes de propor controle — cliente sabe onde cada regra opera e por quê.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                        <h3>Detecção passiva com Nozomi/Claroty/Dragos-agnostic</h3>
+                        <p>Trabalhamos com a plataforma OT-IDS que você já tem (ou ajudamos a escolher) — não vendemos tool próprio embutido no consultoria.</p>
                     </div>
                 </div>
             </div>
@@ -554,14 +660,14 @@
 
                 <div class="faq-grid">
                     <div class="faq-item fade-in">
-                        <button class="faq-question">
+                        <button class="faq-question" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">
                             <span>Qual a diferença entre segurança de TI e segurança OT?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
                             <div class="faq-answer-inner">
                                 A segurança de TI foca em <strong>confidencialidade, integridade e disponibilidade</strong> de dados e sistemas corporativos. Já a segurança OT prioriza a <strong>disponibilidade e a integridade de processos físicos industriais</strong> — como linhas de produção, sistemas SCADA e PLCs.
                                 <br><br>
@@ -571,14 +677,14 @@
                     </div>
 
                     <div class="faq-item fade-in delay-1">
-                        <button class="faq-question">
+                        <button class="faq-question" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
                             <span>Como proteger sistemas SCADA e PLCs legados?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
                             <div class="faq-answer-inner">
                                 Sistemas legados que não podem receber patches são protegidos com estratégias de <strong>defesa em profundidade</strong>:
                                 <br><br>
@@ -592,47 +698,117 @@
                     </div>
 
                     <div class="faq-item fade-in delay-2">
-                        <button class="faq-question">
-                            <span>O assessment de OT causa parada na operação?</span>
+                        <button class="faq-question" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
+                            <span>Vocês trabalham em ambientes de produção sem janela de parada?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
                             <div class="faq-answer-inner">
-                                <strong>Não.</strong> Nosso assessment utiliza exclusivamente técnicas <strong>passivas e não intrusivas</strong>:
+                                <strong>Sim</strong> — a fase de descoberta é 100% passiva (TAP/SPAN, sem ativo). Coleta ativa só em janela negociada, com CLP em modo test/backup validado.
                                 <br><br>
                                 <strong>Análise de tráfego espelhado</strong> - via SPAN port ou network TAP, sem interferir no fluxo<br>
                                 <strong>Inventário passivo</strong> - identificação de ativos pela análise de comunicações existentes<br>
                                 <strong>Revisão de configurações</strong> - análise offline de configurações exportadas<br>
                                 <strong>Entrevistas técnicas</strong> - conversas com equipes de automação e operação
-                                <br><br>
-                                Nunca realizamos varreduras ativas ou testes que possam impactar a disponibilidade dos sistemas industriais em produção.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item fade-in delay-3">
-                        <button class="faq-question">
-                            <span>Quais frameworks e normas de segurança OT vocês seguem?</span>
+                        <button class="faq-question" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">
+                            <span>Quais normas e frameworks de segurança OT vocês seguem?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
                             <div class="faq-answer-inner">
-                                Trabalhamos com os principais frameworks e normas reconhecidos pelo setor:
-                                <br><br>
-                                <strong>IEC 62443</strong> - norma internacional para segurança de automação industrial e sistemas de controle<br>
-                                <strong>NIST SP 800-82</strong> - Guide to Industrial Control Systems Security<br>
-                                <strong>NERC CIP</strong> - padrões para proteção de infraestrutura elétrica crítica<br>
-                                <strong>Modelo Purdue/ISA-95</strong> - referência para arquitetura e segmentação de rede industrial<br>
-                                <strong>MITRE ATT&CK for ICS</strong> - framework para mapeamento de táticas e técnicas de ataque a ambientes industriais
+                                <strong>IEC 62443</strong> (2-1, 3-3, 4-1) - norma internacional para segurança de automação industrial e sistemas de controle<br>
+                                <strong>NIST SP 800-82r3</strong> - Guide to Industrial Control Systems Security<br>
+                                <strong>NERC CIP</strong> - padrões para proteção de infraestrutura elétrica crítica, <strong>ONS RES-964</strong> no Brasil<br>
+                                Se você opera saneamento, <strong>ANA + roteiro CGE</strong>.
                             </div>
                         </div>
                     </div>
+
+                    <div class="faq-item fade-in">
+                        <button class="faq-question" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">
+                            <span>Vocês vendem SCADA/OT-IDS ou são agnósticos?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
+                            <div class="faq-answer-inner">
+                                <strong>Agnósticos.</strong> Trabalhamos com Nozomi, Claroty, Dragos, Tenable.ot. Se você não tem nenhum, ajudamos a escolher baseado no seu parque — mas quem compra e opera é o cliente.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in delay-1">
+                        <button class="faq-question" id="faq-q-6" aria-expanded="false" aria-controls="faq-a-6">
+                            <span>Como funciona o assessment em legados fim-de-vida (Win XP/Server 2003)?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer" id="faq-a-6" role="region" aria-labelledby="faq-q-6">
+                            <div class="faq-answer-inner">
+                                Mapeamos, documentamos risco, propomos <strong>compensating controls</strong> (segmentação, allow-list, jump-server) — porque trocar CLP com Windows embutido custa milhões de reais e paralisa produção. Segurança pragmática, não perfeccionista.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in delay-2">
+                        <button class="faq-question" id="faq-q-7" aria-expanded="false" aria-controls="faq-a-7">
+                            <span>Fazem exercício de tabletop OT com o time de automação e IT juntos?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer" id="faq-a-7" role="region" aria-labelledby="faq-q-7">
+                            <div class="faq-answer-inner">
+                                <strong>Sim</strong> — é diferencial obrigatório. Rodamos cenário OT (ex: ransomware em EWS engineering) com automação, IT e operação na sala — quem for parar linha decide na hora, não em reunião.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Links Section -->
+        <section class="related-links">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Aprofunde-se em segurança OT/ICS</h2>
+                    <p class="section-subtitle">Artigos técnicos do blog sobre proteção de ambientes industriais.</p>
+                </div>
+                <div class="services-grid">
+                    <a class="service-card" href="../../blog/seguranca-ot-ics-scada/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                        <h3>Segurança OT/ICS e SCADA — guia completo</h3>
+                        <p>Fundamentos IEC 62443, arquitetura Purdue e controles em ambientes industriais.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/jaguar-land-rover-ataque-ot-licoes-ciso/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="12" cy="12" r="10"></circle><path d="M9 12l2 2 4-4"></path></svg></div>
+                        <h3>Jaguar Land Rover — ataque OT e lições para o CISO</h3>
+                        <p>Case study de incidente OT em manufatura discreta com £1,9bi de impacto e o que aprender.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/salt-typhoon-espionagem-telecom-infraestrutura-critica/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.8-6.2 3.8 1.6-7-5.4-4.7 7.1-.6z"></path></svg></div>
+                        <h3>Salt Typhoon — espionagem em telecom e infraestrutura crítica</h3>
+                        <p>Grupo estatal com foco em infraestrutura crítica e o que operadores no Brasil precisam checar.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
                 </div>
             </div>
         </section>

@@ -142,34 +142,42 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Qual a diferença entre Cloud Security Assessment e CSPM?",
+                "name": "Qual a diferenca entre CSPM, CWPP, CIEM e CNAPP?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "O Cloud Security Assessment é uma avaliação pontual e aprofundada do seu ambiente cloud, identificando vulnerabilidades, misconfigurations e riscos. Já o CSPM (Cloud Security Posture Management) é uma solução contínua que monitora automaticamente a postura de segurança do seu ambiente, alertando sobre desvios em tempo real."
+                    "text": "CSPM monitora postura e configuracao da infraestrutura cloud. CWPP protege workloads (VMs, containers, serverless) em runtime. CIEM foca em direitos de identidade e acesso excessivos. CNAPP unifica os tres em uma plataforma unica."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Vocês trabalham com AWS, Azure e GCP?",
+                "name": "Voces trabalham so em AWS ou tambem Azure/GCP?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim, nossa equipe possui certificações e experiência prática nas três principais plataformas de nuvem: Amazon Web Services (AWS), Microsoft Azure e Google Cloud Platform (GCP), além de ambientes multi-cloud e híbridos."
+                    "text": "Trabalhamos em AWS, Azure e GCP com engenheiros que operaram cada plataforma em producao. Cobrimos tambem ambientes multi-cloud e hibridos com postura unificada."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Quanto tempo leva uma avaliação de segurança cloud?",
+                "name": "Como fazem cloud security assessment sem quebrar producao?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Depende do tamanho e complexidade do ambiente. Uma avaliação de segurança cloud típica leva de 5 a 15 dias úteis. Ambientes multi-cloud ou com grande número de contas podem levar de 3 a 4 semanas."
+                    "text": "O assessment utiliza acessos somente leitura (read-only) para analisar configuracoes, politicas e arquitetura via API do provider. Nao realizamos alteracoes no ambiente e nao ha risco de indisponibilidade."
                 }
             },
             {
                 "@type": "Question",
-                "name": "A avaliação pode impactar meus serviços em produção?",
+                "name": "Podem integrar controles no Terraform/CI antes do deploy?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Não. Nossa avaliação utiliza acessos somente leitura (read-only) para analisar configurações, políticas e arquitetura. Não realizamos alterações no ambiente e não há risco de indisponibilidade dos seus serviços."
+                    "text": "Sim. Nossos controles rodam via IaC gate (Checkov, tfsec) integrado ao pipeline de CI, bloqueando misconfig antes do apply."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Kubernetes security cabe no engagement ou e separado?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Kubernetes faz parte do escopo padrao quando o cliente roda EKS/AKS/GKE, cobrindo pod security standards, RBAC e admission control como parte do hardening de cloud."
                 }
             }
         ]
@@ -198,6 +206,10 @@
         /* PAGE-SPECIFIC STYLES */
         /* Unique overrides only */
     </style>
+    <!-- SCHEMA-SERVICE-V1 -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Service","name":"Seguranca em Cloud","provider":{"@type":"Organization","name":"Inteligência Brasil"},"areaServed":"BR","serviceType":"Cloud Security","description":"Avaliacao e hardening de ambientes em nuvem (AWS, Azure, GCP), incluindo configuracao de identidade, redes e dados. Identifica configuracoes inseguras que expoem a empresa a acesso nao autorizado."}
+    </script>
 </head>
 
 <body>
@@ -313,6 +325,30 @@
             </div>
         </section>
 
+        <!-- Audience Section -->
+        <section class="audience">
+            <div class="container">
+                <h2 class="section-title">Para quem é <span class="highlight">Segurança em Cloud</span></h2>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg></div>
+                        <h3>CTO com multi-cloud AWS + Azure para redundância</h3>
+                        <p>Postura de segurança divergente entre providers, IAM em silos, e nenhum inventário unificado de recursos expostos publicamente.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg></div>
+                        <h3>Head de Plataforma com Kubernetes em produção (EKS/AKS/GKE)</h3>
+                        <p>Cluster crescendo, RBAC frouxo, imagens sem scan em runtime — pod security standards e admission control ainda no backlog.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+                        <h3>CISO de empresa migrando datacenter para cloud em 12 meses</h3>
+                        <p>Time interno com skill on-prem forte, cloud fraco; landing zone precisa nascer com controles baseline (encryption, logging, network segmentation) antes das apps chegarem.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Problem Section -->
         <section class="problem">
             <div class="container">
@@ -350,9 +386,9 @@
         <!-- Services Section -->
         <section class="services" id="servicos">
             <div class="container">
-                <h2 class="section-title">Soluções de <span class="highlight">Cloud Security</span></h2>
+                <h2 class="section-title">Entregáveis de <span class="highlight">Segurança em Cloud</span></h2>
                 <p class="section-subtitle">
-                    Proteja seus ambientes cloud com serviços especializados para cada necessidade
+                    CSPM baseline, IAM review, landing zone spec, Kubernetes hardening e runbook de resposta — artefatos concretos, não relatório genérico
                 </p>
 
                 <div class="services-grid">
@@ -390,6 +426,51 @@
                             <li>Análise de segmentação e rede</li>
                             <li>Recomendações de Well-Architected</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits">
+            <div class="container">
+                <h2 class="section-title">Resultados de <span class="highlight">Segurança em Cloud</span></h2>
+                <div class="benefits-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-sm)">
+                    <ul class="service-list">
+                        <li>Postura CSPM unificada AWS + Azure + GCP — findings priorizados por blast radius</li>
+                        <li>Landing zone baseline com encryption, logging e network segmentation prontos</li>
+                        <li>IAM least-privilege modelado por workload (não pastebin de policies)</li>
+                        <li>Kubernetes admission control (Kyverno/OPA Gatekeeper) com policies right-sized ao cluster</li>
+                    </ul>
+                    <ul class="service-list">
+                        <li>Detection cobrindo cloud control plane (CloudTrail, Azure Activity, Audit Logs GCP)</li>
+                        <li>Cost de segurança visível — dashboard de gasto por controle, não guerra fiscal com FinOps</li>
+                        <li>Compliance-ready: mapeamento para CIS Benchmark, PCI-DSS, ISO 27017/27018</li>
+                        <li>Runbook de resposta a incidente cloud (S3 exposto, IAM comprometido, container escape)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Differentiators Section -->
+        <section class="differentiators">
+            <div class="container">
+                <h2 class="section-title">Por que <span class="highlight">Segurança em Cloud com a Inteligência Brasil</span></h2>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg></div>
+                        <h3>Multi-cloud real — não somos AWS-only</h3>
+                        <p>Muito consultor cloud é "AWS-only com Azure na palestra". Executamos em AWS + Azure + GCP com engenheiros que operaram cada um em produção — não copy-paste de post do blog.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg></div>
+                        <h3>Kubernetes + IaC (Terraform/Pulumi) na mesma esteira</h3>
+                        <p>Cloud não é só console — é Terraform, Helm, ArgoCD. Nossos controles rodam via IaC gate (Checkov, tfsec) para bloquear misconfig antes do apply — não só CSPM post-facto.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                        <h3>Landing zone modular — não pacote monolitico proprietário</h3>
+                        <p>Não vendemos "nossa landing zone secreta". Adaptamos Control Tower / Landing Zone Accelerator / Cloud Adoption Framework aos padrões do cliente. Zero lock-in em ferramentas nossas.</p>
                     </div>
                 </div>
             </div>
@@ -562,74 +643,106 @@
 
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Qual a diferença entre Cloud Security Assessment e CSPM?</span>
+                        <button class="faq-question" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">
+                            <span>Qual a diferença entre CSPM, CWPP, CIEM e CNAPP?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
                             <div class="faq-answer-inner">
-                                O <strong>Cloud Security Assessment</strong> é uma avaliação pontual e aprofundada do seu ambiente cloud,
-                                identificando vulnerabilidades, misconfigurations e riscos com um relatório detalhado.
-                                <br><br>
-                                Já o <strong>CSPM (Cloud Security Posture Management)</strong> é uma solução contínua que monitora
-                                automaticamente a postura de segurança do seu ambiente, alertando sobre desvios em tempo real.
+                                <strong>CSPM</strong> monitora postura e configuração da infraestrutura cloud. <strong>CWPP</strong> protege workloads (VMs, containers, serverless) em runtime. <strong>CIEM</strong> foca em direitos de identidade e acesso excessivos. <strong>CNAPP</strong> unifica os três em uma plataforma única. Recomendamos a família certa conforme a maturidade e stack do seu ambiente.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Vocês trabalham com AWS, Azure e GCP?</span>
+                        <button class="faq-question" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
+                            <span>Vocês trabalham só em AWS ou também Azure/GCP?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
                             <div class="faq-answer-inner">
-                                Sim, nossa equipe possui certificações e experiência prática nas três principais plataformas
-                                de nuvem: <strong>Amazon Web Services (AWS)</strong>, <strong>Microsoft Azure</strong> e
-                                <strong>Google Cloud Platform (GCP)</strong>, além de ambientes multi-cloud e híbridos.
+                                Trabalhamos em AWS, Azure e GCP com engenheiros que operaram cada plataforma em produção — não copy-paste de post do blog. Cobrimos também ambientes multi-cloud e híbridos com postura unificada.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Quanto tempo leva uma avaliação de segurança cloud?</span>
+                        <button class="faq-question" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
+                            <span>Como fazem cloud security assessment sem quebrar produção?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
                             <div class="faq-answer-inner">
-                                Depende do tamanho e complexidade do ambiente. Uma avaliação de segurança cloud típica leva
-                                de <strong>5 a 15 dias úteis</strong>. Ambientes multi-cloud ou com grande número de contas
-                                podem levar de 3 a 4 semanas. Fornecemos cronograma detalhado na proposta.
+                                O assessment utiliza acessos somente leitura (read-only) para analisar configurações, políticas e arquitetura via API do provider. Não realizamos alterações no ambiente e não há risco de indisponibilidade dos seus serviços.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>A avaliação pode impactar meus serviços em produção?</span>
+                        <button class="faq-question" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">
+                            <span>Podem integrar controles no Terraform/CI antes do deploy?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
                             <div class="faq-answer-inner">
-                                <strong>Não.</strong> Nossa avaliação utiliza acessos somente leitura (read-only) para analisar
-                                configurações, políticas e arquitetura. Não realizamos alterações no ambiente e não há risco
-                                de indisponibilidade dos seus serviços.
+                                Sim. Nossos controles rodam via IaC gate (Checkov, tfsec) integrado ao pipeline de CI, bloqueando misconfig antes do apply — não apenas CSPM post-facto depois que o recurso já subiu.
                             </div>
                         </div>
                     </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">
+                            <span>Kubernetes security cabe no engagement ou é separado?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
+                            <div class="faq-answer-inner">
+                                Kubernetes faz parte do escopo padrão quando o cliente roda EKS/AKS/GKE — cobrimos pod security standards, RBAC e admission control (Kyverno/OPA Gatekeeper) como parte do hardening de cloud, sem cobrança à parte para clusters já mapeados no assessment.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Links Section -->
+        <section class="related-links">
+            <div class="container">
+                <h2 class="section-title">Conteúdo <span class="highlight">relacionado</span></h2>
+                <div class="problem-grid">
+                    <a class="service-card" href="../../blog/seguranca-cloud-aws-azure-gcp/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg></div>
+                        <h3>Segurança em cloud — AWS, Azure e GCP</h3>
+                        <p>Panorama comparativo dos controles nativos por provider e onde eles cobrem menos que parece.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/kubernetes-pod-security-standards-kyverno/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg></div>
+                        <h3>Kubernetes Pod Security Standards com Kyverno</h3>
+                        <p>Do PSP deprecated ao PSS + admission control moderno na prática.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/cspm-dspm-sspm-posture-management/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+                        <h3>CSPM, DSPM e SSPM — posture management explicado</h3>
+                        <p>Cada família de posture management, o que cobre, e por que uma sozinha nunca basta.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -786,7 +899,7 @@
                 email: document.getElementById('email').value.trim(),
                 phone: document.getElementById('telefone').value.replace(/\D/g, ''),
                 empresa: document.getElementById('empresa').value.trim(),
-                serviço: document.getElementById('serviço').value,
+                serviço: document.getElementById('servico').value,
                 message: document.getElementById('mensagem').value.trim(),
                 terms: 'Aceito',
                 origem: 'Landing Page Cloud Security',

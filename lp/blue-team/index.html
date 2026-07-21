@@ -142,34 +142,42 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Qual a diferenca entre Blue Team e Red Team?",
+                "name": "Qual a diferença entre Blue Team e SOC-as-a-Service tradicional?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Red Team simula ataques reais para testar as defesas da organização. Blue Team e responsavel pela defesa: monitoramento contínuo, detecção de ameaças, resposta a incidentes e fortalecimento da postura de segurança. Ambos são complementares para uma estratégia robusta de ciberseguranca."
+                    "text": "SOC-as-a-Service tradicional entrega monitoramento e triagem de alertas gerados pela ferramenta do fornecedor, geralmente caixa-preta. Nosso Blue Team as a Service inclui isso, mas soma detection engineering contínuo com regras Sigma/YARA/KQL versionadas no seu Git, threat hunting mensal com hipótese guiada e playbooks de resposta testados em tabletop, não apenas triagem passiva de alertas prontos."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Minha empresa precisa de um SOC 24/7?",
+                "name": "Vocês usam SIEM/EDR próprios ou o meu?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Ataques ciberneticos acontecem a qualquer hora. Um SOC 24/7 garante monitoramento contínuo e resposta imediata a incidentes. Para empresas que não justificam um SOC interno, oferecemos SOC como serviço (SOCaaS) com custo acessivel e cobertura completa."
+                    "text": "Trabalhamos com o SIEM/EDR/XDR que sua empresa já usa, sem exigir migração para ferramenta própria. Isso evita lock-in: se você sair do contrato, fica com o ambiente configurado e as regras de detecção que escrevemos, sem depender de licença nossa."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Quanto tempo leva para implementar as soluções de defesa?",
+                "name": "Como funciona a cobertura 24×7 no modelo híbrido?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Depende do escopo e maturidade atual. Um projeto de hardening pode ser implementado em 2 a 4 semanas. A implantacao completa de SOC/SIEM leva de 4 a 8 semanas. Iniciamos com quick wins para proteção imediata enquanto construimos a solução definitiva."
+                    "text": "Cobertura contínua para triagem e resposta a alertas críticos fora do horário comercial, com escalonamento L1/L2/L3 definido em playbook. O modelo é híbrido porque o time interno do cliente mantém visibilidade e pode assumir qualquer etapa: não terceirizamos a decisão final, só a operação 24×7."
                 }
             },
             {
                 "@type": "Question",
-                "name": "As soluções de Blue Team são compativeis com minha infraestrutura atual?",
+                "name": "As regras de detecção ficam com quem se sair do contrato?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim. Trabalhamos com ambientes heterogeneos: on-premises, cloud (AWS, Azure, GCP) e hibridos. Nossas soluções se integram com as ferramentas ja existentes na sua infraestrutura, maximizando o retorno sobre investimentos anteriores em segurança."
+                    "text": "Ficam com você. Toda regra Sigma/YARA/KQL é escrita e versionada no repositório Git do cliente desde o primeiro dia. Não existe caixa-preta nem dependência de licença nossa para continuar rodando o que já foi construído."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como medem MTTD/MTTR mensalmente?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Reportamos MTTD (tempo médio de detecção) e MTTR (tempo médio de resposta) por categoria de incidente a cada mês, comparando com a linha de base definida no baseline inicial. A meta contratual é redução de 50%+ nas TTPs prioritárias ao seu setor dentro dos primeiros dois trimestres."
                 }
             }
         ]
@@ -199,6 +207,10 @@
         /* PAGE-SPECIFIC STYLES */
         /* Unique overrides only */
     </style>
+    <!-- SCHEMA-SERVICE-V1 -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Service","name":"Blue Team","provider":{"@type":"Organization","name":"Inteligência Brasil"},"areaServed":"BR","serviceType":"Blue Team as a Service","description":"Operacao continua de defesa cibernetica com monitoramento, deteccao e resposta a incidentes em tempo real. Fortalece a postura defensiva da empresa com playbooks, threat hunting e SOC especializado."}
+    </script>
 </head>
 
 <body>
@@ -314,6 +326,33 @@
             </div>
         </section>
 
+        <!-- Audience Section -->
+        <section class="audience">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Para quem é o <span class="highlight">Blue Team as a Service</span></h2>
+                    <p class="section-subtitle">Times de segurança que precisam de defesa contínua sem contratar um SOC inteiro</p>
+                </div>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="9" cy="7" r="4"></circle><path d="M17 11a4 4 0 1 0 0-8"></path><path d="M1 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"></path><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path></svg></div>
+                        <h3>Head de SI de empresa média que não terceiriza SOC</h3>
+                        <p>Time interno pequeno (2-5 pessoas) que precisa de deep-defense sem contratar MSSP full-scope.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></div>
+                        <h3>CISO de holding com múltiplas BUs e SIEM centralizado</h3>
+                        <p>Precisa de detection engineering compartilhado + threat hunting periódico sem crescer headcount.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></div>
+                        <h3>Empresa de setor regulado (financeiro/saúde) com pressão auditorial</h3>
+                        <p>BCB/ANPD/ANS pedem evidência de operação continuada de detecção — precisa de trilha auditável.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Problem Section -->
         <section class="problem">
             <div class="container">
@@ -325,23 +364,23 @@
                 <div class="problem-grid">
                     <div class="problem-card">
                         <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></div>
-                        <h3>Falta de Visibilidade</h3>
-                        <p>Sem monitoramento centralizado, atividades maliciosas acontecem sem que ninguem perceba. Logs não analisados escondem evidências de comprometimento.</p>
+                        <h3>SIEM captura logs, mas ninguém escreve regras</h3>
+                        <p>Ferramenta liga, dados fluem, mas sem detection engineering ativo o SIEM vira ruído sem sinal — alertas genéricos que ninguém tria.</p>
                     </div>
                     <div class="problem-card">
                         <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
-                        <h3>Resposta Lenta a Incidentes</h3>
-                        <p>Sem processos definidos, a equipe demora horas ou dias para conter um ataque. Cada minuto de atraso amplia o impacto e os prejuizos.</p>
+                        <h3>Playbook de resposta só existe em PDF</h3>
+                        <p>O EDR alerta, mas o runbook de resposta nunca foi testado. Na hora real, cada analista improvisa um processo diferente.</p>
                     </div>
                     <div class="problem-card">
                         <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
-                        <h3>Configuracoes Inseguras</h3>
-                        <p>Servidores, firewalls e endpoints com configuracoes padrão são portas abertas para atacantes. Hardening inadequado e uma das principais causas de invasoes.</p>
+                        <h3>Threat hunting é ad-hoc, sem hipótese guiada</h3>
+                        <p>Buscas pontuais sem TI relevante ao seu setor raramente encontram algo — e não deixam regra nova quando encontram.</p>
                     </div>
                     <div class="problem-card">
                         <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
-                        <h3>Ameaças Avancadas (APT)</h3>
-                        <p>Atacantes sofisticados se movem lateralmente na rede por semanas sem detecção. Ferramentas tradicionais não identificam ameaças persistentes.</p>
+                        <h3>IR de incidente médio consome o time inteiro</h3>
+                        <p>Sem playbook operável, cada incidente vira reinvenção — uma semana de trabalho para o que deveria ser um processo repetível.</p>
                     </div>
                 </div>
             </div>
@@ -357,39 +396,100 @@
 
                 <div class="services-grid">
                     <div class="service-card">
-                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-                        <h3>SOC / SIEM</h3>
-                        <p>Centro de Operações de Segurança com monitoramento 24/7 e correlacao inteligente de eventos.</p>
-                        <ul class="service-list">
-                            <li>Monitoramento contínuo 24/7/365</li>
-                            <li>Correlacao e análise de logs (SIEM)</li>
-                            <li>Alertas em tempo real priorizados</li>
-                            <li>Dashboards executivos e relatórios</li>
-                        </ul>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
-                        <h3>Hardening</h3>
-                        <p>Fortalecimento de servidores, endpoints, redes e cloud seguindo benchmarks reconhecidos.</p>
-                        <ul class="service-list">
-                            <li>Hardening baseado em CIS Benchmarks</li>
-                            <li>Revisão de políticas de acesso (IAM)</li>
-                            <li>Segmentacao de rede e Zero Trust</li>
-                            <li>Gestão de patches e vulnerabilidades</li>
-                        </ul>
-                    </div>
-
-                    <div class="service-card">
                         <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
-                        <h3>Threat Hunting</h3>
-                        <p>Caca proativa a ameaças que ja podem estar dentro do seu ambiente sem serem detectadas.</p>
+                        <h3>Detection engineering contínuo</h3>
+                        <p>Regras Sigma/YARA/KQL escritas contra TTPs relevantes ao seu setor.</p>
                         <ul class="service-list">
-                            <li>Busca proativa baseada em MITRE ATT&CK</li>
-                            <li>Análise de comportamento anomalo (UEBA)</li>
-                            <li>Investigação de indicadores de comprometimento</li>
-                            <li>Relatórios de hipoteses e descobertas</li>
+                            <li>Regras versionadas no seu repositório Git</li>
+                            <li>Cobertura mapeada em MITRE ATT&CK</li>
+                            <li>Tuning contínuo para reduzir falso positivo</li>
+                            <li>Auditável por analista L1</li>
                         </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+                        <h3>Threat hunting mensal com hipóteses</h3>
+                        <p>4 hunts/mês com report + regras novas quando encontramos.</p>
+                        <ul class="service-list">
+                            <li>Hipóteses guiadas por TI relevante ao seu setor</li>
+                            <li>Análise de comportamento anômalo (UEBA)</li>
+                            <li>Investigação de indicadores de comprometimento</li>
+                            <li>Toda descoberta vira regra de detecção nova</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                        <h3>IR playbooks operáveis (não PDF)</h3>
+                        <p>Runbooks executáveis por analista L1, com decision trees testados em tabletop.</p>
+                        <ul class="service-list">
+                            <li>Decision trees testados em exercícios tabletop</li>
+                            <li>Playbook por tipo de incidente, não genérico</li>
+                            <li>Contenção e erradicação passo a passo</li>
+                            <li>Onboarding de novo analista em 2 semanas</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                        <h3>SOC-as-a-Service 24×7 (modelo híbrido)</h3>
+                        <p>Cobertura fora do horário comercial com integração ao SIEM/EDR do cliente.</p>
+                        <ul class="service-list">
+                            <li>Monitoramento contínuo 24×7×365</li>
+                            <li>Integração nativa com SIEM/EDR/XDR existente</li>
+                            <li>Sem lock-in de ferramentas — o dado é seu</li>
+                            <li>Escalonamento L1/L2/L3 com playbook definido</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="benefits">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Benefícios para seu negócio</h2>
+                    <p class="section-subtitle">O que você ganha ao contratar Blue Team as a Service contínuo.</p>
+                </div>
+                <div class="benefits-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-sm)">
+                    <ul class="service-list">
+                        <li>MTTD reduzido em 50%+ nas TTPs de maior risco ao seu setor</li>
+                        <li>Playbooks operáveis por L1 — L3 foca em hunting</li>
+                        <li>Regras de detecção auditáveis + versionadas (não caixa preta do vendor)</li>
+                        <li>Cobertura MITRE ATT&CK medida trimestralmente</li>
+                    </ul>
+                    <ul class="service-list">
+                        <li>Backlog de detection engineering priorizado por risco de negócio</li>
+                        <li>Threat hunts mensais viram regras novas — não apenas relatórios</li>
+                        <li>Onboard de novo analista em 2 semanas (playbooks documentados)</li>
+                        <li>Trilha auditável para regulador (BCB/ANPD/ANS)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="differentiators">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Por que Inteligência Brasil</h2>
+                    <p class="section-subtitle">O que diferencia nosso Blue Team as a Service de comodities de mercado.</p>
+                </div>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                        <h3>Modelo híbrido — não somos MSSP, não somos consultoria pura</h3>
+                        <p>Trabalhamos com seu SIEM/EDR existente. Zero lock-in em tools nossos; conhecimento fica no cliente.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+                        <h3>Detection-as-code — regras versionadas no seu Git</h3>
+                        <p>Você audita cada regra Sigma/YARA/KQL. Se sair de contrato, mantém tudo funcionando sem black-box.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <h3>Purple team quarterly incluído</h3>
+                        <p>Todo trimestre exercitamos as regras contra red team (nosso ou seu) — não deixamos detecção envelhecer silenciosamente.</p>
                     </div>
                 </div>
             </div>
@@ -406,28 +506,33 @@
                 <div class="steps-grid">
                     <div class="step-item">
                         <div class="step-number">1</div>
-                        <h3>Assessment</h3>
-                        <p>Avaliamos a maturidade atual e mapeamos gaps de segurança</p>
+                        <h3>Baseline</h3>
+                        <p>Mapeamos fontes de log disponíveis, cobertura atual e TTPs prioritárias ao seu setor</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number">2</div>
-                        <h3>Planejamento</h3>
-                        <p>Definimos roadmap priorizado com quick wins e ações estrategicas</p>
+                        <h3>Detection Engineering</h3>
+                        <p>Escrevemos regras Sigma/YARA/KQL versionadas contra os gaps identificados no baseline</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number">3</div>
-                        <h3>Implementação</h3>
-                        <p>Implantamos controles, ferramentas e processos de defesa</p>
+                        <h3>Threat Hunting</h3>
+                        <p>Hunts mensais com hipótese guiada por TI — toda descoberta vira regra nova</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number">4</div>
-                        <h3>Operação</h3>
-                        <p>Monitoramento contínuo, detecção e resposta a incidentes 24/7</p>
+                        <h3>Tuning</h3>
+                        <p>Ajustamos limiares e lógica das regras para reduzir falso positivo sem perder sinal</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number">5</div>
-                        <h3>Melhoria</h3>
-                        <p>Revisão contínua de metricas, ajustes de regras e evolucao</p>
+                        <h3>Tabletop</h3>
+                        <p>Testamos os playbooks de resposta com o seu time em exercício simulado, não em teoria</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">6</div>
+                        <h3>Retrospectiva</h3>
+                        <p>Revisamos métricas de MTTD/MTTR e priorizamos o próximo ciclo de detection engineering</p>
                     </div>
                 </div>
             </div>
@@ -516,7 +621,7 @@
                                 <label class="form-label" for="servico">Interesse Principal *</label>
                                 <select id="servico" name="servico" class="form-select" required>
                                     <option value="">Selecione uma opção...</option>
-                                    <option value="SOC/SIEM">SOC / SIEM (Monitoramento 24/7)</option>
+                                    <option value="Blue Team">Blue Team as a Service</option>
                                     <option value="Hardening">Hardening de Infraestrutura</option>
                                     <option value="Threat Hunting">Threat Hunting (Caca a Ameaças)</option>
                                     <option value="Resposta Incidentes">Resposta a Incidentes</option>
@@ -559,77 +664,118 @@
 
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Qual a diferenca entre Blue Team e Red Team?</span>
+                        <button class="faq-question" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">
+                            <span>Qual a diferença entre Blue Team e SOC-as-a-Service tradicional?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
                             <div class="faq-answer-inner">
-                                <strong>Red Team</strong> simula ataques reais para testar as defesas da organização, identificando vulnerabilidades e caminhos de comprometimento.
+                                <strong>SOC-as-a-Service tradicional</strong> entrega monitoramento e triagem de alertas gerados pela ferramenta do fornecedor, geralmente caixa-preta.
                                 <br><br>
-                                <strong>Blue Team</strong> e responsavel pela defesa: monitoramento contínuo, detecção de ameaças, resposta a incidentes e fortalecimento da postura de segurança. Ambos são complementares para uma estratégia robusta de ciberseguranca.
+                                Nosso <strong>Blue Team as a Service</strong> inclui isso, mas soma detection engineering contínuo com regras Sigma/YARA/KQL versionadas no seu Git, threat hunting mensal com hipótese guiada e playbooks de resposta testados em tabletop — não apenas triagem passiva de alertas prontos.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Minha empresa precisa de um SOC 24/7?</span>
+                        <button class="faq-question" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
+                            <span>Vocês usam SIEM/EDR próprios ou o meu?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
                             <div class="faq-answer-inner">
-                                Ataques ciberneticos acontecem a qualquer hora, especialmente fora do horario comercial e em finais de semana. Um <strong>SOC 24/7</strong> garante monitoramento contínuo e resposta imediata a incidentes.
+                                Trabalhamos com o <strong>SIEM/EDR/XDR que sua empresa já usa</strong>, sem exigir migração para ferramenta própria.
                                 <br><br>
-                                Para empresas que não justificam um SOC interno, oferecemos <strong>SOC como serviço (SOCaaS)</strong> com custo acessivel e cobertura completa, adaptado ao porte e orcamento da sua organização.
+                                Isso evita lock-in: se você sair do contrato, fica com o ambiente configurado e as regras de detecção que escrevemos, sem depender de licença nossa.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Quanto tempo leva para implementar as soluções de defesa?</span>
+                        <button class="faq-question" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
+                            <span>Como funciona a cobertura 24×7 no modelo híbrido?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
                             <div class="faq-answer-inner">
-                                Depende do escopo e da maturidade atual. Em geral:
+                                Cobertura contínua para triagem e resposta a alertas críticos fora do horário comercial, com escalonamento <strong>L1/L2/L3</strong> definido em playbook.
                                 <br><br>
-                                • <strong>Hardening inicial:</strong> 2 a 4 semanas<br>
-                                • <strong>Implantacao de SOC/SIEM:</strong> 4 a 8 semanas<br>
-                                • <strong>Threat Hunting pontual:</strong> 1 a 2 semanas<br>
-                                • <strong>Quick wins de segurança:</strong> Primeiros resultados em 48h
-                                <br><br>
-                                Iniciamos com ações de proteção imediata enquanto construimos a solução definitiva.
+                                O modelo é híbrido porque o time interno do cliente mantém visibilidade e pode assumir qualquer etapa — não terceirizamos a decisão final, só a operação 24×7.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>As soluções são compativeis com minha infraestrutura atual?</span>
+                        <button class="faq-question" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">
+                            <span>As regras de detecção ficam com quem se sair do contrato?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
                             <div class="faq-answer-inner">
-                                <strong>Sim.</strong> Trabalhamos com ambientes heterogeneos: on-premises, cloud (AWS, Azure, GCP) e hibridos. Nossas soluções se integram com as ferramentas ja existentes na sua infraestrutura.
+                                <strong>Ficam com você.</strong> Toda regra Sigma/YARA/KQL é escrita e versionada no repositório Git do cliente desde o primeiro dia.
                                 <br><br>
-                                Maximizamos o retorno sobre investimentos anteriores em segurança, integrando firewalls, antivirus, EDR e outras soluções que sua empresa ja utiliza ao nosso ecossistema de monitoramento e defesa.
+                                Não existe caixa-preta nem dependência de licença nossa para continuar rodando o que já foi construído.
                             </div>
                         </div>
                     </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">
+                            <span>Como medem MTTD/MTTR mensalmente?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
+                            <div class="faq-answer-inner">
+                                Reportamos <strong>MTTD</strong> (tempo médio de detecção) e <strong>MTTR</strong> (tempo médio de resposta) por categoria de incidente a cada mês, comparando com a linha de base definida no baseline inicial.
+                                <br><br>
+                                A meta contratual é redução de 50%+ nas TTPs prioritárias ao seu setor dentro dos primeiros dois trimestres.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="related-links">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Aprofunde-se no tema</h2>
+                    <p class="section-subtitle">Artigos técnicos do blog sobre detecção, threat hunting e SIEM.</p>
+                </div>
+                <div class="services-grid">
+                    <a class="service-card" href="../../blog/detection-engineering-regras-deteccao/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+                        <h3>Detection Engineering — escrevendo regras que pegam</h3>
+                        <p>Guia completo de como criar, testar e manter regras de detecção com Sigma rules e MITRE ATT&CK.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/a-importancia-do-threat-hunting-para-organizacao/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+                        <h3>Threat Hunting — por que sua organização precisa</h3>
+                        <p>Como a caça proativa de ameaças identifica invasores antes que causem dano e fortalece a postura de segurança.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/siem-implementacao-casos-uso/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div>
+                        <h3>SIEM — implementação e casos de uso reais</h3>
+                        <p>Arquitetura, regras de correlação e integração de fontes de log para operações de segurança maduras.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -771,7 +917,7 @@
                 email: document.getElementById('email').value.trim(),
                 phone: document.getElementById('telefone').value.replace(/\D/g, ''),
                 empresa: document.getElementById('empresa').value.trim(),
-                serviço: document.getElementById('serviço').value,
+                serviço: document.getElementById('servico').value,
                 message: document.getElementById('mensagem').value.trim(),
                 terms: 'Aceito',
                 origem: 'Landing Page Blue Team',

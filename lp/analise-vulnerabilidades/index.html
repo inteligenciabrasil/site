@@ -26,7 +26,7 @@
     <meta property="og:description"
         content="Descubra e corrija vulnerabilidades críticas antes dos atacantes. Scan automatizado, análise de configuracao e gestão contínua com relatórios priorizados.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://inteligenciabrasil.seg.br/lp/análise-vulnerabilidades/">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/lp/analise-vulnerabilidades/">
     <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -128,7 +128,7 @@
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Análise de Vulnerabilidades",
-                "item": "https://inteligenciabrasil.seg.br/lp/análise-vulnerabilidades/"
+                "item": "https://inteligenciabrasil.seg.br/lp/analise-vulnerabilidades/"
             }
         ]
     }
@@ -142,34 +142,42 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Qual a diferenca entre Análise de Vulnerabilidades e Pentest?",
+                "name": "Qual a diferença entre análise de vulnerabilidades e pentest?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "A Análise de Vulnerabilidades identifica e classifica falhas conhecidas em sistemas, redes e aplicações por meio de scans e revisoes de configuracao. O Pentest vai alem, explorando ativamente essas vulnerabilidades para comprovar o impacto real. Ambos são complementares: a análise oferece visao ampla e o pentest oferece profundidade."
+                    "text": "A Análise de Vulnerabilidades é um programa contínuo de descoberta, priorização e acompanhamento de findings. O Pentest é um assessment point-in-time que explora ativamente as falhas para comprovar impacto real. São complementares: gestão de vulnerabilidades cobre amplitude e cadência; pentest cobre profundidade em um momento específico."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Com que frequência devo realizar uma análise de vulnerabilidades?",
+                "name": "Vocês usam scanner próprio ou o meu (Nessus/Qualys/Rapid7)?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Recomendamos scans mensais ou trimestrais, dependendo do seu setor e nível de exposição. Ambientes regulados (financeiro, saude) ou com deploys frequentes devem realizar análises continuas. Mudancas significativas na infraestrutura tambem exigem avaliação imediata."
+                    "text": "Trabalhamos com o scanner que sua empresa já opera (Nessus, Qualys, Rapid7 InsightVM, Tenable.io) para preservar histórico de findings. Quando não há scanner instalado, recomendamos e configuramos uma ferramenta adequada ao ambiente."
                 }
             },
             {
                 "@type": "Question",
-                "name": "A análise de vulnerabilidades causa indisponibilidade nos sistemas?",
+                "name": "Como priorizam CVEs quando são milhares por mês?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Não. Os scans são realizados de forma controlada e não invasiva. Planejamos janelas de execução com sua equipe e utilizamos técnicas que minimizam qualquer impacto na performance. Ambientes críticos recebem tratamento especial."
+                    "text": "Não usamos CVSS puro. Cruzamos EPSS (probabilidade real de exploração) com o catálogo CISA KEV (exploração já observada em produção) e a criticidade do asset para o negócio, resultando em um backlog pequeno de findings que realmente importam."
                 }
             },
             {
                 "@type": "Question",
-                "name": "O que e entregue ao final da análise?",
+                "name": "Vulnerabilidades em containers são cobertas separadamente?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Você recebe um relatório executivo com visao gerencial de risco e um relatório técnico detalhado com cada vulnerabilidade classificada por severidade (CVSS), evidências, impacto potencial e recomendacoes de correcao priorizadas. Tambem oferecemos suporte na remediação."
+                    "text": "Não. Containers entram no mesmo backlog unificado de infra, cloud e aplicações. Cobrimos image scanning (build time) e runtime scanning, com o mesmo critério de priorização EPSS + KEV aplicado a hosts e cloud."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual o SLA de patch por severidade que vocês recomendam?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Como baseline: crítico com exploração ativa (KEV) em 48h, crítico sem exploração conhecida em 7 dias, alto em 30 dias, médio em 90 dias, ajustado por exposição do asset e criticidade de negócio."
                 }
             }
         ]
@@ -207,6 +215,10 @@
 
         /* Any truly unique styles for this page only */
     </style>
+    <!-- SCHEMA-SERVICE-V1 -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Service","name":"Gestao de Vulnerabilidades","provider":{"@type":"Organization","name":"Inteligência Brasil"},"areaServed":"BR","serviceType":"Vulnerability Management","description":"Identificacao, priorizacao e acompanhamento continuo de vulnerabilidades em toda a superficie de ataque da empresa. Programa recorrente com metricas de reducao de risco ao longo do tempo."}
+    </script>
 </head>
 
 <body>
@@ -322,6 +334,39 @@
             </div>
         </section>
 
+        <!-- Audience Section -->
+        <section class="audience">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Para quem é a gestão de vulnerabilidades</h2>
+                    <p class="section-subtitle">Times de segurança afogados em findings que precisam de priorização defensável.</p>
+                </div>
+                <div class="problem-grid">
+                    <article class="problem-card">
+                        <div class="problem-icon">
+                            <svg width="32" height="32" fill="none" stroke="#10B981" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h3>Head de Segurança de empresa média com Nessus/Rapid7 rodando</h3>
+                        <p>Scan gera 5.000 findings/mês, time interno prioriza no olho; precisa de processo defensável baseado em EPSS + KEV.</p>
+                    </article>
+                    <article class="problem-card">
+                        <div class="problem-icon">
+                            <svg width="32" height="32" fill="none" stroke="#10B981" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3>CISO de empresa com auditoria SOC 2 anual</h3>
+                        <p>Auditor pede evidência de gestão contínua de vulns (não apenas scan point-in-time); SLA por severidade precisa ser mensurável.</p>
+                    </article>
+                    <article class="problem-card">
+                        <div class="problem-icon">
+                            <svg width="32" height="32" fill="none" stroke="#10B981" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <h3>Head de Engenharia com cloud multi-conta AWS/Azure</h3>
+                        <p>CVEs em imagens de container publicadas semanalmente; kernel dos hosts nunca é o mesmo dia da próxima semana — patch cadence não escala.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
         <!-- Problem Section -->
         <section class="problem">
             <div class="container">
@@ -366,7 +411,7 @@
         <!-- Services Section -->
         <section class="services" id="servicos">
             <div class="container">
-                <h2 class="section-title">Soluções de <span class="highlight">Análise de Vulnerabilidades</span></h2>
+                <h2 class="section-title">Entregáveis da <span class="highlight">Gestão de Vulnerabilidades</span></h2>
                 <p class="section-subtitle">
                     Da descoberta a remediação, cobrimos todo o ciclo de gestão de vulnerabilidades da sua empresa
                 </p>
@@ -412,6 +457,63 @@
                             <li>Dashboard executivo em tempo real</li>
                             <li>Alertas de novas CVEs críticas</li>
                         </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Benefícios da gestão contínua</h2>
+                    <p class="section-subtitle">Resultados que aparecem no board, não só no scanner.</p>
+                </div>
+                <div class="benefits-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-sm)">
+                    <ul class="service-list">
+                        <li>Priorização por EPSS + CISA KEV + contexto de negócio — não CVSS puro</li>
+                        <li>Redução mensurável de findings críticos entre janelas de scan</li>
+                        <li>SLA por severidade definido e reportado ao board mensalmente</li>
+                        <li>Integração com ITSM (Jira/ServiceNow) para trilha de patch auditável</li>
+                    </ul>
+                    <ul class="service-list">
+                        <li>Cobertura contínua de infra + cloud + containers + apps na mesma cadência</li>
+                        <li>Dashboards de tendência (aging, backlog, MTTR de patch) para exec review</li>
+                        <li>Redução de janela de exposição via patch orchestration coordenado com change window</li>
+                        <li>Compliance-ready: relatórios aceitos por ISO 27001, PCI-DSS Q6, SOC 2 CC7</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Differentiators Section -->
+        <section class="differentiators">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Por que Inteligência Brasil para Gestão de Vulnerabilidades</h2>
+                    <p class="section-subtitle">O que nos diferencia de um scanner gerenciado.</p>
+                </div>
+                <div class="problem-grid">
+                    <article class="problem-card">
+                        <div class="problem-icon">
+                            <svg width="32" height="32" fill="none" stroke="#10B981" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3>Priorização baseada em EPSS + CISA KEV + criticidade de asset</h3>
+                        <p>Não priorizamos CVSS 9+ em host de dev sem exposição. Cross-referenciamos exploitação real (EPSS score, catálogo KEV) com valor do asset — patch se faz onde importa primeiro.</p>
+                    </article>
+                    <article class="problem-card">
+                        <div class="problem-icon">
+                            <svg width="32" height="32" fill="none" stroke="#10B981" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7h-9m3-3l-3 3 3 3m9 4h-9m3-3l-3 3 3 3"></path></svg>
+                        </div>
+                        <h3>Cobertura unificada infra + cloud + container + application</h3>
+                        <p>Um único backlog de vulnerabilidades — não 4 silos com dashboards diferentes. Time de patch enxerga tudo no mesmo Jira, mesma métrica de MTTR.</p>
+                    </article>
+                    <article class="problem-card">
+                        <div class="problem-icon">
+                            <svg width="32" height="32" fill="none" stroke="#10B981" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3>Runbook de patch orchestration + change window integration</h3>
+                        <p>A gente não só reporta CVE — desenha o workflow de patch com o time de infra: change window, teste de regressão, rollback, evidência de aplicação. Do achar ao fechar.</p>
                     </article>
                 </div>
             </div>
@@ -585,76 +687,119 @@
 
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Qual a diferenca entre Análise de Vulnerabilidades e Pentest?</span>
+                        <button class="faq-question" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">
+                            <span>Qual a diferença entre análise de vulnerabilidades e pentest?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
                             <div class="faq-answer-inner">
-                                A <strong>Análise de Vulnerabilidades</strong> identifica e classifica falhas conhecidas em
-                                sistemas, redes e aplicações por meio de scans e revisoes de configuracao. Oferece uma visao ampla
-                                da superficie de ataque.
+                                A <strong>Análise de Vulnerabilidades</strong> é um programa contínuo de descoberta, priorização e acompanhamento de findings — scan recorrente, backlog, SLA de patch e dashboards de tendência.
                                 <br><br>
-                                O <strong>Pentest</strong> vai alem, explorando ativamente essas vulnerabilidades para comprovar o
-                                impacto real. Ambos são complementares: a análise oferece amplitude e o pentest oferece profundidade.
+                                O <strong>Pentest</strong> é um assessment point-in-time que explora ativamente as falhas para comprovar impacto real e chain de exploração. São complementares: gestão de vulnerabilidades cobre amplitude e cadência; pentest cobre profundidade em um momento específico.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>Com que frequência devo realizar uma análise de vulnerabilidades?</span>
+                        <button class="faq-question" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
+                            <span>Vocês usam scanner próprio ou o meu (Nessus/Qualys/Rapid7)?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
                             <div class="faq-answer-inner">
-                                Recomendamos scans mensais ou trimestrais, dependendo do seu setor e nível de exposição. Ambientes
-                                regulados (financeiro, saude) ou com deploys frequentes devem realizar análises continuas. Mudancas
-                                significativas na infraestrutura tambem exigem avaliação imediata.
+                                Trabalhamos com o scanner que sua empresa já opera (Nessus, Qualys, Rapid7 InsightVM, Tenable.io) para preservar histórico de findings e não duplicar licenciamento.
+                                <br><br>
+                                Quando não há scanner instalado, recomendamos e configuramos uma ferramenta adequada ao ambiente — o valor entregue está na priorização e no processo de remediação, não na marca do scanner.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>A análise de vulnerabilidades causa indisponibilidade nos sistemas?</span>
+                        <button class="faq-question" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
+                            <span>Como priorizam CVEs quando são milhares por mês?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
                             <div class="faq-answer-inner">
-                                Não. Os scans são realizados de forma controlada e não invasiva. Planejamos janelas de execução com
-                                sua equipe e utilizamos técnicas que minimizam qualquer impacto na performance. Ambientes críticos
-                                recebem tratamento especial com configuracoes de scan ajustadas.
+                                Não usamos CVSS puro. Cruzamos EPSS (probabilidade real de exploração) com o catálogo CISA KEV (exploração já observada em produção) e a criticidade do asset para o negócio.
+                                <br><br>
+                                O resultado é um backlog pequeno de findings que realmente importam — em vez de milhares de "críticos" que nunca serão todos corrigidos.
                             </div>
                         </div>
                     </div>
 
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <span>O que e entregue ao final da análise?</span>
+                        <button class="faq-question" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">
+                            <span>Vulnerabilidades em containers são cobertas separadamente?</span>
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
-                        <div class="faq-answer">
+                        <div class="faq-answer" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
                             <div class="faq-answer-inner">
-                                Você recebe um <strong>relatório executivo</strong> com visao gerencial de risco e um
-                                <strong>relatório técnico</strong> detalhado com cada vulnerabilidade classificada por severidade
-                                (CVSS), evidências, impacto potencial e recomendacoes de correcao priorizadas. Tambem oferecemos
-                                suporte na remediação e reteste das correcoes.
+                                Não. Containers entram no mesmo backlog unificado de infra, cloud e aplicações — não em um silo separado com dashboard próprio.
+                                <br><br>
+                                Cobrimos image scanning (build time) e runtime scanning (imagens já em produção), com o mesmo critério de priorização EPSS + KEV aplicado a hosts e cloud.
                             </div>
                         </div>
                     </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">
+                            <span>Qual o SLA de patch por severidade que vocês recomendam?</span>
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <path d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
+                            <div class="faq-answer-inner">
+                                Como baseline: crítico com exploração ativa (KEV) em 48h, crítico sem exploração conhecida em 7 dias, alto em 30 dias, médio em 90 dias.
+                                <br><br>
+                                Ajustamos por exposição do asset (internet-facing vs. rede interna) e criticidade de negócio, e reportamos o SLA real ao board mensalmente — não apenas o SLA prometido.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Links Section -->
+        <section class="related-links">
+            <div class="container">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">Aprofunde-se no tema</h2>
+                    <p class="section-subtitle">Artigos técnicos do blog sobre gestão de vulnerabilidades e posture management.</p>
+                </div>
+                <div class="services-grid">
+                    <a class="service-card" href="../../blog/gestao-vulnerabilidades-processo-completo/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <h3>Gestão de Vulnerabilidades — processo completo</h3>
+                        <p>Do scan ao patch verificado: fases, ferramentas, KPIs e integração com ITSM.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/cspm-dspm-sspm-posture-management/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg></div>
+                        <h3>CSPM, DSPM e SSPM — posture management explicado</h3>
+                        <p>Como cada família de ferramentas encontra e mede gaps de configuração em cloud, dados e SaaS.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
+                    <a class="service-card" href="../../blog/kubernetes-container-security/">
+                        <div class="service-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M12 2l9 5v10l-9 5-9-5V7z"></path></svg></div>
+                        <h3>Segurança de containers em Kubernetes</h3>
+                        <p>Do image scanning ao runtime enforcement — camadas onde a vulnerabilidade real vive.</p>
+                        <span style="color:var(--accent)">Ler artigo &rarr;</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -812,7 +957,7 @@
                 email: document.getElementById('email').value.trim(),
                 phone: document.getElementById('telefone').value.replace(/\D/g, ''),
                 empresa: document.getElementById('empresa').value.trim(),
-                serviço: document.getElementById('serviço').value,
+                serviço: document.getElementById('servico').value,
                 message: document.getElementById('mensagem').value.trim(),
                 terms: 'Aceito',
                 origem: 'Landing Page Análise de Vulnerabilidades',
