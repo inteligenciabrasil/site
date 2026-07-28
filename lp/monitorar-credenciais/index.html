@@ -894,7 +894,7 @@
                 email: document.getElementById('email').value.trim(),
                 phone: document.getElementById('telefone').value.replace(/\D/g, ''),
                 empresa: document.getElementById('empresa').value.trim(),
-                serviço: document.getElementById('servico').value,
+                servico: document.getElementById('servico').value,
                 message: document.getElementById('mensagem').value.trim(),
                 terms: 'Aceito',
                 origem: 'Landing Page Monitorar Credenciais',
@@ -1012,7 +1012,7 @@
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: Object.entries(formData).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&')
+                    body: Object.entries(formData).map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&')
                 });
 
                 // Track conversion
