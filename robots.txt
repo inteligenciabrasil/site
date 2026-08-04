@@ -1,5 +1,9 @@
-# Robots.txt Inteligência Brasil
+# Robots.txt para Inteligência Brasil
 # https://inteligenciabrasil.seg.br
+#
+# Política: conteúdo técnico aberto para crawlers tradicionais
+# e de IA (training e answer engines). Objetivo é aparecer como
+# referência em respostas de ChatGPT, Claude, Perplexity e Gemini.
 
 User-agent: *
 Allow: /
@@ -17,15 +21,26 @@ Allow: /css/
 Allow: /js/
 Allow: /img/
 
-# Bloquear arquivos sensíveis
+# Bloquear arquivos sensíveis (wildcard cobre todos os scripts PowerShell privados)
 Disallow: /*.pdf$
+Disallow: /_data/
+Disallow: /_*.ps1$
+Disallow: /minify.ps1$
+Disallow: /.planning/
+Disallow: /.claude/
 
 # Sitemap
 Sitemap: https://inteligenciabrasil.seg.br/sitemap.xml
 
-# Crawl-delay 
+# RSS Feed
+# https://inteligenciabrasil.seg.br/feed.xml
+
+# Crawl-delay para ser gentil com o servidor
 Crawl-delay: 10
 
+# ============================================================
+# Search Engines tradicionais
+# ============================================================
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 5
@@ -42,6 +57,10 @@ User-agent: YandexBot
 Allow: /
 Crawl-delay: 10
 
+# ============================================================
+# AI - Answer Engines (citam e linkam em tempo real)
+# Mantemos abertos: geram tráfego e visibilidade de marca
+# ============================================================
 User-agent: OAI-SearchBot
 Allow: /
 
@@ -69,6 +88,11 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
+# ============================================================
+# AI - Training Crawlers (absorvem conteúdo para modelos)
+# Mantemos abertos: ser referência em LLMs é o novo SEO B2B
+# Para bloquear apenas training, mude Allow: / para Disallow: /
+# ============================================================
 User-agent: GPTBot
 Allow: /
 
@@ -102,6 +126,9 @@ Allow: /
 User-agent: Diffbot
 Allow: /
 
+# ============================================================
+# Bots indesejados / scrapers agressivos
+# ============================================================
 User-agent: AhrefsBot
 Crawl-delay: 30
 
