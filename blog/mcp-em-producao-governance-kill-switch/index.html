@@ -284,12 +284,30 @@
 </div>
 <h2 id="faq">Perguntas frequentes</h2>
 <div class="faq-section">
-<div class="faq-item"><h3>Por que MCP em produção é diferente de MCP em piloto?</h3><p>Em piloto o impacto é contido (um usuário, ambiente isolado, baixa frequência). Em produção o agente atua sobre identidades e dados reais, em alta frequência e sem operador acompanhando. Confused deputy, tool poisoning e excessive agency saem do plano teórico e viram incidentes potencialmente caros.</p></div>
-<div class="faq-item"><h3>O que deve estar no audit log?</h3><p>Timestamp, identidade do principal humano, identidade do agente, modelo+versão, server MCP, tool chamada com argumentos, hash da resposta, ação executada (com IDs dos recursos), aprovação HITL quando aplicável. Em log imutável com integridade verificável (hash chain) e retenção alinhada à regulação.</p></div>
-<div class="faq-item"><h3>Como implementar kill switch?</h3><p>Quatro camadas em paralelo: endpoint /kill no orchestrator, revogação imediata de tokens <a class="gloss-link" href="/glossario/#oauth" title="Ver no glossário">OAuth</a>/credenciais, circuit breaker no gateway, feature flag global. Teste em GameDay trimestral — sem teste, ele falha quando você precisa.</p></div>
-<div class="faq-item"><h3>O que é allow-listing de MCP server?</h3><p>Lista de servidores MCP aprovados pela organização, validada no gateway. Inclui URL canônica, identidade (mTLS/assinatura), tools permitidas por server e pinning de versão. Bloqueia tool poisoning e contém blast radius quando um server legítimo é comprometido.</p></div>
-<div class="faq-item"><h3>Quando exigir human-in-the-loop?</h3><p>Em pontos de impacto irreversível ou alto custo: criar/aprovar/deletar recurso externo, enviar comunicação a cliente, primeira execução de tool nova, ação fora dos guardrails da sessão. O humano aprova/edita, a aprovação é o gatilho da execução, e tudo é logado.</p></div>
-<div class="faq-item"><h3>Como medir se a governance está funcionando?</h3><p>% ações irreversíveis com HITL (meta 100%), tempo até kill switch propagar, cobertura de audit, bloqueios de MCP fora da allow-list, taxa de guardrail acionado, MTTR de revisão de incidente. Acompanhe semanal até estabilizar.</p></div>
+<div class="faq-item">
+                    <div class="faq-question"><span>Por que MCP em produção é diferente de MCP em piloto?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>Em piloto o impacto é contido (um usuário, ambiente isolado, baixa frequência). Em produção o agente atua sobre identidades e dados reais, em alta frequência e sem operador acompanhando. Confused deputy, tool poisoning e excessive agency saem do plano teórico e viram incidentes potencialmente caros.</p></div>
+                </div>
+<div class="faq-item">
+                    <div class="faq-question"><span>O que deve estar no audit log?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>Timestamp, identidade do principal humano, identidade do agente, modelo+versão, server MCP, tool chamada com argumentos, hash da resposta, ação executada (com IDs dos recursos), aprovação HITL quando aplicável. Em log imutável com integridade verificável (hash chain) e retenção alinhada à regulação.</p></div>
+                </div>
+<div class="faq-item">
+                    <div class="faq-question"><span>Como implementar kill switch?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>Quatro camadas em paralelo: endpoint /kill no orchestrator, revogação imediata de tokens <a class="gloss-link" href="/glossario/#oauth" title="Ver no glossário">OAuth</a>/credenciais, circuit breaker no gateway, feature flag global. Teste em GameDay trimestral — sem teste, ele falha quando você precisa.</p></div>
+                </div>
+<div class="faq-item">
+                    <div class="faq-question"><span>O que é allow-listing de MCP server?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>Lista de servidores MCP aprovados pela organização, validada no gateway. Inclui URL canônica, identidade (mTLS/assinatura), tools permitidas por server e pinning de versão. Bloqueia tool poisoning e contém blast radius quando um server legítimo é comprometido.</p></div>
+                </div>
+<div class="faq-item">
+                    <div class="faq-question"><span>Quando exigir human-in-the-loop?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>Em pontos de impacto irreversível ou alto custo: criar/aprovar/deletar recurso externo, enviar comunicação a cliente, primeira execução de tool nova, ação fora dos guardrails da sessão. O humano aprova/edita, a aprovação é o gatilho da execução, e tudo é logado.</p></div>
+                </div>
+<div class="faq-item">
+                    <div class="faq-question"><span>Como medir se a governance está funcionando?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>% ações irreversíveis com HITL (meta 100%), tempo até kill switch propagar, cobertura de audit, bloqueios de MCP fora da allow-list, taxa de guardrail acionado, MTTR de revisão de incidente. Acompanhe semanal até estabilizar.</p></div>
+                </div>
 </div>
 <h2 id="referencias" style="margin-top:3rem">Referências</h2>
 <div class="references-list">
@@ -305,7 +323,7 @@
 </div>
 </article>
 <!-- PHASE5-RELATED-V1 -->
-<div class="container">
+<div class="container related-articles">
     <p class="footer-col-title"><strong>Artigos Relacionados</strong></p>
     <ul style="list-style:none;padding:0">
             <li><a href="../../lp/grc/">GRC (pillar)</a></li>
@@ -336,15 +354,7 @@
 </div>
 </div>
 
-    <!-- TRUST-BADGES-V1 -->
-    <div class="trusted-logos" style="padding:16px 0 0;">
-      <div class="trust-item"><span><i class="fas fa-certificate" aria-hidden="true"></i> NIST CSF</span></div>
-      <div class="trust-item"><span><i class="fas fa-certificate" aria-hidden="true"></i> ISO 27001</span></div>
-      <div class="trust-item"><span><i class="fas fa-certificate" aria-hidden="true"></i> OWASP Top 10</span></div>
-      <div class="trust-item"><span><i class="fas fa-certificate" aria-hidden="true"></i> MITRE ATT&CK</span></div>
-      <div class="trust-item"><span><i class="fas fa-certificate" aria-hidden="true"></i> CIS Controls</span></div>
-    </div>
-    </footer>
+</footer>
 <div class="copyright"><div class="container"><p class="p-small">Copyright © Inteligência Brasil — Todos os direitos reservados</p></div></div>
 <script src="../../js/site-common.js"></script>
 </body>

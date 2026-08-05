@@ -370,12 +370,30 @@ spec:
 </div>
 <h2 id="faq">Perguntas frequentes</h2>
 <div class="faq-section">
-<div class="faq-item"><h3>PSP foi removida em qual versão do Kubernetes?</h3><p>Deprecada em 1.21 (abril/2021) e removida em 1.25 (agosto/2022). Quem está em 1.25+ precisou migrar para Pod Security Standards (built-in) ou policy engines como Kyverno e OPA Gatekeeper.</p></div>
-<div class="faq-item"><h3>Qual a diferença entre baseline e restricted?</h3><p>Baseline previne escalações conhecidas (hostNetwork, privileged, capabilities perigosas) — é o mínimo em produção. Restricted vai além: runAsNonRoot, readOnlyRootFilesystem, drop ALL capabilities, seccomp RuntimeDefault. Use baseline em legados e restricted em tudo novo.</p></div>
-<div class="faq-item"><h3>Qual o papel dos modos audit, warn e enforce?</h3><p>Enforce bloqueia. Warn avisa no kubectl mas permite. Audit registra no log do API server sem bloquear. Estratégia: audit+warn primeiro, depois enforce baseline, depois enforce restricted onde possível.</p></div>
-<div class="faq-item"><h3>PSS substitui Kyverno?</h3><p>Não. PSS cobre as restrições padronizadas. Kyverno entra em (1) regras custom da organização, (2) mutação, (3) validações ricas (<a class="gloss-link" href="/glossario/#sigstore" title="Ver no glossário">Cosign</a>, cross-resource). A combinação é o padrão moderno.</p></div>
-<div class="faq-item"><h3>Como descobrir o que vai quebrar antes do enforce?</h3><p>Use modo audit nos namespaces antes de enforce. Os eventos vão para o audit log do API server. Polaris, kubescape, kube-score rodam validação offline contra manifests. Integre no CI/CD para quebrar PR antes de chegar em prod.</p></div>
-<div class="faq-item"><h3>O que fazer com workloads que precisam de privilégio?</h3><p>CSI drivers, ingress controllers, agentes de segurança precisam genuinamente de capabilities elevadas. Isole em namespaces dedicados privileged, audite uso, e prefira providers que rodam restricted. Documente exceções com responsável e revisão semestral.</p></div>
+<div class="faq-item">
+                    <div class="faq-question"><span>PSP foi removida em qual versão do Kubernetes?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>Deprecada em 1.21 (abril/2021) e removida em 1.25 (agosto/2022). Quem está em 1.25+ precisou migrar para Pod Security Standards (built-in) ou policy engines como Kyverno e OPA Gatekeeper.</p></div>
+                </div>
+<div class="faq-item">
+                    <div class="faq-question"><span>Qual a diferença entre baseline e restricted?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>Baseline previne escalações conhecidas (hostNetwork, privileged, capabilities perigosas) — é o mínimo em produção. Restricted vai além: runAsNonRoot, readOnlyRootFilesystem, drop ALL capabilities, seccomp RuntimeDefault. Use baseline em legados e restricted em tudo novo.</p></div>
+                </div>
+<div class="faq-item">
+                    <div class="faq-question"><span>Qual o papel dos modos audit, warn e enforce?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>Enforce bloqueia. Warn avisa no kubectl mas permite. Audit registra no log do API server sem bloquear. Estratégia: audit+warn primeiro, depois enforce baseline, depois enforce restricted onde possível.</p></div>
+                </div>
+<div class="faq-item">
+                    <div class="faq-question"><span>PSS substitui Kyverno?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>Não. PSS cobre as restrições padronizadas. Kyverno entra em (1) regras custom da organização, (2) mutação, (3) validações ricas (<a class="gloss-link" href="/glossario/#sigstore" title="Ver no glossário">Cosign</a>, cross-resource). A combinação é o padrão moderno.</p></div>
+                </div>
+<div class="faq-item">
+                    <div class="faq-question"><span>Como descobrir o que vai quebrar antes do enforce?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>Use modo audit nos namespaces antes de enforce. Os eventos vão para o audit log do API server. Polaris, kubescape, kube-score rodam validação offline contra manifests. Integre no CI/CD para quebrar PR antes de chegar em prod.</p></div>
+                </div>
+<div class="faq-item">
+                    <div class="faq-question"><span>O que fazer com workloads que precisam de privilégio?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                    <div class="faq-answer"><p>CSI drivers, ingress controllers, agentes de segurança precisam genuinamente de capabilities elevadas. Isole em namespaces dedicados privileged, audite uso, e prefira providers que rodam restricted. Documente exceções com responsável e revisão semestral.</p></div>
+                </div>
 </div>
 <h2 id="referencias" style="margin-top:3rem">Referências</h2>
 <div class="references-list">
@@ -391,7 +409,7 @@ spec:
 </div>
 </article>
 <!-- PHASE5-RELATED-V1 -->
-<div class="container">
+<div class="container related-articles">
     <p class="footer-col-title"><strong>Artigos Relacionados</strong></p>
     <ul style="list-style:none;padding:0">
             <li><a href="../../lp/cloud-security/">Seguran&ccedil;a em Cloud (pillar)</a></li>
@@ -408,15 +426,7 @@ spec:
 <div class="footer-col third"><p class="footer-col-title"><strong>Contato</strong></p><p>contato@inteligenciabrasil.seg.br</p></div>
 </div>
 
-    <!-- TRUST-BADGES-V1 -->
-    <div class="trusted-logos" style="padding:16px 0 0;">
-      <div class="trust-item"><span><i class="fas fa-certificate" aria-hidden="true"></i> NIST CSF</span></div>
-      <div class="trust-item"><span><i class="fas fa-certificate" aria-hidden="true"></i> ISO 27001</span></div>
-      <div class="trust-item"><span><i class="fas fa-certificate" aria-hidden="true"></i> OWASP Top 10</span></div>
-      <div class="trust-item"><span><i class="fas fa-certificate" aria-hidden="true"></i> MITRE ATT&CK</span></div>
-      <div class="trust-item"><span><i class="fas fa-certificate" aria-hidden="true"></i> CIS Controls</span></div>
-    </div>
-    </footer>
+</footer>
 <div class="copyright"><div class="container"><p class="p-small">Copyright © Inteligência Brasil — Todos os direitos reservados</p></div></div>
 <script src="../../js/site-common.js"></script>
 </body>
