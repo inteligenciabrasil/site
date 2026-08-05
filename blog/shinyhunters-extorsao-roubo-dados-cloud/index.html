@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Como o ShinyHunters (G1057) roubou dados em nuvem via credenciais e OAuth nas campanhas Snowflake e Salesforce/Drift, e como detectar e se defender.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="shinyhunters, g1057, roubo de dados em nuvem, extorsão, snowflake, salesforce, oauth, mitre attack, the com">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/shinyhunters-extorsao-roubo-dados-cloud/">
+
+    <meta property="og:title" content="ShinyHunters (G1057): extorsão e roubo de dados em nuvem">
+    <meta property="og:description" content="Snowflake, Salesforce e Salesloft-Drift: como o ShinyHunters transformou credenciais roubadas e tokens OAuth em extorsão, e o que o SOC deve fazer.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/shinyhunters-extorsao-roubo-dados-cloud/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-08-05T14:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Cibercrime">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ShinyHunters (G1057): extorsão e roubo de dados em nuvem">
+    <meta name="twitter:description" content="Snowflake, Salesforce e Salesloft-Drift: como o ShinyHunters transformou credenciais roubadas e tokens OAuth em extorsão, e o que o SOC deve fazer.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>ShinyHunters (G1057): extorsão e roubo de dados em nuvem | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "articleSection": "Cibercrime", "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"}, "copyrightHolder": {"@type": "Organization", "name": "Intelig\u00eancia Brasil", "url": "https://inteligenciabrasil.seg.br"}, "copyrightYear": 2026, "dateModified": "2026-08-05T14:00:00-03:00", "datePublished": "2026-08-05T14:00:00-03:00", "description": "Como o ShinyHunters (G1057) roubou dados em nuvem via credenciais e OAuth nas campanhas Snowflake e Salesforce/Drift, e como detectar e se defender.", "headline": "ShinyHunters (G1057): extors\u00e3o e roubo de dados em nuvem", "image": "https://inteligenciabrasil.seg.br/img/og-image.webp", "inLanguage": "pt-BR", "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/", "mainEntityOfPage": {"@id": "https://inteligenciabrasil.seg.br/blog/shinyhunters-extorsao-roubo-dados-cloud/", "@type": "WebPage"}, "publisher": {"@type": "Organization", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}, "name": "Intelig\u00eancia Brasil"}}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "O ShinyHunters \u00e9 um grupo cibercriminoso financeiramente motivado ativo desde cerca de 2019, catalogado pelo MITRE ATT\u0026CK como G1057 e conhecido tamb\u00e9m pelos aliases UNC6240 e Bling Libra. Ele evoluiu de vazamentos de bancos de dados no modelo pay-or-leak para roubo de dados em nuvem e extors\u00e3o via credenciais roubadas e abuso de tokens OAuth."}, "name": "O que \u00e9 o ShinyHunters e desde quando ele atua?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "A atribui\u00e7\u00e3o t\u00e9cnica do cluster de intrus\u00e3o contra clientes da Snowflake coube a UNC5537, rastreado pela Mandiant e pelo Google. A Mandiant n\u00e3o equaciona UNC5537 diretamente ao ShinyHunters; o que se sabe \u00e9 que os dados roubados foram vendidos e usados para extors\u00e3o sob a marca ShinyHunters. As duas designa\u00e7\u00f5es n\u00e3o devem ser tratadas como a mesma entidade."}, "name": "O ShinyHunters foi o respons\u00e1vel direto pelos ataques \u00e0 Snowflake em 2024?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Em agosto de 2025, os atacantes roubaram tokens OAuth e refresh tokens da integra\u00e7\u00e3o Drift, come\u00e7ando por um comprometimento no GitHub da Salesloft e no ambiente AWS da Drift. Com esses tokens acessaram mais de 700 inst\u00e2ncias Salesforce downstream sem precisar de senha nem MFA, porque o token j\u00e1 representava uma autoriza\u00e7\u00e3o v\u00e1lida e ativa concedida \u00e0 integra\u00e7\u00e3o."}, "name": "Como o abuso de tokens OAuth funcionou no caso Salesforce/Salesloft-Drift?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Entre agosto e setembro de 2025, empresas como Cloudflare, Google, PagerDuty, Palo Alto Networks, Proofpoint, Zscaler e Tanium publicaram avisos oficiais confirmando exposi\u00e7\u00e3o de dados via a integra\u00e7\u00e3o Drift. O FBI emitiu um alerta FLASH em 12 de setembro de 2025 atribuindo as intrus\u00f5es a UNC6040, ligado ao ShinyHunters, e a UNC6395."}, "name": "Quais empresas confirmaram impacto na campanha Salesloft-Drift?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Os controles mais eficazes s\u00e3o MFA resistente a phishing (FIDO2/passkeys) em todas as contas cloud e SaaS, governan\u00e7a de tokens OAuth e identidades n\u00e3o-humanas com rota\u00e7\u00e3o e expira\u00e7\u00e3o curta, allow-list de rede em data warehouses, monitoramento de exfiltra\u00e7\u00e3o an\u00f4mala, secret scanning cont\u00ednuo em reposit\u00f3rios e detec\u00e7\u00e3o de credenciais expostas por infostealer. Todos endere\u00e7am diretamente os vetores usados em Snowflake e Salesforce."}, "name": "Quais controles reduzem o risco de ataques do estilo ShinyHunters?"}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/", "name": "Blog", "position": 2}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/shinyhunters-extorsao-roubo-dados-cloud/", "name": "ShinyHunters (G1057)", "position": 3}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Cibercrime</span>
+            <h1>ShinyHunters (G1057): extorsão e roubo de dados em nuvem</h1>
+            <div class="article-meta">
+                <span><i class="far fa-user"></i> Roberto Lima</span>
+                <span><i class="far fa-calendar"></i> Agosto 2026</span>
+                <span><i class="far fa-clock"></i> 12 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">ShinyHunters (G1057)</li></ol></div></nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <figure class="article-hero">
+                    <img src="../../img/og-image.webp" alt="Grupo cibercriminoso ShinyHunters (G1057) roubando dados em nuvem via credenciais e tokens OAuth" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async">
+                </figure>
+
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#quem-e-shinyhunters">Quem é o ShinyHunters (G1057)</a></li>
+                        <li><a href="#mitre-g1057">Como o MITRE catalogou o grupo (G1057)</a></li>
+                        <li><a href="#snowflake-2024">Snowflake (2024): credenciais e contas sem MFA</a></li>
+                        <li><a href="#salesforce-drift-2025">Salesforce / Salesloft-Drift (2025): abuso de OAuth</a></li>
+                        <li><a href="#ttps-attack">TTPs principais em ATT&CK</a></li>
+                        <li><a href="#detectar-defender">Como detectar e se defender</a></li>
+                    </ul>
+                </div>
+
+                <p>O ShinyHunters deixou de ser apenas mais uma marca de vazamento em fórum clandestino para se tornar um dos vetores de extorsão em nuvem mais custosos dos últimos anos. Este artigo mapeia como o grupo evoluiu de despejos de bancos de dados em 2020 para o roubo sistemático de dados em plataformas SaaS e data warehouses, com base nas campanhas contra Snowflake em 2024 e Salesforce/Salesloft-Drift em 2025, e traduz o que isso exige de times de CTI, SOC e identidade no Brasil.</p>
+
+<div class="stat-highlight">
+<div class="number">~700 instâncias</div>
+<div class="label">de Salesforce foram afetadas downstream pelo abuso de tokens OAuth da integração Drift em agosto de 2025, incluindo Cloudflare, Google, Palo Alto Networks, Proofpoint e Zscaler, segundo avisos oficiais das próprias empresas.</div>
+</div>
+
+<h2 id="quem-e-shinyhunters">Quem é o ShinyHunters (G1057)</h2>
+
+<p>O ShinyHunters é um grupo cibercriminoso financeiramente motivado ativo desde aproximadamente 2019. Além do nome público, o coletivo aparece na literatura de inteligência de ameaças sob os aliases UNC6240 e Bling Libra, e opera personas em fóruns e canais de venda como ShinyCorp. O modelo de negócio original era o clássico pay-or-leak: comprometer bancos de dados, anunciá-los em fóruns como o extinto RaidForums e depois o BreachForums, e monetizar por venda direta ou extorsão da vítima sob ameaça de publicação.</p>
+
+<p>Entre 2020 e 2021, o grupo construiu reputação com uma sequência de grandes vazamentos: Tokopedia (cerca de 90 milhões de registros), Wattpad (cerca de 270 milhões), além de BigBasket, Pluto TV e Mashable. Nesse mesmo período circulou a alegação de roubo de código-fonte do GitHub privado da Microsoft; a Microsoft, contudo, afirmou tratar-se de amostras e snippets sem comprometimento real confirmado, e essa alegação permanece contestada, não deve ser tratada como fato estabelecido.</p>
+
+<p>O ShinyHunters não opera isolado. Ele integra o ecossistema informal conhecido como The Com, uma rede difusa de atores de língua inglesa que também abriga grupos como Scattered Spider e Lapsus$. Essa proximidade explica sobreposições de táticas e a aparição, em agosto de 2025, de um canal no Telegram autointitulado Scattered Lapsus$ Hunters (também chamado de Trinity of Chaos) reunindo as marcas dos três grupos. É importante ler esse rótulo pelo que ele é: uma autoproclamação de aliança e branding de ecossistema amplificada por reportagem, não uma fusão corporativa verificada de estruturas operacionais.</p>
+
+<h2 id="mitre-g1057">Como o MITRE catalogou o grupo (G1057)</h2>
+
+<p>Em 2025, o MITRE ATT&amp;CK formalizou o ShinyHunters em sua base de grupos adversários, atribuindo-lhe o identificador G1057 na versão v19.2 do framework. O catálogo reúne cerca de 46 técnicas associadas ao grupo, com concentração clara em acesso a nuvem, abuso de credenciais válidas e extorsão financeira, refletindo a mudança de foco de despejos de banco de dados para roubo de dados em ambientes SaaS e data warehouses. Para quem constrói detecção, esse mapeamento é o ponto de partida para transformar o comportamento observado do grupo em regras acionáveis. Se sua equipe ainda não usa o ATT&amp;CK como base de cobertura, nosso <a href="../mitre-attack-enterprise-comprehensive-adversary-tactics-and-techniques/">guia completo do MITRE ATT&amp;CK Enterprise</a> mostra como estruturar essa matriz e por que a catalogação de grupos como o G1057 acelera a priorização de casos de uso do SOC.</p>
+
+<p>A leitura correta do perfil G1057 no ATT&amp;CK evita um erro comum: procurar por malware sofisticado ou exploits de dia zero. O grupo raramente precisa disso. A maior parte do dano vem de credenciais legítimas obtidas por outros meios e do abuso de mecanismos de confiança já existentes entre plataformas SaaS.</p>
+
+<h2 id="snowflake-2024">Snowflake (2024): credenciais de infostealer e contas sem MFA</h2>
+
+<p>A campanha contra clientes da Snowflake em 2024 é o caso que consolidou a virada do ShinyHunters para roubo de dados em nuvem. O cluster de intrusão foi rastreado pela Mandiant e pelo Google Threat Intelligence sob o identificador UNC5537. Um ponto de precisão técnica é obrigatório aqui: a Mandiant não equaciona UNC5537 diretamente ao ShinyHunters. O que se pode afirmar é que os dados roubados da Snowflake foram vendidos e usados para extorsão sob a marca ShinyHunters, enquanto a atribuição técnica do cluster de intrusão coube a UNC5537, sem que as duas designações sejam declaradas a mesma entidade.</p>
+
+<p>O vetor de acesso não envolveu qualquer falha na plataforma Snowflake em si. Os atacantes usaram credenciais previamente roubadas por infostealers, incluindo famílias como VIDAR, REDLINE, LUMMA, RACOON e METASTEALER, contra contas que não tinham autenticação multifator ativada nem allow-list de rede configurada. Segundo o Google Threat Intelligence, 79,7% das contas afetadas já tinham exposição prévia de credencial, e a infecção por infostealer mais antiga associada ao caso remontava a novembro de 2020, um lembrete de que credenciais roubadas anos antes permanecem exploráveis enquanto não forem rotacionadas.</p>
+
+<div class="stat-highlight">
+<div class="number">~165</div>
+<div class="label">organizações foram potencialmente expostas e notificadas até 10 de junho de 2024 na campanha rastreada como UNC5537 contra clientes da Snowflake.</div>
+</div>
+
+<p>O desdobramento judicial reforça a conexão com o The Com. Connor Riley Moucka, conhecido como Alexander Moucka, cidadão canadense, foi preso em 30 de outubro de 2024 e consentiu com a extradição para os Estados Unidos em março de 2025; John Binns foi preso na Turquia. Ambos foram indiciados no Distrito Oeste de Washington, e as autoridades estimaram cerca de US$ 2,5 milhões extorquidos de três vítimas, com os acusados vinculados ao ecossistema The Com. A detecção de credenciais expostas por infostealer é, portanto, um controle de primeira linha, e alimenta diretamente as práticas de <a href="../itdr-deteccao-ameacas-identidade/">detecção de ameaças de identidade (ITDR)</a> que discutimos adiante.</p>
+
+<h2 id="salesforce-drift-2025">Salesforce / Salesloft-Drift (2025): abuso de tokens OAuth e cadeia SaaS</h2>
+
+<p>Se Snowflake mostrou o poder de credenciais roubadas contra contas sem MFA, a campanha de agosto de 2025 elevou a aposta ao explorar a confiança entre plataformas SaaS. Os atacantes roubaram tokens OAuth e refresh tokens da integração Drift, o produto de chat da Salesloft, e os usaram contra mais de 700 instâncias de Salesforce downstream. O Google rastreou o acesso inicial como UNC6040 e a atividade de extorsão como UNC6240, o alias que também identifica o ShinyHunters.</p>
+
+<p>A raiz da cadeia de suprimentos é instrutiva. O comprometimento começou no ambiente GitHub da Salesloft em março de 2025, avançou para o ambiente AWS da Drift e culminou na coleta em massa de tokens de integração. De posse desses tokens, os atacantes acessaram os ambientes Salesforce de clientes que haviam autorizado a integração Drift, sem precisar de senha ou MFA de nenhum usuário final, porque o token OAuth já representava uma autorização válida e ativa. Esse é o cerne do risco: tokens de aplicação são identidades não-humanas com escopo amplo e vida longa, e sua governança costuma ser negligenciada. É exatamente o tema da nossa análise sobre <a href="../nhi-non-human-identity-governanca/">governança de identidades não-humanas e tokens OAuth</a>, cujo caso Salesloft-Drift virou exemplo canônico.</p>
+
+<p>As empresas que confirmaram impacto publicaram avisos oficiais entre agosto e setembro de 2025: Cloudflare, Google, PagerDuty, Palo Alto Networks, Proofpoint, Zscaler e Tanium. Em 12 de setembro de 2025, o FBI publicou um alerta FLASH atribuindo as intrusões em Salesforce a UNC6040, ligado ao ShinyHunters por táticas de vishing e por um aplicativo conectado falso, e a UNC6395, com sobreposição a Scattered Spider. A recorrência de segredos e tokens em repositórios como ponto de partida reforça por que a higiene de segredos, tema do nosso <a href="../secrets-management-corporativo-comparativo/">comparativo de gestão de segredos corporativos</a>, precisa incluir varredura contínua e revogação rápida.</p>
+
+<h2 id="ttps-attack">TTPs principais em ATT&amp;CK</h2>
+
+<p>Traduzido para o vocabulário do ATT&amp;CK, o comportamento do G1057 concentra-se em um punhado de técnicas de alto impacto. Mapear casos de uso do SOC contra essa lista cobre a maior parte do modus operandi observado:</p>
+
+<ul>
+<li><strong>Valid Accounts (T1078)</strong>: uso de credenciais legítimas roubadas por infostealer para acessar SaaS e data warehouses, contornando defesas perimetrais.</li>
+<li><strong>Application Access Token (T1550.001)</strong>: abuso de tokens OAuth e refresh tokens de integrações de terceiros, como no caso Salesloft-Drift, para autenticar sem senha nem MFA.</li>
+<li><strong>Data from Cloud Storage (T1530)</strong>: exfiltração de dados diretamente de repositórios e objetos em nuvem após obter acesso válido.</li>
+<li><strong>Compromise Software Dependencies and Development Tools (T1195.001)</strong>: comprometimento de ambientes de desenvolvimento e cadeia de suprimentos SaaS, como o GitHub da Salesloft, para alcançar vítimas downstream.</li>
+<li><strong>Financial Theft (T1657)</strong>: monetização por extorsão da vítima sob ameaça de publicação dos dados roubados.</li>
+</ul>
+
+<p>O padrão comum a todas essas técnicas é a ausência de malware persistente no endpoint. O grupo vive de identidade e confiança, não de implantes, o que exige que a detecção se desloque do endpoint para o plano de identidade e para o comportamento de acesso a dados em nuvem.</p>
+
+<h2 id="detectar-defender">Como detectar e se defender</h2>
+
+<p>As recomendações a seguir derivam diretamente das lições de Snowflake e Salesforce/Drift. Nenhuma delas depende de tecnologia exótica; todas dependem de disciplina de identidade e de visibilidade sobre acesso a dados.</p>
+
+<div class="phase-card" data-phase="Passo 1">
+<h3>MFA resistente a phishing em todas as contas cloud e SaaS</h3>
+<p>Ative FIDO2 ou passkeys em todas as contas de plataformas em nuvem e SaaS, sem exceção para contas de serviço. A campanha Snowflake foi possível porque contas críticas não tinham MFA; a exceção é justamente onde o atacante entra.</p>
+</div>
+
+<div class="phase-card" data-phase="Passo 2">
+<h3>Governança de identidades não-humanas e tokens OAuth</h3>
+<p>Mantenha inventário de tokens e integrações de terceiros, imponha expiração curta e rotação de tokens e refresh tokens, e revise periodicamente aplicativos OAuth com escopo excessivo, revogando os que não forem estritamente necessários. Foi a persistência de tokens de longa duração que viabilizou o alcance da campanha Drift.</p>
+</div>
+
+<div class="phase-card" data-phase="Passo 3">
+<h3>Allow-list de rede e acesso condicional</h3>
+<p>Aplique allow-list de rede e políticas de acesso condicional em data warehouses e SaaS críticos, de modo que uma credencial válida roubada não seja suficiente sem origem de rede autorizada.</p>
+</div>
+
+<div class="phase-card" data-phase="Passo 4">
+<h3>Monitoramento de acesso anômalo e exfiltração</h3>
+<p>Estabeleça baseline de volume de queries e exportação em cloud storage e SaaS, e gere alertas para bulk export fora do padrão. O ShinyHunters exfiltra grandes volumes; um baseline de comportamento é o que transforma isso em alerta acionável.</p>
+</div>
+
+<div class="phase-card" data-phase="Passo 5">
+<h3>Higiene de segredos e detecção de credenciais expostas</h3>
+<p>Rode secret scanning contínuo em repositórios em busca de chaves AWS, tokens Snowflake e credenciais VPN em texto claro, os mesmos alvos que atacantes varrem ofensivamente com ferramentas como TruffleHog. Combine com feeds de vazamento de credenciais e reset forçado ao detectar exposição por infostealer.</p>
+</div>
+
+<div class="phase-card" data-phase="Passo 6">
+<h3>PAM, menor privilégio e treinamento contra vishing</h3>
+<p>Separe contas de serviço de contas humanas e aplique menor privilégio de forma consistente, conforme detalhamos em <a href="../pam-gestao-acessos-privilegiados/">gestão de acessos privilegiados (PAM)</a>. Treine as equipes contra vishing e aplicativos conectados falsos usados por UNC6040, e bloqueie a instalação não aprovada de apps OAuth conectados no Salesforce.</p>
+</div>
+
+<div class="cta-box">
+<h3>Sua organização tem visibilidade sobre credenciais vazadas e tokens OAuth de risco?</h3>
+<p>O serviço de CTI e monitoramento de ameaças da Inteligência Brasil rastreia exposição de credenciais por infostealer, menções em fóruns e canais usados por grupos como o ShinyHunters, e integrações SaaS com escopo de risco, para que sua equipe detecte a exposição antes que ela vire extorsão.</p>
+<a href="/lp/cti-monitoramento/" class="cta-btn">Conhecer o monitoramento de ameaças (CTI)</a>
+</div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que é o ShinyHunters e desde quando ele atua?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O ShinyHunters é um grupo cibercriminoso financeiramente motivado ativo desde cerca de 2019, catalogado pelo MITRE ATT&CK como G1057 e conhecido também pelos aliases UNC6240 e Bling Libra. Ele evoluiu de vazamentos de bancos de dados no modelo pay-or-leak para roubo de dados em nuvem e extorsão via credenciais roubadas e abuso de tokens OAuth.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O ShinyHunters foi o responsável direto pelos ataques à Snowflake em 2024?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>A atribuição técnica do cluster de intrusão contra clientes da Snowflake coube a UNC5537, rastreado pela Mandiant e pelo Google. A Mandiant não equaciona UNC5537 diretamente ao ShinyHunters; o que se sabe é que os dados roubados foram vendidos e usados para extorsão sob a marca ShinyHunters. As duas designações não devem ser tratadas como a mesma entidade.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como o abuso de tokens OAuth funcionou no caso Salesforce/Salesloft-Drift?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Em agosto de 2025, os atacantes roubaram tokens OAuth e refresh tokens da integração Drift, começando por um comprometimento no GitHub da Salesloft e no ambiente AWS da Drift. Com esses tokens acessaram mais de 700 instâncias Salesforce downstream sem precisar de senha nem MFA, porque o token já representava uma autorização válida e ativa concedida à integração.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quais empresas confirmaram impacto na campanha Salesloft-Drift?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Entre agosto e setembro de 2025, empresas como Cloudflare, Google, PagerDuty, Palo Alto Networks, Proofpoint, Zscaler e Tanium publicaram avisos oficiais confirmando exposição de dados via a integração Drift. O FBI emitiu um alerta FLASH em 12 de setembro de 2025 atribuindo as intrusões a UNC6040, ligado ao ShinyHunters, e a UNC6395.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quais controles reduzem o risco de ataques do estilo ShinyHunters?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Os controles mais eficazes são MFA resistente a phishing (FIDO2/passkeys) em todas as contas cloud e SaaS, governança de tokens OAuth e identidades não-humanas com rotação e expiração curta, allow-list de rede em data warehouses, monitoramento de exfiltração anômala, secret scanning contínuo em repositórios e detecção de credenciais expostas por infostealer. Todos endereçam diretamente os vetores usados em Snowflake e Salesforce.</p></div>
+                    </div>
+                </div>
+
+                <h2>Conclusao</h2>
+
+                <p>O ShinyHunters é um estudo de caso sobre como o crime cibernético financeiramente motivado se adaptou à realidade da nuvem. O grupo praticamente abandonou a exploração de vulnerabilidades técnicas em favor de algo mais barato e mais difícil de detectar: credenciais legítimas roubadas e a confiança implícita entre plataformas SaaS. Snowflake mostrou o custo de contas sem MFA; Salesforce/Salesloft-Drift mostrou o custo de tokens OAuth de longa duração e escopo amplo governados de forma negligente.</p>
+
+<p>A implicação para times de segurança brasileiros é clara e desconfortável ao mesmo tempo. A defesa contra o G1057 não passa por comprar mais uma ferramenta de endpoint, mas por disciplina de identidade: MFA resistente a phishing sem exceções, inventário e rotação de tokens de integração, allow-list de rede em ativos de dados críticos e visibilidade contínua sobre credenciais vazadas e exfiltração anômala. São controles conhecidos, e é justamente a sua ausência que o grupo explora com consistência.</p>
+
+<p>Monitorar a exposição antes que ela vire extorsão é uma decisão de maturidade, não de orçamento. As organizações que trataram identidade não-humana e higiene de segredos como controles de primeira linha, e não como itens de checklist anual, são as que menos apareceram nas listas de vítimas de 2024 e 2025.</p>
+
+                <div class="module-sources" style="margin-top:2rem;padding:1.5rem;background:rgba(96,165,250,.04);border-left:3px solid #60A5FA;border-radius:8px">
+                    <div style="font-weight:700;color:#60A5FA;margin-bottom:.75rem"><i class="fas fa-bookmark"></i> Fontes e referencias tecnicas</div>
+                    <ul style="margin:0;padding-left:1.2rem">
+                        <li><a href="https://cloud.google.com/blog/topics/threat-intelligence/unc5537-snowflake-data-theft-extortion" target="_blank" rel="noopener">Google Threat Intelligence — UNC5537 e roubo de dados na Snowflake</a></li>
+                        <li><a href="https://cyberscoop.com/connor-moucka-snowflake-data-breach-indictment-john-binns/" target="_blank" rel="noopener">CyberScoop — indiciamento de Connor Moucka e John Binns</a></li>
+                        <li><a href="https://www.bleepingcomputer.com/news/security/us-indicts-snowflake-hackers-who-extorted-25-million-from-3-victims/" target="_blank" rel="noopener">BleepingComputer — indiciamento dos hackers da Snowflake (US$ 2,5 mi)</a></li>
+                        <li><a href="https://therecord.media/alleged-snowflake-hacker-extradition-us" target="_blank" rel="noopener">The Record — extradição consentida do suspeito da Snowflake</a></li>
+                        <li><a href="https://www.microsoft.com/en-us/security/blog/2026/07/13/defending-saas-based-applications-against-shinyhunters-oauth-abuse/" target="_blank" rel="noopener">Microsoft Security Blog — abuso de OAuth pelo ShinyHunters</a></li>
+                        <li><a href="https://thehackernews.com/2026/07/microsoft-maps-year-long-shinyhunters.html" target="_blank" rel="noopener">The Hacker News — Microsoft mapeia campanha do ShinyHunters no Salesforce</a></li>
+                        <li><a href="https://www.mitiga.io/blog/shinyhunters-and-unc6395-inside-the-salesforce-and-salesloft-breaches" target="_blank" rel="noopener">Mitiga — ShinyHunters e UNC6395 nas violações Salesforce e Salesloft</a></li>
+                        <li><a href="https://socradar.io/blog/dark-web-profile-shinyhunters/" target="_blank" rel="noopener">SOCRadar — Dark Web Profile do ShinyHunters</a></li>
+                        <li><a href="https://attack.mitre.org/groups/G1057/" target="_blank" rel="noopener">MITRE ATT&CK — ShinyHunters (G1057)</a></li>
+                    </ul>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/shinyhunters-extorsao-roubo-dados-cloud/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/shinyhunters-extorsao-roubo-dados-cloud/" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=ShinyHunters%20%28G1057%29%3A%20extors%C3%A3o%20e%20roubo%20de%20dados%20em%20nuvem https://inteligenciabrasil.seg.br/blog/shinyhunters-extorsao-roubo-dados-cloud/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h3>Roberto Lima</h3>
+                        <p>Especialista em Seguranca Ofensiva, Threat Intelligence e Detection Engineering na Inteligencia Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>
