@@ -345,7 +345,8 @@
             'parser-iocs':                 { name: 'Parser e Normalizador de IOCs', desc: 'Extração, defang/refang, pivot links.', icon: 'fa-fingerprint', tags: ['cti', 'ioc', 'hunting'] },
             'validador-dns':               { name: 'Validador DNS e DNSSEC', desc: 'A/AAAA/MX/NS/SOA/TXT/CAA + DNSKEY/DS via DoH.', icon: 'fa-network-wired', tags: ['dns', 'dnssec', 'caa', 'doh'] },
             'parser-x509':                 { name: 'Parser de Certificados X.509', desc: 'Subject/issuer/SAN/extensões + fingerprint SHA-256.', icon: 'fa-certificate', tags: ['x509', 'tls', 'pki', 'certificado'] },
-            'gerador-validador-qrcode-pix': { name: 'Gerador e Validador de QR Code Pix', desc: 'BR Code Pix com verificação de integridade CRC16.', icon: 'fa-qrcode', tags: ['pix', 'qrcode', 'antifraude', 'crc16'] }
+            'gerador-validador-qrcode-pix': { name: 'Gerador e Validador de QR Code Pix', desc: 'BR Code Pix com verificação de integridade CRC16.', icon: 'fa-qrcode', tags: ['pix', 'qrcode', 'antifraude', 'crc16'] },
+            'calculadora-datas':           { name: 'Calculadora de Diferença entre Datas', desc: 'Dias, horas, minutos, semanas, meses e anos entre datas.', icon: 'fa-calendar-day', tags: ['datas', 'dias', 'tempo', 'calculadora'] }
         };
 
         // Curated relations by overlap of tags + manual tweaks
@@ -364,7 +365,8 @@
             'parser-iocs':                 ['calculadora-hash', 'conversor-timestamps', 'codificador-base64-url-hex'],
             'validador-dns':               ['validador-spf-dkim-dmarc', 'security-headers', 'parser-x509'],
             'parser-x509':                 ['validador-dns', 'security-headers', 'calculadora-hash'],
-            'gerador-validador-qrcode-pix': ['calculadora-hash', 'parser-iocs']
+            'gerador-validador-qrcode-pix': ['calculadora-hash', 'parser-iocs'],
+            'calculadora-datas':           ['conversor-timestamps', 'calculadora-hash', 'codificador-base64-url-hex']
         };
 
         var related = relations[current];

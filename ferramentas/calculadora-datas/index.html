@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- CONSENT-MODE-V2 -->
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','analytics_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','personalization_storage':'denied','functionality_storage':'granted','security_storage':'granted','wait_for_update':500});</script>
+    <!-- Google Tag Manager --><!-- GTM-DEFERRED-V1 -->
+    <script>window.dataLayer=window.dataLayer||[];dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});function __gtmBoot(){var d=document,s='script',l='dataLayer',i='GTM-WCL38PDP',f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',__gtmBoot);}else{setTimeout(__gtmBoot,0);}</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Calculadora de datas: diferença entre duas datas em dias, horas, semanas, meses e anos, e também somar/subtrair dias, semanas, meses ou anos a partir de uma data (ex.: 37 dias a partir de hoje). 100% no navegador.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="calculadora de datas, diferença entre datas, contagem de dias, dias entre datas, calcular horas entre datas, semanas entre datas, anos entre datas, contador de tempo">
+    <meta name="author" content="Inteligência Brasil">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/calculadora-datas/">
+    <link rel="alternate" type="application/rss+xml" title="Blog Inteligência Brasil &#8212; RSS" href="../../feed.xml">
+
+    <meta property="og:title" content="Calculadora de Diferença entre Datas | Inteligência Brasil">
+    <meta property="og:description" content="Calcule o tempo entre duas datas em dias, horas, minutos, semanas, meses e anos. Roda no navegador, sem enviar nada ao servidor.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/calculadora-datas/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Calculadora de Diferença entre Datas">
+    <meta name="twitter:description" content="Dias, horas, minutos, semanas, meses e anos entre duas datas.">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
+
+    <title>Calculadora de Diferença entre Datas (dias, horas, semanas, anos) | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Calculadora de Diferença entre Datas","description":"Ferramenta online gratuita para calcular o tempo entre duas datas: total em dias corridos, horas, minutos, segundos, semanas, meses e anos, além da duração em anos, meses e dias de calendário. Executa inteiramente no navegador.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+        {"@type":"Question","name":"O que são dias corridos?","acceptedAnswer":{"@type":"Answer","text":"Dias corridos são todos os dias entre as duas datas, incluindo fins de semana e feriados. É a contagem calendário simples, diferente de dias úteis, que excluiriam sábados, domingos e feriados."}},
+        {"@type":"Question","name":"Como o total em anos é calculado?","acceptedAnswer":{"@type":"Answer","text":"O total em anos divide a diferença completa em milissegundos pela duração média de um ano no calendário gregoriano (365,2425 dias), o que já leva em conta anos bissextos. Por isso o valor costuma aparecer com casas decimais. Para a duração exata do calendário, use o campo 'Duração' que mostra anos, meses e dias inteiros."}},
+        {"@type":"Question","name":"A hora do dia afeta o resultado?","acceptedAnswer":{"@type":"Answer","text":"Sim. Se você preencher os campos de horário, o cálculo de horas, minutos e segundos usa o horário informado. Se deixar os horários em branco, ambos assumem 00:00, e a diferença é medida de meia-noite a meia-noite."}},
+        {"@type":"Question","name":"Anos bissextos são considerados?","acceptedAnswer":{"@type":"Answer","text":"Sim. A contagem em dias, horas e minutos é feita sobre o tempo real decorrido, então dias 29 de fevereiro entram naturalmente na conta. A duração em anos, meses e dias usa o calendário real de cada mês."}},
+        {"@type":"Question","name":"Os dados que eu digito são enviados a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Todo o cálculo acontece localmente no seu navegador em JavaScript. Nenhuma data digitada sai do seu dispositivo."}}
+    ]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Ferramentas","item":"https://inteligenciabrasil.seg.br/ferramentas/"},{"@type":"ListItem","item":"https://inteligenciabrasil.seg.br/ferramentas/calculadora-datas/","position":3,"name":"Calculadora de Diferença entre Datas"}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
+    <!-- ASYNC-CSS-V1 -->
+    <style>
+    /* ASYNC-CSS-V1 critical: shell (navbar + body + container + FA placeholders) */
+    @font-face{font-family:'Fira Sans Fallback';src:local('Arial'),local('Helvetica');size-adjust:100%}
+    *,*::before,*::after{box-sizing:border-box}
+    html{overflow-x:clip}
+    body{margin:0;background:#0a1628;color:#F1F5F9;font-family:'Fira Sans','Fira Sans Fallback',sans-serif;font-size:1rem;line-height:1.6;overflow-x:clip;width:100%;max-width:100vw}
+    a{text-decoration:none}
+    .container{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}
+    @media(min-width:576px){.container{max-width:540px}}
+    @media(min-width:768px){.container{max-width:720px}}
+    @media(min-width:992px){.container{max-width:960px}}
+    @media(min-width:1200px){.container{max-width:1140px}}
+    .fa,.fas,.far,.fab{display:inline-block;width:1em;min-width:1em;text-align:center;font-style:normal}
+    .fa-fw{width:1.25em}
+    .fa-stack{position:relative;display:inline-block;width:2em;height:2em;line-height:2em;vertical-align:middle}
+    .fa-stack-1x{position:absolute;left:0;top:0;width:100%;text-align:center}
+    .fixed-top{position:fixed;top:0;right:0;left:0;z-index:1030}
+    .navbar{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:.5rem 1rem}
+    .navbar-custom{padding:0;background:rgba(13,30,56,0.95)!important;border-bottom:1px solid rgba(96,165,250,0.1);font:600 .875rem/.875rem 'Fira Sans','Fira Sans Fallback',sans-serif;backdrop-filter:blur(20px);box-shadow:0 .0625rem .375rem 0 rgba(0,0,0,.1)}
+    .navbar-custom .navbar-brand{font-size:0}
+    .navbar-custom .navbar-brand img{width:7.0625rem;height:auto;aspect-ratio:196/113}
+    .navbar-custom .navbar-toggler{border:none;color:#fff;font-size:2rem;padding:.25rem .75rem;background:transparent}
+    .navbar-custom .navbar-toggler-awesome.fas.fa-times,.navbar-custom button[aria-expanded=false] .navbar-toggler-awesome.fas.fa-times,.navbar-custom button[aria-expanded=true] .navbar-toggler-awesome.fas.fa-bars{display:none}
+    .navbar-custom button[aria-expanded=false] .navbar-toggler-awesome.fas.fa-bars{display:inline-block}
+    .navbar-custom button[aria-expanded=true] .navbar-toggler-awesome.fas.fa-times{display:inline-block}
+    .navbar-custom .navbar-nav{display:flex;flex-direction:column;padding-left:0;margin:.75rem 0 .5rem;list-style:none}
+    .navbar-custom .nav-item .nav-link{padding:.625rem .75rem;color:#F1F5F9!important;text-decoration:none}
+    .navbar-collapse{flex-basis:100%;flex-grow:1;align-items:center}
+    .collapse:not(.show){display:none}
+    .navbar-custom .social-icons{display:none}
+    @media(min-width:768px){.navbar-expand-md{flex-flow:row nowrap;justify-content:flex-start}.navbar-expand-md .navbar-nav{flex-direction:row;margin-top:0;margin-left:auto!important}.navbar-expand-md .navbar-toggler{display:none}.navbar-expand-md .navbar-collapse{display:flex!important;flex-basis:auto}}
+    </style>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="../../css/bootstrap.min.css" rel="stylesheet"></noscript>
+    <link href="../../css/fontawesome-subset.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="../../css/fontawesome-subset.min.css" rel="stylesheet"></noscript>
+    <link href="../../css/styles.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="../../css/styles.min.css" rel="stylesheet"></noscript>
+    <link href="../../css/servico.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="../../css/servico.min.css" rel="stylesheet"></noscript>
+    <link href="../../css/blog-article.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="../../css/blog-article.min.css" rel="stylesheet"></noscript>
+    <style>
+        .dc-wrap{max-width:1100px;margin:0 auto;padding:0 1rem}
+        .dc-wrap p,.dc-wrap h2,.dc-wrap h3,.dc-wrap h4,.dc-wrap strong,.dc-wrap li,.dc-wrap label{color:inherit}
+        .dc-intro{color:#E2E8F0;font-size:1.05rem;line-height:1.65;margin-bottom:1.5rem}
+        .dc-intro p{color:#CBD5E1;margin-bottom:.75rem}
+        .dc-card{background:linear-gradient(145deg,rgba(13,30,56,.65) 0%,rgba(15,23,42,.55) 100%);border:1px solid rgba(96,165,250,.22);border-radius:12px;padding:1.5rem 1.5rem 1.25rem;margin:0 0 1.5rem}
+        .dc-card h2{font-family:Montserrat,sans-serif;color:#F1F5F9;font-size:1.35rem;margin:0 0 .35rem}
+        .dc-card h2 i{color:#60A5FA;margin-right:.4rem}
+        .dc-card .subtitle{color:#94A3B8;font-size:.92rem;margin:0 0 1rem}
+        .dc-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+        .dc-field label{display:block;color:#93C5FD;font-size:.82rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;margin:0 0 .4rem}
+        .dc-inputs{display:flex;gap:.5rem}
+        .dc-input{width:100%;padding:.7rem .8rem;border:1px solid rgba(96,165,250,.3);border-radius:.45rem;background:rgba(2,6,23,.6);color:#E2E8F0;font-family:'JetBrains Mono',monospace;font-size:1rem;outline:none;transition:border-color .15s;color-scheme:dark}
+        .dc-input.date{flex:3}
+        .dc-input.time{flex:2}
+        .dc-input:focus{border-color:#60A5FA;box-shadow:0 0 0 3px rgba(96,165,250,.18)}
+        .dc-controls{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:1rem 0 0}
+        .dc-btn{background:linear-gradient(135deg,#1e40af 0%,#1e3a8a 100%);color:#fff;border:0;border-radius:.4rem;padding:.55rem 1rem;font-weight:600;cursor:pointer;font-size:.92rem;transition:opacity .15s}
+        .dc-btn:hover{opacity:.88}
+        .dc-btn.secondary{background:rgba(96,165,250,.12);color:#93C5FD;border:1px solid rgba(96,165,250,.3)}
+        .dc-summary{color:#E2E8F0;font-size:1.05rem;margin:0 0 1rem;line-height:1.55}
+        .dc-summary strong{color:#A5F3FC}
+        .dc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+        .dc-row{background:rgba(2,6,23,.45);border:1px solid rgba(148,163,184,.18);border-radius:.5rem;padding:.9rem 1rem;position:relative}
+        .dc-row h3{color:#93C5FD;font-size:.78rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin:0 0 .3rem}
+        .dc-row .val{font-family:'JetBrains Mono',monospace;color:#F1F5F9;font-size:1.5rem;word-break:break-all;display:block;line-height:1.2}
+        .dc-row .unit{color:#94A3B8;font-size:.8rem;margin:.2rem 0 0}
+        .dc-row button{position:absolute;top:.6rem;right:.6rem;background:transparent;border:1px solid rgba(96,165,250,.25);color:#93C5FD;border-radius:.3rem;padding:.15rem .45rem;font-size:.72rem;cursor:pointer}
+        .dc-row button:hover{background:rgba(96,165,250,.1)}
+        .dc-row.feature{grid-column:1/-1;background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.3)}
+        .dc-error{color:#fca5a5;background:rgba(239,68,68,.08);border-left:3px solid #ef4444;padding:.6rem .85rem;border-radius:.3rem;margin-top:.75rem;font-size:.88rem}
+        .dc-faq{margin-top:2rem}
+        .dc-faq details{background:rgba(13,30,56,.4);border:1px solid rgba(96,165,250,.18);border-radius:.5rem;padding:1rem 1.25rem;margin-bottom:.6rem}
+        .dc-faq summary{color:#F1F5F9;font-weight:600;cursor:pointer;font-size:1.02rem}
+        .dc-faq details p{color:#CBD5E1;margin:.6rem 0 0;line-height:1.6;font-size:.95rem}
+        .dc-faq details code{background:rgba(96,165,250,.12);color:#A5F3FC;padding:.1rem .35rem;border-radius:.25rem;font-family:'JetBrains Mono',monospace;font-size:.88em}
+        select.dc-input{cursor:pointer;appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,#93C5FD 50%),linear-gradient(135deg,#93C5FD 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:2rem}
+        .dc-add-result{margin-top:1.25rem}
+        .dc-add-hint{color:#94A3B8;font-size:.92rem;margin:.5rem 0 0}
+        .dc-add-big{display:flex;flex-direction:column;gap:.15rem;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.3);border-radius:.6rem;padding:1.1rem 1.35rem}
+        .dc-add-wd{color:#93C5FD;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+        .dc-add-date{font-family:'JetBrains Mono',monospace;color:#F1F5F9;font-size:2rem;line-height:1.15}
+        .dc-add-long{color:#CBD5E1;font-size:1.02rem}
+        .dc-add-meta{color:#94A3B8;font-size:.9rem;margin:.75rem 0 0;line-height:1.5}
+    </style>
+</head>
+<body><a class="skip-link" href="#main-content">Pular para conte&uacute;do</a>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav role="navigation" class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVI&Ccedil;OS</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../">FERRAMENTAS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../sobre/">SOBRE</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Ferramenta</span>
+            <h1>Calculadora de Diferença entre Datas</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-calendar-day"></i> Dias, horas, semanas, anos</span>
+                <span><i class="fas fa-calendar-check"></i> Duração calendário</span>
+                <span><i class="fas fa-lock"></i> 100% local</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../../">Home</a></li>
+                <li class="breadcrumb-item"><a href="../">Ferramentas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Calculadora de Datas</li>
+            </ol>
+        </div>
+    </nav>
+
+    <main id="main-content">
+    <section class="article-content">
+        <div class="dc-wrap">
+
+            <div class="dc-intro">
+                <p>Informe uma <strong>data inicial</strong> e uma <strong>data final</strong> para ver o intervalo entre elas expresso em <strong>dias corridos</strong>, <strong>horas</strong>, <strong>minutos</strong>, <strong>segundos</strong>, <strong>semanas</strong>, <strong>meses</strong> e <strong>anos</strong> — além da duração exata em anos, meses e dias de calendário.</p>
+                <p>Precisa do caminho inverso? Use <strong>Contar a partir de uma data</strong> para somar ou subtrair dias, semanas, meses ou anos — por exemplo, ver em que dia caem <strong>37 dias a partir de hoje</strong>.</p>
+                <p>O horário é opcional: deixe em branco para medir de meia-noite a meia-noite. Todo o cálculo roda no seu navegador — nenhuma data é enviada ao servidor.</p>
+            </div>
+
+            <div class="dc-card">
+                <h2><i class="fas fa-calendar-alt"></i> Datas</h2>
+                <p class="subtitle">A data final já vem preenchida com hoje. Ajuste conforme precisar.</p>
+
+                <div class="dc-fields">
+                    <div class="dc-field">
+                        <label for="dcStartDate">Data inicial</label>
+                        <div class="dc-inputs">
+                            <input type="text" id="dcStartDate" class="dc-input date" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off">
+                            <input type="text" id="dcStartTime" class="dc-input time" inputmode="numeric" placeholder="hh:mm" maxlength="8" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="dc-field">
+                        <label for="dcEndDate">Data final</label>
+                        <div class="dc-inputs">
+                            <input type="text" id="dcEndDate" class="dc-input date" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off">
+                            <input type="text" id="dcEndTime" class="dc-input time" inputmode="numeric" placeholder="hh:mm" maxlength="8" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dc-controls">
+                    <button class="dc-btn" id="dcNow">Data final = agora</button>
+                    <button class="dc-btn secondary" id="dcSwap">Inverter datas</button>
+                    <button class="dc-btn secondary" id="dcClear">Limpar</button>
+                </div>
+
+                <div id="dcError"></div>
+            </div>
+
+            <div class="dc-card">
+                <h2><i class="fas fa-stopwatch"></i> Resultado</h2>
+                <p class="dc-summary" id="dcSummary">Preencha as duas datas para ver o resultado.</p>
+                <div class="dc-grid" id="dcGrid"></div>
+            </div>
+
+            <div class="dc-card">
+                <h2><i class="fas fa-forward"></i> Contar a partir de uma data</h2>
+                <p class="subtitle">Some ou subtraia um período a uma data e veja em que dia da semana ela cai.</p>
+
+                <div class="dc-fields">
+                    <div class="dc-field">
+                        <label for="dcBaseDate">Data base</label>
+                        <div class="dc-inputs">
+                            <input type="text" id="dcBaseDate" class="dc-input date" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="dc-field">
+                        <label for="dcAddQty">Quantidade</label>
+                        <div class="dc-inputs">
+                            <input type="number" id="dcAddQty" class="dc-input" inputmode="numeric" placeholder="37" min="0" step="1" autocomplete="off">
+                            <select id="dcAddUnit" class="dc-input" aria-label="Unidade">
+                                <option value="d">dias</option>
+                                <option value="w">semanas</option>
+                                <option value="m">meses</option>
+                                <option value="y">anos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="dc-field">
+                        <label for="dcAddDir">Direção</label>
+                        <div class="dc-inputs">
+                            <select id="dcAddDir" class="dc-input">
+                                <option value="1">depois (futuro)</option>
+                                <option value="-1">antes (passado)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dcAddResult" class="dc-add-result"></div>
+            </div>
+
+            <div class="dc-faq">
+                <h2 style="color:#F1F5F9;font-family:Montserrat,sans-serif;margin-bottom:1rem"><i class="fas fa-question-circle" style="color:#60A5FA"></i> Perguntas frequentes</h2>
+
+                <details><summary>O que são dias corridos?</summary>
+                    <p>Dias corridos são todos os dias entre as duas datas, incluindo fins de semana e feriados. É a contagem calendário simples, diferente de <em>dias úteis</em>, que excluiriam sábados, domingos e feriados.</p>
+                </details>
+
+                <details><summary>Como o total em anos é calculado?</summary>
+                    <p>O total em anos divide a diferença completa pela duração média de um ano no calendário gregoriano (<code>365,2425</code> dias), o que já leva em conta anos bissextos. Por isso o valor costuma aparecer com casas decimais. Para a duração exata, use o campo <strong>Duração</strong>, que mostra anos, meses e dias inteiros.</p>
+                </details>
+
+                <details><summary>A hora do dia afeta o resultado?</summary>
+                    <p>Sim. Se você preencher os campos de horário, o cálculo de horas, minutos e segundos usa o horário informado. Se deixar em branco, ambos assumem <code>00:00:00</code> e a diferença é medida de meia-noite a meia-noite.</p>
+                </details>
+
+                <details><summary>Anos bissextos são considerados?</summary>
+                    <p>Sim. A contagem em dias, horas e minutos é feita sobre o tempo real decorrido, então dias 29 de fevereiro entram naturalmente na conta. A duração em anos, meses e dias usa o calendário real de cada mês.</p>
+                </details>
+
+                <details><summary>Os dados que eu digito são enviados a algum servidor?</summary>
+                    <p>Não. Todo o cálculo acontece localmente no seu navegador em JavaScript. Nenhuma data digitada sai do seu dispositivo.</p>
+                </details>
+            </div>
+
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Ferramentas</h4><ul><li><a href="../conversor-timestamps/">Conversor de Timestamps</a></li><li><a href="../calculadora-hash/">Calculadora de Hash</a></li><li><a href="../">Todas</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+
+</footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></a>
+
+    <script src="../../js/site-common.min.js"></script>
+    <script>
+    (function(){
+        var startDate = document.getElementById('dcStartDate');
+        var startTime = document.getElementById('dcStartTime');
+        var endDate   = document.getElementById('dcEndDate');
+        var endTime   = document.getElementById('dcEndTime');
+        var errBox    = document.getElementById('dcError');
+        var summary   = document.getElementById('dcSummary');
+        var grid      = document.getElementById('dcGrid');
+
+        var DAY = 86400000, HOUR = 3600000, MIN = 60000, WEEK = 604800000;
+        var YEAR_DAYS = 365.2425, MONTH_DAYS = 30.436875; // média gregoriana
+
+        function nf(n, dec){
+            return n.toLocaleString('pt-BR', {minimumFractionDigits: dec||0, maximumFractionDigits: dec||0});
+        }
+
+        // Fração com 2 casas, mas revela dígitos significativos quando o valor
+        // é pequeno — evita "0,00" enganoso em intervalos curtos (< ~1 semana).
+        function nfFrac(n){
+            var dec = 2;
+            if(n > 0 && n < 0.01) dec = Math.min(6, -Math.floor(Math.log10(n)) + 1);
+            return n.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: dec});
+        }
+
+        // Parse dd/mm/aaaa (+ hh:mm opcional). Retorna {date} ou {error} ou null (vazio).
+        function buildDate(dateStr, timeStr){
+            dateStr = (dateStr || '').trim();
+            if(!dateStr) return null;
+            var mD = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+            if(!mD) return {error: 'Data inválida. Use o formato dd/mm/aaaa.'};
+            var d = +mD[1], mo = +mD[2], y = +mD[3];
+            var hh = 0, mm = 0, ss = 0;
+            timeStr = (timeStr || '').trim();
+            if(timeStr){
+                var mT = timeStr.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);
+                if(!mT) return {error: 'Horário inválido. Use hh:mm.'};
+                hh = +mT[1]; mm = +mT[2]; ss = +(mT[3] || 0);
+                if(hh > 23 || mm > 59 || ss > 59) return {error: 'Horário fora do intervalo (máx. 23:59:59).'};
+            }
+            var dt = new Date(y, mo - 1, d, hh, mm, ss);
+            if(dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== d){
+                return {error: 'Data inexistente no calendário (ex.: 31/02).'};
+            }
+            return {date: dt};
+        }
+
+        // Dias úteis, sábados e domingos no intervalo de datas [early, late], inclusivo.
+        // O(1): conta semanas cheias e trata o resto (< 7 dias) manualmente.
+        function countByDow(early, late){
+            var s = new Date(early.getFullYear(), early.getMonth(), early.getDate());
+            var e = new Date(late.getFullYear(), late.getMonth(), late.getDate());
+            var total = Math.round((e - s) / DAY) + 1;      // dias de calendário, inclusivo
+            var full = Math.floor(total / 7);
+            var res = {business: full * 5, sat: full, sun: full};
+            var dow = s.getDay();                            // 0=dom .. 6=sáb
+            for(var i = 0; i < total - full * 7; i++){
+                var day = (dow + i) % 7;
+                if(day === 0) res.sun++;
+                else if(day === 6) res.sat++;
+                else res.business++;
+            }
+            return res;
+        }
+
+        // Soma n meses preservando hora, com clamp para o último dia do mês
+        // (ex.: 31/jan + 1 mês => 28/29 fev). Evita o overflow do setMonth nativo.
+        function addMonths(date, n){
+            var target = new Date(date.getFullYear(), date.getMonth() + n, 1,
+                                  date.getHours(), date.getMinutes(), date.getSeconds());
+            var dim = new Date(target.getFullYear(), target.getMonth() + 1, 0).getDate();
+            target.setDate(Math.min(date.getDate(), dim));
+            return target;
+        }
+
+        // Duração calendário exata (late >= early garantido pelo chamador).
+        // Conta meses inteiros somando ao early até passar de late; o resto vira dias.
+        // ponytail: usa hora local; datas históricas com DST podem drift ~1h no floor de dias.
+        function calendarBreakdown(early, late){
+            var months = 0;
+            while(addMonths(early, months + 1).getTime() <= late.getTime()) months++;
+            var anchor = addMonths(early, months);
+            var d = Math.floor((late.getTime() - anchor.getTime()) / DAY);
+            return {y: Math.floor(months / 12), m: months % 12, d: d};
+        }
+
+        function row(label, value, unit, feature){
+            var safe = String(value);
+            return '<div class="dc-row'+(feature?' feature':'')+'">'+
+                '<button data-copy="'+safe.replace(/"/g,'&quot;')+'">Copiar</button>'+
+                '<h3>'+label+'</h3><span class="val">'+safe+'</span>'+
+                (unit?'<p class="unit">'+unit+'</p>':'')+'</div>';
+        }
+
+        function update(){
+            errBox.innerHTML = '';
+            var pa = buildDate(startDate.value, startTime.value);
+            var pb = buildDate(endDate.value, endTime.value);
+
+            var err = (pa && pa.error) || (pb && pb.error);
+            if(err){
+                summary.textContent = 'Preencha as duas datas para ver o resultado.';
+                grid.innerHTML = '';
+                errBox.innerHTML = '<div class="dc-error">' + err + '</div>';
+                return;
+            }
+            if(!pa || !pb){
+                summary.textContent = 'Preencha as duas datas para ver o resultado.';
+                grid.innerHTML = '';
+                return;
+            }
+            var a = pa.date, b = pb.date;
+
+            var early = a, late = b, inverted = false;
+            if(a.getTime() > b.getTime()){ early = b; late = a; inverted = true; }
+            var ms = late.getTime() - early.getTime();
+
+            if(ms === 0){
+                summary.textContent = 'As duas datas são idênticas — zero de diferença.';
+                grid.innerHTML = '';
+                return;
+            }
+
+            var days = ms / DAY;
+            var cal = calendarBreakdown(early, late);
+            var dow = countByDow(early, late);
+            var calParts = [];
+            if(cal.y) calParts.push(cal.y + (cal.y === 1 ? ' ano' : ' anos'));
+            if(cal.m) calParts.push(cal.m + (cal.m === 1 ? ' mês' : ' meses'));
+            if(cal.d || !calParts.length) calParts.push(cal.d + (cal.d === 1 ? ' dia' : ' dias'));
+
+            summary.innerHTML = (inverted ? '<strong>Datas invertidas na leitura.</strong> ' : '') +
+                'Entre <strong>' + early.toLocaleString('pt-BR', {dateStyle:'short'}) +
+                '</strong> e <strong>' + late.toLocaleString('pt-BR', {dateStyle:'short'}) +
+                '</strong> há <strong>' + calParts.join(', ') + '</strong>.';
+
+            var html = '';
+            html += row('Duração', calParts.join(', '), 'anos, meses e dias de calendário', true);
+            html += row('Dias corridos', nf(Math.floor(days)), 'dias');
+            html += row('Dias úteis', nf(dow.business), 'seg a sex, período inclusivo');
+            html += row('Fins de semana', nf(dow.sat), 'sábados no período (sáb+dom = 1)');
+            html += row('Semanas', nfFrac(ms / WEEK), 'semanas');
+            html += row('Meses (aprox.)', nfFrac(days / MONTH_DAYS), 'base 30,44 dias/mês');
+            html += row('Anos (aprox.)', nfFrac(days / YEAR_DAYS), 'base 365,2425 dias/ano');
+            html += row('Horas', nf(Math.floor(ms / HOUR)), 'horas');
+            html += row('Minutos', nf(Math.floor(ms / MIN)), 'minutos');
+            html += row('Segundos', nf(Math.floor(ms / 1000)), 'segundos');
+            grid.innerHTML = html;
+        }
+
+        // Copiar (delegação)
+        grid.addEventListener('click', function(e){
+            var btn = e.target.closest('button[data-copy]');
+            if(!btn) return;
+            navigator.clipboard.writeText(btn.getAttribute('data-copy'));
+            var old = btn.textContent;
+            btn.textContent = 'Copiado!';
+            setTimeout(function(){ btn.textContent = old; }, 1200);
+        });
+
+        var pad = function(n){ return (n<10?'0':'') + n; };
+        function todayDMY(){ var n = new Date(); return pad(n.getDate()) + '/' + pad(n.getMonth()+1) + '/' + n.getFullYear(); }
+
+        // Máscara dd/mm/aaaa: insere as barras conforme digita (só dígitos).
+        function maskDate(el){
+            var v = el.value.replace(/\D/g, '').slice(0, 8), out = v;
+            if(v.length > 4) out = v.slice(0,2) + '/' + v.slice(2,4) + '/' + v.slice(4);
+            else if(v.length > 2) out = v.slice(0,2) + '/' + v.slice(2);
+            el.value = out;
+        }
+        [startDate, endDate].forEach(function(el){
+            el.addEventListener('input', function(){ maskDate(el); });
+        });
+        [startDate, startTime, endDate, endTime].forEach(function(el){
+            el.addEventListener('input', update);
+        });
+
+        document.getElementById('dcNow').addEventListener('click', function(){
+            var now = new Date();
+            endDate.value = todayDMY();
+            endTime.value = pad(now.getHours()) + ':' + pad(now.getMinutes());
+            update();
+        });
+        document.getElementById('dcSwap').addEventListener('click', function(){
+            var d = startDate.value, t = startTime.value;
+            startDate.value = endDate.value; startTime.value = endTime.value;
+            endDate.value = d; endTime.value = t;
+            update();
+        });
+        document.getElementById('dcClear').addEventListener('click', function(){
+            startDate.value = ''; startTime.value = ''; endDate.value = ''; endTime.value = '';
+            errBox.innerHTML = '';
+            update();
+        });
+
+        // --- Contar a partir de uma data ---
+        var baseDate  = document.getElementById('dcBaseDate');
+        var addQty    = document.getElementById('dcAddQty');
+        var addUnit   = document.getElementById('dcAddUnit');
+        var addDir    = document.getElementById('dcAddDir');
+        var addResult = document.getElementById('dcAddResult');
+        var WD = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+        var UNIT_LABEL = {d:['dia','dias'], w:['semana','semanas'], m:['mês','meses'], y:['ano','anos']};
+
+        function midnight(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+
+        function updateAdd(){
+            addResult.innerHTML = '';
+            var p = buildDate(baseDate.value, '');
+            if(!p){ addResult.innerHTML = '<p class="dc-add-hint">Informe a data base e a quantidade.</p>'; return; }
+            if(p.error){ addResult.innerHTML = '<div class="dc-error">' + p.error + '</div>'; return; }
+            var qty = parseInt(addQty.value, 10);
+            if(isNaN(qty) || qty < 0){ addResult.innerHTML = '<p class="dc-add-hint">Informe uma quantidade válida.</p>'; return; }
+
+            var base = p.date, dir = +addDir.value, n = qty * dir, unit = addUnit.value, res;
+            if(unit === 'd')      res = new Date(base.getFullYear(), base.getMonth(), base.getDate() + n);
+            else if(unit === 'w') res = new Date(base.getFullYear(), base.getMonth(), base.getDate() + n * 7);
+            else if(unit === 'm') res = addMonths(base, n);
+            else                  res = addMonths(base, n * 12);
+
+            var diffDays = Math.round((midnight(res) - midnight(base)) / DAY);
+            var lbl = UNIT_LABEL[unit][qty === 1 ? 0 : 1];
+            var full = res.toLocaleDateString('pt-BR', {day:'2-digit', month:'long', year:'numeric'});
+            addResult.innerHTML =
+                '<div class="dc-add-big">' +
+                    '<span class="dc-add-wd">' + WD[res.getDay()] + '</span>' +
+                    '<span class="dc-add-date">' + res.toLocaleDateString('pt-BR') + '</span>' +
+                    '<span class="dc-add-long">' + full + '</span>' +
+                '</div>' +
+                '<p class="dc-add-meta">' + qty + ' ' + lbl + ' ' + (dir > 0 ? 'depois' : 'antes') +
+                ' de ' + base.toLocaleDateString('pt-BR') + ' — ' + nf(Math.abs(diffDays)) + ' dias corridos de diferença.</p>';
+        }
+
+        baseDate.addEventListener('input', function(){ maskDate(baseDate); });
+        [baseDate, addQty, addUnit, addDir].forEach(function(el){ el.addEventListener('input', updateAdd); });
+        addDir.addEventListener('change', updateAdd);
+        addUnit.addEventListener('change', updateAdd);
+
+        // Pré-preenche datas com hoje
+        endDate.value = todayDMY();
+        baseDate.value = todayDMY();
+        updateAdd();
+    })();
+    </script>
+</body>
+</html>
