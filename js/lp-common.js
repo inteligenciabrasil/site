@@ -163,6 +163,68 @@
     }
 
     // ========================================
+    // FORM SUBMIT (fetch + status)
+    // ========================================
+    function initFormSubmit() {
+        var forms = document.querySelectorAll('form[data-validate]');
+        if (!forms.length) return;
+
+        forms.forEach(function(form) {
+            var msgEl = form.querySelector('#formMessage');
+            if (!msgEl) return;
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // E2/partial: focus first invalid field, do not submit
+                if (!form.checkValidity()) {
+                    var firstInvalid = form.querySelector(':invalid');
+                    if (firstInvalid) firstInvalid.focus();
+                    return;
+                }
+
+                var submitBtn = form.querySelector('[type="submit"]');
+                var originalLabel = submitBtn ? submitBtn.textContent : '';
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Enviando...';
+                }
+
+                fetch(form.action, { method: 'POST', body: new FormData(form) })
+                    .then(function() {
+                        msgEl.style.display = 'block';
+                        msgEl.style.background = 'rgba(16,185,129,0.1)';
+                        msgEl.style.color = '#10B981';
+                        msgEl.textContent = 'Mensagem enviada! Nossa equipe retornará em até 2 horas úteis.';
+                        msgEl.focus();
+                    })
+                    .catch(function() {
+                        msgEl.style.display = 'block';
+                        msgEl.style.background = 'rgba(239,68,68,0.1)';
+                        msgEl.style.color = '#EF4444';
+                        msgEl.textContent = '';
+                        var errorSpan = document.createElement('span');
+                        errorSpan.textContent = 'Ocorreu um erro ao enviar. Tente novamente ou fale conosco pelo ';
+                        var fallbackLink = document.createElement('a');
+                        fallbackLink.setAttribute('href', form.dataset.waFallback);
+                        fallbackLink.setAttribute('target', '_blank');
+                        fallbackLink.setAttribute('rel', 'noopener');
+                        fallbackLink.textContent = 'WhatsApp';
+                        msgEl.appendChild(errorSpan);
+                        msgEl.appendChild(fallbackLink);
+                        msgEl.focus();
+                    })
+                    .finally(function() {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = originalLabel;
+                        }
+                    });
+            });
+        });
+    }
+
+    // ========================================
     // HEADER SCROLL EFFECT
     // ========================================
     function initHeaderScroll() {
@@ -195,6 +257,7 @@
         initSmoothScroll();
         initFadeInAnimation();
         initFormValidation();
+        initFormSubmit();
         initHeaderScroll();
     }
 
