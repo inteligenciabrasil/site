@@ -293,12 +293,27 @@
         var ctaDiv = document.createElement('div');
         ctaDiv.className = 'mid-article-cta';
         var utm = (cta.url.indexOf('?') === -1 ? '?' : '&') + 'utm_source=site&utm_medium=mid-article&utm_campaign=blog-cta';
-        ctaDiv.innerHTML = '<div class="mid-article-cta-text"><strong>' + cta.title + '</strong>' + cta.desc + '</div><a href="' + cta.url + utm + '" class="cta-btn">' + cta.label + '</a><button class="mid-article-cta-close" aria-label="Fechar">\u00d7</button>';
+        var ctaText = document.createElement('div');
+        ctaText.className = 'mid-article-cta-text';
+        var ctaStrong = document.createElement('strong');
+        ctaStrong.textContent = cta.title;
+        ctaText.appendChild(ctaStrong);
+        ctaText.appendChild(document.createTextNode(cta.desc));
+        var ctaLink = document.createElement('a');
+        ctaLink.href = cta.url + utm;
+        ctaLink.className = 'cta-btn';
+        ctaLink.textContent = cta.label;
+        var ctaCloseBtn = document.createElement('button');
+        ctaCloseBtn.className = 'mid-article-cta-close';
+        ctaCloseBtn.setAttribute('aria-label', 'Fechar');
+        ctaCloseBtn.textContent = '\u00d7';
+        ctaDiv.appendChild(ctaText);
+        ctaDiv.appendChild(ctaLink);
+        ctaDiv.appendChild(ctaCloseBtn);
         document.body.appendChild(ctaDiv);
 
         var ctaDismissed = false;
-        var ctaClose = ctaDiv.querySelector('.mid-article-cta-close');
-        ctaClose.addEventListener('click', function () {
+        ctaCloseBtn.addEventListener('click', function () {
             ctaDismissed = true;
             ctaDiv.classList.add('dismissed');
             ctaDiv.classList.remove('visible');
