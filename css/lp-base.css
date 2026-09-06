@@ -819,8 +819,12 @@ header {
     transition: max-height 0.3s ease;
 }
 
+/* PHASE7-FAQ-V1: deliberate height ceiling — worst-case answer measured at 821 chars
+   plain text in lp/monitorar-emails, ~780px at 320px width (28 chars/line, 26px/line).
+   1200px gives >=40% headroom. An answer taller than this will be silently clipped;
+   raise the value here and re-minify before adding very long FAQ content. */
 .faq-item.active .faq-answer {
-    max-height: 500px;
+    max-height: 1200px;
 }
 
 .faq-answer-inner {
