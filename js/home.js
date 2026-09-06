@@ -122,15 +122,6 @@
         }
     }
 
-    // ========== SELECT PLACEHOLDER ==========
-    var servicoSelect = document.getElementById('servico');
-    if (servicoSelect) {
-        servicoSelect.classList.add('placeholder-selected');
-        servicoSelect.addEventListener('change', function() {
-            this.classList.toggle('placeholder-selected', !this.value);
-        });
-    }
-
     // ========== CONTACT FORM ==========
     var contactForm = document.getElementById('contactFormServico');
     if (contactForm) {
@@ -139,89 +130,68 @@
 
             if (!contactForm.checkValidity()) {
                 contactForm.reportValidity();
+                var firstInvalid = contactForm.querySelector(':invalid');
+                if (firstInvalid) firstInvalid.focus();
                 return;
             }
 
-            var msgDiv = document.getElementById('msgSubmit');
-            var formMessage = msgDiv ? msgDiv.parentElement : null;
+            var statusDiv = document.getElementById('homeFormMessage');
             var submitBtn = contactForm.querySelector('.btn-submit');
             var originalText = submitBtn ? submitBtn.innerHTML : '';
 
-            function showMsg(type, text, delay) {
-                if (!msgDiv) return;
-                msgDiv.className = 'alert alert-' + type;
-                msgDiv.textContent = text;
-                if (formMessage) formMessage.style.display = 'block';
-                setTimeout(function() { if (formMessage) formMessage.style.display = 'none'; }, delay || 5000);
+            function showStatus(text, color) {
+                if (!statusDiv) return;
+                // Clear previous content
+                while (statusDiv.firstChild) statusDiv.removeChild(statusDiv.firstChild);
+                statusDiv.style.display = 'block';
+                statusDiv.style.marginTop = '0.75rem';
+                statusDiv.style.padding = '0.75rem';
+                statusDiv.style.borderRadius = '4px';
+                statusDiv.style.color = '#F1F5F9';
+                statusDiv.style.backgroundColor = color;
             }
 
-            // Validate checkbox
-            var termos = document.getElementById('termos');
-            if (!termos || !termos.checked) {
-                showMsg('danger', 'Você deve aceitar a Política de Privacidade e os Termos de Uso para continuar.');
-                return;
-            }
-
-            // Validate corporate email
-            var emailValidation = validateCorporateEmail(document.getElementById('email').value);
-            if (!emailValidation.valid) {
-                showMsg('danger', emailValidation.message);
-                return;
-            }
-
-            // Collect data
-            var formData = {
-                name: document.getElementById('nome').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('telefone').value.replace(/\D/g, ''),
-                empresa: document.getElementById('empresa').value,
-                servico: document.getElementById('servico').value,
-                message: document.getElementById('mensagem').value,
-                terms: 'Aceito',
-                origem: 'Página Home',
-                ip: ''
-            };
-
-            // Validate phone - repeated digits
-            if (/^(.)\1+$/.test(formData.phone)) {
-                showMsg('danger', 'Telefone inválido: números não podem ser todos iguais.');
-                return;
-            }
-
-            // Ensure IP
-            var ipInput = document.getElementById('ip');
-            formData.ip = (ipInput && ipInput.value) ? ipInput.value : await fetchIp();
-
-            // Disable button
             if (submitBtn) {
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             }
 
-            var body = Object.keys(formData).map(function(key) {
-                return key + '=' + encodeURIComponent(formData[key]);
-            }).join('&');
+            // Ensure IP
+            var ipInput = document.getElementById('ip');
+            if (ipInput && !ipInput.value) ipInput.value = await fetchIp();
 
             try {
                 var res = await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: body
+                    body: new FormData(contactForm)
                 });
                 var response = await res.json();
                 var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
                 if (result === 'success' || result === 'ok') {
-                    contactForm.reset();
-                    if (servicoSelect) servicoSelect.classList.add('placeholder-selected');
-                    showMsg('success', 'Mensagem enviada com sucesso! Entraremos em contato em breve.', 8000);
+                    showStatus('Mensagem enviada! Nossa equipe retornará em até 2 horas úteis.', '#10B981');
                 } else {
-                    var errorMsg = (typeof response === 'object') ? (response.message || response.error || 'Erro ao enviar.') : 'Erro ao enviar.';
-                    showMsg('danger', errorMsg + ' Tente novamente.', 8000);
+                    showStatus('Ocorreu um erro ao enviar. Tente novamente ou fale conosco pelo ', '#EF4444');
+                    var waLink = document.createElement('a');
+                    waLink.href = 'https://wa.me/5511993619947';
+                    waLink.target = '_blank';
+                    waLink.rel = 'noopener';
+                    waLink.textContent = 'WhatsApp';
+                    waLink.style.color = '#F1F5F9';
+                    if (statusDiv) statusDiv.appendChild(waLink);
                 }
             } catch (err) {
-                showMsg('danger', 'Erro de conexão. Verifique sua internet e tente novamente.', 8000);
+                showStatus('Ocorreu um erro ao enviar. Tente novamente ou fale conosco pelo ', '#EF4444');
+                var waLink = document.createElement('a');
+                waLink.href = 'https://wa.me/5511993619947';
+                waLink.target = '_blank';
+                waLink.rel = 'noopener';
+                waLink.textContent = 'WhatsApp';
+                waLink.style.color = '#F1F5F9';
+                if (statusDiv) statusDiv.appendChild(waLink);
+            } finally {
+                if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = originalText; }
+                if (statusDiv) statusDiv.focus();
             }
-            if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = originalText; }
         });
     }
 
@@ -298,12 +268,12 @@
                 var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
                 if (result === 'success' || result === 'ok') {
                     newsletterForm.reset();
-                    showNewsletterMessage('Inscrição realizada com sucesso! Você receberá nossos conteúdos em breve.', 'success');
+                    showNewsletterMessage('Verifique seu e-mail para confirmar a assinatura.', 'success');
                 } else {
-                    showNewsletterMessage('Erro ao realizar inscrição. Tente novamente.', 'error');
+                    showNewsletterMessage('Não foi possível inscrever agora. Tente novamente em instantes.', 'error');
                 }
             } catch (err) {
-                showNewsletterMessage('Erro de conexão. Verifique sua internet e tente novamente.', 'error');
+                showNewsletterMessage('Não foi possível inscrever agora. Tente novamente em instantes.', 'error');
             }
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalText;

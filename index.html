@@ -416,6 +416,7 @@
     </nav>
 
     <!-- Hero Section -->
+    <!-- CONV-HOME-V1 -->
     <header id="header" class="hero-servico">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
@@ -1112,7 +1113,7 @@
                         ajudar.</p>
                 </div>
                 <div class="cta-actions">
-                    <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" class="btn-whatsapp">
+                    <a href="https://wa.me/5511993619947?text=Ol%C3%A1%21%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Intelig%C3%AAncia%20Brasil." target="_blank" class="btn-whatsapp" aria-label="Falar no WhatsApp" rel="noopener">
                         <i class="fab fa-whatsapp"></i> Falar no WhatsApp
                     </a>
                     <a href="#contato" class="btn-form page-scroll">
@@ -1135,7 +1136,7 @@
                             24 horas úteis.</p>
 
                         <div class="contact-channels">
-                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" class="contact-channel">
+                            <a href="https://wa.me/5511993619947?text=Ol%C3%A1%21%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Intelig%C3%AAncia%20Brasil." target="_blank" class="contact-channel" aria-label="Falar no WhatsApp" rel="noopener">
                                 <div class="channel-icon"><i class="fab fa-whatsapp"></i></div>
                                 <div class="channel-info">
                                     <span class="channel-label">WhatsApp</span>
@@ -1162,45 +1163,22 @@
                 <div class="col-lg-7">
                     <div class="contact-form-wrapper">
                         <form id="contactFormServico" class="contact-form">
+                            <input type="hidden" name="ip" id="ip">
                             <div class="form-row">
-                                <input type="hidden" name="ip" id="ip">
-
                                 <div class="form-group col-md-6">
                                     <label for="nome">Nome completo *</label>
                                     <input type="text" class="form-control" id="nome" name="nome" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="empresa">Empresa</label>
-                                    <input type="text" class="form-control" id="empresa" name="empresa">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="email">E-mail Corporativo*</label>
+                                    <label for="email">E-mail Corporativo *</label>
                                     <input type="email" class="form-control" id="email" name="email"
                                         pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" maxlength="100"
                                         required>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="telefone">Telefone *</label>
-                                    <input type="tel" class="form-control" id="telefone" name="telefone"
-                                        pattern="^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$" maxlength="15"
-                                        placeholder="(11) 99999-9999" required>
-                                </div>
                             </div>
-
                             <div class="form-group">
-                                <label for="servico">Serviço de interesse *</label>
-                                <select class="form-control" id="servico" name="servico" required>
-                                    <option value="" disabled selected>Selecione um serviço</option>
-                                    <option value="Análise de Vulnerabilidades">Análise de Vulnerabilidades</option>
-                                    <option value="Adequação LGPD">Adequação LGPD</option>
-                                    <option value="Governança de TI">Governança de TI</option>
-                                    <option value="Gestão de Identidades (IAM)">Gestão de Identidades (IAM)</option>
-                                    <option value="Conscientização e Treinamento">Conscientização e Treinamento</option>
-                                    <option value="Auditoria e Compliance">Auditoria e Compliance</option>
-                                    <option value="Consultoria Geral">Consultoria Geral em Segurança</option>
-                                </select>
+                                <label for="empresa">Empresa</label>
+                                <input type="text" class="form-control" id="empresa" name="empresa">
                             </div>
                             <div class="form-group">
                                 <label for="mensagem">Como podemos ajudar? *</label>
@@ -1208,18 +1186,10 @@
                                     placeholder="Descreva brevemente sua necessidade ou desafio atual..."
                                     required></textarea>
                             </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="termos" name="termos" required>
-                                <label class="form-check-label" for="termos">
-                                    Li e aceito os termos de uso e autorizo o contato para fins comerciais.
-                                </label>
-                            </div>
                             <button type="submit" class="btn-submit">
-                                <i class="fas fa-paper-plane"></i> Enviar Solicitação
+                                <i class="fas fa-paper-plane"></i> Enviar Mensagem
                             </button>
-                            <div class="form-message" style="display:none;">
-                                <div id="msgSubmit" class="alert"></div>
-                            </div>
+                            <div id="homeFormMessage" role="status" aria-live="polite" tabindex="-1" style="display:none;"></div>
                         </form>
                     </div>
                 </div>
@@ -1243,17 +1213,18 @@
                 </div>
                 <form id="newsletterForm" class="newsletter-form">
                     <input type="hidden" name="ip" id="newsletterIp">
+                    <p style="color:#F1F5F9;font-weight:400;margin-bottom:0.75rem;">Receba análises de cibersegurança diretamente no seu e-mail. Sem spam.</p>
                     <div class="newsletter-input-group">
                         <input type="email" id="newsletterEmail" name="email" class="newsletter-input"
                                placeholder="Seu e-mail corporativo"
                                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                                maxlength="100" required>
                         <button type="submit" class="newsletter-btn">
-                            <span class="btn-text">Assinar</span>
+                            <span class="btn-text">Quero receber as análises</span>
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
-                    <div class="newsletter-message" id="newsletterMessage"></div>
+                    <div class="newsletter-message" id="newsletterMessage" role="status" aria-live="polite"></div>
                     <p class="newsletter-disclaimer">
                         <i class="fas fa-lock"></i> Seu e-mail está seguro. Não enviamos spam e você pode cancelar a qualquer momento.
                     </p>
@@ -1281,8 +1252,7 @@
                                 aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                             <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"
                                 aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i
-                                    class="fab fa-whatsapp"></i></a>
+                            <a href="https://wa.me/5511993619947?text=Ol%C3%A1%21%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Intelig%C3%AAncia%20Brasil." target="_blank" aria-label="Falar no WhatsApp" rel="noopener"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1343,7 +1313,7 @@
 
     <!-- WhatsApp Float Button -->
     <div class="whatsapp-float">
-        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+        <a href="https://wa.me/5511993619947?text=Ol%C3%A1%21%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Intelig%C3%AAncia%20Brasil." target="_blank" aria-label="Falar no WhatsApp" rel="noopener">
             <i class="fab fa-whatsapp"></i>
         </a>
     </div>
