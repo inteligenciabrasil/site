@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Como uma PME sem equipe de TI monta backup que sobrevive a ransomware: ferramentas gratuitas, imutabilidade, custo de nuvem e a rotina de teste de restauração.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="backup para pequenas empresas, teste de restauração backup, backup imutável PME, backup contra ransomware, Veeam gratuito, backup Microsoft 365 pequena empresa">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/backup-pmes-montar-testar-sem-equipe-ti/">
+
+    <meta property="og:title" content="Backup para PMEs: Como Montar e Testar sem Equipe de TI">
+    <meta property="og:description" content="Ferramentas, custo real e a rotina de teste de restauração que transforma backup em recuperação de verdade, sem equipe dedicada.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/backup-pmes-montar-testar-sem-equipe-ti/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2026-09-03T09:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Continuidade e Recuperação">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Backup para PMEs: Como Montar e Testar sem Equipe de TI">
+    <meta name="twitter:description" content="Ferramentas, custo real e a rotina de teste de restauração que transforma backup em recuperação de verdade, sem equipe dedicada.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Backup para PMEs sem Equipe de TI | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "articleSection": "Continuidade e Recuperação", "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"}, "copyrightHolder": {"@type": "Organization", "name": "Inteligência Brasil", "url": "https://inteligenciabrasil.seg.br"}, "copyrightYear": 2026, "dateModified": "2026-09-03T09:00:00-03:00", "datePublished": "2026-09-03T09:00:00-03:00", "description": "Como uma PME sem equipe de TI monta backup que sobrevive a ransomware: ferramentas gratuitas, imutabilidade, custo de nuvem e a rotina de teste de restauração.", "headline": "Backup para PMEs: Como Montar e Testar sem Equipe de TI", "image": "https://inteligenciabrasil.seg.br/img/og-image.webp", "inLanguage": "pt-BR", "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/", "mainEntityOfPage": {"@id": "https://inteligenciabrasil.seg.br/blog/backup-pmes-montar-testar-sem-equipe-ti/", "@type": "WebPage"}, "publisher": {"@type": "Organization", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}, "name": "Inteligência Brasil"}}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Não. Sincronização replica alterações, e criptografia de ransomware é uma alteração. Quando os arquivos da estação são cifrados, o cliente de sincronização propaga os arquivos cifrados para a nuvem em minutos. Serviços como OneDrive, Google Drive e Dropbox mantêm versões anteriores e lixeira por um período, o que ajuda em um punhado de arquivos, mas restaurar dezenas de milhares de versões manualmente sob pressão não é um plano de recuperação. Backup precisa ser uma cópia separada, com histórico próprio e com credencial diferente da que o usuário usa no dia a dia."}, "name": "Sincronizar com OneDrive ou Google Drive conta como backup?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Sim, e essa é uma das lacunas mais comuns em PME. Microsoft e Google operam sob modelo de responsabilidade compartilhada: eles garantem a disponibilidade da plataforma, e o dado é do cliente. Lixeira, retenção e ferramentas como o Google Vault servem a retenção e investigação, com prazos limitados, e não a recuperação de um cenário de exclusão em massa ou conta comprometida. Se a caixa de e-mail e os arquivos da equipe são críticos para faturar, eles precisam de backup com histórico próprio, seja pelo serviço pago do próprio fabricante, seja por ferramenta de terceiro."}, "name": "Preciso fazer backup do Microsoft 365 ou do Google Workspace?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "O suficiente para restaurar um dia de trabalho perdido. Na prática de PME, o ciclo que funciona é: uma vez por mês, restaurar um arquivo aleatório de um ponto antigo e conferir se abre; uma vez por trimestre, restaurar uma pasta inteira ou uma máquina completa em ambiente separado e cronometrar quanto tempo levou. Anote a data, o que foi restaurado e o tempo gasto. Esse registro é o que transforma uma intuição em um número de RTO defensável, e leva menos de trinta minutos por mês."}, "name": "Com que frequência preciso testar a restauração?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Porque o ransomware herda as permissões do usuário infectado. Se a estação tem uma unidade de rede mapeada com credencial salva, ou se o NAS aceita gravação com a mesma senha usada para acessar as pastas, o processo que cifra o disco local cifra também o destino do backup, e o faz antes de qualquer alerta. O destino de backup precisa ser inacessível para o usuário comum: credencial exclusiva usada só pelo processo de backup, ou armazenamento em nuvem com bloqueio de objeto ativado, onde o arquivo não pode ser apagado nem sobrescrito antes do prazo definido."}, "name": "Por que o backup no servidor de arquivos da rede não protege contra ransomware?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Bem menos do que a maioria imagina, quando o volume é o volume real. Armazenamento de objeto voltado a backup é cobrado na casa de poucos dólares por terabyte ao mês em provedores como Backblaze B2 e Wasabi, e o software pode ser gratuito: o Veeam Backup and Replication tem edição comunitária para até dez cargas de trabalho e o Duplicati é livre e grava em destino compatível com S3. O custo relevante quase nunca é a licença ou o armazenamento, é o tempo de alguém montar, monitorar e testar. Orce esse tempo explicitamente, ou o backup vira um item comprado e não operado."}, "name": "Quanto custa manter backup em nuvem para uma empresa pequena?"}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/", "name": "Blog", "position": 2}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/backup-pmes-montar-testar-sem-equipe-ti/", "name": "Backup para PMEs: Como Montar e Testar sem Equipe de TI", "position": 3}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Continuidade e Recuperação</span>
+            <h1>Backup para PMEs: Como Montar e Testar sem Equipe de TI</h1>
+            <div class="article-meta">
+                <span><i class="far fa-user"></i> Roberto Lima</span>
+                <span><i class="far fa-calendar"></i> Setembro 2026</span>
+                <span><i class="far fa-clock"></i> 11 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">Backup para PMEs sem Equipe de TI</li></ol></div></nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <figure class="article-hero">
+                    <img src="../../img/og-image.webp" alt="Técnico verificando rotina de backup e restauração em pequena empresa" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async">
+                </figure>
+
+                <div class="toc">
+                    <!-- REVIEWED-V1 -->
+<p class="article-review-seal"><i class="fas fa-shield-check" aria-hidden="true"></i> Revisado em <time datetime="2026-09-03">03/09/2026</time> por <a href="/sobre/">Roberto Lima</a></p>
+<h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#nao-e-backup">Quatro Coisas que Não São Backup</a></li>
+                        <li><a href="#armadilha">A Armadilha do Compartilhamento de Rede</a></li>
+                        <li><a href="#montar">Como Montar: Três Arranjos por Perfil</a></li>
+                        <li><a href="#imutabilidade">Imutabilidade sem Projeto</a></li>
+                        <li><a href="#teste">A Rotina de Teste de 30 Minutos</a></li>
+                        <li><a href="#custo">Quanto Custa de Verdade</a></li>
+                    </ul>
+                </div>
+
+                <p>Quase toda empresa pequena que atendo diz ter backup. Quando peço para restaurar um arquivo de três meses atrás, na frente de mim, a taxa de sucesso despenca. Às vezes o software parou de rodar depois de uma atualização e ninguém viu. Às vezes o destino é uma pasta de rede que o ransomware alcançaria em segundos. Às vezes o backup existe e funciona, mas a única pessoa que sabia restaurar saiu da empresa. Backup que não foi testado é uma hipótese, não um controle.</p>
+
+                <p>Este texto é operacional. Ele não discute a doutrina de resiliência, a regra 3-2-1-1-0, definição de RPO e RTO ou modelos de DRaaS, que já estão detalhados no artigo sobre <a href="../backup-cyber-resilience-recuperacao/">backup e resiliência cibernética</a>. Aqui o assunto é a execução em uma empresa sem equipe de TI: que ferramenta usar, quanto custa, como configurar o destino para que ransomware não o alcance e qual rotina mínima de teste transforma backup em recuperação de verdade.</p>
+
+                <h2 id="nao-e-backup">Quatro Coisas que a Empresa Chama de Backup e Não São</h2>
+
+                <p><strong>Sincronização de nuvem.</strong> OneDrive, Google Drive e Dropbox replicam alterações, e criptografia por ransomware é uma alteração como qualquer outra. Os arquivos cifrados sobem para a nuvem em minutos. As versões anteriores e a lixeira ajudam em um punhado de arquivos, mas restaurar dezenas de milhares de versões manualmente, sob pressão, não é plano de recuperação.</p>
+
+                <p><strong>RAID no servidor.</strong> Espelhamento de disco protege contra falha de hardware de um disco. Contra exclusão acidental, corrupção lógica ou criptografia maliciosa, o RAID replica o problema com fidelidade perfeita.</p>
+
+                <p><strong>Retenção do Microsoft 365 e do Google Workspace.</strong> Os dois operam sob responsabilidade compartilhada: o fabricante garante a plataforma, o dado é do cliente. Lixeira, políticas de retenção e ferramentas de arquivamento como o Google Vault servem a retenção legal e investigação, com prazos finitos, e não a recuperação de exclusão em massa ou de uma conta comprometida.</p>
+
+                <p><strong>Cópias Sombra do Windows.</strong> As <em>shadow copies</em> são úteis para recuperar um arquivo salvo por cima. Praticamente toda família de ransomware moderna apaga esses pontos de restauração como primeira ação, antes de começar a cifrar. É o item mais fácil de destruir do arsenal defensivo.</p>
+
+                <h2 id="armadilha">A Armadilha do Compartilhamento de Rede</h2>
+
+                <p>Este é o erro estrutural mais frequente em PME, e ele merece uma seção própria porque anula todo o resto. O arranjo típico: as estações têm uma unidade de rede mapeada, digamos a letra Z, apontando para uma pasta no servidor ou em um NAS, e o backup grava ali.</p>
+
+                <p>O ransomware executa com as permissões do usuário que abriu o anexo. Se aquele usuário enxerga e escreve na unidade Z, o processo que cifra o disco local cifra a unidade Z também, e normalmente termina antes de qualquer alerta chegar a alguém. O mesmo vale para o NAS cuja credencial de gravação está salva nas estações, e vale para o disco externo que fica permanentemente conectado por USB.</p>
+
+                <div class="warning-box">
+                <p><strong><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i>O teste que revela o problema em dois minutos</strong></p>
+                <p>Sente-se em uma estação comum, abra o Explorador de Arquivos, navegue até o destino do backup e tente apagar um arquivo antigo. Se conseguiu, o ransomware também conseguiria. O destino do backup precisa ser inacessível para a conta que a pessoa usa no dia a dia, seja por credencial exclusiva do processo de backup, seja por bloqueio de objeto na nuvem, seja por mídia fisicamente desconectada.</p>
+                </div>
+
+                <h2 id="montar">Como Montar: Três Arranjos por Perfil</h2>
+
+                <h3>Empresa sem servidor, tudo em nuvem e notebooks</h3>
+
+                <p>É o perfil mais comum hoje em empresas de serviço. O que precisa de backup aqui são as caixas de e-mail, os arquivos compartilhados do Microsoft 365 ou do Google Workspace e as pastas locais dos notebooks que não estão sincronizadas.</p>
+
+                <p>Para os dados do SaaS, o caminho é um serviço de backup dedicado. A Microsoft passou a oferecer backup nativo pago para o Microsoft 365, e existem fornecedores independentes que fazem o mesmo para as duas plataformas, cobrando por caixa ou por usuário ao mês. Para as pastas locais, uma ferramenta livre como o Duplicati ou o Restic grava direto em armazenamento de objeto compatível com S3, com criptografia no cliente.</p>
+
+                <h3>Empresa com servidor de arquivos ou ERP local</h3>
+
+                <p>Aqui o alvo é a máquina inteira, não a pasta. Recuperar um servidor de ERP arquivo por arquivo é um exercício de dias; recuperar a partir de uma imagem completa é um exercício de horas. O Veeam Backup &amp; Replication tem edição comunitária gratuita para até dez cargas de trabalho, o que cobre com folga a estrutura de uma PME típica, e há alternativas comerciais de custo baixo por servidor.</p>
+
+                <p>O arranjo mínimo defensável é: uma cópia local em disco dedicado, para restaurar rápido, e uma cópia em nuvem com bloqueio de objeto, para o dia em que a cópia local for perdida junto com o resto.</p>
+
+                <h3>Empresa com um sistema crítico hospedado por terceiro</h3>
+
+                <p>Se o ERP, o PDV ou o sistema de gestão roda na infraestrutura do fornecedor, a pergunta muda: passa a ser contratual. Pergunte por escrito qual a frequência do backup, qual o tempo de retenção, quanto tempo leva uma restauração completa e se o fornecedor já testou. A resposta a essa última pergunta diz mais do que as três primeiras. Trate isso como parte do seu programa de risco de fornecedor, tema que também aparece no <a href="../checklist-seguranca-pmes-pequenas-empresas/">checklist de segurança para PMEs</a>.</p>
+
+                <h2 id="imutabilidade">Imutabilidade sem Projeto: o Bloqueio de Objeto</h2>
+
+                <p>Imutabilidade parece assunto de empresa grande e não é. Os principais armazenamentos de objeto de baixo custo, incluindo Backblaze B2 e Wasabi, oferecem bloqueio de objeto no padrão S3, e ligar isso é marcar uma opção no bucket e definir um prazo de retenção.</p>
+
+                <p>Com o bloqueio ativo, o arquivo gravado não pode ser apagado nem sobrescrito antes do prazo, nem por quem tem a chave de acesso, nem por quem tem a senha da conta. É a única proteção que continua valendo depois que o atacante obteve credencial de administrador, que é exatamente o cenário em que backup importa. Um prazo de retenção de 30 dias é um bom ponto de partida para PME: cobre o intervalo típico entre a invasão e a detecção, e mantém o custo previsível.</p>
+
+                <div class="stat-highlight">
+                <div class="number">2 minutos</div>
+                <div class="label">é o tempo do único teste que separa backup real de backup teórico: tentar apagar, de uma estação comum, um arquivo do destino de backup. Se der certo, o ransomware também conseguiria</div>
+                </div>
+
+                <h2 id="teste">A Rotina de Teste que Cabe em 30 Minutos por Mês</h2>
+
+                <p>Esta é a parte que quase nenhuma PME faz, e é a que decide o resultado no dia ruim. Não precisa de simulação elaborada. Precisa de constância e de registro.</p>
+
+                <p><strong>Toda semana, cinco minutos:</strong> abra o painel da ferramenta e confirme que os últimos trabalhos terminaram com sucesso. Configure alerta por e-mail para falha, e teste esse alerta uma vez, porque alerta que nunca disparou pode simplesmente não estar funcionando.</p>
+
+                <p><strong>Todo mês, quinze minutos:</strong> escolha um arquivo qualquer de um ponto de restauração antigo, restaure em uma pasta temporária e abra. Não basta o arquivo aparecer, ele precisa abrir sem erro. Backup corrompido costuma se revelar exatamente aí.</p>
+
+                <p><strong>Todo trimestre, uma hora:</strong> restaure algo grande. Uma pasta departamental inteira, ou uma máquina virtual completa em ambiente isolado. Cronometre. O número que sair do cronômetro é o seu tempo real de recuperação, e ele quase sempre é maior do que a estimativa que o dono tinha na cabeça.</p>
+
+                <p><strong>Registre em uma folha:</strong> data, o que foi restaurado, quanto tempo levou, o que deu errado. Três linhas por teste. Esse registro serve para três coisas: mostrar evolução, sustentar conversa com seguradora e responder à ANPD sobre medidas técnicas adotadas, obrigação que detalhamos no <a href="../lgpd-pequenas-empresas-guia-adequacao/">guia de adequação à LGPD para pequenas empresas</a>.</p>
+
+                <p>Uma observação sobre quem faz: em empresa sem TI, a pessoa que executa isso não precisa ser técnica. Precisa ser alguém confiável, com o procedimento escrito em uma página e com um segundo nome designado para quando essa pessoa estiver de férias. Rotina que depende de uma pessoa só é uma rotina com data de validade.</p>
+
+                <h2 id="custo">Quanto Custa de Verdade</h2>
+
+                <p>O software pode custar zero: a edição comunitária do Veeam cobre até dez cargas de trabalho, o Duplicati e o Restic são livres, e os agentes gratuitos de fabricantes conhecidos dão conta de estações e servidores isolados.</p>
+
+                <p>O armazenamento em nuvem de objeto voltado a backup é cobrado na casa de poucos dólares por terabyte ao mês em provedores como Backblaze B2 e Wasabi. Antes de fechar, confira dois detalhes que mudam a conta: a política de cobrança de saída de dados, que importa justamente no dia da restauração, e o período mínimo de retenção faturada, que alguns provedores aplicam. Os valores mudam, então trate a página oficial de preços como fonte no momento da compra.</p>
+
+                <p>O custo que ninguém orça é o tempo. Montar o arranjo inicial leva algumas horas. Manter leva a rotina descrita acima, algo entre trinta minutos e uma hora por mês. É esse tempo, e não a licença, que costuma faltar, e é por isso que tantas empresas têm backup comprado e não têm backup operado. Quando dimensionamos <a href="../orcamento-seguranca-pmes-quanto-investir/">orçamento de segurança para PME</a>, essa linha de operação entra sempre colada na linha de ferramenta.</p>
+
+                <div class="cta-box">
+                <h3>Quer saber se o seu backup sobreviveria a um ransomware?</h3>
+                <p>Avaliamos o arranjo atual, testamos a restauração com você e apontamos onde o atacante alcançaria as cópias. Você fica com o procedimento escrito e com o tempo real de recuperação medido, não com uma estimativa.</p>
+                <a href="../../lp/resposta-ransomware/" class="cta-btn">Avaliar Meu Backup</a>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Sincronizar com OneDrive ou Google Drive conta como backup?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Não. Sincronização replica alterações, e criptografia de ransomware é uma alteração. Quando os arquivos da estação são cifrados, o cliente de sincronização propaga os arquivos cifrados para a nuvem em minutos. Serviços como OneDrive, Google Drive e Dropbox mantêm versões anteriores e lixeira por um período, o que ajuda em um punhado de arquivos, mas restaurar dezenas de milhares de versões manualmente sob pressão não é um plano de recuperação. Backup precisa ser uma cópia separada, com histórico próprio e com credencial diferente da que o usuário usa no dia a dia.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Preciso fazer backup do Microsoft 365 ou do Google Workspace?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Sim, e essa é uma das lacunas mais comuns em PME. Microsoft e Google operam sob modelo de responsabilidade compartilhada: eles garantem a disponibilidade da plataforma, e o dado é do cliente. Lixeira, retenção e ferramentas como o Google Vault servem a retenção e investigação, com prazos limitados, e não a recuperação de um cenário de exclusão em massa ou conta comprometida. Se a caixa de e-mail e os arquivos da equipe são críticos para faturar, eles precisam de backup com histórico próprio, seja pelo serviço pago do próprio fabricante, seja por ferramenta de terceiro.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Com que frequência preciso testar a restauração?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O suficiente para restaurar um dia de trabalho perdido. Na prática de PME, o ciclo que funciona é: uma vez por mês, restaurar um arquivo aleatório de um ponto antigo e conferir se abre; uma vez por trimestre, restaurar uma pasta inteira ou uma máquina completa em ambiente separado e cronometrar quanto tempo levou. Anote a data, o que foi restaurado e o tempo gasto. Esse registro é o que transforma uma intuição em um número de RTO defensável, e leva menos de trinta minutos por mês.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Por que o backup no servidor de arquivos da rede não protege contra ransomware?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Porque o <a class="gloss-link" href="/glossario/#ransomware" title="Ver no gloss&#225;rio">ransomware</a> herda as permissões do usuário infectado. Se a estação tem uma unidade de rede mapeada com credencial salva, ou se o NAS aceita gravação com a mesma senha usada para acessar as pastas, o processo que cifra o disco local cifra também o destino do backup, e o faz antes de qualquer alerta. O destino de backup precisa ser inacessível para o usuário comum: credencial exclusiva usada só pelo processo de backup, ou armazenamento em nuvem com bloqueio de objeto ativado, onde o arquivo não pode ser apagado nem sobrescrito antes do prazo definido.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quanto custa manter backup em nuvem para uma empresa pequena?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Bem menos do que a maioria imagina, quando o volume é o volume real. Armazenamento de objeto voltado a backup é cobrado na casa de poucos dólares por terabyte ao mês em provedores como Backblaze B2 e Wasabi, e o software pode ser gratuito: o Veeam Backup and Replication tem edição comunitária para até dez cargas de trabalho e o Duplicati é livre e grava em destino compatível com S3. O custo relevante quase nunca é a licença ou o armazenamento, é o tempo de alguém montar, monitorar e testar. Orce esse tempo explicitamente, ou o backup vira um item comprado e não operado.</p></div>
+                    </div>
+                </div>
+
+                <h2>Conclusão</h2>
+
+                <p>Backup em empresa pequena falha por três motivos previsíveis, e todos têm correção barata. O destino está ao alcance do usuário comum, e a correção é credencial exclusiva ou bloqueio de objeto. A restauração nunca foi testada, e a correção é meia hora por mês com registro em três linhas. E a rotina depende de uma única pessoa, cuja correção é um procedimento escrito em uma página e um segundo nome designado. Nenhum dos três exige equipe de TI, licença cara ou projeto. Exigem constância, que é justamente o recurso mais escasso em quem toca uma empresa pequena, e é por isso que vale transformar isso em compromisso de calendário e não em boa intenção.</p>
+
+                <div class="module-sources" style="margin-top:2rem;padding:1.5rem;background:rgba(96,165,250,.04);border-left:3px solid #60A5FA;border-radius:8px">
+                    <div style="font-weight:700;color:#60A5FA;margin-bottom:.75rem"><i class="fas fa-bookmark"></i> Fontes e referencias tecnicas</div>
+                    <ul style="margin:0;padding-left:1.2rem">
+                        <li><a href="https://www.veeam.com/products/free/backup-recovery.html" target="_blank" rel="noopener">Veeam — Backup &amp; Replication Community Edition, limite de dez cargas de trabalho</a></li>
+                        <li><a href="https://www.backblaze.com/cloud-storage/pricing" target="_blank" rel="noopener">Backblaze B2 — página oficial de preços e bloqueio de objeto</a></li>
+                        <li><a href="https://wasabi.com/pricing" target="_blank" rel="noopener">Wasabi — página oficial de preços e política de retenção mínima</a></li>
+                        <li><a href="https://duplicati.com/" target="_blank" rel="noopener">Duplicati — software livre de backup para destinos compatíveis com S3</a></li>
+                        <li><a href="https://learn.microsoft.com/en-us/microsoft-365/enterprise/microsoft-cloud-it-architecture-resources" target="_blank" rel="noopener">Microsoft Learn — modelo de responsabilidade compartilhada na nuvem</a></li>
+                        <li><a href="https://support.google.com/vault/answer/2462365" target="_blank" rel="noopener">Google — Vault como ferramenta de retenção e investigação, não de backup</a></li>
+                        <li><a href="https://www.cisa.gov/stopransomware" target="_blank" rel="noopener">CISA — StopRansomware, orientações sobre backups offline e imutáveis</a></li>
+                    </ul>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/backup-pmes-montar-testar-sem-equipe-ti/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/backup-pmes-montar-testar-sem-equipe-ti/" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Backup%20para%20PMEs%3A%20Como%20Montar%20e%20Testar%20sem%20Equipe%20de%20TI https://inteligenciabrasil.seg.br/blog/backup-pmes-montar-testar-sem-equipe-ti/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h3>Roberto Lima</h3>
+                        <p>Especialista em Seguranca Ofensiva, <a class="gloss-link" href="/glossario/#cti" title="Ver no gloss&#225;rio">Threat Intelligence</a> e Detection Engineering na Inteligencia Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- PHASE5-RELATED-V1 -->
+<div class="container related-articles">
+    <p class="footer-col-title"><strong>Artigos Relacionados</strong></p>
+    <ul style="list-style:none;padding:0">
+            <li><a href="../checklist-seguranca-pmes-pequenas-empresas/">Checklist de Segurança da Informação para PMEs (pillar)</a></li>
+            <li><a href="../backup-cyber-resilience-recuperacao/">Backup e Resiliência Cibernética: a Doutrina Completa</a></li>
+            <li><a href="../orcamento-seguranca-pmes-quanto-investir/">Orçamento de Segurança para PMEs: Quanto Investir</a></li>
+            <li><a href="../lgpd-pequenas-empresas-guia-adequacao/">LGPD para Pequenas Empresas: Guia Simplificado</a></li>
+            <li><a href="../../lp/resposta-ransomware/">Serviço: Resposta a Ransomware</a></li>
+    </ul>
+</div>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><p class="footer-col-title"><strong>Navegacao</strong></p><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><p class="footer-col-title"><strong>Contato</strong></p><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+
+</footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

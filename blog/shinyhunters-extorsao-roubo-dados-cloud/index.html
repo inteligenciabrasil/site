@@ -197,7 +197,7 @@
 
 <div class="phase-card" data-phase="Passo 5">
 <h3>Higiene de segredos e detecção de credenciais expostas</h3>
-<p>Rode secret scanning contínuo em repositórios em busca de chaves AWS, tokens Snowflake e credenciais VPN em texto claro, os mesmos alvos que atacantes varrem ofensivamente com ferramentas como TruffleHog. Combine com feeds de vazamento de credenciais e reset forçado ao detectar exposição por infostealer.</p>
+<p>Rode secret scanning contínuo em repositórios em busca de chaves AWS, tokens Snowflake e credenciais <a class="gloss-link" href="/glossario/#vpn" title="Ver no gloss&#225;rio">VPN</a> em texto claro, os mesmos alvos que atacantes varrem ofensivamente com ferramentas como TruffleHog. Combine com feeds de vazamento de credenciais e reset forçado ao detectar exposição por infostealer.</p>
 </div>
 
 <div class="phase-card" data-phase="Passo 6">
@@ -224,7 +224,7 @@
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Como o abuso de tokens OAuth funcionou no caso Salesforce/Salesloft-Drift?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Em agosto de 2025, os atacantes roubaram tokens OAuth e refresh tokens da integração Drift, começando por um comprometimento no GitHub da Salesloft e no ambiente AWS da Drift. Com esses tokens acessaram mais de 700 instâncias Salesforce downstream sem precisar de senha nem MFA, porque o token já representava uma autorização válida e ativa concedida à integração.</p></div>
+                        <div class="faq-answer"><p>Em agosto de 2025, os atacantes roubaram tokens OAuth e refresh tokens da integração Drift, começando por um comprometimento no GitHub da Salesloft e no ambiente AWS da Drift. Com esses tokens acessaram mais de 700 instâncias Salesforce downstream sem precisar de senha nem <a class="gloss-link" href="/glossario/#mfa" title="Ver no gloss&#225;rio">MFA</a>, porque o token já representava uma autorização válida e ativa concedida à integração.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Quais empresas confirmaram impacto na campanha Salesloft-Drift?</span><i class="fas fa-chevron-down faq-icon"></i></div>
@@ -232,15 +232,15 @@
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Quais controles reduzem o risco de ataques do estilo ShinyHunters?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Os controles mais eficazes são MFA resistente a phishing (FIDO2/passkeys) em todas as contas cloud e SaaS, governança de tokens OAuth e identidades não-humanas com rotação e expiração curta, allow-list de rede em data warehouses, monitoramento de exfiltração anômala, secret scanning contínuo em repositórios e detecção de credenciais expostas por infostealer. Todos endereçam diretamente os vetores usados em Snowflake e Salesforce.</p></div>
+                        <div class="faq-answer"><p>Os controles mais eficazes são MFA resistente a phishing (<a class="gloss-link" href="/glossario/#fido2" title="Ver no gloss&#225;rio">FIDO2</a>/passkeys) em todas as contas cloud e SaaS, governança de tokens OAuth e identidades não-humanas com rotação e expiração curta, allow-list de rede em data warehouses, monitoramento de exfiltração anômala, secret scanning contínuo em repositórios e detecção de credenciais expostas por infostealer. Todos endereçam diretamente os vetores usados em Snowflake e Salesforce.</p></div>
                     </div>
                 </div>
 
                 <h2>Conclusao</h2>
 
-                <p>O ShinyHunters é um estudo de caso sobre como o crime cibernético financeiramente motivado se adaptou à realidade da nuvem. O grupo praticamente abandonou a exploração de vulnerabilidades técnicas em favor de algo mais barato e mais difícil de detectar: credenciais legítimas roubadas e a confiança implícita entre plataformas SaaS. Snowflake mostrou o custo de contas sem MFA; Salesforce/Salesloft-Drift mostrou o custo de tokens OAuth de longa duração e escopo amplo governados de forma negligente.</p>
+                <p>O ShinyHunters é um estudo de caso sobre como o crime cibernético financeiramente motivado se adaptou à realidade da nuvem. O grupo praticamente abandonou a exploração de vulnerabilidades técnicas em favor de algo mais barato e mais difícil de detectar: credenciais legítimas roubadas e a confiança implícita entre plataformas SaaS. Snowflake mostrou o custo de contas sem MFA; Salesforce/Salesloft-Drift mostrou o custo de tokens <a class="gloss-link" href="/glossario/#oauth" title="Ver no gloss&#225;rio">OAuth</a> de longa duração e escopo amplo governados de forma negligente.</p>
 
-<p>A implicação para times de segurança brasileiros é clara e desconfortável ao mesmo tempo. A defesa contra o G1057 não passa por comprar mais uma ferramenta de endpoint, mas por disciplina de identidade: MFA resistente a phishing sem exceções, inventário e rotação de tokens de integração, allow-list de rede em ativos de dados críticos e visibilidade contínua sobre credenciais vazadas e exfiltração anômala. São controles conhecidos, e é justamente a sua ausência que o grupo explora com consistência.</p>
+<p>A implicação para times de segurança brasileiros é clara e desconfortável ao mesmo tempo. A defesa contra o G1057 não passa por comprar mais uma ferramenta de endpoint, mas por disciplina de identidade: MFA resistente a <a class="gloss-link" href="/glossario/#phishing" title="Ver no gloss&#225;rio">phishing</a> sem exceções, inventário e rotação de tokens de integração, allow-list de rede em ativos de dados críticos e visibilidade contínua sobre credenciais vazadas e exfiltração anômala. São controles conhecidos, e é justamente a sua ausência que o grupo explora com consistência.</p>
 
 <p>Monitorar a exposição antes que ela vire extorsão é uma decisão de maturidade, não de orçamento. As organizações que trataram identidade não-humana e higiene de segredos como controles de primeira linha, e não como itens de checklist anual, são as que menos apareceram nas listas de vítimas de 2024 e 2025.</p>
 
@@ -270,7 +270,7 @@
                     <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
                     <div class="author-info">
                         <h3>Roberto Lima</h3>
-                        <p>Especialista em Seguranca Ofensiva, Threat Intelligence e Detection Engineering na Inteligencia Brasil.</p>
+                        <p>Especialista em Seguranca Ofensiva, <a class="gloss-link" href="/glossario/#cti" title="Ver no gloss&#225;rio">Threat Intelligence</a> e Detection Engineering na Inteligencia Brasil.</p>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-WCL38PDP');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Segurança de e-commerce para PMEs: quem responde pelo quê em cada tipo de loja, qual PCI DSS se aplica, skimming no checkout, fraude e o que a lei exige.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="segurança e-commerce PME, PCI DSS pequena loja virtual, skimming checkout, teste de cartão fraude, Decreto 7962 comércio eletrônico, segurança loja virtual">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/seguranca-ecommerce-pmes/">
+
+    <meta property="og:title" content="Segurança de E-commerce para PMEs: o Guia Prático">
+    <meta property="og:description" content="Quem responde pelo quê na sua loja virtual, qual PCI DSS se aplica de verdade e as fraudes que atingem quem vende online no Brasil.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/seguranca-ecommerce-pmes/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2026-09-06T09:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Segurança de Aplicações">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Segurança de E-commerce para PMEs: o Guia Prático">
+    <meta name="twitter:description" content="Quem responde pelo quê na sua loja virtual, qual PCI DSS se aplica de verdade e as fraudes que atingem quem vende online no Brasil.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Segurança de E-commerce para PMEs | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "Article", "articleSection": "Segurança de Aplicações", "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"}, "copyrightHolder": {"@type": "Organization", "name": "Inteligência Brasil", "url": "https://inteligenciabrasil.seg.br"}, "copyrightYear": 2026, "dateModified": "2026-09-06T09:00:00-03:00", "datePublished": "2026-09-06T09:00:00-03:00", "description": "Segurança de e-commerce para PMEs: quem responde pelo quê em cada tipo de loja, qual PCI DSS se aplica, skimming no checkout, fraude e o que a lei exige.", "headline": "Segurança de E-commerce para PMEs: o Guia Prático", "image": "https://inteligenciabrasil.seg.br/img/og-image.webp", "inLanguage": "pt-BR", "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/", "mainEntityOfPage": {"@id": "https://inteligenciabrasil.seg.br/blog/seguranca-ecommerce-pmes/", "@type": "WebPage"}, "publisher": {"@type": "Organization", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}, "name": "Inteligência Brasil"}}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Sim, o PCI DSS se aplica a qualquer estabelecimento que aceite cartão, independentemente do porte. O que muda é a profundidade da comprovação. Lojas que terceirizam integralmente o pagamento para um provedor validado, seja por redirecionamento, seja por um formulário hospedado pelo provedor dentro de um iframe, se enquadram no questionário de autoavaliação mais simples, o SAQ A. Já quem recebe o número do cartão no próprio servidor cai em um escopo muito maior e mais caro. Para uma PME, a decisão de arquitetura que mais reduz custo de conformidade é simplesmente nunca deixar o dado do cartão passar pela sua infraestrutura."}, "name": "Uma loja virtual pequena precisa se preocupar com PCI DSS?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "É a injeção de código JavaScript malicioso na página de checkout, que copia os dados do cartão enquanto o cliente digita e os envia para o atacante, sem interromper a compra. O ataque é invisível para o lojista e para o comprador, porque a transação é concluída normalmente. Ele costuma entrar por um script de terceiro, uma extensão desatualizada ou uma conta de administrador comprometida. É justamente esse risco que motivou os requisitos 6.4.3 e 11.6.1 do PCI DSS 4.0, que passaram a ser obrigatórios a partir de 31 de março de 2025 e exigem inventário dos scripts da página de pagamento e mecanismo de detecção de alteração."}, "name": "O que é skimming de checkout e como percebo que aconteceu?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Provavelmente é teste de cartão. Fraudadores usam lojas com checkout aberto para validar listas de cartões roubados, disparando muitas transações de valor baixo para descobrir quais números ainda funcionam. O prejuízo para o lojista não é a venda, é a taxa cobrada por transação e por contestação, além do risco de a loja ser sinalizada pelo adquirente. As defesas eficazes são limitação de tentativas por sessão, por endereço de origem e por cartão, verificação de desafio nas etapas de pagamento e regras antifraude no gateway."}, "name": "Minha loja recebeu dezenas de tentativas de compra de valor baixo. O que é isso?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Muda a responsabilidade sobre a infraestrutura, não sobre o conteúdo. Em plataformas gerenciadas, o fornecedor cuida de servidor, atualizações do núcleo e certificado, e a sua responsabilidade fica concentrada em contas de administrador, aplicativos instalados, integrações e conteúdo. Em loja auto-hospedada, tipicamente WordPress com WooCommerce ou Magento em servidor próprio, tudo isso continua sendo seu: atualização de núcleo, tema, extensões, servidor e monitoramento. A escolha da plataforma é, na prática, uma decisão sobre quanta operação de segurança a empresa quer manter internamente."}, "name": "Usar Shopify, Nuvemshop ou VTEX me isenta de responsabilidade?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Sim. O Decreto nº 7.962/2013, que regulamenta o Código de Defesa do Consumidor para a contratação no comércio eletrônico, exige que o site apresente de forma clara a identificação do fornecedor, incluindo CNPJ e endereço, ofereça atendimento eletrônico e respeite o direito de arrependimento previsto no art. 49 do CDC. Somam-se a isso as obrigações da LGPD, já que loja virtual trata dados pessoais em volume, o que inclui base legal por finalidade, canal de atendimento ao titular e comunicação de incidente à ANPD nos prazos da regulamentação vigente."}, "name": "Existe obrigação legal específica para lojas virtuais no Brasil?"}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/", "name": "Blog", "position": 2}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/seguranca-ecommerce-pmes/", "name": "Segurança de E-commerce para PMEs: o Guia Prático", "position": 3}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Segurança de Aplicações</span>
+            <h1>Segurança de E-commerce para PMEs: o Guia Prático</h1>
+            <div class="article-meta">
+                <span><i class="far fa-user"></i> Roberto Lima</span>
+                <span><i class="far fa-calendar"></i> Setembro 2026</span>
+                <span><i class="far fa-clock"></i> 12 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">Segurança de E-commerce para PMEs</li></ol></div></nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <figure class="article-hero">
+                    <img src="../../img/og-image.webp" alt="Lojista analisando pedidos e transações suspeitas no painel de uma loja virtual" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async">
+                </figure>
+
+                <div class="toc">
+                    <!-- REVIEWED-V1 -->
+<p class="article-review-seal"><i class="fas fa-shield-check" aria-hidden="true"></i> Revisado em <time datetime="2026-09-06">06/09/2026</time> por <a href="/sobre/">Roberto Lima</a></p>
+<h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#quem-responde">Quem Responde pelo Quê</a></li>
+                        <li><a href="#pci-dss">PCI DSS sem Pânico</a></li>
+                        <li><a href="#skimming">O Ataque que Ninguém Vê</a></li>
+                        <li><a href="#fraude">Teste de Cartão e Chargeback</a></li>
+                        <li><a href="#conta-cliente">A Conta do Cliente é um Alvo</a></li>
+                        <li><a href="#obrigacoes">O que a Lei Brasileira Exige</a></li>
+                    </ul>
+                </div>
+
+                <p>Loja virtual pequena tem uma característica que a diferencia de qualquer outro tipo de PME: ela processa pagamento e guarda dados de consumidor em volume, com uma superfície pública exposta vinte e quatro horas por dia. O resultado é que ela herda, em escala reduzida, um conjunto de exigências que nasceu para varejo grande, e quase sempre sem ninguém dedicado a cuidar disso.</p>
+
+                <p>A boa notícia é que a maior parte do risco pode ser transferida por decisão de arquitetura, e não por gasto. Este guia trata de quem responde pelo quê em cada tipo de loja, de qual regra de cartão realmente se aplica ao seu caso, dos dois ataques que mais atingem quem vende online no Brasil e das obrigações legais que valem para o comércio eletrônico. Ele complementa o <a href="../checklist-seguranca-pmes-pequenas-empresas/">checklist de segurança para PMEs</a> na parte específica de quem vende pela internet.</p>
+
+                <h2 id="quem-responde">Quem Responde pelo Quê: a Divisão que Muda Tudo</h2>
+
+                <p>Antes de qualquer controle, é preciso saber onde termina a responsabilidade do fornecedor e começa a sua. Essa fronteira é a decisão mais importante do artigo, porque ela define o tamanho do trabalho.</p>
+
+                <h3>Loja apenas em marketplace</h3>
+
+                <p>Se você vende só em marketplace, a plataforma cuida da aplicação, do pagamento e da infraestrutura. A sua exposição se concentra em um único ponto: a conta de vendedor. Comprometida, ela permite alterar dados bancários de repasse, baixar a base de compradores e prejudicar a reputação construída ao longo de anos. Segundo fator obrigatório nessa conta, com senha exclusiva, é praticamente a totalidade do trabalho de segurança nesse cenário, e é surpreendente quantos vendedores não o fazem.</p>
+
+                <h3>Plataforma de loja gerenciada</h3>
+
+                <p>Em plataformas de loja como serviço, o fornecedor cuida de servidor, atualizações do núcleo e certificado. Sobram para você quatro frentes: contas de administrador da loja, aplicativos e integrações instalados, scripts de terceiros no tema e o conteúdo. Aplicativo instalado é o item mais negligenciado, porque cada um recebe permissões amplas sobre pedidos e clientes e continua ativo depois que deixa de ser usado. Faça uma revisão semestral e remova o que não estiver em uso.</p>
+
+                <h3>Loja auto-hospedada</h3>
+
+                <p>WordPress com WooCommerce, Magento ou aplicação própria em servidor seu. Aqui tudo é responsabilidade da empresa: sistema operacional, servidor web, banco, núcleo da aplicação, tema, extensões e monitoramento. Em lojas WordPress, a origem dominante de comprometimento não é o núcleo, é a extensão desatualizada ou abandonada pelo autor. Se ninguém na empresa tem rotina para aplicar atualização em até poucos dias, essa arquitetura é uma escolha cara disfarçada de barata.</p>
+
+                <div class="warning-box">
+                <p><strong><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i>A decisão que mais reduz risco custa zero</strong></p>
+                <p>Nunca deixe o número do cartão passar pela sua infraestrutura. Use redirecionamento para a página do provedor de pagamento ou o formulário hospedado por ele. Essa única escolha tira a sua loja do escopo mais pesado do PCI DSS, elimina a possibilidade de vazamento de cartão a partir do seu servidor e não custa nada, porque é o modo padrão de integração de praticamente todos os gateways brasileiros.</p>
+                </div>
+
+                <h2 id="pci-dss">PCI DSS sem Pânico: Qual Questionário é o Seu</h2>
+
+                <p>O PCI DSS é o padrão de segurança das bandeiras de cartão e se aplica a qualquer estabelecimento que aceite cartão, sem exceção por porte. O que varia é a profundidade da comprovação, definida pelo questionário de autoavaliação, o SAQ, que corresponde à sua forma de integração.</p>
+
+                <p>Para uma PME, o cenário desejável é o SAQ A, que se aplica a quem terceiriza integralmente as funções de pagamento para um provedor validado, seja por redirecionamento completo, seja por formulário hospedado pelo provedor dentro de um iframe. É a lista mais curta de requisitos e a que menos exige da sua infraestrutura.</p>
+
+                <p>À medida que a sua página passa a controlar o formulário de cartão, ainda que os dados sigam direto para o provedor, o enquadramento se desloca para questionários mais extensos, e se o número do cartão chega a tocar o seu servidor, o escopo cresce de forma que raramente compensa para uma loja pequena. Confirme o seu enquadramento com o adquirente ou o gateway, porque é ele quem cobra a comprovação de você.</p>
+
+                <p>Uma mudança recente merece atenção mesmo de quem está no SAQ A. Os requisitos 6.4.3 e 11.6.1 da versão 4.0 do padrão, que passaram a ser obrigatórios a partir de 31 de março de 2025, tratam especificamente dos scripts carregados na página de pagamento: exigem inventário e justificativa de cada script e um mecanismo de detecção de alteração não autorizada na página. Eles existem por causa do ataque da próxima seção.</p>
+
+                <h2 id="skimming">O Ataque que Ninguém Vê: Skimming no Checkout</h2>
+
+                <p>O roubo de dados de cartão em loja virtual raramente acontece por invasão do banco de dados. Acontece por injeção de um trecho de JavaScript na página de checkout, que copia o que o cliente digita e envia para um servidor do atacante. A compra é concluída normalmente, o cliente recebe o produto, o lojista recebe o dinheiro e nada parece errado. O golpe roda por semanas ou meses.</p>
+
+                <p>Os caminhos de entrada mais comuns em loja de PME são três: um script de terceiro carregado no tema, tipicamente uma ferramenta de análise ou de chat cuja origem foi comprometida; uma extensão ou aplicativo desatualizado; e uma conta de administrador da loja tomada por credencial roubada.</p>
+
+                <p>As defesas proporcionais para uma empresa pequena são igualmente três. Primeira, saber quais scripts a sua página de checkout carrega, o que é literalmente uma lista e é o que o requisito 6.4.3 pede. Segunda, remover tudo o que não tiver justificativa, especialmente scripts de marketing na página de pagamento. Terceira, monitorar alteração: existem serviços que verificam periodicamente se o conjunto de scripts da página mudou, e mesmo uma checagem manual mensal já é infinitamente melhor do que nenhuma. O <a href="../phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">monitoramento contínuo de sites</a> cobre esse tipo de vigilância externa.</p>
+
+                <div class="stat-highlight">
+                <div class="number">31/03/2025</div>
+                <div class="label">é a data a partir da qual os requisitos 6.4.3 e 11.6.1 do PCI DSS 4.0 deixaram de ser recomendação e passaram a ser obrigatórios: inventário dos scripts da página de pagamento e detecção de alteração não autorizada</div>
+                </div>
+
+                <h2 id="fraude">Teste de Cartão e Chargeback: a Fraude que Chega pelo Checkout</h2>
+
+                <p>Há um padrão que assusta lojistas pequenos e é frequentemente mal interpretado: uma enxurrada de tentativas de compra de valor baixo, muitas recusadas, em poucos minutos. Não é um ataque contra a sua loja, é o uso da sua loja como ferramenta. Fraudadores testam listas de cartões roubados em checkouts abertos para descobrir quais números ainda funcionam, e depois usam os validados em outro lugar.</p>
+
+                <p>O prejuízo é real mesmo sem venda concretizada: taxa por transação processada, taxa por contestação e o risco de a loja ser sinalizada pelo adquirente por índice anormal de recusa. As defesas são de configuração, não de compra: limitar tentativas por sessão, por origem e por cartão, exigir desafio antes da submissão do pagamento, e ativar as regras antifraude que o próprio gateway oferece e que muita loja mantém no padrão mais permissivo.</p>
+
+                <p>Para a fraude de compra propriamente dita, aquela em que o produto é entregue e depois contestado, o mecanismo mais relevante é a autenticação do portador na transação, conhecida como 3-D Secure na sua versão moderna, suportada pelos adquirentes brasileiros. Além de reduzir a fraude, ela desloca a responsabilidade pelo chargeback em transações autenticadas, o que muda a conta do lojista. Vale conversar com o seu adquirente sobre habilitá-la, e tratamos o tema de forma mais ampla no artigo sobre <a href="../phishing-golpes-pmes-casos-reais/">golpes contra PMEs</a>.</p>
+
+                <h2 id="conta-cliente">A Conta do Cliente é um Alvo, e o Prejuízo é Seu</h2>
+
+                <p>Contas de clientes em loja virtual guardam endereço, histórico de pedidos, cartões tokenizados e, em alguns casos, saldo ou pontos. Como muita gente reutiliza senha, listas de credenciais vazadas em outros serviços são testadas em massa nas lojas, prática conhecida como <em>credential stuffing</em>.</p>
+
+                <p>O ponto que costuma passar despercebido é que o prejuízo reputacional é do lojista. O cliente que teve a conta acessada não vai concluir que reutilizou a senha, vai concluir que a sua loja vazou. As medidas proporcionais são limitação de tentativas de entrada, desafio após falhas repetidas, oferta de segundo fator para o cliente e alerta por e-mail quando o endereço de entrega ou a senha mudarem. A conversa sobre reutilização de senha e o que fazer a respeito está no artigo sobre <a href="../gerenciadores-senhas-seguros-gratuitos/">gerenciadores de senhas</a>.</p>
+
+                <h2 id="obrigacoes">O que a Lei Brasileira Exige da Sua Loja</h2>
+
+                <p>Duas frentes, e nenhuma delas é opcional.</p>
+
+                <p><strong>Comércio eletrônico.</strong> O Decreto nº 7.962/2013 regulamenta o Código de Defesa do Consumidor para a contratação no comércio eletrônico e exige que o site apresente de forma clara e ostensiva a identificação do fornecedor, com CNPJ e endereço físico, informações completas sobre o produto e sobre o contrato, canal de atendimento eletrônico com confirmação do recebimento das demandas, e o cumprimento do direito de arrependimento previsto no art. 49 do CDC, com prazo de sete dias. São exigências de transparência, mas na prática funcionam também como sinal de legitimidade que diferencia a sua loja das lojas falsas que copiam catálogos.</p>
+
+                <p><strong>Proteção de dados.</strong> Loja virtual trata dados pessoais em volume, o que a coloca no centro da LGPD: base legal por finalidade, política de privacidade que descreva o tratamento real, canal para exercício de direitos do titular e comunicação de incidente à ANPD nos prazos da regulamentação vigente. Vale prestar atenção ao enquadramento: o regime simplificado da Resolução CD/ANPD nº 2/2022 não alcança quem realiza tratamento de alto risco, e uma loja com base grande de clientes pode não se enquadrar. O caminho está detalhado no <a href="../lgpd-pequenas-empresas-guia-adequacao/">guia de adequação à LGPD para pequenas empresas</a>.</p>
+
+                <p>Uma nota sobre o que não se aplica: as regras do decreto de serviço de atendimento ao consumidor por telefone, que fixam tempos de espera e horários, alcançam serviços regulados por agências federais, e não o comércio eletrônico em geral. É um ponto em que muito conteúdo de mercado erra, e cumprir obrigação que não existe custa dinheiro tanto quanto descumprir a que existe.</p>
+
+                <div class="cta-box">
+                <h3>Sua loja já foi testada por alguém do seu lado?</h3>
+                <p>Fazemos avaliação de segurança de aplicação em lojas virtuais: escopo de PCI, scripts do checkout, controle de acesso administrativo, configuração antifraude e exposição de dados de cliente, com plano de correção priorizado.</p>
+                <a href="../../lp/application-security/" class="cta-btn">Avaliar Minha Loja Virtual</a>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Uma loja virtual pequena precisa se preocupar com PCI DSS?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Sim, o PCI DSS se aplica a qualquer estabelecimento que aceite cartão, independentemente do porte. O que muda é a profundidade da comprovação. Lojas que terceirizam integralmente o pagamento para um provedor validado, seja por redirecionamento, seja por um formulário hospedado pelo provedor dentro de um iframe, se enquadram no questionário de autoavaliação mais simples, o SAQ A. Já quem recebe o número do cartão no próprio servidor cai em um escopo muito maior e mais caro. Para uma PME, a decisão de arquitetura que mais reduz custo de conformidade é simplesmente nunca deixar o dado do cartão passar pela sua infraestrutura.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que é skimming de checkout e como percebo que aconteceu?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>É a injeção de código JavaScript malicioso na página de checkout, que copia os dados do cartão enquanto o cliente digita e os envia para o atacante, sem interromper a compra. O ataque é invisível para o lojista e para o comprador, porque a transação é concluída normalmente. Ele costuma entrar por um script de terceiro, uma extensão desatualizada ou uma conta de administrador comprometida. É justamente esse risco que motivou os requisitos 6.4.3 e 11.6.1 do <a class="gloss-link" href="/glossario/#pci-dss" title="Ver no gloss&#225;rio">PCI DSS</a> 4.0, que passaram a ser obrigatórios a partir de 31 de março de 2025 e exigem inventário dos scripts da página de pagamento e mecanismo de detecção de alteração.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Minha loja recebeu dezenas de tentativas de compra de valor baixo. O que é isso?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Provavelmente é teste de cartão. Fraudadores usam lojas com checkout aberto para validar listas de cartões roubados, disparando muitas transações de valor baixo para descobrir quais números ainda funcionam. O prejuízo para o lojista não é a venda, é a taxa cobrada por transação e por contestação, além do risco de a loja ser sinalizada pelo adquirente. As defesas eficazes são limitação de tentativas por sessão, por endereço de origem e por cartão, verificação de desafio nas etapas de pagamento e regras antifraude no gateway.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Usar Shopify, Nuvemshop ou VTEX me isenta de responsabilidade?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Muda a responsabilidade sobre a infraestrutura, não sobre o conteúdo. Em plataformas gerenciadas, o fornecedor cuida de servidor, atualizações do núcleo e certificado, e a sua responsabilidade fica concentrada em contas de administrador, aplicativos instalados, integrações e conteúdo. Em loja auto-hospedada, tipicamente WordPress com WooCommerce ou Magento em servidor próprio, tudo isso continua sendo seu: atualização de núcleo, tema, extensões, servidor e monitoramento. A escolha da plataforma é, na prática, uma decisão sobre quanta operação de segurança a empresa quer manter internamente.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Existe obrigação legal específica para lojas virtuais no Brasil?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Sim. O Decreto nº 7.962/2013, que regulamenta o Código de Defesa do Consumidor para a contratação no comércio eletrônico, exige que o site apresente de forma clara a identificação do fornecedor, incluindo CNPJ e endereço, ofereça atendimento eletrônico e respeite o direito de arrependimento previsto no art. 49 do CDC. Somam-se a isso as obrigações da <a class="gloss-link" href="/glossario/#lgpd" title="Ver no gloss&#225;rio">LGPD</a>, já que loja virtual trata dados pessoais em volume, o que inclui base legal por finalidade, canal de atendimento ao titular e comunicação de incidente à ANPD nos prazos da regulamentação vigente.</p></div>
+                    </div>
+                </div>
+
+                <h2>Conclusão</h2>
+
+                <p>Segurança de e-commerce em empresa pequena não se resolve com investimento pesado, se resolve com três decisões e uma rotina. A primeira decisão é arquitetural: manter o dado do cartão fora da sua infraestrutura, o que encolhe o escopo de conformidade e elimina a pior classe de vazamento. A segunda é de acesso: segundo fator obrigatório em toda conta administrativa, da plataforma ao marketplace, porque é por ali que o skimming entra. A terceira é de inventário: saber quais scripts, aplicativos e integrações rodam na sua loja, e remover os que não têm justificativa. A rotina é olhar isso de novo a cada seis meses, porque loja virtual acumula integração como gaveta acumula papel. Feito isso, sobra o trabalho comercial de calibrar antifraude, e esse é um problema muito melhor de se ter.</p>
+
+                <div class="module-sources" style="margin-top:2rem;padding:1.5rem;background:rgba(96,165,250,.04);border-left:3px solid #60A5FA;border-radius:8px">
+                    <div style="font-weight:700;color:#60A5FA;margin-bottom:.75rem"><i class="fas fa-bookmark"></i> Fontes e referencias tecnicas</div>
+                    <ul style="margin:0;padding-left:1.2rem">
+                        <li><a href="https://www.pcisecuritystandards.org/document_library/" target="_blank" rel="noopener">PCI Security Standards Council — biblioteca de documentos do PCI DSS 4.0 e questionários SAQ</a></li>
+                        <li><a href="https://blog.pcisecuritystandards.org/just-published-pci-dss-v4x-payment-page-security-controls-faqs" target="_blank" rel="noopener">PCI SSC — requisitos 6.4.3 e 11.6.1, controles de segurança da página de pagamento</a></li>
+                        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/decreto/d7962.htm" target="_blank" rel="noopener">Planalto — Decreto nº 7.962/2013, contratação no comércio eletrônico</a></li>
+                        <li><a href="https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm" target="_blank" rel="noopener">Planalto — Código de Defesa do Consumidor, art. 49, direito de arrependimento</a></li>
+                        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener">Planalto — Lei nº 13.709/2018 (LGPD)</a></li>
+                        <li><a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener">OWASP — Top 10 de riscos em aplicações web</a></li>
+                        <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Credential_Stuffing_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">OWASP — folha de referência sobre prevenção a credential stuffing</a></li>
+                        <li><a href="https://www.emvco.com/emv-technologies/3-d-secure/" target="_blank" rel="noopener">EMVCo — especificação do 3-D Secure para autenticação do portador</a></li>
+                    </ul>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/seguranca-ecommerce-pmes/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/seguranca-ecommerce-pmes/" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Seguran%C3%A7a%20de%20E-commerce%20para%20PMEs%3A%20o%20Guia%20Pr%C3%A1tico https://inteligenciabrasil.seg.br/blog/seguranca-ecommerce-pmes/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h3>Roberto Lima</h3>
+                        <p>Especialista em Seguranca Ofensiva, <a class="gloss-link" href="/glossario/#cti" title="Ver no gloss&#225;rio">Threat Intelligence</a> e Detection Engineering na Inteligencia Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- PHASE5-RELATED-V1 -->
+<div class="container related-articles">
+    <p class="footer-col-title"><strong>Artigos Relacionados</strong></p>
+    <ul style="list-style:none;padding:0">
+            <li><a href="../checklist-seguranca-pmes-pequenas-empresas/">Checklist de Segurança da Informação para PMEs (pillar)</a></li>
+            <li><a href="../phishing-golpes-pmes-casos-reais/">Phishing e Golpes contra PMEs: Casos Reais</a></li>
+            <li><a href="../lgpd-pequenas-empresas-guia-adequacao/">LGPD para Pequenas Empresas: Guia Simplificado</a></li>
+            <li><a href="../phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">Monitoramento Contínuo de Sites contra Phishing</a></li>
+            <li><a href="../../lp/application-security/">Serviço: Segurança de Aplicações</a></li>
+            <li><a href="../../lp/prevencao-fraudes/">Serviço: Prevenção a Fraudes</a></li>
+    </ul>
+</div>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><p class="footer-col-title"><strong>Navegacao</strong></p><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><p class="footer-col-title"><strong>Contato</strong></p><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+
+</footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>
