@@ -326,7 +326,8 @@
                 entries.sort(function(a,b){ return (b.date || '').localeCompare(a.date || ''); });
                 var latest = entries.slice(0, 5);
                 var months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-                list.innerHTML = latest.map(function(e){
+                list.innerHTML = '';
+                latest.forEach(function(e){
                     var t = (e.title || e.slug).replace(/\s*\|\s*Blog Inteligencia Brasil.*$/i,'').replace(/\s*\|\s*Intelig.ncia Brasil.*$/i,'');
                     var dateStr = '';
                     if(e.date){
@@ -334,11 +335,19 @@
                         if(!isNaN(d)) dateStr = months[d.getMonth()] + ' ' + d.getFullYear();
                     }
                     var section = e.section ? ' · ' + e.section : '';
-                    return '<a class="archive-item" href="' + e.url + '">' +
-                           '<div class="meta">' + dateStr + section + '</div>' +
-                           '<div class="title">' + t + '</div>' +
-                           '</a>';
-                }).join('');
+                    var a = document.createElement('a');
+                    a.className = 'archive-item';
+                    if (/^(https?:|\/|\.\.?\/)/.test(e.url)) a.href = e.url;
+                    var meta = document.createElement('div');
+                    meta.className = 'meta';
+                    meta.textContent = dateStr + section;
+                    var titleEl = document.createElement('div');
+                    titleEl.className = 'title';
+                    titleEl.textContent = t;
+                    a.appendChild(meta);
+                    a.appendChild(titleEl);
+                    list.appendChild(a);
+                });
             })
             .catch(function(){
                 list.innerHTML = '<p style="color:#94A3B8">Não foi possível carregar o arquivo.</p>';
