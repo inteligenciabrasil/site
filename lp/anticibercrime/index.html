@@ -766,7 +766,8 @@
         })();
 
         // Phone Mask
-        document.getElementById('telefone').addEventListener('input', function(e) {
+        var _telEl = document.getElementById('telefone');
+        if (_telEl) _telEl.addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length > 11) value = value.slice(0, 11);
             if (value.length > 6) {
@@ -795,9 +796,9 @@
             const formData = {
                 name: document.getElementById('nome').value.trim(),
                 email: document.getElementById('email').value.trim(),
-                phone: document.getElementById('telefone').value.replace(/\D/g, ''),
+                phone: (document.getElementById('telefone') ? document.getElementById('telefone').value.replace(/\D/g, '') : ''),
                 empresa: document.getElementById('empresa').value.trim(),
-                servico: document.getElementById('servico').value,
+                servico: (document.getElementById('servico') ? document.getElementById('servico').value : ''),
                 message: document.getElementById('mensagem').value.trim(),
                 terms: 'Aceito',
                 origem: 'Landing Page Anticibercrime',
@@ -889,12 +890,6 @@
                 return;
             }
 
-            if (formData.phone.length < 10 || formData.phone.length > 11) {
-                showMessage('Por favor, informe um telefone valido com DDD.', 'error');
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-                return;
-            }
 
             if (formData.empresa.length < 2) {
                 showMessage('Por favor, informe o nome da empresa.', 'error');
@@ -903,12 +898,6 @@
                 return;
             }
 
-            if (!formData.servico) {
-                showMessage('Por favor, selecione o servico de interesse.', 'error');
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-                return;
-            }
 
             try {
                 const response = await fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
