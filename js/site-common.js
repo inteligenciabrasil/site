@@ -145,6 +145,7 @@
 
     // ========== 5. FAQ ACCORDION ==========
     document.querySelectorAll('.faq-question').forEach(function (btn) {
+        if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
         btn.addEventListener('click', function () {
             var item = this.closest('.faq-item');
             var isActive = item.classList.contains('active');
