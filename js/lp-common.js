@@ -126,6 +126,7 @@
             form.addEventListener('submit', function(e) {
                 if (emailInput && !validateCorporateEmail(emailInput)) {
                     e.preventDefault();
+                    e.stopImmediatePropagation();
                     emailInput.focus();
                 }
             });
@@ -191,12 +192,18 @@
                 }
 
                 fetch(form.action, { method: 'POST', body: new FormData(form) })
-                    .then(function() {
-                        msgEl.style.display = 'block';
-                        msgEl.style.background = 'rgba(16,185,129,0.1)';
-                        msgEl.style.color = '#10B981';
-                        msgEl.textContent = 'Mensagem enviada! Nossa equipe retornará em até 2 horas úteis.';
-                        msgEl.focus();
+                    .then(function(res) { return res.json(); })
+                    .then(function(data) {
+                        var result = (typeof data === 'object') ? data.result || data.status || '' : data;
+                        if (result === 'success' || result === 'ok') {
+                            msgEl.style.display = 'block';
+                            msgEl.style.background = 'rgba(16,185,129,0.1)';
+                            msgEl.style.color = '#10B981';
+                            msgEl.textContent = 'Mensagem enviada! Nossa equipe retornará em até 2 horas úteis.';
+                            msgEl.focus();
+                        } else {
+                            throw new Error('server error');
+                        }
                     })
                     .catch(function() {
                         msgEl.style.display = 'block';
