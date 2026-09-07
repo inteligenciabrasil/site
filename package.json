@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "name": "inteligenciabrasil-site",
+  "version": "0.0.0",
+  "description": "Manifesto documental — este arquivo NAO e um manifesto de build. O site e estatico e nao tem etapa de build automatizada. Este arquivo existe para registrar o esbuild que esta instalado em node_modules/ (via npm install --no-save) e os scripts de minificacao que o projeto usa.",
+  "devDependencies": {
+    "esbuild": "0.25.0"
+  },
+  "scripts": {
+    "minify:site-common": "node_modules/.bin/esbuild js/site-common.js --minify --target=es2017 --legal-comments=none --outfile=js/site-common.min.js",
+    "minify:cookie-consent": "node_modules/.bin/esbuild js/cookie-consent.js --minify --target=es2017 --legal-comments=none --outfile=js/cookie-consent.min.js",
+    "minify:lp-common": "node_modules/.bin/esbuild js/lp-common.js --minify --target=es2017 --legal-comments=none --outfile=js/lp-common.min.js",
+    "minify:home": "node_modules/.bin/esbuild js/home.js --minify --target=es2017 --legal-comments=none --outfile=js/home.min.js"
+  }
+}
