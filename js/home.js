@@ -153,6 +153,15 @@
                 statusDiv.style.backgroundColor = color;
             }
 
+            // checkValidity() only checks the email format, not the domain.
+            var emailInput = document.getElementById('email');
+            var emailCheck = validateCorporateEmail(emailInput ? emailInput.value : '');
+            if (!emailCheck.valid) {
+                showStatus(emailCheck.message, '#EF4444');
+                if (emailInput) emailInput.focus();
+                return;
+            }
+
             if (submitBtn) {
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
