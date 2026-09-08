@@ -143,6 +143,8 @@
                 if (!statusDiv) return;
                 // Clear previous content
                 while (statusDiv.firstChild) statusDiv.removeChild(statusDiv.firstChild);
+                // Text node, not textContent: callers append a WhatsApp link after this.
+                statusDiv.appendChild(document.createTextNode(text));
                 statusDiv.style.display = 'block';
                 statusDiv.style.marginTop = '0.75rem';
                 statusDiv.style.padding = '0.75rem';
@@ -168,6 +170,7 @@
                 var response = await res.json();
                 var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
                 if (result === 'success' || result === 'ok') {
+                    contactForm.reset();
                     showStatus('Mensagem enviada! Nossa equipe retornará em até 2 horas úteis.', '#10B981');
                 } else {
                     showStatus('Ocorreu um erro ao enviar. Tente novamente ou fale conosco pelo ', '#EF4444');
