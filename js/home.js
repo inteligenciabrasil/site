@@ -270,11 +270,18 @@
             var nlIpInput = document.getElementById('newsletterIp');
             if (nlIpInput) nlIpInput.value = ip;
 
+            // Build FormData from the form so cf-turnstile-response and fpr ride along for free.
+            // Defensively read token: if widget did not load, proceed without it (backend in report mode accepts).
+            var nlFormData = new FormData(newsletterForm);
+            nlFormData.set('origem', 'Newsletter Home');
+            nlFormData.set('servico', 'Newsletter');
+            var cfInput = document.querySelector('#newsletterForm [name="cf-turnstile-response"]');
+            if (cfInput) nlFormData.set('cf-turnstile-response', cfInput.value);
+
             try {
                 var res = await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: 'email=' + encodeURIComponent(email) + '&origem=Newsletter Home&servico=Newsletter&ip=' + encodeURIComponent(ip)
+                    body: nlFormData
                 });
                 var response = await res.json();
                 var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
