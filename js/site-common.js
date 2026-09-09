@@ -508,10 +508,18 @@
             var origem = 'Blog: ' + slug;
 
             nlFetchIp().then(function (ip) {
+                var fd = new FormData(nlForm);
+                fd.set('email', email);
+                fd.set('origem', origem);
+                fd.set('servico', 'Newsletter');
+                fd.set('ip', ip);
+                // cf-turnstile-response and fpr ride along from hidden inputs inside the form
+                // Defensive read: widget may not have loaded (report mode accepts without token)
+                var tokenInput = nlForm.querySelector('[name="cf-turnstile-response"]');
+                if (tokenInput && tokenInput.value) { fd.set('cf-turnstile-response', tokenInput.value); }
                 return fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: 'email=' + encodeURIComponent(email) + '&origem=' + encodeURIComponent(origem) + '&servico=Newsletter&ip=' + encodeURIComponent(ip)
+                    body: fd
                 });
             }).then(function (res) { return res.json(); })
                 .then(function (response) {
