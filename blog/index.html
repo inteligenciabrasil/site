@@ -3522,15 +3522,21 @@ Ler artigo completo <i class="fas fa-arrow-right"></i>
 <input id="newsletterIp" name="ip" type="hidden"/>
 <div class="newsletter-input-group">
 <input class="newsletter-input" id="newsletterEmail" maxlength="100" name="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" placeholder="Seu e-mail corporativo" required="" type="email"/>
-<button class="newsletter-btn" type="submit">
+
+            <!-- SEC-FORM-V1 -->
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEr8u6noYgM9vDoS" data-action="lead-blog-index-html" data-size="flexible" data-appearance="interaction-only"></div>
+
+            <input type="hidden" name="fpr" id="fpr">
+            <script>
+            (function(){var k='ib_fpr';var v=localStorage.getItem(k);if(!v){try{v=crypto.randomUUID();}catch(e){v=Math.random().toString(36).slice(2);}localStorage.setItem(k,v);}document.getElementById('fpr').value=v;})();
+            </script>
+            <!-- /SEC-FORM-V1 --><button class="newsletter-btn" type="submit">
 <span class="btn-text">Assinar</span>
 <i class="fas fa-paper-plane"></i>
 </button>
 </div>
 <div class="newsletter-message" id="newsletterMessage"></div>
-<p class="newsletter-disclaimer">
-<i class="fas fa-lock"></i> Seu e-mail está seguro. Não enviamos spam e você pode cancelar a qualquer momento.
-                    </p>
+<p class="newsletter-disclaimer">Ao se inscrever, voc&#234; concorda com nossa <a href="/politica-de-privacidade.html" target="_blank" rel="noopener">Pol&#237;tica de Privacidade</a>.</p>
 </form>
 </div>
 </div>
@@ -4126,5 +4132,6 @@ Ler artigo completo <i class="fas fa-arrow-right"></i>
     })();
     </script>
 <script defer="" src="../js/cookie-consent.min.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
 </html>

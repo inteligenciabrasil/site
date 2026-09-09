@@ -188,10 +188,18 @@
                         <input type="hidden" name="ip" id="news-page-ip">
                         <div class="news-form-row">
                             <input type="email" id="news-page-email" name="email" placeholder="seu@empresa.com.br" required maxlength="100" autocomplete="email">
-                            <button type="submit" id="news-page-btn"><i class="fas fa-paper-plane"></i> Quero receber as análises</button>
+                            
+            <!-- SEC-FORM-V1 -->
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAEr8u6noYgM9vDoS" data-action="lead-newsletter-index-html" data-size="flexible" data-appearance="interaction-only"></div>
+
+            <input type="hidden" name="fpr" id="fpr">
+            <script>
+            (function(){var k='ib_fpr';var v=localStorage.getItem(k);if(!v){try{v=crypto.randomUUID();}catch(e){v=Math.random().toString(36).slice(2);}localStorage.setItem(k,v);}document.getElementById('fpr').value=v;})();
+            </script>
+            <!-- /SEC-FORM-V1 --><button type="submit" id="news-page-btn"><i class="fas fa-paper-plane"></i> Quero receber as análises</button>
                         </div>
                         <div class="news-msg" id="news-page-msg" role="status" aria-live="polite"></div>
-                        <p class="news-disclaimer"><i class="fas fa-lock"></i> E-mail corporativo obrigatório. Não vendemos sua lista — sua privacidade é nosso ofício.</p>
+                        <p class="news-disclaimer">Ao enviar este formul&#225;rio, voc&#234; autoriza a Intelig&#234;ncia Brasil a tratar seus dados pessoais para responder &#224; sua solicita&#231;&#227;o comercial, com base no art.&nbsp;7&#186;, inciso&nbsp;V da LGPD. Seus dados n&#227;o ser&#227;o compartilhados com terceiros sem seu consentimento. <a href="/politica-de-privacidade.html" target="_blank" rel="noopener">Pol&#237;tica de Privacidade</a>.</p>
                     </form>
                 </div>
             </div>
@@ -436,6 +444,7 @@
     </script>
 
     <script src="../js/cookie-consent.min.js" defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
 
 </html>
