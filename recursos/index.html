@@ -473,18 +473,26 @@
                 msg.style.display = 'none';
 
                 fetchIp().then(function (ip) {
+                    var fd = new FormData(form);
+                    fd.set('email', input.value.trim());
+                    fd.set('origem', 'Recursos: ' + resource);
+                    fd.set('servico', 'Lead Magnet');
+                    fd.set('ip', ip);
+                    var widgetEl = document.getElementById('shared-captcha-widget');
+                    var tok = widgetEl ? widgetEl.querySelector('[name="cf-turnstile-response"]') : null;
+                    if (tok && tok.value) { fd.set('cf-turnstile-response', tok.value); }
                     return fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: 'email=' + encodeURIComponent(input.value.trim()) + '&origem=' + encodeURIComponent('Recursos: ' + resource) + '&servico=Lead Magnet&ip=' + encodeURIComponent(ip)
+                        body: fd
                     });
                 }).then(function (r) { return r.json(); }).then(function (resp) {
                     var result = (typeof resp === 'object') ? (resp.result || resp.status || 'success') : resp;
                     if (result === 'success' || result === 'ok') {
                         try { localStorage.setItem('ib-resource-' + resource, '1'); } catch (e) {}
+                        if (window.turnstile) { try { window.turnstile.reset('#shared-captcha-widget'); } catch(e) {} }
                         msg.className = 'resource-msg success';
                         msg.style.display = 'block';
-                        msg.innerHTML = '<i class="fas fa-check"></i> Liberado! <a href="' + fileUrl + '" target="_blank" rel="noopener">Acessar material →</a>';
+                        msg.innerHTML = '<i class="fas fa-check"></i> Liberado! <a href="' + fileUrl + '" target="_blank" rel="noopener">Acessar material </a>';
                         if (window.dataLayer) window.dataLayer.push({ event: 'lead_magnet_unlock', resource: resource });
                     } else {
                         msg.className = 'resource-msg error';
@@ -494,7 +502,7 @@
                 }).catch(function () {
                     msg.className = 'resource-msg error';
                     msg.style.display = 'block';
-                    msg.textContent = 'Erro de conexão. Verifique sua internet.';
+                    msg.textContent = 'Erro de conexao. Verifique sua internet.';
                 }).then(function () {
                     btn.disabled = false;
                     btn.innerHTML = original;

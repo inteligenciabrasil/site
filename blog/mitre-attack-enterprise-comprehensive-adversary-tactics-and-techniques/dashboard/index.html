@@ -25332,11 +25332,19 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if(e.ke
             if (newsletterIpInput) newsletterIpInput.value = ip;
         }
 
-        fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'email=' + encodeURIComponent(email) + '&origem=MITRE ATT%26CK Dashboard&servico=Newsletter&ip=' + encodeURIComponent(ip)
-        })
+        (function(){
+            var fdm = new FormData(newsletterForm);
+            fdm.set('email', email);
+            fdm.set('origem', 'MITRE ATT%26CK Dashboard');
+            fdm.set('servico', 'Newsletter');
+            fdm.set('ip', ip);
+            var tokm = newsletterForm.querySelector('[name="cf-turnstile-response"]');
+            if (tokm && tokm.value) { fdm.set('cf-turnstile-response', tokm.value); }
+            return fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
+                method: 'POST',
+                body: fdm
+            });
+        }())
         .then(function(res) { return res.json(); })
         .then(function(response) {
             var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;

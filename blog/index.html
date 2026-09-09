@@ -4081,11 +4081,19 @@ Ler artigo completo <i class="fas fa-arrow-right"></i>
                 if (newsletterIpInput) newsletterIpInput.value = ip;
             }
 
-            fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'email=' + encodeURIComponent(email) + '&origem=Blog Listagem&servico=Newsletter&ip=' + encodeURIComponent(ip)
-            })
+            (function(){
+                var fd2 = new FormData(newsletterForm);
+                fd2.set('email', email);
+                fd2.set('origem', 'Blog Listagem');
+                fd2.set('servico', 'Newsletter');
+                fd2.set('ip', ip);
+                var tok2 = newsletterForm.querySelector('[name="cf-turnstile-response"]');
+                if (tok2 && tok2.value) { fd2.set('cf-turnstile-response', tok2.value); }
+                return fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
+                    method: 'POST',
+                    body: fd2
+                });
+            }())
             .then(function(res) { return res.json(); })
             .then(function(response) {
                 var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;

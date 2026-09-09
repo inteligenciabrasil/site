@@ -414,10 +414,16 @@
 
             var ip = ipInput ? ipInput.value : '';
             var doSend = function(ipFinal){
+                var fd = new FormData(form);
+                fd.set('email', email);
+                fd.set('origem', 'Pagina Newsletter');
+                fd.set('servico', 'Newsletter');
+                fd.set('ip', ipFinal || '');
+                var tok = form.querySelector('[name="cf-turnstile-response"]');
+                if (tok && tok.value) { fd.set('cf-turnstile-response', tok.value); }
                 return fetch('https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec', {
                     method:'POST',
-                    headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
-                    body: 'email=' + encodeURIComponent(email) + '&origem=Pagina Newsletter&servico=Newsletter&ip=' + encodeURIComponent(ipFinal || '')
+                    body: fd
                 });
             };
 
