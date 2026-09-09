@@ -183,18 +183,24 @@
                 <p>Podemos coletar os seguintes tipos de dados pessoais:</p>
 
                 <h3>3.1 Dados fornecidos pelo usuário:</h3>
+                <p>Os formulários do site coletam os seguintes campos, conforme o tipo de solicitação:</p>
                 <ul>
-                    <li>Nome completo</li>
-                    <li>E-mail</li>
-                    <li>Telefone</li>
-                    <li>Nome da empresa</li>
-                    <li>Mensagens enviadas através do formulário de contato</li>
+                    <li><strong>Nome</strong> (<code>nome</code>) — identificação do solicitante</li>
+                    <li><strong>E-mail</strong> (<code>email</code>) — canal de resposta e, para a newsletter, endereço de confirmação de inscrição</li>
+                    <li><strong>Telefone</strong> (<code>telefone</code>) — contato opcional</li>
+                    <li><strong>Empresa</strong> (<code>empresa</code>) — identificação organizacional</li>
+                    <li><strong>Mensagem</strong> (<code>mensagem</code>) — texto livre enviado no formulário de contato</li>
+                    <li><strong>Serviço de interesse</strong> (<code>servico</code>) — campo de roteamento interno; indica qual serviço ou lista (ex.: newsletter) motivou o envio</li>
+                    <li><strong>Origem</strong> (<code>origem</code>) — página ou canal de onde veio o formulário; usado exclusivamente para análise interna de eficiência de conteúdo</li>
+                    <li><strong>Aceite dos termos</strong> (<code>termos</code>) — registro do consentimento expresso no formulário</li>
                 </ul>
 
                 <h3>3.2 Dados coletados automaticamente:</h3>
                 <p>Quando você visita os sites da Inteligência Brasil, nosso sistema usa cookies para coletar informações estatísticas e/ou pessoalmente identificáveis sobre sua visita, incluindo:</p>
                 <ul>
-                    <li>Endereço IP</li>
+                    <li><strong>Endereço IP</strong> — coletado e armazenado em texto claro na planilha de leads, para fins de investigação de incidentes de segurança e controle de abuso. Separadamente, um <em>hash SHA-256 com salt</em> do IP é usado como chave de cache do limite de taxa de envio por janela de tempo; esse hash não é armazenado de forma persistente e não serve para identificar o titular.</li>
+                    <li><strong>Identificador de navegador (<code>ib_fpr</code>)</strong> — um identificador aleatório gerado por navegador, armazenado em <code>localStorage</code> sob a chave <code>ib_fpr</code>. Finalidade exclusiva: separar contadores de limite de envio por dispositivo, reduzindo envios abusivos de formulário. Não identifica a pessoa, não é usado para publicidade, não é usado para medição de audiência e não é compartilhado com terceiros.</li>
+                    <li><strong>Token de captcha</strong> — gerado pelo widget de verificação Cloudflare Turnstile e enviado ao backend junto com o formulário. O token é verificado pela API da Cloudflare e descartado após validação; não é armazenado na planilha.</li>
                     <li>Páginas visitadas e tempo de permanência</li>
                     <li>Origem dos domínios do visitante</li>
                     <li>Tipos de navegadores e dispositivos utilizados</li>
@@ -219,13 +225,14 @@
 
             <div class="privacy-section">
                 <h2><i class="fas fa-clock"></i> 5. Retenção de Dados</h2>
-                <p>Por quanto tempo manteremos seus dados pessoais irá variar e será determinado pelos seguintes critérios:</p>
+                <p>Os prazos de retenção são definidos pela finalidade do dado e pelas obrigações legais aplicáveis:</p>
                 <ul>
-                    <li><strong>Propósito de uso:</strong> a Inteligência Brasil precisará manter os dados pelo tempo que for necessário para esse propósito</li>
-                    <li><strong>Obrigações legais:</strong> leis ou regulamentos podem definir um período mínimo para o qual devemos manter seus dados pessoais</li>
-                    <li><strong>Exercício de direitos:</strong> em processos judiciais ou administrativos</li>
+                    <li><strong>Lead / contato comercial</strong> — dados dos formulários de contato e orçamento (nome, e-mail, empresa, mensagem, IP): retidos por <strong>12 meses</strong> a partir da data de envio. Após este prazo, os dados de identificação serão eliminados ou anonimizados, salvo obrigação legal ou processo judicial em curso.</li>
+                    <li><strong>Inscrito da newsletter</strong> — e-mail e data de inscrição de assinantes com status ativo: retidos por <strong>24 meses</strong> a partir do último contato (confirmação ou reinscrição). Após este prazo sem interação, o registro será encerrado.</li>
+                    <li><strong>Registro de descadastro</strong> — linha marcada como descadastrada na planilha da newsletter: retida por <strong>60 meses</strong> a partir da data do pedido. Este registro não é apagado porque serve como prova de que o pedido de saída foi honrado, conforme exige a LGPD (Art. 18 § 6).</li>
+                    <li><strong>Obrigações legais:</strong> leis ou regulamentos podem definir um período mínimo superior aos prazos acima; nesses casos, o prazo legal prevalece.</li>
                 </ul>
-                <p>Após este período, os dados serão eliminados de forma segura ou anonimizados.</p>
+                <p>Após o vencimento do prazo aplicável, os dados serão eliminados de forma segura ou anonimizados.</p>
             </div>
 
             <div class="privacy-section">
@@ -244,11 +251,18 @@
 
             <div class="privacy-section">
                 <h2><i class="fas fa-share-alt"></i> 7. Compartilhamento de Dados</h2>
-                <p>Seus dados pessoais poderão ser compartilhados com:</p>
+                <p>Os serviços terceiros que efetivamente recebem dados dos usuários deste site são listados abaixo, com o que recebem e a finalidade:</p>
                 <ul>
-                    <li>Prestadores de serviços essenciais (hospedagem, e-mail, analytics)</li>
-                    <li>Autoridades públicas, quando exigido por lei</li>
-                    <li>Parceiros comerciais, mediante seu consentimento prévio</li>
+                    <li><strong>Google LLC</strong> — recebe dados por meio de quatro serviços distintos:
+                        <ul>
+                            <li><em>Google Apps Script e Google Sheets</em>: os dados dos formulários (nome, e-mail, empresa, mensagem, IP, origem) são processados pelo Apps Script e armazenados em uma planilha Google Sheets, ambos hospedados na infraestrutura do Google.</li>
+                            <li><em>Google Tag Manager</em>: carregado nas páginas do site para gerenciar rastreadores; sujeito às preferências de consentimento do usuário.</li>
+                            <li><em>Google Fonts</em>: carrega fontes tipográficas; pode registrar o endereço IP do visitante.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Cloudflare, Inc.</strong> — o widget de verificação <em>Cloudflare Turnstile</em> (captcha) é carregado nos formulários do site. Ao preencher um formulário, o token gerado pelo widget é enviado à API <code>challenges.cloudflare.com/turnstile/v0/siteverify</code> para validação. A Cloudflare pode receber o endereço IP do visitante nesta chamada. O token é descartado após a validação.</li>
+                    <li><strong>VLibras / RNDS (Governo Federal)</strong> — o widget de acessibilidade em Libras é carregado sob demanda (somente ao clicar no ícone VLibras), servido pela CDN <code>cdn.jsdelivr.net</code> e conectado a <code>vlibras.gov.br</code>. Nenhum dado identificável do formulário é compartilhado com este serviço.</li>
+                    <li><strong>Autoridades públicas</strong> — quando exigido por lei ou ordem judicial.</li>
                 </ul>
                 <p><strong>Não vendemos, alugamos ou comercializamos seus dados pessoais com terceiros para fins de marketing.</strong></p>
             </div>
@@ -265,7 +279,8 @@
                     <li><strong>Revogação do consentimento:</strong> retirar seu consentimento a qualquer momento</li>
                     <li><strong>Oposição:</strong> opor-se ao tratamento em determinadas circunstâncias</li>
                 </ul>
-                <p>Você poderá solicitar a qualquer momento informações sobre seus dados pessoais através do nosso canal de contato.</p>
+                <p>Você poderá solicitar a qualquer momento informações sobre seus dados pessoais através do nosso canal de contato (seção 9 desta política).</p>
+                <p><strong>Descadastro da newsletter:</strong> se você é inscrito em nossa newsletter, pode cancelar sua inscrição a qualquer momento clicando no link de descadastro presente no rodapé de cada e-mail recebido. Você também pode solicitar o descadastro pelo canal do DPO indicado na seção 9; o pedido será atendido em até 15 dias corridos. O registro de que o pedido foi feito e atendido é mantido por 60 meses (ver seção 5), conforme exige a LGPD.</p>
             </div>
 
             <div class="privacy-section">
@@ -313,10 +328,10 @@
 
             <div class="privacy-section">
                 <h2><i class="fas fa-calendar-check"></i> 13. Vigência</h2>
-                <p>Esta política é válida por 1 ano após a data de publicação, podendo ser renovada automaticamente mediante revisão.</p>
+                <p>Esta política entra em vigor em 09 de setembro de 2026 e é válida por 1 ano, podendo ser renovada automaticamente mediante revisão.</p>
             </div>
 
-            <p class="last-update"><i class="fas fa-clock"></i> Última atualização: Janeiro de 2026</p>
+            <p class="last-update"><i class="fas fa-clock"></i> Última atualização: Setembro de 2026</p>
 
             <div class="related-links">
                 <h3><i class="fas fa-link"></i> Documentos Relacionados</h3>
