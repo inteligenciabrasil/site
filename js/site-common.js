@@ -526,7 +526,7 @@
                     var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
                     if (result === 'success' || result === 'ok') {
                         nlForm.reset();
-                        nlShow('Inscricao realizada com sucesso! Voce recebera nossos conteudos em breve.', 'success');
+                        nlShow('Verifique seu e-mail para confirmar a assinatura.', 'success');
                     } else {
                         nlShow('Erro ao realizar inscricao. Tente novamente.', 'error');
                     }
