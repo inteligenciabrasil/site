@@ -107,12 +107,50 @@
     function initFormValidation() {
         const forms = document.querySelectorAll('form[data-validate]');
 
+        // Espelha PERSONAL_EMAIL_DOMAINS / DISPOSABLE_EMAIL_DOMAINS do Codigo.gs.
+        // Aqui e so feedback imediato; o portao que vale e o servidor.
         const freeEmailDomains = [
-            'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com',
-            'live.com', 'msn.com', 'aol.com', 'icloud.com', 'mail.com',
-            'protonmail.com', 'zoho.com', 'yandex.com', 'gmx.com',
-            'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br'
+            'gmail.com', 'gmail.com.br', 'googlemail.com',
+            'hotmail.com', 'hotmail.com.br', 'outlook.com', 'outlook.com.br',
+            'live.com', 'live.com.br', 'msn.com',
+            'yahoo.com', 'yahoo.com.br', 'ymail.com', 'rocketmail.com',
+            'icloud.com', 'me.com', 'mac.com', 'aol.com', 'aol.com.br',
+            'protonmail.com', 'protonmail.ch', 'proton.me', 'pm.me',
+            'zoho.com', 'zohomail.com', 'mail.com', 'email.com',
+            'gmx.com', 'gmx.net', 'yandex.com', 'mail.ru',
+            'tutanota.com', 'tuta.io', 'fastmail.com', 'hushmail.com', 'hey.com',
+            'qq.com', '163.com',
+            'uol.com.br', 'bol.com.br', 'terra.com.br', 'ig.com.br',
+            'itelefonica.com.br', 'globo.com', 'globomail.com', 'r7.com',
+            'zipmail.com.br', 'oi.com.br', 'pop.com.br', 'click21.com.br',
+            'superig.com.br', 'brturbo.com.br', 'ibest.com.br'
         ];
+
+        const tempEmailDomains = [
+            'mailinator.com', 'mailinator.net', 'yopmail.com', 'yopmail.fr',
+            'guerrillamail.com', 'guerrillamail.net', 'guerrillamail.biz',
+            'sharklasers.com', 'grr.la', 'spam4.me',
+            '10minutemail.com', '10minutemail.net', 'minuteinbox.com',
+            'tempmail.com', 'temp-mail.org', 'temp-mail.io', 'tempr.email',
+            'tempmail.plus', 'mytemp.email', 'throwaway.email', 'throwawaymail.com',
+            'trashmail.com', 'trashmail.de', 'fakeinbox.com', 'dispostable.com',
+            'getairmail.com', 'getnada.com', 'nada.email', 'maildrop.cc',
+            'mailnesia.com', 'mailcatch.com', 'mohmal.com', 'discard.email',
+            'emailondeck.com', 'spamgourmet.com', 'jetable.org', 'moakt.com',
+            'burnermail.io', '33mail.com', 'mailsac.com', 'inboxkitten.com'
+        ];
+
+        // Sobe os rotulos para pegar subdominio (xyz.mailinator.com).
+        // Para no penultimo, entao 'com.br' nunca vira chave de busca.
+        function blockedReason(domain) {
+            const parts = domain.split('.');
+            for (let i = 0; i <= parts.length - 2; i++) {
+                const candidate = parts.slice(i).join('.');
+                if (tempEmailDomains.indexOf(candidate) !== -1) return 'temp';
+                if (freeEmailDomains.indexOf(candidate) !== -1) return 'free';
+            }
+            return '';
+        }
 
         forms.forEach(function(form) {
             const emailInput = form.querySelector('input[type="email"]');
@@ -137,7 +175,12 @@
             if (!email) return true; // Let required validation handle empty
 
             const domain = email.split('@')[1];
-            if (domain && freeEmailDomains.includes(domain)) {
+            const reason = domain ? blockedReason(domain) : '';
+            if (reason === 'temp') {
+                showError(input, 'E-mails temporarios nao sao aceitos');
+                return false;
+            }
+            if (reason === 'free') {
                 showError(input, 'Por favor, utilize seu e-mail corporativo');
                 return false;
             }
@@ -161,6 +204,24 @@
             const existing = input.parentNode.querySelector('.form-error');
             if (existing) existing.remove();
         }
+    }
+
+    // ========================================
+    // TELEFONE (mascara BR)
+    // ========================================
+    // O input so aceita digitos; o pattern do HTML barra o resto no checkValidity.
+    // ponytail: cursor volta para o fim ao editar no meio do valor. So vale a pena
+    // preservar a posicao se alguem reclamar.
+    function initTelMask() {
+        document.querySelectorAll('input[type="tel"]').forEach(function(el) {
+            el.addEventListener('input', function() {
+                var d = el.value.replace(/\D/g, '').slice(0, 11);
+                if (d.length < 3) { el.value = d; return; }
+                var cut = d.length > 10 ? 7 : 6;
+                var rest = d.slice(cut);
+                el.value = '(' + d.slice(0, 2) + ') ' + d.slice(2, cut) + (rest ? '-' + rest : '');
+            });
+        });
     }
 
     // ========================================
@@ -264,6 +325,7 @@
         initSmoothScroll();
         initFadeInAnimation();
         initFormValidation();
+        initTelMask();
         initFormSubmit();
         initHeaderScroll();
     }

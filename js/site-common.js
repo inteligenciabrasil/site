@@ -445,6 +445,19 @@
         window.__ibArticleToCluster = articleToCluster;
     }
 
+    // ========== 9b. TELEFONE (mascara BR) ==========
+    // O input so aceita digitos; o pattern do HTML barra o resto no checkValidity.
+    // ponytail: cursor volta para o fim ao editar no meio do valor.
+    document.querySelectorAll('input[type="tel"]').forEach(function (el) {
+        el.addEventListener('input', function () {
+            var d = el.value.replace(/\D/g, '').slice(0, 11);
+            if (d.length < 3) { el.value = d; return; }
+            var cut = d.length > 10 ? 7 : 6;
+            var rest = d.slice(cut);
+            el.value = '(' + d.slice(0, 2) + ') ' + d.slice(2, cut) + (rest ? '-' + rest : '');
+        });
+    });
+
     // ========== 10. NEWSLETTER FORM (kebab-case ids) ==========
     // Targets blog-article markup: #newsletter-form / #newsletter-email / #newsletter-message
     // Posts to the same Google Apps Script endpoint used elsewhere.
@@ -455,7 +468,8 @@
         var nlBtn = nlForm.querySelector('.newsletter-btn');
 
         var publicDomains = ['gmail.com','gmail.com.br','googlemail.com','outlook.com','outlook.com.br','hotmail.com','hotmail.com.br','live.com','live.com.br','msn.com','yahoo.com','yahoo.com.br','ymail.com','rocketmail.com','icloud.com','me.com','mac.com','aol.com','aol.com.br','protonmail.com','protonmail.ch','proton.me','zoho.com','zohomail.com','mail.com','email.com','uol.com.br','bol.com.br','terra.com.br','ig.com.br','globo.com','globomail.com','r7.com','zipmail.com.br','oi.com.br','pop.com.br'];
-        var tempDomains = ['tempmail.com','temp-mail.org','guerrillamail.com','mailinator.com','10minutemail.com','throwaway.email','fakeinbox.com','trashmail.com','dispostable.com','yopmail.com','sharklasers.com','getairmail.com'];
+        // Espelha DISPOSABLE_EMAIL_DOMAINS do Codigo.gs; o portao que vale e o servidor.
+        var tempDomains = ['mailinator.com','mailinator.net','yopmail.com','yopmail.fr','guerrillamail.com','guerrillamail.net','guerrillamail.biz','sharklasers.com','grr.la','spam4.me','10minutemail.com','10minutemail.net','minuteinbox.com','tempmail.com','temp-mail.org','temp-mail.io','tempr.email','tempmail.plus','mytemp.email','throwaway.email','throwawaymail.com','trashmail.com','trashmail.de','fakeinbox.com','dispostable.com','getairmail.com','getnada.com','nada.email','maildrop.cc','mailnesia.com','mailcatch.com','mohmal.com','discard.email','emailondeck.com','spamgourmet.com','jetable.org','moakt.com','burnermail.io','33mail.com','mailsac.com','inboxkitten.com'];
 
         function nlShow(text, type) {
             if (!nlMsg) return;
@@ -472,12 +486,18 @@
             if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(lower)) {
                 return { valid: false, message: 'Por favor, informe um e-mail valido.' };
             }
-            var domain = lower.split('@')[1];
-            if (publicDomains.indexOf(domain) !== -1) {
-                return { valid: false, message: 'Por favor, utilize seu e-mail corporativo. E-mails pessoais nao sao aceitos.' };
-            }
-            if (tempDomains.indexOf(domain) !== -1 || tempDomains.some(function (d) { return domain.indexOf(d) !== -1; })) {
-                return { valid: false, message: 'E-mails temporarios nao sao permitidos.' };
+            // Sobe os rotulos para pegar subdominio (xyz.mailinator.com). Para no
+            // penultimo, entao 'com.br' nunca vira chave. Substituiu um indexOf de
+            // substring que casava dominio legitimo por acidente.
+            var parts = lower.split('@')[1].split('.');
+            for (var i = 0; i <= parts.length - 2; i++) {
+                var candidate = parts.slice(i).join('.');
+                if (tempDomains.indexOf(candidate) !== -1) {
+                    return { valid: false, message: 'E-mails temporarios nao sao permitidos.' };
+                }
+                if (publicDomains.indexOf(candidate) !== -1) {
+                    return { valid: false, message: 'Por favor, utilize seu e-mail corporativo. E-mails pessoais nao sao aceitos.' };
+                }
             }
             return { valid: true };
         }
@@ -527,6 +547,10 @@
                     if (result === 'success' || result === 'ok') {
                         nlForm.reset();
                         nlShow('Verifique seu e-mail para confirmar a assinatura.', 'success');
+                    } else if (response && response.reason === 'disposable_email') {
+                        nlShow('E-mails temporarios nao sao permitidos. Use seu e-mail corporativo.', 'error');
+                    } else if (response && response.reason === 'personal_email') {
+                        nlShow('Por favor, utilize seu e-mail corporativo. E-mails pessoais nao sao aceitos.', 'error');
                     } else {
                         nlShow('Erro ao realizar inscricao. Tente novamente.', 'error');
                     }
