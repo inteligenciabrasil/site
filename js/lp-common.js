@@ -225,92 +225,6 @@
     }
 
     // ========================================
-    // FORM SUBMIT (fetch + status)
-    // ========================================
-    // O servidor rejeita e-mail pessoal/temporario com {result:'error', reason:...}.
-    // Sem este mapa a rejeicao cai no catch generico e o usuario ve "erro ao enviar"
-    // mais o link de WhatsApp, que esconde o motivo real e convida a repetir o envio.
-    var REJECT_MSG = {
-        personal_email:   'Use seu e-mail corporativo. E-mails pessoais não são aceitos.',
-        disposable_email: 'E-mails temporários não são permitidos. Use seu e-mail corporativo.',
-        invalid_email:    'Informe um e-mail válido.',
-        rate_limited:     'Você já enviou uma solicitação há pouco. Aguarde alguns minutos antes de tentar de novo.',
-        captcha:          'Não conseguimos validar que você é humano. Recarregue a página e tente novamente.'
-    };
-
-    function initFormSubmit() {
-        var forms = document.querySelectorAll('form[data-validate]');
-        if (!forms.length) return;
-
-        forms.forEach(function(form) {
-            var msgEl = form.querySelector('#formMessage');
-            if (!msgEl) return;
-
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                // E2/partial: focus first invalid field, do not submit
-                if (!form.checkValidity()) {
-                    var firstInvalid = form.querySelector(':invalid');
-                    if (firstInvalid) firstInvalid.focus();
-                    return;
-                }
-
-                var submitBtn = form.querySelector('[type="submit"]');
-                var originalLabel = submitBtn ? submitBtn.textContent : '';
-                if (submitBtn) {
-                    submitBtn.disabled = true;
-                    submitBtn.textContent = 'Enviando...';
-                }
-
-                fetch(form.action, { method: 'POST', body: new FormData(form) })
-                    .then(function(res) { return res.json(); })
-                    .then(function(data) {
-                        var result = (typeof data === 'object') ? data.result || data.status || '' : data;
-                        if (result === 'success' || result === 'ok') {
-                            msgEl.style.display = 'block';
-                            msgEl.style.background = 'rgba(16,185,129,0.1)';
-                            msgEl.style.color = '#10B981';
-                            msgEl.textContent = 'Mensagem enviada! Nossa equipe retornará em até 2 horas úteis.';
-                            msgEl.focus();
-                        } else if (data && REJECT_MSG[data.reason]) {
-                            // Rejeicao de validacao: motivo explicito, sem fallback de WhatsApp.
-                            msgEl.style.display = 'block';
-                            msgEl.style.background = 'rgba(239,68,68,0.1)';
-                            msgEl.style.color = '#EF4444';
-                            msgEl.textContent = REJECT_MSG[data.reason];
-                            msgEl.focus();
-                        } else {
-                            throw new Error('server error');
-                        }
-                    })
-                    .catch(function() {
-                        msgEl.style.display = 'block';
-                        msgEl.style.background = 'rgba(239,68,68,0.1)';
-                        msgEl.style.color = '#EF4444';
-                        msgEl.textContent = '';
-                        var errorSpan = document.createElement('span');
-                        errorSpan.textContent = 'Ocorreu um erro ao enviar. Tente novamente ou fale conosco pelo ';
-                        var fallbackLink = document.createElement('a');
-                        fallbackLink.setAttribute('href', form.dataset.waFallback);
-                        fallbackLink.setAttribute('target', '_blank');
-                        fallbackLink.setAttribute('rel', 'noopener');
-                        fallbackLink.textContent = 'WhatsApp';
-                        msgEl.appendChild(errorSpan);
-                        msgEl.appendChild(fallbackLink);
-                        msgEl.focus();
-                    })
-                    .finally(function() {
-                        if (submitBtn) {
-                            submitBtn.disabled = false;
-                            submitBtn.textContent = originalLabel;
-                        }
-                    });
-            });
-        });
-    }
-
-    // ========================================
     // HEADER SCROLL EFFECT
     // ========================================
     function initHeaderScroll() {
@@ -344,7 +258,6 @@
         initFadeInAnimation();
         initFormValidation();
         initTelMask();
-        initFormSubmit();
         initHeaderScroll();
     }
 
