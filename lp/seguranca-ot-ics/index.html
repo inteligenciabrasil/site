@@ -978,7 +978,8 @@
                 message: document.getElementById('mensagem').value.trim(),
                 terms: 'Aceito',
                 origem: 'Landing Page Segurança OT/ICS',
-                ip: document.getElementById('ip').value || ''
+                ip: document.getElementById('ip').value || '',
+                'cf-turnstile-response': (document.querySelector('[name="cf-turnstile-response"]') || {}).value || ''
             };
 
             // ========== VALIDAÇÃO ROBUSTA ==========
@@ -1091,6 +1092,21 @@
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: Object.entries(formData).map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&')
                 });
+                // Sem ler o corpo, recusa do servidor (e-mail pessoal, captcha, limite) virava "sucesso" verde.
+                const veredito = await response.json().catch(() => null);
+                if (!veredito || (veredito.result !== 'success' && veredito.result !== 'ok')) {
+                    const RECUSA = {
+                        personal_email:   'Use seu e-mail corporativo. E-mails pessoais não são aceitos.',
+                        disposable_email: 'E-mails temporários não são permitidos. Use seu e-mail corporativo.',
+                        invalid_email:    'Informe um e-mail válido.',
+                        rate_limited:     'Você já enviou uma solicitação há pouco. Aguarde alguns minutos antes de tentar de novo.',
+                        captcha:          'Não conseguimos validar que você é humano. Recarregue a página e tente novamente.'
+                    };
+                    showMessage(RECUSA[veredito && veredito.reason] || 'Não foi possível enviar agora. Tente novamente em instantes.', 'error');
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                    return;
+                }
 
                 // Track conversion
                 if (typeof gtag === 'function') {
