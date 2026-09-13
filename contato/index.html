@@ -248,8 +248,8 @@
                                 </div>
                                 
             <div class="form-group">
-                <label class="form-label" for="telefone">WhatsApp</label>
-                <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="(11) 99999-9999" maxlength="15" pattern="\(\d{2}\) \d{4,5}-\d{4}" title="Informe no formato (11) 99999-9999">
+                <label class="form-label" for="telefone">Telefone</label>
+                <input type="tel" id="telefone" name="telefone" class="form-control" placeholder="(11) 99999-9999" maxlength="15" pattern="[0-9\(\)+ \-]{10,15}" title="Somente n&#250;meros, com DDD. Ex.: (11) 99999-9999 ou 11999999999">
             </div>
             <div class="form-group">
                 <label class="form-label" for="servico">Interesse Principal</label>
@@ -378,6 +378,13 @@
         var ok = document.getElementById('alertSuccess');
         var err = document.getElementById('alertError');
         if (!form) return;
+        var REJECT_MSG = {
+            personal_email:   'Use seu e-mail corporativo. E-mails pessoais não são aceitos.',
+            disposable_email: 'E-mails temporários não são permitidos. Use seu e-mail corporativo.',
+            invalid_email:    'Informe um e-mail válido.',
+            rate_limited:     'Você já enviou uma solicitação há pouco. Aguarde alguns minutos antes de tentar de novo.',
+            captcha:          'Não conseguimos validar que você é humano. Recarregue a página e tente novamente.'
+        };
         // Capture IP (best-effort, no block on failure)
         fetch('https://api.ipify.org?format=json').then(function(r){ return r.json(); }).then(function(d){ var el=document.getElementById('ip'); if(el) el.value=d.ip||''; }).catch(function(){});
         form.addEventListener('submit', function(e) {
@@ -389,9 +396,18 @@
             ok.style.display = 'none';
             err.style.display = 'none';
             fetch(form.action, { method: 'POST', body: new FormData(form) })
-                .then(function() {
-                    ok.style.display = 'block';
-                    form.reset();
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    var result = (typeof data === 'object') ? data.result || data.status || '' : data;
+                    if (result === 'success' || result === 'ok') {
+                        ok.style.display = 'block';
+                        form.reset();
+                        return;
+                    }
+                    // Antes o .then nao lia o corpo: e-mail rejeitado pelo servidor pintava de verde.
+                    err.textContent = (data && REJECT_MSG[data.reason]) ||
+                        'Erro ao enviar mensagem. Tente novamente ou envie um e-mail diretamente.';
+                    err.style.display = 'block';
                 })
                 .catch(function() {
                     err.style.display = 'block';

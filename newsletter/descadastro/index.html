@@ -141,6 +141,10 @@
                     btn.style.display = 'none';
                     show('success', 'fa-check-circle', 'Inscrição cancelada',
                          'Pronto. Você não vai mais receber a newsletter da Inteligência Brasil.');
+                    // Nunca no load: esta pagina so cancela no clique, e redirecionar antes
+                    // disso tiraria do titular a chance de exercer o art. 18 da LGPD.
+                    msg.textContent += ' Levamos você à página inicial em 5 segundos.';
+                    setTimeout(function(){ location.href = '/'; }, 5000);
                 } else {
                     btn.disabled = false;
                     // Mensagem neutra: nao revela se o token existe, ja foi usado ou expirou.

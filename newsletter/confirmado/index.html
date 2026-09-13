@@ -142,6 +142,9 @@
             if (d && d.result === 'success') {
                 show('success', 'fa-check-circle', 'Inscrição confirmada!',
                      'Pronto. Você vai receber os próximos conteúdos de Segurança da Informação da Inteligência Brasil no seu e-mail.');
+                // So no sucesso: em erro o titular precisa ler a mensagem e agir.
+                msg.textContent += ' Levamos você à página inicial em 5 segundos.';
+                setTimeout(function(){ location.href = '/'; }, 5000);
             } else {
                 invalido();
             }

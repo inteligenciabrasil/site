@@ -43,6 +43,17 @@
     ];
     var suspiciousPatterns = [/temp/i, /fake/i, /trash/i, /spam/i, /disposable/i, /throwaway/i, /mailinator/i, /guerrilla/i, /10min/i, /burner/i, /noreply/i, /no-reply/i];
 
+    // O servidor rejeita e-mail pessoal/temporario com {result:'error', reason:...}.
+    // A lista do cliente e menor que a do servidor, entao dominio que passa aqui e barrado
+    // la voltava como "erro ao enviar" + WhatsApp, escondendo o motivo real.
+    var REJECT_MSG = {
+        personal_email:   'Use seu e-mail corporativo. E-mails pessoais não são aceitos.',
+        disposable_email: 'E-mails temporários não são permitidos. Use seu e-mail corporativo.',
+        invalid_email:    'Informe um e-mail válido.',
+        rate_limited:     'Você já enviou uma solicitação há pouco. Aguarde alguns minutos antes de tentar de novo.',
+        captcha:          'Não conseguimos validar que você é humano. Recarregue a página e tente novamente.'
+    };
+
     function validateCorporateEmail(email) {
         var emailLower = email.toLowerCase().trim();
         if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailLower)) {
@@ -181,6 +192,9 @@
                 if (result === 'success' || result === 'ok') {
                     contactForm.reset();
                     showStatus('Mensagem enviada! Nossa equipe retornará em até 2 horas úteis.', '#10B981');
+                } else if (response && REJECT_MSG[response.reason]) {
+                    // Rejeicao de validacao: motivo explicito, sem fallback de WhatsApp.
+                    showStatus(REJECT_MSG[response.reason], '#EF4444');
                 } else {
                     showStatus('Ocorreu um erro ao enviar. Tente novamente ou fale conosco pelo ', '#EF4444');
                     var waLink = document.createElement('a');
@@ -288,6 +302,8 @@
                 if (result === 'success' || result === 'ok') {
                     newsletterForm.reset();
                     showNewsletterMessage('Verifique seu e-mail para confirmar a assinatura.', 'success');
+                } else if (response && REJECT_MSG[response.reason]) {
+                    showNewsletterMessage(REJECT_MSG[response.reason], 'error');
                 } else {
                     showNewsletterMessage('Não foi possível inscrever agora. Tente novamente em instantes.', 'error');
                 }
