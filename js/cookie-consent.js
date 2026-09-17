@@ -81,28 +81,28 @@
   // --- Panel builder (used by banner "Preferencias" and by ibConsent.open()) ---
   function buildPanelHTML() {
     return (
-      '<div id="cc-panel" role="dialog" aria-modal="true" aria-label="Preferencias de cookies">' +
+      '<div id="cc-panel" role="dialog" aria-modal="true" aria-label="Preferências de cookies">' +
       '<div id="cc-panel-inner">' +
-      '<h3 id="cc-panel-title">Preferencias de privacidade</h3>' +
-      '<p id="cc-panel-desc">Selecione quais cookies voce aceita. Os necessarios nao podem ser desativados.</p>' +
+      '<h3 id="cc-panel-title">Preferências de privacidade</h3>' +
+      '<p id="cc-panel-desc">Selecione quais cookies você aceita. Os necessários não podem ser desativados.</p>' +
 
       '<div class="cc-cat cc-cat-required">' +
-      '<label><input type="checkbox" id="cc-req" checked disabled> Necessarios (sempre ativos)</label>' +
-      '<p>Guardam suas preferencias de consentimento (<code>' + KEY_V2 + '</code>) e o identificador anonimo de limite de abuso (<code>ib_fpr</code>). Sem eles o site nao funciona corretamente.</p>' +
+      '<label><input type="checkbox" id="cc-req" checked disabled> Necessários (sempre ativos)</label>' +
+      '<p>Guardam suas preferências de consentimento (<code>' + KEY_V2 + '</code>) e o identificador anônimo de limite de abuso (<code>ib_fpr</code>). Sem eles o site não funciona corretamente.</p>' +
       '</div>' +
 
       '<div class="cc-cat">' +
-      '<label><input type="checkbox" id="cc-analytics"> Medicao de audiencia</label>' +
-      '<p>Permite analisar como os visitantes usam o site (Google Analytics via GTM). Sem este cookie, o trafego nao e contabilizado.</p>' +
+      '<label><input type="checkbox" id="cc-analytics"> Medição de audiência</label>' +
+      '<p>Permite analisar como os visitantes usam o site (Google Analytics via GTM). Sem este cookie, o tráfego não é contabilizado.</p>' +
       '</div>' +
 
       '<div class="cc-cat">' +
       '<label><input type="checkbox" id="cc-marketing"> Marketing e publicidade</label>' +
-      '<p>Permite personalizar anuncios e medir conversoes (sinais de anuncio do Google via GTM). Os tres sinais sao: ad_storage, ad_user_data e ad_personalization.</p>' +
+      '<p>Permite personalizar anúncios e medir conversões (sinais de anúncio do Google via GTM). Os três sinais são: ad_storage, ad_user_data e ad_personalization.</p>' +
       '</div>' +
 
       '<div id="cc-panel-btns">' +
-      '<button id="cc-panel-save">Salvar preferencias</button>' +
+      '<button id="cc-panel-save">Salvar preferências</button>' +
       '<button id="cc-panel-all">Aceitar tudo</button>' +
       '<button id="cc-panel-none">Rejeitar tudo</button>' +
       '</div>' +
@@ -259,11 +259,11 @@
     banner.setAttribute('aria-label', 'Consentimento de cookies');
     banner.innerHTML =
       '<div id="cc-inner">' +
-      '<p id="cc-text">Este site utiliza cookies e tecnologias semelhantes para melhorar sua experiencia. ' +
-      'Veja nossa <a href="/politica-de-privacidade.html">Politica de Privacidade</a> e escolha suas preferencias.</p>' +
+      '<p id="cc-text">Este site utiliza cookies e tecnologias semelhantes para melhorar sua experiência. ' +
+      'Veja nossa <a href="/politica-de-privacidade.html">Política de Privacidade</a> e escolha suas preferências.</p>' +
       '<div id="cc-btns">' +
       '<button id="cc-accept">Aceitar tudo</button>' +
-      '<button id="cc-prefs">Preferencias</button>' +
+      '<button id="cc-prefs">Preferências</button>' +
       '<button id="cc-reject">Rejeitar tudo</button>' +
       '</div></div>';
     document.body.appendChild(banner);
