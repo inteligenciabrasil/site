@@ -202,7 +202,7 @@
                 <ul>
                     <li><strong>Endereço IP</strong> — coletado e armazenado em texto claro na planilha de leads, para fins de investigação de incidentes de segurança e controle de abuso. Separadamente, um <em>hash SHA-256 com salt</em> do IP é usado como chave de cache do limite de taxa de envio por janela de tempo; esse hash não é armazenado de forma persistente e não serve para identificar o titular.</li>
                     <li><strong>Identificador de navegador (<code>ib_fpr</code>)</strong> — um identificador aleatório gerado por navegador, armazenado em <code>localStorage</code> sob a chave <code>ib_fpr</code>. Finalidade exclusiva: separar contadores de limite de envio por dispositivo, reduzindo envios abusivos de formulário. Não identifica a pessoa, não é usado para publicidade, não é usado para medição de audiência e não é compartilhado com terceiros.</li>
-                    <li><strong>Token de captcha</strong> — gerado pelo widget de verificação Cloudflare Turnstile e enviado ao backend junto com o formulário. O token é verificado pela API da Cloudflare e descartado após validação; não é armazenado na planilha.</li>
+                    <li><strong>Token de captcha</strong> — gerado pelo widget de verificação Cloudflare Turnstile e enviado ao backend junto com o formulário. O token é verificado pela API da Cloudflare e descartado após validação; <em>o token em si não é armazenado</em>. O que fica registrado na planilha de leads é apenas o <strong>resultado da verificação</strong> (coluna <code>captcha_status</code>, com valores como <code>ok</code> ou <code>skipped</code>), usado para auditoria de envios automatizados.</li>
                     <li>Páginas visitadas e tempo de permanência</li>
                     <li>Origem dos domínios do visitante</li>
                     <li>Tipos de navegadores e dispositivos utilizados</li>
@@ -235,6 +235,7 @@
                     <li><strong>Obrigações legais:</strong> leis ou regulamentos podem definir um período mínimo superior aos prazos acima; nesses casos, o prazo legal prevalece.</li>
                 </ul>
                 <p>Após o vencimento do prazo aplicável, os dados serão eliminados de forma segura ou anonimizados.</p>
+                <p><strong>Como os prazos são verificados:</strong> a conferência dos prazos acima é feita por revisão periódica conduzida pelo Encarregado (DPO), realizada no mínimo a cada seis meses. Os registros vencidos identificados na revisão são eliminados ou anonimizados. Independentemente do calendário de revisão, o titular pode solicitar a eliminação dos seus dados a qualquer momento pelo canal da seção 9, e o pedido é atendido em até 15 dias corridos.</p>
             </div>
 
             <div class="privacy-section">
@@ -255,14 +256,20 @@
                 <h2><i class="fas fa-share-alt"></i> 7. Compartilhamento de Dados</h2>
                 <p>Os serviços terceiros que efetivamente recebem dados dos usuários deste site são listados abaixo, com o que recebem e a finalidade:</p>
                 <ul>
-                    <li><strong>Google LLC</strong> — recebe dados por meio de quatro serviços distintos:
+                    <li><strong>Google LLC</strong> — recebe dados por meio dos seguintes serviços:
                         <ul>
                             <li><em>Google Apps Script e Google Sheets</em>: os dados dos formulários (nome, e-mail, empresa, mensagem, IP, origem) são processados pelo Apps Script e armazenados em uma planilha Google Sheets, ambos hospedados na infraestrutura do Google.</li>
                             <li><em>Google Tag Manager</em>: carregado nas páginas do site para gerenciar rastreadores; sujeito às preferências de consentimento do usuário.</li>
                             <li><em>Google Fonts</em>: carrega fontes tipográficas; pode registrar o endereço IP do visitante.</li>
                         </ul>
                     </li>
-                    <li><strong>Cloudflare, Inc.</strong> — o widget de verificação <em>Cloudflare Turnstile</em> (captcha) é carregado nos formulários do site. Ao preencher um formulário, o token gerado pelo widget é enviado à API <code>challenges.cloudflare.com/turnstile/v0/siteverify</code> para validação. A Cloudflare pode receber o endereço IP do visitante nesta chamada. O token é descartado após a validação.</li>
+                    <li><strong>Cloudflare, Inc.</strong> — atua em dois papéis distintos:
+                        <ul>
+                            <li><em>Rede de entrega de conteúdo e proteção de borda</em>: todo o tráfego deste site passa pela infraestrutura da Cloudflare antes de chegar ao servidor de origem. Isso significa que, em <strong>qualquer visita</strong> — mesmo sem preencher formulário —, a Cloudflare processa o endereço IP, o cabeçalho de navegador e a página requisitada, com a finalidade de entrega de conteúdo, aplicação de cabeçalhos de segurança e mitigação de abuso. Base legal: interesse legítimo (Art. 7º IX LGPD).</li>
+                            <li><em>Cloudflare Turnstile</em> (captcha): o widget é carregado nos formulários do site. Ao preencher um formulário, o token gerado é enviado à API <code>challenges.cloudflare.com/turnstile/v0/siteverify</code> para validação. O token é descartado após a validação.</li>
+                        </ul>
+                    </li>
+                    <li><strong>ipify (api.ipify.org)</strong> — serviço público de consulta de endereço IP, utilizado <strong>exclusivamente na página de contato</strong>. Ao abrir <code>/contato/</code>, o navegador consulta esse serviço para descobrir o seu IP e preenchê-lo no formulário, de modo que o registro do envio contenha a origem da solicitação (ver seção 3.2). A consulta ocorre no carregamento da página e o serviço recebe apenas o seu endereço IP, sem qualquer outro dado do formulário.</li>
                     <li><strong>VLibras / RNDS (Governo Federal)</strong> — o widget de acessibilidade em Libras é carregado sob demanda (somente ao clicar no ícone VLibras), servido pela CDN <code>cdn.jsdelivr.net</code> e conectado a <code>vlibras.gov.br</code>. Nenhum dado identificável do formulário é compartilhado com este serviço.</li>
                     <li><strong>Autoridades públicas</strong> — quando exigido por lei ou ordem judicial.</li>
                 </ul>
