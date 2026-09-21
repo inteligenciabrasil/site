@@ -192,6 +192,8 @@
                 if (result === 'success' || result === 'ok') {
                     contactForm.reset();
                     showStatus('Mensagem enviada! Nossa equipe retornará em até 2 horas úteis.', '#10B981');
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({ event: 'form_contato_enviado' });
                 } else if (response && REJECT_MSG[response.reason]) {
                     // Rejeicao de validacao: motivo explicito, sem fallback de WhatsApp.
                     showStatus(REJECT_MSG[response.reason], '#EF4444');
