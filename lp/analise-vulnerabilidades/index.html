@@ -1108,12 +1108,11 @@
                 }
 
                 // Track conversion
-                if (typeof gtag === 'function') {
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
-                        'event_callback': function () { }
-                    });
-                }
+                dataLayer.push({
+                    event: 'form_submit',
+                    form_id: 'analise-vulnerabilidades',
+                    form_type: 'lp_lead'
+                });
 
                 // Success
                 showMessage('Sucesso! Em breve um especialista entrara em contato.', 'success');

@@ -930,12 +930,11 @@
                 }
 
                 // Track conversion
-                if (typeof gtag === 'function') {
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
-                        'event_callback': function() {}
-                    });
-                }
+                dataLayer.push({
+                    event: 'form_submit',
+                    form_id: 'csoc',
+                    form_type: 'lp_lead'
+                });
 
                 // Success
                 showMessage('Solicitacao enviada com sucesso! Entraremos em contato em breve.', 'success');

@@ -952,12 +952,11 @@
                 }
 
                 // Track conversion
-                if (typeof gtag === 'function') {
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
-                        'event_callback': function () { }
-                    });
-                }
+                dataLayer.push({
+                    event: 'form_submit',
+                    form_id: 'computacao-forense',
+                    form_type: 'lp_lead'
+                });
 
                 showMessage('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
                 this.reset();

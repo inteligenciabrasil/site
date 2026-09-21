@@ -1102,12 +1102,11 @@
                 }
 
                 // Track conversion
-                if (typeof gtag === 'function') {
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
-                        'event_callback': function () { }
-                    });
-                }
+                dataLayer.push({
+                    event: 'form_submit',
+                    form_id: 'red-team',
+                    form_type: 'lp_lead'
+                });
 
                 // Success
                 showMessage('Sucesso! Nosso time entrará em contato em breve.', 'success');

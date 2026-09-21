@@ -1109,12 +1109,11 @@
                 }
 
                 // Track conversion
-                if (typeof gtag === 'function') {
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
-                        'event_callback': function() {}
-                    });
-                }
+                dataLayer.push({
+                    event: 'form_submit',
+                    form_id: 'seguranca-ot-ics',
+                    form_type: 'lp_lead'
+                });
 
                 // Success
                 showMessage('Solicitação enviada com sucesso! Entraremos em contato em breve.', 'success');
