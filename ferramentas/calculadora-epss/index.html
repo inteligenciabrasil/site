@@ -9,7 +9,7 @@
     <!-- CSP-V5 -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://*.googletagmanager.com https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/ https://vlibras.gov.br https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://tagassistant.google.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://tagassistant.google.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://vlibras.gov.br https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.gstatic.com https://ssl.gstatic.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cloudflareinsights.com https://fonts.googleapis.com https://cloudflare-dns.com https://dns.google https://vlibras.gov.br https://api.ipify.org https://challenges.cloudflare.com https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://pagead2.googlesyndication.com; frame-src https://www.googletagmanager.com https://challenges.cloudflare.com https://td.doubleclick.net https://tagassistant.google.com; form-action 'self' https://script.google.com; base-uri 'self'; object-src 'none';">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Consulte EPSS (Exploit Prediction Scoring System) de qualquer CVE em tempo real via API FIRST.org. Combine com CVSS e KEV para priorizar patches por risco real de exploração.">
+    <meta name="description" content="Consulte o EPSS de qualquer CVE grátis e em tempo real. Veja a chance de exploração nos próximos 30 dias e combine com CVSS e KEV para priorizar patches.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="keywords" content="epss, exploit prediction scoring system, cve, priorizacao vulnerabilidade, cvss epss kev, first.org, gestao vulnerabilidades">
     <meta name="author" content="Inteligência Brasil">
@@ -17,8 +17,8 @@
     <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/calculadora-epss/">
     <link rel="alternate" type="application/rss+xml" title="Blog Inteligência Brasil &#8212; RSS" href="../../feed.xml">
 
-    <meta property="og:title" content="Consulta EPSS por CVE | Inteligência Brasil">
-    <meta property="og:description" content="Probabilidade de exploração nos próximos 30 dias para qualquer CVE. Pareado com CVSS e KEV para priorização de patches.">
+    <meta property="og:title" content="Calculadora EPSS Grátis: Probabilidade de Exploração de CVE">
+    <meta property="og:description" content="Consulte o EPSS de qualquer CVE grátis e em tempo real. Veja a chance de exploração nos próximos 30 dias e combine com CVSS e KEV para priorizar patches.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/calculadora-epss/">
     <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
@@ -26,14 +26,14 @@
     <meta property="og:site_name" content="Inteligência Brasil">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Consulta EPSS por CVE">
-    <meta name="twitter:description" content="EPSS + CVSS + KEV para priorizar vulnerabilidades.">
+    <meta name="twitter:title" content="Calculadora EPSS Grátis: Probabilidade de Exploração de CVE">
+    <meta name="twitter:description" content="Consulte o EPSS de qualquer CVE grátis e em tempo real. Veja a chance de exploração nos próximos 30 dias e combine com CVSS e KEV para priorizar patches.">
 
     <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
 
-    <title>Consulta EPSS por CVE — Priorização de Patches | Inteligência Brasil</title>
+    <title>Calculadora EPSS Grátis: Probabilidade de Exploração de CVE</title>
 
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Consulta EPSS por CVE","description":"Ferramenta online gratuita para consultar EPSS (Exploit Prediction Scoring System) de CVEs em tempo real e priorizar patches combinando EPSS com CVSS e o catálogo KEV da CISA.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
@@ -165,7 +165,7 @@
     <header class="article-header">
         <div class="container">
             <span class="article-category">Ferramenta</span>
-            <h1>Consulta EPSS por CVE</h1>
+            <h1>Calculadora EPSS: probabilidade de exploração de CVEs</h1>
             <div class="article-meta">
                 <span><i class="fas fa-chart-line"></i> EPSS v3 (FIRST.org)</span>
                 <span><i class="fas fa-bolt"></i> Tempo real</span>
@@ -189,8 +189,9 @@
         <div class="ep-wrap">
 
             <div class="ep-intro">
-                <p>Consulta em tempo real o <strong>EPSS</strong> (Exploit Prediction Scoring System) de uma ou mais CVEs, com base na API pública da FIRST.org. EPSS estima a probabilidade da CVE ser explorada in-the-wild nos próximos 30 dias — ferramenta-chave para priorizar patches por <em>risco real de exploração</em>, não apenas severidade técnica do CVSS.</p>
-                <p>Use combinando com <a href="../calculadora-cvss/" style="color:#60A5FA">CVSS</a> (severidade) e <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener" style="color:#60A5FA">KEV da CISA</a> (exploração confirmada) para decisões de priorização.</p>
+                <h2 style="color:#F1F5F9;font-family:Montserrat,sans-serif;font-size:1.35rem;margin:0 0 .6rem">O que é EPSS?</h2>
+                <p>O <strong>EPSS</strong> (Exploit Prediction Scoring System) é um modelo da FIRST.org que estima a probabilidade de uma vulnerabilidade ser explorada em ataques reais nos próximos 30 dias. O resultado é um valor de 0 a 1: um EPSS de 0,42 significa 42% de chance. Serve para priorizar patches por risco real de exploração, não por severidade teórica.</p>
+                <p>Esta calculadora consulta o EPSS de uma ou mais CVEs em tempo real, direto da API pública da FIRST.org. Use combinando com <a href="../calculadora-cvss/" style="color:#60A5FA">CVSS</a> (severidade) e <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener" style="color:#60A5FA">KEV da CISA</a> (exploração confirmada) para decisões de priorização.</p>
             </div>
 
             <div class="ep-card">
