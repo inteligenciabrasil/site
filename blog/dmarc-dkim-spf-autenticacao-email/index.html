@@ -9,16 +9,16 @@
     <!-- CSP-V5 -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://*.googletagmanager.com https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/ https://vlibras.gov.br https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://tagassistant.google.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://tagassistant.google.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://vlibras.gov.br https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.gstatic.com https://ssl.gstatic.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cloudflareinsights.com https://fonts.googleapis.com https://cloudflare-dns.com https://dns.google https://vlibras.gov.br https://api.ipify.org https://challenges.cloudflare.com https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://pagead2.googlesyndication.com; frame-src https://www.googletagmanager.com https://challenges.cloudflare.com https://td.doubleclick.net https://tagassistant.google.com; form-action 'self' https://script.google.com; base-uri 'self'; object-src 'none';">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Guia completo de DMARC, DKIM e SPF: como configurar autenticacao de email para prevenir phishing, spoofing e melhorar entregabilidade. Implementacao passo a passo.">
+    <meta name="description" content="Guia completo de DMARC, DKIM e SPF: como configurar autenticação de email para prevenir phishing, spoofing e melhorar entregabilidade. Implementação passo a passo.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="keywords" content="DMARC, DKIM, SPF, autenticacao email, email security, anti-spoofing, phishing prevention, DNS records, email deliverability, BIMI, MTA-STS">
+    <meta name="keywords" content="DMARC, DKIM, SPF, autenticação email, email security, anti-spoofing, phishing prevention, DNS records, email deliverability, BIMI, MTA-STS">
     <meta name="author" content="Inteligencia Brasil">
     <meta name="theme-color" content="#0D1E38">
     <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/dmarc-dkim-spf-autenticacao-email/">
     <link rel="alternate" type="application/rss+xml" title="Blog Intelig&#234;ncia Brasil &#8212; RSS" href="../../feed.xml">
 
-    <meta property="og:title" content="DMARC, DKIM e SPF: Guia Completo de Autenticacao de Email">
-    <meta property="og:description" content="Como configurar SPF, DKIM e DMARC para proteger seu dominio contra spoofing.">
+    <meta property="og:title" content="DMARC, DKIM e SPF: Guia Completo de Autenticação de Email">
+    <meta property="og:description" content="Como configurar SPF, DKIM e DMARC para proteger seu domínio contra spoofing.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/dmarc-dkim-spf-autenticacao-email/">
     <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
@@ -28,23 +28,23 @@
     <meta property="article:section" content="Email Security">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DMARC, DKIM e SPF: Autenticacao de Email">
-    <meta name="twitter:description" content="Guia completo para configurar autenticacao de email e prevenir spoofing.">
+    <meta name="twitter:title" content="DMARC, DKIM e SPF: Autenticação de Email">
+    <meta name="twitter:description" content="Guia completo para configurar autenticação de email e prevenir spoofing.">
 
     <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
 
-    <title>DMARC, DKIM e SPF: Guia Completo de Autenticacao de Email | Inteligencia Brasil</title>
+    <title>DMARC, DKIM e SPF: Guia Completo de Autenticação de Email | Inteligência Brasil</title>
 
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "DMARC, DKIM e SPF: Guia Completo de Autenticacao de Email",
-        "description": "Como configurar SPF, DKIM e DMARC para proteger seu dominio contra spoofing e phishing.",
+        "headline": "DMARC, DKIM e SPF: Guia Completo de Autenticação de Email",
+        "description": "Como configurar SPF, DKIM e DMARC para proteger seu domínio contra spoofing e phishing.",
         "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
         "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
-        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
+        "publisher": {"@type": "Organization", "name": "Inteligência Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
         "datePublished": "2026-01-31T00:00:00-03:00",
         "dateModified": "2026-01-31T00:00:00-03:00",
         "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/dmarc-dkim-spf-autenticacao-email/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
@@ -59,26 +59,26 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Qual a ordem correta de implementacao: SPF, DKIM ou DMARC?",
+                "name": "Qual a ordem correta de implementação: SPF, DKIM ou DMARC?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "A ordem recomendada e: 1) SPF primeiro - mais simples, lista servidores autorizados; 2) DKIM segundo - assinatura criptografica das mensagens; 3) DMARC por ultimo - politica que usa SPF e DKIM para decidir o que fazer com emails que falham. DMARC sem SPF/DKIM nao funciona."
+                    "text": "A ordem recomendada e: 1) SPF primeiro - mais simples, lista servidores autorizados; 2) DKIM segundo - assinatura criptográfica das mensagens; 3) DMARC por último - política que usa SPF e DKIM para decidir o que fazer com emails que falham. DMARC sem SPF/DKIM não funciona."
                 }
             },
             {
                 "@type": "Question",
-                "name": "DMARC pode bloquear emails legitimos?",
+                "name": "DMARC pode bloquear emails legítimos?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim, se mal configurado. Por isso comece com politica p=none (apenas monitoramento) por 2-4 semanas. Analise os relatorios para identificar fontes legitimas nao autorizadas (marketing, CRM, terceiros). So mude para p=quarantine ou p=reject apos garantir que tudo legitimo esta alinhado."
+                    "text": "Sim, se mal configurado. Por isso comece com política p=none (apenas monitoramento) por 2-4 semanas. Analise os relatórios para identificar fontes legítimas não autorizadas (marketing, CRM, terceiros). Só mude para p=quarantine ou p=reject após garantir que tudo legítimo esta alinhado."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Preciso de DMARC se ja tenho SPF e DKIM?",
+                "name": "Preciso de DMARC se já tenho SPF e DKIM?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim. SPF e DKIM sozinhos nao dizem ao servidor receptor o que fazer quando a verificacao falha. DMARC define a politica (rejeitar, quarentena, nada) e fornece relatorios de quem esta tentando usar seu dominio. Sem DMARC, atacantes ainda podem fazer spoofing do seu dominio."
+                    "text": "Sim. SPF e DKIM sozinhos não dizem ao servidor receptor o que fazer quando a verificação falha. DMARC define a política (rejeitar, quarentena, nada) e fornece relatórios de quem esta tentando usar seu domínio. Sem DMARC, atacantes ainda podem fazer spoofing do seu domínio."
                 }
             }
         ]
@@ -167,12 +167,12 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
-        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
-                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
                     <div class="dropdown-menu" aria-labelledby="navProdutos">
@@ -205,11 +205,11 @@
     <header class="article-header">
         <div class="container">
             <span class="article-category">Email Security</span>
-            <h1>DMARC, DKIM e SPF: Guia Completo de Autenticacao de Email</h1>
+            <h1>DMARC, DKIM e SPF: Guia Completo de Autenticação de Email</h1>
             <div class="article-meta">
                 <span><i class="far fa-calendar"></i> Janeiro 2026</span>
                 <span><i class="far fa-clock"></i> 20 min de leitura</span>
-                <span><i class="far fa-building"></i> Inteligencia Brasil</span>
+                <span><i class="far fa-building"></i> Inteligência Brasil</span>
             </div>
         </div>
     </header>
@@ -237,42 +237,42 @@
                         <li><a href="#spf">SPF - Sender Policy Framework</a></li>
                         <li><a href="#dkim">DKIM - DomainKeys Identified Mail</a></li>
                         <li><a href="#dmarc">DMARC - Domain-based Authentication</a></li>
-                        <li><a href="#implementacao">Implementacao passo a passo</a></li>
-                        <li><a href="#ferramentas">Ferramentas de verificacao</a></li>
+                        <li><a href="#implementacao">Implementação passo a passo</a></li>
+                        <li><a href="#ferramentas">Ferramentas de verificação</a></li>
                         <li><a href="#avancado">BIMI e MTA-STS</a></li>
                         <li><a href="#faq">Perguntas frequentes</a></li>
-                        <li><a href="#conclusao">Conclusao</a></li>
+                        <li><a href="#conclusao">Conclusão</a></li>
                     </ul>
                 </div>
 
                 <h2 id="problema">O Problema do Email Spoofing</h2>
 
                 <p>
-                    O protocolo de email (SMTP) foi criado em 1982, quando a internet era confiavel e pequena. Nao havia verificacao de identidade - qualquer servidor podia enviar email alegando ser de qualquer dominio. Atacantes exploram isso para <a href="../phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">phishing</a>, BEC (Business Email Compromise) e fraudes.
+                    O protocolo de email (SMTP) foi criado em 1982, quando a internet era confiável e pequena. Não havia verificação de identidade - qualquer servidor podia enviar email alegando ser de qualquer domínio. Atacantes exploram isso para <a href="../phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">phishing</a>, BEC (Business Email Compromise) e fraudes.
                 </p>
 
                 <div class="stat-highlight">
                     <div class="number">91%</div>
-                    <div class="label">dos ataques ciberneticos comecam com email (Verizon DBIR)</div>
+                    <div class="label">dos ataques cibernéticos começam com email (Verizon DBIR)</div>
                 </div>
 
                 <p>
-                    <strong>SPF, DKIM e DMARC</strong> sao os tres pilares da autenticacao de email. Juntos, permitem que servidores receptores verifiquem se um email realmente veio de quem diz ter vindo, e o que fazer quando a verificacao falha.
+                    <strong>SPF, DKIM e DMARC</strong> são os três pilares da autenticação de email. Juntos, permitem que servidores receptores verifiquem se um email realmente veio de quem diz ter vindo, e o que fazer quando a verificação falha.
                 </p>
 
                 <div class="concept-card">
-                    <h3><i class="fas fa-shield-alt" style="color:#60A5FA;margin-right:10px"></i> Os tres pilares</h3>
+                    <h3><i class="fas fa-shield-alt" style="color:#60A5FA;margin-right:10px"></i> Os três pilares</h3>
                     <ul>
-                        <li><strong>SPF:</strong> Lista quais servidores podem enviar email pelo seu dominio</li>
+                        <li><strong>SPF:</strong> Lista quais servidores podem enviar email pelo seu domínio</li>
                         <li><strong>DKIM:</strong> Assina digitalmente cada email para provar autenticidade</li>
-                        <li><strong>DMARC:</strong> Define politica do que fazer quando SPF/DKIM falham</li>
+                        <li><strong>DMARC:</strong> Define política do que fazer quando SPF/DKIM falham</li>
                     </ul>
                 </div>
 
                 <h2 id="spf">SPF - Sender Policy Framework</h2>
 
                 <p>
-                    <strong>SPF</strong> e um registro DNS TXT que lista os servidores autorizados a enviar email em nome do seu dominio. Quando um servidor recebe email de "@seudominio.com", ele consulta o SPF para verificar se o IP de origem esta autorizado.
+                    <strong>SPF</strong> e um registro DNS TXT que lista os servidores autorizados a enviar email em nome do seu domínio. Quando um servidor recebe email de "@seudominio.com", ele consulta o SPF para verificar se o IP de origem esta autorizado.
                 </p>
 
                 <h3>Como funciona</h3>
@@ -281,7 +281,7 @@
                     <li>Servidor de email envia mensagem de @seudominio.com</li>
                     <li>Servidor receptor consulta DNS TXT de seudominio.com</li>
                     <li>Verifica se IP do remetente esta na lista SPF</li>
-                    <li>Se nao estiver, marca como SPF fail</li>
+                    <li>Se não estiver, marca como SPF fail</li>
                 </ol>
 
                 <h3>Sintaxe do registro SPF</h3>
@@ -292,24 +292,24 @@
                 </div>
 
                 <ul>
-                    <li><strong>v=spf1:</strong> Versao do SPF (sempre spf1)</li>
+                    <li><strong>v=spf1:</strong> Versão do SPF (sempre spf1)</li>
                     <li><strong>ip4:</strong> IPs autorizados diretamente</li>
-                    <li><strong>include:</strong> Inclui SPF de outro dominio (provedores de email)</li>
-                    <li><strong>a:</strong> Autoriza IPs do registro A do dominio</li>
+                    <li><strong>include:</strong> Inclui SPF de outro domínio (provedores de email)</li>
+                    <li><strong>a:</strong> Autoriza IPs do registro A do domínio</li>
                     <li><strong>mx:</strong> Autoriza IPs dos servidores MX</li>
-                    <li><strong>-all:</strong> Rejeitar tudo que nao esta listado (hard fail)</li>
-                    <li><strong>~all:</strong> Soft fail (marcar mas nao rejeitar)</li>
+                    <li><strong>-all:</strong> Rejeitar tudo que não esta listado (hard fail)</li>
+                    <li><strong>~all:</strong> Soft fail (marcar mas não rejeitar)</li>
                 </ul>
 
                 <div class="warning-box">
                     <h4><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Limite de lookups DNS</h4>
-                    <p>SPF tem limite de 10 lookups DNS. Cada "include" conta como lookup. Se exceder, SPF falha silenciosamente. Use ferramentas de flatten SPF se necessario ou consolide provedores.</p>
+                    <p>SPF tem limite de 10 lookups DNS. Cada "include" conta como lookup. Se exceder, SPF falha silenciosamente. Use ferramentas de flatten SPF se necessário ou consolide provedores.</p>
                 </div>
 
                 <h2 id="dkim">DKIM - DomainKeys Identified Mail</h2>
 
                 <p>
-                    <strong>DKIM</strong> adiciona uma assinatura criptografica a cada email enviado. O servidor receptor usa a chave publica publicada no DNS para verificar que o email nao foi alterado em transito e realmente veio do dominio alegado.
+                    <strong>DKIM</strong> adiciona uma assinatura criptográfica a cada email enviado. O servidor receptor usa a chave publica publicada no DNS para verificar que o email não foi alterado em trânsito e realmente veio do domínio alegado.
                 </p>
 
                 <h3>Como funciona</h3>
@@ -329,10 +329,10 @@
                 </div>
 
                 <ul>
-                    <li><strong>v=DKIM1:</strong> Versao do DKIM</li>
-                    <li><strong>k=rsa:</strong> Algoritmo (RSA e padrao)</li>
+                    <li><strong>v=DKIM1:</strong> Versão do DKIM</li>
+                    <li><strong>k=rsa:</strong> Algoritmo (RSA e padrão)</li>
                     <li><strong>p=:</strong> Chave publica em base64</li>
-                    <li><strong>selector:</strong> Identificador da chave (permite rotacao)</li>
+                    <li><strong>selector:</strong> Identificador da chave (permite rotação)</li>
                 </ul>
 
                 <h3>Header DKIM em um email</h3>
@@ -348,18 +348,18 @@
                 <h2 id="dmarc">DMARC - Domain-based Message Authentication</h2>
 
                 <p>
-                    <strong>DMARC</strong> e a politica que une SPF e DKIM. Define o que servidores receptores devem fazer quando a autenticacao falha e configura relatorios para visibilidade do que esta acontecendo com seu dominio.
+                    <strong>DMARC</strong> e a política que une SPF e DKIM. Define o que servidores receptores devem fazer quando a autenticação falha e configura relatórios para visibilidade do que esta acontecendo com seu domínio.
                 </p>
 
                 <h3>Alinhamento DMARC</h3>
 
                 <p>
-                    DMARC exige "alinhamento" - o dominio no header "From:" deve corresponder ao dominio validado por SPF ou DKIM:
+                    DMARC exige "alinhamento" - o domínio no header "From:" deve corresponder ao domínio validado por SPF ou DKIM:
                 </p>
 
                 <ul>
-                    <li><strong>SPF alignment:</strong> Dominio do envelope (MAIL FROM) = dominio do From:</li>
-                    <li><strong>DKIM alignment:</strong> Dominio assinado (d=) = dominio do From:</li>
+                    <li><strong>SPF alignment:</strong> Domínio do envelope (MAIL FROM) = domínio do From:</li>
+                    <li><strong>DKIM alignment:</strong> Domínio assinado (d=) = domínio do From:</li>
                 </ul>
 
                 <h3>Registro DMARC</h3>
@@ -370,32 +370,32 @@
                 </div>
 
                 <ul>
-                    <li><strong>v=DMARC1:</strong> Versao</li>
-                    <li><strong>p=:</strong> Politica (none, quarantine, reject)</li>
-                    <li><strong>rua=:</strong> Email para relatorios agregados (diarios)</li>
-                    <li><strong>ruf=:</strong> Email para relatorios forenses (por falha)</li>
-                    <li><strong>pct=:</strong> Percentual de emails para aplicar politica</li>
+                    <li><strong>v=DMARC1:</strong> Versão</li>
+                    <li><strong>p=:</strong> Política (none, quarantine, reject)</li>
+                    <li><strong>rua=:</strong> Email para relatórios agregados (diarios)</li>
+                    <li><strong>ruf=:</strong> Email para relatórios forenses (por falha)</li>
+                    <li><strong>pct=:</strong> Percentual de emails para aplicar política</li>
                     <li><strong>adkim=:</strong> Alinhamento DKIM (s=strict, r=relaxed)</li>
                     <li><strong>aspf=:</strong> Alinhamento SPF (s=strict, r=relaxed)</li>
                 </ul>
 
-                <h3>Politicas DMARC</h3>
+                <h3>Políticas DMARC</h3>
 
                 <div class="protocol-box">
-                    <h4><i class="fas fa-cog"></i> Niveis de politica</h4>
+                    <h4><i class="fas fa-cog"></i> Níveis de política</h4>
                     <ul>
-                        <li><strong>p=none:</strong> Apenas monitoramento, nao afeta entrega. Use inicialmente.</li>
-                        <li><strong>p=quarantine:</strong> Emails que falham vao para spam/quarentena.</li>
-                        <li><strong>p=reject:</strong> Emails que falham sao rejeitados. Maximo nivel de protecao.</li>
+                        <li><strong>p=none:</strong> Apenas monitoramento, não afeta entrega. Use inicialmente.</li>
+                        <li><strong>p=quarantine:</strong> Emails que falham vão para spam/quarentena.</li>
+                        <li><strong>p=reject:</strong> Emails que falham são rejeitados. Máximo nível de proteção.</li>
                     </ul>
                 </div>
 
-                <h2 id="implementacao">Implementacao Passo a Passo</h2>
+                <h2 id="implementacao">Implementação Passo a Passo</h2>
 
-                <h3>Fase 1: Inventario de fontes de email</h3>
+                <h3>Fase 1: Inventário de fontes de email</h3>
 
                 <p>
-                    Antes de configurar, liste todas as fontes que enviam email pelo seu dominio:
+                    Antes de configurar, liste todas as fontes que enviam email pelo seu domínio:
                 </p>
 
                 <ul>
@@ -403,7 +403,7 @@
                     <li>Plataformas de marketing (Mailchimp, HubSpot, RD Station)</li>
                     <li>CRM e sistemas de vendas (Salesforce, Pipedrive)</li>
                     <li>Sistemas de suporte (Zendesk, Freshdesk)</li>
-                    <li>Aplicacoes que enviam email (notificacoes, alertas)</li>
+                    <li>Aplicações que enviam email (notificações, alertas)</li>
                     <li>Terceiros (parceiros que enviam em seu nome)</li>
                 </ul>
 
@@ -415,19 +415,19 @@
                 </div>
 
                 <p>
-                    Adicione cada provedor via "include" e IPs proprios via "ip4/ip6".
+                    Adicione cada provedor via "include" e IPs próprios via "ip4/ip6".
                 </p>
 
                 <h3>Fase 3: Configurar DKIM</h3>
 
                 <p>
-                    Cada provedor de email tem processo proprio para gerar chaves DKIM:
+                    Cada provedor de email tem processo próprio para gerar chaves DKIM:
                 </p>
 
                 <ul>
                     <li><strong>Google Workspace:</strong> Admin Console > Apps > Gmail > Authenticate email</li>
                     <li><strong>Microsoft 365:</strong> Defender > Email & collaboration > Policies > DKIM</li>
-                    <li><strong>Provedores de marketing:</strong> Configuracoes de dominio no painel</li>
+                    <li><strong>Provedores de marketing:</strong> Configurações de domínio no painel</li>
                 </ul>
 
                 <h3>Fase 4: Configurar DMARC em modo monitoramento</h3>
@@ -438,17 +438,17 @@
                 </div>
 
                 <p>
-                    Mantenha p=none por 2-4 semanas enquanto analisa relatorios.
+                    Mantenha p=none por 2-4 semanas enquanto analisa relatórios.
                 </p>
 
-                <h3>Fase 5: Analisar relatorios e ajustar</h3>
+                <h3>Fase 5: Analisar relatórios e ajustar</h3>
 
                 <p>
-                    Use servicos como DMARC Analyzer, Valimail ou dmarcian para processar relatorios XML. Identifique:
+                    Use serviços como DMARC Analyzer, Valimail ou dmarcian para processar relatórios XML. Identifique:
                 </p>
 
                 <ul>
-                    <li>Fontes legitimas que estao falhando (adicione ao SPF/configure DKIM)</li>
+                    <li>Fontes legítimas que estão falhando (adicione ao SPF/configure DKIM)</li>
                     <li>Fontes desconhecidas que podem ser spoofing</li>
                     <li>Taxa de alinhamento SPF e DKIM</li>
                 </ul>
@@ -466,20 +466,20 @@ v=DMARC1; p=quarantine; pct=25; rua=mailto:dmarc@exemplo.com
 # Semana 9-12: Quarentena total
 v=DMARC1; p=quarantine; pct=100; rua=mailto:dmarc@exemplo.com
 
-# Producao: Rejeicao
+# Produção: Rejeição
 v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
                 </div>
 
-                <h2 id="ferramentas">Ferramentas de Verificacao</h2>
+                <h2 id="ferramentas">Ferramentas de Verificação</h2>
 
                 <div class="checklist">
                     <h3>Ferramentas gratuitas para teste</h3>
                     <ul>
-                        <li><strong><a href="../../ferramentas/validador-spf-dkim-dmarc/">Validador SPF/DKIM/DMARC (Inteligencia Brasil)</a>:</strong> Nossa ferramenta em portugues, com analise detalhada e recomendacoes</li>
+                        <li><strong><a href="../../ferramentas/validador-spf-dkim-dmarc/">Validador SPF/DKIM/DMARC (Inteligência Brasil)</a>:</strong> Nossa ferramenta em português, com analise detalhada e recomendações</li>
                         <li><strong>MXToolbox:</strong> mxtoolbox.com - Verifica SPF, DKIM, DMARC</li>
-                        <li><strong>DMARC Analyzer:</strong> dmarcanalyzer.com - Relatorios DMARC</li>
+                        <li><strong>DMARC Analyzer:</strong> dmarcanalyzer.com - Relatórios DMARC</li>
                         <li><strong>Mail-Tester:</strong> mail-tester.com - Teste completo de email</li>
-                        <li><strong>Google Admin Toolbox:</strong> Verificacao de registros DNS</li>
+                        <li><strong>Google Admin Toolbox:</strong> Verificação de registros DNS</li>
                         <li><strong>DKIM Validator:</strong> dkimvalidator.com - Teste de assinatura</li>
                     </ul>
                 </div>
@@ -500,7 +500,7 @@ v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
                 <h3>MTA-STS - Mail Transfer Agent Strict Transport Security</h3>
 
                 <p>
-                    <strong>MTA-STS</strong> forca conexoes TLS entre servidores de email, prevenindo ataques de downgrade. Requer arquivo de politica em https://mta-sts.seudominio.com/.well-known/mta-sts.txt
+                    <strong>MTA-STS</strong> força conexões TLS entre servidores de email, prevenindo ataques de downgrade. Requer arquivo de política em https://mta-sts.seudominio.com/.well-known/mta-sts.txt
                 </p>
 
                 <h2 id="faq">Perguntas Frequentes</h2>
@@ -508,11 +508,11 @@ v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
                 <div class="faq-section">
                     <div class="faq-item">
                         <div class="faq-question">
-                            <span>Por que meus emails estao indo para spam mesmo com SPF/DKIM?</span>
+                            <span>Por que meus emails estão indo para spam mesmo com SPF/DKIM?</span>
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>SPF/DKIM/DMARC sao apenas parte da equacao. Reputacao do IP, conteudo do email, engajamento dos destinatarios e praticas de envio tambem afetam entregabilidade. Verifique se seu IP nao esta em blacklists e siga boas praticas de email marketing.</p>
+                            <p>SPF/DKIM/DMARC são apenas parte da equação. Reputação do IP, conteúdo do email, engajamento dos destinatarios e práticas de envio também afetam entregabilidade. Verifique se seu IP não esta em blacklists e siga boas práticas de email marketing.</p>
                         </div>
                     </div>
 
@@ -522,7 +522,7 @@ v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Sim. Google e Microsoft configuram SPF e DKIM automaticamente, mas DMARC voce precisa configurar. Sem DMARC, atacantes ainda podem fazer spoofing do seu dominio mesmo que seus emails legitimos estejam autenticados.</p>
+                            <p>Sim. Google e Microsoft configuram SPF e DKIM automaticamente, mas DMARC você precisa configurar. Sem DMARC, atacantes ainda podem fazer spoofing do seu domínio mesmo que seus emails legítimos estejam autenticados.</p>
                         </div>
                     </div>
 
@@ -532,28 +532,28 @@ v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Encaminhamento quebra SPF porque o IP muda. DKIM sobrevive ao encaminhamento se o conteudo nao for alterado. Por isso DMARC aceita se SPF OU DKIM passar. Configure DKIM corretamente e o encaminhamento funcionara via alinhamento DKIM.</p>
+                            <p>Encaminhamento quebra SPF porque o IP muda. DKIM sobrevive ao encaminhamento se o conteúdo não for alterado. Por isso DMARC aceita se SPF OU DKIM passar. Configure DKIM corretamente e o encaminhamento funcionara via alinhamento DKIM.</p>
                         </div>
                     </div>
                 </div>
 
-                <h2 id="conclusao">Conclusao</h2>
+                <h2 id="conclusao">Conclusão</h2>
 
                 <p>
-                    Implementar SPF, DKIM e DMARC nao e opcional em 2026 - e requisito basico de seguranca de email. Sem esses controles, seu dominio pode ser usado por atacantes para <a class="gloss-link" href="/glossario/#phishing" title="Ver no gloss&#225;rio">phishing</a> contra seus clientes, parceiros e funcionarios.
+                    Implementar SPF, DKIM e DMARC não e opcional em 2026 - e requisito básico de segurança de email. Sem esses controles, seu domínio pode ser usado por atacantes para <a class="gloss-link" href="/glossario/#phishing" title="Ver no gloss&#225;rio">phishing</a> contra seus clientes, parceiros e funcionários.
                 </p>
 
                 <p>
-                    A implementacao deve ser gradual: comece com SPF, adicione DKIM, configure DMARC em monitoramento, analise relatorios por algumas semanas, e so entao escale para politica de rejeicao. Pressa causa bloqueio de emails legitimos.
+                    A implementação deve ser gradual: comece com SPF, adicione DKIM, configure DMARC em monitoramento, analise relatórios por algumas semanas, e só então escale para política de rejeição. Pressa causa bloqueio de emails legítimos.
                 </p>
 
                 <p>
-                    Alem da seguranca, DMARC melhora entregabilidade. Provedores como Gmail e Microsoft favorecem dominios com autenticacao completa. E com BIMI, voce ainda ganha visibilidade de marca nos clientes de email.
+                    Além da segurança, DMARC melhora entregabilidade. Provedores como Gmail e Microsoft favorecem domínios com autenticação completa. E com BIMI, você ainda ganha visibilidade de marca nos clientes de email.
                 </p>
 
                 <div class="cta-box">
                     <h3>Precisa de Ajuda com Email Security?</h3>
-                    <p>Oferecemos assessment de autenticacao de email, configuracao de SPF/DKIM/DMARC e monitoramento de dominios.</p>
+                    <p>Oferecemos assessment de autenticação de email, configuração de SPF/DKIM/DMARC e monitoramento de domínios.</p>
                     <a href="../../#contato" class="cta-btn">Falar com Especialista</a>
                 </div>
 
@@ -565,10 +565,10 @@ v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
                 </div>
 
                 <div class="author-box">
-                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="80" height="80"></picture>
                     <div class="author-info">
-                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligencia Brasil</a></h4>
-                        <p>Consultoria especializada em Email Security e Protecao contra Phishing.</p>
+                        <h4><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" rel="noopener">Inteligência Brasil</a></h4>
+                        <p>Consultoria especializada em Email Security e Proteção contra Phishing.</p>
                     </div>
                 </div>
             </div>
@@ -594,9 +594,9 @@ v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
                     <div class="footer-about">
                         <picture>
                             <source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140">
-                            <img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy">
+                            <img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" class="footer-logo" width="140" height="140" loading="lazy">
                         </picture>
-                        <p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao, com as melhores praticas para reducao de riscos digitais corporativos.</p>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação, com as melhores práticas para redução de riscos digitais corporativos.</p>
                         <div class="footer-social">
                             <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                             <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -610,16 +610,16 @@ v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
                         <ul>
                             <li><a href="../phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">Phishing</a></li>
                             <li><a href="../security-awareness-programa-conscientizacao/">Security Awareness</a></li>
-                            <li><a href="../seguro-cibernetico-cyber-insurance/">Seguro Cibernetico</a></li>
+                            <li><a href="../seguro-cibernetico-cyber-insurance/">Seguro Cibernético</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <div class="footer-links">
-                        <h4>Navegacao</h4>
+                        <h4>Navegação</h4>
                         <ul>
                             <li><a href="../../">Home</a></li>
-                            <li><a href="../../#servicos">Servicos</a></li>
+                            <li><a href="../../#servicos">Serviços</a></li>
                             <li><a href="../">Blog</a></li>
                             <li><a href="../../#contato">Contato</a></li>
                         </ul>
@@ -628,7 +628,7 @@ v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-contact">
                         <h4>Contato</h4>
-                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
                         <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
                         <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
                     </div>
@@ -636,9 +636,9 @@ v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
             </div>
             <div class="footer-bottom">
                 <div class="row align-items-center">
-                    <div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+                    <div class="col-md-6"><p>&copy; 2026 Inteligência Brasil. Todos os direitos reservados.</p></div>
                     <div class="col-md-6 text-md-right">
-                        <a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+                        <a href="../../politica-de-privacidade.html">Política de Privacidade</a>
                         <span class="separator">|</span>
                         <a href="../../#contato">Contato</a>
                     </div>

@@ -10,15 +10,15 @@
 <!-- CSP-V5 -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://*.googletagmanager.com https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/ https://vlibras.gov.br https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://tagassistant.google.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://tagassistant.google.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://vlibras.gov.br https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.gstatic.com https://ssl.gstatic.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cloudflareinsights.com https://fonts.googleapis.com https://cloudflare-dns.com https://dns.google https://vlibras.gov.br https://api.ipify.org https://challenges.cloudflare.com https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://pagead2.googlesyndication.com; frame-src https://www.googletagmanager.com https://challenges.cloudflare.com https://td.doubleclick.net https://tagassistant.google.com; form-action 'self' https://script.google.com; base-uri 'self'; object-src 'none';">
 <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
-<meta content="Guia completo de implementacao de SIEM: arquitetura, casos de uso, regras de correlacao, integracao com fontes de log, metricas e melhores praticas para Security Operations." name="description"/>
+<meta content="Guia completo de implementação de SIEM: arquitetura, casos de uso, regras de correlação, integração com fontes de log, métricas e melhores práticas para Security Operations." name="description"/>
 <meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/>
-<meta content="SIEM, Security Information Event Management, implementacao SIEM, casos de uso SIEM, correlacao de eventos, log management, SOC, Splunk, Elastic SIEM, Microsoft Sentinel, QRadar" name="keywords"/>
+<meta content="SIEM, Security Information Event Management, implementação SIEM, casos de uso SIEM, correlação de eventos, log management, SOC, Splunk, Elastic SIEM, Microsoft Sentinel, QRadar" name="keywords"/>
 <meta content="Inteligencia Brasil" name="author"/>
 <meta content="#0D1E38" name="theme-color"/>
 <link href="https://inteligenciabrasil.seg.br/blog/siem-implementacao-casos-uso/" rel="canonical"/>
 <link href="../../feed.xml" rel="alternate" title="Blog Inteligência Brasil — RSS" type="application/rss+xml"/>
-<meta content="SIEM: Guia de Implementacao e Casos de Uso" property="og:title"/>
-<meta content="Como implementar SIEM: arquitetura, casos de uso, regras de correlacao e melhores praticas." property="og:description"/>
+<meta content="SIEM: Guia de Implementação e Casos de Uso" property="og:title"/>
+<meta content="Como implementar SIEM: arquitetura, casos de uso, regras de correlação e melhores práticas." property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://inteligenciabrasil.seg.br/blog/siem-implementacao-casos-uso/" property="og:url"/>
 <meta content="https://inteligenciabrasil.seg.br/img/og-image.webp" property="og:image"/>
@@ -27,20 +27,20 @@
 <meta content="2026-01-31T14:00:00-03:00" property="article:published_time"/>
 <meta content="SOC" property="article:section"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="SIEM: Implementacao e Casos de Uso" name="twitter:title"/>
+<meta content="SIEM: Implementação e Casos de Uso" name="twitter:title"/>
 <meta content="Guia completo para implementar SIEM no seu SOC." name="twitter:description"/>
 <link href="../../img/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="../../img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
-<title>SIEM: Guia de Implementacao e Casos de Uso | Inteligencia Brasil</title>
+<title>SIEM: Guia de Implementação e Casos de Uso | Inteligência Brasil</title>
 <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "SIEM: Guia de Implementacao e Casos de Uso",
-        "description": "Guia completo de implementacao de SIEM: arquitetura, casos de uso, regras de correlacao e melhores praticas.",
+        "headline": "SIEM: Guia de Implementação e Casos de Uso",
+        "description": "Guia completo de implementação de SIEM: arquitetura, casos de uso, regras de correlação e melhores práticas.",
         "image": "https://inteligenciabrasil.seg.br/img/og-image.webp",
         "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
-        "publisher": {"@type": "Organization", "name": "Inteligencia Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
+        "publisher": {"@type": "Organization", "name": "Inteligência Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
         "datePublished": "2026-01-31T00:00:00-03:00",
         "dateModified": "2026-01-31T00:00:00-03:00",
         "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/siem-implementacao-casos-uso/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
@@ -54,10 +54,10 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Qual a diferenca entre SIEM e SOAR?",
+                "name": "Qual a diferença entre SIEM e SOAR?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "SIEM (Security Information and Event Management) coleta, armazena e correlaciona logs para detectar ameacas. SOAR (Security Orchestration, Automation and Response) automatiza a resposta a incidentes com playbooks e integracao de ferramentas. SIEM detecta, SOAR responde. Muitas solucoes modernas combinam ambos."
+                    "text": "SIEM (Security Information and Event Management) coleta, armazena e correlaciona logs para detectar ameaças. SOAR (Security Orchestration, Automation and Response) automatiza a resposta a incidentes com playbooks e integração de ferramentas. SIEM detecta, SOAR responde. Muitas soluções modernas combinam ambos."
                 }
             },
             {
@@ -65,7 +65,7 @@
                 "name": "Quanto custa implementar um SIEM?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Custos variam drasticamente. SIEMs comerciais (Splunk, QRadar) custam US$ 50.000-500.000+/ano dependendo do volume de dados. Cloud-native (Sentinel, Chronicle) usam modelo pay-per-GB ingerido. Open source (Elastic, Wazuh) tem custo de infraestrutura e equipe. Para PMEs, solucoes managed SIEM custam US$ 3.000-10.000/mes."
+                    "text": "Custos variam drasticamente. SIEMs comerciais (Splunk, QRadar) custam US$ 50.000-500.000+/ano dependendo do volume de dados. Cloud-native (Sentinel, Chronicle) usam modelo pay-per-GB ingerido. Open source (Elastic, Wazuh) tem custo de infraestrutura e equipe. Para PMEs, soluções managed SIEM custam US$ 3.000-10.000/mês."
                 }
             },
             {
@@ -73,7 +73,7 @@
                 "name": "Quais logs devo coletar primeiro?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Priorize: 1) Active Directory e autenticacao (falhas de login, alteracoes de privilegios); 2) Firewall e proxy (conexoes externas); 3) Endpoints (EDR/antivirus); 4) Servidores criticos (Windows Security, Linux auth); 5) Aplicacoes de negocio. Comece com o essencial e expanda gradualmente."
+                    "text": "Priorize: 1) Active Directory e autenticação (falhas de login, alterações de privilégios); 2) Firewall e proxy (conexões externas); 3) Endpoints (EDR/antivírus); 4) Servidores críticos (Windows Security, Linux auth); 5) Aplicações de negócio. Comece com o essencial e expanda gradualmente."
                 }
             }
         ]
@@ -86,7 +86,7 @@
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://inteligenciabrasil.seg.br/"},
             {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://inteligenciabrasil.seg.br/blog/"},
-            {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/siem-implementacao-casos-uso/", "position": 3, "name": "SIEM Implementacao"}
+            {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/siem-implementacao-casos-uso/", "position": 3, "name": "SIEM Implementação"}
         ]
     }
     </script>
@@ -158,12 +158,12 @@
 <body><a class="skip-link" href="#main-content">Pular para conteúdo</a>
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
-<a class="navbar-brand logo-image" href="../../"><img alt="Logo Inteligencia Brasil" height="113" src="../../img/logo.svg" width="196"/></a>
+<a class="navbar-brand logo-image" href="../../"><img alt="Logo Inteligência Brasil" height="113" src="../../img/logo.svg" width="196"/></a>
 <button aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler collapsed" data-target="#navbarsExampleDefault" data-toggle="collapse" type="button"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 <ul class="navbar-nav ml-auto">
 <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
-<li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+<li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
 <li class="nav-item dropdown">
 <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button">PRODUTOS</a>
 <div aria-labelledby="navProdutos" class="dropdown-menu">
@@ -195,11 +195,11 @@
 <header class="article-header">
 <div class="container">
 <span class="article-category">SOC</span>
-<h1>SIEM: Guia Completo de Implementacao e Casos de Uso</h1>
+<h1>SIEM: Guia Completo de Implementação e Casos de Uso</h1>
 <div class="article-meta">
 <span><i class="far fa-calendar"></i> Janeiro 2026</span>
 <span><i class="far fa-clock"></i> 25 min de leitura</span>
-<span><i class="far fa-building"></i> Inteligencia Brasil</span>
+<span><i class="far fa-building"></i> Inteligência Brasil</span>
 </div>
 </div>
 </header>
@@ -208,7 +208,7 @@
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="../../">Home</a></li>
 <li class="breadcrumb-item"><a href="../">Blog</a></li>
-<li class="breadcrumb-item active">SIEM Implementacao</li>
+<li class="breadcrumb-item active">SIEM Implementação</li>
 </ol>
 </div>
 </nav>
@@ -225,70 +225,70 @@
 <li><a href="#arquitetura">Arquitetura de SIEM</a></li>
 <li><a href="#fontes">Fontes de log essenciais</a></li>
 <li><a href="#casos">Casos de uso e regras</a></li>
-<li><a href="#solucoes">Principais solucoes</a></li>
-<li><a href="#implementacao">Implementacao passo a passo</a></li>
-<li><a href="#metricas">Metricas de sucesso</a></li>
+<li><a href="#solucoes">Principais soluções</a></li>
+<li><a href="#implementacao">Implementação passo a passo</a></li>
+<li><a href="#metricas">Métricas de sucesso</a></li>
 <li><a href="#faq">Perguntas frequentes</a></li>
-<li><a href="#conclusao">Conclusao</a></li>
+<li><a href="#conclusao">Conclusão</a></li>
 </ul>
 </div>
 <h2 id="oque">O que e SIEM</h2>
 <p>
-<strong>SIEM (Security Information and Event Management)</strong> e a tecnologia central de um <a href="../csoc-o-centro-de-operacoes-de-seguranca-cibernetica/">Security Operations Center (SOC)</a>. Ele coleta, normaliza, armazena e correlaciona logs de seguranca de toda a infraestrutura, permitindo detectar ameacas, investigar incidentes e atender requisitos de compliance.
+<strong>SIEM (Security Information and Event Management)</strong> e a tecnologia central de um <a href="../csoc-o-centro-de-operacoes-de-seguranca-cibernetica/">Security Operations Center (SOC)</a>. Ele coleta, normaliza, armazena e correlaciona logs de segurança de toda a infraestrutura, permitindo detectar ameaças, investigar incidentes e atender requisitos de compliance.
                 </p>
 <div class="stat-highlight">
 <div class="number">277 dias</div>
-<div class="label">tempo medio para identificar e conter breach sem SIEM vs 197 dias com SIEM (IBM Cost of a Data Breach 2025)</div>
+<div class="label">tempo médio para identificar e conter breach sem SIEM vs 197 dias com SIEM (IBM Cost of a Data Breach 2025)</div>
 </div>
 <p>
-                    O termo SIEM combina duas funcoes historicamente separadas: <strong>SIM (Security Information Management)</strong> - armazenamento e analise de logs - e <strong>SEM (Security Event Management)</strong> - correlacao e alertas em tempo real. Solucoes modernas adicionam UEBA (User and Entity Behavior Analytics), SOAR (automacao) e integracao com <a class="gloss-link" href="/glossario/#cti" title="Ver no glossário">threat intelligence</a>.
+                    O termo SIEM combina duas funções historicamente separadas: <strong>SIM (Security Information Management)</strong> - armazenamento e analise de logs - e <strong>SEM (Security Event Management)</strong> - correlação e alertas em tempo real. Soluções modernas adicionam UEBA (User and Entity Behavior Analytics), SOAR (automação) e integração com <a class="gloss-link" href="/glossario/#cti" title="Ver no glossário">threat intelligence</a>.
                 </p>
 <div class="concept-card">
-<h3><i class="fas fa-bullseye" style="color:#60A5FA;margin-right:10px"></i> Funcoes principais do SIEM</h3>
+<h3><i class="fas fa-bullseye" style="color:#60A5FA;margin-right:10px"></i> Funções principais do SIEM</h3>
 <ul>
-<li><strong>Coleta de logs:</strong> Agregacao centralizada de eventos de toda infraestrutura</li>
-<li><strong>Normalizacao:</strong> Padronizacao de formatos diferentes para analise unificada</li>
-<li><strong>Correlacao:</strong> Identificacao de padroes que indicam ameacas</li>
-<li><strong>Alertas:</strong> Notificacao de eventos que requerem atencao</li>
-<li><strong>Investigacao:</strong> Busca e analise forense de eventos historicos</li>
-<li><strong>Relatorios:</strong> Dashboards e reports para compliance e gestao</li>
-<li><strong>Retencao:</strong> Armazenamento de logs para requisitos regulatorios</li>
+<li><strong>Coleta de logs:</strong> Agregação centralizada de eventos de toda infraestrutura</li>
+<li><strong>Normalizacao:</strong> Padronização de formatos diferentes para analise unificada</li>
+<li><strong>Correlação:</strong> Identificação de padrões que indicam ameaças</li>
+<li><strong>Alertas:</strong> Notificação de eventos que requerem atenção</li>
+<li><strong>Investigação:</strong> Busca e analise forense de eventos históricos</li>
+<li><strong>Relatórios:</strong> Dashboards e reports para compliance e gestão</li>
+<li><strong>Retenção:</strong> Armazenamento de logs para requisitos regulatórios</li>
 </ul>
 </div>
-<p style="font-size:.9rem;color:#94A3B8">Este artigo utiliza diversas siglas tecnicas (SIEM, SOC, SOAR, UEBA, EDR, etc.). Consulte nosso <a href="../glossario-acronimos-ti-seguranca-informacao/">glossario de acronimos de TI e SI</a> para referencia rapida.</p>
+<p style="font-size:.9rem;color:#94A3B8">Este artigo utiliza diversas siglas técnicas (SIEM, SOC, SOAR, UEBA, EDR, etc.). Consulte nosso <a href="../glossario-acronimos-ti-seguranca-informacao/">glossário de acrônimos de TI e SI</a> para referência rápida.</p>
 <h2 id="arquitetura">Arquitetura de SIEM</h2>
 <p>
-                    Uma implementacao SIEM tipica envolve multiplos componentes trabalhando em conjunto:
+                    Uma implementação SIEM típica envolve múltiplos componentes trabalhando em conjunto:
                 </p>
 <div class="architecture-box">
 <h3><i class="fas fa-sitemap"></i> Componentes da Arquitetura</h3>
 <ul>
 <li><strong>Coletores/Forwarders:</strong> Agentes que coletam logs nas fontes e enviam ao SIEM</li>
 <li><strong>Agregadores:</strong> Servidores intermediarios que concentram logs antes do processamento</li>
-<li><strong>Parser/Normalizer:</strong> Converte logs de diferentes formatos para schema padrao</li>
-<li><strong>Correlation Engine:</strong> Aplica regras para detectar padroes de ameaca</li>
+<li><strong>Parser/Normalizer:</strong> Converte logs de diferentes formatos para schema padrão</li>
+<li><strong>Correlation Engine:</strong> Aplica regras para detectar padrões de ameaça</li>
 <li><strong>Storage:</strong> Armazenamento de logs (hot/warm/cold tiers)</li>
-<li><strong>Search/Analytics:</strong> Motor de busca para investigacao e hunting</li>
+<li><strong>Search/Analytics:</strong> Motor de busca para investigação e hunting</li>
 <li><strong>Console:</strong> Interface para analistas, dashboards e alertas</li>
 </ul>
 </div>
-<h3>Consideracoes de dimensionamento</h3>
+<h3>Considerações de dimensionamento</h3>
 <ul>
-<li><strong>EPS (Events Per Second):</strong> Volume de eventos processados - determina capacidade necessaria</li>
-<li><strong>Retencao:</strong> Quanto tempo manter logs (30 dias hot, 1 ano warm, 7 anos cold para compliance)</li>
-<li><strong>Alta disponibilidade:</strong> Redundancia para garantir operacao continua</li>
+<li><strong>EPS (Events Per Second):</strong> Volume de eventos processados - determina capacidade necessária</li>
+<li><strong>Retenção:</strong> Quanto tempo manter logs (30 dias hot, 1 ano warm, 7 anos cold para compliance)</li>
+<li><strong>Alta disponibilidade:</strong> Redundancia para garantir operação continua</li>
 <li><strong>Escalabilidade:</strong> Capacidade de crescer conforme ambiente expande</li>
 </ul>
 <h2 id="fontes">Fontes de Log Essenciais</h2>
 <p>
-                    Nem todos os logs tem o mesmo valor. Priorize fontes com maior impacto na deteccao de ameacas:
+                    Nem todos os logs tem o mesmo valor. Priorize fontes com maior impacto na detecção de ameaças:
                 </p>
 <h3>Prioridade Alta (implementar primeiro)</h3>
 <ul>
 <li><strong><a href="../active-directory-security-protecao-ataques/">Active Directory</a>:</strong> Event IDs 4624/4625 (logon), 4728/4732 (grupos), 4662 (DCSync), 4769 (Kerberoasting)</li>
-<li><strong>Firewall/Proxy:</strong> Conexoes bloqueadas, trafego para IPs maliciosos, downloads suspeitos</li>
-<li><strong>EDR/Antivirus:</strong> Deteccoes de malware, comportamentos suspeitos, bloqueios</li>
-<li><strong>VPN/Acesso remoto:</strong> Logins de locais anomalos, falhas de autenticacao</li>
+<li><strong>Firewall/Proxy:</strong> Conexões bloqueadas, tráfego para IPs maliciosos, downloads suspeitos</li>
+<li><strong>EDR/Antivírus:</strong> Detecções de malware, comportamentos suspeitos, bloqueios</li>
+<li><strong>VPN/Acesso remoto:</strong> Logins de locais anômalos, falhas de autenticação</li>
 <li><strong>Email gateway:</strong> <a href="../phishing-monitoramento-continuo-de-sites-evitar-fraudes-incidentes/">Phishing</a> bloqueado, anexos maliciosos, SPF/DKIM failures</li>
 </ul>
 <h3>Prioridade Media</h3>
@@ -296,69 +296,69 @@
 <li><strong>Servidores Windows:</strong> Security Event Log, PowerShell logging, Sysmon</li>
 <li><strong>Servidores Linux:</strong> auth.log, syslog, auditd</li>
 <li><strong>Banco de dados:</strong> Acessos privilegiados, queries anomalas, falhas de auth</li>
-<li><strong>Aplicacoes web:</strong> WAF, access logs, erros de aplicacao</li>
+<li><strong>Aplicações web:</strong> WAF, access logs, erros de aplicação</li>
 <li><strong>Cloud:</strong> CloudTrail (AWS), Activity Log (Azure), Audit Log (GCP)</li>
 </ul>
-<h3>Prioridade Expansao</h3>
+<h3>Prioridade Expansão</h3>
 <ul>
-<li><strong>DNS:</strong> Queries para dominios maliciosos, DNS tunneling</li>
-<li><strong>DHCP:</strong> Correlacao de IPs com hostnames</li>
-<li><strong>Switches/Roteadores:</strong> Netflow, mudancas de configuracao</li>
+<li><strong>DNS:</strong> Queries para domínios maliciosos, DNS tunneling</li>
+<li><strong>DHCP:</strong> Correlação de IPs com hostnames</li>
+<li><strong>Switches/Roteadores:</strong> Netflow, mudanças de configuração</li>
 <li><strong>IoT/OT:</strong> Dispositivos industriais, cameras, impressoras</li>
 </ul>
 <div class="warning-box">
 <h4><i class="fas fa-exclamation-triangle" style="margin-right:10px"></i> Cuidado com volume</h4>
-<p>Logs de debug, netflow detalhado e endpoints sem filtragem podem gerar EPS massivo e custos proibitivos. Filtre na origem, colete o que tem valor para seguranca. Qualidade &gt; quantidade.</p>
+<p>Logs de debug, netflow detalhado e endpoints sem filtragem podem gerar EPS massivo e custos proibitivos. Filtre na origem, colete o que tem valor para segurança. Qualidade &gt; quantidade.</p>
 </div>
-<h2 id="casos">Casos de Uso e Regras de Correlacao</h2>
+<h2 id="casos">Casos de Uso e Regras de Correlação</h2>
 <p>
-                    Casos de uso sao regras que detectam comportamentos suspeitos correlacionando eventos. Comece com deteccoes de alto impacto e baixo falso positivo:
+                    Casos de uso são regras que detectam comportamentos suspeitos correlacionando eventos. Comece com detecções de alto impacto e baixo falso positivo:
                 </p>
 <div class="usecase-card">
-<h3><i class="fas fa-key"></i> Deteccao de Credenciais Comprometidas</h3>
+<h3><i class="fas fa-key"></i> Detecção de Credenciais Comprometidas</h3>
 <ul>
-<li>Multiplas falhas de login seguidas de sucesso (password spray/brute force)</li>
-<li>Login de um usuario de multiplas localizacoes geograficas em curto periodo</li>
-<li>Login em horarios anomalos para o usuario</li>
+<li>Múltiplas falhas de login seguidas de sucesso (password spray/brute force)</li>
+<li>Login de um usuário de múltiplas localizacoes geograficas em curto período</li>
+<li>Login em horários anômalos para o usuário</li>
 <li>Primeiro login de um dispositivo desconhecido</li>
 <li>Uso de credenciais em sistemas nunca acessados antes</li>
 </ul>
 </div>
 <div class="usecase-card">
-<h4><i class="fas fa-user-secret"></i> Deteccao de Movimentacao Lateral</h4>
+<h4><i class="fas fa-user-secret"></i> Detecção de Movimentação Lateral</h4>
 <ul>
-<li>Pass-the-Hash: NTLM auth sem logon interativo previo</li>
-<li>Kerberoasting: Volume anomalo de TGS requests (Event ID 4769)</li>
-<li>Admin logando em workstation (violacao de tiering)</li>
-<li>RDP para multiplos hosts em sequencia</li>
+<li>Pass-the-Hash: NTLM auth sem logon interativo prévio</li>
+<li>Kerberoasting: Volume anômalo de TGS requests (Event ID 4769)</li>
+<li>Admin logando em workstation (violação de tiering)</li>
+<li>RDP para múltiplos hosts em sequência</li>
 <li>PsExec/WMI execution remota anomala</li>
 </ul>
 </div>
 <div class="usecase-card">
-<h4><i class="fas fa-bug"></i> Deteccao de Malware e Execucao Maliciosa</h4>
+<h4><i class="fas fa-bug"></i> Detecção de Malware e Execução Maliciosa</h4>
 <ul>
-<li>Processo filho anomalo (Word spawning PowerShell)</li>
-<li>Execucao de scripts de diretorios temp/downloads</li>
-<li>Conexao para C2 conhecidos (threat intelligence)</li>
+<li>Processo filho anômalo (Word spawning PowerShell)</li>
+<li>Execução de scripts de diretórios temp/downloads</li>
+<li>Conexão para C2 conhecidos (threat intelligence)</li>
 <li>Criptografia massiva de arquivos (<a href="../ransomware-como-funciona-proteger-empresa/">ransomware</a>)</li>
-<li>Desabilitacao de antivirus/EDR</li>
+<li>Desabilitacao de antivírus/EDR</li>
 </ul>
 </div>
 <div class="usecase-card">
-<h4><i class="fas fa-database"></i> Deteccao de Exfiltracao</h4>
+<h4><i class="fas fa-database"></i> Detecção de Exfiltração</h4>
 <ul>
 <li>Upload massivo para cloud storage (Dropbox, GDrive, etc.)</li>
-<li>Transferencia de dados fora do horario comercial</li>
-<li>Acesso anomalo a file shares sensiveis</li>
+<li>Transferência de dados fora do horário comercial</li>
+<li>Acesso anômalo a file shares sensíveis</li>
 <li>DNS tunneling (queries longas, alto volume)</li>
 <li>Email com anexos grandes para destinatarios externos</li>
 </ul>
 </div>
-<h2 id="solucoes">Principais Solucoes de SIEM</h2>
+<h2 id="solucoes">Principais Soluções de SIEM</h2>
 <div class="tool-grid">
 <div class="tool-card">
 <h3><i class="fas fa-chart-bar" style="color:#60A5FA;margin-right:8px"></i> Splunk</h3>
-<p>Lider de mercado, poderoso mas caro. Excelente para grandes <a href="../shadow-ai-uso-nao-autorizado-empresas/">empresas</a> com budget.</p>
+<p>Líder de mercado, poderoso mas caro. Excelente para grandes <a href="../shadow-ai-uso-nao-autorizado-empresas/">empresas</a> com budget.</p>
 <span class="tag">Enterprise</span>
 </div>
 <div class="tool-card">
@@ -373,27 +373,27 @@
 </div>
 <div class="tool-card">
 <h4><i class="fab fa-google" style="color:#60A5FA;margin-right:8px"></i> Google Chronicle</h4>
-<p>SIEM cloud com preco fixo, escala massiva, integracao com Mandiant TI.</p>
+<p>SIEM cloud com preço fixo, escala massiva, integração com Mandiant TI.</p>
 <span class="tag">Cloud</span>
 </div>
 <div class="tool-card">
 <h4><i class="fas fa-search" style="color:#60A5FA;margin-right:8px"></i> Elastic Security</h4>
-<p>Baseado no Elasticsearch, versao gratuita e paga. Flexivel e escalavel.</p>
+<p>Baseado no Elasticsearch, versão gratuita e paga. Flexível e escalável.</p>
 <span class="tag">Open Source</span>
 </div>
 <div class="tool-card">
 <h4><i class="fas fa-eye" style="color:#60A5FA;margin-right:8px"></i> Wazuh</h4>
-<p>SIEM open source com EDR integrado. Excelente custo-beneficio para PMEs.</p>
+<p>SIEM open source com EDR integrado. Excelente custo-benefício para PMEs.</p>
 <span class="tag">Open Source</span>
 </div>
 </div>
-<h2 id="implementacao">Implementacao Passo a Passo</h2>
+<h2 id="implementacao">Implementação Passo a Passo</h2>
 <h3>Fase 1: Planejamento (2-4 semanas)</h3>
 <ul>
-<li>Definir objetivos: deteccao, compliance, ou ambos?</li>
-<li>Mapear fontes de log prioritarias</li>
+<li>Definir objetivos: detecção, compliance, ou ambos?</li>
+<li>Mapear fontes de log prioritárias</li>
 <li>Estimar EPS e necessidades de armazenamento</li>
-<li>Avaliar e selecionar solucao</li>
+<li>Avaliar e selecionar solução</li>
 <li>Definir equipe e responsabilidades</li>
 </ul>
 <h3>Fase 2: Infraestrutura (2-4 semanas)</h3>
@@ -401,39 +401,39 @@
 <li>Provisionar servidores/cloud resources</li>
 <li>Instalar e configurar SIEM</li>
 <li>Configurar alta disponibilidade</li>
-<li>Definir politicas de retencao</li>
+<li>Definir políticas de retenção</li>
 <li>Configurar backup</li>
 </ul>
-<h3>Fase 3: Integracao de Fontes (4-8 semanas)</h3>
+<h3>Fase 3: Integração de Fontes (4-8 semanas)</h3>
 <ul>
 <li>Integrar fontes de alta prioridade primeiro</li>
 <li>Validar parsing e normalizacao</li>
 <li>Ajustar coletores para otimizar EPS</li>
-<li>Documentar cada integracao</li>
+<li>Documentar cada integração</li>
 <li>Expandir gradualmente para outras fontes</li>
 </ul>
 <h3>Fase 4: Casos de Uso (4-8 semanas)</h3>
 <ul>
-<li>Implementar regras de deteccao prioritarias</li>
+<li>Implementar regras de detecção prioritárias</li>
 <li>Tunar para reduzir falsos positivos</li>
 <li>Criar dashboards operacionais</li>
-<li>Configurar alertas e notificacoes</li>
+<li>Configurar alertas e notificações</li>
 <li>Integrar com <a href="../resposta-incidentes-guia-pratico/">processo de resposta a incidentes</a></li>
 </ul>
-<h3>Fase 5: Operacao (continuo)</h3>
+<h3>Fase 5: Operação (contínuo)</h3>
 <ul>
-<li>Monitoramento 24x7 ou horario definido</li>
-<li>Triagem e investigacao de alertas</li>
-<li>Refinamento continuo de regras</li>
+<li>Monitoramento 24x7 ou horário definido</li>
+<li>Triagem e investigação de alertas</li>
+<li>Refinamento contínuo de regras</li>
 <li>Adicao de novos casos de uso</li>
-<li>Metricas e reporting</li>
+<li>Métricas e reporting</li>
 </ul>
-<h2 id="metricas">Metricas de Sucesso do SIEM</h2>
+<h2 id="metricas">Métricas de Sucesso do SIEM</h2>
 <ul>
-<li><strong>MTTD (Mean Time to Detect):</strong> Tempo para detectar ameaca - meta: minutos, nao dias</li>
+<li><strong>MTTD (Mean Time to Detect):</strong> Tempo para detectar ameaça - meta: minutos, não dias</li>
 <li><strong>MTTR (Mean Time to Respond):</strong> Tempo para conter - integra com IR</li>
-<li><strong>Alert Volume:</strong> Quantidade de alertas por dia - muitos = tune necessario</li>
-<li><strong>True Positive Rate:</strong> % de alertas que sao ameacas reais - meta: &gt;50%</li>
+<li><strong>Alert Volume:</strong> Quantidade de alertas por dia - muitos = tune necessário</li>
+<li><strong>True Positive Rate:</strong> % de alertas que são ameaças reais - meta: &gt;50%</li>
 <li><strong>Coverage:</strong> % de ativos enviando logs ao SIEM</li>
 <li><strong>EPS:</strong> Eventos por segundo ingeridos</li>
 <li><strong>Uptime:</strong> Disponibilidade do SIEM - meta: 99.9%</li>
@@ -446,7 +446,7 @@
 <i class="fas fa-chevron-down faq-icon"></i>
 </div>
 <div class="faq-answer">
-<p>Nao, sao complementares. <a class="gloss-link" href="/glossario/#edr" title="Ver no glossário">EDR</a> detecta ameacas em endpoints com visibilidade profunda. NDR detecta ameacas na rede. SIEM correlaciona eventos de ambos (e outras fontes) para visao holistica. A combinacao e mais poderosa que qualquer um isoladamente.</p>
+<p>Não, são complementares. <a class="gloss-link" href="/glossario/#edr" title="Ver no glossário">EDR</a> detecta ameaças em endpoints com visibilidade profunda. NDR detecta ameaças na rede. SIEM correlaciona eventos de ambos (e outras fontes) para visão holistica. A combinação e mais poderosa que qualquer um isoladamente.</p>
 </div>
 </div>
 <div class="faq-item">
@@ -455,7 +455,7 @@
 <i class="fas fa-chevron-down faq-icon"></i>
 </div>
 <div class="faq-answer">
-<p>Cloud SIEMs (Sentinel, Chronicle) oferecem escalabilidade elastica, menor overhead operacional e modelo de custo variavel. On-premises (Splunk, QRadar) oferecem mais controle e podem ser mais economicos em volumes muito altos. Tendencia e cloud, especialmente para quem ja usa cloud providers.</p>
+<p>Cloud SIEMs (Sentinel, Chronicle) oferecem escalabilidade elastica, menor overhead operacional e modelo de custo variável. On-premises (Splunk, QRadar) oferecem mais controle e podem ser mais econômicos em volumes muito altos. Tendência e cloud, especialmente para quem já usa cloud providers.</p>
 </div>
 </div>
 <div class="faq-item">
@@ -464,23 +464,23 @@
 <i class="fas fa-chevron-down faq-icon"></i>
 </div>
 <div class="faq-answer">
-<p>Filtre logs na origem - nao envie tudo. Use tiering de storage (hot/warm/cold). Evite logs de debug. Considere pre-processamento com log forwarders. Avalie SIEMs com preco fixo (Chronicle) ou open source (Elastic, Wazuh). Monitore e otimize EPS continuamente.</p>
+<p>Filtre logs na origem - não envie tudo. Use tiering de storage (hot/warm/cold). Evite logs de debug. Considere pré-processamento com log forwarders. Avalie SIEMs com preço fixo (Chronicle) ou open source (Elastic, Wazuh). Monitore e otimize EPS continuamente.</p>
 </div>
 </div>
 </div>
-<h2 id="conclusao">Conclusao</h2>
+<h2 id="conclusao">Conclusão</h2>
 <p>
-                    SIEM e o coracao de qualquer operacao de seguranca madura. Sem ele, detectar ameacas depende de sorte e alertas isolados de ferramentas individuais. Com ele, voce ganha visibilidade centralizada, capacidade de correlacao e base para <a href="../a-importancia-do-threat-hunting-para-organizacao/">threat hunting</a> proativo.
+                    SIEM e o coracao de qualquer operação de segurança madura. Sem ele, detectar ameaças depende de sorte e alertas isolados de ferramentas individuais. Com ele, você ganha visibilidade centralizada, capacidade de correlação e base para <a href="../a-importancia-do-threat-hunting-para-organizacao/">threat hunting</a> proativo.
                 </p>
 <p>
-                    A implementacao bem-sucedida requer planejamento cuidadoso: comece com fontes de alto valor, implemente casos de uso prioritarios, e expanda gradualmente. Mais importante que a ferramenta escolhida e a qualidade dos logs coletados e a maturidade dos casos de uso. Um SIEM mal implementado e apenas um repositorio caro de logs.
+                    A implementação bem-sucedida requer planejamento cuidadoso: comece com fontes de alto valor, implemente casos de uso prioritários, e expanda gradualmente. Mais importante que a ferramenta escolhida e a qualidade dos logs coletados e a maturidade dos casos de uso. Um SIEM mal implementado e apenas um repositório caro de logs.
                 </p>
 <p>
-                    Invista tempo em tuning continuo, medicao de metricas e evolucao do programa. SIEM nao e projeto - e capacidade operacional que precisa de atencao constante para entregar valor.
+                    Invista tempo em tuning contínuo, medicao de métricas e evolução do programa. SIEM não e projeto - e capacidade operacional que precisa de atenção constante para entregar valor.
                 </p>
 <div class="cta-box">
 <h3>Precisa de Ajuda com SIEM?</h3>
-<p>Oferecemos consultoria de implementacao, integracao de fontes e desenvolvimento de casos de uso personalizados.</p>
+<p>Oferecemos consultoria de implementação, integração de fontes e desenvolvimento de casos de uso personalizados.</p>
 <a class="cta-btn" href="../../#contato">Falar com Especialista</a>
 </div>
 <div class="share-buttons">
@@ -490,10 +490,10 @@
 <a class="share-btn whatsapp" href="https://wa.me/?text=SIEM: Guia de Implementacao https://inteligenciabrasil.seg.br/blog/siem-implementacao-casos-uso/" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
 </div>
 <div class="author-box">
-<picture><source height="80" srcset="../../img/logo-white-140x140.webp" type="image/webp" width="80"/><img alt="Inteligencia Brasil" height="80" src="../../img/logo-white-140x140.png" width="80"/></picture>
+<picture><source height="80" srcset="../../img/logo-white-140x140.webp" type="image/webp" width="80"/><img alt="Inteligência Brasil" height="80" src="../../img/logo-white-140x140.png" width="80"/></picture>
 <div class="author-info">
-<h4><a href="https://www.linkedin.com/company/inteligenciabrasil" rel="noopener" target="_blank">Inteligencia Brasil</a></h4>
-<p>Consultoria especializada em Security Operations, SIEM e Deteccao de Ameacas.</p>
+<h4><a href="https://www.linkedin.com/company/inteligenciabrasil" rel="noopener" target="_blank">Inteligência Brasil</a></h4>
+<p>Consultoria especializada em Security Operations, SIEM e Detecção de Ameaças.</p>
 </div>
 </div>
 </div>
@@ -507,9 +507,9 @@
 <div class="footer-about">
 <picture>
 <source height="140" srcset="../../img/logo-white-140x140.webp" type="image/webp" width="140"/>
-<img alt="Inteligencia Brasil" class="footer-logo" height="140" loading="lazy" src="../../img/logo-white-140x140.png" width="140"/>
+<img alt="Inteligência Brasil" class="footer-logo" height="140" loading="lazy" src="../../img/logo-white-140x140.png" width="140"/>
 </picture>
-<p>Consultoria especializada em Seguranca, Estrategia e Tecnologia da Informacao, com as melhores praticas para reducao de riscos digitais corporativos.</p>
+<p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação, com as melhores práticas para redução de riscos digitais corporativos.</p>
 <div class="footer-social">
 <a aria-label="LinkedIn" href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a>
 <a aria-label="Instagram" href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -529,10 +529,10 @@
 </div>
 <div class="col-lg-2 col-md-6">
 <div class="footer-links">
-<h4>Navegacao</h4>
+<h4>Navegação</h4>
 <ul>
 <li><a href="../../">Home</a></li>
-<li><a href="../../#servicos">Servicos</a></li>
+<li><a href="../../#servicos">Serviços</a></li>
 <li><a href="../">Blog</a></li>
 <li><a href="../../#contato">Contato</a></li>
 </ul>
@@ -541,7 +541,7 @@
 <div class="col-lg-4 col-md-6">
 <div class="footer-contact">
 <h4>Contato</h4>
-<p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, Sao Paulo - SP</p>
+<p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, São Paulo - SP</p>
 <p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p>
 <p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p>
 </div>
@@ -549,9 +549,9 @@
 </div>
 <div class="footer-bottom">
 <div class="row align-items-center">
-<div class="col-md-6"><p>© 2026 Inteligencia Brasil. Todos os direitos reservados.</p></div>
+<div class="col-md-6"><p>© 2026 Inteligência Brasil. Todos os direitos reservados.</p></div>
 <div class="col-md-6 text-md-right">
-<a href="../../politica-de-privacidade.html">Politica de Privacidade</a>
+<a href="../../politica-de-privacidade.html">Política de Privacidade</a>
 <span class="separator">|</span>
 <a href="../../#contato">Contato</a>
 </div>
