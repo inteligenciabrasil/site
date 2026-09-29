@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="theme-rose">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- CSP-V5 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://*.googletagmanager.com https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/ https://vlibras.gov.br https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://tagassistant.google.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://tagassistant.google.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://vlibras.gov.br https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.gstatic.com https://ssl.gstatic.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cloudflareinsights.com https://fonts.googleapis.com https://cloudflare-dns.com https://dns.google https://vlibras.gov.br https://api.ipify.org https://challenges.cloudflare.com https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://pagead2.googlesyndication.com; frame-src https://www.googletagmanager.com https://challenges.cloudflare.com https://td.doubleclick.net https://tagassistant.google.com; form-action 'self' https://script.google.com; base-uri 'self'; object-src 'none';">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Formulário de levantamento de requisitos para projetos de Conscientização e Treinamento em Segurança da Informação.">
+    <meta name="theme-color" content="#0A1628">
+    <title>Diagnóstico de Conscientização e Treinamento | Inteligência Brasil</title>
+
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+
+    <link href="/css/fontawesome-subset.min.css" rel="stylesheet">
+    <link href="/css/lp-base.min.css" rel="stylesheet">
+    <link href="/css/lp-themes.min.css" rel="stylesheet">
+
+    <style>
+        /* Radios, checkbox e blocos: lp-base.css cobre input/select/textarea, nao grupos de escolha. */
+        .form-page { padding: 56px 0 80px; }
+        .form-shell { max-width: 760px; margin: 0 auto; }
+        .page-head { text-align: center; margin-bottom: 44px; }
+        .page-head .logo { width: 150px; height: auto; margin-bottom: 20px; }
+        .page-head h1 { font-size: clamp(26px, 5vw, 36px); font-weight: 800; margin-bottom: 14px; }
+        .page-head p { color: var(--text-secondary); font-size: 16px; }
+        .block { margin-bottom: 40px; }
+        .block-title { font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+        .block-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+        .q { margin-bottom: 22px; }
+        .q-label { display: block; font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
+        .q-options { display: flex; flex-direction: column; gap: 9px; }
+        .q-options.inline { flex-direction: row; gap: 28px; }
+        .opt { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-secondary); line-height: 1.45; cursor: pointer; }
+        .opt:hover { color: var(--text-primary); }
+        .opt input { accent-color: var(--accent); width: 18px; height: 18px; margin-top: 1px; flex-shrink: 0; }
+        .cond { margin-top: 12px; padding-left: 28px; }
+        .consent { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--text-secondary); line-height: 1.55; margin: 24px 0 8px; cursor: pointer; }
+        .consent input { accent-color: var(--accent); width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; }
+        .consent a { color: var(--accent); text-decoration: underline; }
+        .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        .skip-link { position: absolute; left: -9999px; }
+        .skip-link:focus { left: 1rem; top: 1rem; background: #fff; color: #0A1628; padding: .5rem 1rem; border-radius: 4px; z-index: 10; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @media (max-width: 576px) {
+            .lead-form-wrapper { padding: 24px 18px; }
+            .q-options.inline { gap: 20px; }
+            .cond { padding-left: 0; }
+        }
+    </style>
+</head>
+
+<body><a class="skip-link" href="#main-content">Pular para conteúdo</a>
+
+    <main id="main-content" class="form-page">
+        <div class="container">
+            <div class="form-shell">
+                <div class="page-head">
+                    <img src="/img/logo-white-196x196.png" alt="Inteligência Brasil" class="logo" width="150" height="150">
+                    <h1>Diagnóstico de <span class="highlight">Conscientização e Treinamento</span></h1>
+                    <p>Responda às perguntas abaixo para que possamos montar uma proposta técnica alinhada à realidade da sua organização. Leva cerca de 5 minutos.</p>
+                </div>
+
+                <div class="lead-form-wrapper">
+                    <form id="diagForm" action="https://script.google.com/a/inteligenciabrasil.seg.br/macros/s/AKfycbzzkHQxLsw0M5wU1LF2maVkF_piJiERJU34NCzE9g/exec" method="POST" data-validate>
+
+                        <input type="hidden" name="ip" id="ip">
+                        <input type="hidden" name="fpr" id="fpr">
+                        <div class="hp" aria-hidden="true">
+                            <label for="honeypot">Não preencha este campo</label>
+                            <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <!-- ============ BLOCO 1 ============ -->
+                        <div class="block">
+                            <div class="block-title">1. A organização</div>
+                            <div class="block-sub">Quem é a empresa e qual o tamanho do público.</div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="empresa">Nome da empresa / grupo / organização *</label>
+                                <input type="text" id="empresa" name="empresa" class="form-input" maxlength="120" placeholder="Razão social ou nome fantasia" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="site">Site da organização *</label>
+                                <input type="text" id="site" name="site" class="form-input" maxlength="100" placeholder="empresa.com.br" required>
+                            </div>
+
+                            <div class="q">
+                                <span class="q-label">Quantidade de colaboradores *</span>
+                                <div class="q-options">
+                                    <label class="opt"><input type="radio" name="colaboradores" value="1 a 100" required> 1 a 100</label>
+                                    <label class="opt"><input type="radio" name="colaboradores" value="101 a 1.000"> 101 a 1.000</label>
+                                    <label class="opt"><input type="radio" name="colaboradores" value="1.001 a 5.000"> 1.001 a 5.000</label>
+                                    <label class="opt"><input type="radio" name="colaboradores" value="mais de 5.000"> mais de 5.000</label>
+                                </div>
+                            </div>
+
+                            <div class="q">
+                                <span class="q-label">A organização possui mais de um domínio? *</span>
+                                <div class="q-options inline" data-reveal="#cond-dominios" data-reveal-when="Sim">
+                                    <label class="opt"><input type="radio" name="multidominio" value="Sim" required> Sim</label>
+                                    <label class="opt"><input type="radio" name="multidominio" value="Não"> Não</label>
+                                </div>
+                                <div class="cond" id="cond-dominios" hidden>
+                                    <label class="form-label" for="dominios">Quais domínios?</label>
+                                    <textarea id="dominios" name="dominios" class="form-textarea" maxlength="300" placeholder="empresa.com.br, empresa.com, empresa.io"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ============ BLOCO 2 ============ -->
+                        <div class="block">
+                            <div class="block-title">2. Responsável pelo projeto</div>
+                            <div class="block-sub">Com quem falamos sobre a proposta.</div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="nome">Nome e sobrenome *</label>
+                                <input type="text" id="nome" name="nome" class="form-input" maxlength="120" placeholder="Seu nome completo" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="email">E-mail corporativo *</label>
+                                <input type="email" id="email" name="email" class="form-input" maxlength="100" placeholder="voce@empresa.com.br" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="telefone">Telefone para contato *</label>
+                                <input type="tel" id="telefone" name="telefone" class="form-input" placeholder="(11) 99999-9999" maxlength="15" pattern="[0-9\(\)+ \-]{10,15}" title="Somente números, com DDD. Ex.: (11) 99999-9999 ou 11999999999" required>
+                            </div>
+                        </div>
+
+                        <!-- ============ BLOCO 3 ============ -->
+                        <div class="block">
+                            <div class="block-title">3. O projeto</div>
+                            <div class="block-sub">O que a campanha precisa entregar.</div>
+
+                            <div class="q">
+                                <span class="q-label">Objetivo *</span>
+                                <div class="q-options">
+                                    <label class="opt"><input type="radio" name="objetivo" value="Criar maturidade em Segurança da Informação" required> Criar maturidade em Segurança da Informação</label>
+                                    <label class="opt"><input type="radio" name="objetivo" value="Analisar maturidade em Segurança da Informação"> Analisar maturidade em Segurança da Informação</label>
+                                </div>
+                            </div>
+
+                            <div class="q">
+                                <span class="q-label">Interesse do projeto em *</span>
+                                <div class="q-options">
+                                    <label class="opt"><input type="radio" name="interesse" value="Campanha de Phishing" required> Campanha de Phishing</label>
+                                    <label class="opt"><input type="radio" name="interesse" value="Conscientização"> Conscientização</label>
+                                    <label class="opt"><input type="radio" name="interesse" value="Campanha de Phishing &amp; Conscientização"> Campanha de Phishing &amp; Conscientização</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="duracao">Expectativa de duração da campanha *</label>
+                                <select id="duracao" name="duracao" class="form-select" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="1 mês">1 mês</option>
+                                    <option value="3 meses">3 meses</option>
+                                    <option value="6 meses">6 meses</option>
+                                    <option value="9 meses">9 meses</option>
+                                    <option value="12 meses">12 meses</option>
+                                    <option value="Contínuo">Contínuo</option>
+                                </select>
+                            </div>
+
+                            <div class="q">
+                                <span class="q-label">Modalidade *</span>
+                                <div class="q-options inline">
+                                    <label class="opt"><input type="radio" name="modalidade" value="Presencial" required> Presencial</label>
+                                    <label class="opt"><input type="radio" name="modalidade" value="Remota"> Remota</label>
+                                    <label class="opt"><input type="radio" name="modalidade" value="Ambas"> Ambas</label>
+                                </div>
+                            </div>
+
+                            <div class="q">
+                                <label class="form-label" for="frequencia">Frequência *</label>
+                                <select id="frequencia" name="frequencia" class="form-select" data-reveal="#cond-frequencia" data-reveal-when="Outra" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="1 anual">1 anual</option>
+                                    <option value="1 semestral">1 semestral</option>
+                                    <option value="1 trimestral">1 trimestral</option>
+                                    <option value="1 bimestral">1 bimestral</option>
+                                    <option value="1 mensal">1 mensal</option>
+                                    <option value="Outra">Outra</option>
+                                </select>
+                                <div class="cond" id="cond-frequencia" hidden>
+                                    <label class="form-label" for="frequencia_outra">Qual frequência?</label>
+                                    <input type="text" id="frequencia_outra" name="frequencia_outra" class="form-input" maxlength="60" placeholder="Ex.: 2 por semestre">
+                                </div>
+                            </div>
+
+                            <div class="q">
+                                <span class="q-label">Quantidade de usuários na campanha *</span>
+                                <div class="q-options">
+                                    <label class="opt"><input type="radio" name="usuarios" value="1 a 10" required> 1 a 10</label>
+                                    <label class="opt"><input type="radio" name="usuarios" value="11 a 100"> 11 a 100</label>
+                                    <label class="opt"><input type="radio" name="usuarios" value="101 a 1.000"> 101 a 1.000</label>
+                                    <label class="opt"><input type="radio" name="usuarios" value="mais de 1.000"> mais de 1.000</label>
+                                </div>
+                            </div>
+
+                            <div class="q">
+                                <span class="q-label">A organização costuma realizar projetos de conscientização? *</span>
+                                <div class="q-options inline" data-reveal="#cond-ultima" data-reveal-when="Sim">
+                                    <label class="opt"><input type="radio" name="ja_realizou" value="Sim" required> Sim</label>
+                                    <label class="opt"><input type="radio" name="ja_realizou" value="Não"> Não</label>
+                                </div>
+                                <div class="cond" id="cond-ultima" hidden>
+                                    <label class="form-label" for="ultima_campanha">Quando foi a última campanha?</label>
+                                    <input type="text" id="ultima_campanha" name="ultima_campanha" class="form-input" maxlength="60" placeholder="Ex.: março de 2026">
+                                </div>
+                            </div>
+
+                            <div class="q">
+                                <span class="q-label">Tema da campanha *</span>
+                                <div class="q-options">
+                                    <label class="opt"><input type="radio" name="tema" value="Interno — sistemas proprietários" required> Interno — sistemas proprietários</label>
+                                    <label class="opt"><input type="radio" name="tema" value="Externo — sites diversos (promoções, faculdades, redes sociais)"> Externo — sites diversos (promoções, faculdades, redes sociais)</label>
+                                    <label class="opt"><input type="radio" name="tema" value="Interno e Externo"> Interno e Externo</label>
+                                </div>
+                            </div>
+
+                            <div class="q">
+                                <span class="q-label">A organização possui template próprio? *</span>
+                                <div class="q-options inline">
+                                    <label class="opt"><input type="radio" name="template_proprio" value="Sim" required> Sim</label>
+                                    <label class="opt"><input type="radio" name="template_proprio" value="Não"> Não</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="templates_qtd">Quantos templates gostaria de elaborar conosco? *</label>
+                                <input type="number" id="templates_qtd" name="templates_qtd" class="form-input" min="1" max="20" step="1" placeholder="1" required>
+                            </div>
+
+                            <div class="q">
+                                <span class="q-label">Quantidade de e-mails para a campanha *</span>
+                                <div class="q-options">
+                                    <label class="opt"><input type="radio" name="emails_qtd" value="1 a 100" required> 1 a 100</label>
+                                    <label class="opt"><input type="radio" name="emails_qtd" value="101 a 1.000"> 101 a 1.000</label>
+                                    <label class="opt"><input type="radio" name="emails_qtd" value="mais de 1.000"> mais de 1.000</label>
+                                </div>
+                            </div>
+
+                            <div class="q">
+                                <label class="form-label" for="hospedagem">Hospedagem do serviço de e-mail *</label>
+                                <select id="hospedagem" name="hospedagem" class="form-select" data-reveal="#cond-hospedagem" data-reveal-when="Outra" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="Microsoft 365">Microsoft 365</option>
+                                    <option value="Google Workspace">Google Workspace</option>
+                                    <option value="Zimbra">Zimbra</option>
+                                    <option value="Servidor próprio / interna">Servidor próprio / interna</option>
+                                    <option value="Outra">Outra</option>
+                                </select>
+                                <div class="cond" id="cond-hospedagem" hidden>
+                                    <label class="form-label" for="hospedagem_outra">Qual?</label>
+                                    <input type="text" id="hospedagem_outra" name="hospedagem_outra" class="form-input" maxlength="60" placeholder="Ex.: Amazon WorkMail">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEC-FORM-V1 -->
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAEr8u6noYgM9vDoS" data-action="lead-lp" data-size="flexible" data-appearance="interaction-only"></div>
+                        <!-- /SEC-FORM-V1 -->
+
+                        <label class="consent">
+                            <input type="checkbox" id="consentimento" required>
+                            <span>Autorizo a Inteligência Brasil a tratar os dados informados para elaborar e apresentar a proposta comercial deste projeto, nos termos do art.&nbsp;7º, inciso&nbsp;V da Lei&nbsp;13.709/2018 (LGPD). <a href="/politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+                        </label>
+
+                        <button type="submit" class="btn btn-primary form-submit">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar diagnóstico
+                        </button>
+
+                        <div id="formMessage" role="status" aria-live="polite" tabindex="-1" style="display:none; margin-top:16px; padding:16px; border-radius:10px; text-align:center;"></div>
+
+                        <p class="form-disclaimer">Seus dados não serão compartilhados com terceiros sem seu consentimento. Dúvidas: <a href="mailto:contato@inteligenciabrasil.seg.br">contato@inteligenciabrasil.seg.br</a>.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/lp-common.min.js"></script>
+
+    <script>
+    (function () {
+        var form = document.getElementById('diagForm');
+        var btn = form.querySelector('button[type="submit"]');
+        var msgDiv = document.getElementById('formMessage');
+        var originalBtn = btn.innerHTML;
+
+        // IP: /cdn-cgi/trace (Cloudflare), ja liberado por 'self' na CSP.
+        fetch('/cdn-cgi/trace', { cache: 'no-store' })
+            .then(function (r) { return r.text(); })
+            .then(function (t) {
+                var m = t.match(/(?:^|\n)ip=([^\n]+)/);
+                document.getElementById('ip').value = m ? m[1].trim() : '';
+            })
+            .catch(function () {});
+
+        // fpr: segunda metade da chave do rate limit do servidor (par ip+fpr).
+        (function () {
+            var k = 'ib_fpr', v = localStorage.getItem(k);
+            if (!v) {
+                try { v = crypto.randomUUID(); } catch (e) { v = Math.random().toString(36).slice(2); }
+                localStorage.setItem(k, v);
+            }
+            document.getElementById('fpr').value = v;
+        })();
+
+        // Campos condicionais: 'required' alternado junto com 'hidden'. Um campo escondido
+        // e required travaria checkValidity() sem nada visivel na tela para o usuario corrigir.
+        form.querySelectorAll('[data-reveal]').forEach(function (ctrl) {
+            var target = document.querySelector(ctrl.getAttribute('data-reveal'));
+            var when = ctrl.getAttribute('data-reveal-when');
+            var field = target.querySelector('input, textarea, select');
+            ctrl.addEventListener('change', function (e) {
+                var on = e.target.value === when;
+                target.hidden = !on;
+                field.required = on;
+                if (!on) field.value = '';
+            });
+        });
+
+        // Ordem dos rotulos no corpo do e-mail. Terceiro item = campo condicional,
+        // anexado entre parenteses quando preenchido.
+        var MESSAGE_LINES = [
+            ['Site', 'site'],
+            ['Colaboradores', 'colaboradores'],
+            ['Mais de um dominio', 'multidominio', 'dominios'],
+            ['--'],
+            ['Objetivo', 'objetivo'],
+            ['Interesse', 'interesse'],
+            ['Duracao', 'duracao'],
+            ['Modalidade', 'modalidade'],
+            ['Frequencia', 'frequencia', 'frequencia_outra'],
+            ['Usuarios na campanha', 'usuarios'],
+            ['Ja realizou conscientizacao', 'ja_realizou', 'ultima_campanha'],
+            ['Tema', 'tema'],
+            ['Template proprio', 'template_proprio'],
+            ['Templates a elaborar', 'templates_qtd'],
+            ['E-mails na campanha', 'emails_qtd'],
+            ['Hospedagem de e-mail', 'hospedagem', 'hospedagem_outra']
+        ];
+
+        function buildMessage(data) {
+            return MESSAGE_LINES.map(function (line) {
+                if (line.length === 1) return line[0];
+                var value = (data.get(line[1]) || '').trim();
+                var extra = line[2] ? (data.get(line[2]) || '').trim() : '';
+                if (extra) value += ' (' + extra.replace(/\s*\n\s*/g, ', ') + ')';
+                return line[0] + ': ' + value;
+            }).join('\n');
+        }
+
+        var RECUSA = {
+            captcha:          'Falha na verificação anti-robô. Recarregue a página e tente de novo.',
+            rate_limited:     'Muitos envios deste acesso. Tente novamente em uma hora.',
+            replay:           'Este formulário já foi enviado. Recarregue a página.',
+            personal_email:   'Utilize seu e-mail corporativo. E-mails pessoais não são aceitos.',
+            disposable_email: 'E-mails temporários não são aceitos.',
+            invalid_email:    'Informe um e-mail válido.'
+        };
+
+        function showMessage(text, type) {
+            msgDiv.style.display = 'block';
+            msgDiv.style.background = type === 'success' ? 'rgba(16,185,129,.2)' : 'rgba(239,68,68,.2)';
+            msgDiv.style.color = type === 'success' ? '#10B981' : '#EF4444';
+            msgDiv.style.border = '1px solid ' + (type === 'success' ? '#10B981' : '#EF4444');
+            msgDiv.textContent = text;
+            msgDiv.focus();
+        }
+
+        function restore() {
+            btn.disabled = false;
+            btn.innerHTML = originalBtn;
+            // O token do Turnstile vale 1x: sem reset, corrigir o e-mail e reenviar cairia
+            // em 'replay' e o cliente teria de recarregar e repreencher as 19 respostas.
+            if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
+        }
+
+        // Um unico handler de submit. Um segundo consumiria o token de uso unico.
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-circle-notch" style="animation:spin 1s linear infinite"></i> Enviando...';
+
+            var data = new FormData(form);
+            var payload = {
+                name: (data.get('nome') || '').trim(),
+                email: (data.get('email') || '').trim(),
+                phone: (data.get('telefone') || '').replace(/\D/g, ''),
+                empresa: (data.get('empresa') || '').trim(),
+                servico: 'Diagnóstico Conscientização e Treinamento',
+                origem: 'Diagnóstico Conscientização',
+                message: buildMessage(data),
+                terms: 'Aceito',
+                ip: document.getElementById('ip').value || '',
+                fpr: document.getElementById('fpr').value || '',
+                honeypot: data.get('honeypot') || '',
+                'cf-turnstile-response': (document.querySelector('[name="cf-turnstile-response"]') || {}).value || ''
+            };
+
+            try {
+                var response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(payload).toString()
+                });
+                // Ler o corpo antes de declarar sucesso: sem isto, recusa do servidor
+                // (e-mail pessoal, captcha, rate limit) viraria mensagem verde.
+                var veredito = await response.json().catch(function () { return null; });
+
+                if (!veredito || veredito.result !== 'success') {
+                    showMessage(RECUSA[veredito && veredito.reason] ||
+                        'Não foi possível enviar agora. Tente novamente em instantes ou fale com a gente pelo WhatsApp (11) 99361-9947.', 'error');
+                    restore();
+                    return;
+                }
+
+                showMessage('Diagnóstico enviado. Nossa equipe vai analisar as respostas e retornar com a proposta técnica.', 'success');
+                form.reset();
+                form.querySelectorAll('.cond').forEach(function (c) {
+                    c.hidden = true;
+                    c.querySelector('input, textarea, select').required = false;
+                });
+                btn.innerHTML = originalBtn;
+                btn.disabled = true;
+            } catch (err) {
+                showMessage('Erro de conexão. Tente novamente ou fale com a gente pelo WhatsApp (11) 99361-9947.', 'error');
+                restore();
+            }
+        });
+    })();
+    </script>
+
+    <script src="/js/cookie-consent.min.js" defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</body>
+
+</html>
