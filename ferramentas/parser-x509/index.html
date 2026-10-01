@@ -10,7 +10,7 @@
     <!-- CSP-V5 -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://*.googletagmanager.com https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/ https://vlibras.gov.br https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://tagassistant.google.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://tagassistant.google.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://vlibras.gov.br https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.gstatic.com https://ssl.gstatic.com; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cloudflareinsights.com https://fonts.googleapis.com https://cloudflare-dns.com https://dns.google https://vlibras.gov.br https://api.ipify.org https://challenges.cloudflare.com https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://pagead2.googlesyndication.com; frame-src https://www.googletagmanager.com https://challenges.cloudflare.com https://td.doubleclick.net https://tagassistant.google.com; form-action 'self' https://script.google.com; base-uri 'self'; object-src 'none';">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Parser online de certificados X.509: cole um PEM ou envie .crt/.cer/.pem e veja subject, issuer, SAN, validade, algoritmo, chave publica, extensoes e fingerprints SHA-256.">
+    <meta name="description" content="Parser online de certificados X.509: cole um PEM ou envie .crt/.cer/.pem e veja subject, issuer, SAN, validade, algoritmo, chave publica, extensões e fingerprints SHA-256.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="keywords" content="parser x509, certificate viewer, certificado tls, PEM parser, SAN viewer, fingerprint SHA256, basicConstraints, extendedKeyUsage, cert lint, x509 brasil">
     <meta name="author" content="Inteligencia Brasil">
@@ -18,8 +18,8 @@
     <link rel="canonical" href="https://inteligenciabrasil.seg.br/ferramentas/parser-x509/">
     <link rel="alternate" type="application/rss+xml" title="Blog Intelig&#234;ncia Brasil &#8212; RSS" href="../../feed.xml">
 
-    <meta property="og:title" content="Parser de Certificados X.509 Online | Inteligencia Brasil">
-    <meta property="og:description" content="Cole um certificado PEM e veja subject, issuer, SAN, validade, chave, extensoes e fingerprints SHA-256.">
+    <meta property="og:title" content="Parser de Certificados X.509 Online | Inteligência Brasil">
+    <meta property="og:description" content="Cole um certificado PEM e veja subject, issuer, SAN, validade, chave, extensões e fingerprints SHA-256.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://inteligenciabrasil.seg.br/ferramentas/parser-x509/">
     <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
@@ -35,20 +35,20 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="../../img/apple-touch-icon-iphone-6-plus-180x180.png">
 
-    <title>Parser de Certificados X.509 Online | Inteligencia Brasil</title>
+    <title>Parser de Certificados X.509 Online | Inteligência Brasil</title>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Parser de Certificados X.509","description":"Ferramenta online para analisar certificados X.509 (PEM/DER): subject, issuer, SAN, validade, chave publica, extensoes (basicConstraints, keyUsage, extKeyUsage, AKI, SKI) e fingerprints SHA-256.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligencia Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Parser de Certificados X.509","description":"Ferramenta online para analisar certificados X.509 (PEM/DER): subject, issuer, SAN, validade, chave publica, extensões (basicConstraints, keyUsage, extKeyUsage, AKI, SKI) e fingerprints SHA-256.","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"author":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"inLanguage":"pt-BR"}
     </script>
 
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-        {"@type":"Question","name":"O que e um certificado X.509?","acceptedAnswer":{"@type":"Answer","text":"X.509 e o padrao de certificado digital usado em TLS/SSL, S/MIME, code signing e EAP-TLS. Carrega uma chave publica assinada por uma Autoridade Certificadora (CA), associada a uma identidade (dominio, CPF, organizacao). E o que estabelece confianca em HTTPS - seu navegador valida que a chave publica do servidor foi assinada por uma CA que ele confia."}},
-        {"@type":"Question","name":"Qual a diferenca entre PEM e DER?","acceptedAnswer":{"@type":"Answer","text":"DER e o formato binario ASN.1 - bytes crus. PEM e o mesmo conteudo, mas codificado em Base64 com cabecalhos -----BEGIN/END CERTIFICATE----- para ser texto-amigavel. Esta ferramenta aceita ambos: cole o PEM ou faca upload de um arquivo .crt/.cer/.pem (PEM) ou .der (DER)."}},
-        {"@type":"Question","name":"O que e SAN?","acceptedAnswer":{"@type":"Answer","text":"SAN (Subject Alternative Name) lista os dominios, IPs ou URIs para os quais o certificado e valido. Desde 2017 navegadores ignoram o CN do subject - so SAN vale. Um certificado para *.empresa.com.br + empresa.com.br precisa ter ambos no SAN. Erro de SAN ausente ou desalinhado e a causa mais comum de NET::ERR_CERT_COMMON_NAME_INVALID."}},
-        {"@type":"Question","name":"O que e BasicConstraints CA:TRUE?","acceptedAnswer":{"@type":"Answer","text":"BasicConstraints e a extensao que indica se o certificado pode assinar outros certificados. CA:TRUE marca um certificado intermediario ou raiz; CA:FALSE marca um end-entity (servidor, cliente). Um end-entity com CA:TRUE seria uma falha critica de seguranca - permitiria emitir certificados arbitrarios."}},
-        {"@type":"Question","name":"Por que algumas extensoes aparecem como nao reconhecidas?","acceptedAnswer":{"@type":"Answer","text":"X.509 e extensivel - CAs adicionam OIDs proprios para Certificate Transparency (SCT), CABF EV, BRBR, etc. Esta ferramenta cobre as mais usadas em TLS publico (SAN, BC, KU, EKU, AKI, SKI, AIA, CDP, certificate policies, SCT list). OIDs nao reconhecidos sao exibidos com seu numero."}},
-        {"@type":"Question","name":"Os certificados sao enviados a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Nao. O parser roda 100% local no navegador. ASN.1/DER e processado em JavaScript no cliente; fingerprints SHA-1/SHA-256 sao calculados via WebCrypto na propria pagina. Nenhum byte sai do seu navegador."}}
+        {"@type":"Question","name":"O que e um certificado X.509?","acceptedAnswer":{"@type":"Answer","text":"X.509 e o padrão de certificado digital usado em TLS/SSL, S/MIME, code signing e EAP-TLS. Carrega uma chave publica assinada por uma Autoridade Certificadora (CA), associada a uma identidade (domínio, CPF, organização). E o que estabelece confiança em HTTPS - seu navegador valida que a chave publica do servidor foi assinada por uma CA que ele confia."}},
+        {"@type":"Question","name":"Qual a diferença entre PEM e DER?","acceptedAnswer":{"@type":"Answer","text":"DER e o formato binário ASN.1 - bytes crus. PEM e o mesmo conteúdo, mas codificado em Base64 com cabecalhos -----BEGIN/END CERTIFICATE----- para ser texto-amigavel. Esta ferramenta aceita ambos: cole o PEM ou faça upload de um arquivo .crt/.cer/.pem (PEM) ou .der (DER)."}},
+        {"@type":"Question","name":"O que e SAN?","acceptedAnswer":{"@type":"Answer","text":"SAN (Subject Alternative Name) lista os domínios, IPs ou URIs para os quais o certificado e valido. Desde 2017 navegadores ignoram o CN do subject - só SAN vale. Um certificado para *.empresa.com.br + empresa.com.br precisa ter ambos no SAN. Erro de SAN ausente ou desalinhado e a causa mais comum de NET::ERR_CERT_COMMON_NAME_INVALID."}},
+        {"@type":"Question","name":"O que e BasicConstraints CA:TRUE?","acceptedAnswer":{"@type":"Answer","text":"BasicConstraints e a extensão que indica se o certificado pode assinar outros certificados. CA:TRUE marca um certificado intermediario ou raiz; CA:FALSE marca um end-entity (servidor, cliente). Um end-entity com CA:TRUE seria uma falha crítica de segurança - permitiria emitir certificados arbitrarios."}},
+        {"@type":"Question","name":"Por que algumas extensões aparecem como não reconhecidas?","acceptedAnswer":{"@type":"Answer","text":"X.509 e extensivel - CAs adicionam OIDs próprios para Certificate Transparency (SCT), CABF EV, BRBR, etc. Esta ferramenta cobre as mais usadas em TLS público (SAN, BC, KU, EKU, AKI, SKI, AIA, CDP, certificate policies, SCT list). OIDs não reconhecidos são exibidos com seu número."}},
+        {"@type":"Question","name":"Os certificados são enviados a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. O parser roda 100% local no navegador. ASN.1/DER e processado em JavaScript no cliente; fingerprints SHA-1/SHA-256 são calculados via WebCrypto na própria página. Nenhum byte sai do seu navegador."}}
     ]}
     </script>
 
@@ -163,12 +163,12 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
-        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
-                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
                 <li class="nav-item"><a class="nav-link" href="../../blog/">BLOG</a></li>
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navParaVoce" role="button" aria-haspopup="true" aria-expanded="false">PARA VOC&Ecirc;</a><div class="dropdown-menu" aria-labelledby="navParaVoce"><a class="dropdown-item" href="../../para-cisos/"><i class="fas fa-user-shield fa-fw"></i> <span class="item-text">Para CISOs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-pmes/"><i class="fas fa-building fa-fw"></i> <span class="item-text">Para PMEs</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../para-conselho/"><i class="fas fa-balance-scale fa-fw"></i> <span class="item-text">Para Conselho</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../recursos/"><i class="fas fa-download fa-fw"></i> <span class="item-text">Recursos</span></a><div class="dropdown-items-divide-hr"></div><a class="dropdown-item" href="../../newsletter/"><i class="fas fa-envelope fa-fw"></i> <span class="item-text">Newsletter</span></a></div></li><li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
             </ul>
@@ -179,7 +179,7 @@
         <div class="container">
             <span class="article-category">Ferramenta</span>
             <h1>Parser de Certificados X.509</h1>
-            <p style="color:#94A3B8;font-size:1.1rem;max-width:720px;margin:1rem auto 0">Cole um certificado PEM (ou envie .crt/.cer/.pem/.der) e veja subject, issuer, SAN, validade, chave publica, extensoes e fingerprints SHA-256. Cadeia inteira suportada. 100% local no navegador.</p>
+            <p style="color:#94A3B8;font-size:1.1rem;max-width:720px;margin:1rem auto 0">Cole um certificado PEM (ou envie .crt/.cer/.pem/.der) e veja subject, issuer, SAN, validade, chave publica, extensões e fingerprints SHA-256. Cadeia inteira suportada. 100% local no navegador.</p>
         </div>
     </header>
 
@@ -192,7 +192,7 @@
             <div class="x509-form">
                 <label for="x509Input" class="form-label">Certificado PEM (cole 1 ou mais)</label>
                 <textarea id="x509Input" class="pem-textarea" spellcheck="false" autocomplete="off" placeholder="-----BEGIN CERTIFICATE-----&#10;MIIE...&#10;-----END CERTIFICATE-----"></textarea>
-                <div class="form-help">Aceita: PEM com cabecalho <code>-----BEGIN CERTIFICATE-----</code>. Para arquivos <code>.crt</code>/<code>.cer</code>/<code>.pem</code>/<code>.der</code> use o botao Carregar Arquivo. Se colar varios PEMs em sequencia, todos sao analisados como cadeia.</div>
+                <div class="form-help">Aceita: PEM com cabeçalho <code>-----BEGIN CERTIFICATE-----</code>. Para arquivos <code>.crt</code>/<code>.cer</code>/<code>.pem</code>/<code>.der</code> use o botao Carregar Arquivo. Se colar vários PEMs em sequência, todos são analisados como cadeia.</div>
                 <div class="form-actions">
                     <button type="button" id="x509ParseBtn" class="form-btn"><i class="fas fa-search"></i> Analisar</button>
                     <label for="x509FileInput" class="form-btn form-btn-secondary" style="cursor:pointer"><i class="fas fa-upload"></i> Carregar Arquivo</label>
@@ -207,7 +207,7 @@
 
             <div class="highlight-box info" style="margin-top:2rem">
                 <div class="highlight-box-title"><i class="fas fa-lock"></i> 100% local</div>
-                <p>O parser ASN.1/DER roda inteiramente no navegador. Os fingerprints SHA-1 e SHA-256 sao calculados via WebCrypto na propria pagina. Nenhum byte do seu certificado e enviado aos nossos servidores - voce pode analisar certificados privados sem risco.</p>
+                <p>O parser ASN.1/DER roda inteiramente no navegador. Os fingerprints SHA-1 e SHA-256 são calculados via WebCrypto na própria página. Nenhum byte do seu certificado e enviado aos nossos servidores - você pode analisar certificados privados sem risco.</p>
             </div>
 
         </div>
@@ -218,42 +218,42 @@
             <div class="article-body">
 
                 <h2 id="oque-x509">O Que e X.509?</h2>
-                <p>X.509 e o padrao do ITU-T para certificados de chave publica - usado em TLS/SSL (HTTPS), S/MIME (e-mail assinado), code signing, EAP-TLS (Wi-Fi corporativo), client authentication, ICP-Brasil e dezenas de outros cenarios. Um certificado X.509 associa uma <strong>chave publica</strong> a uma <strong>identidade</strong> (dominio, CPF, organizacao) atraves da assinatura de uma <strong>Autoridade Certificadora (CA)</strong> em quem voce ja confia.</p>
+                <p>X.509 e o padrão do ITU-T para certificados de chave publica - usado em TLS/SSL (HTTPS), S/MIME (e-mail assinado), code signing, EAP-TLS (Wi-Fi corporativo), client authentication, ICP-Brasil e dezenas de outros cenários. Um certificado X.509 associa uma <strong>chave publica</strong> a uma <strong>identidade</strong> (domínio, CPF, organização) através da assinatura de uma <strong>Autoridade Certificadora (CA)</strong> em quem você já confia.</p>
 
-                <p>A estrutura interna e <strong>ASN.1 codificada em DER</strong> - um formato binario hierarquico. PEM e apenas DER em Base64 com cabecalhos <code>-----BEGIN CERTIFICATE-----</code> para ser texto-amigavel. Os campos principais de um X.509 v3:</p>
+                <p>A estrutura interna e <strong>ASN.1 codificada em DER</strong> - um formato binário hierarquico. PEM e apenas DER em Base64 com cabecalhos <code>-----BEGIN CERTIFICATE-----</code> para ser texto-amigavel. Os campos principais de um X.509 v3:</p>
 
                 <h2 id="campos">Campos Principais</h2>
                 <ul>
                     <li><strong>Subject</strong> - identidade do dono do certificado (CN, O, OU, C, etc.)</li>
                     <li><strong>Issuer</strong> - identidade da CA que assinou</li>
-                    <li><strong>Serial Number</strong> - identificador unico atribuido pela CA (importante para revogacao)</li>
+                    <li><strong>Serial Number</strong> - identificador único atribuído pela CA (importante para revogação)</li>
                     <li><strong>Validity</strong> - notBefore / notAfter</li>
                     <li><strong>Signature Algorithm</strong> - algoritmo usado pela CA (ex: sha256WithRSAEncryption)</li>
                     <li><strong>Subject Public Key Info</strong> - a chave publica e seu algoritmo (RSA-2048, P-256, Ed25519, etc.)</li>
                 </ul>
 
-                <h2 id="extensoes">Extensoes Importantes (X.509 v3)</h2>
+                <h2 id="extensoes">Extensões Importantes (X.509 v3)</h2>
                 <ul>
-                    <li><strong>Subject Alternative Name (SAN)</strong> - DNS names, IPs, URIs, e-mails para os quais o cert e valido. Desde 2017, navegadores so olham SAN, nao CN.</li>
+                    <li><strong>Subject Alternative Name (SAN)</strong> - DNS names, IPs, URIs, e-mails para os quais o cert e valido. Desde 2017, navegadores só olham SAN, não CN.</li>
                     <li><strong>Basic Constraints</strong> - CA:TRUE/FALSE e pathLenConstraint. Diz se o cert pode emitir outros certs.</li>
                     <li><strong>Key Usage</strong> - finalidades da chave: digitalSignature, keyEncipherment, keyCertSign, etc.</li>
-                    <li><strong>Extended Key Usage</strong> - finalidades especificas: serverAuth (TLS server), clientAuth (mTLS), codeSigning, etc.</li>
+                    <li><strong>Extended Key Usage</strong> - finalidades específicas: serverAuth (TLS server), clientAuth (mTLS), codeSigning, etc.</li>
                     <li><strong>Subject Key Identifier (SKI)</strong> - hash da chave publica, usado para encadeamento.</li>
                     <li><strong>Authority Key Identifier (AKI)</strong> - SKI da CA que assinou. Liga este cert ao cert da CA.</li>
                     <li><strong>Authority Information Access (AIA)</strong> - URL para baixar o cert da CA (caIssuers) e URL do responder OCSP.</li>
-                    <li><strong>CRL Distribution Points (CDP)</strong> - URLs onde baixar listas de revogacao.</li>
-                    <li><strong>Certificate Transparency (SCT)</strong> - timestamps assinados de logs CT. Obrigatorio em certs publicos modernos.</li>
+                    <li><strong>CRL Distribution Points (CDP)</strong> - URLs onde baixar listas de revogação.</li>
+                    <li><strong>Certificate Transparency (SCT)</strong> - timestamps assinados de logs CT. Obrigatório em certs públicos modernos.</li>
                 </ul>
 
                 <h2 id="lint">Checks de Lint que o Parser Aplica</h2>
                 <ul>
                     <li><strong>Expirado ou perto de expirar</strong> - alerta com 90/60/30/0 dias restantes</li>
-                    <li><strong>Algoritmo de assinatura fraco</strong> - SHA-1 e MD5 sao rejeitados em TLS publico ha anos</li>
-                    <li><strong>Chave RSA &lt; 2048 bits</strong> - inseguro pelos padroes atuais (NIST recomenda &ge;2048)</li>
-                    <li><strong>SAN ausente</strong> - cert TLS publico precisa de SAN, nao basta CN</li>
-                    <li><strong>End-entity com CA:TRUE</strong> - falha grave, equivale a permitir emissao arbitraria</li>
-                    <li><strong>Validade &gt; 398 dias</strong> - desde set/2020 navegadores rejeitam TLS publico com validade maior</li>
-                    <li><strong>Sem extendedKeyUsage para serverAuth</strong> - cert que claramente e de servidor mas nao declara o EKU</li>
+                    <li><strong>Algoritmo de assinatura fraco</strong> - SHA-1 e MD5 são rejeitados em TLS público ha anos</li>
+                    <li><strong>Chave RSA &lt; 2048 bits</strong> - inseguro pelos padrões atuais (NIST recomenda &ge;2048)</li>
+                    <li><strong>SAN ausente</strong> - cert TLS público precisa de SAN, não basta CN</li>
+                    <li><strong>End-entity com CA:TRUE</strong> - falha grave, equivale a permitir emissao arbitrária</li>
+                    <li><strong>Validade &gt; 398 dias</strong> - desde set/2020 navegadores rejeitam TLS público com validade maior</li>
+                    <li><strong>Sem extendedKeyUsage para serverAuth</strong> - cert que claramente e de servidor mas não declara o EKU</li>
                 </ul>
 
                 <h2 id="faq">Perguntas Frequentes</h2>
@@ -261,34 +261,34 @@
                 <div class="faq-section">
                     <div class="faq-item">
                         <div class="faq-question"><span>O que e um certificado X.509?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>X.509 e o padrao de certificado digital usado em TLS, S/MIME e code signing. Associa uma chave publica a uma identidade atraves da assinatura de uma CA.</p></div>
+                        <div class="faq-answer"><p>X.509 e o padrão de certificado digital usado em TLS, S/MIME e code signing. Associa uma chave publica a uma identidade através da assinatura de uma CA.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>PEM vs DER, qual usar?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>DER e binario, PEM e DER em Base64 com cabecalhos. Para configurar Apache/Nginx/HAProxy o padrao e PEM. Para clientes Windows/Java geralmente DER. Esta ferramenta aceita ambos.</p></div>
+                        <div class="faq-answer"><p>DER e binário, PEM e DER em Base64 com cabecalhos. Para configurar Apache/Nginx/HAProxy o padrão e PEM. Para clientes Windows/Java geralmente DER. Esta ferramenta aceita ambos.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>O que e SAN?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>SAN lista todos os hostnames/IPs/URIs para os quais o certificado e valido. Desde 2017 navegadores so olham SAN - CN do subject e ignorado.</p></div>
+                        <div class="faq-answer"><p>SAN lista todos os hostnames/IPs/URIs para os quais o certificado e valido. Desde 2017 navegadores só olham SAN - CN do subject e ignorado.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>O que e BasicConstraints CA:TRUE?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>CA:TRUE indica que o certificado pode assinar outros certificados (CA intermediaria ou raiz). End-entity sempre deve ter CA:FALSE.</p></div>
+                        <div class="faq-answer"><p>CA:TRUE indica que o certificado pode assinar outros certificados (CA intermediária ou raiz). End-entity sempre deve ter CA:FALSE.</p></div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question"><span>Por que algumas extensoes aparecem como nao reconhecidas?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>X.509 e extensivel - varios OIDs sao especificos de uma CA, de Certificate Transparency, EV ou ICP-Brasil. Cobrimos as mais relevantes; outros sao mostrados por OID numerico.</p></div>
+                        <div class="faq-question"><span>Por que algumas extensões aparecem como não reconhecidas?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>X.509 e extensivel - vários OIDs são específicos de uma CA, de Certificate Transparency, EV ou ICP-Brasil. Cobrimos as mais relevantes; outros são mostrados por OID numerico.</p></div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question"><span>Os certificados sao enviados a algum servidor?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Nao. Tudo roda no navegador via JavaScript e WebCrypto. Nada sai do seu cliente - voce pode analisar certificados privados com seguranca.</p></div>
+                        <div class="faq-question"><span>Os certificados são enviados a algum servidor?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Não. Tudo roda no navegador via JavaScript e WebCrypto. Nada sai do seu cliente - você pode analisar certificados privados com segurança.</p></div>
                     </div>
                 </div>
 
-                <h2 id="cta">Sua empresa precisa de governanca de certificados?</h2>
+                <h2 id="cta">Sua empresa precisa de governança de certificados?</h2>
                 <div class="cta-box">
-                    <h3>PKI, gestao de certificados e mTLS sob medida</h3>
-                    <p>Implementamos PKI corporativa (CA propria), inventario e renovacao automatica de certs publicos, mTLS para APIs internas e validacao de cadeia em ambientes complexos.</p>
+                    <h3>PKI, gestão de certificados e mTLS sob medida</h3>
+                    <p>Implementamos PKI corporativa (CA própria), inventário e renovação automática de certs públicos, mTLS para APIs internas e validação de cadeia em ambientes complexos.</p>
                     <a href="../../#contato" class="cta-btn">Solicitar Proposta</a>
                 </div>
 
@@ -300,12 +300,12 @@
     <footer class="footer-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Segurança, Estratégia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div></div>
                 <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Ferramentas</h4><ul><li><a href="../validador-dns/">Validador DNS/DNSSEC</a></li><li><a href="../security-headers/">Security Headers</a></li><li><a href="../">Todas</a></li></ul></div></div>
-                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegação</h4><ul><li><a href="../../">Home</a></li><li><a href="../../blog/">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
                 <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> contato@inteligenciabrasil.seg.br</p></div></div>
             </div>
-            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligência Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
         </div>
     
 </footer>
