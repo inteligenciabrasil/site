@@ -434,6 +434,14 @@
                     return;
                 }
 
+                // Track conversion
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    event: 'form_submit',
+                    form_id: 'diagnostico-conscientizacao',
+                    form_type: 'lp_lead'
+                });
+
                 showMessage('Diagnóstico enviado. Nossa equipe vai analisar as respostas e retornar com a proposta técnica.', 'success');
                 form.reset();
                 form.querySelectorAll('.cond').forEach(function (c) {
