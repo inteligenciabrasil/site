@@ -202,6 +202,17 @@
     .navbar-custom .social-icons{display:none}
     @media(min-width:768px){.navbar-expand-md{flex-flow:row nowrap;justify-content:flex-start}.navbar-expand-md .navbar-nav{flex-direction:row;margin-top:0;margin-left:auto!important}.navbar-expand-md .navbar-toggler{display:none}.navbar-expand-md .navbar-collapse{display:flex!important;flex-basis:auto}}
     </style>
+    <style>
+    /* CONTENT-LINK-V1: servico.css nao define cor de link in-content. Sem isto o link
+       cai no azul do bootstrap (#007bff, contraste 2.5:1 no fundo escuro) e o a:hover
+       global de styles.css (#0b1e39) o deixa invisivel. Ancora que ja tem class ou
+       style proprio nao e afetada. */
+    main a:not([class]){color:#60A5FA;text-decoration:underline}
+    main a:not([class]):hover{color:#F1F5F9}
+    /* o link da letra miuda do formulario segue discreto; especificidade maior de proposito */
+    p.form-disclaimer a:not([class]){color:#94A3B8}
+    p.form-disclaimer a:not([class]):hover{color:#F1F5F9}
+    </style>
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="../css/bootstrap.min.css" rel="stylesheet"></noscript>
     <link href="../css/fontawesome-subset.min.css" rel="stylesheet" media="print" onload="this.media='all'">
