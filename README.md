@@ -40,6 +40,15 @@ Varre o filesystem, então **páginas novas entram sozinhas**. Exclui automatica
 Converte `/foo/index.html` em `/foo/` e guarda backup do sitemap anterior em
 `_data/backups/`.
 
+**A detecção de `noindex` é ancorada em `<meta ... >`, e isso é de propósito.** A
+versão anterior casava `name="robots"[^>]*noindex`, e `[^>]*` atravessa qualquer
+trecho que não tenha `>` — inclusive JavaScript. O script inline de `/blog/`, que
+troca a meta para `noindex, follow` quando existe `?q=`, casava nesse regex e
+derrubava o hub do blog do sitemap. Exigir o `<meta` resolve, porque a string dentro
+do JS não traz a tag. Os dois lookaheads cobrem as duas ordens de atributo que
+convivem no repo (`name` antes de `content` e o inverso). **Ao mexer nessa linha,
+confira que `/blog/` continua no sitemap e que as cascas de redirect continuam fora.**
+
 **`lastmod`.** O mtime do filesystem não serve: qualquer script de edição em massa
 reescreve as 223 páginas no mesmo instante e o sitemap sai com uma data única em
 tudo — foi exatamente o que o Search Console apontou em 03/10/2026, e um campo
