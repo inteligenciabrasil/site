@@ -89,6 +89,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
     <!-- ASYNC-CSS-V1 -->
+    <!-- CSS-BLOCKING-V1 -->
     <style>
     /* ASYNC-CSS-V1 critical: shell (navbar + body + container + FA placeholders) */
     @font-face{font-family:'Fira Sans Fallback';src:local('Arial'),local('Helvetica');size-adjust:100%}
@@ -126,13 +127,19 @@
     .step-item h3{font-size:1.05rem;margin:14px 0 10px}
     .step-item p{margin:0;color:#94A3B8;font-size:.9rem;line-height:1.6}
     .step-number{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#60A5FA,#3B82F6);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+    /* CSS-BLOCKING-V1: grid do Bootstrap usado em <main>; o bootstrap segue
+       assincrono, estas 4 regras evitam o shift residual quando ele pousa */
+    .row{display:flex;flex-wrap:wrap;margin-right:-15px;margin-left:-15px}
+    .col-lg-8{position:relative;width:100%;padding-right:15px;padding-left:15px}
+    @media(min-width:992px){.col-lg-8{flex:0 0 66.666667%;max-width:66.666667%}}
+    .justify-content-center{justify-content:center!important}
+    .text-center{text-align:center!important}
     </style>
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="../css/bootstrap.min.css" rel="stylesheet"></noscript>
     <link href="../css/fontawesome-subset.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="../css/fontawesome-subset.min.css" rel="stylesheet"></noscript>
-    <link href="../css/styles.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="../css/styles.min.css" rel="stylesheet"></noscript>
+    <link href="../css/styles.min.css" rel="stylesheet">
     <link href="../css/servico.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="../css/servico.min.css" rel="stylesheet"></noscript>
 </head>
