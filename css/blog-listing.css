@@ -295,7 +295,10 @@ body {
     border: none;
     cursor: pointer;
     transition: all 0.3s;
-    padding: 0;
+    /* padding + content-box: alvo de 24px (WCAG 2.5.8) com ponto visual de 10px */
+    box-sizing: content-box;
+    padding: 7px;
+    background-clip: content-box;
 }
 
 .featured-dot.active {
@@ -339,6 +342,10 @@ body {
 .footer-contact p,
 .footer-links a {
     color: #94A3B8;
+}
+
+.footer-contact p a {
+    color: #60A5FA;
 }
 
 .footer-links h4,
