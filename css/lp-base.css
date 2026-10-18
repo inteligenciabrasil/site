@@ -454,7 +454,8 @@ header {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    /* min() impede a track de travar em 320px dentro de um container de 288px (viewport 320) */
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
     gap: 30px;
 }
 
@@ -1129,6 +1130,13 @@ header {
         max-width: 400px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    /* ponytail: !important porque as 16 LPs declaram grid-template-columns
+       inline no .benefits-grid, e style inline vence media query de folha.
+       Remover os 16 inline styles seria o fix limpo, ao custo de 16 arquivos. */
+    .benefits-grid {
+        grid-template-columns: 1fr !important;
     }
 }
 
