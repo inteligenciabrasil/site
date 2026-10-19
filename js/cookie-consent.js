@@ -218,7 +218,7 @@
       'cursor:pointer;font-family:inherit;transition:border-color .2s,color .2s}' +
       '#cc-prefs:hover{color:#93c5fd;border-color:rgba(147,197,253,.6)}' +
       '@media(max-width:600px){#cc-inner{flex-direction:column;text-align:center}' +
-      '#cc-btns{width:100%;justify-content:center}}' +
+      '#cc-btns{width:100%;justify-content:center;flex-wrap:wrap}}' +
       // Panel styles
       '#cc-panel{display:none;position:fixed;inset:0;z-index:100000;' +
       'background:rgba(0,0,0,.6);align-items:center;justify-content:center;' +
