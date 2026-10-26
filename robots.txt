@@ -16,33 +16,38 @@ Disallow: /*.pdf$
 # Obfuscation). Nao sao paginas; evita URLs /cdn-cgi/* no indice.
 Disallow: /cdn-cgi/
 
+# Proxy first-party do Google Tag Manager. Nao e pagina; aparecia como
+# "Rastreada, mas nao indexada" no Search Console. Ja serve X-Robots-Tag:
+# noindex no header da Cloudflare; o Disallow evita o gasto de rastreamento.
+Disallow: /x87g/
+
+# Planejamento interno. Nunca foi publicado (gitignored), mas o Google tinha
+# 5 URLs /.planning/seo-fase2/*.intro.html em 404 a partir do sitemap antigo.
+Disallow: /.planning/
+
 # Sitemap
 Sitemap: https://inteligenciabrasil.seg.br/sitemap.xml
 
 # RSS Feed
 # https://inteligenciabrasil.seg.br/feed.xml
 
-# Crawl-delay para ser gentil com o servidor
-Crawl-delay: 10
-
 # ============================================================
 # Search Engines tradicionais
+# Sem Crawl-delay: o Google ignora a diretiva e, para Bing/Yandex, atrasar o
+# rastreamento trabalha contra a meta deste sprint (indexar mais rapido).
+# Mantido so para os scrapers no fim do arquivo, que de fato a honram.
 # ============================================================
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 5
 
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 10
 
 User-agent: DuckDuckBot
 Allow: /
-Crawl-delay: 10
 
 User-agent: YandexBot
 Allow: /
-Crawl-delay: 10
 
 # ============================================================
 # AI - Answer Engines (citam e linkam em tempo real)
