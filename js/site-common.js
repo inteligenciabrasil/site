@@ -266,7 +266,7 @@
             { match: /cloud|aws|azure|gcp|cspm|kubernetes|container/i, url: '/lp/cloud-security/', title: 'Sua nuvem est\u00e1 segura?', desc: 'Avalia\u00e7\u00e3o de postura cloud (CSPM/KSPM) em AWS, Azure e GCP.', label: 'Avaliar Cloud' },
             { match: /devsecops|appsec|api|sast|dast|sbom|graphql/i, url: '/lp/application-security/', title: 'Seu c\u00f3digo \u00e9 seguro desde o design?', desc: 'AppSec/DevSecOps: SAST, DAST, SBOM e seguran\u00e7a no SDLC.', label: 'Proteger Aplica\u00e7\u00f5es' },
             { match: /grc|governan|compliance|auditoria|risco|iso 27001|nis2/i, url: '/lp/grc/', title: 'Como est\u00e1 sua maturidade em GRC?', desc: 'Programa de Governan\u00e7a, Riscos e Compliance sob medida.', label: 'Diagnosticar GRC' },
-            { match: /soc|siem|soar|xdr|edr|ndr|detection|threat hunt/i, url: '/lp/csoc/', title: 'Precisa de monitoramento 24x7?', desc: 'Cyber SOC com detec\u00e7\u00e3o, resposta e threat hunting.', label: 'Conhecer o cSOC' },
+            { match: /soc|siem|soar|xdr|edr|ndr|detection|threat hunt/i, url: '/lp/blue-team/', title: 'Precisa de monitoramento 24x7?', desc: 'Cyber SOC com detec\u00e7\u00e3o, resposta e threat hunting.', label: 'Conhecer o cSOC' },
             { match: /threat intel|cti|inteligencia|intelig\u00eancia|osint/i, url: '/lp/cti-monitoramento/', title: 'Antecipe-se \u00e0s amea\u00e7as.', desc: 'Cyber Threat Intelligence operacional para sua superf\u00edcie de risco.', label: 'Conhecer CTI' },
             { match: /ransomware|incident|resposta|forense|breach/i, url: '/lp/resposta-incidentes/', title: 'Sofreu um incidente?', desc: 'Resposta a incidentes 24x7 com conten\u00e7\u00e3o e recupera\u00e7\u00e3o.', label: 'Acionar Resposta' },
             { match: /vulnerab|cvss|cve|patch/i, url: '/lp/analise-vulnerabilidades/', title: 'Conhece suas vulnerabilidades cr\u00edticas?', desc: 'An\u00e1lise de vulnerabilidades com prioriza\u00e7\u00e3o por risco real.', label: 'Solicitar An\u00e1lise' },
@@ -274,7 +274,7 @@
             { match: /email|spf|dkim|dmarc|phishing|spoofing/i, url: '/lp/monitorar-emails/', title: 'Seu dom\u00ednio est\u00e1 protegido?', desc: 'Monitoramento de e-mail, marca e abuse de dom\u00ednio.', label: 'Monitorar E-mails' },
             { match: /awareness|conscienti|treinamento|engenharia social/i, url: '/lp/conscientizacao-treinamento/', title: 'Pessoas s\u00e3o seu primeiro per\u00edmetro.', desc: 'Programa de conscientiza\u00e7\u00e3o com simula\u00e7\u00e3o de phishing.', label: 'Conhecer Programa' },
             { match: /terceiros|tprm|supply chain|due diligence/i, url: '/lp/gestao-riscos-terceiros/', title: 'Conhece o risco dos seus fornecedores?', desc: 'Gest\u00e3o de risco de terceiros (TPRM) ponta a ponta.', label: 'Avaliar Terceiros' },
-            { match: /forense|investiga|computa.{0,2}forense/i, url: '/lp/computacao-forense/', title: 'Precisa de evid\u00eancias t\u00e9cnicas?', desc: 'Computa\u00e7\u00e3o forense com cadeia de cust\u00f3dia e laudo.', label: 'Solicitar Per\u00edcia' },
+            { match: /forense|investiga|computa.{0,2}forense/i, url: '/lp/resposta-incidentes/', title: 'Precisa de evid\u00eancias t\u00e9cnicas?', desc: 'Computa\u00e7\u00e3o forense com cadeia de cust\u00f3dia e laudo.', label: 'Solicitar Per\u00edcia' },
             { match: /fraude|cartao|cart\u00e3o|golpe/i, url: '/lp/prevencao-fraudes/', title: 'Reduza perdas com fraudes.', desc: 'Preven\u00e7\u00e3o e resposta a fraudes digitais.', label: 'Conhecer Solu\u00e7\u00e3o' }
         ];
 

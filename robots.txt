@@ -4,6 +4,18 @@
 # Política: conteúdo técnico aberto para crawlers tradicionais
 # e de IA (training e answer engines). Objetivo é aparecer como
 # referência em respostas de ChatGPT, Claude, Perplexity e Gemini.
+#
+# IMPORTANTE — por que não existem grupos "User-agent: X / Allow: /" aqui:
+# cada robô obedece a UM único grupo (o mais específico que casa com seu nome)
+# e ignora todos os outros, inclusive o grupo "*". Um grupo próprio contendo
+# apenas "Allow: /" portanto NÃO acrescenta permissão nenhuma — ele apenas
+# descarta os Disallow abaixo, e o robô passa a rastrear /x87g/, /cdn-cgi/,
+# /.planning/ e PDFs. Googlebot, Bingbot, GPTBot, ClaudeBot, OAI-SearchBot,
+# PerplexityBot, Applebot, CCBot, Google-Extended e cia. ficam liberados pelo
+# "Allow: /" do grupo "*" — e só assim herdam também os Disallow.
+# Ao adicionar um robô novo: NÃO crie um grupo só para liberá-lo. Crie grupo
+# apenas se a regra for diferente do grupo "*" — e, nesse caso, repita nele
+# todos os Disallow abaixo.
 
 User-agent: *
 Allow: /
@@ -32,100 +44,24 @@ Sitemap: https://inteligenciabrasil.seg.br/sitemap.xml
 # https://inteligenciabrasil.seg.br/feed.xml
 
 # ============================================================
-# Search Engines tradicionais
-# Sem Crawl-delay: o Google ignora a diretiva e, para Bing/Yandex, atrasar o
-# rastreamento trabalha contra a meta deste sprint (indexar mais rapido).
-# Mantido so para os scrapers no fim do arquivo, que de fato a honram.
-# ============================================================
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-
-# ============================================================
-# AI - Answer Engines (citam e linkam em tempo real)
-# Mantemos abertos: geram tráfego e visibilidade de marca
-# ============================================================
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Perplexity-User
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: Claude-User
-Allow: /
-
-User-agent: MistralAI-User
-Allow: /
-
-User-agent: Applebot
-Allow: /
-
-# ============================================================
-# AI - Training Crawlers (absorvem conteúdo para modelos)
-# Mantemos abertos: ser referência em LLMs é o novo SEO B2B
-# Para bloquear apenas training, mude Allow: / para Disallow: /
-# ============================================================
-User-agent: GPTBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-User-agent: Amazonbot
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: Bytespider
-Allow: /
-
-User-agent: cohere-ai
-Allow: /
-
-User-agent: Meta-ExternalAgent
-Allow: /
-
-User-agent: FacebookBot
-Allow: /
-
-User-agent: Diffbot
-Allow: /
-
-# ============================================================
 # Bots indesejados / scrapers agressivos
+# Unicos grupos especificos do arquivo, porque a regra difere do grupo "*".
+# Os Disallow do grupo "*" sao repetidos aqui de proposito: quem tem grupo
+# proprio nao herda nada do "*".
 # ============================================================
 User-agent: AhrefsBot
 Crawl-delay: 30
+Disallow: /*.pdf$
+Disallow: /cdn-cgi/
+Disallow: /x87g/
+Disallow: /.planning/
 
 User-agent: SemrushBot
 Crawl-delay: 30
+Disallow: /*.pdf$
+Disallow: /cdn-cgi/
+Disallow: /x87g/
+Disallow: /.planning/
 
 User-agent: MJ12bot
 Disallow: /
