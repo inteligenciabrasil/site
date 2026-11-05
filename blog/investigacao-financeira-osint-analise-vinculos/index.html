@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+<!-- CONSENT-MODE-V2 -->
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','analytics_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','personalization_storage':'denied','functionality_storage':'granted','security_storage':'granted','wait_for_update':500});</script>
+    <!-- Google Tag Manager --><!-- GTM-DEFERRED-V1 -->
+    <script>window.dataLayer=window.dataLayer||[];dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});function __gtmBoot(){var d=document,s='script',l='dataLayer',i='GTM-WCL38PDP',f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',__gtmBoot);}else{setTimeout(__gtmBoot,0);}</script>
+    <!-- CSP-V6 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://*.googletagmanager.com https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/ https://vlibras.gov.br https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://tagassistant.google.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://tagassistant.google.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://vlibras.gov.br https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.gstatic.com https://ssl.gstatic.com https://ad.doubleclick.net; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cloudflareinsights.com https://fonts.googleapis.com https://cloudflare-dns.com https://dns.google https://vlibras.gov.br https://api.ipify.org https://challenges.cloudflare.com https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://analytics.google.com https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://stats.g.doubleclick.net https://ad.doubleclick.net https://pagead2.googlesyndication.com; frame-src https://www.googletagmanager.com https://challenges.cloudflare.com https://td.doubleclick.net https://tagassistant.google.com; form-action 'self' https://script.google.com; base-uri 'self'; object-src 'none';">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="O método de uma investigação financeira: hipótese, linha do tempo, análise de vínculos, OSINT dentro da lei e o dossiê que sustenta a conclusão.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="investigacao financeira, OSINT, analise de vinculos, link analysis, analise temporal, forense financeira, PLD-FT, AML, dossie investigativo, cadeia de custodia, SHA-256, entity resolution, Coaf, compliance">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/investigacao-financeira-osint-analise-vinculos/">
+
+    <meta property="og:title" content="Investigação financeira: OSINT, vínculos e dossiê">
+    <meta property="og:description" content="Consultar bases não é investigar. Veja o fluxo de oito passos, a análise de vínculos e temporal, os limites do OSINT e como documentar sem concluir além da evidência.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/investigacao-financeira-osint-analise-vinculos/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-11-05T09:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Governança e GRC">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Investigação financeira: OSINT, vínculos e dossiê">
+    <meta name="twitter:description" content="Consultar bases não é investigar. Veja o fluxo de oito passos, a análise de vínculos e temporal, os limites do OSINT e como documentar sem concluir além da evidência.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Investigação financeira e OSINT | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "Governança e GRC", "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"}, "dateModified": "2026-11-05T09:00:00-03:00", "datePublished": "2026-11-05T09:00:00-03:00", "description": "O método de uma investigação financeira: hipótese, linha do tempo, análise de vínculos, OSINT dentro da lei e o dossiê que sustenta a conclusão.", "headline": "Investigação financeira: OSINT, vínculos e dossiê", "image": "https://inteligenciabrasil.seg.br/img/og-image.webp", "inLanguage": "pt-BR", "mainEntityOfPage": {"@id": "https://inteligenciabrasil.seg.br/blog/investigacao-financeira-osint-analise-vinculos/", "@type": "WebPage"}, "publisher": {"@type": "Organization", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}, "name": "Inteligência Brasil"}}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qual a diferença entre alerta, caso e comunicação ao Coaf?", "acceptedAnswer": {"@type": "Answer", "text": "O alerta é um evento gerado por uma regra ou modelo e se encerra na triagem, virando caso ou sendo descartado com justificativa registrada. O caso é o conjunto de alertas e informações em análise e se encerra com uma conclusão analítica documentada. A comunicação é o cumprimento de uma obrigação legal, quando aplicável, e não equivale a denúncia criminal nem a prova de ilícito."}}, {"@type": "Question", "name": "Por que a hipótese precisa vir antes da coleta de dados?", "acceptedAnswer": {"@type": "Answer", "text": "Porque só uma hipótese explícita pode ser refutada. Quem consulta bases sem hipótese coleta o que estiver disponível e tende a enxergar confirmação no que encontrou. Definir antes qual dado confirmaria e qual refutaria a suspeita é o que permite encerrar o caso com justificativa, em qualquer direção, e é também o que limita a coleta ao necessário."}}, {"@type": "Question", "name": "Endereço compartilhado entre empresas é indício de estrutura coordenada?", "acceptedAnswer": {"@type": "Answer", "text": "É um indício de força média, que exige verificação. Coworkings, escritórios virtuais e prédios comerciais produzem centenas de empresas no mesmo endereço sem nenhuma relação entre elas. O mesmo vale para administrador em comum, que frequentemente é só o escritório de contabilidade. O indício ganha peso quando vários atributos coincidem ao mesmo tempo e a coincidência é improvável."}}, {"@type": "Question", "name": "O que a análise temporal mostra que a análise de valores não mostra?", "acceptedAnswer": {"@type": "Answer", "text": "O encadeamento. Uma sequência de recebimento e repasse quase imediato, com decréscimo progressivo do valor e nenhuma atividade econômica entre as pernas, descreve um comportamento que nenhum valor isolado revelaria, porque nenhuma das operações rompe um limite relevante. Ainda assim, proximidade temporal pode ter explicação trivial e precisa ser lida junto com os outros dados."}}, {"@type": "Question", "name": "Dado público pode ser usado livremente em uma investigação?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Acessibilidade pública não retira o regime legal: continua sendo dado pessoal, com finalidade, necessidade, prazo de retenção e registro de proveniência. O uso de OSINT deve observar a legislação aplicável, a finalidade declarada da investigação e a qualidade da fonte. Coletar porque pode ser útil depois é justamente o que a norma não autoriza."}}, {"@type": "Question", "name": "Para que serve calcular hash dos arquivos coletados?", "acceptedAnswer": {"@type": "Answer", "text": "Para demonstrar que o arquivo não foi alterado após a coleta. Um SHA-256 calculado no momento da coleta e registrado com data e origem é um controle de custo quase zero e de valor alto quando o caso é contestado tempo depois. Importante: hash demonstra integridade, não autenticidade. Prova que o arquivo é o mesmo, não que o conteúdo é verdadeiro."}}, {"@type": "Question", "name": "Como escrever a conclusão de um caso sem acusar o cliente?", "acceptedAnswer": {"@type": "Answer", "text": "Descrevendo o que foi observado, o que foi testado e o que não foi possível explicar, e encaminhando conforme o procedimento interno. Em vez de afirmar que houve lavagem de dinheiro, o relatório registra que foram identificadas movimentações incompatíveis com o perfil econômico declarado e que as informações disponíveis não permitiram identificar justificativa econômica para o padrão. A instituição não tem competência legal para a primeira formulação e não precisa dela para cumprir sua obrigação."}}, {"@type": "Question", "name": "Por que a normalização dos dados é tão determinante?", "acceptedAnswer": {"@type": "Answer", "text": "Porque cada inconsistência de formato quebra uma correlação que existia nos dados. Nome grafado de três formas, documento com e sem máscara, datas em dois padrões e contrapartes identificadas só por apelido de transferência fazem a mesma entidade aparecer como várias, e a análise de vínculos deixa de enxergar a estrutura real. Normalizar inclui resolver identidade de entidade, não apenas padronizar colunas."}}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/", "name": "Blog", "position": 2}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/investigacao-financeira-osint-analise-vinculos/", "name": "Investigação financeira", "position": 3}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Governança e GRC</span>
+            <h1>Investigação financeira: OSINT, vínculos e dossiê</h1>
+            <div class="article-meta">
+                <span><i class="far fa-user"></i> Roberto Lima</span>
+                <span><i class="far fa-calendar"></i> 5 de novembro de 2026</span>
+                <span><i class="far fa-clock"></i> 14 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">Investigação financeira</li></ol></div></nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <figure class="article-hero">
+                    <img src="../../img/og-image.webp" alt="Grafo de relacionamentos entre pessoas, empresas e contas construído durante uma investigação financeira" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async">
+                </figure>
+
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#investigar-nao-e-consultar-base-de-dados">Investigar não é consultar base de dados</a></li>
+                        <li><a href="#o-fluxo-de-oito-passos">O fluxo de oito passos</a></li>
+                        <li><a href="#analise-de-vinculos-e-analise-temporal">Análise de vínculos e análise temporal</a></li>
+                        <li><a href="#osint-aplicado-a-investigacao-financeira">OSINT aplicado à investigação financeira</a></li>
+                        <li><a href="#forense-de-dados-financeiros">Forense de dados financeiros</a></li>
+                        <li><a href="#estudo-de-caso-a-fintech-e-as-120-pessoas-fisicas">Estudo de caso: a fintech e as 120 pessoas físicas</a></li>
+                        <li><a href="#o-dossie-documentar-sem-concluir-alem-da-evidencia">O dossiê: documentar sem concluir além da evidência</a></li>
+                        <li><a href="#faq">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <p>Há uma diferença de método entre o analista que recebe um alerta, consulta quatro bases, não encontra nada chamativo e encerra o caso, e o analista que formula uma hipótese, decide quais dados a testariam e documenta o que encontrou — inclusive o que contrariou a própria hipótese. O primeiro produz volume. O segundo produz conclusão defensável.</p>
+
+                <p>Este artigo trata do método: o fluxo, as técnicas de correlação, os limites do OSINT e a forma do dossiê. Ele detalha uma das seis etapas do <a href="../pld-ft-aml-programa-prevencao-lavagem-dinheiro/">programa de PLD-FT</a> — a etapa de detecção e investigação, que é onde o programa acerta ou erra na prática.</p>
+
+                <h2 id="investigar-nao-e-consultar-base-de-dados">Investigar não é consultar base de dados</h2>
+
+                <p>O primeiro erro de desenho é tratar alerta, caso e comunicação como a mesma coisa. São três objetos distintos, com três donos e três critérios de encerramento:</p>
+
+                <table border="1" cellpadding="5" cellspacing="0">
+                    <thead><tr><th>Objeto</th><th>O que é</th><th>Como se encerra</th></tr></thead>
+                    <tbody>
+                        <tr><td>Alerta</td><td>Evento gerado por uma regra ou modelo</td><td>Triagem: vira caso ou é descartado com justificativa</td></tr>
+                        <tr><td>Caso</td><td>Conjunto de alertas e informações em análise</td><td>Conclusão analítica documentada</td></tr>
+                        <tr><td>Comunicação</td><td>Cumprimento de obrigação legal, quando aplicável</td><td>Envio à unidade de inteligência financeira</td></tr>
+                    </tbody>
+                </table>
+
+                <p>Quando os três se confundem, aparecem dois sintomas opostos e igualmente ruins: alerta descartado sem registro do motivo, e comunicação enviada como se fosse denúncia. Nenhum dos dois sobrevive a uma supervisão.</p>
+
+                <h3>A hipótese vem antes da coleta</h3>
+
+                <p>Um analista experiente não sai consultando bases para ver o que aparece. Ele constrói uma hipótese investigativa, decide quais dados a confirmariam ou refutariam, coleta esses dados e registra o resultado. A hipótese pode ser simples: "esta conta funciona como ponto de passagem para recursos de terceiros". O que importa é que ela seja explícita, porque só uma hipótese explícita pode ser refutada.</p>
+
+                <p>A disciplina é a mesma de <a href="../threat-intelligence-operacional/">inteligência de ameaças operacional</a>: hipótese, requisito de coleta, avaliação da fonte, conclusão com nível de confiança. Investigação financeira sem essa estrutura produz relatório narrativo, não análise.</p>
+
+                <h2 id="o-fluxo-de-oito-passos">O fluxo de oito passos</h2>
+
+                <p>O fluxo abaixo é o esqueleto de qualquer investigação financeira, do alerta ao encerramento:</p>
+
+                <ol>
+                    <li><strong>Recebimento</strong> do alerta ou da denúncia interna.</li>
+                    <li><strong>Identificação</strong> dos envolvidos e das entidades relacionadas.</li>
+                    <li><strong>Coleta</strong> de dados internos e de fontes externas autorizadas.</li>
+                    <li><strong>Normalização e validação</strong> dos dados.</li>
+                    <li><strong>Linha do tempo</strong> financeira.</li>
+                    <li><strong>Correlação</strong> entre pessoas, empresas, contas e transações.</li>
+                    <li><strong>Padrões, inconsistências e hipóteses alternativas.</strong></li>
+                    <li><strong>Documentação</strong> das evidências e conclusão analítica.</li>
+                </ol>
+
+                <h3>A normalização é o passo que ninguém quer fazer</h3>
+
+                <p>O passo 4 consome mais tempo do que os analistas admitem no planejamento e é o que determina a qualidade de tudo o que vem depois. Nome grafado de três formas, CNPJ com e sem máscara, data em dois formatos, valor com separador trocado, contraparte identificada só por apelido de transferência: cada inconsistência dessas quebra uma correlação que existia nos dados.</p>
+
+                <p>Normalizar significa padronizar formato, resolver identidade de entidade e validar o que foi padronizado — não apenas rodar um <em>trim</em> nas colunas. É o ponto em que a investigação depende de engenharia de dados, assunto tratado em detalhe na <a href="../plataforma-aml-entity-resolution-grafos-ia/">arquitetura de uma plataforma de PLD-FT</a>.</p>
+
+                <h3>As perguntas que o investigador tem de responder</h3>
+
+                <p>Independentemente do caso, um conjunto fixo de perguntas organiza o trabalho e revela o que ainda falta coletar:</p>
+
+                <ul>
+                    <li>Quem é o controlador efetivo da empresa — e não apenas o sócio formal?</li>
+                    <li>Qual é a origem econômica dos recursos?</li>
+                    <li>Por que estas contrapartes específicas estão pagando ou recebendo?</li>
+                    <li>Existe atividade comercial que justifique o volume e a frequência?</li>
+                    <li>As contrapartes têm relação societária, administrador ou endereço em comum?</li>
+                    <li>As empresas envolvidas têm estrutura operacional compatível?</li>
+                    <li>Os valores são compatíveis com contratos e documentos fiscais?</li>
+                    <li>Qual explicação legítima daria conta do mesmo padrão?</li>
+                </ul>
+
+                <p>A última pergunta é a mais negligenciada e a mais importante. Uma investigação que só testa a hipótese de irregularidade não é investigação, é confirmação de viés com aparência de método.</p>
+
+                <h2 id="analise-de-vinculos-e-analise-temporal">Análise de vínculos e análise temporal</h2>
+
+                <p>Correlacionar é o que transforma registros soltos em estrutura. Duas técnicas carregam a maior parte do resultado.</p>
+
+                <h3>Os atributos que ligam entidades</h3>
+
+                <p>A análise de vínculos identifica relacionamentos entre pessoas físicas, pessoas jurídicas, sócios, administradores, endereços, telefones, contas, dispositivos e contrapartes financeiras. O valor não está em um vínculo isolado, está na repetição improvável: duas empresas sem relação comercial declarada que compartilham endereço, telefone e administrador descrevem uma estrutura, não uma coincidência.</p>
+
+                <p>Cada tipo de vínculo tem um peso diferente como evidência:</p>
+
+                <table border="1" cellpadding="5" cellspacing="0">
+                    <thead><tr><th>Vínculo</th><th>Força como indício</th><th>Cuidado</th></tr></thead>
+                    <tbody>
+                        <tr><td>Documento (CPF/CNPJ) em comum</td><td>Alta</td><td>Erro de cadastro e digitação</td></tr>
+                        <tr><td>Participação societária</td><td>Alta</td><td>Pode ser indireta e não aparecer no primeiro nível</td></tr>
+                        <tr><td>Administrador em comum</td><td>Média a alta</td><td>Contadores e escritórios de contabilidade aparecem em centenas de empresas</td></tr>
+                        <tr><td>Endereço em comum</td><td>Média</td><td>Coworkings, escritórios virtuais e prédios comerciais</td></tr>
+                        <tr><td>Telefone ou e-mail em comum</td><td>Média</td><td>Dado antigo, reaproveitado ou de terceiro</td></tr>
+                        <tr><td>Dispositivo em comum</td><td>Média</td><td>Dispositivo compartilhado legitimamente</td></tr>
+                        <tr><td>Nome parecido</td><td>Baixa</td><td>Homônimos — exige outro identificador</td></tr>
+                    </tbody>
+                </table>
+
+                <p>Tratar endereço compartilhado como prova de conluio, sem checar se o prédio é um escritório virtual, é o erro que mais frequentemente derruba um caso na revisão.</p>
+
+                <h3>Análise temporal: o encadeamento importa</h3>
+
+                <p>A sequência dos eventos costuma dizer mais do que o valor de cada um. Considere uma janela de trinta minutos:</p>
+
+                <table border="1" cellpadding="5" cellspacing="0">
+                    <thead><tr><th>Horário</th><th>Evento</th></tr></thead>
+                    <tbody>
+                        <tr><td>09:00</td><td>Conta A recebe R$ 100 mil</td></tr>
+                        <tr><td>09:04</td><td>Conta A transfere R$ 95 mil</td></tr>
+                        <tr><td>09:08</td><td>Conta B recebe R$ 95 mil</td></tr>
+                        <tr><td>09:15</td><td>Conta B transfere R$ 90 mil</td></tr>
+                        <tr><td>09:30</td><td>Conta C recebe R$ 90 mil</td></tr>
+                    </tbody>
+                </table>
+
+                <p>Nenhum desses valores, isoladamente, romperia um limite relevante. O que chama atenção é o encadeamento: recebimento, repasse quase imediato, decréscimo progressivo compatível com retenção de uma fração a cada etapa e ausência de qualquer atividade econômica entre as pernas. Ainda assim, proximidade temporal pode ter explicação trivial — pagamento de fornecedor programado, repasse de intermediação legítima — e precisa ser interpretada com os demais dados.</p>
+
+                <h3>Análise de origem e destino</h3>
+
+                <p>Reconstruir o fluxo significa responder duas perguntas que raramente aparecem no alerta: qual é a primeira origem conhecida do recurso e qual é o destino final observado. "Conhecida" e "observado" não são excesso de cautela: o investigador quase nunca enxerga a ponta real da cadeia, e afirmar origem ou destino além do que os dados mostram é o tipo de conclusão que uma defesa desmonta em uma linha.</p>
+
+                <h2 id="osint-aplicado-a-investigacao-financeira">OSINT aplicado à investigação financeira</h2>
+
+                <p>OSINT é a coleta e análise de informações de fontes abertas e legalmente acessíveis. Em investigação financeira, ele preenche o que os dados internos não têm: existência real da empresa, atividade declarada versus observável, relações societárias, exposição pública dos envolvidos.</p>
+
+                <h3>Fontes utilizáveis</h3>
+
+                <ul>
+                    <li>Registros públicos de empresas e dados societários.</li>
+                    <li>Publicações oficiais e diários.</li>
+                    <li>Processos públicos, respeitadas as restrições de acesso.</li>
+                    <li>Dados de contratação pública e licenciamento.</li>
+                    <li>Sites corporativos e publicações institucionais.</li>
+                    <li>Notícias de veículos confiáveis.</li>
+                    <li>Listas de sanções e listas de pessoas expostas politicamente, tratadas em <a href="../sanctions-screening-ofac-pep-falsos-positivos/">screening de sanções e PEP</a>.</li>
+                </ul>
+
+                <p>As técnicas de reconhecimento são as mesmas que um atacante usa para mapear uma organização — o objetivo é que difere. Quem quiser entender o repertório pelo outro lado encontra o detalhamento em <a href="../como-atacantes-mapeiam-empresa-reconhecimento/">como atacantes mapeiam uma empresa</a>.</p>
+
+                <h3>Registro de proveniência: fonte, data, contexto, confiabilidade</h3>
+
+                <p>Toda informação coletada em fonte aberta precisa chegar ao dossiê com quatro metadados: de onde veio, quando foi coletada, em que contexto apareceu e qual o grau de confiabilidade atribuído. Sem isso, a informação é impossível de reavaliar meses depois, quando a página original já mudou.</p>
+
+                <p>E vale o limite que mais se ignora: uma publicação isolada não é confirmação de envolvimento criminoso. Notícia é indício de que algo foi noticiado — nada além disso.</p>
+
+                <h3>Os limites legais e de proteção de dados</h3>
+
+                <p>O uso de OSINT tem de observar a legislação aplicável, a finalidade declarada da investigação, a qualidade da fonte e a proteção de dados pessoais. Dado publicamente acessível não é dado livre de regime legal: ele continua sendo dado pessoal, com finalidade, necessidade e prazo de retenção, como detalha a <a href="../lgpd-implementacao-tecnica/">implementação técnica da LGPD</a>.</p>
+
+                <p>Na prática isso significa decidir, antes da coleta, qual pergunta justifica cada fonte consultada. Coletar "porque pode ser útil depois" é exatamente o que a norma não autoriza.</p>
+
+                <h2 id="forense-de-dados-financeiros">Forense de dados financeiros</h2>
+
+                <p>A análise forense financeira é a preservação, organização e interpretação de dados para reconstruir eventos. Ela empresta integralmente os princípios da <a href="../computacao-forense-digital-organizacoes/">computação forense digital</a>.</p>
+
+                <h3>Sete princípios de preservação</h3>
+
+                <ol>
+                    <li>Preservação dos dados originais, sem edição sobre a cópia de trabalho.</li>
+                    <li>Registro da origem e do horário de coleta.</li>
+                    <li>Controle de acesso ao material do caso.</li>
+                    <li>Integridade verificável dos arquivos.</li>
+                    <li>Rastreabilidade de cada transformação aplicada aos dados.</li>
+                    <li>Registro das hipóteses consideradas, inclusive as descartadas.</li>
+                    <li>Separação explícita entre fato e inferência.</li>
+                </ol>
+
+                <p>O sexto princípio é o que distingue um dossiê auditável de uma narrativa: quem lê precisa saber o que foi testado e não se sustentou, não apenas o que sobrou.</p>
+
+                <h3>Hash como prova de integridade</h3>
+
+                <p>Um hash criptográfico como SHA-256, calculado no momento da coleta e registrado junto com data e origem, permite demonstrar que o arquivo não foi alterado depois. É um controle de custo quase zero e de valor alto justamente quando o caso é contestado — meses ou anos depois, quando ninguém lembra quem exportou aquela planilha.</p>
+
+                <p>Hash demonstra integridade, não autenticidade: ele prova que o arquivo é o mesmo, não que o conteúdo é verdadeiro. São garantias diferentes e confundi-las enfraquece o relatório.</p>
+
+                <h2 id="estudo-de-caso-a-fintech-e-as-120-pessoas-fisicas">Estudo de caso: a fintech e as 120 pessoas físicas</h2>
+
+                <p>Um cenário fictício, mas com a forma dos casos reais. Uma fintech identifica uma empresa que:</p>
+
+                <ul>
+                    <li>foi constituída há seis meses;</li>
+                    <li>declara faturamento mensal de R$ 50 mil;</li>
+                    <li>recebeu R$ 1,8 milhão em transferências em um único mês;</li>
+                    <li>recebeu valores de 120 pessoas físicas distintas;</li>
+                    <li>transferiu 90% dos recursos para quatro empresas;</li>
+                    <li>tem sócios que participam de outras empresas com movimentação semelhante.</li>
+                </ul>
+
+                <h3>As oito etapas aplicadas ao caso</h3>
+
+                <table border="1" cellpadding="5" cellspacing="0">
+                    <thead><tr><th>Etapa</th><th>Atividade</th><th>Resultado esperado</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Análise cadastral</td><td>Perfil declarado da empresa e consistência do cadastro</td></tr>
+                        <tr><td>2</td><td>Análise societária</td><td>Sócios, administradores e beneficiários finais</td></tr>
+                        <tr><td>3</td><td>Análise transacional</td><td>Origem e destino efetivos dos recursos</td></tr>
+                        <tr><td>4</td><td>Análise de vínculos</td><td>Relações entre as empresas e as pessoas envolvidas</td></tr>
+                        <tr><td>5</td><td>OSINT</td><td>Existência operacional e exposição pública</td></tr>
+                        <tr><td>6</td><td>Análise temporal</td><td>Sequência e latência das movimentações</td></tr>
+                        <tr><td>7</td><td>Avaliação de risco</td><td>Inconsistências priorizadas</td></tr>
+                        <tr><td>8</td><td>Relatório</td><td>Evidências e conclusão fundamentada</td></tr>
+                    </tbody>
+                </table>
+
+                <p>Observe que as etapas 1 e 2 vêm antes da análise transacional. Olhar o extrato primeiro é tentador e produz a pior versão do caso: o analista já chega à etapa cadastral com uma conclusão formada.</p>
+
+                <h3>O que mudaria a conclusão</h3>
+
+                <p>O padrão descrito é compatível com conta de passagem e com incompatibilidade econômica. Também é compatível com um negócio legítimo de intermediação que cresceu rápido. O que separa as duas leituras são evidências específicas, e vale listá-las antes de investigar:</p>
+
+                <ul>
+                    <li>contratos e notas fiscais que expliquem os 120 pagadores;</li>
+                    <li>relação identificável entre os pagadores (clientes de um mesmo produto, por exemplo);</li>
+                    <li>estrutura operacional nas quatro empresas destinatárias — funcionários, instalações, atividade;</li>
+                    <li>justificativa econômica para o repasse de 90% dos recursos;</li>
+                    <li>histórico que mostre crescimento gradual em vez de salto súbito;</li>
+                    <li>atualização cadastral do faturamento declarado, compatível com a nova realidade.</li>
+                </ul>
+
+                <p>Se essas evidências existem e são verificáveis, o caso se encerra com justificativa registrada. Se não existem, o que se documenta é exatamente isso: não foi possível identificar justificativa econômica para o padrão observado. Perceba a diferença — a conclusão é sobre a ausência de explicação, não sobre a prática de um crime.</p>
+
+                <h2 id="o-dossie-documentar-sem-concluir-alem-da-evidencia">O dossiê: documentar sem concluir além da evidência</h2>
+
+                <p>O relatório é parte do controle. Um caso bem investigado e mal escrito vira um problema jurídico; um caso bem escrito sobrevive à supervisão, ao contencioso e à rotatividade da equipe.</p>
+
+                <h3>Estrutura mínima do relatório</h3>
+
+                <ol>
+                    <li>Identificação do caso.</li>
+                    <li>Identificação dos envolvidos.</li>
+                    <li>Origem do alerta.</li>
+                    <li>Perfil cadastral e econômico.</li>
+                    <li>Histórico transacional.</li>
+                    <li>Descrição dos eventos.</li>
+                    <li>Relacionamentos identificados.</li>
+                    <li>Evidências coletadas, com proveniência.</li>
+                    <li>Justificativas apresentadas pelo cliente.</li>
+                    <li>Análise de consistência.</li>
+                    <li>Fundamentação da conclusão.</li>
+                    <li>Decisão e encaminhamento.</li>
+                </ol>
+
+                <h3>Fato, inferência e hipótese alternativa</h3>
+
+                <p>Três registros diferentes, que o texto precisa manter distinguíveis:</p>
+
+                <table border="1" cellpadding="5" cellspacing="0">
+                    <thead><tr><th>Registro</th><th>Exemplo</th></tr></thead>
+                    <tbody>
+                        <tr><td>Fato</td><td>A conta recebeu R$ 1,8 milhão de 120 contrapartes pessoa física em 30 dias.</td></tr>
+                        <tr><td>Inferência</td><td>O volume é incompatível com o faturamento declarado de R$ 50 mil mensais.</td></tr>
+                        <tr><td>Hipótese alternativa testada</td><td>Intermediação legítima com muitos clientes — não sustentada: não foram apresentados contratos nem notas fiscais correspondentes.</td></tr>
+                    </tbody>
+                </table>
+
+                <p>A formulação que condena o relatório é a conclusão categórica: "o cliente está lavando dinheiro". A que o sustenta descreve o observado, o testado e o que não foi possível explicar, encaminhando o caso conforme o procedimento interno. A instituição não tem competência legal para afirmar a primeira — e não precisa dela para cumprir sua obrigação.</p>
+
+                <p>Guardar essa disciplina no texto tem um efeito colateral útil: ela expõe, para a própria área, quais casos foram encerrados por evidência e quais foram encerrados por cansaço.</p>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Qual a diferença entre alerta, caso e comunicação ao Coaf?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O alerta é um evento gerado por uma regra ou modelo e se encerra na triagem, virando caso ou sendo descartado com justificativa registrada. O caso é o conjunto de alertas e informações em análise e se encerra com uma conclusão analítica documentada. A comunicação é o cumprimento de uma obrigação legal, quando aplicável, e não equivale a denúncia criminal nem a prova de ilícito.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Por que a hipótese precisa vir antes da coleta de dados?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Porque só uma hipótese explícita pode ser refutada. Quem consulta bases sem hipótese coleta o que estiver disponível e tende a enxergar confirmação no que encontrou. Definir antes qual dado confirmaria e qual refutaria a suspeita é o que permite encerrar o caso com justificativa, em qualquer direção, e é também o que limita a coleta ao necessário.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Endereço compartilhado entre empresas é indício de estrutura coordenada?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>É um indício de força média, que exige verificação. Coworkings, escritórios virtuais e prédios comerciais produzem centenas de empresas no mesmo endereço sem nenhuma relação entre elas. O mesmo vale para administrador em comum, que frequentemente é só o escritório de contabilidade. O indício ganha peso quando vários atributos coincidem ao mesmo tempo e a coincidência é improvável.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que a análise temporal mostra que a análise de valores não mostra?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O encadeamento. Uma sequência de recebimento e repasse quase imediato, com decréscimo progressivo do valor e nenhuma atividade econômica entre as pernas, descreve um comportamento que nenhum valor isolado revelaria, porque nenhuma das operações rompe um limite relevante. Ainda assim, proximidade temporal pode ter explicação trivial e precisa ser lida junto com os outros dados.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Dado público pode ser usado livremente em uma investigação?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Não. Acessibilidade pública não retira o regime legal: continua sendo dado pessoal, com finalidade, necessidade, prazo de retenção e registro de proveniência. O uso de OSINT deve observar a legislação aplicável, a finalidade declarada da investigação e a qualidade da fonte. Coletar porque pode ser útil depois é justamente o que a norma não autoriza.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Para que serve calcular hash dos arquivos coletados?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Para demonstrar que o arquivo não foi alterado após a coleta. Um SHA-256 calculado no momento da coleta e registrado com data e origem é um controle de custo quase zero e de valor alto quando o caso é contestado tempo depois. Importante: hash demonstra integridade, não autenticidade. Prova que o arquivo é o mesmo, não que o conteúdo é verdadeiro.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como escrever a conclusão de um caso sem acusar o cliente?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Descrevendo o que foi observado, o que foi testado e o que não foi possível explicar, e encaminhando conforme o procedimento interno. Em vez de afirmar que houve lavagem de dinheiro, o relatório registra que foram identificadas movimentações incompatíveis com o perfil econômico declarado e que as informações disponíveis não permitiram identificar justificativa econômica para o padrão. A instituição não tem competência legal para a primeira formulação e não precisa dela para cumprir sua obrigação.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Por que a normalização dos dados é tão determinante?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Porque cada inconsistência de formato quebra uma correlação que existia nos dados. Nome grafado de três formas, documento com e sem máscara, datas em dois padrões e contrapartes identificadas só por apelido de transferência fazem a mesma entidade aparecer como várias, e a análise de vínculos deixa de enxergar a estrutura real. Normalizar inclui resolver identidade de entidade, não apenas padronizar colunas.</p></div>
+                    </div>
+                </div>
+
+                <h2>Conclusão</h2>
+
+                <p>Uma investigação financeira madura se reconhece por três marcas no dossiê: a hipótese está escrita, as hipóteses alternativas testadas aparecem mesmo quando não se sustentaram, e cada evidência carrega fonte, data e grau de confiabilidade. Nenhuma das três depende de ferramenta nova.</p>
+
+                <p>Se a sua área precisa de um ponto de partida, comece pelo que não exige orçamento: padronizar a estrutura do relatório, exigir registro do motivo de descarte na triagem e separar fato de inferência no texto. Grafo, OSINT automatizado e priorização por modelo rendem muito mais depois disso, porque passam a operar sobre dados e conclusões que alguém consegue auditar.</p>
+
+                <p>Vale lembrar o limite que atravessa o artigo inteiro: tipologia, vínculo e padrão temporal são referências para investigar, não provas. A conclusão legítima de um caso costuma ser sobre a ausência de explicação econômica — e isso é suficiente para cumprir a obrigação.</p>
+
+                <div class="module-sources" style="margin-top:2rem;padding:1.5rem;background:rgba(96,165,250,.04);border-left:3px solid #60A5FA;border-radius:8px">
+                    <div style="font-weight:700;color:#60A5FA;margin-bottom:.75rem"><i class="fas fa-bookmark"></i> Fontes e referencias tecnicas</div>
+                    <ul style="margin:0;padding-left:1.2rem">
+                        <li><a href="https://www.fatf-gafi.org/en/publications/Methodsandtrends.html" target="_blank" rel="noopener">GAFI/FATF - Metodos e tendencias em lavagem de dinheiro e financiamento do terrorismo</a></li>
+                        <li><a href="https://www.gov.br/coaf/pt-br" target="_blank" rel="noopener">Coaf - Deveres, comunicacoes e orientacoes para pessoas sujeitas a legislacao</a></li>
+                        <li><a href="https://www.planalto.gov.br/ccivil_03/leis/l9613.htm" target="_blank" rel="noopener">Lei no 9.613/1998 - Lavagem de dinheiro, registros e comunicacao de operacoes</a></li>
+                        <li><a href="https://www.egmontgroup.org/" target="_blank" rel="noopener">Grupo Egmont - Cooperacao entre unidades de inteligencia financeira</a></li>
+                        <li><a href="https://www.wolfsberg-principles.com/" target="_blank" rel="noopener">Grupo Wolfsberg - Boas praticas de investigacao e monitoramento</a></li>
+                        <li><a href="https://csrc.nist.gov/pubs/sp/800/86/final" target="_blank" rel="noopener">NIST SP 800-86 - Integracao de tecnicas forenses a resposta a incidentes</a></li>
+                        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/L13709.htm" target="_blank" rel="noopener">Lei Geral de Protecao de Dados (LGPD)</a></li>
+                    </ul>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/investigacao-financeira-osint-analise-vinculos/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/investigacao-financeira-osint-analise-vinculos/" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Investiga%C3%A7%C3%A3o%20financeira%3A%20OSINT%2C%20v%C3%ADnculos%20e%20dossi%C3%AA https://inteligenciabrasil.seg.br/blog/investigacao-financeira-osint-analise-vinculos/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h3>Roberto Lima</h3>
+                        <p>Especialista em Seguranca Ofensiva, Threat Intelligence e Detection Engineering na Inteligencia Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> <a href="/contato/">Formul&aacute;rio de contato</a></p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>

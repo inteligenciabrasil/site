@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+<!-- CONSENT-MODE-V2 -->
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','analytics_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','personalization_storage':'denied','functionality_storage':'granted','security_storage':'granted','wait_for_update':500});</script>
+    <!-- Google Tag Manager --><!-- GTM-DEFERRED-V1 -->
+    <script>window.dataLayer=window.dataLayer||[];dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});function __gtmBoot(){var d=document,s='script',l='dataLayer',i='GTM-WCL38PDP',f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',__gtmBoot);}else{setTimeout(__gtmBoot,0);}</script>
+    <!-- CSP-V6 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://*.googletagmanager.com https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/ https://vlibras.gov.br https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://tagassistant.google.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://tagassistant.google.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://vlibras.gov.br https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.gstatic.com https://ssl.gstatic.com https://ad.doubleclick.net; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cloudflareinsights.com https://fonts.googleapis.com https://cloudflare-dns.com https://dns.google https://vlibras.gov.br https://api.ipify.org https://challenges.cloudflare.com https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://analytics.google.com https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://stats.g.doubleclick.net https://ad.doubleclick.net https://pagead2.googlesyndication.com; frame-src https://www.googletagmanager.com https://challenges.cloudflare.com https://td.doubleclick.net https://tagassistant.google.com; form-action 'self' https://script.google.com; base-uri 'self'; object-src 'none';">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Como funciona o screening de sanções e PEP: listas aplicáveis, resolução de homônimos, calibração do matching e por que um match de nome não bloqueia.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="sanctions screening, sancoes, OFAC, lista SDN, PEP, pessoa exposta politicamente, Lei 13.810/2019, Conselho de Seguranca da ONU, falso positivo, homonimo, fuzzy matching, entity resolution, PLD-FT, AML, AMLA, compliance">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/sanctions-screening-ofac-pep-falsos-positivos/">
+
+    <meta property="og:title" content="Screening de sanções e PEP: OFAC, SDN e falsos positivos">
+    <meta property="og:description" content="Similaridade de nome não é confirmação de sanção. Veja as listas que importam, como resolver homônimos com identificadores e como calibrar o matching sem travar a operação.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/sanctions-screening-ofac-pep-falsos-positivos/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligencia Brasil">
+    <meta property="article:published_time" content="2026-11-05T09:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="Governança e GRC">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Screening de sanções e PEP: OFAC, SDN e falsos positivos">
+    <meta name="twitter:description" content="Similaridade de nome não é confirmação de sanção. Veja as listas que importam, como resolver homônimos com identificadores e como calibrar o matching sem travar a operação.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Screening de sanções e PEP | Inteligencia Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "Governança e GRC", "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"}, "dateModified": "2026-11-05T09:00:00-03:00", "datePublished": "2026-11-05T09:00:00-03:00", "description": "Como funciona o screening de sanções e PEP: listas aplicáveis, resolução de homônimos, calibração do matching e por que um match de nome não bloqueia.", "headline": "Screening de sanções e PEP: OFAC, SDN e falsos positivos", "image": "https://inteligenciabrasil.seg.br/img/og-image.webp", "inLanguage": "pt-BR", "mainEntityOfPage": {"@id": "https://inteligenciabrasil.seg.br/blog/sanctions-screening-ofac-pep-falsos-positivos/", "@type": "WebPage"}, "publisher": {"@type": "Organization", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}, "name": "Inteligência Brasil"}}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Um match de nome em lista de sanções basta para bloquear uma operação?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Similaridade de nome é apenas um ponto de partida. É preciso resolver a correspondência com os identificadores disponíveis: documento, data de nascimento, nacionalidade, endereço, aliases registrados na lista e relações societárias. Homônimos são comuns, e tratar um match de nome como confirmação produz bloqueios indevidos e exclusão financeira sem fundamento."}}, {"@type": "Question", "name": "Quais listas uma instituição brasileira precisa verificar?", "acceptedAnswer": {"@type": "Answer", "text": "As designações do Conselho de Segurança da ONU são obrigatórias no Brasil, com cumprimento disciplinado pela Lei nº 13.810/2019. A lista SDN da OFAC alcança operações com nexo com os Estados Unidos, inclusive em dólar. As listas da União Europeia importam para quem opera ou presta serviço na UE. Já as listas do GAFI classificam jurisdições e afetam risco geográfico, e as listas PEP acionam diligência específica: nenhuma das duas é lista de bloqueio."}}, {"@type": "Question", "name": "Ser PEP significa que o cliente é suspeito?", "acceptedAnswer": {"@type": "Answer", "text": "Não. O status de pessoa exposta politicamente não indica irregularidade alguma. Ele indica que o relacionamento exige procedimentos específicos: qualificação mais detalhada com origem de recursos e patrimônio, aprovação em nível superior, monitoramento mais frequente e reavaliação periódica da condição. Recusar relacionamento só por ser PEP contraria a abordagem baseada em risco e cria problema jurídico para a instituição."}}, {"@type": "Question", "name": "Screening precisa ser feito apenas na abertura de conta?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Designações entram e saem das listas, e uma designação nova pode alcançar clientes que estão na base há anos. O screening é um controle contínuo sobre a carteira inteira, não uma verificação pontual no onboarding. O mesmo vale para mudanças cadastrais do cliente, que podem alterar o resultado de uma comparação antes descartada."}}, {"@type": "Question", "name": "Baixar o limiar de similaridade deixa o controle mais seguro?", "acceptedAnswer": {"@type": "Answer", "text": "Não necessariamente, e em geral é o contrário. Um limiar muito baixo gera uma fila que a equipe não tem capacidade de analisar, e uma fila inanalisável é despachada em vez de examinada. Cobertura declarada alta com capacidade de análise baixa resulta em cobertura efetiva baixa, e é mais difícil de defender diante de um supervisor do que um limiar calibrado e fundamentado."}}, {"@type": "Question", "name": "Como reduzir falsos positivos sem perder cobertura?", "acceptedAnswer": {"@type": "Answer", "text": "Com quatro medidas que não exigem baixar cobertura: normalizar nomes por idioma e padrão, tratando acentos, ordem e partículas; exigir um segundo identificador para gerar alerta onde o cadastro o tenha; usar limiares distintos conforme a criticidade da lista; e persistir as decisões de descarte, com reabertura automática se a designação ou o cadastro mudarem. A persistência é a que mais reduz fila sem reduzir cobertura."}}, {"@type": "Question", "name": "Quais são os cinco componentes do framework de compliance da OFAC?", "acceptedAnswer": {"@type": "Answer", "text": "Compromisso da administração, avaliação de riscos, controles internos, testes e auditoria, e treinamento. O componente de testes é o mais negligenciado e o mais revelador: testar screening significa submeter casos conhecidos ao motor, incluindo variações de grafia, nomes transliterados e entidades relacionadas a um designado. Um motor nunca testado tem efetividade desconhecida, não alta."}}, {"@type": "Question", "name": "Por que a qualidade do cadastro limita a qualidade do screening?", "acceptedAnswer": {"@type": "Answer", "text": "Porque resolver um homônimo depende de identificadores. Sem data de nascimento, documento e nacionalidade preenchidos e confiáveis, não há atributo para confirmar ou descartar a correspondência, e o controle degrada para comparação textual de nome. Investir em cadastro e em resolução de entidade melhora o screening mais do que ajustar o algoritmo de similaridade."}}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/", "name": "Blog", "position": 2}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/sanctions-screening-ofac-pep-falsos-positivos/", "name": "Screening de sanções e PEP", "position": 3}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligencia Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVICOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">Governança e GRC</span>
+            <h1>Screening de sanções e PEP: OFAC, SDN e falsos positivos</h1>
+            <div class="article-meta">
+                <span><i class="far fa-user"></i> Roberto Lima</span>
+                <span><i class="far fa-calendar"></i> 5 de novembro de 2026</span>
+                <span><i class="far fa-clock"></i> 14 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">Screening de sanções e PEP</li></ol></div></nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <figure class="article-hero">
+                    <img src="../../img/og-image.webp" alt="Tela de verificação de listas restritivas comparando identificadores de uma contraparte durante o screening" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async">
+                </figure>
+
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#screening-nao-e-busca-por-nome">Screening não é busca por nome</a></li>
+                        <li><a href="#quais-listas-se-aplicam-e-por-que-isso-varia">Quais listas se aplicam e por que isso varia</a></li>
+                        <li><a href="#pep-nao-e-suspeito">PEP não é suspeito</a></li>
+                        <li><a href="#como-resolver-um-match-antes-de-decidir">Como resolver um match antes de decidir</a></li>
+                        <li><a href="#calibrar-o-matching-sem-travar-a-operacao">Calibrar o matching sem travar a operação</a></li>
+                        <li><a href="#os-cinco-componentes-do-programa-da-ofac">Os cinco componentes do programa da OFAC</a></li>
+                        <li><a href="#erros-de-desenho-que-custam-caro">Erros de desenho que custam caro</a></li>
+                        <li><a href="#faq">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+
+                <p>De todos os controles de um programa de PLD-FT, o screening de listas restritivas é o que parece mais simples e o que produz mais dano quando é mal desenhado. A operação é aparentemente trivial — comparar o nome da contraparte com uma lista — e o resultado desse raciocínio é previsível: milhares de alertas por semana, uma fila que ninguém consegue analisar e, no meio dela, bloqueios de pessoas que só têm o azar de se chamar como alguém sancionado.</p>
+
+                <p>Este artigo trata do screening como problema de identificação de entidade, não de busca textual. Ele detalha um módulo específico do <a href="../pld-ft-aml-programa-prevencao-lavagem-dinheiro/">programa de PLD-FT</a>: a verificação de sanções e de pessoas expostas politicamente.</p>
+
+                <h2 id="screening-nao-e-busca-por-nome">Screening não é busca por nome</h2>
+
+                <p>O alerta mais importante de todo o processo cabe em uma frase: <strong>similaridade de nome não é confirmação de sanção</strong>. Um resultado de comparação é um ponto de partida que precisa ser resolvido, nunca uma decisão.</p>
+
+                <p>A comparação pode considerar correspondência exata de nomes, variações de grafia, aliases, datas de nascimento, nacionalidades, documentos de identificação, endereços e relações societárias. Note que apenas o primeiro item é textual — os outros sete são identificadores. É a combinação deles que resolve, ou descarta, o match.</p>
+
+                <p>A consequência prática de ignorar isso tem nome: exclusão financeira sem fundamento. Uma pessoa cujo nome coincide com o de um indivíduo sancionado pode ter conta recusada, pagamento retido e relacionamento encerrado, sem que ninguém tenha comparado uma data de nascimento. Em nomes comuns de língua portuguesa, árabe ou chinesa, o problema é estrutural, não excepcional.</p>
+
+                <h2 id="quais-listas-se-aplicam-e-por-que-isso-varia">Quais listas se aplicam e por que isso varia</h2>
+
+                <p>Não existe "a lista". Existem regimes diferentes, com fundamentos jurídicos diferentes e consequências diferentes para quem descumpre:</p>
+
+                <table border="1" cellpadding="5" cellspacing="0">
+                    <thead><tr><th>Regime</th><th>Natureza</th><th>Observação</th></tr></thead>
+                    <tbody>
+                        <tr><td>Conselho de Segurança da ONU</td><td>Obrigatória no Brasil</td><td>Cumprimento disciplinado pela Lei nº 13.810/2019, com indisponibilidade imediata de ativos</td></tr>
+                        <tr><td>OFAC (EUA) - lista SDN</td><td>Jurisdição norte-americana</td><td>Alcança operações em dólar, pessoas americanas e entidades com nexo com os EUA</td></tr>
+                        <tr><td>União Europeia</td><td>Jurisdição europeia</td><td>Relevante para quem opera, financia ou presta serviço na UE</td></tr>
+                        <tr><td>Listas do GAFI</td><td>Não é lista de pessoas</td><td>Classifica jurisdições sob monitoramento reforçado ou de alto risco — afeta risco geográfico, não bloqueio</td></tr>
+                        <tr><td>Listas PEP</td><td>Não é restritiva</td><td>Dispara diligência específica, nunca bloqueio</td></tr>
+                        <tr><td>Listas internas e de terceiros</td><td>Decisão da instituição</td><td>Clientes recusados, fraudes confirmadas, mídia adversa — critério e governança próprios</td></tr>
+                    </tbody>
+                </table>
+
+                <p>Confundir os três últimos blocos com os três primeiros é o erro de desenho mais comum. Lista do GAFI não bloqueia ninguém: ela eleva o risco geográfico de uma operação. Lista PEP não bloqueia ninguém: ela aciona procedimento. Mídia adversa não bloqueia ninguém: ela pede verificação.</p>
+
+                <h3>Listas mudam, e a data da consulta importa</h3>
+
+                <p>Designações entram e saem, e jurisdições são reclassificadas. Duas obrigações decorrem disso. A primeira é consultar a versão vigente na data da análise — presumir que uma classificação permanece indefinidamente é erro de processo. A segunda é registrar <em>qual</em> versão da lista foi consultada e quando, porque é isso que permite explicar, meses depois, por que a decisão foi aquela.</p>
+
+                <p>Há ainda o caso que surpreende equipes novas: uma designação nova pode alcançar clientes que já estavam na base há anos. Screening é controle contínuo sobre a carteira inteira, não apenas verificação no onboarding.</p>
+
+                <h2 id="pep-nao-e-suspeito">PEP não é suspeito</h2>
+
+                <p>Pessoas expostas politicamente são aquelas que desempenham ou desempenharam funções públicas relevantes, conforme as definições e os prazos das normas aplicáveis, além das relações relevantes ali previstas — familiares e estreitos colaboradores, nos termos da regulamentação.</p>
+
+                <p>O status de PEP não indica irregularidade alguma. Ele indica que o relacionamento exige procedimentos específicos:</p>
+
+                <ul>
+                    <li>identificação e qualificação mais detalhadas, incluindo origem dos recursos e do patrimônio;</li>
+                    <li>aprovação em nível hierárquico superior para iniciar ou manter o relacionamento;</li>
+                    <li>monitoramento mais frequente e com parâmetros próprios;</li>
+                    <li>reavaliação periódica da condição, que tem prazo nas normas aplicáveis.</li>
+                </ul>
+
+                <p>Recusar relacionamento por ser PEP, sem análise, é a reação errada por três motivos: contraria a abordagem baseada em risco, que pede controle proporcional e não exclusão; cria problema jurídico e reputacional para a instituição; e desperdiça a informação, porque a condição de PEP é justamente um dado que melhora a calibração do monitoramento daquele cliente.</p>
+
+                <h2 id="como-resolver-um-match-antes-de-decidir">Como resolver um match antes de decidir</h2>
+
+                <p>Resolver um match é decidir se o registro da lista e o registro do cliente são a mesma entidade. O procedimento é sempre o mesmo e deve estar escrito:</p>
+
+                <ol>
+                    <li><strong>Separar nome de identificador.</strong> O nome gerou o alerta; ele não o resolve.</li>
+                    <li><strong>Comparar identificadores fortes.</strong> Documento, data de nascimento, nacionalidade, local de nascimento quando disponível.</li>
+                    <li><strong>Comparar identificadores de contexto.</strong> Endereço, aliases registrados na lista, relações societárias, cargo e período.</li>
+                    <li><strong>Avaliar divergências decisivas.</strong> Uma data de nascimento incompatível, por exemplo, costuma encerrar a questão.</li>
+                    <li><strong>Registrar a conclusão com a evidência.</strong> Qual atributo decidiu, qual versão da lista, quem decidiu e quando.</li>
+                    <li><strong>Persistir a decisão.</strong> Para que o mesmo cliente não gere o mesmo alerta amanhã — com reabertura automática se a designação ou o cadastro mudarem.</li>
+                </ol>
+
+                <p>O passo 6 é o que mais reduz volume de fila sem reduzir cobertura. Uma decisão de descarte bem registrada vale para o futuro; sem persistência, a equipe reanalisa o mesmo homônimo indefinidamente e a fila nunca diminui.</p>
+
+                <p>Já a mecânica de comparar registros e decidir se representam a mesma entidade é exatamente <em>entity resolution</em>, o problema central da <a href="../plataforma-aml-entity-resolution-grafos-ia/">arquitetura de uma plataforma de PLD-FT</a>. Screening bem feito é um caso de uso de entity resolution, e tratá-lo como busca textual é a raiz da maioria dos falsos positivos.</p>
+
+                <h2 id="calibrar-o-matching-sem-travar-a-operacao">Calibrar o matching sem travar a operação</h2>
+
+                <p>Toda calibração troca falso positivo por falso negativo. O ponto não é eliminar os dois — é escolher deliberadamente onde ficar, e registrar a escolha.</p>
+
+                <table border="1" cellpadding="5" cellspacing="0">
+                    <thead><tr><th>Decisão de calibração</th><th>Ganho</th><th>Custo</th></tr></thead>
+                    <tbody>
+                        <tr><td>Limiar de similaridade mais alto</td><td>Fila menor e analisável</td><td>Risco de perder variação legítima de grafia</td></tr>
+                        <tr><td>Limiar mais baixo</td><td>Mais cobertura</td><td>Fila inanalisável, que na prática reduz a cobertura real</td></tr>
+                        <tr><td>Normalização de nome (acento, ordem, partículas)</td><td>Captura variações sem baixar o limiar</td><td>Exige tratamento por idioma e padrão de nomes</td></tr>
+                        <tr><td>Exigir segundo identificador para alertar</td><td>Corte expressivo de falso positivo</td><td>Só funciona onde o cadastro tem o identificador</td></tr>
+                        <tr><td>Limiar por criticidade da lista</td><td>Rigor onde a consequência é maior</td><td>Mais regras para manter e explicar</td></tr>
+                    </tbody>
+                </table>
+
+                <p>A linha mais contraintuitiva é a segunda. Um limiar muito baixo parece conservador e é o oposto: uma fila de dez mil alertas semanais não é analisada, é despachada. Cobertura declarada alta com capacidade de análise baixa resulta em cobertura efetiva baixa — e é muito mais difícil de defender diante de um supervisor do que um limiar fundamentado.</p>
+
+                <p>A quarta linha expõe uma dependência que raramente é explicitada: a qualidade do screening é limitada pela qualidade do cadastro. Sem data de nascimento e documento preenchidos, não há como resolver homônimo, e o controle degrada para comparação de nome.</p>
+
+                <h3>Dados pessoais no processo</h3>
+
+                <p>Screening trata dados pessoais em volume, inclusive de pessoas que não são clientes — contrapartes de pagamento, sócios, representantes. Isso traz finalidade, necessidade, prazo de retenção e segurança para dentro do desenho, nos termos discutidos em <a href="../lgpd-implementacao-tecnica/">implementação técnica da LGPD</a>. O registro das decisões de match é dado pessoal sensível na prática: ele associa uma pessoa a uma suspeita descartada, e precisa de controle de acesso à altura.</p>
+
+                <h2 id="os-cinco-componentes-do-programa-da-ofac">Os cinco componentes do programa da OFAC</h2>
+
+                <p>A OFAC administra e aplica os programas de sanções econômicas e comerciais dos Estados Unidos. Sua lista SDN — <em>Specially Designated Nationals and Blocked Persons</em> — reúne pessoas, entidades, grupos e embarcações sujeitos a determinadas sanções.</p>
+
+                <p>O framework de conformidade da OFAC organiza um programa em cinco componentes, e a lista é útil como estrutura mesmo para quem não está sob jurisdição americana:</p>
+
+                <ol>
+                    <li><strong>Compromisso da administração:</strong> recursos, autonomia e respaldo formal para a função.</li>
+                    <li><strong>Avaliação de riscos:</strong> exposição real a jurisdições, produtos, canais e contrapartes.</li>
+                    <li><strong>Controles internos:</strong> procedimentos escritos, screening, escalada e registro.</li>
+                    <li><strong>Testes e auditoria:</strong> verificação independente de que o controle funciona.</li>
+                    <li><strong>Treinamento:</strong> capacitação de quem opera e de quem decide.</li>
+                </ol>
+
+                <p>O quarto componente é o mais ignorado e o mais revelador. Testar screening significa submeter casos conhecidos ao motor e verificar se ele alerta — incluindo variações de grafia, nomes transliterados e entidades relacionadas a um designado. Um motor que nunca foi testado contra casos construídos tem efetividade desconhecida, não alta.</p>
+
+                <p>Para instituições brasileiras que operam com a Europa, o pacote de AML/CFT da UE acrescenta um eixo próprio de obrigações, com a AMLA como autoridade — e com cronogramas em que entrada em vigor e aplicação efetiva não coincidem. A sobreposição com exigências de resiliência e de terceiros aparece em <a href="../dora-ue-cadeias-fornecedores-brasil/">DORA e cadeias de fornecedores brasileiros</a>.</p>
+
+                <h2 id="erros-de-desenho-que-custam-caro">Erros de desenho que custam caro</h2>
+
+                <p>Sete falhas aparecem com frequência suficiente para virar checklist:</p>
+
+                <ul>
+                    <li><strong>Tratar match de nome como decisão.</strong> Produz bloqueio indevido e, mais tarde, contencioso.</li>
+                    <li><strong>Screening só no onboarding.</strong> Designações novas alcançam a carteira existente; a verificação precisa ser contínua.</li>
+                    <li><strong>Não rastrear a versão da lista consultada.</strong> Impossibilita justificar a decisão depois.</li>
+                    <li><strong>Não persistir decisões de descarte.</strong> A mesma fila se reconstrói todos os dias.</li>
+                    <li><strong>Misturar lista restritiva com lista de risco.</strong> Faz PEP e jurisdição virarem bloqueio, o que a norma não pede.</li>
+                    <li><strong>Ignorar entidades relacionadas.</strong> Sanção a uma pessoa alcança estruturas que ela controla, conforme o regime aplicável.</li>
+                    <li><strong>Não testar o motor.</strong> Sem teste com casos construídos, a efetividade é desconhecida.</li>
+                </ul>
+
+                <p>Há um oitavo, de natureza diferente e mais grave: deixar o screening sem trilha de auditoria sobre alterações de regra e de limiar. Quem pode baixar um limiar sem registro pode criar um ponto cego sob medida. Esse é o ponto em que o controle de compliance passa a ser, também, um ativo a proteger — e volta a valer a lógica de <a href="../conformidade-continua-trilha-auditoria/">conformidade contínua</a>: evidência coletada na origem, não reconstruída depois.</p>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Um match de nome em lista de sanções basta para bloquear uma operação?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Não. Similaridade de nome é apenas um ponto de partida. É preciso resolver a correspondência com os identificadores disponíveis: documento, data de nascimento, nacionalidade, endereço, aliases registrados na lista e relações societárias. Homônimos são comuns, e tratar um match de nome como confirmação produz bloqueios indevidos e exclusão financeira sem fundamento.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quais listas uma instituição brasileira precisa verificar?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>As designações do Conselho de Segurança da ONU são obrigatórias no Brasil, com cumprimento disciplinado pela Lei nº 13.810/2019. A lista SDN da OFAC alcança operações com nexo com os Estados Unidos, inclusive em dólar. As listas da União Europeia importam para quem opera ou presta serviço na UE. Já as listas do GAFI classificam jurisdições e afetam risco geográfico, e as listas PEP acionam diligência específica: nenhuma das duas é lista de bloqueio.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Ser PEP significa que o cliente é suspeito?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Não. O status de pessoa exposta politicamente não indica irregularidade alguma. Ele indica que o relacionamento exige procedimentos específicos: qualificação mais detalhada com origem de recursos e patrimônio, aprovação em nível superior, monitoramento mais frequente e reavaliação periódica da condição. Recusar relacionamento só por ser PEP contraria a abordagem baseada em risco e cria problema jurídico para a instituição.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Screening precisa ser feito apenas na abertura de conta?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Não. Designações entram e saem das listas, e uma designação nova pode alcançar clientes que estão na base há anos. O screening é um controle contínuo sobre a carteira inteira, não uma verificação pontual no onboarding. O mesmo vale para mudanças cadastrais do cliente, que podem alterar o resultado de uma comparação antes descartada.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Baixar o limiar de similaridade deixa o controle mais seguro?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Não necessariamente, e em geral é o contrário. Um limiar muito baixo gera uma fila que a equipe não tem capacidade de analisar, e uma fila inanalisável é despachada em vez de examinada. Cobertura declarada alta com capacidade de análise baixa resulta em cobertura efetiva baixa, e é mais difícil de defender diante de um supervisor do que um limiar calibrado e fundamentado.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como reduzir falsos positivos sem perder cobertura?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Com quatro medidas que não exigem baixar cobertura: normalizar nomes por idioma e padrão, tratando acentos, ordem e partículas; exigir um segundo identificador para gerar alerta onde o cadastro o tenha; usar limiares distintos conforme a criticidade da lista; e persistir as decisões de descarte, com reabertura automática se a designação ou o cadastro mudarem. A persistência é a que mais reduz fila sem reduzir cobertura.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Quais são os cinco componentes do framework de compliance da OFAC?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Compromisso da administração, avaliação de riscos, controles internos, testes e auditoria, e treinamento. O componente de testes é o mais negligenciado e o mais revelador: testar screening significa submeter casos conhecidos ao motor, incluindo variações de grafia, nomes transliterados e entidades relacionadas a um designado. Um motor nunca testado tem efetividade desconhecida, não alta.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Por que a qualidade do cadastro limita a qualidade do screening?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Porque resolver um homônimo depende de identificadores. Sem data de nascimento, documento e nacionalidade preenchidos e confiáveis, não há atributo para confirmar ou descartar a correspondência, e o controle degrada para comparação textual de nome. Investir em cadastro e em resolução de entidade melhora o screening mais do que ajustar o algoritmo de similaridade.</p></div>
+                    </div>
+                </div>
+
+                <h2>Conclusão</h2>
+
+                <p>Screening de sanções é um problema de identificação de entidade disfarçado de busca por nome. Quem o trata como busca textual recebe o resultado previsível: fila enorme, decisões não registradas e bloqueios que não se sustentam.</p>
+
+                <p>Três medidas mudam o patamar e não dependem de trocar de ferramenta: escrever o procedimento de resolução de match, com os identificadores que decidem e o registro obrigatório da versão da lista; persistir as decisões de descarte, com reabertura automática quando designação ou cadastro mudarem; e testar o motor contra casos construídos, incluindo transliteração e entidades relacionadas.</p>
+
+                <p>E separar, em política, o que bloqueia do que apenas eleva risco. Sanção da ONU bloqueia. PEP aciona procedimento. Jurisdição listada pelo GAFI muda a diligência. Tratar os três como a mesma coisa é o caminho mais curto para um programa que recusa clientes legítimos e continua sem ver o que deveria ver.</p>
+
+                <div class="module-sources" style="margin-top:2rem;padding:1.5rem;background:rgba(96,165,250,.04);border-left:3px solid #60A5FA;border-radius:8px">
+                    <div style="font-weight:700;color:#60A5FA;margin-bottom:.75rem"><i class="fas fa-bookmark"></i> Fontes e referencias tecnicas</div>
+                    <ul style="margin:0;padding-left:1.2rem">
+                        <li><a href="https://ofac.treasury.gov/sanctions-programs-and-country-information" target="_blank" rel="noopener">OFAC - Programas de sancoes, lista SDN e orientacoes de conformidade</a></li>
+                        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/L13810.htm" target="_blank" rel="noopener">Lei no 13.810/2019 - Cumprimento de sancoes do Conselho de Seguranca da ONU</a></li>
+                        <li><a href="https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list" target="_blank" rel="noopener">Conselho de Seguranca da ONU - Lista consolidada de sancoes</a></li>
+                        <li><a href="https://www.fatf-gafi.org/en/topics/high-risk-and-other-monitored-jurisdictions.html" target="_blank" rel="noopener">GAFI/FATF - Jurisdicoes de alto risco e sob monitoramento reforcado</a></li>
+                        <li><a href="https://www.gov.br/coaf/pt-br" target="_blank" rel="noopener">Coaf - Deveres de PLD-FT, incluindo PEP e listas restritivas</a></li>
+                        <li><a href="https://eur-lex.europa.eu/eli/reg/2024/1620/oj" target="_blank" rel="noopener">Regulamento (UE) 2024/1620 - Criacao da AMLA</a></li>
+                        <li><a href="https://www.wolfsberg-principles.com/" target="_blank" rel="noopener">Grupo Wolfsberg - Boas praticas em sancoes e KYC</a></li>
+                        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/L13709.htm" target="_blank" rel="noopener">Lei Geral de Protecao de Dados (LGPD)</a></li>
+                    </ul>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/sanctions-screening-ofac-pep-falsos-positivos/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/sanctions-screening-ofac-pep-falsos-positivos/" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Screening%20de%20san%C3%A7%C3%B5es%20e%20PEP%3A%20OFAC%2C%20SDN%20e%20falsos%20positivos https://inteligenciabrasil.seg.br/blog/sanctions-screening-ofac-pep-falsos-positivos/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h3>Roberto Lima</h3>
+                        <p>Especialista em Seguranca Ofensiva, Threat Intelligence e Detection Engineering na Inteligencia Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Seguranca, Estrategia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegacao</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> <a href="/contato/">Formul&aacute;rio de contato</a></p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligencia Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>
