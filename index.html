@@ -437,14 +437,27 @@
                     <p class="hero-services">
                         <!-- PERF-LCP-ROTATOR: este span E o elemento de LCP da home, e cada troca de
                              textContent pode emitir um novo candidato de LCP, empurrando a metrica a cada
-                             3s (medido no PSI mobile: LCP 7,9s, sendo 3,7s de "element render delay",
-                             contra FCP de 1,1s). DECISAO DE 09/11/2026: nao corrigir. O LCP de ranking vem
-                             do campo (CrUX) e este site nao tem dado de campo; o visitante ve o hero no FCP,
-                             entao a metrica carimba uma animacao, nao uma espera. Ja foi tentado reordenar
-                             pelo termo "mais largo" contando CARACTERES -- nao funciona, porque largura
-                             renderizada nao e contagem de caracteres: "Investigacao Digital" (20) renderiza
-                             mais largo que "Analise de Vulnerabilidades" (27). Reordenar so com largura
-                             medida em navegador, e so se o CrUX algum dia acusar o problema. -->
+                             3s (PSI mobile: LCP 7,9s, sendo 3,7s de "element render delay", contra FCP
+                             de 1,1s).
+
+                             DECISAO DE 09/11/2026: NAO CORRIGIR. O LCP que vira sinal de ranking vem do
+                             campo (CrUX) e este site nao tem dado de campo; o visitante ve o hero no FCP.
+                             A metrica esta carimbando uma animacao, nao uma espera.
+
+                             JA TENTADO E FALHOU (commit 1769130, revertido em 5b3e3aa): por o termo mais
+                             largo em primeiro lugar, para que nenhuma troca posterior gerasse candidato
+                             maior. Larguras medidas no Chrome a 412px de viewport, fonte de 37,6px:
+                             "Analise de Vulnerabilidades" 502px (o mais largo), "Monitoramento de Marca"
+                             458, "Governanca Cibernetica" 441, "Application Security" 371, "Investigacao
+                             Digital" 354, "Pentest" 139. O paragrafo tem 382px, entao o mais largo NAO
+                             cabe numa linha: ele quebra em duas. Mesmo com ele em primeiro, o PSI seguiu
+                             apontando um candidato posterior de uma linha so ("Investigacao Digital",
+                             356px no relatorio -- bate com os 354 medidos aqui).
+
+                             Ou seja, a regra "mais largo primeiro" NAO vale para este elemento, e o
+                             mecanismo real NAO foi isolado. Ja foi descartado que o styles.min.css
+                             assincrono mude o font-size depois do paint (medido: 37,6px com e sem ele).
+                             Nao refazer a tentativa; so reabrir se o CrUX um dia acusar o problema. -->
                         <span class="text-gradient" id="js-rotating" data-words="Pentest, Compliance LGPD, Gestão de Riscos, Defesa Cibernética, Análise de Vulnerabilidades, Investigação Digital, Teste de Intrusão, Monitoramento de Marca, Application Security, Cloud Security, Governança Cibernética">Pentest</span>
                     </p>
                     <p class="hero-subtitle">
