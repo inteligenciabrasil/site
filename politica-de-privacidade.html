@@ -308,6 +308,13 @@
             <div class="privacy-section">
                 <h2><i class="fas fa-cookie-bite"></i> 10. Cookies e Consentimento</h2>
                 <p>Utilizamos cookies e tecnologias similares. A tabela abaixo descreve as tr&ecirc;s categorias que o nosso painel de consentimento oferece.</p>
+                <!-- TABLE-OVERFLOW-320: esta tabela tem 4 colunas de texto e largura minima de
+                     ~488px, contra 312px de viewport a 320. Sem este wrapper o overflow vazava
+                     para o documento (medido: scrollWidth 528 vs clientWidth 312) e a pagina
+                     inteira rolava na horizontal. O overflow-x:auto cria um contexto de scroll
+                     proprio, e o tabindex/role deixam a regiao rolavel pelo teclado (WCAG 2.1.1).
+                     NAO remover sem reduzir as colunas. -->
+                <div role="region" aria-label="Categorias de cookies" tabindex="0" style="overflow-x:auto">
                 <table style="width:100%;border-collapse:collapse;font-size:.9rem;margin:1rem 0">
                     <thead>
                         <tr style="background:rgba(96,165,250,.08)">
@@ -338,6 +345,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p>Voc&ecirc; pode rever ou alterar suas escolhas a qualquer momento clicando no bot&atilde;o abaixo. Tamb&eacute;m &eacute; poss&iacute;vel limpar cookies diretamente pelo menu de privacidade do navegador que voc&ecirc; utiliza.</p>
                 <p><button onclick="window.ibConsent &amp;&amp; ibConsent.open()" style="background:#2563EB;color:#fff;border:none;padding:.55rem 1.5rem;border-radius:6px;font-size:.875rem;font-weight:600;cursor:pointer;font-family:inherit">Gerenciar prefer&ecirc;ncias de cookies</button></p>
             </div>
