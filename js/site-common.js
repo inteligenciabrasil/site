@@ -145,6 +145,22 @@
 
     // ========== 5. FAQ ACCORDION ==========
     document.querySelectorAll('.faq-question').forEach(function (btn) {
+        // A11Y-AGENT: a home, as LPs e alguns posts usam <button class="faq-question">, mas o
+        // template dos artigos do blog usa <div> (135 arquivos, 640 ocorrencias). Em um div sem
+        // role, o aria-expanded abaixo e um atributo ARIA nao suportado -- reprovava o audit
+        // "Elements must only use supported ARIA attributes" (categoria Agentic Browsing do
+        // Lighthouse) -- e o acordeao nao abria pelo teclado. Promover a role=button corrige os
+        // dois num lugar so, em vez de reescrever a tag nos 135 arquivos.
+        if (btn.tagName !== 'BUTTON') {
+            if (!btn.hasAttribute('role')) btn.setAttribute('role', 'button');
+            if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex', '0');
+            btn.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        }
         if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
         btn.addEventListener('click', function () {
             var item = this.closest('.faq-item');

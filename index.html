@@ -435,7 +435,13 @@
                     </h1>
                     <p class="hero-lead">Protegemos sua empresa com</p>
                     <p class="hero-services">
-                        <span class="text-gradient" id="js-rotating" data-words="Pentest, Compliance LGPD, Gestão de Riscos, Defesa Cibernética, Análise de Vulnerabilidades, Investigação Digital, Teste de Intrusão, Monitoramento de Marca, Application Security, Cloud Security, Governança Cibernética">Pentest</span>
+                        <!-- PERF-LCP-ROTATOR: o termo MAIS LARGO vem primeiro de proposito. Cada troca de
+                             textContent repinta este span, e um termo mais largo que o anterior emite um
+                             novo candidato de LCP, empurrando a metrica a cada 3s (medido: LCP 7,1s no PSI
+                             mobile, com 4,6s de "element render delay"). Com o mais largo no primeiro paint,
+                             nenhuma troca posterior gera candidato maior e o LCP trava junto com o FCP.
+                             Ao adicionar termos novos, mantenha o mais largo em primeiro lugar. -->
+                        <span class="text-gradient" id="js-rotating" data-words="Análise de Vulnerabilidades, Pentest, Compliance LGPD, Gestão de Riscos, Defesa Cibernética, Investigação Digital, Teste de Intrusão, Monitoramento de Marca, Application Security, Cloud Security, Governança Cibernética">Análise de Vulnerabilidades</span>
                     </p>
                     <p class="hero-subtitle">
                         Transformamos a segurança em vantagem competitiva. Abordagem estratégica e personalizada para
