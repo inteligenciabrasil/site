@@ -435,13 +435,17 @@
                     </h1>
                     <p class="hero-lead">Protegemos sua empresa com</p>
                     <p class="hero-services">
-                        <!-- PERF-LCP-ROTATOR: o termo MAIS LARGO vem primeiro de proposito. Cada troca de
-                             textContent repinta este span, e um termo mais largo que o anterior emite um
-                             novo candidato de LCP, empurrando a metrica a cada 3s (medido: LCP 7,1s no PSI
-                             mobile, com 4,6s de "element render delay"). Com o mais largo no primeiro paint,
-                             nenhuma troca posterior gera candidato maior e o LCP trava junto com o FCP.
-                             Ao adicionar termos novos, mantenha o mais largo em primeiro lugar. -->
-                        <span class="text-gradient" id="js-rotating" data-words="Análise de Vulnerabilidades, Pentest, Compliance LGPD, Gestão de Riscos, Defesa Cibernética, Investigação Digital, Teste de Intrusão, Monitoramento de Marca, Application Security, Cloud Security, Governança Cibernética">Análise de Vulnerabilidades</span>
+                        <!-- PERF-LCP-ROTATOR: este span E o elemento de LCP da home, e cada troca de
+                             textContent pode emitir um novo candidato de LCP, empurrando a metrica a cada
+                             3s (medido no PSI mobile: LCP 7,9s, sendo 3,7s de "element render delay",
+                             contra FCP de 1,1s). DECISAO DE 09/11/2026: nao corrigir. O LCP de ranking vem
+                             do campo (CrUX) e este site nao tem dado de campo; o visitante ve o hero no FCP,
+                             entao a metrica carimba uma animacao, nao uma espera. Ja foi tentado reordenar
+                             pelo termo "mais largo" contando CARACTERES -- nao funciona, porque largura
+                             renderizada nao e contagem de caracteres: "Investigacao Digital" (20) renderiza
+                             mais largo que "Analise de Vulnerabilidades" (27). Reordenar so com largura
+                             medida em navegador, e so se o CrUX algum dia acusar o problema. -->
+                        <span class="text-gradient" id="js-rotating" data-words="Pentest, Compliance LGPD, Gestão de Riscos, Defesa Cibernética, Análise de Vulnerabilidades, Investigação Digital, Teste de Intrusão, Monitoramento de Marca, Application Security, Cloud Security, Governança Cibernética">Pentest</span>
                     </p>
                     <p class="hero-subtitle">
                         Transformamos a segurança em vantagem competitiva. Abordagem estratégica e personalizada para
