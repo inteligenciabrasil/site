@@ -51,7 +51,8 @@
         disposable_email: 'E-mails temporários não são permitidos. Use seu e-mail corporativo.',
         invalid_email:    'Informe um e-mail válido.',
         rate_limited:     'Você já enviou uma solicitação há pouco. Aguarde alguns minutos antes de tentar de novo.',
-        captcha:          'Não conseguimos validar que você é humano. Recarregue a página e tente novamente.'
+        captcha:          'Não conseguimos validar que você é humano. Recarregue a página e tente novamente.',
+        replay:           'Sua verificação de segurança expirou. Recarregue a página e envie novamente.'
     };
 
     function validateCorporateEmail(email) {
@@ -197,6 +198,12 @@
                     window.dataLayer = window.dataLayer || [];
                     window.dataLayer.push({ event: 'form_submit', form_id: 'home', form_type: 'contato' });
                 } else if (response && REJECT_MSG[response.reason]) {
+                    // CAPTCHA-RESET-V1: o backend consome o token do Turnstile no passo 3, ANTES de validar
+                    // o e-mail no passo 6. Numa recusa o token morre, e o reenvio corrigido voltava
+                    // {reason:'replay'} -- que nao tinha mensagem no mapa e caia no generico + WhatsApp.
+                    // O reset emite token novo para a 2a tentativa. Nao remover sem reordenar o
+                    // consumeToken_ no Apps Script.
+                    if (window.turnstile) { try { window.turnstile.reset(contactForm.querySelector('.cf-turnstile') || undefined); } catch (e) {} }
                     // Rejeicao de validacao: motivo explicito, sem fallback de WhatsApp.
                     showStatus(REJECT_MSG[response.reason], '#EF4444');
                 } else {
@@ -309,6 +316,12 @@
                     newsletterForm.reset();
                     showNewsletterMessage('Verifique seu e-mail para confirmar a assinatura.', 'success');
                 } else if (response && REJECT_MSG[response.reason]) {
+                    // CAPTCHA-RESET-V1: o backend consome o token do Turnstile no passo 3, ANTES de validar
+                    // o e-mail no passo 6. Numa recusa o token morre, e o reenvio corrigido voltava
+                    // {reason:'replay'} -- que nao tinha mensagem no mapa e caia no generico + WhatsApp.
+                    // O reset emite token novo para a 2a tentativa. Nao remover sem reordenar o
+                    // consumeToken_ no Apps Script.
+                    if (window.turnstile) { try { window.turnstile.reset(newsletterForm.querySelector('.cf-turnstile') || undefined); } catch (e) {} }
                     showNewsletterMessage(REJECT_MSG[response.reason], 'error');
                 } else {
                     showNewsletterMessage('Não foi possível inscrever agora. Tente novamente em instantes.', 'error');

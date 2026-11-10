@@ -1023,8 +1023,15 @@
                         disposable_email: 'E-mails temporários não são permitidos. Use seu e-mail corporativo.',
                         invalid_email:    'Informe um e-mail válido.',
                         rate_limited:     'Você já enviou uma solicitação há pouco. Aguarde alguns minutos antes de tentar de novo.',
-                        captcha:          'Não conseguimos validar que você é humano. Recarregue a página e tente novamente.'
+                        captcha:          'Não conseguimos validar que você é humano. Recarregue a página e tente novamente.',
+                        replay:           'Sua verificação de segurança expirou. Recarregue a página e envie novamente.'
                     };
+                    // CAPTCHA-RESET-V1: o backend consome o token do Turnstile no passo 3, ANTES de validar
+                    // o e-mail no passo 6. Numa recusa o token morre, e o reenvio corrigido voltava
+                    // {reason:'replay'} -- que nao tinha mensagem no mapa e caia no generico + WhatsApp.
+                    // O reset emite token novo para a 2a tentativa. Nao remover sem reordenar o
+                    // consumeToken_ no Apps Script.
+                    if (window.turnstile) { try { window.turnstile.reset(this.querySelector('.cf-turnstile') || undefined); } catch (e) {} }
                     showMessage(RECUSA[veredito && veredito.reason] || 'Não foi possível enviar agora. Tente novamente em instantes.', 'error');
                     btn.disabled = false;
                     btn.innerHTML = originalText;
