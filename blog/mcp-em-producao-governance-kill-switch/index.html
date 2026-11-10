@@ -177,8 +177,8 @@
 </ul>
 </div>
 <h2 id="delta-piloto">O delta entre piloto e produção</h2>
-<p>Pilotos de agentes baseados em <a href="../mcp-agentic-ai-security/" style="color:#60A5FA">MCP</a> escondem o problema operacional: um usuário, um ambiente isolado, baixa frequência de chamadas, alguém observando cada turn. Em produção essas quatro variáveis viram outras quatro: <strong>muitos usuários simultâneos</strong>, <strong>dados e identidades reais</strong>, <strong>frequência alta</strong> e <strong>ninguém olhando ao vivo</strong>. Classes de risco antes toleráveis — confused deputy, tool poisoning, excessive agency — viram incidentes potencialmente caros.</p>
-<p>A diferença é exatamente a mesma do que separa um modelo ML em notebook de um modelo em <em>online serving</em>: observabilidade, controle de mudanças, capacidade de rollback, gestão de versões, e — crucial — a habilidade de parar tudo rápido quando algo dá errado. Os controles abaixo são o equivalente operacional para MCP.</p>
+<p>Pilotos de agentes baseados em <a href="../mcp-agentic-ai-security/" style="color:#60A5FA">MCP</a> escondem o problema operacional: um usuário, um ambiente isolado, baixa frequência de chamadas, alguém observando cada turn. Em produção essas quatro variáveis viram outras quatro: <strong>muitos usuários simultâneos</strong>, <strong>dados e identidades reais</strong>, <strong>frequência alta</strong> e <strong>ninguém olhando ao vivo</strong>. Classes de risco antes toleráveis (confused deputy, tool poisoning, excessive agency) viram incidentes potencialmente caros.</p>
+<p>A diferença é exatamente a mesma do que separa um modelo ML em notebook de um modelo em <em>online serving</em>: observabilidade, controle de mudanças, capacidade de rollback, gestão de versões, e, crucial, a habilidade de parar tudo rápido quando algo dá errado. Os controles abaixo são o equivalente operacional para MCP.</p>
 <h2 id="governance">Governance: quem aprova o quê</h2>
 <p>Antes de qualquer controle técnico, defina três artefatos por escrito:</p>
 <div class="pillar-cards">
@@ -198,14 +198,14 @@
 <p>Quem aciona o kill switch, quem reverte ações, quem comunica usuários afetados, quem decide retomar operação. Sem RACI, em incidente todos olham um para o outro enquanto o agente continua agindo.</p>
 </div>
 </div>
-<p>O catálogo de MCP servers e a política de ações são versionados em Git, revisados por pares, e as mudanças geram trilha de auditoria. Servidores ou tools não listadas no catálogo são <em>rejeitadas no gateway</em> — não dependem de boa-fé do agente.</p>
+<p>O catálogo de MCP servers e a política de ações são versionados em Git, revisados por pares, e as mudanças geram trilha de auditoria. Servidores ou tools não listadas no catálogo são <em>rejeitadas no gateway</em>, não dependem de boa-fé do agente.</p>
 <h2 id="allow-list">Allow-listing de MCP servers</h2>
-<p>O modelo de ameaça mais subestimado é <strong>tool poisoning</strong>: um atacante registra (ou compromete) um MCP server, expõe tools que parecem inocentes (<code>get_user_preferences</code>, <code>format_output</code>) mas que carregam comportamento malicioso — exfiltração, injeção de prompts indiretos, side effects em recursos externos. Sem allow-listing, qualquer prompt malicioso ou bug pode levar o agente a invocar essas tools.</p>
+<p>O modelo de ameaça mais subestimado é <strong>tool poisoning</strong>: um atacante registra (ou compromete) um MCP server, expõe tools que parecem inocentes (<code>get_user_preferences</code>, <code>format_output</code>) mas que carregam comportamento malicioso: exfiltração, injeção de prompts indiretos, side effects em recursos externos. Sem allow-listing, qualquer prompt malicioso ou bug pode levar o agente a invocar essas tools.</p>
 <p>Implemente em <strong>quatro camadas</strong>:</p>
 <ol style="color:#CBD5E1;line-height:1.75;font-size:1rem">
 <li><strong>Gateway de saída:</strong> o cliente do agente nunca fala direto com o MCP server externo. Sempre via proxy que valida o destino contra a allow-list (URL exata, hash de TLS pin, certificado esperado).</li>
 <li><strong>Verificação de identidade do server:</strong> além de URL, exija assinatura ou mTLS. URL pode ser sequestrada; chave criptográfica do server, não.</li>
-<li><strong>Mapeamento explícito de tools:</strong> nem todas as tools que um server expõe estão habilitadas. Mantenha por server uma lista de tools permitidas — se o server expor uma <code>delete_everything</code>, ela continua bloqueada.</li>
+<li><strong>Mapeamento explícito de tools:</strong> nem todas as tools que um server expõe estão habilitadas. Mantenha por server uma lista de tools permitidas, se o server expor uma <code>delete_everything</code>, ela continua bloqueada.</li>
 <li><strong>Pinning de versão:</strong> a allow-list referencia versão (semver ou commit hash) do server. Quando o server upgrada, o gateway bloqueia até alguém revisar o changelog e aprovar a nova versão.</li>
 </ol>
 <h2 id="audit">Audit log imutável: o que registrar</h2>
@@ -216,7 +216,7 @@
 <tbody>
 <tr><td><code>ts</code></td><td>Timestamp UTC ISO 8601 com ms</td><td>Correlação com outros logs</td></tr>
 <tr><td><code>session_id</code></td><td>UUID por sessão de agente</td><td>Reconstruir cadeia de turns</td></tr>
-<tr><td><code>principal</code></td><td>Identidade do humano que originou (Entra ID / Okta sub)</td><td>Accountability — quem pediu</td></tr>
+<tr><td><code>principal</code></td><td>Identidade do humano que originou (Entra ID / Okta sub)</td><td>Accountability, quem pediu</td></tr>
 <tr><td><code>agent_id</code></td><td>Nome + versão do agente</td><td>Rastreio de regressões</td></tr>
 <tr><td><code>model</code></td><td>Provider + modelo + versão</td><td>Reproduzir comportamento</td></tr>
 <tr><td><code>prompt_hash</code></td><td>SHA-256 do prompt do usuário</td><td>Privacidade + auditoria</td></tr>
@@ -233,7 +233,7 @@
 <p>Armazene em backend WORM (write-once-read-many) ou append-only com integridade verificável: AWS CloudWatch Logs com lock, Azure Immutable Blob Storage, GCP Bucket Lock, ou Object Lock S3 em compliance mode. O <code>chain_hash</code> em cadeia (cada linha referencia a anterior) detecta manipulação retroativa mesmo se o storage for comprometido.</p>
 <div class="warning-box" style="border-left-color:#ef4444;background:rgba(239,68,68,.06)">
 <h3 style="color:#fca5a5"><i class="fas fa-exclamation-triangle"></i> Pegadinha de privacidade</h3>
-<p style="color:#cbd5e1">Logue <em>hashes</em> de prompts e resultados, não o conteúdo bruto. Em incidente, você pode pedir consentimento específico para reconstruir, mas o log padrão não deve ter PII em texto claro — caso contrário você criou uma nova superfície de vazamento.</p>
+<p style="color:#cbd5e1">Logue <em>hashes</em> de prompts e resultados, não o conteúdo bruto. Em incidente, você pode pedir consentimento específico para reconstruir, mas o log padrão não deve ter PII em texto claro, caso contrário você criou uma nova superfície de vazamento.</p>
 </div>
 <h2 id="kill-switch">Kill switch operacional</h2>
 <p>Kill switch precisa funcionar em quatro camadas em paralelo, porque cada uma falha sozinha:</p>
@@ -255,18 +255,18 @@
 <div class="phase-card">
 <div class="phase-number">4</div>
 <h3>Feature flag global</h3>
-<p>Flag em config central (Redis pub/sub, Consul, AWS AppConfig, LaunchDarkly) que desativa o agente inteiro. Propagação em segundos. Esta é sua "estrela vermelha" — quando todo o resto falha, o agente para de iniciar sessões novas.</p>
+<p>Flag em config central (Redis pub/sub, Consul, AWS AppConfig, LaunchDarkly) que desativa o agente inteiro. Propagação em segundos. Esta é sua "estrela vermelha", quando todo o resto falha, o agente para de iniciar sessões novas.</p>
 </div>
-<p>Teste o kill switch periodicamente em stage. Sem teste, ele falha justo quando você precisa — credenciais não revogam porque o secrets manager perdeu permissão, flag não propaga porque alguém mudou a chave, circuit breaker está em config errada. <strong>Faça GameDay trimestral de kill switch.</strong></p>
+<p>Teste o kill switch periodicamente em stage. Sem teste, ele falha justo quando você precisa: credenciais não revogam porque o secrets manager perdeu permissão, flag não propaga porque alguém mudou a chave, circuit breaker está em config errada. <strong>Faça GameDay trimestral de kill switch.</strong></p>
 <h2 id="hitl">Human-in-the-loop nos pontos certos</h2>
 <p>HITL em tudo mata produtividade. HITL em nada mata o negócio. A linha está em <em>impacto irreversível ou alto custo</em>:</p>
 <ul style="color:#CBD5E1;line-height:1.75">
 <li><strong>Ação que muda estado externo persistente:</strong> criar fatura, aprovar pagamento, deletar recurso, abrir ticket externo, enviar comunicação a cliente.</li>
-<li><strong>Custo de erro &gt; custo de revisão:</strong> regra simples — se reverter custa muito mais do que aprovar custa, peça aprovação.</li>
+<li><strong>Custo de erro &gt; custo de revisão:</strong> regra simples, se reverter custa muito mais do que aprovar custa, peça aprovação.</li>
 <li><strong>Primeira execução de tool nova naquele contexto:</strong> mesmo se aprovada no catálogo, primeira invocação por aquele agente em produção justifica revisão.</li>
 <li><strong>Ação fora dos guardrails da sessão:</strong> se o usuário definiu escopo (apenas relatórios de leitura), tentativas de sair desse escopo viram pedido de aprovação.</li>
 </ul>
-<p>Implementação típica: o agente apresenta a ação proposta com argumentos finais, o humano vê (UI dedicada, e-mail com link, mensagem no Slack/Teams), aprova/rejeita/edita. A aprovação é o gatilho da execução. <em>Logue a aprovação no audit junto com a ação</em> — quem aprovou, quando, qual delta entre proposto e executado.</p>
+<p>Implementação típica: o agente apresenta a ação proposta com argumentos finais, o humano vê (UI dedicada, e-mail com link, mensagem no Slack/Teams), aprova/rejeita/edita. A aprovação é o gatilho da execução. <em>Logue a aprovação no audit junto com a ação</em>: quem aprovou, quando, qual delta entre proposto e executado.</p>
 <h2 id="rate-limit">Rate limiting e quotas</h2>
 <p>Agentes têm padrão de uso bursty e podem entrar em loops degenerados (o modelo "convence a si mesmo" que precisa chamar a mesma tool dez vezes seguidas). Sem quotas, isso vira incidente de custo e de carga em sistemas downstream.</p>
 <ul style="color:#CBD5E1;line-height:1.75">
@@ -281,7 +281,7 @@
 <table style="width:100%;border-collapse:collapse">
 <thead><tr><th>Métrica</th><th>Meta</th><th>Sinal de alerta</th></tr></thead>
 <tbody>
-<tr><td>% ações irreversíveis com HITL</td><td>100%</td><td>Qualquer queda — significa que alguma rota está bypass</td></tr>
+<tr><td>% ações irreversíveis com HITL</td><td>100%</td><td>Qualquer queda, significa que alguma rota está bypass</td></tr>
 <tr><td>Tempo médio kill switch → todas as execuções paradas</td><td>&lt; 30s</td><td>Aumento sinaliza tokens não revogando</td></tr>
 <tr><td>Cobertura de audit</td><td>100% das chamadas a tools</td><td>Drop indica logger fora do ar ou caminho não instrumentado</td></tr>
 <tr><td>MCP servers fora da allow-list bloqueados/semana</td><td>Próximo de zero (depois de estabilizado)</td><td>Alto = tentativas de shadow MCP, investigar</td></tr>
@@ -320,11 +320,11 @@
 <h2 id="referencias" style="margin-top:3rem">Referências</h2>
 <div class="references-list">
 <ul>
-<li>Anthropic — Model Context Protocol specification — <a href="https://modelcontextprotocol.io" rel="noopener" target="_blank">modelcontextprotocol.io</a></li>
-<li>OWASP Top 10 for LLM Applications (2025) — <a href="https://genai.owasp.org" rel="noopener" target="_blank">genai.owasp.org</a></li>
-<li>NIST AI Risk Management Framework — Generative AI Profile (NIST AI 600-1)</li>
-<li>MITRE ATLAS — Adversarial Threat Landscape for AI Systems — <a href="https://atlas.mitre.org" rel="noopener" target="_blank">atlas.mitre.org</a></li>
-<li>EU AI Act — texto consolidado em <a href="https://eur-lex.europa.eu" rel="noopener" target="_blank">eur-lex.europa.eu</a></li>
+<li>Anthropic, Model Context Protocol specification, <a href="https://modelcontextprotocol.io" rel="noopener" target="_blank">modelcontextprotocol.io</a></li>
+<li>OWASP Top 10 for LLM Applications (2025), <a href="https://genai.owasp.org" rel="noopener" target="_blank">genai.owasp.org</a></li>
+<li>NIST AI Risk Management Framework, Generative AI Profile (NIST AI 600-1)</li>
+<li>MITRE ATLAS, Adversarial Threat Landscape for AI Systems, <a href="https://atlas.mitre.org" rel="noopener" target="_blank">atlas.mitre.org</a></li>
+<li>EU AI Act, texto consolidado em <a href="https://eur-lex.europa.eu" rel="noopener" target="_blank">eur-lex.europa.eu</a></li>
 </ul>
 </div>
 </div>

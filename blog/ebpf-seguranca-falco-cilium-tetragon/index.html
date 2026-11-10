@@ -169,7 +169,7 @@
 
                 <div class="warning-box" style="border-left-color:#60A5FA;background:linear-gradient(145deg,rgba(96,165,250,.08) 0%,rgba(37,99,235,.04) 100%);border-color:rgba(96,165,250,.4)">
                     <p class="warning-title" style="margin:0 0 .5rem;color:#93C5FD;font-weight:700;font-size:1.05rem"><i class="fas fa-info-circle"></i> <strong>Para quem é este artigo</strong></p>
-                    <p style="color:#cbd5e1">Engenheiros de plataforma, times de SecOps e SREs que precisam de <strong>runtime security</strong> em hosts Linux e clusters Kubernetes. O texto cobre o que é eBPF, por que virou base do stack moderno de detecção em container, e como Falco, Cilium Tetragon e Tracee se comparam na prática. Não é tutorial passo-a-passo de instalação — é guia de decisão e arquitetura.</p>
+                    <p style="color:#cbd5e1">Engenheiros de plataforma, times de SecOps e SREs que precisam de <strong>runtime security</strong> em hosts Linux e clusters Kubernetes. O texto cobre o que é eBPF, por que virou base do stack moderno de detecção em container, e como Falco, Cilium Tetragon e Tracee se comparam na prática. Não é tutorial passo-a-passo de instalação, é guia de decisão e arquitetura.</p>
                 </div>
 
                 <div class="toc">
@@ -193,11 +193,11 @@
                 <h2 id="contexto">O que é eBPF e por que importa em segurança</h2>
 
                 <p>
-                    eBPF começou a vida como <em>Extended Berkeley Packet Filter</em> — uma extensão do mecanismo clássico de filtragem de pacotes BSD para o kernel Linux. Hoje, o "BPF" virou marca: a tecnologia transcendeu redes e se tornou uma <strong>infraestrutura geral de programação de kernel</strong>. Programas eBPF rodam dentro de uma máquina virtual no espaço do kernel, em pontos de attachment bem definidos, sob a tutela de um <strong>verificador estático</strong>.
+                    eBPF começou a vida como <em>Extended Berkeley Packet Filter</em>, uma extensão do mecanismo clássico de filtragem de pacotes BSD para o kernel Linux. Hoje, o "BPF" virou marca: a tecnologia transcendeu redes e se tornou uma <strong>infraestrutura geral de programação de kernel</strong>. Programas eBPF rodam dentro de uma máquina virtual no espaço do kernel, em pontos de attachment bem definidos, sob a tutela de um <strong>verificador estático</strong>.
                 </p>
 
                 <p>
-                    O verificador é a peça que separa eBPF de um kernel module tradicional: ele rejeita programas que possam fazer loop infinito, acessar memória inválida, vazar ponteiros para userspace ou executar instruções perigosas. Se o programa passa, o kernel o carrega e o executa em velocidade próxima de nativa via JIT. Se não passa, o programa simplesmente não é aceito — não há a possibilidade clássica de um módulo mal escrito travar o host.
+                    O verificador é a peça que separa eBPF de um kernel module tradicional: ele rejeita programas que possam fazer loop infinito, acessar memória inválida, vazar ponteiros para userspace ou executar instruções perigosas. Se o programa passa, o kernel o carrega e o executa em velocidade próxima de nativa via JIT. Se não passa, o programa simplesmente não é aceito, não há a possibilidade clássica de um módulo mal escrito travar o host.
                 </p>
 
                 <p>
@@ -207,7 +207,7 @@
                 <ul>
                     <li><strong>Visibilidade sem módulo de kernel.</strong> Você instrumenta syscalls, eventos de rede, operações de arquivo, hooks de cgroups e LSM sem compilar um <code>.ko</code> e sem expor a superfície de risco que um módulo carrega.</li>
                     <li><strong>Overhead tipicamente baixo.</strong> A lógica de filtragem roda no kernel, perto dos eventos, evitando o custo de syscalls em userspace, cópia de buffers e context switches. Filtros bem escritos descartam eventos irrelevantes antes que cheguem ao espaço do usuário.</li>
-                    <li><strong>Portabilidade via CO-RE.</strong> O modelo <em>Compile Once — Run Everywhere</em>, suportado por BTF (BPF Type Format) presente em kernels modernos, permite que um único binário rode em distribuições e versões variadas — algo impensável com módulos de kernel tradicionais.</li>
+                    <li><strong>Portabilidade via CO-RE.</strong> O modelo <em>Compile Once, Run Everywhere</em>, suportado por BTF (BPF Type Format) presente em kernels modernos, permite que um único binário rode em distribuições e versões variadas, algo impensável com módulos de kernel tradicionais.</li>
                 </ul>
 
                 <p>
@@ -217,15 +217,15 @@
                 <h2 id="capabilities">Capabilities relevantes: kprobes, tracepoints, XDP, BPF-LSM</h2>
 
                 <p>
-                    eBPF não é um único hook — é um catálogo de pontos de attachment. Para segurança, os mais relevantes são:
+                    eBPF não é um único hook, é um catálogo de pontos de attachment. Para segurança, os mais relevantes são:
                 </p>
 
                 <ul>
-                    <li><strong>kprobes / kretprobes.</strong> Permitem anexar um programa eBPF a praticamente qualquer função do kernel, na entrada (kprobe) ou no retorno (kretprobe). Flexibilidade máxima, mas frágil entre versões — a função pode mudar de nome, assinatura ou ser inlineada.</li>
-                    <li><strong>uprobes / uretprobes.</strong> Equivalentes em userspace — instrumentam funções de binários ou bibliotecas (libssl, libc) sem modificá-los. Úteis para detectar uso anômalo de criptografia, chamadas a funções perigosas em runtime, etc.</li>
-                    <li><strong>tracepoints.</strong> Pontos de instrumentação estáveis declarados pelo próprio kernel (ex.: <code>sched:sched_process_exec</code>, <code>syscalls:sys_enter_execve</code>). São a interface preferida quando existe — não quebram entre versões.</li>
+                    <li><strong>kprobes / kretprobes.</strong> Permitem anexar um programa eBPF a praticamente qualquer função do kernel, na entrada (kprobe) ou no retorno (kretprobe). Flexibilidade máxima, mas frágil entre versões, a função pode mudar de nome, assinatura ou ser inlineada.</li>
+                    <li><strong>uprobes / uretprobes.</strong> Equivalentes em userspace, instrumentam funções de binários ou bibliotecas (libssl, libc) sem modificá-los. Úteis para detectar uso anômalo de criptografia, chamadas a funções perigosas em runtime, etc.</li>
+                    <li><strong>tracepoints.</strong> Pontos de instrumentação estáveis declarados pelo próprio kernel (ex.: <code>sched:sched_process_exec</code>, <code>syscalls:sys_enter_execve</code>). São a interface preferida quando existe, não quebram entre versões.</li>
                     <li><strong>XDP (eXpress Data Path).</strong> Hook ultra-precoce no pipeline de rede, antes mesmo da pilha TCP/IP do kernel processar o pacote. Base de mitigação de <a class="gloss-link" href="/glossario/#ddos" title="Ver no glossário">DDoS</a> e firewalls programáveis de alta performance.</li>
-                    <li><strong>cgroup hooks.</strong> Permitem aplicar políticas (de rede, de sockets) por cgroup — perfeito para o modelo de container, onde cada Pod tem seu próprio cgroup.</li>
+                    <li><strong>cgroup hooks.</strong> Permitem aplicar políticas (de rede, de sockets) por cgroup, perfeito para o modelo de container, onde cada Pod tem seu próprio cgroup.</li>
                     <li><strong>BPF-LSM (kernel 5.7+).</strong> Plugar programas eBPF nos hooks oficiais do Linux Security Module, ao lado de SELinux e AppArmor. Permite decisões de autorização (allow/deny) em pontos canônicos, com a robustez do framework LSM.</li>
                 </ul>
 
@@ -258,7 +258,7 @@
                             <tr>
                                 <td><strong>LD_PRELOAD / shim em userspace</strong></td>
                                 <td>Trivialmente burlável (binários estáticos, syscall direta); cobertura parcial; quebrável por upgrade de glibc</td>
-                                <td>Hook no kernel — todo userspace passa por lá, independentemente de como foi compilado</td>
+                                <td>Hook no kernel, todo userspace passa por lá, independentemente de como foi compilado</td>
                             </tr>
                         </tbody>
                     </table>
@@ -271,19 +271,19 @@
                 <h2 id="falco">Falco: o motor de regras CNCF</h2>
 
                 <p>
-                    Falco nasceu na Sysdig em 2016, foi doado à CNCF e atingiu o status de <strong>graduated</strong> — sinal de maturidade comparável a Kubernetes e Prometheus. É hoje a referência open source de motor de regras para detecção runtime em Linux e containers.
+                    Falco nasceu na Sysdig em 2016, foi doado à CNCF e atingiu o status de <strong>graduated</strong>, sinal de maturidade comparável a Kubernetes e Prometheus. É hoje a referência open source de motor de regras para detecção runtime em Linux e containers.
                 </p>
 
                 <h3>Arquitetura e drivers</h3>
 
                 <p>
-                    Falco lê uma stream de eventos do kernel e a confronta com um conjunto de regras declarativas. A stream é fornecida por um <em>driver</em> — e é aqui que a evolução do projeto fica visível:
+                    Falco lê uma stream de eventos do kernel e a confronta com um conjunto de regras declarativas. A stream é fornecida por um <em>driver</em>, e é aqui que a evolução do projeto fica visível:
                 </p>
 
                 <ul>
-                    <li><strong>modern_bpf</strong> (atual padrão) — driver CO-RE, baseado em libbpf, sem necessidade de compilar nada no host. Funciona em kernels com suporte a BTF (kernels 5.8+ na prática). É a opção recomendada.</li>
-                    <li><strong>ebpf (legacy)</strong> — driver eBPF baseado em bcc/llvm, requer toolchain no host. Mantido para compatibilidade com kernels mais antigos.</li>
-                    <li><strong>kmod</strong> — módulo de kernel clássico. Ainda suportado para distros muito legadas (RHEL 7, alguns kernels sem BTF), porém deve ser última opção.</li>
+                    <li><strong>modern_bpf</strong> (atual padrão): driver CO-RE, baseado em libbpf, sem necessidade de compilar nada no host. Funciona em kernels com suporte a BTF (kernels 5.8+ na prática). É a opção recomendada.</li>
+                    <li><strong>ebpf (legacy)</strong>, driver eBPF baseado em bcc/llvm, requer toolchain no host. Mantido para compatibilidade com kernels mais antigos.</li>
+                    <li><strong>kmod</strong>, módulo de kernel clássico. Ainda suportado para distros muito legadas (RHEL 7, alguns kernels sem BTF), porém deve ser última opção.</li>
                 </ul>
 
                 <h3>Regras YAML e contexto</h3>
@@ -302,7 +302,7 @@
   tags: [container, shell, mitre_execution]</code></pre>
 
                 <p>
-                    O conjunto base de regras cobre dezenas de casos de uso mapeados a táticas do <a class="gloss-link" href="/glossario/#mitre" title="Ver no glossário">MITRE ATT&amp;CK</a> — TA0002 Execution, TA0003 Persistence, TA0004 Privilege Escalation, TA0005 Defense Evasion. Detecções típicas:
+                    O conjunto base de regras cobre dezenas de casos de uso mapeados a táticas do <a class="gloss-link" href="/glossario/#mitre" title="Ver no glossário">MITRE ATT&amp;CK</a>: TA0002 Execution, TA0003 Persistence, TA0004 Privilege Escalation, TA0005 Defense Evasion. Detecções típicas:
                 </p>
 
                 <ul>
@@ -322,19 +322,19 @@
                 </p>
 
                 <p>
-                    Falco brilha em <em>detecção generalista de host e container</em>. Ele não tem ambição nativa de enforcement — quando alerta, alerta. Enforcement, quando desejado, vem por integração externa (falco-talon, controladores próprios).
+                    Falco brilha em <em>detecção generalista de host e container</em>. Ele não tem ambição nativa de enforcement, quando alerta, alerta. Enforcement, quando desejado, vem por integração externa (falco-talon, controladores próprios).
                 </p>
 
                 <h2 id="tetragon">Cilium Tetragon: detecção e enforcement nativos em K8s</h2>
 
                 <p>
-                    Tetragon é parte da família Cilium — projeto originário da Isovalent (adquirida pela Cisco) — e tem foco explícito em <strong>segurança runtime para Kubernetes</strong>, com awareness profundo de identidade e namespaces. Não é fork nem derivativo de Falco: é uma implementação independente de tracing eBPF, com filosofia distinta.
+                    Tetragon é parte da família Cilium, projeto originário da Isovalent (adquirida pela Cisco), e tem foco explícito em <strong>segurança runtime para Kubernetes</strong>, com awareness profundo de identidade e namespaces. Não é fork nem derivativo de Falco: é uma implementação independente de tracing eBPF, com filosofia distinta.
                 </p>
 
                 <h3>TracingPolicy: política como CRD</h3>
 
                 <p>
-                    O modelo de configuração de Tetragon são as <strong>TracingPolicy</strong> — Custom Resources do Kubernetes que descrevem quais eventos observar, quais filtros aplicar e quais ações tomar. Exemplo simplificado para detectar e bloquear escrita em <code>/etc/shadow</code>:
+                    O modelo de configuração de Tetragon são as <strong>TracingPolicy</strong>, Custom Resources do Kubernetes que descrevem quais eventos observar, quais filtros aplicar e quais ações tomar. Exemplo simplificado para detectar e bloquear escrita em <code>/etc/shadow</code>:
                 </p>
 
                 <pre style="background:#0b1220;border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:1rem;overflow-x:auto;color:#e2e8f0;font-size:.85rem;line-height:1.5"><code>apiVersion: cilium.io/v1alpha1
@@ -358,7 +358,7 @@ spec:
       - action: Sigkill</code></pre>
 
                 <p>
-                    A propriedade decisiva é <strong>matchActions</strong>. Tetragon pode <em>detectar e agir</em>: enviar um <code>SIGKILL</code> ao processo (via <code>bpf_send_signal()</code>), sobrescrever o retorno da syscall com erro (override action), ou apenas registrar o evento. Isso transforma a categoria — sai de "detection" e entra em "prevention". O preço é cuidado: regra mal calibrada em modo enforcement pode derrubar workloads legítimos.
+                    A propriedade decisiva é <strong>matchActions</strong>. Tetragon pode <em>detectar e agir</em>: enviar um <code>SIGKILL</code> ao processo (via <code>bpf_send_signal()</code>), sobrescrever o retorno da syscall com erro (override action), ou apenas registrar o evento. Isso transforma a categoria, sai de "detection" e entra em "prevention". O preço é cuidado: regra mal calibrada em modo enforcement pode derrubar workloads legítimos.
                 </p>
 
                 <h3>Process tree e contexto K8s</h3>
@@ -370,7 +370,7 @@ spec:
                 <h3>Integração com Cilium</h3>
 
                 <p>
-                    Em clusters que já rodam Cilium como CNI, Tetragon reaproveita a identidade de workload, a observabilidade Hubble e o pipeline de policy. Em clusters com outro CNI, Tetragon funciona standalone — não exige Cilium. Mas a sinergia justifica a escolha do par em greenfield de plataforma.
+                    Em clusters que já rodam Cilium como CNI, Tetragon reaproveita a identidade de workload, a observabilidade Hubble e o pipeline de policy. Em clusters com outro CNI, Tetragon funciona standalone, não exige Cilium. Mas a sinergia justifica a escolha do par em greenfield de plataforma.
                 </p>
 
                 <h2 id="tracee">Tracee: forensics e detecção orientada a eventos</h2>
@@ -384,9 +384,9 @@ spec:
                 </p>
 
                 <ul>
-                    <li><strong>Captura de artefatos.</strong> Além de logar o evento, Tracee pode capturar o binário executado, memória em execução, sockets abertos — útil para análise pós-incidente sem precisar voltar ao host.</li>
+                    <li><strong>Captura de artefatos.</strong> Além de logar o evento, Tracee pode capturar o binário executado, memória em execução, sockets abertos, útil para análise pós-incidente sem precisar voltar ao host.</li>
                     <li><strong>Assinaturas separadas do core.</strong> O motor emite eventos; um runtime de assinaturas (signature engine) avalia-os contra regras. Permite escrever detecções em código (Go) ou política declarativa (Rego).</li>
-                    <li><strong>Foco em behaviors complexos.</strong> Detecções multi-step encadeadas — por exemplo, processo que faz <code>memfd_create</code> seguido de <code>execve</code> a partir de file descriptor (técnica fileless clássica).</li>
+                    <li><strong>Foco em behaviors complexos.</strong> Detecções multi-step encadeadas, por exemplo, processo que faz <code>memfd_create</code> seguido de <code>execve</code> a partir de file descriptor (técnica fileless clássica).</li>
                 </ul>
 
                 <p>
@@ -455,9 +455,9 @@ spec:
                             </tr>
                             <tr>
                                 <td><strong>Maturidade comunidade</strong></td>
-                                <td>Alta — referência de mercado</td>
-                                <td>Crescente — adoção corporativa rápida</td>
-                                <td>Média — nicho de detection engineering</td>
+                                <td>Alta, referência de mercado</td>
+                                <td>Crescente, adoção corporativa rápida</td>
+                                <td>Média, nicho de detection engineering</td>
                             </tr>
                         </tbody>
                     </table>
@@ -476,7 +476,7 @@ spec:
                     <div class="pillar-card integrity">
                         <div class="icon"><i class="fas fa-bolt"></i></div>
                         <h3>Use Tetragon se...</h3>
-                        <p>Seu ambiente é Kubernetes-first, você precisa de <strong>enforcement</strong> (não só detectar — bloquear), e/ou já roda Cilium como CNI. TracingPolicies como CRD encaixam-se naturalmente em GitOps.</p>
+                        <p>Seu ambiente é Kubernetes-first, você precisa de <strong>enforcement</strong> (não só detectar, bloquear), e/ou já roda Cilium como CNI. TracingPolicies como CRD encaixam-se naturalmente em GitOps.</p>
                     </div>
                     <div class="pillar-card availability">
                         <div class="icon"><i class="fas fa-search"></i></div>
@@ -492,7 +492,7 @@ spec:
                 <h2 id="limitacoes">Limitações reais e armadilhas</h2>
 
                 <p>
-                    eBPF não é mágica — e ferramentas baseadas nele herdam três classes de problemas que devem entrar no plano de capacity e gestão de risco:
+                    eBPF não é mágica, e ferramentas baseadas nele herdam três classes de problemas que devem entrar no plano de capacity e gestão de risco:
                 </p>
 
                 <div class="phase-card">
@@ -504,7 +504,7 @@ spec:
                 <div class="phase-card">
                     <div class="phase-number">2</div>
                     <h3>False positives e ruído</h3>
-                    <p>Regras prontas, especialmente "shell em container", produzem ruído em pipelines de CI/CD e workloads que legitimamente fazem exec (Helm hooks, init containers, jobs operacionais). Tuning é trabalho contínuo — não item de instalação. Sem tuning, a fadiga de alerta corrói o SOC em semanas.</p>
+                    <p>Regras prontas, especialmente "shell em container", produzem ruído em pipelines de CI/CD e workloads que legitimamente fazem exec (Helm hooks, init containers, jobs operacionais). Tuning é trabalho contínuo, não item de instalação. Sem tuning, a fadiga de alerta corrói o SOC em semanas.</p>
                 </div>
 
                 <div class="phase-card">
@@ -516,18 +516,18 @@ spec:
                 <div class="phase-card">
                     <div class="phase-number">4</div>
                     <h3>Verificador rejeitando programas legítimos</h3>
-                    <p>Em regras complexas (especialmente em Tetragon com selectors aninhados), o verificador pode rejeitar o programa por exceder limite de instruções, complexidade, ou indireções. Não é falha rara — exige decomposição da política em programas menores.</p>
+                    <p>Em regras complexas (especialmente em Tetragon com selectors aninhados), o verificador pode rejeitar o programa por exceder limite de instruções, complexidade, ou indireções. Não é falha rara, exige decomposição da política em programas menores.</p>
                 </div>
 
                 <div class="phase-card">
                     <div class="phase-number">5</div>
                     <h3>Complexidade operacional</h3>
-                    <p>Cada ferramenta traz seu próprio ciclo de vida: chart Helm, CRDs, RBAC, telemetria, atualização de regras. Em clusters de centenas de nós, é trabalho de plataforma real — não "instalar e esquecer". Versione regras em Git como qualquer outro código de infraestrutura.</p>
+                    <p>Cada ferramenta traz seu próprio ciclo de vida: chart Helm, CRDs, RBAC, telemetria, atualização de regras. Em clusters de centenas de nós, é trabalho de plataforma real, não "instalar e esquecer". Versione regras em Git como qualquer outro código de infraestrutura.</p>
                 </div>
 
                 <div class="warning-box">
                     <h3><i class="fas fa-exclamation-triangle"></i> Atenção ao enforcement em produção</h3>
-                    <p>A maior tentação ao adotar Tetragon é ligar enforcement (SIGKILL/override) cedo demais. Uma regra mal calibrada que mata processos em um namespace crítico cria um incidente <em>causado</em> pelo controle. <strong>Rode em modo audit por semanas</strong>, analise as detecções, valide casos de uso legítimos, e só então promova regra-por-regra para enforcement. Em rollback, você deve conseguir desativar a TracingPolicy em segundos — pratique isso.</p>
+                    <p>A maior tentação ao adotar Tetragon é ligar enforcement (SIGKILL/override) cedo demais. Uma regra mal calibrada que mata processos em um namespace crítico cria um incidente <em>causado</em> pelo controle. <strong>Rode em modo audit por semanas</strong>, analise as detecções, valide casos de uso legítimos, e só então promova regra-por-regra para enforcement. Em rollback, você deve conseguir desativar a TracingPolicy em segundos, pratique isso.</p>
                 </div>
 
                 <h2 id="pipeline">Pipeline típico: do kernel ao SIEM</h2>
@@ -537,11 +537,11 @@ spec:
                 </p>
 
                 <ol>
-                    <li><strong>Coleta no kernel</strong> — Falco (driver modern_bpf) ou Tetragon (eBPF nativo) instrumentam pontos relevantes (tracepoints de syscall, LSM hooks, kprobes selecionadas).</li>
-                    <li><strong>Filtragem e correlação no agente</strong> — eventos irrelevantes são descartados ainda no kernel; eventos relevantes recebem enrichment com contexto de container/pod/namespace.</li>
-                    <li><strong>Fan-out (falcosidekick / Hubble exporters)</strong> — o evento é roteado a múltiplos destinos conforme severidade: SIEM corporativo, datalake, canal de chat, ticketing.</li>
-                    <li><strong>Normalização e enriquecimento</strong> — em pipelines maduros, Vector ou Logstash convertem para um schema padrão (ECS, OCSF), agregam tags de business, anexam owner do serviço, mapeiam a MITRE.</li>
-                    <li><strong>Detecção e resposta no SIEM/SOAR</strong> — Splunk, Sentinel, Elastic ou similar correlacionam com outras fontes (identidade, EDR, cloud audit logs) e disparam playbook de resposta — automatizada para casos baixa-severidade, com humano no loop para alta.</li>
+                    <li><strong>Coleta no kernel</strong>: Falco (driver modern_bpf) ou Tetragon (eBPF nativo) instrumentam pontos relevantes (tracepoints de syscall, LSM hooks, kprobes selecionadas).</li>
+                    <li><strong>Filtragem e correlação no agente</strong>, eventos irrelevantes são descartados ainda no kernel; eventos relevantes recebem enrichment com contexto de container/pod/namespace.</li>
+                    <li><strong>Fan-out (falcosidekick / Hubble exporters)</strong>, o evento é roteado a múltiplos destinos conforme severidade: SIEM corporativo, datalake, canal de chat, ticketing.</li>
+                    <li><strong>Normalização e enriquecimento</strong>: em pipelines maduros, Vector ou Logstash convertem para um schema padrão (ECS, OCSF), agregam tags de business, anexam owner do serviço, mapeiam a MITRE.</li>
+                    <li><strong>Detecção e resposta no SIEM/SOAR</strong> (Splunk, Sentinel, Elastic ou similar correlacionam com outras fontes (identidade, EDR, cloud audit logs) e disparam playbook de resposta) automatizada para casos baixa-severidade, com humano no loop para alta.</li>
                 </ol>
 
                 <p>
@@ -549,7 +549,7 @@ spec:
                 </p>
 
                 <p>
-                    Para a comparação ampla entre stacks de detecção e resposta — incluindo onde runtime security se encaixa frente a EDR e XDR — veja o comparador <a href="../../comparadores/edr-vs-xdr-vs-mdr/">EDR vs XDR vs MDR</a>. Para o contexto de segurança de containers e cluster, o artigo <a href="../kubernetes-container-security/">Kubernetes &amp; Container Security</a> traz o panorama de controles complementares, e o de <a href="../devsecops-seguranca-desenvolvimento/">DevSecOps</a> aborda o lado de pipeline.
+                    Para a comparação ampla entre stacks de detecção e resposta, incluindo onde runtime security se encaixa frente a EDR e XDR, veja o comparador <a href="../../comparadores/edr-vs-xdr-vs-mdr/">EDR vs XDR vs MDR</a>. Para o contexto de segurança de containers e cluster, o artigo <a href="../kubernetes-container-security/">Kubernetes &amp; Container Security</a> traz o panorama de controles complementares, e o de <a href="../devsecops-seguranca-desenvolvimento/">DevSecOps</a> aborda o lado de pipeline.
                 </p>
 
                 <h2 id="faq">Perguntas frequentes</h2>
@@ -584,28 +584,28 @@ spec:
                 <h2 id="conclusao">Conclusão</h2>
 
                 <p>
-                    eBPF deixou de ser feature obscura de kernel e virou base do stack moderno de runtime security em Linux e Kubernetes. Para times de SecOps e plataforma, isso significa que finalmente é possível ter <em>visibilidade profunda, portabilidade e estabilidade simultaneamente</em> — algo que kernel modules, auditd e LD_PRELOAD nunca entregaram juntos.
+                    eBPF deixou de ser feature obscura de kernel e virou base do stack moderno de runtime security em Linux e Kubernetes. Para times de SecOps e plataforma, isso significa que finalmente é possível ter <em>visibilidade profunda, portabilidade e estabilidade simultaneamente</em>, algo que kernel modules, auditd e LD_PRELOAD nunca entregaram juntos.
                 </p>
 
                 <p>
-                    O ecossistema oferece três projetos open source com personalidades complementares. <strong>Falco</strong> é a aposta segura para detecção generalista, com regras maduras, comunidade ampla e integração trivial com SIEM. <strong>Cilium Tetragon</strong> é a escolha quando enforcement Kubernetes-native está na mesa — bloqueio em kernel, identidade Cilium, TracingPolicy via GitOps. <strong>Tracee</strong> brilha em times de detection engineering avançado que querem expressar lógica complexa em código e capturar artefatos para forense.
+                    O ecossistema oferece três projetos open source com personalidades complementares. <strong>Falco</strong> é a aposta segura para detecção generalista, com regras maduras, comunidade ampla e integração trivial com SIEM. <strong>Cilium Tetragon</strong> é a escolha quando enforcement Kubernetes-native está na mesa: bloqueio em kernel, identidade Cilium, TracingPolicy via GitOps. <strong>Tracee</strong> brilha em times de detection engineering avançado que querem expressar lógica complexa em código e capturar artefatos para forense.
                 </p>
 
                 <p>
-                    O caminho prático de adoção é incremental: comece com Falco em modo detecção em todos os nós, calibre regras durante 4–8 semanas, integre ao SIEM, mapeie a MITRE ATT&amp;CK, mensure ruído. Quando o motor de detecção estiver estável, avalie Tetragon para enforcement seletivo em workloads críticos. Tracee entra sob demanda específica de DFIR. Em paralelo, mantenha disciplina de versionamento de regras, testes em pré-prod e tuning contínuo — eBPF não substitui processo, apenas dá ao processo uma base técnica muito melhor.
+                    O caminho prático de adoção é incremental: comece com Falco em modo detecção em todos os nós, calibre regras durante 4–8 semanas, integre ao SIEM, mapeie a MITRE ATT&amp;CK, mensure ruído. Quando o motor de detecção estiver estável, avalie Tetragon para enforcement seletivo em workloads críticos. Tracee entra sob demanda específica de DFIR. Em paralelo, mantenha disciplina de versionamento de regras, testes em pré-prod e tuning contínuo, eBPF não substitui processo, apenas dá ao processo uma base técnica muito melhor.
                 </p>
 
                 <h2 id="referencias">Referências</h2>
 
                 <ul class="references-list">
-                    <li>eBPF Foundation. <em>What is eBPF? — Project hub e documentação</em>. Disponível em: <a href="https://ebpf.io/" target="_blank" rel="noopener nofollow">ebpf.io</a>.</li>
+                    <li>eBPF Foundation. <em>What is eBPF?, Project hub e documentação</em>. Disponível em: <a href="https://ebpf.io/" target="_blank" rel="noopener nofollow">ebpf.io</a>.</li>
                     <li>The Linux Kernel Documentation. <em>BPF and XDP Reference Guide</em>. Disponível em: <a href="https://docs.kernel.org/bpf/" target="_blank" rel="noopener nofollow">docs.kernel.org/bpf</a>.</li>
                     <li>The Falco Project (CNCF Graduated). <em>Falco Documentation, drivers e regras</em>. Disponível em: <a href="https://falco.org/docs/" target="_blank" rel="noopener nofollow">falco.org/docs</a>.</li>
-                    <li>Cilium / Isovalent. <em>Tetragon — Security Observability and Runtime Enforcement</em>. Disponível em: <a href="https://tetragon.io/" target="_blank" rel="noopener nofollow">tetragon.io</a>; código em <a href="https://github.com/cilium/tetragon" target="_blank" rel="noopener nofollow">github.com/cilium/tetragon</a>.</li>
-                    <li>Aqua Security. <em>Tracee — Runtime Security and Forensics using eBPF</em>. Disponível em: <a href="https://github.com/aquasecurity/tracee" target="_blank" rel="noopener nofollow">github.com/aquasecurity/tracee</a>.</li>
-                    <li>MITRE Corporation. <em>ATT&amp;CK for Enterprise — Tactics and Techniques</em>. Disponível em: <a href="https://attack.mitre.org/" target="_blank" rel="noopener nofollow">attack.mitre.org</a>.</li>
-                    <li>CNCF. <em>Cloud Native Landscape — Runtime Security category</em>. Disponível em: <a href="https://landscape.cncf.io/" target="_blank" rel="noopener nofollow">landscape.cncf.io</a>.</li>
-                    <li>Brendan Gregg. <em>BPF Performance Tools — Linux System and Application Observability</em>. Addison-Wesley, 2019.</li>
+                    <li>Cilium / Isovalent. <em>Tetragon, Security Observability and Runtime Enforcement</em>. Disponível em: <a href="https://tetragon.io/" target="_blank" rel="noopener nofollow">tetragon.io</a>; código em <a href="https://github.com/cilium/tetragon" target="_blank" rel="noopener nofollow">github.com/cilium/tetragon</a>.</li>
+                    <li>Aqua Security. <em>Tracee, Runtime Security and Forensics using eBPF</em>. Disponível em: <a href="https://github.com/aquasecurity/tracee" target="_blank" rel="noopener nofollow">github.com/aquasecurity/tracee</a>.</li>
+                    <li>MITRE Corporation. <em>ATT&amp;CK for Enterprise, Tactics and Techniques</em>. Disponível em: <a href="https://attack.mitre.org/" target="_blank" rel="noopener nofollow">attack.mitre.org</a>.</li>
+                    <li>CNCF. <em>Cloud Native Landscape, Runtime Security category</em>. Disponível em: <a href="https://landscape.cncf.io/" target="_blank" rel="noopener nofollow">landscape.cncf.io</a>.</li>
+                    <li>Brendan Gregg. <em>BPF Performance Tools, Linux System and Application Observability</em>. Addison-Wesley, 2019.</li>
                 </ul>
 
                 <div class="cta-box">

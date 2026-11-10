@@ -255,7 +255,7 @@
                 </div>
 
                 <p>
-                    Em opera&#231;&#245;es ofensivas avan&#231;adas &mdash; sejam de atacantes reais ou exerc&#237;cios de <a href="../red-team-blue-team-purple-team/">Red Team</a> &mdash; o servidor de Comando e Controle (C2) &#233; o cora&#231;&#227;o da opera&#231;&#227;o. Se o Blue Team identifica e bloqueia o C2, toda a campanha &#233; neutralizada. Por isso, atacantes sofisticados nunca exp&#245;em o C2 diretamente: eles usam <strong>redirectors</strong>.
+                    Em opera&#231;&#245;es ofensivas avan&#231;adas, sejam de atacantes reais ou exerc&#237;cios de <a href="../red-team-blue-team-purple-team/">Red Team</a>, o servidor de Comando e Controle (C2) &#233; o cora&#231;&#227;o da opera&#231;&#227;o. Se o Blue Team identifica e bloqueia o C2, toda a campanha &#233; neutralizada. Por isso, atacantes sofisticados nunca exp&#245;em o C2 diretamente: eles usam <strong>redirectors</strong>.
                 </p>
 
                 <p>
@@ -273,38 +273,38 @@
                     <div class="label">dos grupos APT utilizam alguma forma de redirecionamento de tr&#225;fego C2 para ocultar infraestrutura (MITRE ATT&amp;CK T1090)</div>
                 </div>
 
-                <p>Se o redirector for descoberto e bloqueado, o atacante simplesmente substitui por outro &mdash; o C2 real permanece intacto e operacional. &#201; infraestrutura <strong>descart&#225;vel por design</strong>.</p>
+                <p>Se o redirector for descoberto e bloqueado, o atacante simplesmente substitui por outro, o C2 real permanece intacto e operacional. &#201; infraestrutura <strong>descart&#225;vel por design</strong>.</p>
 
                 <h2 id="cadeia">Cadeia de comunica&#231;&#227;o C2</h2>
 
                 <div class="concept-card">
                     <p><strong><i class="fas fa-project-diagram" style="color:#60A5FA;margin-right:10px"></i> Fluxo de tr&#225;fego em 4 camadas</strong></p>
                     <ul>
-                        <li><strong>Camada 1 &mdash; Implant:</strong> c&#243;digo malicioso na m&#225;quina da v&#237;tima. Envia beacons e recebe comandos</li>
-                        <li><strong>Camada 2 &mdash; Redirector(s):</strong> servidor(es) intermedi&#225;rio(s) que recebem o tr&#225;fego e encaminham. Descart&#225;veis</li>
-                        <li><strong>Camada 3 &mdash; Filtragem (opcional):</strong> camada de valida&#231;&#227;o que verifica se o tr&#225;fego &#233; do implant antes de encaminhar</li>
-                        <li><strong>Camada 4 &mdash; Team Server (C2):</strong> servidor real de comando e controle. Nunca exposto diretamente &#224; internet</li>
+                        <li><strong>Camada 1, Implant:</strong> c&#243;digo malicioso na m&#225;quina da v&#237;tima. Envia beacons e recebe comandos</li>
+                        <li><strong>Camada 2, Redirector(s):</strong> servidor(es) intermedi&#225;rio(s) que recebem o tr&#225;fego e encaminham. Descart&#225;veis</li>
+                        <li><strong>Camada 3, Filtragem (opcional):</strong> camada de valida&#231;&#227;o que verifica se o tr&#225;fego &#233; do implant antes de encaminhar</li>
+                        <li><strong>Camada 4, Team Server (C2):</strong> servidor real de comando e controle. Nunca exposto diretamente &#224; internet</li>
                     </ul>
                 </div>
 
-                <p>Para a rede da v&#237;tima, todo o tr&#225;fego parece ir para o redirector &mdash; que pode ser um dom&#237;nio leg&#237;timo, um CDN ou um IP aparentemente inofensivo. O C2 real &#233; invis&#237;vel.</p>
+                <p>Para a rede da v&#237;tima, todo o tr&#225;fego parece ir para o redirector, que pode ser um dom&#237;nio leg&#237;timo, um CDN ou um IP aparentemente inofensivo. O C2 real &#233; invis&#237;vel.</p>
 
                 <h2 id="tipos">Tipos de redirectors</h2>
 
                 <h3>Redirector simples (dumb)</h3>
 
-                <p>Encaminha <strong>todo</strong> o tr&#225;fego indiscriminadamente para o C2. Implementado com ferramentas como <code>socat</code> ou regras <code>iptables</code>. R&#225;pido de configurar, mas mais f&#225;cil de detectar &mdash; qualquer an&#225;lise do servidor revela o encaminhamento.</p>
+                <p>Encaminha <strong>todo</strong> o tr&#225;fego indiscriminadamente para o C2. Implementado com ferramentas como <code>socat</code> ou regras <code>iptables</code>. R&#225;pido de configurar, mas mais f&#225;cil de detectar, qualquer an&#225;lise do servidor revela o encaminhamento.</p>
 
                 <h3>Redirector inteligente (smart)</h3>
 
-                <p>Inspeciona o tr&#225;fego e <strong>filtra seletivamente</strong>: encaminha apenas requisi&#231;&#245;es que correspondem a padr&#245;es esperados do implant (URIs espec&#237;ficas, headers, user agents). Para qualquer outra requisi&#231;&#227;o, serve conte&#250;do leg&#237;timo &mdash; um site real, blog ou p&#225;gina corporativa. Implementado com Nginx ou Apache com regras de proxy condicional.</p>
+                <p>Inspeciona o tr&#225;fego e <strong>filtra seletivamente</strong>: encaminha apenas requisi&#231;&#245;es que correspondem a padr&#245;es esperados do implant (URIs espec&#237;ficas, headers, user agents). Para qualquer outra requisi&#231;&#227;o, serve conte&#250;do leg&#237;timo, um site real, blog ou p&#225;gina corporativa. Implementado com Nginx ou Apache com regras de proxy condicional.</p>
 
                 <h3>Redirectors por protocolo</h3>
 
                 <div class="concept-card">
                     <p><strong><i class="fas fa-layer-group" style="color:#60A5FA;margin-right:10px"></i> Protocolos mais utilizados</strong></p>
                     <ul>
-                        <li><strong>HTTP/HTTPS:</strong> o mais comum &mdash; se mistura ao tr&#225;fego web normal. Proxy reverso com Nginx ou Apache filtra por URI, headers ou certificado</li>
+                        <li><strong>HTTP/HTTPS:</strong> o mais comum, se mistura ao tr&#225;fego web normal. Proxy reverso com Nginx ou Apache filtra por URI, headers ou certificado</li>
                         <li><strong>DNS:</strong> comunica&#231;&#227;o C2 encapsulada em queries DNS (TXT records). Porta 53 raramente &#233; bloqueada. Baixa largura de banda, mas muito furtivo</li>
                         <li><strong>SMTP:</strong> comandos C2 embutidos em e-mails. Usa Postfix como relay. Oferece persist&#234;ncia store-and-forward</li>
                         <li><strong>ICMP:</strong> dados C2 em payloads de pacotes ping. Raramente monitorado, mas limitado em volume</li>
@@ -320,7 +320,7 @@
                     Uma das t&#233;cnicas mais sofisticadas: o tr&#225;fego C2 &#233; roteado atrav&#233;s de CDNs de alta reputa&#231;&#227;o (CloudFront, Azure Front Door, Fastly). A conex&#227;o TLS vis&#237;vel aponta para o dom&#237;nio da CDN, mas o <strong>header HTTP Host</strong> dentro do t&#250;nel criptografado direciona para o C2 real.
                 </p>
 
-                <p>Para o <a href="../firewall-importancia-tipos-implementacao/">firewall</a> e proxy da organiza&#231;&#227;o, o tr&#225;fego parece ser comunica&#231;&#227;o normal com um servi&#231;o confi&#225;vel &mdash; bloquear significaria bloquear o CDN inteiro.</p>
+                <p>Para o <a href="../firewall-importancia-tipos-implementacao/">firewall</a> e proxy da organiza&#231;&#227;o, o tr&#225;fego parece ser comunica&#231;&#227;o normal com um servi&#231;o confi&#225;vel, bloquear significaria bloquear o CDN inteiro.</p>
 
                 <h3>Modelagem de tr&#225;fego (traffic shaping)</h3>
 
@@ -353,7 +353,7 @@
 
                 <h2 id="deteccao">Como detectar tr&#225;fego C2 com redirectors</h2>
 
-                <p>A detec&#231;&#227;o exige combina&#231;&#227;o de m&#250;ltiplas t&#233;cnicas &mdash; nenhuma isolada &#233; suficiente contra adversários sofisticados.</p>
+                <p>A detec&#231;&#227;o exige combina&#231;&#227;o de m&#250;ltiplas t&#233;cnicas, nenhuma isolada &#233; suficiente contra adversários sofisticados.</p>
 
                 <h3>JA3/JA3S fingerprinting</h3>
 
@@ -363,7 +363,7 @@
 
                 <h3>An&#225;lise de beaconing</h3>
 
-                <p>Implants C2 se comunicam em intervalos &mdash; mesmo com jitter. Ferramentas de <a href="../ndr-deteccao-resposta-rede/">NDR</a> detectam padr&#245;es estat&#237;sticos:</p>
+                <p>Implants C2 se comunicam em intervalos, mesmo com jitter. Ferramentas de <a href="../ndr-deteccao-resposta-rede/">NDR</a> detectam padr&#245;es estat&#237;sticos:</p>
 
                 <ul>
                     <li><strong>Intervalos regulares:</strong> comunica&#231;&#245;es com frequ&#234;ncia previs&#237;vel, mesmo com varia&#231;&#227;o</li>
@@ -458,7 +458,7 @@
 
                 <div class="tip-box">
                     <p><strong><i class="fas fa-lightbulb" style="margin-right:10px"></i> Considera&#231;&#245;es finais</strong></p>
-                    <p>C2 redirectors representam uma das t&#233;cnicas mais eficazes para ocultar opera&#231;&#245;es ofensivas. Para defensores, a chave n&#227;o &#233; tentar bloquear cada redirector individualmente &mdash; eles s&#227;o descart&#225;veis &mdash; mas sim <strong>detectar o padr&#227;o de comportamento C2</strong> independente da infraestrutura.</p>
+                    <p>C2 redirectors representam uma das t&#233;cnicas mais eficazes para ocultar opera&#231;&#245;es ofensivas. Para defensores, a chave n&#227;o &#233; tentar bloquear cada redirector individualmente, eles s&#227;o descart&#225;veis) mas sim <strong>detectar o padr&#227;o de comportamento C2</strong> independente da infraestrutura.</p>
                     <p>Organiza&#231;&#245;es que combinam JA3 fingerprinting, an&#225;lise de beaconing, monitoramento DNS, inspe&#231;&#227;o TLS e <a class="gloss-link" href="/glossario/#cti" title="Ver no gloss&#225;rio">threat intelligence</a> conseguem identificar comunica&#231;&#245;es C2 mesmo quando passam por m&#250;ltiplas camadas de redirecionamento. A detec&#231;&#227;o comportamental supera a detec&#231;&#227;o baseada em IOCs quando o advers&#225;rio rotaciona infraestrutura constantemente.</p>
                 </div>
 
@@ -486,13 +486,13 @@
                 <div class="concept-card">
                     <h3><i class="fas fa-book" style="color:#60A5FA;margin-right:10px"></i> Fontes e refer&#234;ncias t&#233;cnicas</h3>
                     <ul>
-                        <li>MITRE ATT&amp;CK &mdash; T1090 (Proxy), T1071 (Application Layer Protocol), T1572 (Protocol Tunneling)</li>
-                        <li>MITRE ATT&amp;CK &mdash; T1090.004 (Domain Fronting)</li>
-                        <li>Salesforce &mdash; JA3: SSL/TLS Client Fingerprinting</li>
-                        <li>xbz0n.sh &mdash; C2 Redirectors: A Practical Guide</li>
-                        <li>SANS &mdash; Detecting C2 Frameworks with Network Analysis</li>
-                        <li>Cobalt Strike &mdash; Infrastructure Best Practices</li>
-                        <li>Mandiant &mdash; APT Infrastructure Tracking</li>
+                        <li>MITRE ATT&amp;CK: T1090 (Proxy), T1071 (Application Layer Protocol), T1572 (Protocol Tunneling)</li>
+                        <li>MITRE ATT&amp;CK, T1090.004 (Domain Fronting)</li>
+                        <li>Salesforce, JA3: SSL/TLS Client Fingerprinting</li>
+                        <li>xbz0n.sh, C2 Redirectors: A Practical Guide</li>
+                        <li>SANS, Detecting C2 Frameworks with Network Analysis</li>
+                        <li>Cobalt Strike, Infrastructure Best Practices</li>
+                        <li>Mandiant, APT Infrastructure Tracking</li>
                     </ul>
                 </div>
 

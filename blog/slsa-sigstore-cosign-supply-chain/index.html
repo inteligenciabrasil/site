@@ -179,7 +179,7 @@
 
                 <div class="warning-box" style="border-left-color:#f59e0b;background:linear-gradient(145deg,rgba(245,158,11,.08) 0%,rgba(180,83,9,.04) 100%);border-color:rgba(245,158,11,.4)">
                     <p class="warning-title" style="margin:0 0 .5rem;color:#fcd34d;font-weight:700;font-size:1.05rem"><i class="fas fa-info-circle"></i> <strong>Sobre este conteúdo</strong></p>
-                    <p style="color:#cbd5e1">Este artigo é uma leitura prática de SLSA v1.0 e do ecossistema Sigstore para times de engenharia de plataforma, AppSec e DevSecOps. Os comandos e snippets seguem comportamento documentado das ferramentas, mas <strong>versões mudam</strong> — sempre confira a documentação oficial do <em>Cosign</em>, do <em>slsa-github-generator</em> e do <em>policy-controller</em> antes de promover para produção.</p>
+                    <p style="color:#cbd5e1">Este artigo é uma leitura prática de SLSA v1.0 e do ecossistema Sigstore para times de engenharia de plataforma, AppSec e DevSecOps. Os comandos e snippets seguem comportamento documentado das ferramentas, mas <strong>versões mudam</strong>, sempre confira a documentação oficial do <em>Cosign</em>, do <em>slsa-github-generator</em> e do <em>policy-controller</em> antes de promover para produção.</p>
                 </div>
 
                 <div class="toc">
@@ -204,7 +204,7 @@
                 <h2 id="contexto">Por que proveniência verificável virou requisito</h2>
 
                 <p>
-                    Os ataques mais relevantes da última década não exploraram apenas vulnerabilidades em código — eles exploraram <strong>confiança implícita</strong> na cadeia de produção. <em>SolarWinds</em> (2020) injetou backdoor no build pipeline da Orion, distribuindo malware via update assinado legitimamente. <em>Codecov</em> (2021) teve o uploader Bash modificado e exfiltrou variáveis de ambiente de milhares de CIs. <em>ua-parser-js</em> (2021) e <em>event-stream</em> (2018) tiveram pacotes npm comprometidos via takeover de mantenedor ou de dependência transitiva. <em>Log4Shell</em> (Log4j) não foi supply chain stricto sensu, mas exibiu como uma vulnerabilidade em dependência ubíqua se propaga em horas para milhões de sistemas.
+                    Os ataques mais relevantes da última década não exploraram apenas vulnerabilidades em código, eles exploraram <strong>confiança implícita</strong> na cadeia de produção. <em>SolarWinds</em> (2020) injetou backdoor no build pipeline da Orion, distribuindo malware via update assinado legitimamente. <em>Codecov</em> (2021) teve o uploader Bash modificado e exfiltrou variáveis de ambiente de milhares de CIs. <em>ua-parser-js</em> (2021) e <em>event-stream</em> (2018) tiveram pacotes npm comprometidos via takeover de mantenedor ou de dependência transitiva. <em>Log4Shell</em> (Log4j) não foi supply chain stricto sensu, mas exibiu como uma vulnerabilidade em dependência ubíqua se propaga em horas para milhões de sistemas.
                 </p>
 
                 <p>
@@ -212,7 +212,7 @@
                 </p>
 
                 <p>
-                    A resposta da indústria — formalizada na <strong>OpenSSF</strong>, na ordem executiva norte-americana 14028 e em legislações europeias subsequentes — foi exigir <strong>proveniência verificável</strong>: o artefato deve vir acompanhado de uma declaração assinada de <em>quem o produziu, a partir de qual código-fonte, em qual ambiente, com quais dependências</em>. E essa declaração precisa ser verificável de forma criptograficamente forte, idealmente sem depender de gestão manual de chaves pelo desenvolvedor.
+                    A resposta da indústria, formalizada na <strong>OpenSSF</strong>, na ordem executiva norte-americana 14028 e em legislações europeias subsequentes, foi exigir <strong>proveniência verificável</strong>: o artefato deve vir acompanhado de uma declaração assinada de <em>quem o produziu, a partir de qual código-fonte, em qual ambiente, com quais dependências</em>. E essa declaração precisa ser verificável de forma criptograficamente forte, idealmente sem depender de gestão manual de chaves pelo desenvolvedor.
                 </p>
 
                 <p>
@@ -222,7 +222,7 @@
                 <h2 id="slsa">SLSA v1.0: framework, tracks e níveis</h2>
 
                 <p>
-                    <strong>SLSA</strong> (Supply chain Levels for Software Artifacts, pronuncia-se "salsa") é um projeto da OpenSSF que define níveis incrementais de garantia sobre a cadeia de produção de software. A versão <strong>1.0</strong>, publicada em junho de 2023, reorganizou o framework em <em>tracks</em> — cada track foca em uma propriedade específica e tem seus próprios níveis. Hoje o track maduro e estabilizado é o <strong>Build Track</strong>, que trata do processo de build e da proveniência produzida.
+                    <strong>SLSA</strong> (Supply chain Levels for Software Artifacts, pronuncia-se "salsa") é um projeto da OpenSSF que define níveis incrementais de garantia sobre a cadeia de produção de software. A versão <strong>1.0</strong>, publicada em junho de 2023, reorganizou o framework em <em>tracks</em>, cada track foca em uma propriedade específica e tem seus próprios níveis. Hoje o track maduro e estabilizado é o <strong>Build Track</strong>, que trata do processo de build e da proveniência produzida.
                 </p>
 
                 <div class="comparison-table">
@@ -240,22 +240,22 @@
                 </div>
 
                 <p>
-                    Há discussão na comunidade sobre tracks adicionais (Source Track para garantias sobre o repositório de código, Dependencies Track para a árvore de dependências), mas em 2026 a recomendação prática é: <strong>foque em Build L2 como meta inicial e em L3 para artefatos críticos</strong>. Versões anteriores do SLSA (pré-1.0) mencionavam um L4 que foi removido — não persiga L4, ele não existe na especificação atual.
+                    Há discussão na comunidade sobre tracks adicionais (Source Track para garantias sobre o repositório de código, Dependencies Track para a árvore de dependências), mas em 2026 a recomendação prática é: <strong>foque em Build L2 como meta inicial e em L3 para artefatos críticos</strong>. Versões anteriores do SLSA (pré-1.0) mencionavam um L4 que foi removido, não persiga L4, ele não existe na especificação atual.
                 </p>
 
                 <h2 id="provenance">Build provenance e o formato in-toto</h2>
 
                 <p>
-                    Proveniência, no contexto SLSA, é uma <em>attestation</em>: uma declaração estruturada, assinada, que descreve como um artefato foi produzido. O formato de referência é o <strong>in-toto attestation framework</strong> — JSON com dois campos centrais:
+                    Proveniência, no contexto SLSA, é uma <em>attestation</em>: uma declaração estruturada, assinada, que descreve como um artefato foi produzido. O formato de referência é o <strong>in-toto attestation framework</strong>, JSON com dois campos centrais:
                 </p>
 
                 <ul>
-                    <li><code>subject</code> — o que está sendo atestado (lista de artefatos com seus digests SHA-256);</li>
-                    <li><code>predicate</code> — o conteúdo da declaração, cujo schema é definido pelo <code>predicateType</code>. Para SLSA, é <code>https://slsa.dev/provenance/v1</code>.</li>
+                    <li><code>subject</code>, o que está sendo atestado (lista de artefatos com seus digests SHA-256);</li>
+                    <li><code>predicate</code>, o conteúdo da declaração, cujo schema é definido pelo <code>predicateType</code>. Para SLSA, é <code>https://slsa.dev/provenance/v1</code>.</li>
                 </ul>
 
                 <p>
-                    Um predicate SLSA v1.0 contém, entre outros campos, <code>buildDefinition</code> (qual builder, qual workflow, qual ref/commit, quais parâmetros e entradas externas) e <code>runDetails</code> (qual invocação específica, metadados, dependências resolvidas). Em build do GitHub Actions, o predicate referencia o repositório, o SHA do commit, o nome do workflow, o ref que disparou — tudo o que o verificador precisa para responder "esse binário veio mesmo daquele código?".
+                    Um predicate SLSA v1.0 contém, entre outros campos, <code>buildDefinition</code> (qual builder, qual workflow, qual ref/commit, quais parâmetros e entradas externas) e <code>runDetails</code> (qual invocação específica, metadados, dependências resolvidas). Em build do GitHub Actions, o predicate referencia o repositório, o SHA do commit, o nome do workflow, o ref que disparou. Tudo o que o verificador precisa para responder "esse binário veio mesmo daquele código?".
                 </p>
 
                 <p>
@@ -292,7 +292,7 @@
                 </div>
 
                 <p>
-                    A instância pública é <code>fulcio.sigstore.dev</code> + <code>rekor.sigstore.dev</code> e é gratuita. Para ambientes que exigem soberania de dados ou maior controle, é possível operar uma instância privada — todas as três peças têm Helm charts oficiais. Em 2026, a maioria das organizações começa pela instância pública e migra para privada apenas quando há requisito regulatório explícito.
+                    A instância pública é <code>fulcio.sigstore.dev</code> + <code>rekor.sigstore.dev</code> e é gratuita. Para ambientes que exigem soberania de dados ou maior controle, é possível operar uma instância privada, todas as três peças têm Helm charts oficiais. Em 2026, a maioria das organizações começa pela instância pública e migra para privada apenas quando há requisito regulatório explícito.
                 </p>
 
                 <h2 id="keyless">Como funciona o keyless signing na prática</h2>
@@ -322,7 +322,7 @@
                 <div class="phase-card">
                     <div class="phase-number">4</div>
                     <h3>Assinatura e gravação no Rekor</h3>
-                    <p>O Cosign assina o digest do artefato (ou a envelope DSSE da attestation) com a chave efêmera, e submete a assinatura + certificado ao Rekor. O Rekor retorna uma <em>inclusion proof</em> — prova criptográfica de que a entrada foi incluída no log.</p>
+                    <p>O Cosign assina o digest do artefato (ou a envelope DSSE da attestation) com a chave efêmera, e submete a assinatura + certificado ao Rekor. O Rekor retorna uma <em>inclusion proof</em>, prova criptográfica de que a entrada foi incluída no log.</p>
                 </div>
 
                 <div class="phase-card">
@@ -336,7 +336,7 @@
                 </p>
 
                 <p>
-                    Comandos típicos (versões recentes do Cosign — 2.x — habilitam keyless por default; em versões anteriores era preciso <code>COSIGN_EXPERIMENTAL=1</code>):
+                    Comandos típicos (versões recentes do Cosign, 2.x, habilitam keyless por default; em versões anteriores era preciso <code>COSIGN_EXPERIMENTAL=1</code>):
                 </p>
 
                 <pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code># Assinatura keyless de uma imagem OCI
@@ -373,7 +373,7 @@ cosign verify-attestation \
                 </p>
 
                 <p>
-                    Snippet exemplificativo (estrutura essencial — adapte aos seus secrets, labels e tags):
+                    Snippet exemplificativo (estrutura essencial, adapte aos seus secrets, labels e tags):
                 </p>
 
                 <pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>name: release
@@ -447,7 +447,7 @@ jobs:
                 </div>
 
                 <p>
-                    Exemplo de política Kyverno que exige assinatura keyless válida para uma identidade GitHub Actions específica (esqueleto — adapte ao seu schema e versão):
+                    Exemplo de política Kyverno que exige assinatura keyless válida para uma identidade GitHub Actions específica (esqueleto, adapte ao seu schema e versão):
                 </p>
 
                 <pre style="background:rgba(0,0,0,.35);color:#A5F3FC;padding:1rem;border-radius:.4rem;overflow-x:auto;font-family:'JetBrains Mono',monospace,sans-serif;font-size:.88rem;line-height:1.55"><code>apiVersion: kyverno.io/v2beta1
@@ -484,7 +484,7 @@ spec:
                 </p>
 
                 <p>
-                    Em GitHub Actions, o caminho prático é o <strong>slsa-github-generator</strong>: um reusable workflow oficial mantido pela OpenSSF que executa em um job separado, com permissões restritas, sem acesso ao código do build. Ele recebe os hashes do artefato produzido, monta a attestation SLSA e a assina keyless, sem rodar nada do projeto. Como o gerador roda em workflow <em>reusable</em> com SHA fixo e identidade própria, a proveniência fica vinculada a essa identidade — não à do workflow do projeto, o que impede que código malicioso no repositório falsifique a attestation.
+                    Em GitHub Actions, o caminho prático é o <strong>slsa-github-generator</strong>: um reusable workflow oficial mantido pela OpenSSF que executa em um job separado, com permissões restritas, sem acesso ao código do build. Ele recebe os hashes do artefato produzido, monta a attestation SLSA e a assina keyless, sem rodar nada do projeto. Como o gerador roda em workflow <em>reusable</em> com SHA fixo e identidade própria, a proveniência fica vinculada a essa identidade, não à do workflow do projeto, o que impede que código malicioso no repositório falsifique a attestation.
                 </p>
 
                 <p>
@@ -492,10 +492,10 @@ spec:
                 </p>
 
                 <ul>
-                    <li><strong>Hermeticidade do build</strong> — entradas declaradas, sem network access durante a build, dependências resolvidas em proxy controlado;</li>
-                    <li><strong>Reprodutibilidade</strong> — build do mesmo commit em ambiente equivalente produz o mesmo hash;</li>
+                    <li><strong>Hermeticidade do build</strong>: entradas declaradas, sem network access durante a build, dependências resolvidas em proxy controlado;</li>
+                    <li><strong>Reprodutibilidade</strong>, build do mesmo commit em ambiente equivalente produz o mesmo hash;</li>
                     <li><strong>Pin de actions de terceiros</strong> por commit SHA, nunca por tag mutável;</li>
-                    <li><strong>Segregação de segredos de release</strong> — credenciais de push só existem no job de release, não no job de build;</li>
+                    <li><strong>Segregação de segredos de release</strong>, credenciais de push só existem no job de release, não no job de build;</li>
                     <li><strong>Revisão obrigatória</strong> de mudanças no workflow de release (CODEOWNERS).</li>
                 </ul>
 
@@ -506,9 +506,9 @@ spec:
                 </p>
 
                 <ul>
-                    <li><strong>EO 14028 (Estados Unidos, 2021)</strong> — Executive Order sobre cibersegurança da União que exigiu, via guidance NIST SP 800-218 (SSDF) e M-22-18 / M-23-16 da OMB, que fornecedores de software ao governo federal atestem práticas seguras de desenvolvimento. SBOM e <em>self-attestation</em> de aderência ao SSDF são exigidos; SLSA é referenciado como caminho técnico aceitável para evidenciar várias dessas práticas.</li>
-                    <li><strong>CRA — Cyber Resilience Act (UE, 2024)</strong> — regula produtos com elementos digitais colocados no mercado europeu. Fabricantes terão de fornecer <a class="gloss-link" href="/glossario/#sbom" title="Ver no glossário">SBOM</a>, gerir vulnerabilidades durante o ciclo de vida e demonstrar processo de desenvolvimento seguro. Proveniência verificável é um habilitador natural — veja o detalhamento em <a href="../cyber-resilience-act-cra-fabricantes/">CRA para fabricantes</a>.</li>
-                    <li><strong>NIS2 (UE, 2024)</strong> — obriga entidades essenciais e importantes a gerirem riscos de cadeia de suprimentos, incluindo a integridade dos componentes de software adquiridos. Verificação de assinatura e proveniência em admission de produção é um controle direto contra esse requisito.</li>
+                    <li><strong>EO 14028 (Estados Unidos, 2021)</strong>: Executive Order sobre cibersegurança da União que exigiu, via guidance NIST SP 800-218 (SSDF) e M-22-18 / M-23-16 da OMB, que fornecedores de software ao governo federal atestem práticas seguras de desenvolvimento. SBOM e <em>self-attestation</em> de aderência ao SSDF são exigidos; SLSA é referenciado como caminho técnico aceitável para evidenciar várias dessas práticas.</li>
+                    <li><strong>CRA, Cyber Resilience Act (UE, 2024)</strong>, regula produtos com elementos digitais colocados no mercado europeu. Fabricantes terão de fornecer <a class="gloss-link" href="/glossario/#sbom" title="Ver no glossário">SBOM</a>, gerir vulnerabilidades durante o ciclo de vida e demonstrar processo de desenvolvimento seguro. Proveniência verificável é um habilitador natural, veja o detalhamento em <a href="../cyber-resilience-act-cra-fabricantes/">CRA para fabricantes</a>.</li>
+                    <li><strong>NIS2 (UE, 2024)</strong>, obriga entidades essenciais e importantes a gerirem riscos de cadeia de suprimentos, incluindo a integridade dos componentes de software adquiridos. Verificação de assinatura e proveniência em admission de produção é um controle direto contra esse requisito.</li>
                 </ul>
 
                 <p>
@@ -524,13 +524,13 @@ spec:
                 <div class="phase-card">
                     <div class="phase-number">1</div>
                     <h3>Crawl — assinatura básica e visibilidade</h3>
-                    <p>Habilite <code>cosign sign</code> keyless nos pipelines das 3-5 imagens mais críticas. Não imponha verificação no cluster ainda — apenas comece a gerar assinaturas. Configure dashboards para mostrar quais imagens em produção têm e quais não têm assinatura. Treine os times de plataforma e AppSec no ferramental.</p>
+                    <p>Habilite <code>cosign sign</code> keyless nos pipelines das 3-5 imagens mais críticas. Não imponha verificação no cluster ainda, apenas comece a gerar assinaturas. Configure dashboards para mostrar quais imagens em produção têm e quais não têm assinatura. Treine os times de plataforma e AppSec no ferramental.</p>
                 </div>
 
                 <div class="phase-card">
                     <div class="phase-number">2</div>
                     <h3>Walk — proveniência SLSA L2 e enforcement em audit</h3>
-                    <p>Adicione <code>actions/attest-build-provenance</code> aos workflows. Habilite Kyverno ou policy-controller em modo <em>Audit</em> nos namespaces produtivos — você verá quem está fora de conformidade sem bloquear deploys. Use o período de audit (4-8 semanas) para remediar pipelines legados e padronizar identidades aceitáveis.</p>
+                    <p>Adicione <code>actions/attest-build-provenance</code> aos workflows. Habilite Kyverno ou policy-controller em modo <em>Audit</em> nos namespaces produtivos, você verá quem está fora de conformidade sem bloquear deploys. Use o período de audit (4-8 semanas) para remediar pipelines legados e padronizar identidades aceitáveis.</p>
                 </div>
 
                 <div class="phase-card">
@@ -575,29 +575,29 @@ spec:
                 <h2 id="conclusao">Conclusão</h2>
 
                 <p>
-                    A defesa contra ataques de supply chain saiu da camada do scanner e desceu para a camada do processo. Não basta mais verificar o que o artefato é — é preciso verificar <em>como ele veio a existir</em>. SLSA dá o vocabulário e os níveis; Sigstore dá a infraestrutura prática e sem fricção. Juntos, tornam viável que cada deploy em produção carregue prova criptográfica de origem.
+                    A defesa contra ataques de supply chain saiu da camada do scanner e desceu para a camada do processo. Não basta mais verificar o que o artefato é, é preciso verificar <em>como ele veio a existir</em>. SLSA dá o vocabulário e os níveis; Sigstore dá a infraestrutura prática e sem fricção. Juntos, tornam viável que cada deploy em produção carregue prova criptográfica de origem.
                 </p>
 
                 <p>
-                    Para o engenheiro de plataforma, o trabalho desta sprint é claro: identifique três pipelines críticos, habilite <code>cosign sign</code> keyless e <code>actions/attest-build-provenance</code>, e configure verificação em modo <em>Audit</em> nos namespaces produtivos. Para o líder de AppSec, é hora de codificar o requisito em política e amarrar release approvals à verificação automática. Para o líder técnico de produto, é momento de incluir <em>proveniência verificável</em> nos contratos com terceiros e nos requisitos de aquisição — antes que a regulação imponha um cronograma mais apertado.
+                    Para o engenheiro de plataforma, o trabalho desta sprint é claro: identifique três pipelines críticos, habilite <code>cosign sign</code> keyless e <code>actions/attest-build-provenance</code>, e configure verificação em modo <em>Audit</em> nos namespaces produtivos. Para o líder de AppSec, é hora de codificar o requisito em política e amarrar release approvals à verificação automática. Para o líder técnico de produto, é momento de incluir <em>proveniência verificável</em> nos contratos com terceiros e nos requisitos de aquisição, antes que a regulação imponha um cronograma mais apertado.
                 </p>
 
                 <p>
-                    O custo de adoção em 2026 é baixo, o ferramental está maduro e a infraestrutura pública do Sigstore funciona com SLA razoável. A janela para adotar de forma controlada — em vez de correr atrás de auditoria — é agora.
+                    O custo de adoção em 2026 é baixo, o ferramental está maduro e a infraestrutura pública do Sigstore funciona com SLA razoável. A janela para adotar de forma controlada, em vez de correr atrás de auditoria) é agora.
                 </p>
 
                 <h2 id="referencias">Referências</h2>
 
                 <ul class="references-list">
-                    <li>OpenSSF. <em>SLSA — Supply-chain Levels for Software Artifacts (v1.0)</em>. Disponível em: <a href="https://slsa.dev/" target="_blank" rel="noopener nofollow">slsa.dev</a>.</li>
-                    <li>OpenSSF / Sigstore Project. <em>Sigstore — Documentação oficial (Cosign, Fulcio, Rekor)</em>. Disponível em: <a href="https://docs.sigstore.dev/" target="_blank" rel="noopener nofollow">docs.sigstore.dev</a>.</li>
-                    <li>Sigstore. <em>Cosign — Container Signing CLI (código)</em>. Disponível em: <a href="https://github.com/sigstore/cosign" target="_blank" rel="noopener nofollow">github.com/sigstore/cosign</a>.</li>
-                    <li>Sigstore. <em>Rekor — Public Transparency Log</em>. Disponível em: <a href="https://docs.sigstore.dev/logging/overview/" target="_blank" rel="noopener nofollow">docs.sigstore.dev/logging/overview</a>.</li>
-                    <li>in-toto. <em>Attestation Framework — Specification</em>. Disponível em: <a href="https://github.com/in-toto/attestation" target="_blank" rel="noopener nofollow">github.com/in-toto/attestation</a>.</li>
-                    <li>GitHub. <em>actions/attest-build-provenance — Generate signed build provenance</em>. Disponível em: <a href="https://github.com/actions/attest-build-provenance" target="_blank" rel="noopener nofollow">github.com/actions/attest-build-provenance</a>.</li>
-                    <li>SLSA Project. <em>slsa-github-generator — Reusable workflows for SLSA L3 builds</em>. Disponível em: <a href="https://github.com/slsa-framework/slsa-github-generator" target="_blank" rel="noopener nofollow">github.com/slsa-framework/slsa-github-generator</a>.</li>
-                    <li>The White House. <em>Executive Order 14028 — Improving the Nation&rsquo;s Cybersecurity</em>. Disponível em: <a href="https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/" target="_blank" rel="noopener nofollow">whitehouse.gov</a>.</li>
-                    <li>Nicolaou, F. <em>Kyverno verifyImages — verifying container image signatures with Cosign</em>. Documentação Kyverno. Disponível em: <a href="https://kyverno.io/docs/writing-policies/verify-images/" target="_blank" rel="noopener nofollow">kyverno.io/docs/writing-policies/verify-images</a>.</li>
+                    <li>OpenSSF. <em>SLSA, Supply-chain Levels for Software Artifacts (v1.0)</em>. Disponível em: <a href="https://slsa.dev/" target="_blank" rel="noopener nofollow">slsa.dev</a>.</li>
+                    <li>OpenSSF / Sigstore Project. <em>Sigstore: Documentação oficial (Cosign, Fulcio, Rekor)</em>. Disponível em: <a href="https://docs.sigstore.dev/" target="_blank" rel="noopener nofollow">docs.sigstore.dev</a>.</li>
+                    <li>Sigstore. <em>Cosign, Container Signing CLI (código)</em>. Disponível em: <a href="https://github.com/sigstore/cosign" target="_blank" rel="noopener nofollow">github.com/sigstore/cosign</a>.</li>
+                    <li>Sigstore. <em>Rekor, Public Transparency Log</em>. Disponível em: <a href="https://docs.sigstore.dev/logging/overview/" target="_blank" rel="noopener nofollow">docs.sigstore.dev/logging/overview</a>.</li>
+                    <li>in-toto. <em>Attestation Framework, Specification</em>. Disponível em: <a href="https://github.com/in-toto/attestation" target="_blank" rel="noopener nofollow">github.com/in-toto/attestation</a>.</li>
+                    <li>GitHub. <em>actions/attest-build-provenance, Generate signed build provenance</em>. Disponível em: <a href="https://github.com/actions/attest-build-provenance" target="_blank" rel="noopener nofollow">github.com/actions/attest-build-provenance</a>.</li>
+                    <li>SLSA Project. <em>slsa-github-generator, Reusable workflows for SLSA L3 builds</em>. Disponível em: <a href="https://github.com/slsa-framework/slsa-github-generator" target="_blank" rel="noopener nofollow">github.com/slsa-framework/slsa-github-generator</a>.</li>
+                    <li>The White House. <em>Executive Order 14028, Improving the Nation&rsquo;s Cybersecurity</em>. Disponível em: <a href="https://www.whitehouse.gov/briefing-room/presidential-actions/2021/05/12/executive-order-on-improving-the-nations-cybersecurity/" target="_blank" rel="noopener nofollow">whitehouse.gov</a>.</li>
+                    <li>Nicolaou, F. <em>Kyverno verifyImages, verifying container image signatures with Cosign</em>. Documentação Kyverno. Disponível em: <a href="https://kyverno.io/docs/writing-policies/verify-images/" target="_blank" rel="noopener nofollow">kyverno.io/docs/writing-policies/verify-images</a>.</li>
                 </ul>
 
                 <div class="cta-box">

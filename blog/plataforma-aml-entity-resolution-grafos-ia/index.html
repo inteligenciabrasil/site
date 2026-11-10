@@ -129,12 +129,12 @@
                 <p>Nenhum controle funciona melhor do que a qualidade dos dados que o alimenta. Essa frase é repetida com frequência e raramente tratada como restrição de projeto. Na prática, ela define uma ordem de construção:</p>
 
                 <ol>
-                    <li><strong>Ingestão confiável</strong> — dados chegam completos, no prazo e com origem registrada.</li>
-                    <li><strong>Resolução de entidade</strong> — a mesma pessoa ou empresa é uma só no sistema.</li>
-                    <li><strong>Vínculos</strong> — relações entre entidades resolvidas ficam navegáveis.</li>
-                    <li><strong>Detecção</strong> — regras primeiro, modelos depois, sobre dados já resolvidos.</li>
-                    <li><strong>Investigação e caso</strong> — o analista trabalha com contexto, não com linhas soltas.</li>
-                    <li><strong>Relatório explicável</strong> — a decisão é reconstituível meses depois.</li>
+                    <li><strong>Ingestão confiável</strong>, dados chegam completos, no prazo e com origem registrada.</li>
+                    <li><strong>Resolução de entidade</strong>, a mesma pessoa ou empresa é uma só no sistema.</li>
+                    <li><strong>Vínculos</strong>, relações entre entidades resolvidas ficam navegáveis.</li>
+                    <li><strong>Detecção</strong>: regras primeiro, modelos depois, sobre dados já resolvidos.</li>
+                    <li><strong>Investigação e caso</strong>, o analista trabalha com contexto, não com linhas soltas.</li>
+                    <li><strong>Relatório explicável</strong>, a decisão é reconstituível meses depois.</li>
                 </ol>
 
                 <p>Inverter os passos 2 e 4 é o erro mais caro, porque ele não aparece como defeito técnico. Aparece como "o modelo gera muito falso positivo", e a equipe passa a recalibrar modelo quando o problema está na camada abaixo.</p>
@@ -155,7 +155,7 @@
 
                 <p>Decidir se esses quatro registros são uma entidade, duas ou quatro é a pergunta que organiza a plataforma inteira. A comparação pode considerar nome normalizado, CPF ou CNPJ, data de nascimento, endereço, telefone, e-mail, participações societárias e, quando permitido e necessário, nome da mãe.</p>
 
-                <p>A regra prática: <strong>correspondência apenas por nome tem baixa confiabilidade</strong>, especialmente com homônimos. É o mesmo princípio que torna o <a href="../sanctions-screening-ofac-pep-falsos-positivos/">screening de sanções e PEP</a> um problema de identificação de entidade, e não de busca textual — os dois módulos resolvem a mesma questão com consequências diferentes.</p>
+                <p>A regra prática: <strong>correspondência apenas por nome tem baixa confiabilidade</strong>, especialmente com homônimos. É o mesmo princípio que torna o <a href="../sanctions-screening-ofac-pep-falsos-positivos/">screening de sanções e PEP</a> um problema de identificação de entidade, e não de busca textual, os dois módulos resolvem a mesma questão com consequências diferentes.</p>
 
                 <h3>Os dois erros de resolução, e qual deles dói mais</h3>
 
@@ -167,23 +167,23 @@
                     </tbody>
                 </table>
 
-                <p>O super-agrupamento é o mais grave, porque produz uma afirmação falsa sobre uma pessoa e se propaga silenciosamente para o relatório. Por isso a decisão de unir registros deve ser auditável: qual atributo decidiu, com que confiança, e com possibilidade de revisão. Resolução de entidade não é um passo de limpeza — é uma decisão que precisa de trilha, como qualquer outra decisão do programa.</p>
+                <p>O super-agrupamento é o mais grave, porque produz uma afirmação falsa sobre uma pessoa e se propaga silenciosamente para o relatório. Por isso a decisão de unir registros deve ser auditável: qual atributo decidiu, com que confiança, e com possibilidade de revisão. Resolução de entidade não é um passo de limpeza, é uma decisão que precisa de trilha, como qualquer outra decisão do programa.</p>
 
                 <h2 id="o-grafo-de-vinculos">O grafo de vínculos</h2>
 
-                <p>Resolvida a identidade, o grafo de conhecimento representa entidades e seus relacionamentos: pessoas físicas, pessoas jurídicas, sócios, administradores, endereços, telefones, contas, dispositivos e contrapartes financeiras. Ele revela conexões que a análise isolada não mostra — por exemplo, que quatro empresas destinatárias de um mesmo fluxo compartilham administrador e endereço.</p>
+                <p>Resolvida a identidade, o grafo de conhecimento representa entidades e seus relacionamentos: pessoas físicas, pessoas jurídicas, sócios, administradores, endereços, telefones, contas, dispositivos e contrapartes financeiras. Ele revela conexões que a análise isolada não mostra, por exemplo, que quatro empresas destinatárias de um mesmo fluxo compartilham administrador e endereço.</p>
 
                 <p>Três usos pagam a construção do grafo:</p>
 
                 <ul>
                     <li><strong>Enriquecimento do alerta.</strong> O analista recebe o alerta já com a vizinhança da entidade, em vez de montá-la à mão.</li>
-                    <li><strong>Detecção estrutural.</strong> Padrões que só existem em rede — circularidade, concentração de contrapartes, hubs de endereço — não são expressáveis em regra por transação.</li>
+                    <li><strong>Detecção estrutural.</strong> Padrões que só existem em rede (circularidade, concentração de contrapartes, hubs de endereço) não são expressáveis em regra por transação.</li>
                     <li><strong>Propagação de risco.</strong> Exposição de uma entidade a uma contraparte de risco elevado é computável a uma ou duas arestas de distância.</li>
                 </ul>
 
                 <p>O terceiro uso exige cuidado explícito: propagar risco por vizinhança, sem limite de distância e sem peso por tipo de aresta, transforma o grafo em máquina de contaminar clientes legítimos. Dois graus de separação em um grafo que inclui endereço de coworking conectam meio mercado.</p>
 
-                <p>Modelar o grafo é, antes de tudo, decidir o significado de cada tipo de nó e de aresta — um problema de ontologia, tratado em <a href="../ontologias-seguranca-informacao-organizar-conhecimento-inteligencia/">ontologias para organizar conhecimento e inteligência</a>.</p>
+                <p>Modelar o grafo é, antes de tudo, decidir o significado de cada tipo de nó e de aresta, um problema de ontologia, tratado em <a href="../ontologias-seguranca-informacao-organizar-conhecimento-inteligencia/">ontologias para organizar conhecimento e inteligência</a>.</p>
 
                 <h2 id="os-doze-modulos-e-o-que-cada-um-resolve">Os doze módulos e o que cada um resolve</h2>
 
@@ -205,7 +205,7 @@
                     </tbody>
                 </table>
 
-                <p>Duas observações sobre essa lista. O módulo de UBO costuma ser subestimado: identificar beneficiário final exige percorrer participações indiretas e controle exercido por outros meios, e é trabalho de grafo, não de consulta cadastral. E os módulos 10 e 11 são distintos de propósito — gestão de investigação cuida do trabalho analítico, gestão de caso cuida do ciclo de vida e da prestação de contas.</p>
+                <p>Duas observações sobre essa lista. O módulo de UBO costuma ser subestimado: identificar beneficiário final exige percorrer participações indiretas e controle exercido por outros meios, e é trabalho de grafo, não de consulta cadastral. E os módulos 10 e 11 são distintos de propósito, gestão de investigação cuida do trabalho analítico, gestão de caso cuida do ciclo de vida e da prestação de contas.</p>
 
                 <h2 id="regras-e-modelos-convivem">Regras e modelos convivem</h2>
 
@@ -214,22 +214,22 @@
                 <table border="1" cellpadding="5" cellspacing="0">
                     <thead><tr><th>Aspecto</th><th>Regras</th><th>Aprendizado de máquina</th></tr></thead>
                     <tbody>
-                        <tr><td>Explicabilidade</td><td>Alta — a condição está escrita</td><td>Variável, exige técnica própria</td></tr>
+                        <tr><td>Explicabilidade</td><td>Alta, a condição está escrita</td><td>Variável, exige técnica própria</td></tr>
                         <tr><td>Auditoria</td><td>Simples</td><td>Exige versionamento de dado, modelo e features</td></tr>
                         <tr><td>Padrão desconhecido</td><td>Não detecta o que não foi previsto</td><td>Pode apontar o não previsto</td></tr>
                         <tr><td>Falso positivo</td><td>Tende a ser alto</td><td>Pode reduzir com priorização</td></tr>
                         <tr><td>Manutenção</td><td>Revisão de limiares</td><td>Retreino, validação e monitoramento de deriva</td></tr>
-                        <tr><td>Resposta a tipologia nova</td><td>Rápida — escreve-se a regra</td><td>Lenta — depende de dado rotulado</td></tr>
+                        <tr><td>Resposta a tipologia nova</td><td>Rápida, escreve-se a regra</td><td>Lenta, depende de dado rotulado</td></tr>
                     </tbody>
                 </table>
 
                 <p>As técnicas usuais do lado estatístico são <em>isolation forest</em>, agrupamento, modelos supervisionados, detecção de anomalias e análise de séries temporais. A última linha da tabela explica por que as regras não desaparecem: quando surge uma tipologia nova, escrever a regra leva horas, enquanto treinar modelo depende de casos rotulados que ainda não existem.</p>
 
-                <p>Há um paralelo direto com o lado defensivo da segurança, onde a mesma convivência entre regra determinística e detecção estatística é discutida em <a href="../detection-engineering-regras-deteccao/">detection engineering</a> — inclusive o hábito saudável de testar a regra contra casos construídos antes de confiar nela.</p>
+                <p>Há um paralelo direto com o lado defensivo da segurança, onde a mesma convivência entre regra determinística e detecção estatística é discutida em <a href="../detection-engineering-regras-deteccao/">detection engineering</a>, inclusive o hábito saudável de testar a regra contra casos construídos antes de confiar nela.</p>
 
                 <h3>Medir o que importa</h3>
 
-                <p>Precisão — proporção de alertas relevantes sobre alertas analisados — é o indicador mais citado e o mais fácil de usar mal. Precisão alta com cobertura baixa descreve um sistema que só olha onde já sabe olhar. Ela precisa vir acompanhada de uma estimativa de casos relevantes que não geraram alerta, obtida por amostragem independente ou por teste com casos construídos. Sem isso, o painel mede conforto, não efetividade.</p>
+                <p>Precisão, proporção de alertas relevantes sobre alertas analisados, é o indicador mais citado e o mais fácil de usar mal. Precisão alta com cobertura baixa descreve um sistema que só olha onde já sabe olhar. Ela precisa vir acompanhada de uma estimativa de casos relevantes que não geraram alerta, obtida por amostragem independente ou por teste com casos construídos. Sem isso, o painel mede conforto, não efetividade.</p>
 
                 <h2 id="os-nove-controles-obrigatorios-de-ia">Os nove controles obrigatórios de IA</h2>
 
@@ -250,7 +250,7 @@
                     </tbody>
                 </table>
 
-                <p>O quinto controle é o que sustenta os outros oito. Decisão de risco com efeito sobre uma pessoa ou empresa precisa de <a href="../human-in-the-loop-governanca-ia/">supervisão humana efetiva</a> — revisor que pode discordar, com a discordância registrada — e não de aprovação formal de uma saída que ninguém consegue explicar.</p>
+                <p>O quinto controle é o que sustenta os outros oito. Decisão de risco com efeito sobre uma pessoa ou empresa precisa de <a href="../human-in-the-loop-governanca-ia/">supervisão humana efetiva</a> (revisor que pode discordar, com a discordância registrada) e não de aprovação formal de uma saída que ninguém consegue explicar.</p>
 
                 <p>O oitavo merece destaque de segurança, não só de compliance. Quem pode alterar um limiar sem deixar registro pode criar um ponto cego sob medida. O motor de regras é um ativo a proteger com a mesma seriedade de um sistema de produção, e a classificação da base de KYC e dos dossiês segue a mesma lógica discutida em <a href="../classificacao-estados-dados-protecao/">classificação e estados dos dados</a>.</p>
 
@@ -272,7 +272,7 @@
                     <li>quem decidiu o encerramento e com qual fundamento.</li>
                 </ul>
 
-                <p>Observe que quase todos esses itens são dados que a plataforma já possui — e perde, por não persistir a versão do que foi usado. Guardar o resultado sem guardar o contexto que o produziu é o que transforma um sistema auditável em um sistema que apenas parece auditável.</p>
+                <p>Observe que quase todos esses itens são dados que a plataforma já possui, e perde, por não persistir a versão do que foi usado. Guardar o resultado sem guardar o contexto que o produziu é o que transforma um sistema auditável em um sistema que apenas parece auditável.</p>
 
                 <p>Essa é também a diferença entre coletar evidência na origem e reconstruí-la na véspera da auditoria, a lógica de <a href="../conformidade-continua-trilha-auditoria/">conformidade contínua</a>. O custo de persistir contexto é de armazenamento. O custo de não persistir aparece de uma vez, quando alguém pergunta por que aquele caso foi encerrado.</p>
 
@@ -315,9 +315,9 @@
 
                 <h2>Conclusão</h2>
 
-                <p>A sequência que funciona é ingestão confiável, resolução de entidade, vínculos, detecção, investigação e relatório explicável. Quem começa pela detecção acaba recalibrando modelo para compensar um problema de identidade — e paga duas vezes pelo mesmo trabalho.</p>
+                <p>A sequência que funciona é ingestão confiável, resolução de entidade, vínculos, detecção, investigação e relatório explicável. Quem começa pela detecção acaba recalibrando modelo para compensar um problema de identidade, e paga duas vezes pelo mesmo trabalho.</p>
 
-                <p>Se o programa já está em operação e precisa de um próximo passo, dois diagnósticos rendem mais do que qualquer aquisição. Primeiro: medir quantos clientes distintos na base são, de fato, a mesma entidade. Segundo: pegar um caso encerrado há seis meses e tentar reconstituir a decisão — versão da regra, versão da lista, fatores do score, o que o cliente respondeu. O que não for possível reconstituir é exatamente a lacuna que uma supervisão vai encontrar.</p>
+                <p>Se o programa já está em operação e precisa de um próximo passo, dois diagnósticos rendem mais do que qualquer aquisição. Primeiro: medir quantos clientes distintos na base são, de fato, a mesma entidade. Segundo: pegar um caso encerrado há seis meses e tentar reconstituir a decisão, versão da regra, versão da lista, fatores do score, o que o cliente respondeu. O que não for possível reconstituir é exatamente a lacuna que uma supervisão vai encontrar.</p>
 
                 <p>E o princípio que atravessa os nove controles de IA não é técnico: a IA apoia a investigação e não converte correlação estatística em acusação. Modelo aponta onde olhar. Quem conclui é uma pessoa, com nome registrado no caso.</p>
 
