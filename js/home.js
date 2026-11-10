@@ -188,7 +188,9 @@
                     body: new FormData(contactForm)
                 });
                 var response = await res.json();
-                var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
+                // Default '' e nao 'success': resposta sem o campo `result` pintava de verde
+                // um envio que nao foi gravado -- a mesma perda silenciosa que o contato/ teve.
+                var result = (typeof response === 'object') ? response.result || response.status || '' : response;
                 if (result === 'success' || result === 'ok') {
                     contactForm.reset();
                     showStatus('Mensagem enviada! Nossa equipe retornará em até 2 horas úteis.', '#10B981');
@@ -300,7 +302,9 @@
                     body: nlFormData
                 });
                 var response = await res.json();
-                var result = (typeof response === 'object') ? response.result || response.status || 'success' : response;
+                // Default '' e nao 'success': resposta sem o campo `result` pintava de verde
+                // um envio que nao foi gravado -- a mesma perda silenciosa que o contato/ teve.
+                var result = (typeof response === 'object') ? response.result || response.status || '' : response;
                 if (result === 'success' || result === 'ok') {
                     newsletterForm.reset();
                     showNewsletterMessage('Verifique seu e-mail para confirmar a assinatura.', 'success');
