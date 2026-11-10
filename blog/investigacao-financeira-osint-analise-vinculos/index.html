@@ -120,7 +120,7 @@
                     </ul>
                 </div>
 
-                <p>Há uma diferença de método entre o analista que recebe um alerta, consulta quatro bases, não encontra nada chamativo e encerra o caso, e o analista que formula uma hipótese, decide quais dados a testariam e documenta o que encontrou — inclusive o que contrariou a própria hipótese. O primeiro produz volume. O segundo produz conclusão defensável. O ponto de partida dessa formulação costuma ser um sinal de alerta, e o que cada sinal pede como verificação varia por setor: o mapa está em <a href="../sinais-alerta-lavagem-dinheiro-setores/">sinais de alerta, setor por setor</a>.</p>
+                <p>Há uma diferença de método entre o analista que recebe um alerta, consulta quatro bases, não encontra nada chamativo e encerra o caso, e o analista que formula uma hipótese, decide quais dados a testariam e documenta o que encontrou, inclusive o que contrariou a própria hipótese. O primeiro produz volume. O segundo produz conclusão defensável. O ponto de partida dessa formulação costuma ser um sinal de alerta, e o que cada sinal pede como verificação varia por setor: o mapa está em <a href="../sinais-alerta-lavagem-dinheiro-setores/">sinais de alerta, setor por setor</a>.</p>
 
                 <p>Este artigo trata do método: o fluxo, as técnicas de correlação, os limites do OSINT e a forma do dossiê. Ele detalha uma das seis etapas do <a href="../pld-ft-aml-programa-prevencao-lavagem-dinheiro/">programa de PLD-FT</a> — a etapa de detecção e investigação, que é onde o programa acerta ou erra na prática.</p>
 
@@ -164,14 +164,14 @@
 
                 <p>O passo 4 consome mais tempo do que os analistas admitem no planejamento e é o que determina a qualidade de tudo o que vem depois. Nome grafado de três formas, CNPJ com e sem máscara, data em dois formatos, valor com separador trocado, contraparte identificada só por apelido de transferência: cada inconsistência dessas quebra uma correlação que existia nos dados.</p>
 
-                <p>Normalizar significa padronizar formato, resolver identidade de entidade e validar o que foi padronizado — não apenas rodar um <em>trim</em> nas colunas. É o ponto em que a investigação depende de engenharia de dados, assunto tratado em detalhe na <a href="../plataforma-aml-entity-resolution-grafos-ia/">arquitetura de uma plataforma de PLD-FT</a>.</p>
+                <p>Normalizar significa padronizar formato, resolver identidade de entidade e validar o que foi padronizado, não apenas rodar um <em>trim</em> nas colunas. É o ponto em que a investigação depende de engenharia de dados, assunto tratado em detalhe na <a href="../plataforma-aml-entity-resolution-grafos-ia/">arquitetura de uma plataforma de PLD-FT</a>.</p>
 
                 <h3>As perguntas que o investigador tem de responder</h3>
 
                 <p>Independentemente do caso, um conjunto fixo de perguntas organiza o trabalho e revela o que ainda falta coletar:</p>
 
                 <ul>
-                    <li>Quem é o controlador efetivo da empresa — e não apenas o sócio formal?</li>
+                    <li>Quem é o controlador efetivo da empresa, e não apenas o sócio formal?</li>
                     <li>Qual é a origem econômica dos recursos?</li>
                     <li>Por que estas contrapartes específicas estão pagando ou recebendo?</li>
                     <li>Existe atividade comercial que justifique o volume e a frequência?</li>
@@ -223,7 +223,7 @@
                     </tbody>
                 </table>
 
-                <p>Nenhum desses valores, isoladamente, romperia um limite relevante. O que chama atenção é o encadeamento: recebimento, repasse quase imediato, decréscimo progressivo compatível com retenção de uma fração a cada etapa e ausência de qualquer atividade econômica entre as pernas. Ainda assim, proximidade temporal pode ter explicação trivial — pagamento de fornecedor programado, repasse de intermediação legítima — e precisa ser interpretada com os demais dados.</p>
+                <p>Nenhum desses valores, isoladamente, romperia um limite relevante. O que chama atenção é o encadeamento: recebimento, repasse quase imediato, decréscimo progressivo compatível com retenção de uma fração a cada etapa e ausência de qualquer atividade econômica entre as pernas. Ainda assim, proximidade temporal pode ter explicação trivial (pagamento de fornecedor programado, repasse de intermediação legítima) e precisa ser interpretada com os demais dados.</p>
 
                 <h3>Análise de origem e destino</h3>
 
@@ -245,13 +245,13 @@
                     <li>Listas de sanções e listas de pessoas expostas politicamente, tratadas em <a href="../sanctions-screening-ofac-pep-falsos-positivos/">screening de sanções e PEP</a>.</li>
                 </ul>
 
-                <p>As técnicas de reconhecimento são as mesmas que um atacante usa para mapear uma organização — o objetivo é que difere. Quem quiser entender o repertório pelo outro lado encontra o detalhamento em <a href="../como-atacantes-mapeiam-empresa-reconhecimento/">como atacantes mapeiam uma empresa</a>.</p>
+                <p>As técnicas de reconhecimento são as mesmas que um atacante usa para mapear uma organização, o objetivo é que difere. Quem quiser entender o repertório pelo outro lado encontra o detalhamento em <a href="../como-atacantes-mapeiam-empresa-reconhecimento/">como atacantes mapeiam uma empresa</a>.</p>
 
                 <h3>Registro de proveniência: fonte, data, contexto, confiabilidade</h3>
 
                 <p>Toda informação coletada em fonte aberta precisa chegar ao dossiê com quatro metadados: de onde veio, quando foi coletada, em que contexto apareceu e qual o grau de confiabilidade atribuído. Sem isso, a informação é impossível de reavaliar meses depois, quando a página original já mudou.</p>
 
-                <p>E vale o limite que mais se ignora: uma publicação isolada não é confirmação de envolvimento criminoso. Notícia é indício de que algo foi noticiado — nada além disso.</p>
+                <p>E vale o limite que mais se ignora: uma publicação isolada não é confirmação de envolvimento criminoso. Notícia é indício de que algo foi noticiado, nada além disso.</p>
 
                 <h3>Os limites legais e de proteção de dados</h3>
 
@@ -279,7 +279,7 @@
 
                 <h3>Hash como prova de integridade</h3>
 
-                <p>Um hash criptográfico como SHA-256, calculado no momento da coleta e registrado junto com data e origem, permite demonstrar que o arquivo não foi alterado depois. É um controle de custo quase zero e de valor alto justamente quando o caso é contestado — meses ou anos depois, quando ninguém lembra quem exportou aquela planilha.</p>
+                <p>Um hash criptográfico como SHA-256, calculado no momento da coleta e registrado junto com data e origem, permite demonstrar que o arquivo não foi alterado depois. É um controle de custo quase zero e de valor alto justamente quando o caso é contestado, meses ou anos depois, quando ninguém lembra quem exportou aquela planilha.</p>
 
                 <p>Hash demonstra integridade, não autenticidade: ele prova que o arquivo é o mesmo, não que o conteúdo é verdadeiro. São garantias diferentes e confundi-las enfraquece o relatório.</p>
 
@@ -321,13 +321,13 @@
                 <ul>
                     <li>contratos e notas fiscais que expliquem os 120 pagadores;</li>
                     <li>relação identificável entre os pagadores (clientes de um mesmo produto, por exemplo);</li>
-                    <li>estrutura operacional nas quatro empresas destinatárias — funcionários, instalações, atividade;</li>
+                    <li>estrutura operacional nas quatro empresas destinatárias: funcionários, instalações, atividade;</li>
                     <li>justificativa econômica para o repasse de 90% dos recursos;</li>
                     <li>histórico que mostre crescimento gradual em vez de salto súbito;</li>
                     <li>atualização cadastral do faturamento declarado, compatível com a nova realidade.</li>
                 </ul>
 
-                <p>Se essas evidências existem e são verificáveis, o caso se encerra com justificativa registrada. Se não existem, o que se documenta é exatamente isso: não foi possível identificar justificativa econômica para o padrão observado. Perceba a diferença — a conclusão é sobre a ausência de explicação, não sobre a prática de um crime.</p>
+                <p>Se essas evidências existem e são verificáveis, o caso se encerra com justificativa registrada. Se não existem, o que se documenta é exatamente isso: não foi possível identificar justificativa econômica para o padrão observado. Perceba a diferença, a conclusão é sobre a ausência de explicação, não sobre a prática de um crime.</p>
 
                 <h2 id="o-dossie-documentar-sem-concluir-alem-da-evidencia">O dossiê: documentar sem concluir além da evidência</h2>
 
@@ -359,11 +359,11 @@
                     <tbody>
                         <tr><td>Fato</td><td>A conta recebeu R$ 1,8 milhão de 120 contrapartes pessoa física em 30 dias.</td></tr>
                         <tr><td>Inferência</td><td>O volume é incompatível com o faturamento declarado de R$ 50 mil mensais.</td></tr>
-                        <tr><td>Hipótese alternativa testada</td><td>Intermediação legítima com muitos clientes — não sustentada: não foram apresentados contratos nem notas fiscais correspondentes.</td></tr>
+                        <tr><td>Hipótese alternativa testada</td><td>Intermediação legítima com muitos clientes, não sustentada: não foram apresentados contratos nem notas fiscais correspondentes.</td></tr>
                     </tbody>
                 </table>
 
-                <p>A formulação que condena o relatório é a conclusão categórica: "o cliente está lavando dinheiro". A que o sustenta descreve o observado, o testado e o que não foi possível explicar, encaminhando o caso conforme o procedimento interno. A instituição não tem competência legal para afirmar a primeira — e não precisa dela para cumprir sua obrigação.</p>
+                <p>A formulação que condena o relatório é a conclusão categórica: "o cliente está lavando dinheiro". A que o sustenta descreve o observado, o testado e o que não foi possível explicar, encaminhando o caso conforme o procedimento interno. A instituição não tem competência legal para afirmar a primeira, e não precisa dela para cumprir sua obrigação.</p>
 
                 <p>Guardar essa disciplina no texto tem um efeito colateral útil: ela expõe, para a própria área, quais casos foram encerrados por evidência e quais foram encerrados por cansaço.</p>
 
@@ -410,7 +410,7 @@
 
                 <p>Se a sua área precisa de um ponto de partida, comece pelo que não exige orçamento: padronizar a estrutura do relatório, exigir registro do motivo de descarte na triagem e separar fato de inferência no texto. Grafo, OSINT automatizado e priorização por modelo rendem muito mais depois disso, porque passam a operar sobre dados e conclusões que alguém consegue auditar.</p>
 
-                <p>Vale lembrar o limite que atravessa o artigo inteiro: tipologia, vínculo e padrão temporal são referências para investigar, não provas. A conclusão legítima de um caso costuma ser sobre a ausência de explicação econômica — e isso é suficiente para cumprir a obrigação.</p>
+                <p>Vale lembrar o limite que atravessa o artigo inteiro: tipologia, vínculo e padrão temporal são referências para investigar, não provas. A conclusão legítima de um caso costuma ser sobre a ausência de explicação econômica, e isso é suficiente para cumprir a obrigação.</p>
 
                 <div class="module-sources" style="margin-top:2rem;padding:1.5rem;background:rgba(96,165,250,.04);border-left:3px solid #60A5FA;border-radius:8px">
                     <div style="font-weight:700;color:#60A5FA;margin-bottom:.75rem"><i class="fas fa-bookmark"></i> Fontes e referencias tecnicas</div>

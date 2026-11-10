@@ -204,7 +204,7 @@
 <div class="article-body">
 <div class="warning-box" style="border-left-color:#f59e0b;background:linear-gradient(145deg,rgba(245,158,11,.08) 0%,rgba(180,83,9,.04) 100%);border-color:rgba(245,158,11,.4)">
 <p class="warning-title" style="margin:0 0 .5rem;color:#fcd34d;font-weight:700;font-size:1.05rem"><i class="fas fa-info-circle"></i> <strong>Sobre este conteúdo</strong></p>
-<p style="color:#cbd5e1">Este artigo aprofunda <strong>DSPM</strong> (Data Security Posture Management) além do básico de descoberta — classificação contextual com IA, lineage entre data lakes e priorização por blast radius. Para o panorama comparativo de CSPM/CWPP/DSPM, veja <a href="../cspm-dspm-sspm-posture-management/" style="color:#60A5FA">CSPM, DSPM e SSPM</a>.</p>
+<p style="color:#cbd5e1">Este artigo aprofunda <strong>DSPM</strong> (Data Security Posture Management) além do básico de descoberta, classificação contextual com IA, lineage entre data lakes e priorização por blast radius. Para o panorama comparativo de CSPM/CWPP/DSPM, veja <a href="../cspm-dspm-sspm-posture-management/" style="color:#60A5FA">CSPM, DSPM e SSPM</a>.</p>
 </div>
 <div class="toc">
 <!-- REVIEWED-V1 -->
@@ -222,7 +222,7 @@
 </ul>
 </div>
 <h2 id="evolucao">Por que DSPM evoluiu</h2>
-<p>A primeira geração de DSPM (2021-2022) resolveu um problema visível: descobrir dados sensíveis em cloud storage e banco transacional, usando regex e algumas heurísticas. Funcionava em casos simples — bucket S3 com .csv aberto, banco MySQL com coluna chamada <code>cpf</code>.</p>
+<p>A primeira geração de DSPM (2021-2022) resolveu um problema visível: descobrir dados sensíveis em cloud storage e banco transacional, usando regex e algumas heurísticas. Funcionava em casos simples, bucket S3 com .csv aberto, banco MySQL com coluna chamada <code>cpf</code>.</p>
 <p>Três deslocamentos forçaram a evolução para o que hoje se chama <strong>DSPM avançado</strong> (ou DSPM de segunda geração):</p>
 <ul style="color:#CBD5E1;line-height:1.75">
 <li><strong>Dados migraram para data lakes:</strong> Snowflake, Databricks Unity Catalog, BigQuery, Iceberg/Delta passaram a ser o repositório dominante. Regex sobre arquivos em S3 não cobre uma view materializada de Snowflake com 50 milhões de linhas.</li>
@@ -244,7 +244,7 @@
 <p>Os motores de DSPM avançado tipicamente combinam três camadas: regex + dicionários (rápido, baseline), modelos NER fine-tuned (NLP), e classificadores semânticos baseados em embeddings. O resultado é uma classificação <em>contextual</em>: o mesmo CPF é classificado diferente conforme onde mora, quem acessa e de onde veio.</p>
 <h2 id="lineage">Lineage de dados: o grafo que faltava</h2>
 <p>Lineage é o grafo de origem e propagação. Exemplo: <em>"a tabela analytics.cust_2026 veio do JOIN entre raw.customers e raw.orders, foi materializada por job às 03h, é lida pelo dashboard X e exportada para o sandbox Y todo domingo"</em>.</p>
-<p>Em segurança importa porque expõe <strong>shadow data</strong>: dados sensíveis que vazaram para zonas menos protegidas. Sem lineage, um vazamento em sandbox de analytics não é rastreável ao dado de origem; com lineage, você sabe imediatamente que aquele snapshot continha PII de 200 mil clientes e qual job o gerou — informação crítica para notificação <a class="gloss-link" href="/glossario/#lgpd" title="Ver no glossário">LGPD</a>/GDPR.</p>
+<p>Em segurança importa porque expõe <strong>shadow data</strong>: dados sensíveis que vazaram para zonas menos protegidas. Sem lineage, um vazamento em sandbox de analytics não é rastreável ao dado de origem; com lineage, você sabe imediatamente que aquele snapshot continha PII de 200 mil clientes e qual job o gerou, informação crítica para notificação <a class="gloss-link" href="/glossario/#lgpd" title="Ver no glossário">LGPD</a>/GDPR.</p>
 <div class="pillar-cards">
 <div class="pillar-card confidentiality">
 <div class="icon"><i class="fas fa-snowflake"></i></div>
@@ -289,14 +289,14 @@
 <ul style="color:#CBD5E1;line-height:1.75">
 <li><strong>SIEM/SOAR:</strong> alertas de mudança de exposição (bucket fica público, grant em produção concedido a guest) vão para playbook de IR.</li>
 <li><strong>DLP:</strong> classificação descoberta por DSPM alimenta políticas DLP (Purview, Symantec, Forcepoint). Não precisa configurar manualmente "o que é confidencial".</li>
-<li><strong>Governança de dados (Collibra, Alation):</strong> DSPM enriquece o catálogo com classificação automática — economiza meses de trabalho manual.</li>
+<li><strong>Governança de dados (Collibra, Alation):</strong> DSPM enriquece o catálogo com classificação automática, economiza meses de trabalho manual.</li>
 <li><strong>Pipeline LGPD/GDPR:</strong> mapeamento de tratamentos por finalidade fica mais simples quando você sabe onde os dados estão e quem acessa.</li>
 </ul>
 <h2 id="roadmap">Roadmap de implementação</h2>
 <div class="phase-card">
 <div class="phase-number">1</div>
 <h3>Mapear data stores prioritários</h3>
-<p>Cloud storage (S3, Blob, GCS), bancos transacionais, lakehouse (Snowflake/Databricks/BigQuery). Habilite leitura de metadados via service account — não precisa exfiltrar dados.</p>
+<p>Cloud storage (S3, Blob, GCS), bancos transacionais, lakehouse (Snowflake/Databricks/BigQuery). Habilite leitura de metadados via service account, não precisa exfiltrar dados.</p>
 </div>
 <div class="phase-card">
 <div class="phase-number">2</div>
@@ -321,7 +321,7 @@
 <div class="phase-card">
 <div class="phase-number">6</div>
 <h3>Cobrir shadow data</h3>
-<p>Varra contas inteiras, não só data stores conhecidos. Dumps em buckets pessoais, snapshots em DEV — onde o achado é mais surpreendente, geralmente.</p>
+<p>Varra contas inteiras, não só data stores conhecidos. Dumps em buckets pessoais, snapshots em DEV, onde o achado é mais surpreendente, geralmente.</p>
 </div>
 <h2 id="faq">Perguntas frequentes</h2>
 <div class="faq-section">
