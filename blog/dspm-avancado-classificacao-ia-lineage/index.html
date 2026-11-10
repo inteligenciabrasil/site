@@ -36,15 +36,61 @@
     {"@context":"https://schema.org","@type":"Article","headline":"DSPM Avançado: Classificação com IA, Lineage e Priorização por Risco","description":"Como a categoria DSPM evoluiu de descoberta básica para classificação contextual com IA, lineage de dados em data lakes e priorização de exposição por blast radius.","image":"https://inteligenciabrasil.seg.br/img/og-image.webp","author":{"@type":"Person","name":"Roberto Lima","url":"https://inteligenciabrasil.seg.br/sobre/"},"publisher":{"@type":"Organization","name":"Inteligência Brasil","logo":{"@type":"ImageObject","url":"https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},"datePublished":"2026-05-29T00:00:00-03:00","dateModified":"2026-05-29T00:00:00-03:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://inteligenciabrasil.seg.br/blog/dspm-avancado-classificacao-ia-lineage/"},"inLanguage":"pt-BR"}
     </script>
 <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-        {"@type":"Question","name":"Por que DSPM clássico (só regex) não é mais suficiente?","acceptedAnswer":{"@type":"Answer","text":"Regex consegue achar CPF, e-mail, cartão de crédito num campo isolado. Não consegue distinguir contexto: 'CPF' do colaborador em planilha de RH é informação sensível com base legal específica; 'CPF' em dataset público de licitações da CGU é informação aberta. Não consegue achar o mesmo CPF colado em campo notes/descrição. Não consegue rastrear quando uma coluna de produção foi copiada para um sandbox de analytics e renomeada. A próxima geração de DSPM combina padrões + classificação ML (NER, embeddings semânticos), análise de schema e lineage entre datasets — atacando justamente os pontos que regex perdia."}},
-        {"@type":"Question","name":"O que é lineage de dados e por que importa em segurança?","acceptedAnswer":{"@type":"Answer","text":"Lineage é o grafo de origem e propagação de dados: 'a tabela analytics.cust_2026 veio do JOIN entre raw.customers e raw.orders, foi materializada por um job às 03:00, é lida pelo dashboard X e exportada para o sandbox Y'. Em segurança importa porque expõe shadow data: dados sensíveis que vazaram para zonas menos protegidas. Sem lineage, um vazamento em sandbox de analytics não é rastreável ao dado original; com lineage, você sabe imediatamente que aquele snapshot continha PII de 200k clientes e qual job o gerou."}},
-        {"@type":"Question","name":"DSPM moderno cobre Snowflake, Databricks, BigQuery?","acceptedAnswer":{"@type":"Answer","text":"Sim — esse é justamente o ponto de inflexão. A geração 2021-2022 de DSPM focava em buckets e bancos relacionais. As plataformas modernas (Wiz, Cyera, Sentra, BigID, Symmetry, IBM Guardium DSPM) cobrem data lakes e lakehouses como cidadãos de primeira classe: descobrem tabelas Iceberg/Delta/Parquet, leem o schema, classificam colunas, mapeiam grants/RBAC nativos do warehouse e levantam exposições (compartilhamentos públicos, queries que selecionam PII sem filtro, exports não autorizados)."}},
-        {"@type":"Question","name":"DSPM substitui DLP?","acceptedAnswer":{"@type":"Answer","text":"Não. DLP atua em movimento (e-mail, endpoint, gateway, SaaS) e bloqueia/avisa em tempo real. DSPM atua em repouso (cloud storage, data lakes, bancos) e foca em descobrir, classificar e mapear exposição. Os dois respondem a perguntas diferentes: DLP responde 'o que está sendo enviado agora?' e DSPM responde 'o que existe e quem pode acessar?'. Em programas modernos de proteção de dados, ambos coexistem. Algumas plataformas (Microsoft Purview, Forcepoint, Symantec) já entregam os dois sob um único pacote."}},
-        {"@type":"Question","name":"Como priorizar achados de DSPM?","acceptedAnswer":{"@type":"Answer","text":"O erro clássico é tratar todo dataset com PII como prioridade igual. Priorização contextual usa quatro fatores: (1) sensibilidade — quanto pior se vazar (PII de menor → cartão → saúde → autenticação); (2) volume — número de registros; (3) exposição — quem pode acessar (público &gt; toda organização &gt; squad específico &gt; só DBA); (4) blast radius — quantos outros sistemas dependem desse dataset (via lineage). Multiplicar as quatro dimensões e ordenar dá uma fila de remediação que respeita risco real, não alarme por volume."}},
-        {"@type":"Question","name":"Como começar com DSPM avançado?","acceptedAnswer":{"@type":"Answer","text":"Roadmap pragmático: (1) Mapeie data stores prioritários (cloud storage, banco transacional, lakehouse) e habilite leitura de metadados (não precisa exfiltrar dados); (2) Classifique automaticamente e revise top-200 achados com data owners — calibra o modelo; (3) Habilite lineage (geralmente via integração com Snowflake Access History, BigQuery audit logs, Databricks Unity Catalog); (4) Priorize por blast radius e remedie top exposições; (5) Plugue alertas em SIEM e fluxos de IR; (6) Cubra shadow data — dumps em S3 de bucket pessoal, snapshots de produção em DEV."}}
-    ]}
-    </script>
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Por que DSPM clássico (só regex) não é mais suficiente?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Regex acha PII no campo certo, mas falha em campos notes/descrição, ignora contexto (PII operacional vs. exposta) e não pega embeddings semânticos. DSPM avançado combina padrões + NER + classificadores semânticos + lineage para classificação contextual."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "O que é lineage de dados e por que importa?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Grafo de origem e propagação. Em segurança expõe shadow data: dados sensíveis que vazaram para zonas menos protegidas. Sem lineage, vazamento em sandbox não é rastreável; com lineage, identifica-se imediatamente o dataset de origem e quantos registros eram."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "DSPM moderno cobre Snowflake, Databricks, BigQuery?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sim — esse é o ponto de inflexão. Plataformas modernas (Wiz, Cyera, Sentra, BigID, Symmetry, IBM Guardium DSPM) cobrem data lakes como cidadãos de primeira classe: leem schema, classificam colunas, mapeiam grants e detectam exposições."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "DSPM substitui DLP?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Não. DLP atua em movimento (e-mail, endpoint, gateway) e bloqueia em tempo real. DSPM atua em repouso (cloud storage, data lakes) e descobre/classifica/mapeia exposição. Em programas modernos, ambos coexistem."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Como priorizar achados de DSPM?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Quatro dimensões multiplicadas: sensibilidade × volume × exposição × blast radius (via lineage). Sem isso, DSPM gera 5.000 alertas que ninguém ataca; com isso, 50 ações que reduzem risco real."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Como começar com DSPM avançado?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Mapeie data stores prioritários → classifique e calibre → habilite lineage → priorize e remedie top exposições → integre com SIEM/DLP/governança → cubra shadow data."
+            }
+        }
+    ]
+}
+</script>
 <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inteligenciabrasil.seg.br/blog/"},{"@type":"ListItem","item":"https://inteligenciabrasil.seg.br/blog/dspm-avancado-classificacao-ia-lineage/","position":3,"name":"DSPM Avançado"}]}
     </script>

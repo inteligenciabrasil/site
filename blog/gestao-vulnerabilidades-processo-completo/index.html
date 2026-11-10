@@ -76,26 +76,26 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Qual a diferença entre CVSS e EPSS?",
+                "name": "Gestão de vulnerabilidades substitui pentest?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "CVSS (Common Vulnerability Scoring System) mede a severidade técnica intrínseca da vulnerabilidade (0-10). EPSS (Exploit Prediction Scoring System) estima a probabilidade de exploração nos próximos 30 dias (0-100%). Combine ambos: uma vuln CVSS 9.0 com EPSS 1% é menos urgente que CVSS 7.0 com EPSS 90%."
+                    "text": "Não. Scan de vulnerabilidades encontra problemas conhecidos de forma automatizada. Pentest encontra vulnerabilidades de lógica, cadeia de explorações e problemas que scanners não detectam. Use ambos: scan contínuo para higiene e pentest periódico para validação profunda."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Com que frequência devo fazer scan de vulnerabilidades?",
+                "name": "Como lidar com vulnerabilidades que nao podem ser corrigidas?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Recomendação: scan completo semanal ou quinzenal para infraestrutura geral. Ativos críticos e expostos a internet: diário ou contínuo. Após mudanças significativas: scan imediato. Para compliance (PCI DSS), scan trimestral externo é obrigatório. O importante é consistência e capacidade de processar resultados."
+                    "text": "Documente formalmente como aceitação de risco ou implemente controles compensatórios: segmentação de rede, WAF, monitoramento aumentado, restrição de acesso. Revise periodicamente se a situação mudou. Para sistemas legados, considere plano de descomissionamento."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Devo corrigir todas as vulnerabilidades?",
+                "name": "Qual a relacao com patch management?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Não é prático nem necessário. Priorize baseado em: criticidade do ativo, explorabilidade (EPSS), exposição (internet vs interno), existência de controles compensatórios. Foque em vulnerabilidades críticas/altas em ativos importantes. Aceite risco documentado para vulns baixas em sistemas não-críticos."
+                    "text": "Gestão de vulnerabilidades identifica O QUE corrigir. Patch management é o processo de COMO aplicar correções (teste, deploy, rollback). Devem trabalhar integrados: vuln management alimenta priorização de patches, patch management reporta status de remediação."
                 }
             }
         ]

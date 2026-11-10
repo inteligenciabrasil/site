@@ -48,37 +48,37 @@
     }
     </script>
 <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Qual a diferença entre SIEM e SOAR?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "SIEM (Security Information and Event Management) coleta, armazena e correlaciona logs para detectar ameaças. SOAR (Security Orchestration, Automation and Response) automatiza a resposta a incidentes com playbooks e integração de ferramentas. SIEM detecta, SOAR responde. Muitas soluções modernas combinam ambos."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Quanto custa implementar um SIEM?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Custos variam drasticamente. SIEMs comerciais (Splunk, QRadar) custam US$ 50.000-500.000+/ano dependendo do volume de dados. Cloud-native (Sentinel, Chronicle) usam modelo pay-per-GB ingerido. Open source (Elastic, Wazuh) tem custo de infraestrutura e equipe. Para PMEs, soluções managed SIEM custam US$ 3.000-10.000/mês."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Quais logs devo coletar primeiro?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Priorize: 1) Active Directory e autenticação (falhas de login, alterações de privilégios); 2) Firewall e proxy (conexões externas); 3) Endpoints (EDR/antivírus); 4) Servidores críticos (Windows Security, Linux auth); 5) Aplicações de negócio. Comece com o essencial e expanda gradualmente."
-                }
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "SIEM substitui EDR ou NDR?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Não, são complementares. EDR detecta ameaças em endpoints com visibilidade profunda. NDR detecta ameaças na rede. SIEM correlaciona eventos de ambos (e outras fontes) para visão holistica. A combinação e mais poderosa que qualquer um isoladamente."
             }
-        ]
-    }
-    </script>
+        },
+        {
+            "@type": "Question",
+            "name": "Devo usar SIEM on-premises ou cloud?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Cloud SIEMs (Sentinel, Chronicle) oferecem escalabilidade elastica, menor overhead operacional e modelo de custo variável. On-premises (Splunk, QRadar) oferecem mais controle e podem ser mais econômicos em volumes muito altos. Tendência e cloud, especialmente para quem já usa cloud providers."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Como reduzir custos de SIEM?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Filtre logs na origem - não envie tudo. Use tiering de storage (hot/warm/cold). Evite logs de debug. Considere pré-processamento com log forwarders. Avalie SIEMs com preço fixo (Chronicle) ou open source (Elastic, Wazuh). Monitore e otimize EPS continuamente."
+            }
+        }
+    ]
+}
+</script>
 <script type="application/ld+json">
     {
         "@context": "https://schema.org",

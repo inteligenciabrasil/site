@@ -36,15 +36,61 @@
     {"@context":"https://schema.org","@type":"Article","headline":"MCP em Produção: Governance, Audit e Kill Switch para Agentes Autônomos","description":"Os controles operacionais que separam piloto de MCP de uso real: allow-listing de servidores, audit log imutável, kill switch, rate limiting e human-in-the-loop.","image":"https://inteligenciabrasil.seg.br/img/og-image.webp","author":{"@type":"Person","name":"Roberto Lima","url":"https://inteligenciabrasil.seg.br/sobre/"},"publisher":{"@type":"Organization","name":"Inteligência Brasil","logo":{"@type":"ImageObject","url":"https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},"datePublished":"2026-05-29T00:00:00-03:00","dateModified":"2026-05-29T00:00:00-03:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://inteligenciabrasil.seg.br/blog/mcp-em-producao-governance-kill-switch/"},"inLanguage":"pt-BR"}
     </script>
 <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-        {"@type":"Question","name":"Por que MCP em produção é diferente de MCP em piloto?","acceptedAnswer":{"@type":"Answer","text":"Em piloto o impacto é contido (um usuário, ambiente isolado, baixa frequência de chamadas). Em produção o agente passa a atuar com identidades reais, sobre dados reais, em frequência alta e sem o operador acompanhando cada turn. Isso transforma classes de risco antes toleráveis — confused deputy, tool poisoning, excessive agency — em incidentes potencialmente caros. Os controles que diferenciam piloto de produção são governance (quem aprovou cada MCP server e ação), audit (rastro imutável de tudo que o agente fez), kill switch (capacidade de matar agente e revogar tokens em segundos) e human-in-the-loop nos pontos de impacto irreversível."}},
-        {"@type":"Question","name":"O que deve estar no audit log de um agente MCP?","acceptedAnswer":{"@type":"Answer","text":"Mínimo: timestamp UTC, identidade do principal humano que originou a sessão, identidade do agente, prompt do usuário (ou referência), modelo + versão, server MCP invocado, tool chamada com argumentos, resposta retornada (truncada com hash da resposta completa), decisão final do modelo, e ação executada (incluindo identificadores de recursos modificados). Tudo isso em log imutável (WORM, append-only) com integridade verificável (hash chain) e retenção alinhada à regulação (LGPD: pelo menos durante o tempo de vida do tratamento; setor financeiro/saúde: cinco anos ou mais). Sem essa fundação, qualquer investigação de incidente esbarra em 'não temos como saber'."}},
-        {"@type":"Question","name":"Como implementar kill switch para um agente MCP?","acceptedAnswer":{"@type":"Answer","text":"Quatro camadas em paralelo: (1) endpoint /kill no proprio orchestrator do agente que mata sessoes em curso; (2) revogacao imediata dos tokens OAuth/credenciais que o agente usava para chamar MCP servers — sem isso, sessao morta mas execucoes pendentes continuam; (3) circuit breaker no gateway que recusa novas chamadas para os MCP servers afetados; (4) flag de feature em config central que desativa o agente inteiro, propagado em segundos via push (Redis pub/sub, Consul, etc.). Teste o kill switch periodicamente em ambiente de stage — sem teste, ele falha quando voce precisa."}},
-        {"@type":"Question","name":"O que é allow-listing de MCP server e por que importa?","acceptedAnswer":{"@type":"Answer","text":"Por padrão, MCP permite que clientes conectem em qualquer servidor — útil em desenvolvimento, perigoso em produção. Allow-listing é a lista de MCP servers que sua organização aprovou para uso pelo agente, com identidade verificada (URL canônica + assinatura/certificado), versão fixada, e mapeamento de quais tools de cada server podem ser invocadas. Bloqueia tool poisoning (atacante registra MCP server malicioso e expoe tools que parecem inocentes) e contém o blast radius quando um MCP server legítimo é comprometido. Implemente no gateway: o cliente nunca fala diretamente com server externo, sempre via proxy que valida o destino contra a allow-list."}},
-        {"@type":"Question","name":"Quando exigir human-in-the-loop?","acceptedAnswer":{"@type":"Answer","text":"Em todo ponto de impacto irreversível ou de alto custo. Heurísticas práticas: (a) ação que muda estado externo persistente (criar fatura, aprovar pagamento, deletar recurso, abrir ticket externo); (b) ação cujo custo de erro &gt; custo de revisão humana (envio de e-mail a cliente, transferência de dados, exposição de dado pessoal); (c) primeira execução de uma ferramenta nova naquele contexto; (d) ação fora dos guardrails que o usuário definiu para a sessão. Implementação típica: o agente apresenta a ação proposta com argumentos finais, o humano aprova/rejeita/edita, e a aprovação é o gatilho da execução. Logue a aprovação no audit junto com a ação."}},
-        {"@type":"Question","name":"Como medir se a governance de MCP está funcionando?","acceptedAnswer":{"@type":"Answer","text":"Métricas operacionais que importam: (a) percentual de ações irreversíveis com aprovação humana (meta: 100%); (b) tempo médio entre incidente e kill switch acionado (meta: &lt; 30s); (c) cobertura de audit (100% de chamadas a tools logadas); (d) número de MCP servers fora da allow-list bloqueados pelo gateway por semana (sinaliza tentativas de uso shadow); (e) percentual de prompts que disparam guardrail (alto demais = guardrails ruins; baixo demais = guardrails permissivos); (f) MTTR de revisão de incidente (consegue reconstruir cadeia de ações? quanto tempo?). Acompanhe semanalmente até estabilizar."}}
-    ]}
-    </script>
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Por que MCP em produção é diferente de MCP em piloto?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Em piloto o impacto é contido (um usuário, ambiente isolado, baixa frequência). Em produção o agente atua sobre identidades e dados reais, em alta frequência e sem operador acompanhando. Confused deputy, tool poisoning e excessive agency saem do plano teórico e viram incidentes potencialmente caros."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "O que deve estar no audit log?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Timestamp, identidade do principal humano, identidade do agente, modelo+versão, server MCP, tool chamada com argumentos, hash da resposta, ação executada (com IDs dos recursos), aprovação HITL quando aplicável. Em log imutável com integridade verificável (hash chain) e retenção alinhada à regulação."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Como implementar kill switch?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Quatro camadas em paralelo: endpoint /kill no orchestrator, revogação imediata de tokens OAuth/credenciais, circuit breaker no gateway, feature flag global. Teste em GameDay trimestral — sem teste, ele falha quando você precisa."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "O que é allow-listing de MCP server?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Lista de servidores MCP aprovados pela organização, validada no gateway. Inclui URL canônica, identidade (mTLS/assinatura), tools permitidas por server e pinning de versão. Bloqueia tool poisoning e contém blast radius quando um server legítimo é comprometido."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Quando exigir human-in-the-loop?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Em pontos de impacto irreversível ou alto custo: criar/aprovar/deletar recurso externo, enviar comunicação a cliente, primeira execução de tool nova, ação fora dos guardrails da sessão. O humano aprova/edita, a aprovação é o gatilho da execução, e tudo é logado."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Como medir se a governance está funcionando?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "% ações irreversíveis com HITL (meta 100%), tempo até kill switch propagar, cobertura de audit, bloqueios de MCP fora da allow-list, taxa de guardrail acionado, MTTR de revisão de incidente. Acompanhe semanal até estabilizar."
+            }
+        }
+    ]
+}
+</script>
 <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inteligenciabrasil.seg.br/blog/"},{"@type":"ListItem","item":"https://inteligenciabrasil.seg.br/blog/mcp-em-producao-governance-kill-switch/","position":3,"name":"MCP em Produção"}]}
     </script>

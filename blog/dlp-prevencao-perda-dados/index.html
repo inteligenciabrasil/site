@@ -59,26 +59,26 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "DLP bloqueia ou apenas monitora?",
+                "name": "DLP afeta performance dos endpoints?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "DLP pode fazer ambos. Em modo monitoramento, registra e alerta sobre violações sem bloquear. Em modo enforcement, bloqueia ativamente transferências não autorizadas. Comece com monitoramento para entender padrões e evitar bloqueios de atividades legítimas, depois migre para enforcement gradualmente."
+                    "text": "Agentes modernos são otimizados, mas ha algum overhead. O impacto depende da quantidade de dados escaneados e complexidade das regras. Teste em piloto antes de deploy amplo e ajuste políticas se necessário."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Qual a diferença entre DLP e CASB?",
+                "name": "Como lidar com dados criptografados?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "DLP foca em proteger dados em qualquer lugar (endpoint, rede, email). CASB (Cloud Access Security Broker) foca especificamente em aplicações cloud/SaaS, controlando acesso e dados em serviços como Office 365, Salesforce, Dropbox. Muitas soluções modernas combinam ambos, e CASB frequentemente inclui capacidades DLP para cloud."
+                    "text": "DLP não consegue inspecionar conteúdo criptografado. Soluções: 1) Inspecionar antes da criptografia (endpoint DLP); 2) Usar DLP integrado a solução de criptografia; 3) Política de bloquear upload de arquivos criptografados para destinos não autorizados."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Como classificar dados para DLP?",
+                "name": "DLP protege contra insider threats?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Use combinação de: 1) Classificação automática baseada em conteúdo (regex para CPF, cartão de crédito); 2) Classificação por contexto (origem, destino, usuário); 3) Classificação manual por usuários (labels/tags); 4) Machine learning para padrões complexos. Comece com dados regulamentados (PII, dados financeiros) e expanda."
+                    "text": "Parcialmente. DLP detecta e bloqueia exfiltração de dados por canais monitorados. Mas insiders determinados podem encontrar formas de contornar (fotos da tela, memorizar informações). DLP e uma camada - combine com UEBA, controle de acessos e monitoramento comportamental."
                 }
             }
         ]

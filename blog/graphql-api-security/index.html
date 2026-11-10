@@ -59,26 +59,26 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "GraphQL é mais seguro que REST?",
+                "name": "WAF tradicional protege GraphQL?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Não necessariamente. GraphQL tem vulnerabilidades específicas (introspection, batching, deep queries) que REST não tem. Porém, quando bem implementado com controles adequados, GraphQL pode ser tão seguro quanto REST. A diferença está na superfície de ataque e nos controles necessários."
+                    "text": "Parcialmente. WAFs tradicionais podem detectar payloads maliciosos genéricos (SQLi, XSS) nos argumentos, mas não entendem a semântica GraphQL. Ataques como deep queries, batching abuse e introspection passam despercebidos. Use WAF GraphQL-aware ou controles no servidor."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Devo desabilitar introspection em produção?",
+                "name": "Como fazer rate limiting efetivo em GraphQL?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim, desabilitar introspection em produção é uma prática recomendada. Introspection expõe todo o schema da API, facilitando reconhecimento por atacantes. Em desenvolvimento e staging, mantenha habilitado para debugging. Em produção, desabilite e documente a API separadamente."
+                    "text": "Rate limiting tradicional por IP/requisição não funciona bem devido ao batching. Implemente: (1) limite por operação executada, (2) limite por custo total de query, (3) limite por usuário autenticado, (4) limite de queries batch por requisição."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Como implementar rate limiting em GraphQL?",
+                "name": "Persisted queries eliminam todos os riscos?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Rate limiting em GraphQL deve considerar complexidade da query, não apenas requisições por segundo. Use query cost analysis para calcular custo de cada query baseado em profundidade, campos e resolvers. Limite por custo total, não por número de requests. Bibliotecas como graphql-cost-analysis e graphql-query-complexity ajudam."
+                    "text": "Persisted queries eliminam ataques de DoS por query complexity e injection de queries maliciosas. Porém, vulnerabilidades de autorização (IDOR), injection em argumentos e outros problemas de lógica de negócio permanecem. É uma camada importante, mas não suficiente sozinha."
                 }
             }
         ]

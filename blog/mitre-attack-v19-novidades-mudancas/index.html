@@ -55,7 +55,52 @@
 
     <!-- Schema.org FAQPage -->
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que mudou na Defense Evasion na v19 do MITRE ATT&CK?","acceptedAnswer":{"@type":"Answer","text":"A tática Defense Evasion foi dividida em duas: Stealth (TA0005) para camuflagem comportamental e Defense Impairment (TA0112) para ações que quebram ou desativam controles defensivos."}},{"@type":"Question","name":"Quais são as novas técnicas relacionadas a IA na v19?","acceptedAnswer":{"@type":"Answer","text":"Foram adicionadas T1682 (Query Public AI Services) e T1683 (Generate Content) com sub-técnicas para conteúdo escrito e audiovisual, refletindo o uso de IA generativa por adversários."}},{"@type":"Question","name":"O ATT&CK v19 inclui mudanças em ICS?","acceptedAnswer":{"@type":"Answer","text":"Sim. Cinco técnicas foram reorganizadas com novas sub-técnicas, incluindo T1693 (Modify Firmware), T1695 (Block Communications), T0846, T0843 e T1694 (Insecure Credentials)."}},{"@type":"Question","name":"Como migrar conteúdo da v18 para a v19?","acceptedAnswer":{"@type":"Answer","text":"O MITRE disponibilizou crosswalks oficiais (JSON e CSV) com mapeamento campo a campo das técnicas alteradas, indicando IDs antigos e novos, táticas e tipo de mudança (revogada, virou sub-técnica, fundida)."}}]}
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que mudou na Defense Evasion na v19?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A tática foi dividida em duas: Stealth (TA0005), focada em camuflagem comportamental sem quebrar defesas, e Defense Impairment (TA0112), focada em desativar ou subverter controles defensivos. T1562 e sub-técnicas foram absorvidas pelo novo parent T1685."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais são as novas técnicas de IA na v19?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "T1682 (Query Public AI Services) e T1683 (Generate Content), com sub-técnicas para conteúdo escrito (T1683.001) e audiovisual (T1683.002). A T1660 do Mobile também foi atualizada para cobrir clonagem de voz em tempo real."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Preciso atualizar regras Sigma e SIEM imediatamente?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim, especialmente regras que referenciam IDs T1562.*, T1656 e T1672. Use os crosswalks oficiais do MITRE como base, valide em batches e regere heatmaps de cobertura para confirmar que nada ficou orfao."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que e relevante na v19 para ambientes ICS/OT?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Cinco técnicas foram reorganizadas com sub-técnicas para granularidade operacional, incluindo Block Communications por protocolo (Serial, Ethernet, Wi-Fi), Modify Firmware separado em sistema e módulo, e a nova T1694 (Insecure Credentials)."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais novos grupos foram adicionados ao framework?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Entre os destaques: Void Manticore (G1055), MirrorFace (G1054), atualizações em MuddyWater, Volt Typhoon, APT28 e WIRTE, além de novos softwares como LAMEHUG, BRICKSTORM, GlassWorm e Shai-Hulud."
+                }
+            }
+        ]
+    }
     </script>
 
     <!-- Schema.org BreadcrumbList -->

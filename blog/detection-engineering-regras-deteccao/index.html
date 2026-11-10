@@ -78,7 +78,15 @@
                 "name": "Como medir a eficácia de regras de detecção?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Métricas incluem: taxa de falsos positivos (alertas incorretos / total de alertas), taxa de detecção (ameaças detectadas / total de ameaças no período), cobertura MITRE ATT&CK (% de técnicas cobertas), tempo médio de detecção (MTTD), e operational relevance (alertas que levaram a ações). Testes com red team e BAS validam eficácia real."
+                    "text": "Métricas incluem: taxa de falsos positivos (alertas incorretos / total de alertas), taxa de detecção (ameaças detectadas / total de ameaças no período), cobertura MITRE ATT&CK (% de técnicas cobertas — atenção ao split de Defense Evasion na v19), tempo médio de detecção (MTTD), e operational relevance (alertas que levaram a ações). Testes com red team e BAS validam eficácia real."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Por onde começar com Detection Engineering?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Comece organizando regras existentes em repositório Git. Adote SIGMA como formato padrão para novas regras. Implemente validação básica no CI. Mapeie cobertura atual contra MITRE ATT&CK para identificar gaps. Estabeleça métricas de qualidade (FP rate, alertas por regra). Evolua para testes automatizados e purple team validation."
                 }
             }
         ]

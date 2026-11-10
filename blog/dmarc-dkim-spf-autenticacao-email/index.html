@@ -59,26 +59,26 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Qual a ordem correta de implementação: SPF, DKIM ou DMARC?",
+                "name": "Por que meus emails estão indo para spam mesmo com SPF/DKIM?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "A ordem recomendada e: 1) SPF primeiro - mais simples, lista servidores autorizados; 2) DKIM segundo - assinatura criptográfica das mensagens; 3) DMARC por último - política que usa SPF e DKIM para decidir o que fazer com emails que falham. DMARC sem SPF/DKIM não funciona."
+                    "text": "SPF/DKIM/DMARC são apenas parte da equação. Reputação do IP, conteúdo do email, engajamento dos destinatarios e práticas de envio também afetam entregabilidade. Verifique se seu IP não esta em blacklists e siga boas práticas de email marketing."
                 }
             },
             {
                 "@type": "Question",
-                "name": "DMARC pode bloquear emails legítimos?",
+                "name": "Preciso de DMARC se uso apenas Gmail/Office 365?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim, se mal configurado. Por isso comece com política p=none (apenas monitoramento) por 2-4 semanas. Analise os relatórios para identificar fontes legítimas não autorizadas (marketing, CRM, terceiros). Só mude para p=quarantine ou p=reject após garantir que tudo legítimo esta alinhado."
+                    "text": "Sim. Google e Microsoft configuram SPF e DKIM automaticamente, mas DMARC você precisa configurar. Sem DMARC, atacantes ainda podem fazer spoofing do seu domínio mesmo que seus emails legítimos estejam autenticados."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Preciso de DMARC se já tenho SPF e DKIM?",
+                "name": "Como lidar com encaminhamento de emails que quebra SPF?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim. SPF e DKIM sozinhos não dizem ao servidor receptor o que fazer quando a verificação falha. DMARC define a política (rejeitar, quarentena, nada) e fornece relatórios de quem esta tentando usar seu domínio. Sem DMARC, atacantes ainda podem fazer spoofing do seu domínio."
+                    "text": "Encaminhamento quebra SPF porque o IP muda. DKIM sobrevive ao encaminhamento se o conteúdo não for alterado. Por isso DMARC aceita se SPF OU DKIM passar. Configure DKIM corretamente e o encaminhamento funcionara via alinhamento DKIM."
                 }
             }
         ]

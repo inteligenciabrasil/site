@@ -41,13 +41,52 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-        {"@type":"Question","name":"O que é MCP (Model Context Protocol)?","acceptedAnswer":{"@type":"Answer","text":"MCP é um protocolo aberto, originado na Anthropic, que padroniza como aplicações LLM se conectam a fontes de dados e ferramentas externas. Define uma arquitetura cliente-servidor: o host (ex.: Claude Desktop, IDE) consome servidores MCP que expõem tools (ações), resources (dados) e prompts (templates). É o equivalente a USB para integração de agentes."}},
-        {"@type":"Question","name":"Por que Agentic AI muda o modelo de ameaças?","acceptedAnswer":{"@type":"Answer","text":"LLMs tradicionais geram texto. Agentes ganham agency — capacidade de executar ações no mundo (chamar APIs, mover arquivos, fazer compras). Isso amplifica drasticamente o impacto de qualquer manipulação: um prompt injection que antes gerava texto enganoso agora pode transferir dinheiro, exfiltrar dados ou comprometer infraestrutura."}},
-        {"@type":"Question","name":"O que é tool poisoning?","acceptedAnswer":{"@type":"Answer","text":"Tool poisoning é a manipulação de descrições, parâmetros ou comportamento de uma tool MCP para induzir o agente a executá-la de forma indevida. Um servidor MCP malicioso pode incluir instruções escondidas nas descrições que o LLM lê e segue, ou retornar dados que reprogramam o comportamento do agente."}},
-        {"@type":"Question","name":"Como evitar excessive agency em agentes?","acceptedAnswer":{"@type":"Answer","text":"Aplique privilégio mínimo no escopo de tools: dê ao agente apenas o conjunto estritamente necessário. Use capability-based authorization, escopo por sessão, e human-in-the-loop em ações destrutivas ou de alto valor (transferências, exclusões, envio externo). Audite ações continuamente e estabeleça rate limits."}},
-        {"@type":"Question","name":"Como avaliar a segurança de um servidor MCP de terceiros?","acceptedAnswer":{"@type":"Answer","text":"Verifique procedência (autor, repositório, assinatura), revise o código se for open source, valide se as tools expostas têm escopo apropriado, isole a execução em sandbox, e habilite logging de todas as chamadas. Trate servidores MCP como qualquer dependência crítica de supply chain — não os instale sem due diligence."}}
-    ]}
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que é MCP (Model Context Protocol)?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "MCP é um protocolo aberto, originado na Anthropic, que padroniza como aplicações LLM se conectam a fontes de dados e ferramentas externas. Define uma arquitetura cliente-servidor: o host consome servidores MCP que expõem tools, resources e prompts. É o equivalente a USB para integração de agentes."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Por que Agentic AI muda o modelo de ameaças?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "LLMs tradicionais geram texto. Agentes ganham agency — capacidade de executar ações no mundo. Isso amplifica drasticamente o impacto de qualquer manipulação: um prompt injection que antes gerava texto enganoso agora pode transferir dinheiro, exfiltrar dados ou comprometer infraestrutura."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que é tool poisoning?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "É a manipulação de descrições, parâmetros ou comportamento de uma tool MCP para induzir o agente a executá-la de forma indevida. Um servidor MCP malicioso pode incluir instruções escondidas nas descrições que o LLM lê e segue."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como evitar excessive agency em agentes?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Aplique privilégio mínimo no escopo de tools. Use capability-based authorization, escopo por sessão, e human-in-the-loop em ações destrutivas. Audite ações continuamente e estabeleça rate limits."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como avaliar a segurança de um servidor MCP de terceiros?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Verifique procedência (autor, repositório, assinatura), revise o código se for open source, valide o escopo das tools, isole a execução em sandbox, e habilite logging. Trate servidores MCP como dependência crítica de supply chain — não os instale sem due diligence."
+                }
+            }
+        ]
+    }
     </script>
 
     <script type="application/ld+json">

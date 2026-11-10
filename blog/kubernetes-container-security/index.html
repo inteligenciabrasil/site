@@ -59,26 +59,26 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Quais as principais vulnerabilidades em Kubernetes?",
+                "name": "Managed K8s (EKS, GKE, AKS) e mais seguro que self-managed?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "As principais são: containers rodando como root, imagens com vulnerabilidades conhecidas, secrets expostos em variáveis de ambiente, RBAC permissivo demais, falta de network policies (pods comunicando livremente), API server exposto publicamente, ausência de pod security policies/standards, e mount de volumes sensíveis do host."
+                    "text": "Control plane gerenciado elimina responsabilidade de hardening de API server, etcd e kubelet master. Porém, segurança de workloads (pods, images, RBAC, network policies) continua sua responsabilidade. Managed facilita, mas não resolve tudo automaticamente."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Qual a diferença entre Pod Security Policy e Pod Security Standards?",
+                "name": "Service mesh (Istio/Linkerd) e necessário para segurança?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "PodSecurityPolicy (PSP) foi deprecado no K8s 1.21 e removido no 1.25. Foi substituido por Pod Security Standards (PSS) com três níveis: Privileged (sem restrições), Baseline (previne escalação conhecida), e Restricted (hardening máximo). PSS e enforced via Pod Security Admission controller no namespace."
+                    "text": "Service mesh adiciona mTLS automático entre pods, authorization policies e observabilidade. E valioso para zero trust interno, mas adiciona complexidade significativa. Para muitos casos, Network Policies + RBAC adequado são suficientes. Avalie se a complexidade adicional justifica."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Como proteger secrets no Kubernetes?",
+                "name": "Como lidar com imagens de terceiros sem controle?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Kubernetes Secrets são base64 encoded, não criptografados por padrão. Habilite encryption at rest no etcd. Use external secret stores (Vault, AWS Secrets Manager) com operadores como External Secrets Operator. Monte secrets como volumes (não env vars). Implemente RBAC restritivo para acesso a secrets. Rotacione secrets regularmente."
+                    "text": "Mantenha registry interno e faça proxy/cache de imagens externas. Scan todas as imagens antes de permitir no cluster. Use admission controllers para bloquear imagens não verificadas. Para imagens críticas, considere rebuild com sua própria base image e verificação de supply chain."
                 }
             }
         ]

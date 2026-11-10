@@ -59,26 +59,26 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Por que o Active Directory e o principal alvo de ataques?",
+                "name": "Por que o Active Directory é o principal alvo de ataques?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "O AD centraliza autenticacao, autorizacao e politicas de toda a organizacao. Comprometer o AD significa obter acesso a todos os recursos do dominio. Atacantes buscam contas privilegiadas, Domain Controllers e relacoes de confianca porque uma unica escalacao de privilegio pode dar controle total sobre o ambiente."
+                    "text": "O AD centraliza autenticação, autorização e políticas de toda a organização. Comprometer o AD significa obter acesso a todos os recursos do domínio. Atacantes buscam contas privilegiadas e Domain Controllers porque uma única escalação de privilégio pode dar controle total sobre o ambiente."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Quais as GPOs mais importantes para seguranca?",
+                "name": "Quais as GPOs mais importantes para segurança?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "As GPOs essenciais incluem: politica de senhas (comprimento minimo, complexidade, historico), bloqueio de conta apos tentativas falhas, restricao de NTLM, configuracao de auditoria avancada, controle de execucao (AppLocker/WDAC), restricao de acesso remoto e LAPS para senhas de administrador local."
+                    "text": "As GPOs essenciais incluem: política de senhas (comprimento mínimo 14 chars), bloqueio de conta, restrição de NTLM, auditoria avançada, controle de execução (AppLocker/WDAC) e LAPS para senhas de administrador local."
                 }
             },
             {
                 "@type": "Question",
-                "name": "O que e o tiering model do Active Directory?",
+                "name": "O que é o tiering model do Active Directory?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "E um modelo de segmentacao de privilegios em 3 niveis: Tier 0 (Domain Controllers e contas de dominio), Tier 1 (servidores e aplicacoes) e Tier 2 (estacoes de trabalho e usuarios). Contas de um tier nao devem autenticar em recursos de outro tier, limitando o impacto de um comprometimento."
+                    "text": "É um modelo de segmentação em 3 níveis: Tier 0 (Domain Controllers), Tier 1 (servidores) e Tier 2 (estações de trabalho). Contas de um tier não devem autenticar em recursos de outro, limitando o impacto de um comprometimento."
                 }
             },
             {
@@ -86,7 +86,7 @@
                 "name": "Como proteger o AD contra Kerberoasting e Pass-the-Hash?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Contra Kerberoasting: use senhas longas e complexas em service accounts, implemente gMSA (Group Managed Service Accounts) e monitore requisicoes TGS anomalas. Contra Pass-the-Hash: restrinja NTLM, implemente Credential Guard, use estacoes administrativas dedicadas (PAW) e aplique o tiering model para limitar onde credenciais privilegiadas sao expostas."
+                    "text": "Contra Kerberoasting: senhas longas em service accounts, gMSA e monitoramento de requisições TGS. Contra Pass-the-Hash: restrição de NTLM, Credential Guard, estações administrativas dedicadas (PAW) e tiering model."
                 }
             }
         ]

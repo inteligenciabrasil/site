@@ -59,26 +59,26 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "O que e a regra 3-2-1-1-0 de backup?",
+                "name": "Backup em nuvem e seguro contra ransomware?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Evolução da regra 3-2-1 para era do ransomware: 3 cópias dos dados, em 2 tipos de mídia diferentes, 1 copia offsite, 1 copia offline/imutável/air-gapped, 0 erros verificados com testes de restore. O '1' offline e o '0' de testes são críticos contra ransomware."
+                    "text": "Depende da configuração. Backup cloud com mesmas credenciais AD corporativo pode ser comprometido junto. Configure: conta cloud separada, MFA dedicado, imutabilidade habilitada (Object Lock), e sem conexão direta com rede de produção além do agente de backup."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Backup imutável realmente protege contra ransomware?",
+                "name": "Quanto tempo de retenção imutável preciso?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim, desde que corretamente implementado. Backup imutável não pode ser alterado ou deletado mesmo por admins durante o período de retenção. Ransomware que compromete credenciais de backup não consegue criptografar/deletar cópias imutaveis. Combine com air-gap para proteção máxima."
+                    "text": "Tempo médio de detecção de ransomware e ~21 dias (IBM). Retenção imutável deve cobrir pelo menos 30-60 dias para garantir que você tem um ponto de restauração limpo. Para ataques mais sofisticados com corrupcao gradual, considere 90+ dias."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Qual a diferença entre DR e backup?",
+                "name": "Devo pagar resgate se perdi os backups?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Backup e copia de dados para restauração. DR (Disaster Recovery) e a capacidade de restaurar operações completas (servidores, aplicações, redes) rapidamente. DR inclui backup mas vai além: replicação, sites alternativos, runbooks, RPO/RTO definidos. Backup sem DR significa dados salvos mas semanas para voltar a operar."
+                    "text": "Decisão difícil sem resposta universal. Pagar não garante recuperação (muitos não recebem chave ou chave não funciona). Pagar financia criminosos e pode tornar-lo alvo novamente. Mas se dados são vitais e não ha alternativa, pode ser a única opção. Melhor: investir em prevenção e backup resiliente para nunca chegar nessa situação."
                 }
             }
         ]

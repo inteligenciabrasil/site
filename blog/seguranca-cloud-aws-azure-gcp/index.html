@@ -38,8 +38,37 @@
     {"@context":"https://schema.org","@type":"Article","image":"https://inteligenciabrasil.seg.br/img/og-image.webp","headline":"Segurança em Cloud: AWS, Azure e GCP - Guia Completo","description":"Guia completo de segurança em cloud: modelo de responsabilidade compartilhada, erros comuns e melhores práticas.","author":{"@type":"Person","name":"Roberto Lima","url":"https://inteligenciabrasil.seg.br/sobre/"},"datePublished":"2026-01-31T00:00:00-03:00","dateModified":"2026-01-31T00:00:00-03:00","copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/","inLanguage":"pt-BR","mainEntityOfPage":{"@type":"WebPage","@id":"https://inteligenciabrasil.seg.br/blog/seguranca-cloud-aws-azure-gcp/"}}
     </script>
 <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e o modelo de responsabilidade compartilhada?","acceptedAnswer":{"@type":"Answer","text":"O provedor cloud (AWS, Azure, GCP) e responsável pela segurança DA nuvem (infraestrutura física, rede, hypervisor). O cliente e responsável pela segurança NA nuvem (dados, identidades, configurações, aplicações). A divisão exata varia conforme o serviço (IaaS, PaaS, SaaS)."}},{"@type":"Question","name":"Quais os erros de configuração cloud mais comuns?","acceptedAnswer":{"@type":"Answer","text":"Buckets S3/Blob Storage públicos, security groups permissivos (0.0.0.0/0), credenciais em código, IAM com privilégios excessivos, logging desabilitado, recursos sem criptografia, falta de MFA em contas root/admin. Esses erros causam a maioria dos breaches em cloud."}}]}
-    </script>
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Cloud e mais ou menos seguro que on-premises?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Depende. Provedores cloud investem bilhões em segurança que a maioria das empresas não consegue replicar on-premises. Porém, a facilidade de criar recursos em cloud também facilita misconfiguration. Com as práticas certas, cloud pode ser mais seguro - mas requer conhecimento específico."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Devo usar multi-cloud para maior segurança?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Multi-cloud aumenta complexidade e superfície de ataque, não necessariamente segurança. A maioria das organizações se beneficia mais de dominar um provedor bem do que usar vários de forma superficial. Multi-cloud faz sentido por outros motivos (vendor lock-in, requisitos específicos), mas raramente por segurança."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Como detectar recursos expostos publicamente?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use ferramentas nativas: AWS IAM Access Analyzer, Azure Defender External Attack Surface Management, GCP Security Command Center. Ferramentas third-party como Prowler, ScoutSuite ou CSPM comerciais também identificam recursos públicos. Configure alertas para criação de recursos com acesso público."
+            }
+        }
+    ]
+}
+</script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link as="style" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&amp;display=swap" rel="preload"/>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">

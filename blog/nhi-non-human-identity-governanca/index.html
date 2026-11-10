@@ -43,7 +43,60 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "N\u00e3o. S\u00e3o camadas distintas: NHI cresce em volume e em superf\u00edcie de ataque, mas SSO, MFA e governan\u00e7a de acesso humano continuam essenciais. O programa correto trata humanos e n\u00e3o-humanos como popula\u00e7\u00f5es paralelas, com lifecycle, ownership e auditoria pr\u00f3prios \u2014 frequentemente unificados sob plataformas CIEM ou ITDR."}, "name": "NHI substitui a gest\u00e3o de identidade humana?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "O protocolo OAuth 2.0 n\u00e3o \u00e9 inseguro \u2014 o fluxo est\u00e1 correto. O risco est\u00e1 no uso indevido: refresh tokens de longa dura\u00e7\u00e3o, scopes amplos, aus\u00eancia de revoga\u00e7\u00e3o ap\u00f3s offboarding e armazenamento inseguro em bancos de dados. O caso Salesloft-Drift mostrou como um token OAuth de um app SaaS de terceiros pode propagar exfiltra\u00e7\u00e3o para centenas de organiza\u00e7\u00f5es sem disparar alertas."}, "name": "Por que OAuth virou o vetor preferido em 2025-2026?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Elimina secrets persistentes para workloads que rodam em ambientes attestables \u2014 GitHub Actions, GitLab CI, Kubernetes, m\u00e1quinas virtuais cloud com IMDS. N\u00e3o cobre credenciais de APIs SaaS de terceiros nem integra\u00e7\u00f5es com sistemas legados sem suporte a OIDC. Para o resto, ainda \u00e9 necess\u00e1rio rota\u00e7\u00e3o e gest\u00e3o via vault."}, "name": "Workload Identity Federation elimina todos os secrets persistentes?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "A recomenda\u00e7\u00e3o OWASP NHI7 \u00e9 eliminar long-lived sempre que vi\u00e1vel. Quando inevit\u00e1veis (sistemas legados, APIs sem federa\u00e7\u00e3o), rota\u00e7\u00e3o trimestral \u00e9 refer\u00eancia comum, com revoga\u00e7\u00e3o imediata em offboarding do owner humano associado. Mais importante que o intervalo \u00e9 ter um invent\u00e1rio que torne a rota\u00e7\u00e3o execut\u00e1vel."}, "name": "Com que frequ\u00eancia rotacionar secrets de NHI long-lived?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Depende do escopo da credencial. Se a API key dava acesso a dados pessoais com potencial de risco ou dano relevante, o incidente \u00e9 report\u00e1vel nos termos do art. 48 da LGPD \u2014 independentemente de haver evid\u00eancia confirmada de exfiltra\u00e7\u00e3o. Para IFs supervisionadas, a Resolu\u00e7\u00e3o BCB n\u00ba 538/2025 adiciona obriga\u00e7\u00f5es espec\u00edficas de comunica\u00e7\u00e3o ao Banco Central."}, "name": "Vazamento de API key precisa ser notificado \u00e0 ANPD?"}, {"@type": "Question", "acceptedAnswer": {"@type": "Answer", "text": "Discovery cont\u00ednuo via CIEM ou plataforma de NHI governance \u00e9 o caminho escal\u00e1vel; alternativa b\u00e1sica \u00e9 exportar IAM de cada cloud (AWS Access Analyzer, GCP IAM Recommender, Azure Identity Insights), correlacionar com invent\u00e1rio de owners humanos e marcar como \u00f3rf\u00e3 toda NHI sem owner identific\u00e1vel ou com mais de 90 dias sem uso. A classifica\u00e7\u00e3o dispara o fluxo de revoga\u00e7\u00e3o."}, "name": "Como detectar NHIs \u00f3rf\u00e3s em ambiente multi-cloud?"}]}
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "NHI substitui a gestão de identidade humana?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. São camadas distintas: NHI cresce em volume e em superfície de ataque, mas SSO, MFA e governança de acesso humano continuam essenciais. O programa correto trata humanos e não-humanos como populações paralelas, com lifecycle, ownership e auditoria próprios, frequentemente unificados sob plataformas CIEM ou ITDR."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Por que OAuth virou o vetor preferido em 2025-2026?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O protocolo OAuth 2.0 não é inseguro, o fluxo está correto. O risco está no uso indevido: refresh tokens de longa duração, scopes amplos, ausência de revogação após offboarding e armazenamento inseguro em bancos de dados. O caso Salesloft-Drift mostrou como um token OAuth de um app SaaS de terceiros pode propagar exfiltração para centenas de organizações sem disparar alertas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Workload Identity Federation elimina todos os secrets persistentes?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Elimina secrets persistentes para workloads que rodam em ambientes attestables, GitHub Actions, GitLab CI, Kubernetes, máquinas virtuais cloud com IMDS. Não cobre credenciais de APIs SaaS de terceiros nem integrações com sistemas legados sem suporte a OIDC. Para o resto, ainda é necessário rotação e gestão via vault."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Com que frequência rotacionar secrets de NHI long-lived?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A recomendação OWASP NHI7 é eliminar long-lived sempre que viável. Quando inevitáveis (sistemas legados, APIs sem federação), rotação trimestral é referência comum, com revogação imediata em offboarding do owner humano associado. Mais importante que o intervalo é ter um inventário que torne a rotação executável."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Vazamento de API key precisa ser notificado à ANPD?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Depende do escopo da credencial. Se a API key dava acesso a dados pessoais com potencial de risco ou dano relevante, o incidente é reportável nos termos do art. 48 da LGPD, independentemente de haver evidência confirmada de exfiltração. Para IFs supervisionadas, a Resolução BCB nº 538/2025 adiciona obrigações específicas de comunicação ao Banco Central."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como detectar NHIs órfãs em ambiente multi-cloud?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Discovery contínuo via CIEM ou plataforma de NHI governance é o caminho escalável; alternativa básica é exportar IAM de cada cloud (AWS Access Analyzer, GCP IAM Recommender, Azure Identity Insights), correlacionar com inventário de owners humanos e marcar como órfã toda NHI sem owner identificável ou com mais de 90 dias sem uso. A classificação dispara o fluxo de revogação."
+                }
+            }
+        ]
+    }
     </script>
 
     <script type="application/ld+json">

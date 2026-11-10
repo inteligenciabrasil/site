@@ -36,15 +36,61 @@
     {"@context":"https://schema.org","@type":"Article","headline":"Browser Security Enterprise: O Navegador como Perímetro","description":"Por que o navegador virou camada de segurança relevante, diferença entre Secure Browser Enterprise (SBE) e Extension Browser Enterprise (EBE), e comparativo de Island, Talon, Chrome Enterprise Premium e Edge for Business.","image":"https://inteligenciabrasil.seg.br/img/og-image.webp","author":{"@type":"Person","name":"Roberto Lima","url":"https://inteligenciabrasil.seg.br/sobre/"},"publisher":{"@type":"Organization","name":"Inteligência Brasil","logo":{"@type":"ImageObject","url":"https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},"datePublished":"2026-05-29T00:00:00-03:00","dateModified":"2026-05-29T00:00:00-03:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://inteligenciabrasil.seg.br/blog/browser-security-enterprise/"},"inLanguage":"pt-BR"}
     </script>
 <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-        {"@type":"Question","name":"Por que o navegador virou perímetro de segurança?","acceptedAnswer":{"@type":"Answer","text":"Três deslocamentos: (1) trabalho passou a viver no SaaS — Microsoft 365, Salesforce, Workday, Slack todos rodam no browser; (2) BYOD e contratados ampliaram a base de dispositivos não-gerenciados que precisam acessar dados corporativos; (3) ataques modernos cruzam fronteiras antigas — phishing com OAuth abuse, token theft, downloads de drive externo. O endpoint clássico (EDR + EPP) é cego para o que acontece dentro do browser: copy/paste de PII, upload em SaaS pessoal, screenshot, extensão suspeita. Por isso surgiu a categoria de Browser Security Enterprise."}},
-        {"@type":"Question","name":"Qual a diferença entre SBE (Secure Browser Enterprise) e EBE (Extension Browser Enterprise)?","acceptedAnswer":{"@type":"Answer","text":"SBE entrega um navegador completo gerenciado pela organização (Island, Talon, Mammoth) — geralmente fork do Chromium com agente próprio que controla cookies, downloads, copy/paste, prints, extensões. Tem mais controle mas exige instalação dedicada e onboarding. EBE entrega controles via extensão de browser instalada no Chrome/Edge/Firefox padrão (LayerX, Seraphic, Menlo) — instalação rápida, menor fricção, mas o que dá para ver e bloquear é limitado pelo que a API de extensão permite. SBE vence em controles ricos; EBE vence em adoção rápida e BYOD."}},
-        {"@type":"Question","name":"Chrome Enterprise Premium é o mesmo que SBE/EBE?","acceptedAnswer":{"@type":"Answer","text":"Chrome Enterprise Premium é o que o Google passou a chamar de seu pacote de controles de browser em 2024 — DLP no browser, malware scanning de uploads/downloads, URL filtering, controle de identidade contextual. Tecnicamente é uma camada sobre o Chrome padrão (não um fork) gerenciada via Google Admin/BeyondCorp. Para quem já está em Google Workspace é caminho natural. Microsoft Edge for Business tem oferta análoga integrada a Entra ID + Purview DLP. As duas competem com SBE/EBE puros em organizações com stack do mesmo vendor."}},
-        {"@type":"Question","name":"Browser Security Enterprise substitui SWG, CASB ou DLP?","acceptedAnswer":{"@type":"Answer","text":"Não substitui — complementa. SWG/SASE filtram tráfego na borda (URL category, malware, TLS inspection). CASB media acesso a SaaS via API ou inline proxy. DLP atua em endpoint, e-mail, gateway. Browser Security olha o que acontece dentro do browser onde o usuário trabalha — antes do upload chegar no SWG, antes da ação ser vista pelo CASB. É a camada mais próxima da interação humano-aplicação SaaS. Em arquitetura moderna, todos coexistem com responsabilidades complementares."}},
-        {"@type":"Question","name":"Quais riscos específicos o Browser Security cobre?","acceptedAnswer":{"@type":"Answer","text":"(1) Copy/paste e drag-and-drop de dados sensíveis entre apps SaaS corporativas e pessoais; (2) Upload para SaaS não-aprovado (shadow SaaS); (3) Download de fontes não confiáveis; (4) Screenshot/print de telas confidenciais; (5) Extensões maliciosas ou excessivamente permissivas; (6) Phishing por contexto de página (OAuth grant para app malicioso, login em página clonada); (7) Acesso a SaaS corporativa de dispositivo não-gerenciado (BYOD); (8) Session hijack/cookie theft. EDR e SWG cobrem subconjuntos, mas nenhum cobre essa lista completa do ponto de vista do browser."}},
-        {"@type":"Question","name":"Quando faz sentido investir em Browser Security?","acceptedAnswer":{"@type":"Answer","text":"Indicadores: trabalho majoritariamente em SaaS (M365, Workday, ServiceNow, Salesforce); fração relevante de força de trabalho contratada/terceira/BYOD; ataques recentes envolveram OAuth abuse, token theft ou shadow SaaS; auditoria/regulação pedindo controle de dados em browser; CASB inline custoso ou impactando performance. Sinais contra: maioria do trabalho ainda em apps locais; força de trabalho pequena e todos com endpoint gerenciado moderno (EDR maduro + DLP de endpoint cobrindo browser); orçamento sem fôlego para mais um vendor."}}
-    ]}
-    </script>
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Por que o navegador virou perímetro?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Trabalho passou a viver no SaaS, BYOD e contratados ampliaram a base, ataques modernos cruzam fronteiras antigas (OAuth abuse, token theft, shadow SaaS). EDR/EPP clássicos são cegos ao que acontece dentro do browser."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Diferença entre SBE e EBE?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "SBE é navegador próprio gerenciado (Island, Talon) — mais controle, mais fricção. EBE é extensão em Chrome/Edge/Firefox (LayerX, Seraphic) — adoção rápida, controle limitado pela API. SBE vence em controles ricos; EBE vence em BYOD e velocidade."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Chrome Enterprise Premium é o mesmo?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "É a oferta análoga do Google, camada sobre Chrome padrão. Edge for Business é a do Microsoft sobre Edge. Para quem já está em Google/Microsoft 365, são caminhos naturais que competem com SBE/EBE puros."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Browser Security substitui SWG/CASB/DLP?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Não — complementa. SWG filtra borda, CASB media SaaS, DLP atua em movimento, EDR no host. Browser Security olha o que acontece dentro do browser onde o usuário trabalha. Em arquitetura moderna, todos coexistem."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Quais riscos específicos cobre?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Copy/paste cross-aba, upload para shadow SaaS, download de fontes não confiáveis, screenshot, extensões maliciosas, OAuth grant a apps suspeitos, login em página clonada, acesso de BYOD, session hijack/cookie theft."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Quando vale a pena investir?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Trabalho majoritariamente em SaaS, BYOD relevante, ataques recentes via OAuth/token theft/shadow SaaS, adoção de GenAI. Contra: trabalho ainda local, frota pequena com EDR+DLP cobrindo, orçamento limitado para mais um vendor."
+            }
+        }
+    ]
+}
+</script>
 <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://inteligenciabrasil.seg.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://inteligenciabrasil.seg.br/blog/"},{"@type":"ListItem","item":"https://inteligenciabrasil.seg.br/blog/browser-security-enterprise/","position":3,"name":"Browser Security Enterprise"}]}
     </script>

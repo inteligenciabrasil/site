@@ -59,26 +59,26 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Quais dados são considerados pessoais pela LGPD?",
+                "name": "Logs de sistema são dados pessoais?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Dados pessoais são qualquer informação que identifique ou possa identificar uma pessoa: nome, CPF, email, IP, cookies, localização, dados biometricos. Dados sensíveis (raca, saúde, religiao, biometria) tem proteção adicional. Dados anonimizados (irreversivelmente) estão fora do escopo da LGPD."
+                    "text": "Sim, se contiverem informações que identifiquem usuários: IP, user ID, email em URLs, etc. Aplique retenção adequada, controle de acesso e considere pseudonimizacao para logs de longo prazo. Logs agregados/anonimizados saem do escopo."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Qual a diferença entre anonimizacao e pseudonimizacao?",
+                "name": "Como lidar com dados em backups?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Anonimizacao remove irreversivelmente a possibilidade de identificação - o dado deixa de ser pessoal e sai do escopo da LGPD. Pseudonimizacao substitui identificadores por tokens/hashes reversiveis - o dado continua pessoal mas com risco reduzido. Use anonimizacao para analytics, pseudonimizacao para dados que precisam ser reidentificados."
+                    "text": "Backups contém dados pessoais e estão sujeitos a LGPD. Para solicitações de exclusão, documente que dados permanecem em backups até rotação natural (aceitável se backup criptografado com retenção definida). Não restaure dados excluídos de backups antigos."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Quanto tempo tenho para atender pedido de titular?",
+                "name": "Posso usar dados pessoais para treinar AI/ML?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "A LGPD exige resposta imediata em formato simplificado ou, quando complexo, em até 15 dias. Na prática, implemente SLA de 48h para confirmação de recebimento, 15 dias para resposta completa. Automatize o máximo possível para escalar - solicitações manuais não escalam."
+                    "text": "Depende da base legal. Consentimento específico para este fim ou legítimo interesse com LIA documentado. Prefira dados anonimizados quando possível. Se o modelo memoriza dados pessoais (LLMs), considere técnicas de differential privacy. DPIA recomendado para tratamento automatizado extensivo."
                 }
             }
         ]

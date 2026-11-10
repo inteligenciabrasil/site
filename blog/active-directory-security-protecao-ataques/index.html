@@ -83,26 +83,26 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "Por que o Active Directory e o principal alvo de atacantes?",
+                "name": "Com que frequência devo resetar a senha do KRBTGT?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "O AD é o sistema de identidade central na maioria das empresas. Comprometer o AD significa controlar todas as contas, grupos e permissões. Atacantes buscam Domain Admin para ter controle total do ambiente. Mais de 90% dos ataques de ransomware em ambientes corporativos envolvem comprometimento do AD."
+                    "text": "Recomendação: a cada 180 dias no mínimo. IMPORTANTE: reset deve ser feito DUAS vezes (com intervalo de 10-12h entre eles) para invalidar tickets antigos. Em caso de suspeita de comprometimento, reset imediato (2x). Isso invalida todos os Golden Tickets existentes."
                 }
             },
             {
                 "@type": "Question",
-                "name": "O que é Kerberoasting e como me proteger?",
+                "name": "O que é gMSA e por que devo usar?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Kerberoasting explora o protocolo Kerberos para obter hashes de senhas de service accounts. Qualquer usuário autenticado pode solicitar tickets de serviço e tentar quebrar offline. Proteção: usar senhas longas (+25 caracteres) em service accounts, implementar gMSA (Group Managed Service Accounts), e monitorar solicitações anômalas de tickets."
+                    "text": "Group Managed Service Accounts (gMSA) são contas de serviço gerenciadas automaticamente pelo AD. A senha (240+ caracteres) é rotacionada automaticamente a cada 30 dias sem intervenção manual. Elimina risco de Kerberoasting com senhas fracas. Use para todos os serviços que suportam."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Qual ferramenta usar para auditar segurança do AD?",
+                "name": "Devo migrar para Azure AD e abandonar AD on-premises?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "PingCastle é a ferramenta mais recomendada para assessment rápido - gratuita e gera relatório com score e recomendações. BloodHound mapeia caminhos de ataque visualmente. Purple Knight (Semperis) oferece avaliação mais profunda. Para monitoramento contínuo, Microsoft Defender for Identity detecta ataques em tempo real."
+                    "text": "Azure AD (agora Entra ID) e AD on-premises servem propósitos diferentes. A maioria das organizações usa modelo híbrido. Azure AD é excelente para aplicações cloud e Zero Trust. AD on-premises ainda é necessário para muitos workloads tradicionais. Avalie caso a caso - a tendência é cloud-first, mas migração completa requer planejamento."
                 }
             }
         ]

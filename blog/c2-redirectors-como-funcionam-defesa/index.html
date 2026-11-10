@@ -59,34 +59,34 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "O que e um C2 redirector?",
+                "name": "O que é um C2 redirector?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "E um servidor intermediario que recebe trafego de implants (malware) e o encaminha ao servidor de comando e controle (C2) real. Funciona como um proxy que oculta a localizacao do C2, dificultando que equipes de defesa identifiquem e bloqueiem a infraestrutura do atacante."
+                    "text": "É um servidor intermediário que recebe tráfego de implants e o encaminha ao C2 real. Funciona como proxy que oculta a localização do servidor de comando, dificultando que equipes de defesa identifiquem a infraestrutura do atacante."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Qual a diferenca entre redirector dumb e smart?",
+                "name": "Qual a diferença entre redirector dumb e smart?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Um redirector dumb (burro) encaminha todo o trafego indiscriminadamente para o C2 usando ferramentas como socat ou iptables. Um redirector smart (inteligente) inspeciona o trafego e filtra: encaminha apenas requisicoes que correspondem a padroes esperados do implant e serve conteudo legitimo para qualquer outra requisicao, dificultando a deteccao."
+                    "text": "Dumb encaminha todo tráfego indiscriminadamente. Smart inspeciona e filtra: encaminha apenas tráfego que corresponde ao padrão do implant e serve conteúdo legítimo para qualquer outra requisição, dificultando detecção."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Como detectar trafego C2 com redirectors?",
+                "name": "Como detectar tráfego C2 com redirectors?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Estrategias incluem: JA3/JA3S fingerprinting para identificar ferramentas C2 pelo handshake TLS, analise de padroes de beaconing (intervalos regulares de comunicacao), monitoramento de DNS anomalo (tunneling, dominios recem-registrados), inspeccao de certificados TLS e analise comportamental de rede via NDR."
+                    "text": "Combine: JA3/JA3S fingerprinting para identificar ferramentas C2 pelo handshake TLS, análise de beaconing para padrões de intervalo, monitoramento DNS anômalo, inspeção de certificados TLS e análise comportamental via NDR."
                 }
             },
             {
                 "@type": "Question",
-                "name": "O que e domain fronting?",
+                "name": "O que é domain fronting?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "E uma tecnica onde o trafego C2 e encaminhado via CDNs de alta reputacao (Cloudflare, AWS CloudFront). A conexao TLS visivel aponta para o dominio da CDN, mas o header HTTP Host interno direciona para o servidor C2 real. Para a rede da vitima, o trafego parece ser comunicacao normal com um servico confiavel."
+                    "text": "Técnica onde tráfego C2 é roteado via CDNs de alta reputação. A conexão TLS visível aponta para o CDN, mas o header Host interno direciona para o C2. Para a rede da vítima, parece comunicação normal com serviço confiável."
                 }
             }
         ]

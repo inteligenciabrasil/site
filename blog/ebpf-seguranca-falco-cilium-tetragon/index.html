@@ -41,14 +41,60 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-        {"@type":"Question","name":"O que é eBPF e por que importa em segurança?","acceptedAnswer":{"@type":"Answer","text":"eBPF é uma máquina virtual dentro do kernel Linux que executa programas verificados estaticamente, permitindo instrumentar syscalls, eventos de rede, operações de arquivo e tracepoints sem carregar módulos de kernel. Em segurança, oferece visibilidade profunda com overhead baixo, evita os riscos de estabilidade de kernel modules e dispensa truques de userspace como LD_PRELOAD."}},
-        {"@type":"Question","name":"Falco ou Tetragon: qual escolher?","acceptedAnswer":{"@type":"Answer","text":"Falco é o caminho mais maduro para detecção genérica em hosts e containers, com regras YAML acessíveis e ecossistema amplo via falcosidekick. Tetragon é a melhor opção quando o objetivo inclui enforcement (matar processo, bloquear ação) com awareness nativa de Kubernetes e identidade Cilium. Muitas organizações rodam ambos — Falco como motor de detecção, Tetragon para enforcement seletivo em namespaces críticos."}},
-        {"@type":"Question","name":"eBPF substitui auditd e kernel modules?","acceptedAnswer":{"@type":"Answer","text":"Para a maioria dos casos de uso modernos, sim. eBPF traz visibilidade comparável ou superior ao auditd com overhead menor e estrutura mais flexível. Substitui kernel modules legados em ferramentas como Falco (que tem driver modern_bpf como padrão). Kernels muito antigos — RHEL 7 e similares — ainda podem demandar fallback para módulo de kernel ou driver eBPF legado."}},
-        {"@type":"Question","name":"O que é BPF-LSM e por que isso muda o jogo?","acceptedAnswer":{"@type":"Answer","text":"BPF-LSM é a integração de programas eBPF como hooks do Linux Security Module — disponível em kernels 5.7 ou superiores. Permite que ferramentas como Tetragon implementem decisões de autorização (allow/deny) em pontos canônicos do kernel, com a robustez que antes só estava acessível via SELinux ou AppArmor — mas com programabilidade muito maior."}},
-        {"@type":"Question","name":"Qual o overhead típico de uma ferramenta eBPF de runtime security?","acceptedAnswer":{"@type":"Answer","text":"Por instrumentar diretamente o kernel, o overhead é tipicamente baixo — em parte porque evita o custo de syscalls in userspace e cópia de buffers. O impacto real depende da quantidade de regras ativas, do volume de eventos no host e da política de filtragem. Workloads de altíssimo throughput de syscalls (bancos de dados intensivos, gateways de rede) merecem benchmarks específicos antes do rollout em produção."}},
-        {"@type":"Question","name":"Como integrar Falco a um SIEM como Splunk ou Sentinel?","acceptedAnswer":{"@type":"Answer","text":"O padrão é Falco → falcosidekick (fan-out de eventos) → destino. O falcosidekick traz integrações nativas para Splunk HEC, Microsoft Sentinel, Elastic, Loki, Webhook genérico, Kafka, SQS, AlertManager e dezenas de outros. Em deployments enriquecidos, vale rotear eventos pelo Vector ou Logstash para normalizar para ECS e enriquecer com contexto de Kubernetes antes do SIEM."}}
-    ]}
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que é eBPF e por que importa em segurança?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "eBPF é uma máquina virtual dentro do kernel Linux que executa programas verificados estaticamente, permitindo instrumentar syscalls, eventos de rede, operações de arquivo e tracepoints sem carregar módulos de kernel. Em segurança, oferece visibilidade profunda com overhead baixo, evita riscos de estabilidade de kernel modules e dispensa truques de userspace como LD_PRELOAD."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Falco ou Tetragon: qual escolher?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Falco é o caminho mais maduro para detecção genérica em hosts e containers, com regras YAML acessíveis e ecossistema amplo via falcosidekick. Tetragon é a melhor opção quando o objetivo inclui enforcement (matar processo, bloquear ação) com awareness nativa de Kubernetes e identidade Cilium. Muitas organizações rodam ambos — Falco como motor de detecção, Tetragon para enforcement seletivo em namespaces críticos."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "eBPF substitui auditd e kernel modules?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Para a maioria dos casos de uso modernos, sim. eBPF traz visibilidade comparável ou superior ao auditd com overhead menor e estrutura mais flexível. Substitui kernel modules legados em ferramentas como Falco (que tem driver modern_bpf como padrão). Kernels muito antigos — RHEL 7 e similares — ainda podem demandar fallback para módulo de kernel ou driver eBPF legado."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que é BPF-LSM e por que muda o jogo?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "BPF-LSM é a integração de programas eBPF como hooks do Linux Security Module — disponível em kernels 5.7 ou superiores. Permite que ferramentas como Tetragon implementem decisões de autorização (allow/deny) em pontos canônicos do kernel, com a robustez que antes só estava acessível via SELinux ou AppArmor, mas com programabilidade muito maior."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Qual o overhead típico de uma ferramenta eBPF de runtime security?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Por instrumentar diretamente o kernel, o overhead é tipicamente baixo — em parte porque evita o custo de syscalls in userspace e cópia de buffers. O impacto real depende da quantidade de regras ativas, do volume de eventos no host e da política de filtragem. Workloads de altíssimo throughput de syscalls (bancos de dados intensivos, gateways de rede) merecem benchmarks específicos antes do rollout em produção."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como integrar Falco a um SIEM como Splunk ou Sentinel?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O padrão é Falco → falcosidekick (fan-out de eventos) → destino. O falcosidekick traz integrações nativas para Splunk HEC, Microsoft Sentinel, Elastic, Loki, Webhook genérico, Kafka, SQS, AlertManager e dezenas de outros. Em deployments enriquecidos, vale rotear eventos pelo Vector ou Logstash para normalizar para ECS e enriquecer com contexto de Kubernetes antes do SIEM."
+                }
+            }
+        ]
+    }
     </script>
 
     <script type="application/ld+json">

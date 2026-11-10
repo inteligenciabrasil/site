@@ -42,7 +42,36 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual a diferença entre SAST, DAST e SCA?","acceptedAnswer":{"@type":"Answer","text":"SAST (Static) analisa código-fonte sem executar, encontra bugs e vulnerabilidades no código. DAST (Dynamic) testa aplicação em execução, simulando ataques. SCA (Software Composition Analysis) identifica vulnerabilidades em dependências/bibliotecas terceiras. Idealmente, use os três em conjunto."}},{"@type":"Question","name":"DevSecOps atrasa o desenvolvimento?","acceptedAnswer":{"@type":"Answer","text":"Inicialmente pode haver fricao, mas a longo prazo acelera. Encontrar vulnerabilidades em produção custa 30x mais que em desenvolvimento. Automação no pipeline adiciona minutos mas evita semanas de retrabalho. O segredo e automação e integração suave no fluxo existente."}}]}
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Por onde começar com DevSecOps?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Comece com quick wins: SCA para dependências (Snyk/Dependabot e fácil de integrar), secrets scanning em pré-commit (GitLeaks), e SAST básico (Semgrep). Depois expanda para DAST e container scanning. Não tente tudo de uma vez - adoção gradual e mais sustentável."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como lidar com falsos positivos?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Falsos positivos desmotivam desenvolvedores. Estratégias: tune as ferramentas para seu contexto, comece com regras de alta confiança, implemente processo de triagem, permita supress individual com justificativa, e meca/reduza taxa de FP ao longo do tempo. Qualidade > quantidade de findings."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "DevSecOps substitui pentest?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. DevSecOps automatiza verificações conhecidas - pentest encontra vulnerabilidades de lógica, falhas de design e problemas que ferramentas automatizadas não detectam. Idealmente, DevSecOps reduz a quantidade de issues que chegam ao pentest, permitindo que pentesters foquem em problemas mais complexos."
+                }
+            }
+        ]
+    }
     </script>
 
     <!-- HowTo Schema -->

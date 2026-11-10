@@ -59,26 +59,26 @@
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "O que são Passkeys?",
+                "name": "Passkeys funcionam sem internet?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Passkeys são credenciais FIDO2/WebAuthn sincronizaveis entre dispositivos. Substituem senhas usando criptografia de chave publica. A chave privada fica no dispositivo (protegida por biometria/PIN), o site só tem a chave publica. Não ha segredo compartilhado para roubar, tornando phishing impossível."
+                    "text": "A autenticação local (biometria) funciona offline. Mas o login em si requer conexão com o servidor para enviar a assinatura. Security keys físicas podem funcionar em cenários air-gapped dependendo da aplicação."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Passkeys são resistentes a phishing?",
+                "name": "Posso usar passkey de um dispositivo em outro?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim, por design. Passkeys estão vinculadas ao domínio específico (origin binding). Se você criou passkey para banco.com.br, ela não funciona em banc0.com.br (site falso). O navegador verifica automaticamente, usuário não precisa identificar phishing. E a única autenticação verdadeiramente phishing-resistant."
+                    "text": "Com passkeys sincronizadas, sim - estão em todos os dispositivos do mesmo ecossistema (Apple/Google). Cross-platform (usar iPhone para logar no Windows) funciona via QR code + Bluetooth, onde o celular atua como autenticador remoto."
                 }
             },
             {
                 "@type": "Question",
-                "name": "E se eu perder meu dispositivo?",
+                "name": "Biometria e segura? E se copiarem minha digital?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Com passkeys sincronizadas (iCloud Keychain, Google Password Manager), elas estão em todos os seus dispositivos Apple/Google automaticamente. Se perder um, os outros ainda tem. Para security keys físicas (YubiKey), registre pelo menos 2 keys por conta. Sites devem oferecer recovery via email/SMS como fallback."
+                    "text": "Biometria em FIDO2 e verificação local apenas - não e transmitida. O servidor nunca ve sua digital ou face, apenas a assinatura criptográfica. Mesmo que alguém tenha sua digital, precisaria do seu dispositivo físico. E muito mais seguro que senhas."
                 }
             }
         ]

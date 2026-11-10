@@ -41,7 +41,28 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e SBOM e por que e importante?","acceptedAnswer":{"@type":"Answer","text":"SBOM (Software Bill of Materials) e uma lista completa de todos os componentes, bibliotecas e dependências que compoem um software. Similar a lista de ingredientes de um alimento. Permite identificar rapidamente se você e afetado quando uma vulnerabilidade como Log4Shell e descoberta. Requisito crescente em regulamentações e contratos."}},{"@type":"Question","name":"Como avaliar segurança de fornecedores?","acceptedAnswer":{"@type":"Answer","text":"Use questionários padronizados (SIG, CAIQ), solicite certificações (SOC 2, ISO 27001), avalie histórico de incidentes, revise práticas de desenvolvimento seguro, verifique SLAs de resposta a vulnerabilidades, considere testes de segurança independentes. Proporcione rigor a criticidade do fornecedor."}}]}
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Como priorizar quais dependências analisar?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Foque em: dependências diretas (vs transitivas), populares/críticas, com acesso a rede/filesystem, com histórico de vulnerabilidades. Ferramentas de SCA já priorizam por risco. Para open source, considere saúde do projeto: frequência de commits, responsividade a issues de segurança, número de mantenedores."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "SBOM e obrigatório?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Crescentemente sim. Executive Order 14028 dos EUA exige SBOM para software vendido ao governo federal. PCI DSS 4.0 menciona inventário de componentes. Clientes enterprise e setores regulados estão exigindo contratualmente. Mesmo sem obrigatoriedade, e best practice que permite resposta rápida a vulnerabilidades."
+                }
+            }
+        ]
+    }
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
