@@ -202,12 +202,20 @@
                 <ul>
                     <li><strong>Endereço IP</strong> — coletado e armazenado em texto claro na planilha de leads, para fins de investigação de incidentes de segurança e controle de abuso. Separadamente, um <em>hash SHA-256 com salt</em> do IP é usado como chave de cache do limite de taxa de envio por janela de tempo; esse hash não é armazenado de forma persistente e não serve para identificar o titular.</li>
                     <li><strong>Identificador de navegador (<code>ib_fpr</code>)</strong> — um identificador aleatório gerado por navegador, armazenado em <code>localStorage</code> sob a chave <code>ib_fpr</code>. Finalidade exclusiva: separar contadores de limite de envio por dispositivo, reduzindo envios abusivos de formulário. Não identifica a pessoa, não é usado para publicidade, não é usado para medição de audiência e não é compartilhado com terceiros.</li>
-                    <li><strong>Token de captcha</strong> — gerado pelo widget de verificação Cloudflare Turnstile e enviado ao backend junto com o formulário. O token é verificado pela API da Cloudflare e descartado após validação; <em>o token em si não é armazenado</em>. O que fica registrado na planilha de leads é apenas o <strong>resultado da verificação</strong> (coluna <code>captcha_status</code>, com valores como <code>ok</code> ou <code>skipped</code>), usado para auditoria de envios automatizados.</li>
+                    <li><strong>Token de captcha</strong> — gerado pelo widget de verificação Cloudflare Turnstile e enviado ao backend junto com o formulário. O token é verificado pela API da Cloudflare e descartado após validação; <em>o token em si não é armazenado</em>. O que fica registrado na planilha de leads é apenas o <strong>resultado da verificação</strong> (coluna <code>captcha_status</code>, com os valores <code>ok</code>, <code>fail</code> ou <code>skipped</code>), usado para auditoria de envios automatizados.</li>
                     <li>Páginas visitadas e tempo de permanência</li>
                     <li>Origem dos domínios do visitante</li>
                     <li>Tipos de navegadores e dispositivos utilizados</li>
                     <li>Informações demográficas anônimas</li>
                     <li>Dados de cookies e tecnologias similares</li>
+                </ul>
+
+                <h3>3.3 Dados gerados pelo sistema:</h3>
+                <p>Além dos campos que você preenche, o registro criado pelo seu envio contém dados gerados automaticamente pelo nosso backend:</p>
+                <ul>
+                    <li><strong>Data e hora do envio</strong> (<code>timestamp</code>) — registrada na planilha de leads no momento do recebimento. É o marco a partir do qual conta o prazo de retenção da seção 5.</li>
+                    <li><strong>Situação da inscrição</strong> (<code>status</code>) e <strong>datas de inscrição, confirmação e saída</strong> — registradas na planilha da newsletter para distinguir inscrito pendente, ativo e descadastrado, e para contar os prazos da seção 5.</li>
+                    <li><strong>Token da newsletter</strong> (<code>token</code>) — identificador aleatório combinado com um fragmento de hash do seu e-mail, gerado na inscrição e guardado na linha do inscrito. Finalidade exclusiva: autenticar os links de <em>confirmação</em> e de <em>descadastro</em> enviados por e-mail, sem exigir login. É mantido enquanto a linha existir, porque o link de descadastro presente em e-mails já enviados precisa continuar funcionando. Não é usado para publicidade, não identifica você fora da nossa planilha e não é compartilhado com terceiros.</li>
                 </ul>
             </div>
 
@@ -229,7 +237,7 @@
                 <h2><i class="fas fa-clock"></i> 5. Retenção de Dados</h2>
                 <p>Os prazos de retenção são definidos pela finalidade do dado e pelas obrigações legais aplicáveis:</p>
                 <ul>
-                    <li><strong>Lead / contato comercial</strong> — dados dos formulários de contato e orçamento (nome, e-mail, empresa, mensagem, IP): retidos por <strong>12 meses</strong> a partir da data de envio. Após este prazo, os dados de identificação serão eliminados ou anonimizados, salvo obrigação legal ou processo judicial em curso.</li>
+                    <li><strong>Lead / contato comercial</strong> — todos os campos do registro criado pelos formulários de contato e orçamento — nome, e-mail, telefone, empresa, serviço de interesse, mensagem, origem, aceite dos termos, IP e os dados gerados pelo sistema descritos na seção 3.3: retidos por <strong>12 meses</strong> a partir da data de envio. Após este prazo, os dados de identificação serão eliminados ou anonimizados, salvo obrigação legal ou processo judicial em curso.</li>
                     <li><strong>Inscrito da newsletter</strong> — e-mail e data de inscrição de assinantes com status ativo: retidos por <strong>24 meses</strong> a partir do último contato (confirmação ou reinscrição). Após este prazo sem interação, o registro será encerrado.</li>
                     <li><strong>Registro de descadastro</strong> — linha marcada como descadastrada na planilha da newsletter: retida por <strong>60 meses</strong> a partir da data do pedido. Este registro não é apagado porque serve como prova de que o pedido de saída foi honrado, conforme exige a LGPD (Art. 18 § 6).</li>
                     <li><strong>Obrigações legais:</strong> leis ou regulamentos podem definir um período mínimo superior aos prazos acima; nesses casos, o prazo legal prevalece.</li>
@@ -373,7 +381,7 @@
                 <p>Esta política entra em vigor em 09 de setembro de 2026 e é válida por 1 ano, podendo ser renovada automaticamente mediante revisão.</p>
             </div>
 
-            <p class="last-update"><i class="fas fa-clock"></i> Última atualização: Setembro de 2026</p>
+            <p class="last-update"><i class="fas fa-clock"></i> Última atualização: Novembro de 2026</p>
 
             <div class="related-links">
                 <h3><i class="fas fa-link"></i> Documentos Relacionados</h3>
