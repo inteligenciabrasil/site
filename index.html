@@ -1393,7 +1393,12 @@
 
     <!-- Scripts -->
     <script src="./js/site-common.min.js" defer></script>
-    <script src="./js/home.min.js?v=20261002" defer></script>
+    <!-- CACHE-BUSTER: este ?v= e a UNICA chave de cache versionada do site (nenhum outro
+         HTML usa o padrao). O Cloudflare guarda o JS por chave de URL, entao ao editar
+         home.min.js e preciso bumpar a data aqui, senao visitante e borda seguem com o
+         arquivo antigo -- medido em 10/11/2026: o deploy do fix foi ao ar e o navegador
+         continuou baixando os 7.583 B velhos sob ?v=20261002. -->
+    <script src="./js/home.min.js?v=20261110" defer></script>
 
     <!-- VLibras - Acessibilidade em Libras (load on click) -->
     <div id="vlibras-placeholder" style="position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:9998;cursor:pointer" title="Traduzir para Libras" aria-label="Ativar VLibras - Tradutor de Libras">
