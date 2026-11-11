@@ -86,7 +86,7 @@
                 "name": "NDR pode detectar ransomware?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim. NDR detecta indicadores de ransomware na rede: comúnicação com C2 servers, downloads de payloads, movimentação lateral via SMB/RDP/WMI, reconhecimento interno (port scanning, AD enumeration), e tentativas de exfiltração de dados antes da criptografia. NDR é particularmente eficaz para detectar a fase de propagação do ransomware."
+                    "text": "Sim. NDR detecta indicadores de ransomware na rede: comunicação com C2 servers, downloads de payloads, movimentação lateral via SMB/RDP/WMI, reconhecimento interno (port scanning, AD enumeration), e tentativas de exfiltração de dados antes da criptografia. NDR é particularmente eficaz para detectar a fase de propagação do ransomware."
                 }
             },
             {
@@ -94,7 +94,7 @@
                 "name": "Preciso de NDR se ja tenho EDR e SIEM?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "NDR complementa EDR e SIEM oferecendo visibilidade única: monitora dispositivos sem agente (IoT, OT, BYOD), detecta ameaças que não tocam disco (fileless, living-off-the-land), ve comúnicação entre hosts que EDR individual não correlaciona, e não pode ser desabilitado por malware. A combinação EDR+NDR+SIEM (SOC Visibility Triad) oferece cobertura completa."
+                    "text": "NDR complementa EDR e SIEM oferecendo visibilidade única: monitora dispositivos sem agente (IoT, OT, BYOD), detecta ameaças que não tocam disco (fileless, living-off-the-land), ve comunicação entre hosts que EDR individual não correlaciona, e não pode ser desabilitado por malware. A combinação EDR+NDR+SIEM (SOC Visibility Triad) oferece cobertura completa."
                 }
             }
         ]
@@ -270,7 +270,7 @@
 
                 <p>A rede éo tecido conjuntivo de toda infraestrutura - tudo que um atacante faz, desde o comprometimento inicial ate a exfiltração de dados, gera tráfego de rede. <strong>Network Detection and Response (NDR)</strong> explora essa caracteristica fundamental para fornecer visibilidade sobre ameaças que outras soluções não conseguem ver.</p>
 
-                <p>Enquanto EDR pode ser desabilitado por malware e logs podem ser deletados, o tráfego de rede é muito mais difícil de esconder. Se um atacante se comúnica com um servidor C2, se move lateralmente, ou exfiltra dados, NDR pode detectar - mesmo que o atacante use tecnicas de living-off-the-land que não deixam rastros em disco.</p>
+                <p>Enquanto EDR pode ser desabilitado por malware e logs podem ser deletados, o tráfego de rede é muito mais difícil de esconder. Se um atacante se comunica com um servidor C2, se move lateralmente, ou exfiltra dados, NDR pode detectar - mesmo que o atacante use tecnicas de living-off-the-land que não deixam rastros em disco.</p>
 
                 <p>Este guia explora como NDR funciona, suas diferenças para soluções tradicionais como IDS/IPS, e como implementa-lo para complementar suas defesas existentes.</p>
 
@@ -480,7 +480,7 @@
                 <h2 id="detecção-ameaças">Detecção de Ameaças</h2>
 
                 <h3>Command & Control (C2)</h3>
-                <p>NDR detecta comúnicação com C2 através de:</p>
+                <p>NDR detecta comunicação com C2 através de:</p>
 
                 <div class="code-block">
                     <h4>Indicadores de C2 na Rede</h4>
@@ -683,7 +683,7 @@ Match: Cobalt Strike Beacon (default profile)
                 <p>Dispositivos sem agente onde EDR não funciona:</p>
                 <ul>
                     <li>Descoberta de dispositivos shadow</li>
-                    <li>Comúnicacao anomala de dispositivos IoT</li>
+                    <li>Comunicação anomala de dispositivos IoT</li>
                     <li>Acesso não autorizado a redes OT</li>
                     <li>Protocolos industriais (Modbus, DNP3, etc.)</li>
                 </ul>
@@ -692,7 +692,7 @@ Match: Cobalt Strike Beacon (default profile)
                 <ul>
                     <li>PCI-DSS - Monitoramento de tráfego do CDE</li>
                     <li>LGPD - Detectar transferências de dados pessoais</li>
-                    <li>Auditoria - Histórico de comúnicações para investigação</li>
+                    <li>Auditoria - Histórico de comunicações para investigação</li>
                 </ul>
 
                 <h2 id="integração">Integração com SOC</h2>
@@ -751,7 +751,7 @@ Match: Cobalt Strike Beacon (default profile)
                 <h3>Integração com EDR</h3>
                 <ul>
                     <li>NDR detecta - EDR investiga endpoint específico</li>
-                    <li>EDR detecta - NDR mostra comúnicações do host</li>
+                    <li>EDR detecta - NDR mostra comunicações do host</li>
                     <li>Correlacao: mesmo IP/host em ambos = alta confianca</li>
                 </ul>
 
@@ -822,7 +822,7 @@ Match: Cobalt Strike Beacon (default profile)
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Sim. NDR detecta indicadores de <a class="gloss-link" href="/glossario/#ransomware" title="Ver no gloss&#225;rio">ransomware</a> na rede: comúnicação com C2 servers, downloads de payloads, movimentação lateral via SMB/RDP/WMI, reconhecimento interno (port scanning, AD enumeration), e tentativas de exfiltração de dados antes da criptografia. NDR é particularmente eficaz para detectar a fase de propagação do ransomware.</p>
+                            <p>Sim. NDR detecta indicadores de <a class="gloss-link" href="/glossario/#ransomware" title="Ver no gloss&#225;rio">ransomware</a> na rede: comunicação com C2 servers, downloads de payloads, movimentação lateral via SMB/RDP/WMI, reconhecimento interno (port scanning, AD enumeration), e tentativas de exfiltração de dados antes da criptografia. NDR é particularmente eficaz para detectar a fase de propagação do ransomware.</p>
                         </div>
                     </div>
 
@@ -832,7 +832,7 @@ Match: Cobalt Strike Beacon (default profile)
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>NDR complementa EDR e SIEM oferecendo visibilidade única: monitora dispositivos sem agente (IoT, OT, BYOD), detecta ameaças que não tocam disco (fileless, living-off-the-land), ve comúnicação entre hosts que EDR individual não correlaciona, e não pode ser desabilitado por malware. A combinação EDR+NDR+SIEM (SOC Visibility Triad) oferece cobertura completa.</p>
+                            <p>NDR complementa EDR e SIEM oferecendo visibilidade única: monitora dispositivos sem agente (IoT, OT, BYOD), detecta ameaças que não tocam disco (fileless, living-off-the-land), ve comunicação entre hosts que EDR individual não correlaciona, e não pode ser desabilitado por malware. A combinação EDR+NDR+SIEM (SOC Visibility Triad) oferece cobertura completa.</p>
                         </div>
                     </div>
                 </div>
