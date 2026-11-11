@@ -204,7 +204,7 @@
                     <li><code>sub</code> (Subject) - sujeito (geralmente user ID)</li>
                     <li><code>aud</code> (Audience) - destinatário pretendido</li>
                     <li><code>exp</code> (Expiration) - timestamp Unix de expiração</li>
-                    <li><code>nbf</code> (Not Before) - valido a partir de</li>
+                    <li><code>nbf</code> (Not Before) - válido a partir de</li>
                     <li><code>iat</code> (Issued At) - quando foi emitido</li>
                     <li><code>jti</code> (JWT ID) - identificador único (útil para revogar)</li>
                 </ul>
@@ -220,7 +220,7 @@
                 <p>A especificação permite <code>alg=none</code>, indicando token sem assinatura. Implementações vulneráveis aceitavam esse valor e confiavam no payload, permitindo que atacantes forjassem qualquer token - por exemplo, trocando <code>"role":"user"</code> por <code>"role":"admin"</code>. Documentado em CVE-2015-9235. Sempre rejeite <code>alg=none</code> no servidor e valide o algoritmo explicitamente.</p>
 
                 <h3>2. Algorithm confusion (RS256 &rarr; HS256)</h3>
-                <p>Implementações antigas aceitavam a chave publica RSA (que é publica!) como se fosse segredo HMAC. Atacantes pegavam a chave publica do servidor, trocavam alg para HS256 e assinavam um token com ela. Sempre valide que o alg do token bate com o alg esperado pela aplicação.</p>
+                <p>Implementações antigas aceitavam a chave pública RSA (que é pública!) como se fosse segredo HMAC. Atacantes pegavam a chave pública do servidor, trocavam alg para HS256 e assinavam um token com ela. Sempre valide que o alg do token bate com o alg esperado pela aplicação.</p>
 
                 <h3>3. kid injection</h3>
                 <p>Header <code>kid</code> (Key ID) é usado para selecionar qual chave verificar. Se a aplicação usa o valor para carregar arquivos (<code>keys/{kid}.pem</code>), atacantes podem injetar caminhos como <code>../../etc/passwd</code> ou apontar para arquivos previsíveis. Faça allowlist de kids permitidos.</p>
@@ -237,8 +237,8 @@
                 <ul>
                     <li><strong>Valide o algoritmo explicitamente</strong> - nunca confie no header</li>
                     <li><strong>Rejeite alg=none</strong> sem exceção</li>
-                    <li><strong>Use segredos fortes</strong> (32+ bytes aleatorios) para HMAC</li>
-                    <li><strong>Prefira RS256 ou ES256</strong> para sistemas distribuídos (chave publica verificada por vários serviços, privada só no emissor)</li>
+                    <li><strong>Use segredos fortes</strong> (32+ bytes aleatórios) para HMAC</li>
+                    <li><strong>Prefira RS256 ou ES256</strong> para sistemas distribuídos (chave pública verificada por vários serviços, privada só no emissor)</li>
                     <li><strong>Valide exp, nbf, iat, iss, aud</strong> em toda requisição</li>
                     <li><strong>Implemente revogação</strong> - lista de jtis revogados ou tokens de vida muito curta + refresh</li>
                     <li><strong>Use access tokens curtos</strong> (15-60 min) + refresh tokens</li>
@@ -278,7 +278,7 @@
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>JWT é criptografado?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Por padrão não. Header e payload são apenas codificados em Base64URL - legiveis. A assinatura garante integridade, não confidencialidade. Para confidencialidade, use JWE ou só trafegue por TLS sem dados sensíveis no payload.</p></div>
+                        <div class="faq-answer"><p>Por padrão não. Header e payload são apenas codificados em Base64URL - legíveis. A assinatura garante integridade, não confidencialidade. Para confidencialidade, use JWE ou só trafegue por TLS sem dados sensíveis no payload.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>O que é o ataque alg=none em JWT?</span><i class="fas fa-chevron-down faq-icon"></i></div>

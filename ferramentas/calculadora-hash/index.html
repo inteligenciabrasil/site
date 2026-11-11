@@ -42,7 +42,7 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é uma função hash?","acceptedAnswer":{"@type":"Answer","text":"Uma função hash é um algoritmo matematico que transforma dados de qualquer tamanho em uma saída de tamanho fixo, chamada digest. Boa função hash é determinística (mesma entrada, mesma saída), rápida, unidirecional (não se reverte) e resistente a colisoes (difícil achar duas entradas com o mesmo hash)."}},{"@type":"Question","name":"MD5 e SHA-1 ainda são seguros?","acceptedAnswer":{"@type":"Answer","text":"Não para uso criptográfico. MD5 foi quebrado em 2004 (colisoes práticas) e SHA-1 em 2017 (SHAttered, Google). Ainda são úteis para verificação de integridade não-adversarial (checksum de download, dedup, cache), mas NUNCA use MD5 ou SHA-1 para assinatura digital, certificados ou armazenamento de senhas."}},{"@type":"Question","name":"Qual hash usar hoje em 2026?","acceptedAnswer":{"@type":"Answer","text":"Para uso geral, SHA-256 é o padrão. Para aplicações de alto desempenho em hardware moderno, SHA-512 é mais rápido em CPUs 64-bit. Para armazenar senhas, NUNCA use SHA puro - use bcrypt, scrypt, Argon2 ou PBKDF2 com salt. SHA-3 e BLAKE3 são alternativas mais novas com boa adoção."}},{"@type":"Question","name":"Posso calcular hash de arquivo grande?","acceptedAnswer":{"@type":"Answer","text":"Sim, a ferramenta lê o arquivo no navegador sem enviá-lo a servidor. Para arquivos muito grandes (>500MB), o cálculo pode demorar vários segundos. O limite prático depende da memória RAM do dispositivo. Se travar, tente um arquivo menor."}},{"@type":"Question","name":"O arquivo é enviado ao servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. A ferramenta usa a API FileReader do navegador para ler o arquivo localmente, calcula o hash usando Web Crypto API e exibe o resultado. Nenhum byte do seu arquivo é transmitido. Você pode desconectar da internet e continuar usando."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é uma função hash?","acceptedAnswer":{"@type":"Answer","text":"Uma função hash é um algoritmo matemático que transforma dados de qualquer tamanho em uma saída de tamanho fixo, chamada digest. Boa função hash é determinística (mesma entrada, mesma saída), rápida, unidirecional (não se reverte) e resistente a colisões (difícil achar duas entradas com o mesmo hash)."}},{"@type":"Question","name":"MD5 e SHA-1 ainda são seguros?","acceptedAnswer":{"@type":"Answer","text":"Não para uso criptográfico. MD5 foi quebrado em 2004 (colisões práticas) e SHA-1 em 2017 (SHAttered, Google). Ainda são úteis para verificação de integridade não-adversarial (checksum de download, dedup, cache), mas NUNCA use MD5 ou SHA-1 para assinatura digital, certificados ou armazenamento de senhas."}},{"@type":"Question","name":"Qual hash usar hoje em 2026?","acceptedAnswer":{"@type":"Answer","text":"Para uso geral, SHA-256 é o padrão. Para aplicações de alto desempenho em hardware moderno, SHA-512 é mais rápido em CPUs 64-bit. Para armazenar senhas, NUNCA use SHA puro - use bcrypt, scrypt, Argon2 ou PBKDF2 com salt. SHA-3 e BLAKE3 são alternativas mais novas com boa adoção."}},{"@type":"Question","name":"Posso calcular hash de arquivo grande?","acceptedAnswer":{"@type":"Answer","text":"Sim, a ferramenta lê o arquivo no navegador sem enviá-lo a servidor. Para arquivos muito grandes (>500MB), o cálculo pode demorar vários segundos. O limite prático depende da memória RAM do dispositivo. Se travar, tente um arquivo menor."}},{"@type":"Question","name":"O arquivo é enviado ao servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. A ferramenta usa a API FileReader do navegador para ler o arquivo localmente, calcula o hash usando Web Crypto API e exibe o resultado. Nenhum byte do seu arquivo é transmitido. Você pode desconectar da internet e continuar usando."}}]}
     </script>
 
     <script type="application/ld+json">
@@ -198,7 +198,7 @@
             <div class="article-body">
 
                 <h2 id="o-que-e-hash">O Que é uma Função Hash?</h2>
-                <p>Uma função hash é um algoritmo matematico que transforma dados de qualquer tamanho em uma saída de tamanho fixo (digest). É um dos blocos fundamentais da criptografia moderna.</p>
+                <p>Uma função hash é um algoritmo matemático que transforma dados de qualquer tamanho em uma saída de tamanho fixo (digest). É um dos blocos fundamentais da criptografia moderna.</p>
 
                 <h3>Propriedades de uma boa função hash criptográfica</h3>
                 <ul>
@@ -206,17 +206,17 @@
                     <li><strong>Rápida</strong> - fácil de calcular em hardware comum</li>
                     <li><strong>Unidirecional (pré-image resistant)</strong> - dado o hash, computacionalmente inviável recuperar a entrada</li>
                     <li><strong>Resistente a segunda pré-imagem</strong> - dado X, difícil achar Y !== X tal que hash(X)=hash(Y)</li>
-                    <li><strong>Resistente a colisoes</strong> - difícil achar qualquer par (X,Y) com hash(X)=hash(Y)</li>
+                    <li><strong>Resistente a colisões</strong> - difícil achar qualquer par (X,Y) com hash(X)=hash(Y)</li>
                     <li><strong>Efeito avalanche</strong> - mudança mínima na entrada altera drasticamente a saída</li>
                 </ul>
 
                 <h2 id="algoritmos">Algoritmos de Hash: Panorama 2026</h2>
 
                 <h3>MD5 - QUEBRADO</h3>
-                <p>Projetado por Ron Rivest em 1991. Produz digest de 128 bits (32 caracteres hex). Colisoes práticas foram demonstradas em 2004. Ainda aparece em checksums não-adversariais (verificação de download de fornecedor confiável) e dedup, mas <strong>nunca deve ser usado em contextos de segurança</strong>.</p>
+                <p>Projetado por Ron Rivest em 1991. Produz digest de 128 bits (32 caracteres hex). Colisões práticas foram demonstradas em 2004. Ainda aparece em checksums não-adversariais (verificação de download de fornecedor confiável) e dedup, mas <strong>nunca deve ser usado em contextos de segurança</strong>.</p>
 
                 <h3>SHA-1 - DEPRECIADO</h3>
-                <p>Publicado pela NSA/NIST em 1995, substituto do SHA-0. Digest de 160 bits (40 hex). Google e CWI demonstraram colisao prática em 2017 (ataque <em>SHAttered</em>). Depreciado pelo NIST em 2011 para aplicações criptográficas, mas ainda presente em Git (sendo migrado para SHA-256) e em certificados antigos.</p>
+                <p>Publicado pela NSA/NIST em 1995, substituto do SHA-0. Digest de 160 bits (40 hex). Google e CWI demonstraram colisão prática em 2017 (ataque <em>SHAttered</em>). Depreciado pelo NIST em 2011 para aplicações criptográficas, mas ainda presente em Git (sendo migrado para SHA-256) e em certificados antigos.</p>
 
                 <h3>SHA-2 (SHA-256, SHA-384, SHA-512)</h3>
                 <p>Família publicada pelo NIST em 2001. SHA-256 produz 256 bits (64 hex), SHA-384 produz 384 bits (96 hex), SHA-512 produz 512 bits (128 hex). Ainda considerados seguros em 2026 e são o padrão atual para HTTPS, blockchain (Bitcoin usa SHA-256), integridade de software e assinatura digital.</p>
@@ -244,7 +244,7 @@
                 <p>HMAC (Hash-based Message Authentication Code) combina hash com chave secreta para garantir autenticidade. Assinaturas digitais (RSA-PSS, ECDSA) primeiro hasheiam a mensagem, depois cifram o hash com chave privada.</p>
 
                 <h3>Blockchain</h3>
-                <p>Bitcoin usa SHA-256 duplo para minerar blocos e referenciar transações. Ethereum usa Keccak-256. A resistência a colisoes garante que hashes funcionem como ponteiros imutáveis entre blocos.</p>
+                <p>Bitcoin usa SHA-256 duplo para minerar blocos e referenciar transações. Ethereum usa Keccak-256. A resistência a colisões garante que hashes funcionem como ponteiros imutáveis entre blocos.</p>
 
                 <h2 id="verificando-download">Como Verificar um Download</h2>
                 <p>Cenário clássico: você baixou <code>kali-linux-2026.iso</code> e quer garantir que o arquivo não foi corrompido:</p>
@@ -256,7 +256,7 @@
                 </ol>
 
                 <h3>Atenção: hash não garante autenticidade</h3>
-                <p>Se um atacante comprometer o site de download, pode trocar tanto o arquivo quanto o hash publicado. Para autenticidade real, verifique a assinatura GPG do hash (ou use HTTPS com certificado valido de uma CA confiável).</p>
+                <p>Se um atacante comprometer o site de download, pode trocar tanto o arquivo quanto o hash publicado. Para autenticidade real, verifique a assinatura GPG do hash (ou use HTTPS com certificado válido de uma CA confiável).</p>
 
                 <h2 id="erros-comuns">Erros Comuns</h2>
                 <ul>
@@ -264,7 +264,7 @@
                     <li><strong>Confiar em MD5</strong> para qualquer coisa relacionada a segurança</li>
                     <li><strong>Hash sem salt</strong> - permite ataques de rainbow table</li>
                     <li><strong>Comparação não constant-time</strong> - use funções apropriadas para evitar timing attacks</li>
-                    <li><strong>Truncar hash</strong> - reduz drasticamente a segurança contra colisoes</li>
+                    <li><strong>Truncar hash</strong> - reduz drasticamente a segurança contra colisões</li>
                 </ul>
 
                 <h2 id="faq">Perguntas Frequentes</h2>
@@ -272,7 +272,7 @@
                 <div class="faq-section">
                     <div class="faq-item">
                         <div class="faq-question"><span>O que é uma função hash?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Uma função hash é um algoritmo matematico que transforma dados de qualquer tamanho em saída de tamanho fixo. Boa função hash é determinística, rápida, unidirecional e resistente a colisoes.</p></div>
+                        <div class="faq-answer"><p>Uma função hash é um algoritmo matemático que transforma dados de qualquer tamanho em saída de tamanho fixo. Boa função hash é determinística, rápida, unidirecional e resistente a colisões.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>MD5 e SHA-1 ainda são seguros?</span><i class="fas fa-chevron-down faq-icon"></i></div>

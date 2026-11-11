@@ -46,9 +46,9 @@
         {"@type":"Question","name":"O que é DNSSEC?","acceptedAnswer":{"@type":"Answer","text":"DNSSEC (DNS Security Extensions) é um conjunto de extensões do DNS que adiciona autenticação criptográfica aos registros. Resolvedores validantes verificam assinaturas (RRSIG) usando chaves públicas (DNSKEY) ancoradas por um hash (DS) no domínio pai. Sem DNSSEC, respostas DNS podem ser forjadas via cache poisoning, redirecionando tráfego para servidores maliciosos."}},
         {"@type":"Question","name":"O que é o registro CAA?","acceptedAnswer":{"@type":"Answer","text":"CAA (Certification Authority Authorization) é um registro DNS que indica quais Autoridades Certificadoras podem emitir certificados TLS para o domínio. Desde 2017 é obrigatório que as CAs consultem CAA antes de emitir. Reduz risco de mis-issuance: se um atacante consegue validar domínio em uma CA não autorizada, a emissão deve ser bloqueada."}},
         {"@type":"Question","name":"Como esta ferramenta consulta DNS?","acceptedAnswer":{"@type":"Answer","text":"Usamos DNS over HTTPS (DoH) do Cloudflare (1.1.1.1) e como fallback o Google (8.8.8.8). Ambos são resolvedores validantes - se o domínio for assinado e a validação DNSSEC for bem-sucedida, a resposta vem com a flag AD (Authenticated Data) ativada. Tudo roda no navegador via JavaScript; os domínios consultados não passam por nossos servidores."}},
-        {"@type":"Question","name":"Por que minha empresa deveria habilitar DNSSEC?","acceptedAnswer":{"@type":"Answer","text":"DNSSEC mitiga ataques de cache poisoning e DNS hijacking, protege a integridade da resolução de nomes do seu domínio e é requisito implicito de alguns frameworks de segurança (NIST SP 800-81, requisitos governamentais em vários países). O custo operacional caiu muito - registrars como Registro.br, Cloudflare, Route 53 oferecem assinatura automática."}},
+        {"@type":"Question","name":"Por que minha empresa deveria habilitar DNSSEC?","acceptedAnswer":{"@type":"Answer","text":"DNSSEC mitiga ataques de cache poisoning e DNS hijacking, protege a integridade da resolução de nomes do seu domínio e é requisito implícito de alguns frameworks de segurança (NIST SP 800-81, requisitos governamentais em vários países). O custo operacional caiu muito - registrars como Registro.br, Cloudflare, Route 53 oferecem assinatura automática."}},
         {"@type":"Question","name":"O que o registro DS faz?","acceptedAnswer":{"@type":"Answer","text":"O DS (Delegation Signer) é um hash do DNSKEY do domínio filho, publicado pelo domínio pai (ex: .br para empresa.com.br). É o que ancora a cadeia de confiança DNSSEC - sem DS no pai, mesmo que você publique DNSKEY no seu domínio, resolvedores não tem como validar autenticidade da chave. É o passo final para 'ligar' DNSSEC."}},
-        {"@type":"Question","name":"O que cada nota significa?","acceptedAnswer":{"@type":"Answer","text":"A nota (0 a 100) combina: presença de DNSSEC validado (+30), DS publicado no pai (+20), CAA configurado (+15), suporte a IPv6 via AAAA (+15), pelo menos 2 servidores NS (+10) e TXT presente para autenticacoes futuras (+10). Note A+ (90+) indica postura robusta; F (<50) indica gaps relevantes."}}
+        {"@type":"Question","name":"O que cada nota significa?","acceptedAnswer":{"@type":"Answer","text":"A nota (0 a 100) combina: presença de DNSSEC validado (+30), DS publicado no pai (+20), CAA configurado (+15), suporte a IPv6 via AAAA (+15), pelo menos 2 servidores NS (+10) e TXT presente para autenticações futuras (+10). Note A+ (90+) indica postura robusta; F (<50) indica gaps relevantes."}}
     ]}
     </script>
 
@@ -333,7 +333,7 @@
             <div class="article-body">
 
                 <h2 id="oque-dns">O Que é DNS?</h2>
-                <p>DNS (Domain Name System) é o sistema que traduz nomes legiveis (<code>empresa.com.br</code>) em endereços IP (<code>203.0.113.10</code>). É uma das infraestruturas mais críticas da internet - se o DNS do seu domínio cair ou for sequestrado, todos os serviços associados (site, e-mail, APIs, VPN) param ou são redirecionados para servidores controlados por atacantes.</p>
+                <p>DNS (Domain Name System) é o sistema que traduz nomes legíveis (<code>empresa.com.br</code>) em endereços IP (<code>203.0.113.10</code>). É uma das infraestruturas mais críticas da internet - se o DNS do seu domínio cair ou for sequestrado, todos os serviços associados (site, e-mail, APIs, VPN) param ou são redirecionados para servidores controlados por atacantes.</p>
 
                 <p>Cada tipo de registro DNS tem um propósito específico. Os principais que esta ferramenta analisa:</p>
                 <ul>
@@ -385,7 +385,7 @@ empresa.com.br. CAA 0 iodef "mailto:security@empresa.com.br"</code></pre>
                     <li><strong>+15</strong> - CAA configurado (redução de risco de mis-issuance)</li>
                     <li><strong>+15</strong> - Suporte a IPv6 via AAAA (postura moderna de rede)</li>
                     <li><strong>+10</strong> - 2+ servidores NS (resiliência mínima de DNS)</li>
-                    <li><strong>+10</strong> - TXT presente (sinal de autenticacoes configuradas como SPF/DKIM/DMARC)</li>
+                    <li><strong>+10</strong> - TXT presente (sinal de autenticações configuradas como SPF/DKIM/DMARC)</li>
                 </ul>
 
                 <p>Classificação:</p>

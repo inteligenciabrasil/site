@@ -42,7 +42,7 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é uma boa política de senhas?","acceptedAnswer":{"@type":"Answer","text":"Uma boa política de senhas foca em tamanho (12-16+ caracteres), diversidade de caracteres, bloqueio de senhas comuns/vazadas, permite TODOS os caracteres (incluindo espacos e Unicode) e NÃO força trocas periódicas sem motivo. Essa é a diretriz moderna do NIST SP 800-63B, que abandonou regras de complexidade rígida e expiração arbitrária."}},{"@type":"Question","name":"O que mudou no NIST SP 800-63B?","acceptedAnswer":{"@type":"Answer","text":"A nova diretriz (revisão 3 em 2017, atualizada em 2024) abandonou várias práticas tradicionais: não exige complexidade obrigatória (maiúsculas+números+simbolos), não exige expiração periódica, mas exige mínimo 8 caracteres (recomendado 16+), bloqueio de senhas em listas de vazamentos, e permite todos os caracteres Unicode imprimiveis. O foco mudou de complexidade imposta para tamanho e aleatoriedade."}},{"@type":"Question","name":"Devo exigir troca de senha a cada 90 dias?","acceptedAnswer":{"@type":"Answer","text":"Não. Trocas periódicas arbitrárias diminuem a qualidade da senha (usuários incrementam número no final) sem aumentar segurança. Troque senha apenas se houver suspeita de comprometimento. Para mitigar risco, use MFA, detecte vazamentos, monitore logins suspeitos e bloqueie senhas comuns/reutilizadas."}},{"@type":"Question","name":"Quanto vale a entropia de uma senha?","acceptedAnswer":{"@type":"Answer","text":"Entropia (em bits) mede a imprevisibilidade. Calcula-se como comprimento * log2(tamanho do alfabeto). Uma senha de 8 caracteres minusculos tem ~38 bits (fraca); 12 caracteres mistos tem ~72 bits (boa); 16 caracteres mistos tem ~95 bits (forte). Abaixo de 60 bits, um atacante com GPU moderna quebra em menos de um ano. Mire em 80+ bits para contas comuns e 100+ para críticas."}},{"@type":"Question","name":"Esta ferramenta envia minha senha a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a validação acontece no seu navegador em JavaScript puro. Nenhuma senha é transmitida, salva ou registrada. A lista de senhas comuns está embutida no código. Você pode desconectar da internet após carregar a página e continuar usando. Abra o DevTools (F12) para auditar o código fonte."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é uma boa política de senhas?","acceptedAnswer":{"@type":"Answer","text":"Uma boa política de senhas foca em tamanho (12-16+ caracteres), diversidade de caracteres, bloqueio de senhas comuns/vazadas, permite TODOS os caracteres (incluindo espaços e Unicode) e NÃO força trocas periódicas sem motivo. Essa é a diretriz moderna do NIST SP 800-63B, que abandonou regras de complexidade rígida e expiração arbitrária."}},{"@type":"Question","name":"O que mudou no NIST SP 800-63B?","acceptedAnswer":{"@type":"Answer","text":"A nova diretriz (revisão 3 em 2017, atualizada em 2024) abandonou várias práticas tradicionais: não exige complexidade obrigatória (maiúsculas+números+símbolos), não exige expiração periódica, mas exige mínimo 8 caracteres (recomendado 16+), bloqueio de senhas em listas de vazamentos, e permite todos os caracteres Unicode imprimíveis. O foco mudou de complexidade imposta para tamanho e aleatoriedade."}},{"@type":"Question","name":"Devo exigir troca de senha a cada 90 dias?","acceptedAnswer":{"@type":"Answer","text":"Não. Trocas periódicas arbitrárias diminuem a qualidade da senha (usuários incrementam número no final) sem aumentar segurança. Troque senha apenas se houver suspeita de comprometimento. Para mitigar risco, use MFA, detecte vazamentos, monitore logins suspeitos e bloqueie senhas comuns/reutilizadas."}},{"@type":"Question","name":"Quanto vale a entropia de uma senha?","acceptedAnswer":{"@type":"Answer","text":"Entropia (em bits) mede a imprevisibilidade. Calcula-se como comprimento * log2(tamanho do alfabeto). Uma senha de 8 caracteres minúsculos tem ~38 bits (fraca); 12 caracteres mistos tem ~72 bits (boa); 16 caracteres mistos tem ~95 bits (forte). Abaixo de 60 bits, um atacante com GPU moderna quebra em menos de um ano. Mire em 80+ bits para contas comuns e 100+ para críticas."}},{"@type":"Question","name":"Esta ferramenta envia minha senha a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a validação acontece no seu navegador em JavaScript puro. Nenhuma senha é transmitida, salva ou registrada. A lista de senhas comuns está embutida no código. Você pode desconectar da internet após carregar a página e continuar usando. Abra o DevTools (F12) para auditar o código fonte."}}]}
     </script>
 
     <script type="application/ld+json">
@@ -169,7 +169,7 @@
                         <input type="checkbox" id="pol-req-upper" checked>
                     </div>
                     <div class="pol-policy-row">
-                        <label for="pol-req-lower">Exigir letras minusculas</label>
+                        <label for="pol-req-lower">Exigir letras minúsculas</label>
                         <input type="checkbox" id="pol-req-lower" checked>
                     </div>
                     <div class="pol-policy-row">
@@ -177,7 +177,7 @@
                         <input type="checkbox" id="pol-req-number" checked>
                     </div>
                     <div class="pol-policy-row">
-                        <label for="pol-req-symbol">Exigir simbolos</label>
+                        <label for="pol-req-symbol">Exigir símbolos</label>
                         <input type="checkbox" id="pol-req-symbol" checked>
                     </div>
                     <div class="pol-policy-row">
@@ -255,12 +255,12 @@
 
                 <h3>Princípios modernos (2026)</h3>
                 <ul>
-                    <li><strong>Tamanho &gt; complexidade</strong> - 16 caracteres minusculos é mais seguro que 8 com tudo</li>
-                    <li><strong>Permita tudo</strong> - aceite todos os caracteres Unicode imprimiveis (emojis, espacos, acentos)</li>
+                    <li><strong>Tamanho &gt; complexidade</strong> - 16 caracteres minúsculos é mais seguro que 8 com tudo</li>
+                    <li><strong>Permita tudo</strong> - aceite todos os caracteres Unicode imprimíveis (emojis, espaços, acentos)</li>
                     <li><strong>Bloqueie senhas conhecidas</strong> - listas de vazamentos, dicionários e variações comuns</li>
                     <li><strong>Não force expiração</strong> - só exija troca se houver suspeita de comprometimento</li>
                     <li><strong>MFA como padrão</strong> - senha sozinha nunca é suficiente</li>
-                    <li><strong>Monitore autenticacoes anômalas</strong> - login de local novo, dispositivo novo</li>
+                    <li><strong>Monitore autenticações anômalas</strong> - login de local novo, dispositivo novo</li>
                 </ul>
 
                 <h2 id="padroes">Padrões de Referência</h2>
@@ -269,10 +269,10 @@
                 <p>A diretriz de autenticação digital do NIST (<em>National Institute of Standards and Technology</em>), revisão 3 de 2017 e atualizações de 2024. É considerada o padrão-ouro para políticas modernas.</p>
                 <ul>
                     <li>Mínimo 8 caracteres (recomendado 16+)</li>
-                    <li><strong>Não</strong> exija complexidade (misturar maiúsculas/números/simbolos)</li>
+                    <li><strong>Não</strong> exija complexidade (misturar maiúsculas/números/símbolos)</li>
                     <li><strong>Não</strong> exija expiração periódica sem motivo</li>
                     <li>Bloqueie senhas em listas de vazamentos</li>
-                    <li>Permita todos os caracteres imprimiveis, incluindo espacos e Unicode</li>
+                    <li>Permita todos os caracteres imprimíveis, incluindo espaços e Unicode</li>
                     <li>Limite tentativas de login (rate limiting)</li>
                 </ul>
 
@@ -304,7 +304,7 @@
                 </ul>
 
                 <h4>Pegadinha da entropia</h4>
-                <p>O cálculo acima assume senha <strong>aleatoria</strong>. Uma senha como <code>Empresa@2026</code> tem teoricamente ~66 bits, mas na prática tem &lt;25 bits de entropia real porque segue padrões humanos previsíveis. Atacantes usam dicionários e regras que priorizam esses padrões.</p>
+                <p>O cálculo acima assume senha <strong>aleatória</strong>. Uma senha como <code>Empresa@2026</code> tem teoricamente ~66 bits, mas na prática tem &lt;25 bits de entropia real porque segue padrões humanos previsíveis. Atacantes usam dicionários e regras que priorizam esses padrões.</p>
 
                 <h2 id="erros-politica">Erros Comuns em Políticas</h2>
                 <ul>
@@ -354,7 +354,7 @@
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Quanto vale a entropia de uma senha?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Entropia (bits) mede imprevisibilidade. 8 chars minusculos = ~38 bits (fraca); 12 mistos = ~72 bits (boa); 16 mistos = ~95 bits (forte). Mire em 80+ bits para contas comuns.</p></div>
+                        <div class="faq-answer"><p>Entropia (bits) mede imprevisibilidade. 8 chars minúsculos = ~38 bits (fraca); 12 mistos = ~72 bits (boa); 16 mistos = ~95 bits (forte). Mire em 80+ bits para contas comuns.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Esta ferramenta envia minha senha a algum servidor?</span><i class="fas fa-chevron-down faq-icon"></i></div>

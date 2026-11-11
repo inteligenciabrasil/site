@@ -44,7 +44,7 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual a principal diferença entre IPv4 e IPv6?","acceptedAnswer":{"@type":"Answer","text":"IPv4 usa endereços de 32 bits (cerca de 4,29 bilhões de endereços, já esgotados) e depende de NAT para estender essa capacidade. IPv6 usa 128 bits (3,4 x 10^38 endereços) e foi desenhado para comunicação fim-a-fim sem intermediários, com autoconfiguracao nativa (SLAAC) e suporte a multicast em vez de broadcast."}},{"@type":"Question","name":"O que é NAT e por que foi criado?","acceptedAnswer":{"@type":"Answer","text":"NAT (Network Address Translation) traduz endereços privados em um endereço público compartilhado, permitindo que várias máquinas usem uma única conexão com a Internet. Foi criado como solução temporária para o esgotamento de IPv4 e acabou virando padrão de fato, uma gambiarra elegante que quebra o princípio fim-a-fim da Internet."}},{"@type":"Question","name":"O IPv6 substitui o IPv4?","acceptedAnswer":{"@type":"Answer","text":"Na prática, IPv4 e IPv6 convivem em dual-stack ha mais de duas décadas. IPv6 não elimina IPv4 porque ambos não falam entre si sem tradução, e grande parte da Internet ainda roda IPv4. A adoção global de IPv6 está em torno de 45% (Google IPv6 Statistics)."}},{"@type":"Question","name":"O que é SLAAC e qual a diferença para DHCP?","acceptedAnswer":{"@type":"Answer","text":"SLAAC (Stateless Address Autoconfiguration) permite que um dispositivo IPv6 gere seu próprio endereço a partir de informações anunciadas pelo roteador, sem servidor central. DHCP, por outro lado, exige um servidor que atribua endereços. IPv6 suporta ambos, mas SLAAC é o mecanismo nativo e default."}},{"@type":"Question","name":"IPv6 é mais seguro que IPv4?","acceptedAnswer":{"@type":"Answer","text":"IPv6 foi projetado com IPsec previsto no design, mas na prática o uso obrigatório foi removido pela RFC 6434. Em termos estruturais, IPv6 elimina NAT e oferece comunicação fim-a-fim, o que facilita modelos Zero Trust. Ao mesmo tempo, abre superfícies de ataque novas (Neighbor Discovery spoofing, cabeçalhos de extensão) e exige ferramentas e profissionais preparados."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qual a principal diferença entre IPv4 e IPv6?","acceptedAnswer":{"@type":"Answer","text":"IPv4 usa endereços de 32 bits (cerca de 4,29 bilhões de endereços, já esgotados) e depende de NAT para estender essa capacidade. IPv6 usa 128 bits (3,4 x 10^38 endereços) e foi desenhado para comunicação fim-a-fim sem intermediários, com autoconfiguracao nativa (SLAAC) e suporte a multicast em vez de broadcast."}},{"@type":"Question","name":"O que é NAT e por que foi criado?","acceptedAnswer":{"@type":"Answer","text":"NAT (Network Address Translation) traduz endereços privados em um endereço público compartilhado, permitindo que várias máquinas usem uma única conexão com a Internet. Foi criado como solução temporária para o esgotamento de IPv4 e acabou virando padrão de fato, uma gambiarra elegante que quebra o princípio fim-a-fim da Internet."}},{"@type":"Question","name":"O IPv6 substitui o IPv4?","acceptedAnswer":{"@type":"Answer","text":"Na prática, IPv4 e IPv6 convivem em dual-stack há mais de duas décadas. IPv6 não elimina IPv4 porque ambos não falam entre si sem tradução, e grande parte da Internet ainda roda IPv4. A adoção global de IPv6 está em torno de 45% (Google IPv6 Statistics)."}},{"@type":"Question","name":"O que é SLAAC e qual a diferença para DHCP?","acceptedAnswer":{"@type":"Answer","text":"SLAAC (Stateless Address Autoconfiguration) permite que um dispositivo IPv6 gere seu próprio endereço a partir de informações anunciadas pelo roteador, sem servidor central. DHCP, por outro lado, exige um servidor que atribua endereços. IPv6 suporta ambos, mas SLAAC é o mecanismo nativo e default."}},{"@type":"Question","name":"IPv6 é mais seguro que IPv4?","acceptedAnswer":{"@type":"Answer","text":"IPv6 foi projetado com IPsec previsto no design, mas na prática o uso obrigatório foi removido pela RFC 6434. Em termos estruturais, IPv6 elimina NAT e oferece comunicação fim-a-fim, o que facilita modelos Zero Trust. Ao mesmo tempo, abre superfícies de ataque novas (Neighbor Discovery spoofing, cabeçalhos de extensão) e exige ferramentas e profissionais preparados."}}]}
     </script>
 
     <script type="application/ld+json">
@@ -191,7 +191,7 @@
                     </ul>
                 </div>
 
-                <p>Dois protocolos. Uma Internet. O <strong>IPv4</strong> é a fundação que mantém tudo funcionando ha mais de quatro décadas, mesmo com seus endereços esgotados. O <strong>IPv6</strong> é o que a Internet deveria ter sido desde o início: espaço abundante, comunicação direta e autoconfiguracao nativa.</p>
+                <p>Dois protocolos. Uma Internet. O <strong>IPv4</strong> é a fundação que mantém tudo funcionando há mais de quatro décadas, mesmo com seus endereços esgotados. O <strong>IPv6</strong> é o que a Internet deveria ter sido desde o início: espaço abundante, comunicação direta e autoconfiguracao nativa.</p>
 
                 <p>Este artigo apresenta o contraste técnico e conceitual entre IPv4 e IPv6 de forma direta, para quem precisa entender <em>por que</em> a mudança importa - não apenas <em>que</em> ela existe.</p>
 
@@ -206,7 +206,7 @@
 
                 <h3>IPv4: 32 bits, 4,29 bilhões de endereços - que a gente já gastou</h3>
 
-                <p>O <strong>IPv4</strong> nasceu com a <strong>RFC 791 em 1981</strong> usando endereços de 32 bits. Isso significa <strong>2^32 = 4.294.967.296</strong> endereços únicos possíveis. Em 1981, com menos de mil hosts na ARPANET, parecia número astronomico. Em 2011 a IANA distribuiu o último bloco /8; desde então o esgotamento se propagou pelos <strong>RIRs regionais</strong>.</p>
+                <p>O <strong>IPv4</strong> nasceu com a <strong>RFC 791 em 1981</strong> usando endereços de 32 bits. Isso significa <strong>2^32 = 4.294.967.296</strong> endereços únicos possíveis. Em 1981, com menos de mil hosts na ARPANET, parecia número astronômico. Em 2011 a IANA distribuiu o último bloco /8; desde então o esgotamento se propagou pelos <strong>RIRs regionais</strong>.</p>
 
                 <h4>A solução elegante que virou padrão: NAT</h4>
 
@@ -216,9 +216,9 @@
 
                 <h3>IPv6: 128 bits, 3,4 x 10^38 endereços - e ainda sobra</h3>
 
-                <p>O <strong>IPv6</strong> (padronizado na <strong>RFC 8200</strong>) usa 128 bits. Isso da <strong>2^128 ≈ 3,4 x 10^38</strong> endereços. Para contextualizar: você pode dar um IP para cada grao de areia do planeta e ainda sobram endereços para cada atomo da atmosfera.</p>
+                <p>O <strong>IPv6</strong> (padronizado na <strong>RFC 8200</strong>) usa 128 bits. Isso da <strong>2^128 ≈ 3,4 x 10^38</strong> endereços. Para contextualizar: você pode dar um IP para cada grão de areia do planeta e ainda sobram endereços para cada átomo da atmosfera.</p>
 
-                <h4>O que essa abundancia permite</h4>
+                <h4>O que essa abundância permite</h4>
 
                 <ul>
                     <li><strong>Endereços públicos para cada dispositivo</strong> - sem precisar compartilhar via NAT</li>
@@ -238,12 +238,12 @@
 
                 <h3>IPv4 fala com o mundo passando por tradutor (NAT)</h3>
 
-                <p>Em IPv4 moderno, quase nenhum host fala diretamente com a Internet. Seu notebook tem um endereço privado (ex.: 192.168.0.42). O roteador tem um endereço público. Toda saída passa por <strong>tradução de endereços e portas (NAPT)</strong>. A Internet "ve" apenas o roteador, não você.</p>
+                <p>Em IPv4 moderno, quase nenhum host fala diretamente com a Internet. Seu notebook tem um endereço privado (ex.: 192.168.0.42). O roteador tem um endereço público. Toda saída passa por <strong>tradução de endereços e portas (NAPT)</strong>. A Internet "vê" apenas o roteador, não você.</p>
 
                 <h4>Consequências práticas do modelo com NAT</h4>
 
                 <ul>
-                    <li><strong>Hosts internos não são diretamente alcancaveis</strong> - serviços precisam de port forwarding ou reverse proxy</li>
+                    <li><strong>Hosts internos não são diretamente alcançáveis</strong> - serviços precisam de port forwarding ou reverse proxy</li>
                     <li><strong>Conexões entrantes exigem técnicas especiais</strong> - STUN, TURN, hole punching para P2P e VoIP</li>
                     <li><strong>Logs e forense ficam complexos</strong> - um IP público pode representar centenas ou milhares de usuários sob CGNAT</li>
                     <li><strong>Sessões precisam de estado no NAT</strong> - timeouts, limites de tabela, dor operacional</li>
@@ -377,7 +377,7 @@
                     </tbody>
                 </table>
 
-                <h3>Exemplos de notacao</h3>
+                <h3>Exemplos de notação</h3>
 
                 <h4>IPv4 (decimal separado por pontos)</h4>
 
@@ -414,7 +414,7 @@ fe80::1  <span class="comment">(link-local)</span></pre></div>
 
                 <div class="highlight-box info">
                     <div class="highlight-box-title"><i class="fas fa-shield-alt"></i> Zero Trust e IPv6 combinam</div>
-                    <p>Comunicação fim-a-fim sem NAT e política por identidade são premissas naturais de <a href="../zero-trust-architecture-guia-completo/">Zero Trust</a>. Organizações que migraram para IPv6 antes costumam encontrar terreno mais friendly para microssegmentação e autenticação continua.</p>
+                    <p>Comunicação fim-a-fim sem NAT e política por identidade são premissas naturais de <a href="../zero-trust-architecture-guia-completo/">Zero Trust</a>. Organizações que migraram para IPv6 antes costumam encontrar terreno mais friendly para microssegmentação e autenticação contínua.</p>
                 </div>
 
                 <h2 id="transicao">Transição e Convivência</h2>
@@ -434,7 +434,7 @@ fe80::1  <span class="comment">(link-local)</span></pre></div>
 
                 <h3>Por que a adoção é lenta</h3>
 
-                <p>Após mais de duas décadas, IPv6 chegou a cerca de <strong>45% de adoção global</strong> (Google IPv6 Statistics). Os principais fatores de inercia:</p>
+                <p>Após mais de duas décadas, IPv6 chegou a cerca de <strong>45% de adoção global</strong> (Google IPv6 Statistics). Os principais fatores de inércia:</p>
 
                 <ul>
                     <li><strong>NAT e CGNAT funcionam</strong> - adiaram a urgência</li>
@@ -457,7 +457,7 @@ fe80::1  <span class="comment">(link-local)</span></pre></div>
 
                 <div class="phase-card" data-phase="Passo 1">
                     <h3>Inventariar a stack</h3>
-                    <p>Mapear onde IPv4 roda hoje, quais equipamentos suportam IPv6 e quais aplicações tem dependências hardcoded. Sem inventário não ha plano.</p>
+                    <p>Mapear onde IPv4 roda hoje, quais equipamentos suportam IPv6 e quais aplicações tem dependências hardcoded. Sem inventário não há plano.</p>
                 </div>
 
                 <div class="phase-card" data-phase="Passo 2">
@@ -494,7 +494,7 @@ fe80::1  <span class="comment">(link-local)</span></pre></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>O IPv6 substitui o IPv4?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Na prática, IPv4 e IPv6 convivem em dual-stack ha mais de duas décadas. IPv6 não elimina IPv4 porque ambos não falam entre si sem tradução, e grande parte da Internet ainda roda IPv4. A adoção global de IPv6 está em torno de 45% (Google IPv6 Statistics).</p></div>
+                        <div class="faq-answer"><p>Na prática, IPv4 e IPv6 convivem em dual-stack há mais de duas décadas. IPv6 não elimina IPv4 porque ambos não falam entre si sem tradução, e grande parte da Internet ainda roda IPv4. A adoção global de IPv6 está em torno de 45% (Google IPv6 Statistics).</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>O que é SLAAC e qual a diferença para DHCP?</span><i class="fas fa-chevron-down faq-icon"></i></div>

@@ -42,7 +42,7 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é OWASP Risk Rating Methodology?","acceptedAnswer":{"@type":"Answer","text":"É uma metodologia publicada pela OWASP para avaliar o risco de vulnerabilidades combinando Probabilidade (Likelihood) e Impacto (Impact). Cada dimensão é calculada a partir de 8 fatores pontuados de 0 a 9, e o risco final resulta de uma matriz 3x3 entre ambas as dimensões."}},{"@type":"Question","name":"Qual a diferença entre OWASP Risk e CVSS?","acceptedAnswer":{"@type":"Answer","text":"CVSS avalia severidade técnica de uma vulnerabilidade isolada com foco em características do defeito. OWASP Risk Rating adiciona dimensões de negócio (dano financeiro, reputação, compliance, privacidade) e contexto do atacante, resultando em uma classificação mais próxima do risco real para a organização."}},{"@type":"Question","name":"Como a Probabilidade (Likelihood) é calculada?","acceptedAnswer":{"@type":"Answer","text":"Probabilidade é a media de 8 fatores: 4 do Agente de Ameaça (Skill Level, Motive, Opportunity, Size) e 4 da Vulnerabilidade (Ease of Discovery, Ease of Exploit, Awareness, Intrusion Detection). Cada fator recebe uma pontuação de 0 a 9 e o resultado é classificado como Baixo (0-3), Médio (3-6) ou Alto (6-9)."}},{"@type":"Question","name":"Como o Impacto (Impact) é calculado?","acceptedAnswer":{"@type":"Answer","text":"Impacto é a media de 8 fatores: 4 de Impacto Técnico (confidencialidade, integridade, disponibilidade, accountability) e 4 de Impacto de Negócio (dano financeiro, reputação, compliance, privacidade). Mesmas faixas de severidade da Probabilidade."}},{"@type":"Question","name":"Como interpretar o resultado final?","acceptedAnswer":{"@type":"Answer","text":"A combinação de Probabilidade x Impacto define a severidade final pela matriz OWASP: Informativo, Baixo, Médio, Alto ou Crítico. Vulnerabilidades Alto e Crítico exigem ação prioritária. O resultado deve complementar - não substituir - a avaliação de risco corporativo considerando controles compensatórios e exposição real."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é OWASP Risk Rating Methodology?","acceptedAnswer":{"@type":"Answer","text":"É uma metodologia publicada pela OWASP para avaliar o risco de vulnerabilidades combinando Probabilidade (Likelihood) e Impacto (Impact). Cada dimensão é calculada a partir de 8 fatores pontuados de 0 a 9, e o risco final resulta de uma matriz 3x3 entre ambas as dimensões."}},{"@type":"Question","name":"Qual a diferença entre OWASP Risk e CVSS?","acceptedAnswer":{"@type":"Answer","text":"CVSS avalia severidade técnica de uma vulnerabilidade isolada com foco em características do defeito. OWASP Risk Rating adiciona dimensões de negócio (dano financeiro, reputação, compliance, privacidade) e contexto do atacante, resultando em uma classificação mais próxima do risco real para a organização."}},{"@type":"Question","name":"Como a Probabilidade (Likelihood) é calculada?","acceptedAnswer":{"@type":"Answer","text":"Probabilidade é a média de 8 fatores: 4 do Agente de Ameaça (Skill Level, Motive, Opportunity, Size) e 4 da Vulnerabilidade (Ease of Discovery, Ease of Exploit, Awareness, Intrusion Detection). Cada fator recebe uma pontuação de 0 a 9 e o resultado é classificado como Baixo (0-3), Médio (3-6) ou Alto (6-9)."}},{"@type":"Question","name":"Como o Impacto (Impact) é calculado?","acceptedAnswer":{"@type":"Answer","text":"Impacto é a média de 8 fatores: 4 de Impacto Técnico (confidencialidade, integridade, disponibilidade, accountability) e 4 de Impacto de Negócio (dano financeiro, reputação, compliance, privacidade). Mesmas faixas de severidade da Probabilidade."}},{"@type":"Question","name":"Como interpretar o resultado final?","acceptedAnswer":{"@type":"Answer","text":"A combinação de Probabilidade x Impacto define a severidade final pela matriz OWASP: Informativo, Baixo, Médio, Alto ou Crítico. Vulnerabilidades Alto e Crítico exigem ação prioritária. O resultado deve complementar - não substituir - a avaliação de risco corporativo considerando controles compensatórios e exposição real."}}]}
     </script>
 
     <script type="application/ld+json">
@@ -238,7 +238,7 @@
                                 <option value="9">Sem acesso ou recursos (9)</option>
                             </select>
                         </div>
-                        <div class="owasp-factor" title="Tamanho do grupo de atacantes potenciais. Usuários anonimos da internet = grupo máximo.">
+                        <div class="owasp-factor" title="Tamanho do grupo de atacantes potenciais. Usuários anônimos da internet = grupo máximo.">
                             <label class="owasp-factor-label" for="f-s">Size <span class="owasp-factor-code">S</span></label>
                             <select class="owasp-select" id="f-s">
                                 <option value="">Selecione...</option>
@@ -247,7 +247,7 @@
                                 <option value="5">Usuários da intranet (5)</option>
                                 <option value="6">Parceiros (6)</option>
                                 <option value="7">Usuários autenticados (7)</option>
-                                <option value="9">Anonimos da internet (9)</option>
+                                <option value="9">Anônimos da internet (9)</option>
                             </select>
                         </div>
                     </div>
@@ -342,9 +342,9 @@
                             <label class="owasp-factor-label" for="f-lav">Loss of Availability <span class="owasp-factor-code">LAV</span></label>
                             <select class="owasp-select" id="f-lav">
                                 <option value="">Selecione...</option>
-                                <option value="1">Mínimo serviço secundario (1)</option>
+                                <option value="1">Mínimo serviço secundário (1)</option>
                                 <option value="5">Mínimo serviço primário (5)</option>
-                                <option value="5">Extenso serviço secundario (5)</option>
+                                <option value="5">Extenso serviço secundário (5)</option>
                                 <option value="7">Extenso serviço primário (7)</option>
                                 <option value="9">Todos os serviços perdidos (9)</option>
                             </select>
@@ -483,7 +483,7 @@
                     <li><strong>Preencha os 16 fatores</strong> divididos em 4 grupos (Agente de Ameaça, Vulnerabilidade, Impacto Técnico, Impacto de Negócio).</li>
                     <li><strong>Acompanhe os scores em tempo real</strong> — os cards superiores mostram Probabilidade, Impacto e Severidade Final.</li>
                     <li><strong>Veja a célula destacada</strong> na matriz de risco para entender o cruzamento das duas dimensões.</li>
-                    <li><strong>Copie o link compartilhável</strong> para documentar no relatório de pentest, ticket ou comunicação. A URL preserva todas as selecoes.</li>
+                    <li><strong>Copie o link compartilhável</strong> para documentar no relatório de pentest, ticket ou comunicação. A URL preserva todas as seleções.</li>
                 </ol>
 
                 <h2 id="formulas">Como é Calculado</h2>
@@ -542,11 +542,11 @@
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Como a Probabilidade (Likelihood) é calculada?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Media de 8 fatores: 4 do Agente de Ameaça (Skill, Motive, Opportunity, Size) e 4 da Vulnerabilidade (Ease of Discovery, Ease of Exploit, Awareness, Intrusion Detection). Classificado em Baixo (0-3), Médio (3-6) ou Alto (6-9).</p></div>
+                        <div class="faq-answer"><p>Média de 8 fatores: 4 do Agente de Ameaça (Skill, Motive, Opportunity, Size) e 4 da Vulnerabilidade (Ease of Discovery, Ease of Exploit, Awareness, Intrusion Detection). Classificado em Baixo (0-3), Médio (3-6) ou Alto (6-9).</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Como o Impacto (Impact) é calculado?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Media de 8 fatores: 4 de Impacto Técnico (CIA + accountability) e 4 de Impacto de Negócio (financeiro, reputação, compliance, privacidade). Mesmas faixas de severidade.</p></div>
+                        <div class="faq-answer"><p>Média de 8 fatores: 4 de Impacto Técnico (CIA + accountability) e 4 de Impacto de Negócio (financeiro, reputação, compliance, privacidade). Mesmas faixas de severidade.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Como interpretar o resultado final?</span><i class="fas fa-chevron-down faq-icon"></i></div>
@@ -568,7 +568,7 @@
 
                 <div class="cta-box">
                     <h3>Precisa de Avaliação de Risco Profissional?</h3>
-                    <p>Oferecemos pentest com relatórios priorizados por risco, gestão continua de vulnerabilidades e consultoria em frameworks de segurança.</p>
+                    <p>Oferecemos pentest com relatórios priorizados por risco, gestão contínua de vulnerabilidades e consultoria em frameworks de segurança.</p>
                     <a href="/contato/" class="cta-btn">Solicitar Proposta</a>
                 </div>
 
