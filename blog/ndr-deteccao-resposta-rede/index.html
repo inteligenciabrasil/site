@@ -62,7 +62,7 @@
                 "name": "O que é NDR e como funciona?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "NDR (Network Detection and Response) é uma solucao de segurança que monitora tráfego de rede em tempo real para detectar ameaças e comportamentos maliciosos. Funciona através de sensores que capturam tráfego (via TAP ou SPAN), analisam usando deep packet inspection, machine learning e análise comportamental, e podem responder automaticamente isolando hosts ou bloqueando conexões."
+                    "text": "NDR (Network Detection and Response) é uma solução de segurança que monitora tráfego de rede em tempo real para detectar ameaças e comportamentos maliciosos. Funciona através de sensores que capturam tráfego (via TAP ou SPAN), analisam usando deep packet inspection, machine learning e análise comportamental, e podem responder automaticamente isolando hosts ou bloqueando conexões."
                 }
             },
             {
@@ -70,7 +70,7 @@
                 "name": "Qual a diferença entre NDR e IDS/IPS?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "IDS/IPS usam principalmente assinaturas para detectar ameaças conhecidas e operam em linha (inline). NDR usa análise comportamental e machine learning para detectar ameaças desconhecidas, opera passivamente (out-of-band), mantem contexto histórico de semanas/meses, e foca em detectar atividade pos-comprometimento como movimentação lateral e exfiltração."
+                    "text": "IDS/IPS usam principalmente assinaturas para detectar ameaças conhecidas e operam em linha (inline). NDR usa análise comportamental e machine learning para detectar ameaças desconhecidas, opera passivamente (out-of-band), mantém contexto histórico de semanas/meses, e foca em detectar atividade pós-comprometimento como movimentação lateral e exfiltração."
                 }
             },
             {
@@ -78,7 +78,7 @@
                 "name": "NDR funciona com tráfego criptografado (TLS)?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Sim, NDR pode detectar ameaças mesmo em tráfego criptografado através de: análise de metadados (tamanho de pacotes, timing, certificados), JA3/JA4 fingerprinting para identificar clientes/servidores, detecção de C2 por padroes de beaconing, e opcionalmente integração com TLS inspection para descriptografar tráfego em proxies."
+                    "text": "Sim, NDR pode detectar ameaças mesmo em tráfego criptografado através de: análise de metadados (tamanho de pacotes, timing, certificados), JA3/JA4 fingerprinting para identificar clientes/servidores, detecção de C2 por padrões de beaconing, e opcionalmente integração com TLS inspection para descriptografar tráfego em proxies."
                 }
             },
             {
@@ -91,10 +91,10 @@
             },
             {
                 "@type": "Question",
-                "name": "Preciso de NDR se ja tenho EDR e SIEM?",
+                "name": "Preciso de NDR se já tenho EDR e SIEM?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "NDR complementa EDR e SIEM oferecendo visibilidade única: monitora dispositivos sem agente (IoT, OT, BYOD), detecta ameaças que não tocam disco (fileless, living-off-the-land), ve comunicação entre hosts que EDR individual não correlaciona, e não pode ser desabilitado por malware. A combinação EDR+NDR+SIEM (SOC Visibility Triad) oferece cobertura completa."
+                    "text": "NDR complementa EDR e SIEM oferecendo visibilidade única: monitora dispositivos sem agente (IoT, OT, BYOD), detecta ameaças que não tocam disco (fileless, living-off-the-land), vê comunicação entre hosts que EDR individual não correlaciona, e não pode ser desabilitado por malware. A combinação EDR+NDR+SIEM (SOC Visibility Triad) oferece cobertura completa."
                 }
             }
         ]
@@ -256,7 +256,7 @@
                         <li><a href="#como-funciona">Como NDR Funciona</a></li>
                         <li><a href="#ndr-vs-ids-ips">NDR vs IDS/IPS</a></li>
                         <li><a href="#detecção-ameaças">Detecção de Ameaças</a></li>
-                        <li><a href="#tráfego-criptografado">Análise de Trafego Criptografado</a></li>
+                        <li><a href="#tráfego-criptografado">Análise de Tráfego Criptografado</a></li>
                         <li><a href="#arquitetura">Arquitetura e Deployment</a></li>
                         <li><a href="#casos-uso">Casos de Uso</a></li>
                         <li><a href="#integração">Integração com SOC</a></li>
@@ -268,22 +268,22 @@
 
                 <h2 id="introducao">Introdução</h2>
 
-                <p>A rede éo tecido conjuntivo de toda infraestrutura - tudo que um atacante faz, desde o comprometimento inicial ate a exfiltração de dados, gera tráfego de rede. <strong>Network Detection and Response (NDR)</strong> explora essa caracteristica fundamental para fornecer visibilidade sobre ameaças que outras soluções não conseguem ver.</p>
+                <p>A rede éo tecido conjuntivo de toda infraestrutura - tudo que um atacante faz, desde o comprometimento inicial até a exfiltração de dados, gera tráfego de rede. <strong>Network Detection and Response (NDR)</strong> explora essa característica fundamental para fornecer visibilidade sobre ameaças que outras soluções não conseguem ver.</p>
 
-                <p>Enquanto EDR pode ser desabilitado por malware e logs podem ser deletados, o tráfego de rede é muito mais difícil de esconder. Se um atacante se comunica com um servidor C2, se move lateralmente, ou exfiltra dados, NDR pode detectar - mesmo que o atacante use tecnicas de living-off-the-land que não deixam rastros em disco.</p>
+                <p>Enquanto EDR pode ser desabilitado por malware e logs podem ser deletados, o tráfego de rede é muito mais difícil de esconder. Se um atacante se comunica com um servidor C2, se move lateralmente, ou exfiltra dados, NDR pode detectar - mesmo que o atacante use técnicas de living-off-the-land que não deixam rastros em disco.</p>
 
-                <p>Este guia explora como NDR funciona, suas diferenças para soluções tradicionais como IDS/IPS, e como implementa-lo para complementar suas defesas existentes.</p>
+                <p>Este guia explora como NDR funciona, suas diferenças para soluções tradicionais como IDS/IPS, e como implementá-lo para complementar suas defesas existentes.</p>
 
                 <h2 id="o-que-e-ndr">O que é NDR</h2>
 
                 <h3>Definição</h3>
-                <p>NDR é uma categoria de soluções de segurança que monitora tráfego de rede em tempo real para detectar ameaças, comportamentos anomalos e atividades maliciosas. Utiliza combinação de assinaturas, machine learning e análise comportamental para identificar tanto ameaças conhecidas quanto desconhecidas.</p>
+                <p>NDR é uma categoria de soluções de segurança que monitora tráfego de rede em tempo real para detectar ameaças, comportamentos anômalos e atividades maliciosas. Utiliza combinação de assinaturas, machine learning e análise comportamental para identificar tanto ameaças conhecidas quanto desconhecidas.</p>
 
                 <h3>Evolução: De NTA para NDR</h3>
                 <p>NDR evoluiu de Network Traffic Analysis (NTA):</p>
 
                 <div class="info-box">
-                    <h4>Evolução das Solucoes de Rede</h4>
+                    <h4>Evolução das Soluções de Rede</h4>
                     <table class="comparison-table">
                         <thead>
                             <tr>
@@ -323,7 +323,7 @@
                     <li><strong>Detecção comportamental</strong> - Identifica anomalias sem assinaturas</li>
                     <li><strong>Análise de protocolos</strong> - Deep packet inspection de 50+ protocolos</li>
                     <li><strong>Machine learning</strong> - Modelos treinados para detectar ameaças</li>
-                    <li><strong>Metadados enriquecidos</strong> - Contexto alem do payload</li>
+                    <li><strong>Metadados enriquecidos</strong> - Contexto além do payload</li>
                     <li><strong>Resposta automatizada</strong> - Integração com firewall, NAC, EDR</li>
                     <li><strong>Forense e hunting</strong> - Histórico para investigação retroativa</li>
                 </ul>
@@ -381,16 +381,16 @@
                     </pre>
                 </div>
 
-                <h3>Metodos de Captura</h3>
+                <h3>Métodos de Captura</h3>
 
                 <h4>Network TAP</h4>
-                <p>Dispositivo fisico que copia todo o tráfego passando pelo link. 100% confiável, não introduz latência, mas requer instalacao fisica.</p>
+                <p>Dispositivo físico que copia todo o tráfego passando pelo link. 100% confiável, não introduz latência, mas requer instalação física.</p>
 
                 <h4>SPAN/Mirror Port</h4>
                 <p>Switch copia tráfego para porta de monitoramento. Mais flexível que TAP, mas pode dropar pacotes sob carga alta.</p>
 
                 <h4>Flow Data (NetFlow/IPFIX)</h4>
-                <p>Metadados de conexao sem payload completo. Menor volume de dados, útil para visibilidade ampla, mas perde contexto.</p>
+                <p>Metadados de conexão sem payload completo. Menor volume de dados, útil para visibilidade ampla, mas perde contexto.</p>
 
                 <h4>Packet Broker</h4>
                 <p>Agrega tráfego de múltiplos TAPs/SPANs, filtra e distribui para ferramentas. Essencial em ambientes grandes.</p>
@@ -398,16 +398,16 @@
                 <h3>Técnicas de Detecção</h3>
 
                 <h4>1. Assinaturas (Signatures)</h4>
-                <p>Regras para padroes conhecidos de malware, exploits, éC2. Alta precisão para ameaças conhecidas.</p>
+                <p>Regras para padrões conhecidos de malware, exploits, éC2. Alta precisão para ameaças conhecidas.</p>
 
                 <h4>2. Anomalia de Protocolo</h4>
-                <p>Detecta desvios do comportamento esperado de protocolos (HTTP com metodos estranhos, DNS com queries muito longas).</p>
+                <p>Detecta desvios do comportamento esperado de protocolos (HTTP com métodos estranhos, DNS com queries muito longas).</p>
 
                 <h4>3. Análise Comportamental</h4>
                 <p>Baseline do comportamento normal e detecção de desvios (host que nunca fez SMB agora conectando em múltiplos servidores).</p>
 
                 <h4>4. Machine Learning</h4>
-                <p>Modelos treinados para detectar padroes complexos como beaconing de C2, DGA domains, data exfiltration.</p>
+                <p>Modelos treinados para detectar padrões complexos como beaconing de C2, DGA domains, data exfiltration.</p>
 
                 <h2 id="ndr-vs-ids-ips">NDR vs IDS/IPS</h2>
 
@@ -426,7 +426,7 @@
                             <td>Passivo (TAP/SPAN)</td>
                         </tr>
                         <tr>
-                            <td><strong>Metodo de Detecção</strong></td>
+                            <td><strong>Método de Detecção</strong></td>
                             <td>Assinaturas (principalmente)</td>
                             <td>ML + Behavioral + Signatures</td>
                         </tr>
@@ -437,7 +437,7 @@
                         </tr>
                         <tr>
                             <td><strong>Contexto</strong></td>
-                            <td>Pacote/Sessao</td>
+                            <td>Pacote/Sessão</td>
                             <td>Host/Rede/Tempo</td>
                         </tr>
                         <tr>
@@ -456,7 +456,7 @@
                             <td>Alert + Integrate + Orchestrate</td>
                         </tr>
                         <tr>
-                            <td><strong>Investigacao</strong></td>
+                            <td><strong>Investigação</strong></td>
                             <td>Limitada</td>
                             <td>Forense completo</td>
                         </tr>
@@ -475,7 +475,7 @@
                     <li><strong>NDR</strong> - Detecção avançada, hunting, visibilidade leste-oeste</li>
                 </ul>
 
-                <p>A combinação ideal usa IPS no perimetro para bloquear ameaças conhecidas e NDR internamente para detectar o que passou e movimentação lateral.</p>
+                <p>A combinação ideal usa IPS no perímetro para bloquear ameaças conhecidas e NDR internamente para detectar o que passou e movimentação lateral.</p>
 
                 <h2 id="detecção-ameaças">Detecção de Ameaças</h2>
 
@@ -486,15 +486,15 @@
                     <h4>Indicadores de C2 na Rede</h4>
                     <pre>
 # Beaconing Detection
-- Conexoes periódicas para mesmo destino
+- Conexões periódicas para mesmo destino
 - Intervalos regulares (mesmo com jitter)
 - Payload consistente (mesmo tamanho)
-- Horarios fora do expediente
+- Horários fora do expediente
 
 # DGA (Domain Generation Algorithm)
 - Domains com alta entropia
-- Padrao de caracteres aleatorios
-- Multiplos NXDOMAINs seguidos de resolucao
+- Padrão de caracteres aleatorios
+- Múltiplos NXDOMAINs seguidos de resolução
 
 # Protocol Tunneling
 - DNS com queries muito longas (DNS over DNS)
@@ -508,13 +508,13 @@
                     </pre>
                 </div>
 
-                <h3>Movimentacao Lateral</h3>
+                <h3>Movimentação Lateral</h3>
                 <p>Detectar atacantes se movendo pela rede interna:</p>
 
                 <ul>
-                    <li><strong>SMB anomalo</strong> - Host fazendo conexões SMB para múltiplos servidores</li>
-                    <li><strong>RDP incomum</strong> - Conexoes RDP de/para hosts que não fazem normalmente</li>
-                    <li><strong>WMI/WinRM remoto</strong> - Execucao remota detectada via tráfego</li>
+                    <li><strong>SMB anômalo</strong> - Host fazendo conexões SMB para múltiplos servidores</li>
+                    <li><strong>RDP incomum</strong> - Conexões RDP de/para hosts que não fazem normalmente</li>
+                    <li><strong>WMI/WinRM remoto</strong> - Execução remota detectada via tráfego</li>
                     <li><strong>PsExec patterns</strong> - Named pipes caracteristicos</li>
                     <li><strong>DCE/RPC</strong> - Chamadas de procedimento remoto suspeitas</li>
                 </ul>
@@ -525,7 +525,7 @@
                 <ul>
                     <li><strong>Volume anormal</strong> - Uploads muito maiores que baseline</li>
                     <li><strong>Destinos novos</strong> - Dados indo para cloud storage não aprovado</li>
-                    <li><strong>Timing suspeito</strong> - Transferencias grandes fora do horário</li>
+                    <li><strong>Timing suspeito</strong> - Transferências grandes fora do horário</li>
                     <li><strong>Compressao/encoding</strong> - Dados comprimidos ou codificados no tráfego</li>
                     <li><strong>Staging</strong> - Dados sendo movidos internamente antes de sair</li>
                 </ul>
@@ -534,11 +534,11 @@
                 <ul>
                     <li><strong>Port scanning</strong> - Host varrendo portas de múltiplos destinos</li>
                     <li><strong>AD enumeration</strong> - Queries LDAP anormais</li>
-                    <li><strong>Service discovery</strong> - Tentativas de conexao em múltiplas portas</li>
+                    <li><strong>Service discovery</strong> - Tentativas de conexão em múltiplas portas</li>
                     <li><strong>Network mapping</strong> - ICMP/ARP reconnaissance</li>
                 </ul>
 
-                <h2 id="tráfego-criptografado">Análise de Trafego Criptografado</h2>
+                <h2 id="tráfego-criptografado">Análise de Tráfego Criptografado</h2>
 
                 <p>Com 90%+ do tráfego web usando TLS, NDR precisa detectar ameaças sem ver o payload.</p>
 
@@ -576,7 +576,7 @@ Match: Cobalt Strike Beacon (default profile)
                     <li>Subject/Issuer suspeitos</li>
                 </ul>
 
-                <h4>Timing e Padroes</h4>
+                <h4>Timing e Padrões</h4>
                 <ul>
                     <li>Beaconing detectavel mesmo criptografado</li>
                     <li>Tamanho de pacotes (mesmo com padding)</li>
@@ -628,7 +628,7 @@ Match: Cobalt Strike Beacon (default profile)
 |     +---------------------------------------------+           |
 |                                                               |
 |  PRIORIDADE DE DEPLOY:                                        |
-|  1. Perímetro (visibilidade de entrada/saida)                 |
+|  1. Perímetro (visibilidade de entrada/saída)                 |
 |  2. Core (movimentação lateral)                               |
 |  3. Segmentos críticos (crown jewels)                         |
 |  4. Demais segmentos                                          |
@@ -671,7 +671,7 @@ Match: Cobalt Strike Beacon (default profile)
                 </ul>
 
                 <h3>Insider Threat</h3>
-                <p>Funcionarios maliciosos ou comprometidos:</p>
+                <p>Funcionários maliciosos ou comprometidos:</p>
                 <ul>
                     <li>Acesso a sistemas fora do escopo de trabalho</li>
                     <li>Downloads massivos de dados</li>
@@ -683,7 +683,7 @@ Match: Cobalt Strike Beacon (default profile)
                 <p>Dispositivos sem agente onde EDR não funciona:</p>
                 <ul>
                     <li>Descoberta de dispositivos shadow</li>
-                    <li>Comunicação anomala de dispositivos IoT</li>
+                    <li>Comunicação anômala de dispositivos IoT</li>
                     <li>Acesso não autorizado a redes OT</li>
                     <li>Protocolos industriais (Modbus, DNP3, etc.)</li>
                 </ul>
@@ -698,7 +698,7 @@ Match: Cobalt Strike Beacon (default profile)
                 <h2 id="integração">Integração com SOC</h2>
 
                 <h3>SOC Visibility Triad</h3>
-                <p>Gartner define tres pilares de visibilidade:</p>
+                <p>Gartner define três pilares de visibilidade:</p>
 
                 <div class="code-block">
                     <h4>Cobertura Complementar</h4>
@@ -735,7 +735,7 @@ Match: Cobalt Strike Beacon (default profile)
                 <h3>Integração com SIEM</h3>
                 <ul>
                     <li>Alertas de NDR enviados para SIEM</li>
-                    <li>Correlacao com eventos de outras fontes</li>
+                    <li>Correlação com eventos de outras fontes</li>
                     <li>NDR enriquece alertas com contexto de rede</li>
                     <li>SIEM como console unificado de investigação</li>
                 </ul>
@@ -744,15 +744,15 @@ Match: Cobalt Strike Beacon (default profile)
                 <ul>
                     <li>Playbooks acionados por alertas de NDR</li>
                     <li>Resposta automatizada (isolar host, bloquear IP)</li>
-                    <li>Enriquecimento automatico com threat intel</li>
-                    <li>Escalacao baseada em severidade</li>
+                    <li>Enriquecimento automático com threat intel</li>
+                    <li>Escalação baseada em severidade</li>
                 </ul>
 
                 <h3>Integração com EDR</h3>
                 <ul>
                     <li>NDR detecta - EDR investiga endpoint específico</li>
                     <li>EDR detecta - NDR mostra comunicações do host</li>
-                    <li>Correlacao: mesmo IP/host em ambos = alta confianca</li>
+                    <li>Correlação: mesmo IP/host em ambos = alta confiança</li>
                 </ul>
 
                 <h2 id="fornecedores">Principais Fornecedores</h2>
@@ -792,7 +792,7 @@ Match: Cobalt Strike Beacon (default profile)
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>NDR (Network Detection and Response) é uma solucao de segurança que monitora tráfego de rede em tempo real para detectar ameaças e comportamentos maliciosos. Funciona através de sensores que capturam tráfego (via TAP ou SPAN), analisam usando deep packet inspection, machine learning e análise comportamental, e podem responder automaticamente isolando hosts ou bloqueando conexões.</p>
+                            <p>NDR (Network Detection and Response) é uma solução de segurança que monitora tráfego de rede em tempo real para detectar ameaças e comportamentos maliciosos. Funciona através de sensores que capturam tráfego (via TAP ou SPAN), analisam usando deep packet inspection, machine learning e análise comportamental, e podem responder automaticamente isolando hosts ou bloqueando conexões.</p>
                         </div>
                     </div>
 
@@ -802,7 +802,7 @@ Match: Cobalt Strike Beacon (default profile)
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>IDS/IPS usam principalmente assinaturas para detectar ameaças conhecidas e operam em linha (inline). NDR usa análise comportamental e machine learning para detectar ameaças desconhecidas, opera passivamente (out-of-band), mantem contexto histórico de semanas/meses, e foca em detectar atividade pos-comprometimento como movimentação lateral e exfiltração.</p>
+                            <p>IDS/IPS usam principalmente assinaturas para detectar ameaças conhecidas e operam em linha (inline). NDR usa análise comportamental e machine learning para detectar ameaças desconhecidas, opera passivamente (out-of-band), mantém contexto histórico de semanas/meses, e foca em detectar atividade pós-comprometimento como movimentação lateral e exfiltração.</p>
                         </div>
                     </div>
 
@@ -812,7 +812,7 @@ Match: Cobalt Strike Beacon (default profile)
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Sim, NDR pode detectar ameaças mesmo em tráfego criptografado através de: análise de metadados (tamanho de pacotes, timing, certificados), JA3/JA4 fingerprinting para identificar clientes/servidores, detecção de C2 por padroes de beaconing, e opcionalmente integração com TLS inspection para descriptografar tráfego em proxies.</p>
+                            <p>Sim, NDR pode detectar ameaças mesmo em tráfego criptografado através de: análise de metadados (tamanho de pacotes, timing, certificados), JA3/JA4 fingerprinting para identificar clientes/servidores, detecção de C2 por padrões de beaconing, e opcionalmente integração com TLS inspection para descriptografar tráfego em proxies.</p>
                         </div>
                     </div>
 
@@ -828,11 +828,11 @@ Match: Cobalt Strike Beacon (default profile)
 
                     <div class="faq-item">
                         <div class="faq-question">
-                            <span>Preciso de NDR se ja tenho EDR e SIEM?</span>
+                            <span>Preciso de NDR se já tenho EDR e SIEM?</span>
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>NDR complementa EDR e SIEM oferecendo visibilidade única: monitora dispositivos sem agente (IoT, OT, BYOD), detecta ameaças que não tocam disco (fileless, living-off-the-land), ve comunicação entre hosts que EDR individual não correlaciona, e não pode ser desabilitado por malware. A combinação EDR+NDR+SIEM (SOC Visibility Triad) oferece cobertura completa.</p>
+                            <p>NDR complementa EDR e SIEM oferecendo visibilidade única: monitora dispositivos sem agente (IoT, OT, BYOD), detecta ameaças que não tocam disco (fileless, living-off-the-land), vê comunicação entre hosts que EDR individual não correlaciona, e não pode ser desabilitado por malware. A combinação EDR+NDR+SIEM (SOC Visibility Triad) oferece cobertura completa.</p>
                         </div>
                     </div>
                 </div>
@@ -888,7 +888,7 @@ Match: Cobalt Strike Beacon (default profile)
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-about">
                         <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="140" height="140"><img src="../../img/logo-white-140x140.png" alt="Inteligencia Brasil" class="footer-logo" width="140" height="140" loading="lazy"></picture>
-                        <p>Consultoria especializada em Segurança, Estrategia e Tecnologia da Informação.</p>
+                        <p>Consultoria especializada em Segurança, Estratégia e Tecnologia da Informação.</p>
                         <div class="footer-social">
                             <a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                             <a href="https://www.instagram.com/inteligenciabrasiloficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>

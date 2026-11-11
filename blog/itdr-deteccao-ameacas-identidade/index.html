@@ -73,7 +73,7 @@
             "name": "Quais são os principais ataques que ITDR detecta?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "ITDR é projetado para detectar ataques como: Kerberoasting (extração de hashes de contas de servico), Golden/Silver Ticket (forjamento de tickets Kerberos), DCSync (replicação maliciosa do AD), Pass-the-Hash/Pass-the-Ticket (reuso de credenciais), Credential Stuffing (tentativas massivas de login), Account Takeover, e movimentação lateral baseada em credenciais comprometidas."
+                "text": "ITDR é projetado para detectar ataques como: Kerberoasting (extração de hashes de contas de serviço), Golden/Silver Ticket (forjamento de tickets Kerberos), DCSync (replicação maliciosa do AD), Pass-the-Hash/Pass-the-Ticket (reuso de credenciais), Credential Stuffing (tentativas massivas de login), Account Takeover, e movimentação lateral baseada em credenciais comprometidas."
             }
         },
         {
@@ -81,7 +81,7 @@
             "name": "ITDR substitui EDR ou SIEM?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Nao. ITDR complementa EDR e SIEM. EDR foca em ameaças em endpoints (malware, exploits), SIEM correlaciona eventos de múltiplas fontes. ITDR especializa-se em ameaças de identidade com entendimento profundo de protocolos como Kerberos e LDAP. A integração entre as tres soluções fornece visibilidade completa e melhor detecção."
+                "text": "Não. ITDR complementa EDR e SIEM. EDR foca em ameaças em endpoints (malware, exploits), SIEM correlaciona eventos de múltiplas fontes. ITDR especializa-se em ameaças de identidade com entendimento profundo de protocolos como Kerberos e LDAP. A integração entre as três soluções fornece visibilidade completa e melhor detecção."
             }
         },
         {
@@ -89,7 +89,7 @@
             "name": "Como proteger Active Directory contra ataques modernos?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Proteção do AD requer múltiplas camadas: implementar Tiered Administration (Tier 0/1/2), usar PAWs para administração, habilitar Protected Users group, implementar LAPS para senhas locais, monitorar eventos críticos (4768, 4769, 4776), desabilitar protocolos legados (NTLM onde possível), e implementar ITDR para detecção continua de ataques."
+                "text": "Proteção do AD requer múltiplas camadas: implementar Tiered Administration (Tier 0/1/2), usar PAWs para administração, habilitar Protected Users group, implementar LAPS para senhas locais, monitorar eventos críticos (4768, 4769, 4776), desabilitar protocolos legados (NTLM onde possível), e implementar ITDR para detecção contínua de ataques."
             }
         }
     ]
@@ -260,18 +260,18 @@
 </ul>
 </div>
 <h2 id="introducao">Introdução</h2>
-<p>Em um cenário onde <strong>80% dos ataques cibernéticos envolvem comprometimento de <a href="../nhi-non-human-identity-governanca/">credenciais</a></strong>, proteger identidades tornou-se tao crítico quanto proteger endpoints e redes. Atacantes descobriram que é mais fácil "fazer login" do que "hackear" - e as defesas tradicionais não foram projetadas para detectar esse tipo de ameaca.</p>
+<p>Em um cenário onde <strong>80% dos ataques cibernéticos envolvem comprometimento de <a href="../nhi-non-human-identity-governanca/">credenciais</a></strong>, proteger identidades tornou-se tão crítico quanto proteger endpoints e redes. Atacantes descobriram que é mais fácil "fazer login" do que "hackear" - e as defesas tradicionais não foram projetadas para detectar esse tipo de ameaca.</p>
 <div class="stat-highlight">
 <div class="number">80%</div>
 <div class="label">dos ataques modernos envolvem comprometimento de credenciais</div>
 </div>
-<p><strong>Identity Threat Detection and Response (ITDR)</strong> emergiu como resposta a essa lacuna. Reconhecido pelo Gartner como uma das principais tendências de segurança, ITDR fornece visibilidade especializada sobre ameaças direcionadas a identidades, desde credential stuffing em aplicações web ate ataques sofisticados ao Active Directory como Kerberoasting e Golden Ticket.</p>
-<p>Este guia explora como ITDR funciona, por que é necessário, e como implementa-lo para proteger sua organizacao contra a crescente epidemia de ataques baseados em identidade.</p>
+<p><strong>Identity Threat Detection and Response (ITDR)</strong> emergiu como resposta a essa lacuna. Reconhecido pelo Gartner como uma das principais tendências de segurança, ITDR fornece visibilidade especializada sobre ameaças direcionadas a identidades, desde credential stuffing em aplicações web até ataques sofisticados ao Active Directory como Kerberoasting e Golden Ticket.</p>
+<p>Este guia explora como ITDR funciona, por que é necessário, e como implementá-lo para proteger sua organização contra a crescente epidemia de ataques baseados em identidade.</p>
 <h2 id="o-que-e-itdr">O que é ITDR</h2>
 <h3>Definição e Contexto</h3>
 <p>ITDR é uma categoria de segurança focada especificamente em detectar e responder a ameaças que exploram identidades como vetor de ataque. Enquanto EDR protege endpoints e NDR monitora redes, ITDR protege o plano de identidade - o Active Directory, provedores de identidade em nuvem, e sistemas de autenticação.</p>
 <div class="concept-card">
-<h4><i class="fas fa-bullseye" style="color:#60A5FA;margin-right:10px"></i> ITDR vs Solucoes Tradicionais</h4>
+<h4><i class="fas fa-bullseye" style="color:#60A5FA;margin-right:10px"></i> ITDR vs Soluções Tradicionais</h4>
 <table class="comparison-table">
 <thead>
 <tr>
@@ -283,7 +283,7 @@
 <tbody>
 <tr>
 <td><strong>IAM/IGA</strong></td>
-<td>Provisao e governança</td>
+<td>Provisão e governança</td>
 <td>Preventivo, não detecta ataques em andamento</td>
 </tr>
 <tr>
@@ -315,22 +315,22 @@
 </table>
 </div>
 <h3>Capacidades Principais</h3>
-<p>Uma solucao ITDR completa oferece:</p>
+<p>Uma solução ITDR completa oferece:</p>
 <ul>
-<li><strong>Visibilidade do ambiente de identidade</strong> - Inventario de contas, grupos, privilégios, configurações</li>
+<li><strong>Visibilidade do ambiente de identidade</strong> - Inventário de contas, grupos, privilégios, configurações</li>
 <li><strong>Detecção de ataques em tempo real</strong> - Técnicas específicas como Kerberoasting, DCSync, Pass-the-Hash</li>
 <li><strong>Análise comportamental (UEBA)</strong> - Baseline de comportamento normal, detecção de anomalias</li>
 <li><strong>Assessment de postura</strong> - Identificação de configurações inseguras e vulnerabilidades</li>
-<li><strong>Resposta automatizada</strong> - Bloqueio de contas, revogação de sessoes, integração com SOAR</li>
-<li><strong>Investigacao forense</strong> - Timeline de atividades, correlação de eventos, hunting</li>
+<li><strong>Resposta automatizada</strong> - Bloqueio de contas, revogação de sessões, integração com SOAR</li>
+<li><strong>Investigação forense</strong> - Timeline de atividades, correlação de eventos, hunting</li>
 </ul>
 <h2 id="por-que-itdr">Por que ITDR é Necessário</h2>
 <h3>O Problema das Credenciais</h3>
-<p>Identidade tornou-se o novo perímetro de segurança. Com trabalho remoto, cloud e SaaS, não existe mais um "dentro" é"fora" da rede. O que existe e: voce esta autenticado ou nao.</p>
+<p>Identidade tornou-se o novo perímetro de segurança. Com trabalho remoto, cloud e SaaS, não existe mais um "dentro" é"fora" da rede. O que existe e: você está autenticado ou não.</p>
 <div class="code-block">
-<h4>Estatisticas de Ataques de Identidade (2025)</h4>
+<h4>Estatísticas de Ataques de Identidade (2025)</h4>
 <pre>
-METRICAS DE ATAQUES DE IDENTIDADE
+MÉTRICAS DE ATAQUES DE IDENTIDADE
 
 80% - Ataques que envolvem credenciais comprometidas
 74% - Breaches que envolvem elemento humano (phishing)
@@ -346,27 +346,27 @@ TÉCNICAS MAIS COMUNS:
                     </pre>
 </div>
 <h3>Gaps nas Defesas Tradicionais</h3>
-<p>Solucoes existentes deixam lacunas significativas:</p>
+<p>Soluções existentes deixam lacunas significativas:</p>
 <h4>1. SIEM - Muito Genérico</h4>
-<p>SIEMs coletam eventos de autenticação mas carecem de contexto para distinguir atividade legitima de ataque. Detectar Kerberoasting requer entender padroes normais de requisições de service tickets - algo que SIEMs não fazem nativamente.</p>
+<p>SIEMs coletam eventos de autenticação mas carecem de contexto para distinguir atividade legítima de ataque. Detectar Kerberoasting requer entender padrões normais de requisições de service tickets - algo que SIEMs não fazem nativamente.</p>
 <h4>2. EDR - Foco Diferente</h4>
-<p>EDR é excelente para malware e exploits, mas quando um atacante usa credenciais validas para fazer login via RDP, o EDR ve uma sessao legitima. Não entende que aquela conta normalmente não acessa aquele servidor as 3h da manha.</p>
+<p>EDR é excelente para malware e exploits, mas quando um atacante usa credenciais válidas para fazer login via RDP, o EDR vê uma sessão legítima. Não entende que aquela conta normalmente não acessa aquele servidor as 3h da manha.</p>
 <h4>3. PAM - Escopo Limitado</h4>
-<p>PAM protege contas privilegiadas, mas atacantes frequentemente escalam privilégios a partir de contas normais. O caminho de ataque comeca onde PAM não está olhando.</p>
+<p>PAM protege contas privilegiadas, mas atacantes frequentemente escalam privilégios a partir de contas normais. O caminho de ataque começa onde PAM não está olhando.</p>
 <h4>4. MFA - Não é Infalivel</h4>
 <p>MFA é essencial mas pode ser contornado via phishing (Adversary-in-the-Middle), MFA fatigue, SIM swapping, ou simplesmente atacando sistemas que não tem MFA implementado.</p>
 <h2 id="ataques-identidade">Principais Ataques de Identidade</h2>
 <h3>Ataques ao Active Directory</h3>
 <h4>Kerberoasting</h4>
-<p>Qualquer usuario autenticado pode solicitar um Service Ticket (TGS) para qualquer servico. Se a conta de servico usa uma senha fraca, o atacante pode extrair e quebrar o hash offline.</p>
+<p>Qualquer usuário autenticado pode solicitar um Service Ticket (TGS) para qualquer serviço. Se a conta de serviço usa uma senha fraca, o atacante pode extrair e quebrar o hash offline.</p>
 <div class="code-block">
 <h4>Detecção de Kerberoasting</h4>
 <pre>
 # Indicadores de Kerberoasting:
 # 1. Volume anormal de requisições TGS (Event ID 4769)
-# 2. Requisicoes para múltiplos SPNs de um único usuario
-# 3. Uso de algoritmos fracos (RC4 ao inves de AES)
-# 4. Requisicoes de contas que normalmente não acessam esses serviços
+# 2. Requisições para múltiplos SPNs de um único usuário
+# 3. Uso de algoritmos fracos (RC4 ao invés de AES)
+# 4. Requisições de contas que normalmente não acessam esses serviços
 
 # Query KQL para detecção (Microsoft Sentinel):
 SecurityEvent
@@ -381,25 +381,25 @@ SecurityEvent
                     </pre>
 </div>
 <h4>Golden Ticket</h4>
-<p>Com acesso ao hash da conta KRBTGT, atacantes podem forjar TGTs (Ticket Granting Tickets) validos para qualquer usuario, incluindo Domain Admins inexistentes. Tickets podem ter validade de 10 anos.</p>
+<p>Com acesso ao hash da conta KRBTGT, atacantes podem forjar TGTs (Ticket Granting Tickets) válidos para qualquer usuário, incluindo Domain Admins inexistentes. Tickets podem ter validade de 10 anos.</p>
 <h4>DCSync</h4>
 <p>Atacantes com privilégios de replicação (ou que os obtiveram) podem simular um Domain Controller e solicitar replicação de hashes de senha de qualquer conta, incluindo KRBTGT.</p>
 <h4>AS-REP Roasting</h4>
 <p>Contas com "Do not require Kerberos preauthentication" habilitado permitem que atacantes solicitem dados criptografados sem autenticação - e tentem quebrar offline.</p>
 <h3>Ataques de Credenciais</h3>
 <h4>Credential Stuffing</h4>
-<p>Usando listas de credenciais vazadas, atacantes testam combinacoes email/senha contra múltiplos serviços. Funciona devido ao reuso de senhas.</p>
+<p>Usando listas de credenciais vazadas, atacantes testam combinações email/senha contra múltiplos serviços. Funciona devido ao reuso de senhas.</p>
 <h4>Password Spraying</h4>
-<p>Testa poucas senhas comuns contra muitos usuarios, evitando lockout. "Empresa2026!" provavelmente funciona em varias contas.</p>
+<p>Testa poucas senhas comuns contra muitos usuários, evitando lockout. "Empresa2026!" provavelmente funciona em várias contas.</p>
 <h4>Pass-the-Hash / Pass-the-Ticket</h4>
-<p>Credenciais extraidas de memoria (via Mimikatz) são reutilizadas para autenticar em outros sistemas sem conhecer a senha.</p>
+<p>Credenciais extraidas de memória (via Mimikatz) são reutilizadas para autenticar em outros sistemas sem conhecer a senha.</p>
 <h3>Ataques em Nuvem</h3>
 <h4>Consent Phishing (OAuth)</h4>
-<p>Usuario autoriza aplicativo malicioso que ganha acesso persistente ao M365/Google Workspace via tokens OAuth.</p>
+<p>Usuário autoriza aplicativo malicioso que ganha acesso persistente ao M365/Google Workspace via tokens OAuth.</p>
 <h4>Token Theft</h4>
-<p>Session tokens ou refresh tokens são extraidos e usados para bypass de MFA - o usuario ja autenticou.</p>
+<p>Session tokens ou refresh tokens são extraídos e usados para bypass de MFA - o usuário já autenticou.</p>
 <h4>Adversary-in-the-Middle (AitM)</h4>
-<p>Proxies de phishing (Evilginx2, Modlishka) capturam cookies de sessao em tempo real, permitindo session hijacking pos-MFA.</p>
+<p>Proxies de phishing (Evilginx2, Modlishka) capturam cookies de sessão em tempo real, permitindo session hijacking pos-MFA.</p>
 <h2 id="componentes-itdr">Componentes de uma Solução ITDR</h2>
 <h3>1. Coleta de Dados de Identidade</h3>
 <p>ITDR precisa visibilidade abrangente sobre eventos de identidade:</p>
@@ -410,7 +410,7 @@ SecurityEvent
 <li><strong>Domain Controllers</strong> - Logs de segurança (4624, 4768, 4769, 4776)</li>
 <li><strong>Azure AD / Entra ID</strong> - Sign-in logs, audit logs, risky sign-ins</li>
 <li><strong>Identity Providers</strong> - Okta, Ping, ForgeRock, Auth0</li>
-<li><strong>LDAP/Kerberos</strong> - Trafego de rede (para detecção de protocol-level attacks)</li>
+<li><strong>LDAP/Kerberos</strong> - Tráfego de rede (para detecção de protocol-level attacks)</li>
 <li><strong>VPN/Remote Access</strong> - Tentativas de autenticação remota</li>
 <li><strong>SaaS Applications</strong> - Logs de login de aplicações críticas</li>
 <li><strong>Endpoints</strong> - LSASS access, credential dumping attempts</li>
@@ -423,49 +423,49 @@ SecurityEvent
 <pre>
 # Vulnerabilidades Comuns a Identificar:
 
-## Configuracoes de Alto Risco:
+## Configurações de Alto Risco:
 - Contas com SPN e senhas fracas (Kerberoasting target)
 - Contas sem Kerberos Pre-Authentication (AS-REP Roasting)
 - Unconstrained Delegation (permite impersonation)
 - Grupos aninhados que concedem privilégios excessivos
-- Contas de servico em grupos privilegiados
+- Contas de serviço em grupos privilegiados
 - Senhas que nunca expiram em contas privilegiadas
 - AdminCount=1 em contas que não deveriam ter
 
 ## Problemas de Higiene:
 - Contas dormentes com privilégios
-- Contas de servico compartilhadas entre ambientes
-- Senhas identicas em dev/prod
-- GPOs que expoem credenciais
+- Contas de serviço compartilhadas entre ambientes
+- Senhas idênticas em dev/prod
+- GPOs que expõem credenciais
 - SYSVOL com scripts contendo senhas
 
 ## Caminhos de Ataque (Attack Paths):
-- Quantos hops do usuario médio ate Domain Admin?
+- Quantos hops do usuário médio até Domain Admin?
 - Existem caminhos via grupos aninhados?
-- Ha contas de servico que permitem escalacao?
+- Há contas de serviço que permitem escalação?
                     </pre>
 </div>
 <h3>3. Detecção em Tempo Real</h3>
-<p>Combinacao de técnicas para detecção eficaz:</p>
+<p>Combinação de técnicas para detecção eficaz:</p>
 <h4>Detecção Baseada em Assinaturas</h4>
-<p>Padroes conhecidos de ferramentas de ataque como Mimikatz, Rubeus, Impacket. Eficaz para ataques commoditizados.</p>
+<p>Padrões conhecidos de ferramentas de ataque como Mimikatz, Rubeus, Impacket. Eficaz para ataques commoditizados.</p>
 <h4>Detecção Comportamental (UEBA)</h4>
 <p>Machine learning cria baseline do comportamento normal de cada identidade e detecta desvios:</p>
 <ul>
-<li>Horarios atipicos de acesso</li>
+<li>Horários atípicos de acesso</li>
 <li>Recursos nunca acessados antes</li>
 <li>Volumes anormais de atividade</li>
-<li>Geolocalizacao impossível</li>
+<li>Geolocalização impossível</li>
 </ul>
 <h4>Detecção de Protocolo</h4>
 <p>Análise profunda de protocolos de identidade (Kerberos, NTLM, LDAP) para detectar anomalias que indicam ataque, como tickets com lifetime anormal ou algoritmos de criptografia inesperados.</p>
 <h3>4. Resposta e Remediação</h3>
-<p>Quando ameaca é detectada, acoes de resposta incluem:</p>
+<p>Quando ameaca é detectada, ações de resposta incluem:</p>
 <ul>
 <li><strong>Alertas contextualizados</strong> - Com severidade, timeline, e recomendações</li>
 <li><strong>Bloqueio de conta</strong> - Desabilitar conta comprometida automaticamente</li>
-<li><strong>Revogacao de sessao</strong> - Forcar re-autenticação em todas as sessoes</li>
-<li><strong>Reset de senha</strong> - Forcar mudança de senha</li>
+<li><strong>Revogação de sessão</strong> - Forçar re-autenticação em todas as sessões</li>
+<li><strong>Reset de senha</strong> - Forçar mudança de senha</li>
 <li><strong>Quarentena</strong> - Isolar conta para investigação</li>
 <li><strong>Enrichment</strong> - Adicionar contexto de threat intelligence</li>
 <li><strong>Playbooks</strong> - Integração com SOAR para resposta orquestrada</li>
@@ -494,23 +494,23 @@ Acesso: De PAWs Tier 1 (nunca credenciais Tier 0)
 TIER 2 (Workstations)
 - Helpdesk
 - Desktop Admins
-- Usuarios normais
+- Usuários normais
 Acesso: Credenciais NUNCA usadas em Tier 0/1
 
 REGRA: Credenciais de tier superior NUNCA logam em tier
-       inferior. Violacao = comprometimento potencial.
+       inferior. Violação = comprometimento potencial.
                     </pre>
 </div>
 <h3>Hardening Essencial do AD</h3>
 <h4>Protected Users Group</h4>
-<p>Contas neste grupo tem protecoes adicionais: não cache de credenciais, não delegação, somente Kerberos (AES), TGT de curta duração (4h).</p>
+<p>Contas neste grupo tem proteções adicionais: não cache de credenciais, não delegação, somente Kerberos (AES), TGT de curta duração (4h).</p>
 <h4>LAPS (Local Administrator Password Solution)</h4>
 <p>Senhas únicas e rotacionadas para administrador local de cada máquina. Elimina Pass-the-Hash lateral com conta local.</p>
 <h4>Credential Guard</h4>
 <p>Isola secrets em um ambiente virtualizado (VBS), impedindo extração por Mimikatz mesmo com acesso admin.</p>
 <h4>Restringir NTLM</h4>
-<p>NTLM é inerentemente vulneravel a relay attacks. Migre para Kerberos onde possível e audite/bloqueie NTLM.</p>
-<h3>Eventos Criticos para Monitorar</h3>
+<p>NTLM é inerentemente vulnerável a relay attacks. Migre para Kerberos onde possível e audite/bloqueie NTLM.</p>
+<h3>Eventos Críticos para Monitorar</h3>
 <div class="code-block">
 <h4>Event IDs de Alta Prioridade</h4>
 <pre>
@@ -551,13 +551,13 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 <div class="tip-box">
 <h4><i class="fas fa-clipboard-check" style="margin-right:10px"></i> Checklist de Assessment Inicial</h4>
 <ul>
-<li>Inventario completo de contas privilegiadas</li>
+<li>Inventário completo de contas privilegiadas</li>
 <li>Mapeamento de service accounts e seus SPNs</li>
 <li>Identificação de contas com configurações inseguras</li>
 <li>Análise de caminhos de ataque (BloodHound)</li>
 <li>Auditoria de GPOs e suas configurações</li>
-<li>Verificacao de health do AD (replicação, DNS)</li>
-<li>Inventario de identity providers e federacoes</li>
+<li>Verificação de health do AD (replicação, DNS)</li>
+<li>Inventário de identity providers e federacoes</li>
 <li>Baseline de comportamento de autenticação</li>
 </ul>
 </div>
@@ -580,23 +580,23 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 <li>Coletar eventos de autenticação de aplicações críticas</li>
 </ul>
 <h4>Regras de Detecção Iniciais</h4>
-<p>Comece com deteccoes de alta fidelidade:</p>
+<p>Comece com detecções de alta fidelidade:</p>
 <ul>
-<li>DCSync (replicação de conta nao-DC)</li>
+<li>DCSync (replicação de conta não-DC)</li>
 <li>Golden Ticket indicators (TGT anomalies)</li>
 <li>Kerberoasting (volume alto de TGS requests)</li>
-<li>Mudancas em grupos críticos (Domain Admins)</li>
-<li>Login de contas de servico de forma interativa</li>
+<li>Mudanças em grupos críticos (Domain Admins)</li>
+<li>Login de contas de serviço de forma interativa</li>
 </ul>
 <h3>Fase 4: UEBA e Baseline</h3>
-<p>Apos periodo de aprendizado (2-4 semanas), ative detecção comportamental:</p>
+<p>Após período de aprendizado (2-4 semanas), ative detecção comportamental:</p>
 <ul>
-<li>Horarios atipicos de acesso</li>
+<li>Horários atípicos de acesso</li>
 <li>Recursos nunca acessados</li>
-<li>Geolocalizacao impossível</li>
-<li>Padroes de movimento lateral</li>
+<li>Geolocalização impossível</li>
+<li>Padrões de movimento lateral</li>
 </ul>
-<h3>Fase 5: Automacao de Resposta</h3>
+<h3>Fase 5: Automação de Resposta</h3>
 <p>Implemente respostas automatizadas gradualmente:</p>
 <div class="code-block">
 <h4>Exemplo: Playbook de Resposta a Credential Stuffing</h4>
@@ -605,8 +605,8 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 
 1. ENRICH
    - Verificar se conta é privilegiada
-   - Checar se conta esta em viagem (HR system)
-   - Consultar reputacao dos IPs (threat intelligence)
+   - Checar se conta está em viagem (HR system)
+   - Consultar reputação dos IPs (threat intelligence)
 
 2. CONTAIN (se conta não privilegiada)
    - Aplicar Conditional Access restritivo
@@ -615,7 +615,7 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 
 3. CONTAIN (se conta privilegiada)
    - Desabilitar conta temporariamente
-   - Revogar sessoes ativas
+   - Revogar sessões ativas
    - Notificar SOC imediatamente
    - Gerar alerta P1
 
@@ -625,9 +625,9 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
    - Identificar scope (outras contas do mesmo IP?)
 
 5. RECOVER
-   - Forcar reset de senha
-   - Validar MFA esta habilitado
-   - Confirmar com usuario via canal seguro
+   - Forçar reset de senha
+   - Validar MFA está habilitado
+   - Confirmar com usuário via canal seguro
                     </pre>
 </div>
 <h2 id="integração">Integração com o Ecossistema</h2>
@@ -641,19 +641,19 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 <h3>ITDR + XDR/EDR</h3>
 <p>Correlação entre atividade de endpoint e identidade fornece contexto completo:</p>
 <ul>
-<li>EDR detecta Mimikatz, ITDR ve o uso das credenciais extraidas</li>
+<li>EDR detecta Mimikatz, ITDR vê o uso das credenciais extraidas</li>
 <li>ITDR detecta lateral movement, EDR investiga os endpoints</li>
-<li><a href="../xdr-extended-detection-response/">XDR</a> unifica a visao de endpoint e identidade</li>
+<li><a href="../xdr-extended-detection-response/">XDR</a> unifica a visão de endpoint e identidade</li>
 </ul>
 <h3>ITDR + PAM</h3>
 <p>Proteção em camadas para contas privilegiadas:</p>
 <ul>
 <li>PAM controla o acesso a credenciais privilegiadas</li>
-<li>ITDR monitora uso das credenciais apos checkout</li>
+<li>ITDR monitora uso das credenciais após checkout</li>
 <li>Detecta uso fora do PAM (credencial cached, hardcoded)</li>
 </ul>
 <h3>ITDR + Zero Trust</h3>
-<p>ITDR fornece sinais de risco para decisoes de acesso continuo:</p>
+<p>ITDR fornece sinais de risco para decisões de acesso contínuo:</p>
 <ul>
 <li>Risk score alimenta Conditional Access</li>
 <li>Anomalia detectada - step-up authentication</li>
@@ -666,20 +666,20 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 <pre>
 # Métricas de Detecção
 - MTTD (Mean Time to Detect) para ataques de identidade
-- Numero de ataques detectados por tipo
+- Número de ataques detectados por tipo
 - Taxa de falsos positivos
 - Cobertura de monitoramento (% de identidades monitoradas)
 
 # Métricas de Resposta
 - MTTR (Mean Time to Respond) para incidentes de identidade
 - % de respostas automatizadas vs manuais
-- Tempo médio de contencao de conta comprometida
+- Tempo médio de contenção de conta comprometida
 
 # Métricas de Postura
-- Numero de contas com configurações inseguras
+- Número de contas com configurações inseguras
 - Attack path score (hops para Domain Admin)
 - % de contas privilegiadas em Protected Users
-- Idade media de senhas de service accounts
+- Idade média de senhas de service accounts
 - Contas dormentes com privilégios
 
 # Métricas de Maturidade
@@ -690,8 +690,8 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 </div>
 <h3>KPIs Executivos</h3>
 <ul>
-<li><strong>Identity Risk Score</strong> - Metrica agregada de risco de identidade</li>
-<li><strong>Credential Exposure</strong> - Numero de credenciais em vazamentos</li>
+<li><strong>Identity Risk Score</strong> - Métrica agregada de risco de identidade</li>
+<li><strong>Credential Exposure</strong> - Número de credenciais em vazamentos</li>
 <li><strong>Privileged Account Hygiene</strong> - Score de conformidade de contas privilegiadas</li>
 <li><strong>AD Security Score</strong> - Avaliação geral de segurança do AD</li>
 </ul>
@@ -740,7 +740,7 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 <li>Cobertura: AD on-premises, Entra ID, outros IdPs?</li>
 <li>Detecção: Assinatura + Comportamental + Protocolo?</li>
 <li>Resposta: Integração com SOAR, automação nativa?</li>
-<li>Assessment: Attack path analysis incluido?</li>
+<li>Assessment: Attack path analysis incluído?</li>
 <li>Integração: APIs, conectores SIEM/SOAR?</li>
 <li>Deploy: Agentless vs agent-based?</li>
 </ul>
@@ -770,7 +770,7 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 <i class="fas fa-chevron-down faq-icon"></i>
 </div>
 <div class="faq-answer">
-<p>ITDR é projetado para detectar ataques como: Kerberoasting (extração de hashes de contas de servico), Golden/Silver Ticket (forjamento de tickets Kerberos), DCSync (replicação maliciosa do AD), Pass-the-Hash/Pass-the-Ticket (reuso de credenciais), Credential Stuffing (tentativas massivas de login), Account Takeover, e movimentação lateral baseada em credenciais comprometidas.</p>
+<p>ITDR é projetado para detectar ataques como: Kerberoasting (extração de hashes de contas de serviço), Golden/Silver Ticket (forjamento de tickets Kerberos), DCSync (replicação maliciosa do AD), Pass-the-Hash/Pass-the-Ticket (reuso de credenciais), Credential Stuffing (tentativas massivas de login), Account Takeover, e movimentação lateral baseada em credenciais comprometidas.</p>
 </div>
 </div>
 <div class="faq-item">
@@ -779,7 +779,7 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 <i class="fas fa-chevron-down faq-icon"></i>
 </div>
 <div class="faq-answer">
-<p>Nao. ITDR complementa EDR e SIEM. EDR foca em ameaças em endpoints (malware, exploits), SIEM correlaciona eventos de múltiplas fontes. ITDR especializa-se em ameaças de identidade com entendimento profundo de protocolos como <a class="gloss-link" href="/glossario/#kerberos" title="Ver no glossário">Kerberos</a> e LDAP. A integração entre as tres soluções fornece visibilidade completa e melhor detecção.</p>
+<p>Não. ITDR complementa EDR e SIEM. EDR foca em ameaças em endpoints (malware, exploits), SIEM correlaciona eventos de múltiplas fontes. ITDR especializa-se em ameaças de identidade com entendimento profundo de protocolos como <a class="gloss-link" href="/glossario/#kerberos" title="Ver no glossário">Kerberos</a> e LDAP. A integração entre as três soluções fornece visibilidade completa e melhor detecção.</p>
 </div>
 </div>
 <div class="faq-item">
@@ -788,7 +788,7 @@ REGRA: Credenciais de tier superior NUNCA logam em tier
 <i class="fas fa-chevron-down faq-icon"></i>
 </div>
 <div class="faq-answer">
-<p>Proteção do AD requer múltiplas camadas: implementar Tiered Administration (Tier 0/1/2), usar PAWs para administração, habilitar Protected Users group, implementar LAPS para senhas locais, monitorar eventos críticos (4768, 4769, 4776), desabilitar protocolos legados (NTLM onde possível), e implementar ITDR para detecção continua de ataques.</p>
+<p>Proteção do AD requer múltiplas camadas: implementar Tiered Administration (Tier 0/1/2), usar PAWs para administração, habilitar Protected Users group, implementar LAPS para senhas locais, monitorar eventos críticos (4768, 4769, 4776), desabilitar protocolos legados (NTLM onde possível), e implementar ITDR para detecção contínua de ataques.</p>
 </div>
 </div>
 </div>
