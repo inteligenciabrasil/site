@@ -62,7 +62,7 @@
                 "name": "Por que meus emails estão indo para spam mesmo com SPF/DKIM?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "SPF/DKIM/DMARC são apenas parte da equação. Reputação do IP, conteúdo do email, engajamento dos destinatários e práticas de envio também afetam entregabilidade. Verifique se seu IP não esta em blacklists e siga boas práticas de email marketing."
+                    "text": "SPF/DKIM/DMARC são apenas parte da equação. Reputação do IP, conteúdo do email, engajamento dos destinatários e práticas de envio também afetam entregabilidade. Verifique se seu IP não está em blacklists e siga boas práticas de email marketing."
                 }
             },
             {
@@ -278,7 +278,7 @@
                 <h2 id="spf">SPF - Sender Policy Framework</h2>
 
                 <p>
-                    <strong>SPF</strong> e um registro DNS TXT que lista os servidores autorizados a enviar email em nome do seu domínio. Quando um servidor recebe email de "@seudominio.com", ele consulta o SPF para verificar se o IP de origem esta autorizado.
+                    <strong>SPF</strong> é um registro DNS TXT que lista os servidores autorizados a enviar email em nome do seu domínio. Quando um servidor recebe email de "@seudominio.com", ele consulta o SPF para verificar se o IP de origem está autorizado.
                 </p>
 
                 <h3>Como funciona</h3>
@@ -286,7 +286,7 @@
                 <ol>
                     <li>Servidor de email envia mensagem de @seudominio.com</li>
                     <li>Servidor receptor consulta DNS TXT de seudominio.com</li>
-                    <li>Verifica se IP do remetente esta na lista SPF</li>
+                    <li>Verifica se IP do remetente está na lista SPF</li>
                     <li>Se não estiver, marca como SPF fail</li>
                 </ol>
 
@@ -303,7 +303,7 @@
                     <li><strong>include:</strong> Inclui SPF de outro domínio (provedores de email)</li>
                     <li><strong>a:</strong> Autoriza IPs do registro A do domínio</li>
                     <li><strong>mx:</strong> Autoriza IPs dos servidores MX</li>
-                    <li><strong>-all:</strong> Rejeitar tudo que não esta listado (hard fail)</li>
+                    <li><strong>-all:</strong> Rejeitar tudo que não está listado (hard fail)</li>
                     <li><strong>~all:</strong> Soft fail (marcar mas não rejeitar)</li>
                 </ul>
 
@@ -322,7 +322,7 @@
 
                 <ol>
                     <li>Servidor de envio assina headers e corpo do email com chave privada</li>
-                    <li>Assinatura e adicionada ao header "DKIM-Signature"</li>
+                    <li>Assinatura é adicionada ao header "DKIM-Signature"</li>
                     <li>Servidor receptor busca chave publica no DNS</li>
                     <li>Verifica assinatura - se valida, DKIM pass</li>
                 </ol>
@@ -336,7 +336,7 @@
 
                 <ul>
                     <li><strong>v=DKIM1:</strong> Versão do DKIM</li>
-                    <li><strong>k=rsa:</strong> Algoritmo (RSA e padrão)</li>
+                    <li><strong>k=rsa:</strong> Algoritmo (RSA é padrão)</li>
                     <li><strong>p=:</strong> Chave publica em base64</li>
                     <li><strong>selector:</strong> Identificador da chave (permite rotação)</li>
                 </ul>
@@ -354,7 +354,7 @@
                 <h2 id="dmarc">DMARC - Domain-based Message Authentication</h2>
 
                 <p>
-                    <strong>DMARC</strong> e a política que une SPF e DKIM. Define o que servidores receptores devem fazer quando a autenticação falha e configura relatórios para visibilidade do que esta acontecendo com seu domínio.
+                    <strong>DMARC</strong> é a política que une SPF e DKIM. Define o que servidores receptores devem fazer quando a autenticação falha e configura relatórios para visibilidade do que está acontecendo com seu domínio.
                 </p>
 
                 <h3>Alinhamento DMARC</h3>
@@ -518,7 +518,7 @@ v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>SPF/DKIM/DMARC são apenas parte da equação. Reputação do IP, conteúdo do email, engajamento dos destinatários e práticas de envio também afetam entregabilidade. Verifique se seu IP não esta em blacklists e siga boas práticas de email marketing.</p>
+                            <p>SPF/DKIM/DMARC são apenas parte da equação. Reputação do IP, conteúdo do email, engajamento dos destinatários e práticas de envio também afetam entregabilidade. Verifique se seu IP não está em blacklists e siga boas práticas de email marketing.</p>
                         </div>
                     </div>
 
@@ -546,7 +546,7 @@ v=DMARC1; p=reject; rua=mailto:dmarc@exemplo.com</pre>
                 <h2 id="conclusao">Conclusão</h2>
 
                 <p>
-                    Implementar SPF, DKIM e DMARC não e opcional em 2026 - e requisito básico de segurança de email. Sem esses controles, seu domínio pode ser usado por atacantes para <a class="gloss-link" href="/glossario/#phishing" title="Ver no gloss&#225;rio">phishing</a> contra seus clientes, parceiros e funcionários.
+                    Implementar SPF, DKIM e DMARC não é opcional em 2026 - é requisito básico de segurança de email. Sem esses controles, seu domínio pode ser usado por atacantes para <a class="gloss-link" href="/glossario/#phishing" title="Ver no gloss&#225;rio">phishing</a> contra seus clientes, parceiros e funcionários.
                 </p>
 
                 <p>

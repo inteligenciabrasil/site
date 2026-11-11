@@ -42,7 +42,7 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e um JWT (JSON Web Token)?","acceptedAnswer":{"@type":"Answer","text":"JWT e um padrão aberto (RFC 7519) para representar claims (afirmações) entre duas partes como um objeto JSON assinado. Consiste em três segmentos codificados em Base64URL separados por ponto: header.payload.signature. Muito usado para autenticação em APIs, OAuth 2.0 e OpenID Connect."}},{"@type":"Question","name":"JWT e criptografado?","acceptedAnswer":{"@type":"Answer","text":"Por padrão não. O header e payload são apenas codificados em Base64URL - qualquer pessoa pode ler. A assinatura garante que o token não foi adulterado, mas não oculta o conteúdo. Se você precisa confidencialidade, use JWE (JSON Web Encryption) ou transporte o JWT apenas sobre TLS e não coloque dados sensíveis no payload."}},{"@type":"Question","name":"O que e o ataque alg=none em JWT?","acceptedAnswer":{"@type":"Answer","text":"Algumas bibliotecas aceitavam tokens com header alg=none, que indicava que o token não precisava de assinatura. Atacantes podiam então forjar qualquer token, mudando claims como user_id ou roles. E uma vulnerabilidade clássica (CVE-2015-9235). Sempre configure sua biblioteca para rejeitar alg=none e validar o algoritmo esperado."}},{"@type":"Question","name":"Onde devo armazenar JWT no cliente?","acceptedAnswer":{"@type":"Answer","text":"Evite localStorage (vulnerável a XSS). O padrão recomendado e cookies HttpOnly + Secure + SameSite=Strict, combinados com tokens curtos e rotação. Para SPAs, considere o padrão BFF (Backend for Frontend) mantendo o token apenas no backend e entregando sessão via cookie de sessão tradicional."}},{"@type":"Question","name":"Este decoder envia meu token a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a decodificação acontece no seu navegador usando JavaScript (atob e JSON.parse). Nenhum token e enviado, salvo ou registrado. Você pode desconectar da internet após carregar a página e a ferramenta continua funcionando. Isso e crítico: tokens podem conter credenciais sensíveis e não deveriam ser colados em serviços online de terceiros sem essa garantia."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é um JWT (JSON Web Token)?","acceptedAnswer":{"@type":"Answer","text":"JWT é um padrão aberto (RFC 7519) para representar claims (afirmações) entre duas partes como um objeto JSON assinado. Consiste em três segmentos codificados em Base64URL separados por ponto: header.payload.signature. Muito usado para autenticação em APIs, OAuth 2.0 e OpenID Connect."}},{"@type":"Question","name":"JWT é criptografado?","acceptedAnswer":{"@type":"Answer","text":"Por padrão não. O header e payload são apenas codificados em Base64URL - qualquer pessoa pode ler. A assinatura garante que o token não foi adulterado, mas não oculta o conteúdo. Se você precisa confidencialidade, use JWE (JSON Web Encryption) ou transporte o JWT apenas sobre TLS e não coloque dados sensíveis no payload."}},{"@type":"Question","name":"O que é o ataque alg=none em JWT?","acceptedAnswer":{"@type":"Answer","text":"Algumas bibliotecas aceitavam tokens com header alg=none, que indicava que o token não precisava de assinatura. Atacantes podiam então forjar qualquer token, mudando claims como user_id ou roles. É uma vulnerabilidade clássica (CVE-2015-9235). Sempre configure sua biblioteca para rejeitar alg=none e validar o algoritmo esperado."}},{"@type":"Question","name":"Onde devo armazenar JWT no cliente?","acceptedAnswer":{"@type":"Answer","text":"Evite localStorage (vulnerável a XSS). O padrão recomendado é cookies HttpOnly + Secure + SameSite=Strict, combinados com tokens curtos e rotação. Para SPAs, considere o padrão BFF (Backend for Frontend) mantendo o token apenas no backend e entregando sessão via cookie de sessão tradicional."}},{"@type":"Question","name":"Este decoder envia meu token a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a decodificação acontece no seu navegador usando JavaScript (atob e JSON.parse). Nenhum token é enviado, salvo ou registrado. Você pode desconectar da internet após carregar a página e a ferramenta continua funcionando. Isso é crítico: tokens podem conter credenciais sensíveis e não deveriam ser colados em serviços online de terceiros sem essa garantia."}}]}
     </script>
 
     <script type="application/ld+json">
@@ -177,7 +177,7 @@
 
             <div class="highlight-box info" style="margin:2rem 0">
                 <div class="highlight-box-title"><i class="fas fa-shield-alt"></i> Sua privacidade</div>
-                <p>Esta ferramenta roda <strong>100% no seu navegador</strong> usando <code>atob()</code> e <code>JSON.parse()</code>. Nenhum token e enviado, salvo ou registrado. Isso e crítico para JWTs reais - eles podem conter credenciais sensíveis e não deveriam ser decodificados em serviços de terceiros sem essa garantia.</p>
+                <p>Esta ferramenta roda <strong>100% no seu navegador</strong> usando <code>atob()</code> e <code>JSON.parse()</code>. Nenhum token é enviado, salvo ou registrado. Isso é crítico para JWTs reais - eles podem conter credenciais sensíveis e não deveriam ser decodificados em serviços de terceiros sem essa garantia.</p>
             </div>
 
         </div>
@@ -187,8 +187,8 @@
         <div class="container">
             <div class="article-body">
 
-                <h2 id="o-que-e-jwt">O Que e um JSON Web Token?</h2>
-                <p>JWT (RFC 7519) e um padrão aberto para representar <em>claims</em> (afirmações) entre duas partes como um objeto JSON assinado. E onipresente em autenticação de APIs modernas, OAuth 2.0 e OpenID Connect.</p>
+                <h2 id="o-que-e-jwt">O Que é um JSON Web Token?</h2>
+                <p>JWT (RFC 7519) é um padrão aberto para representar <em>claims</em> (afirmações) entre duas partes como um objeto JSON assinado. É onipresente em autenticação de APIs modernas, OAuth 2.0 e OpenID Connect.</p>
 
                 <h3>Estrutura de um JWT</h3>
                 <p>Um JWT tem três segmentos codificados em Base64URL e separados por ponto:</p>
@@ -210,7 +210,7 @@
                 </ul>
 
                 <div class="highlight-box danger">
-                    <div class="highlight-box-title"><i class="fas fa-exclamation-triangle"></i> JWT não e criptografado por padrão</div>
+                    <div class="highlight-box-title"><i class="fas fa-exclamation-triangle"></i> JWT não é criptografado por padrão</div>
                     <p>O header e payload são apenas <strong>codificados</strong> em Base64URL, não cifrados. Qualquer pessoa com acesso ao token pode ler seu conteúdo. A assinatura garante integridade (não foi adulterado), não confidencialidade. Nunca coloque senhas, CPF, chaves privadas ou dados sensíveis no payload. Se precisar confidencialidade, use JWE.</p>
                 </div>
 
@@ -220,10 +220,10 @@
                 <p>A especificação permite <code>alg=none</code>, indicando token sem assinatura. Implementações vulneráveis aceitavam esse valor e confiavam no payload, permitindo que atacantes forjassem qualquer token - por exemplo, trocando <code>"role":"user"</code> por <code>"role":"admin"</code>. Documentado em CVE-2015-9235. Sempre rejeite <code>alg=none</code> no servidor e valide o algoritmo explicitamente.</p>
 
                 <h3>2. Algorithm confusion (RS256 &rarr; HS256)</h3>
-                <p>Implementações antigas aceitavam a chave publica RSA (que e publica!) como se fosse segredo HMAC. Atacantes pegavam a chave publica do servidor, trocavam alg para HS256 e assinavam um token com ela. Sempre valide que o alg do token bate com o alg esperado pela aplicação.</p>
+                <p>Implementações antigas aceitavam a chave publica RSA (que é publica!) como se fosse segredo HMAC. Atacantes pegavam a chave publica do servidor, trocavam alg para HS256 e assinavam um token com ela. Sempre valide que o alg do token bate com o alg esperado pela aplicação.</p>
 
                 <h3>3. kid injection</h3>
-                <p>Header <code>kid</code> (Key ID) e usado para selecionar qual chave verificar. Se a aplicação usa o valor para carregar arquivos (<code>keys/{kid}.pem</code>), atacantes podem injetar caminhos como <code>../../etc/passwd</code> ou apontar para arquivos previsíveis. Faça allowlist de kids permitidos.</p>
+                <p>Header <code>kid</code> (Key ID) é usado para selecionar qual chave verificar. Se a aplicação usa o valor para carregar arquivos (<code>keys/{kid}.pem</code>), atacantes podem injetar caminhos como <code>../../etc/passwd</code> ou apontar para arquivos previsíveis. Faça allowlist de kids permitidos.</p>
 
                 <h3>4. Brute force de segredo HMAC</h3>
                 <p>Se o token usa HS256 (HMAC-SHA256) com segredo fraco, atacantes podem tentar brute-force offline. Ferramentas como <code>hashcat</code> (modo 16500) testam bilhões de senhas por segundo. Use segredos gerados aleatoriamente com pelo menos 32 bytes (256 bits) de entropia, ou prefira RS256/ES256.</p>
@@ -273,15 +273,15 @@
 
                 <div class="faq-section">
                     <div class="faq-item">
-                        <div class="faq-question"><span>O que e um JWT (JSON Web Token)?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>JWT (RFC 7519) e um padrão aberto para representar claims entre duas partes como JSON assinado. Tem três segmentos Base64URL separados por ponto: header.payload.signature. Usado em APIs, OAuth e OpenID Connect.</p></div>
+                        <div class="faq-question"><span>O que é um JWT (JSON Web Token)?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>JWT (RFC 7519) é um padrão aberto para representar claims entre duas partes como JSON assinado. Tem três segmentos Base64URL separados por ponto: header.payload.signature. Usado em APIs, OAuth e OpenID Connect.</p></div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question"><span>JWT e criptografado?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-question"><span>JWT é criptografado?</span><i class="fas fa-chevron-down faq-icon"></i></div>
                         <div class="faq-answer"><p>Por padrão não. Header e payload são apenas codificados em Base64URL - legiveis. A assinatura garante integridade, não confidencialidade. Para confidencialidade, use JWE ou só trafegue por TLS sem dados sensíveis no payload.</p></div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question"><span>O que e o ataque alg=none em JWT?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-question"><span>O que é o ataque alg=none em JWT?</span><i class="fas fa-chevron-down faq-icon"></i></div>
                         <div class="faq-answer"><p>Bibliotecas vulneráveis aceitavam tokens com alg=none (sem assinatura), permitindo que atacantes forjassem qualquer claim (CVE-2015-9235). Sempre rejeite alg=none e valide o algoritmo esperado.</p></div>
                     </div>
                     <div class="faq-item">
@@ -311,7 +311,7 @@
                 </div>
 
                 <div class="cta-box">
-                    <h3>Sua API esta segura? Faça um pentest especializado</h3>
+                    <h3>Sua API está segura? Faça um pentest especializado</h3>
                     <p>Nossa equipe revisa implementações de JWT, OAuth, OpenID Connect e detecta vulnerabilidades como alg=none, algorithm confusion e kid injection.</p>
                     <a href="/contato/" class="cta-btn">Solicitar Proposta</a>
                 </div>

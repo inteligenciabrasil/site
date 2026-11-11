@@ -42,7 +42,7 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e uma boa política de senhas?","acceptedAnswer":{"@type":"Answer","text":"Uma boa política de senhas foca em tamanho (12-16+ caracteres), diversidade de caracteres, bloqueio de senhas comuns/vazadas, permite TODOS os caracteres (incluindo espacos e Unicode) e NÃO força trocas periódicas sem motivo. Essa e a diretriz moderna do NIST SP 800-63B, que abandonou regras de complexidade rígida e expiração arbitrária."}},{"@type":"Question","name":"O que mudou no NIST SP 800-63B?","acceptedAnswer":{"@type":"Answer","text":"A nova diretriz (revisão 3 em 2017, atualizada em 2024) abandonou várias práticas tradicionais: não exige complexidade obrigatória (maiúsculas+números+simbolos), não exige expiração periódica, mas exige mínimo 8 caracteres (recomendado 16+), bloqueio de senhas em listas de vazamentos, e permite todos os caracteres Unicode imprimiveis. O foco mudou de complexidade imposta para tamanho e aleatoriedade."}},{"@type":"Question","name":"Devo exigir troca de senha a cada 90 dias?","acceptedAnswer":{"@type":"Answer","text":"Não. Trocas periódicas arbitrárias diminuem a qualidade da senha (usuários incrementam número no final) sem aumentar segurança. Troque senha apenas se houver suspeita de comprometimento. Para mitigar risco, use MFA, detecte vazamentos, monitore logins suspeitos e bloqueie senhas comuns/reutilizadas."}},{"@type":"Question","name":"Quanto vale a entropia de uma senha?","acceptedAnswer":{"@type":"Answer","text":"Entropia (em bits) mede a imprevisibilidade. Calcula-se como comprimento * log2(tamanho do alfabeto). Uma senha de 8 caracteres minusculos tem ~38 bits (fraca); 12 caracteres mistos tem ~72 bits (boa); 16 caracteres mistos tem ~95 bits (forte). Abaixo de 60 bits, um atacante com GPU moderna quebra em menos de um ano. Mire em 80+ bits para contas comuns e 100+ para críticas."}},{"@type":"Question","name":"Esta ferramenta envia minha senha a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a validação acontece no seu navegador em JavaScript puro. Nenhuma senha e transmitida, salva ou registrada. A lista de senhas comuns esta embutida no código. Você pode desconectar da internet após carregar a página e continuar usando. Abra o DevTools (F12) para auditar o código fonte."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é uma boa política de senhas?","acceptedAnswer":{"@type":"Answer","text":"Uma boa política de senhas foca em tamanho (12-16+ caracteres), diversidade de caracteres, bloqueio de senhas comuns/vazadas, permite TODOS os caracteres (incluindo espacos e Unicode) e NÃO força trocas periódicas sem motivo. Essa é a diretriz moderna do NIST SP 800-63B, que abandonou regras de complexidade rígida e expiração arbitrária."}},{"@type":"Question","name":"O que mudou no NIST SP 800-63B?","acceptedAnswer":{"@type":"Answer","text":"A nova diretriz (revisão 3 em 2017, atualizada em 2024) abandonou várias práticas tradicionais: não exige complexidade obrigatória (maiúsculas+números+simbolos), não exige expiração periódica, mas exige mínimo 8 caracteres (recomendado 16+), bloqueio de senhas em listas de vazamentos, e permite todos os caracteres Unicode imprimiveis. O foco mudou de complexidade imposta para tamanho e aleatoriedade."}},{"@type":"Question","name":"Devo exigir troca de senha a cada 90 dias?","acceptedAnswer":{"@type":"Answer","text":"Não. Trocas periódicas arbitrárias diminuem a qualidade da senha (usuários incrementam número no final) sem aumentar segurança. Troque senha apenas se houver suspeita de comprometimento. Para mitigar risco, use MFA, detecte vazamentos, monitore logins suspeitos e bloqueie senhas comuns/reutilizadas."}},{"@type":"Question","name":"Quanto vale a entropia de uma senha?","acceptedAnswer":{"@type":"Answer","text":"Entropia (em bits) mede a imprevisibilidade. Calcula-se como comprimento * log2(tamanho do alfabeto). Uma senha de 8 caracteres minusculos tem ~38 bits (fraca); 12 caracteres mistos tem ~72 bits (boa); 16 caracteres mistos tem ~95 bits (forte). Abaixo de 60 bits, um atacante com GPU moderna quebra em menos de um ano. Mire em 80+ bits para contas comuns e 100+ para críticas."}},{"@type":"Question","name":"Esta ferramenta envia minha senha a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a validação acontece no seu navegador em JavaScript puro. Nenhuma senha é transmitida, salva ou registrada. A lista de senhas comuns está embutida no código. Você pode desconectar da internet após carregar a página e continuar usando. Abra o DevTools (F12) para auditar o código fonte."}}]}
     </script>
 
     <script type="application/ld+json">
@@ -240,7 +240,7 @@
 
             <div class="highlight-box info" style="margin:0 0 2rem">
                 <div class="highlight-box-title"><i class="fas fa-shield-alt"></i> Sua privacidade</div>
-                <p>Esta ferramenta roda <strong>100% no seu navegador</strong>. Nenhuma senha e enviada, salva ou registrada. A lista de senhas comuns esta embutida no código (sem chamada ao HIBP ou qualquer API externa). Você pode desconectar da internet após carregar a página e continuar usando.</p>
+                <p>Esta ferramenta roda <strong>100% no seu navegador</strong>. Nenhuma senha é enviada, salva ou registrada. A lista de senhas comuns está embutida no código (sem chamada ao HIBP ou qualquer API externa). Você pode desconectar da internet após carregar a página e continuar usando.</p>
             </div>
 
         </div>
@@ -250,23 +250,23 @@
         <div class="container">
             <div class="article-body">
 
-                <h2 id="boa-politica">O Que e uma Boa Política de Senhas?</h2>
-                <p>Uma política de senhas define as regras mínimas que uma senha deve atender para ser aceita em um sistema. A ciência moderna mudou bastante nos últimos anos - o que antes era boa prática (expiração a cada 90 dias, complexidade obrigatória) hoje e considerado <strong>contraproducente</strong>.</p>
+                <h2 id="boa-politica">O Que é uma Boa Política de Senhas?</h2>
+                <p>Uma política de senhas define as regras mínimas que uma senha deve atender para ser aceita em um sistema. A ciência moderna mudou bastante nos últimos anos - o que antes era boa prática (expiração a cada 90 dias, complexidade obrigatória) hoje é considerado <strong>contraproducente</strong>.</p>
 
                 <h3>Princípios modernos (2026)</h3>
                 <ul>
-                    <li><strong>Tamanho &gt; complexidade</strong> - 16 caracteres minusculos e mais seguro que 8 com tudo</li>
+                    <li><strong>Tamanho &gt; complexidade</strong> - 16 caracteres minusculos é mais seguro que 8 com tudo</li>
                     <li><strong>Permita tudo</strong> - aceite todos os caracteres Unicode imprimiveis (emojis, espacos, acentos)</li>
                     <li><strong>Bloqueie senhas conhecidas</strong> - listas de vazamentos, dicionários e variações comuns</li>
                     <li><strong>Não force expiração</strong> - só exija troca se houver suspeita de comprometimento</li>
-                    <li><strong>MFA como padrão</strong> - senha sozinha nunca e suficiente</li>
+                    <li><strong>MFA como padrão</strong> - senha sozinha nunca é suficiente</li>
                     <li><strong>Monitore autenticacoes anômalas</strong> - login de local novo, dispositivo novo</li>
                 </ul>
 
                 <h2 id="padroes">Padrões de Referência</h2>
 
                 <h3>NIST SP 800-63B (EUA)</h3>
-                <p>A diretriz de autenticação digital do NIST (<em>National Institute of Standards and Technology</em>), revisão 3 de 2017 e atualizações de 2024. E considerada o padrão-ouro para políticas modernas.</p>
+                <p>A diretriz de autenticação digital do NIST (<em>National Institute of Standards and Technology</em>), revisão 3 de 2017 e atualizações de 2024. É considerada o padrão-ouro para políticas modernas.</p>
                 <ul>
                     <li>Mínimo 8 caracteres (recomendado 16+)</li>
                     <li><strong>Não</strong> exija complexidade (misturar maiúsculas/números/simbolos)</li>
@@ -280,18 +280,18 @@
                 <p>Norma internacional de gestão de segurança da informação. Menos específica que o NIST, mas exige política formal de controle de acesso e gestão de credenciais (controle A.9.4.3). Referência prática comum: 12+ caracteres, complexidade misturada, alinhado a risco do ativo.</p>
 
                 <h3>PCI-DSS 4.0</h3>
-                <p>Padrão do setor de cartões de pagamento. Requisito 8.3.6 exige senhas com mínimo 12 caracteres contendo letras e números. Considera-se que MFA e obrigatório para acesso administrativo e acesso remoto a ambientes de dados de cartão (CDE).</p>
+                <p>Padrão do setor de cartões de pagamento. Requisito 8.3.6 exige senhas com mínimo 12 caracteres contendo letras e números. Considera-se que MFA é obrigatório para acesso administrativo e acesso remoto a ambientes de dados de cartão (CDE).</p>
 
                 <h3>LGPD (Brasil)</h3>
                 <p>A LGPD não específica regras técnicas de senha, mas o Art. 46 exige adoção de medidas de segurança aptas a proteger dados pessoais. Na prática, ISMS (ISO 27001) e ANPD recomendam 12+ caracteres, MFA e proibição de reuso. Para detalhes, veja nosso <a href="../../blog/lgpd-implementacao-tecnica/">guia de implementação técnica da LGPD</a>.</p>
 
                 <div class="highlight-box gold">
                     <div class="highlight-box-title"><i class="fas fa-star"></i> Tamanho domina a matemática</div>
-                    <p>Cada caractere adicional multiplica o espaço de busca pelo tamanho do alfabeto. Em alfabeto de 62 chars (a-z,A-Z,0-9), cada char adicional multiplica por 62. De 8 para 9 chars: 62x mais combinações. Tamanho e de longe a variável mais importante.</p>
+                    <p>Cada caractere adicional multiplica o espaço de busca pelo tamanho do alfabeto. Em alfabeto de 62 chars (a-z,A-Z,0-9), cada char adicional multiplica por 62. De 8 para 9 chars: 62x mais combinações. Tamanho é de longe a variável mais importante.</p>
                 </div>
 
                 <h2 id="entropia">Entendendo Entropia</h2>
-                <p>Entropia (em bits) mede quanto uma senha e imprevisível. Calcula-se como:</p>
+                <p>Entropia (em bits) mede quanto uma senha é imprevisível. Calcula-se como:</p>
                 <p><code>entropia = tamanho * log2(tamanho_do_alfabeto)</code></p>
 
                 <h3>Tabela de referência</h3>
@@ -341,8 +341,8 @@
 
                 <div class="faq-section">
                     <div class="faq-item">
-                        <div class="faq-question"><span>O que e uma boa política de senhas?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Foca em tamanho (12-16+ caracteres), diversidade, bloqueio de senhas comuns/vazadas, permite todos os caracteres e NÃO força trocas periódicas sem motivo. E a diretriz moderna do NIST SP 800-63B.</p></div>
+                        <div class="faq-question"><span>O que é uma boa política de senhas?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Foca em tamanho (12-16+ caracteres), diversidade, bloqueio de senhas comuns/vazadas, permite todos os caracteres e NÃO força trocas periódicas sem motivo. É a diretriz moderna do NIST SP 800-63B.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>O que mudou no NIST SP 800-63B?</span><i class="fas fa-chevron-down faq-icon"></i></div>
@@ -358,7 +358,7 @@
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Esta ferramenta envia minha senha a algum servidor?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Não. Toda validação acontece no navegador em JavaScript puro. Nenhuma senha e transmitida, salva ou registrada. Lista de senhas comuns embutida no código. Abra DevTools (F12) para auditar.</p></div>
+                        <div class="faq-answer"><p>Não. Toda validação acontece no navegador em JavaScript puro. Nenhuma senha é transmitida, salva ou registrada. Lista de senhas comuns embutida no código. Abra DevTools (F12) para auditar.</p></div>
                     </div>
                 </div>
 

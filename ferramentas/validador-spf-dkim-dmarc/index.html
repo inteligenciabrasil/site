@@ -42,7 +42,7 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e SPF?","acceptedAnswer":{"@type":"Answer","text":"SPF (Sender Policy Framework) e um registro DNS TXT que lista quais servidores estão autorizados a enviar email em nome do seu domínio. Quando um servidor receptor recebe um email, ele consulta o SPF do domínio do remetente para verificar se o servidor de origem esta autorizado, ajudando a prevenir spoofing."}},{"@type":"Question","name":"O que e DKIM?","acceptedAnswer":{"@type":"Answer","text":"DKIM (DomainKeys Identified Mail) e uma assinatura criptográfica adicionada ao cabeçalho do email pelo servidor remetente. O servidor receptor valida essa assinatura usando uma chave publica publicada no DNS. DKIM garante integridade (mensagem não foi alterada) e autenticidade (originada do domínio declarado)."}},{"@type":"Question","name":"O que e DMARC?","acceptedAnswer":{"@type":"Answer","text":"DMARC (Domain-based Message Authentication, Reporting and Conformance) e uma política que diz aos servidores receptores o que fazer quando emails falham SPF e/ou DKIM. As políticas são: none (apenas monitora), quarantine (envia para spam) ou reject (rejeita). DMARC também fornece relatórios agregados de autenticação."}},{"@type":"Question","name":"Por que preciso de SPF, DKIM e DMARC?","acceptedAnswer":{"@type":"Answer","text":"Os três juntos previnem que atacantes enviem emails se passando pelo seu domínio (spoofing/phishing), protegem sua reputação de marca, melhoram entregabilidade dos seus emails legítimos e são requeridos por grandes provedores como Gmail e Yahoo desde 2024."}},{"@type":"Question","name":"Esta ferramenta consulta DNS real?","acceptedAnswer":{"@type":"Answer","text":"Sim. Usamos DNS over HTTPS (DoH) do Cloudflare e Google para consultar os registros DNS públicos do domínio diretamente do seu navegador. As consultas são públicas e não revelam dados sensíveis - qualquer pessoa pode consultar registros TXT públicos."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é SPF?","acceptedAnswer":{"@type":"Answer","text":"SPF (Sender Policy Framework) é um registro DNS TXT que lista quais servidores estão autorizados a enviar email em nome do seu domínio. Quando um servidor receptor recebe um email, ele consulta o SPF do domínio do remetente para verificar se o servidor de origem está autorizado, ajudando a prevenir spoofing."}},{"@type":"Question","name":"O que é DKIM?","acceptedAnswer":{"@type":"Answer","text":"DKIM (DomainKeys Identified Mail) é uma assinatura criptográfica adicionada ao cabeçalho do email pelo servidor remetente. O servidor receptor valida essa assinatura usando uma chave publica publicada no DNS. DKIM garante integridade (mensagem não foi alterada) e autenticidade (originada do domínio declarado)."}},{"@type":"Question","name":"O que é DMARC?","acceptedAnswer":{"@type":"Answer","text":"DMARC (Domain-based Message Authentication, Reporting and Conformance) é uma política que diz aos servidores receptores o que fazer quando emails falham SPF e/ou DKIM. As políticas são: none (apenas monitora), quarantine (envia para spam) ou reject (rejeita). DMARC também fornece relatórios agregados de autenticação."}},{"@type":"Question","name":"Por que preciso de SPF, DKIM e DMARC?","acceptedAnswer":{"@type":"Answer","text":"Os três juntos previnem que atacantes enviem emails se passando pelo seu domínio (spoofing/phishing), protegem sua reputação de marca, melhoram entregabilidade dos seus emails legítimos e são requeridos por grandes provedores como Gmail e Yahoo desde 2024."}},{"@type":"Question","name":"Esta ferramenta consulta DNS real?","acceptedAnswer":{"@type":"Answer","text":"Sim. Usamos DNS over HTTPS (DoH) do Cloudflare e Google para consultar os registros DNS públicos do domínio diretamente do seu navegador. As consultas são públicas e não revelam dados sensíveis - qualquer pessoa pode consultar registros TXT públicos."}}]}
     </script>
 
     <script type="application/ld+json">
@@ -227,7 +227,7 @@
             <!-- Privacy notice -->
             <div class="highlight-box info" style="margin-top:2rem">
                 <div class="highlight-box-title"><i class="fas fa-info-circle"></i> Como funciona</div>
-                <p>Esta ferramenta usa <strong>DNS over HTTPS (DoH)</strong> do Cloudflare para consultar registros DNS públicos diretamente do seu navegador. Nenhum dado e enviado para nossos servidores - as consultas são públicas e qualquer pessoa pode acessar registros TXT publicados.</p>
+                <p>Esta ferramenta usa <strong>DNS over HTTPS (DoH)</strong> do Cloudflare para consultar registros DNS públicos diretamente do seu navegador. Nenhum dado é enviado para nossos servidores - as consultas são públicas e qualquer pessoa pode acessar registros TXT publicados.</p>
             </div>
 
         </div>
@@ -238,13 +238,13 @@
         <div class="container">
             <div class="article-body">
 
-                <h2 id="oque">O Que e Autenticação de Email?</h2>
-                <p>Autenticação de email e um conjunto de protocolos que permitem ao servidor receptor verificar se um email realmente vem do domínio que ele afirma ser. Sem autenticação, qualquer um pode enviar emails se passando pelo seu domínio - isso e chamado de <strong>spoofing</strong> e e a base de fraudes como <strong>BEC (Business Email Compromise)</strong> e <strong>phishing</strong>.</p>
+                <h2 id="oque">O Que é Autenticação de Email?</h2>
+                <p>Autenticação de email é um conjunto de protocolos que permitem ao servidor receptor verificar se um email realmente vem do domínio que ele afirma ser. Sem autenticação, qualquer um pode enviar emails se passando pelo seu domínio - isso é chamado de <strong>spoofing</strong> e é a base de fraudes como <strong>BEC (Business Email Compromise)</strong> e <strong>phishing</strong>.</p>
 
                 <p>Três protocolos trabalham em conjunto para autenticar emails:</p>
 
                 <h2 id="spf">SPF (Sender Policy Framework)</h2>
-                <p>SPF e um registro DNS TXT que lista quais servidores estão autorizados a enviar email em nome do seu domínio. Exemplo:</p>
+                <p>SPF é um registro DNS TXT que lista quais servidores estão autorizados a enviar email em nome do seu domínio. Exemplo:</p>
                 <pre><code>v=spf1 include:_spf.google.com include:mail.zendesk.com ip4:203.0.113.10 ~all</code></pre>
 
                 <p><strong>Mecanismos comuns:</strong></p>
@@ -260,7 +260,7 @@
 
                 <div class="highlight-box warning">
                     <div class="highlight-box-title"><i class="fas fa-exclamation-triangle"></i> Limite de 10 lookups</div>
-                    <p>SPF tem um limite rígido de <strong>10 DNS lookups</strong>. Cada <code>include</code>, <code>a</code>, <code>mx</code>, <code>exists</code>, <code>redirect</code> conta. Exceder esse limite causa falha de validação (<code>permerror</code>). E uma das causas mais comuns de problemas de entregabilidade.</p>
+                    <p>SPF tem um limite rígido de <strong>10 DNS lookups</strong>. Cada <code>include</code>, <code>a</code>, <code>mx</code>, <code>exists</code>, <code>redirect</code> conta. Exceder esse limite causa falha de validação (<code>permerror</code>). É uma das causas mais comuns de problemas de entregabilidade.</p>
                 </div>
 
                 <h2 id="dkim">DKIM (DomainKeys Identified Mail)</h2>
@@ -275,13 +275,13 @@
 
                 <p><strong>Boas práticas DKIM:</strong></p>
                 <ul>
-                    <li>Use chaves de <strong>pelo menos 2048 bits</strong> (1024 bits e considerado fraco)</li>
+                    <li>Use chaves de <strong>pelo menos 2048 bits</strong> (1024 bits é considerado fraco)</li>
                     <li>Faça <strong>rotação periódica</strong> das chaves (ao menos anual)</li>
                     <li>Use <strong>seletores diferentes</strong> por serviço (ex: <code>google</code>, <code>marketing</code>, <code>transactional</code>)</li>
                 </ul>
 
                 <h2 id="dmarc">DMARC (Domain-based Message Authentication)</h2>
-                <p>DMARC e a política que diz aos servidores receptores o que fazer quando emails falham SPF e/ou DKIM. Também fornece <strong>relatórios agregados</strong> sobre tentativas de autenticação - essenciais para identificar abusos.</p>
+                <p>DMARC é a política que diz aos servidores receptores o que fazer quando emails falham SPF e/ou DKIM. Também fornece <strong>relatórios agregados</strong> sobre tentativas de autenticação - essenciais para identificar abusos.</p>
 
                 <p>O registro DMARC fica em <code>_dmarc.domínio.com</code>. Exemplo:</p>
                 <pre><code>v=DMARC1; p=reject; rua=mailto:dmarc@empresa.com; ruf=mailto:forensic@empresa.com; pct=100; sp=reject</code></pre>
@@ -299,7 +299,7 @@
                 </div>
 
                 <h2 id="bimi">BIMI (Brand Indicators for Message Identification)</h2>
-                <p>BIMI permite que o logo da sua empresa apareca ao lado dos emails autenticados em clientes como Gmail e Yahoo. Requer DMARC com política <code>p=quarantine</code> ou <code>p=reject</code> e um certificado VMC (Verified Mark Certificate). E um benefício adicional para marcas que já tem autenticação bem implementada.</p>
+                <p>BIMI permite que o logo da sua empresa apareca ao lado dos emails autenticados em clientes como Gmail e Yahoo. Requer DMARC com política <code>p=quarantine</code> ou <code>p=reject</code> e um certificado VMC (Verified Mark Certificate). É um benefício adicional para marcas que já tem autenticação bem implementada.</p>
 
                 <h2 id="por-que">Por Que Configurar SPF, DKIM e DMARC?</h2>
                 <ul>
@@ -316,16 +316,16 @@
 
                 <div class="faq-section">
                     <div class="faq-item">
-                        <div class="faq-question"><span>O que e SPF?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>SPF (Sender Policy Framework) e um registro DNS TXT que lista quais servidores estão autorizados a enviar email em nome do seu domínio. Quando um servidor receptor recebe um email, consulta o SPF do domínio remetente para verificar se o servidor de origem esta autorizado.</p></div>
+                        <div class="faq-question"><span>O que é SPF?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>SPF (Sender Policy Framework) é um registro DNS TXT que lista quais servidores estão autorizados a enviar email em nome do seu domínio. Quando um servidor receptor recebe um email, consulta o SPF do domínio remetente para verificar se o servidor de origem está autorizado.</p></div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question"><span>O que e DKIM?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>DKIM e uma assinatura criptográfica adicionada ao cabeçalho do email. O servidor receptor valida usando uma chave publica publicada no DNS, garantindo integridade e autenticidade da mensagem.</p></div>
+                        <div class="faq-question"><span>O que é DKIM?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>DKIM é uma assinatura criptográfica adicionada ao cabeçalho do email. O servidor receptor valida usando uma chave publica publicada no DNS, garantindo integridade e autenticidade da mensagem.</p></div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question"><span>O que e DMARC?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>DMARC e uma política que define o que fazer quando emails falham SPF/DKIM. As políticas são: <code>none</code> (monitora), <code>quarantine</code> (envia para spam) ou <code>reject</code> (rejeita). DMARC também fornece relatórios de autenticação.</p></div>
+                        <div class="faq-question"><span>O que é DMARC?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>DMARC é uma política que define o que fazer quando emails falham SPF/DKIM. As políticas são: <code>none</code> (monitora), <code>quarantine</code> (envia para spam) ou <code>reject</code> (rejeita). DMARC também fornece relatórios de autenticação.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Por que preciso de SPF, DKIM e DMARC?</span><i class="fas fa-chevron-down faq-icon"></i></div>
@@ -333,7 +333,7 @@
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Esta ferramenta consulta DNS real?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Sim. Usamos DNS over HTTPS (DoH) do Cloudflare para consultar os registros DNS públicos do domínio diretamente do seu navegador. Nenhum dado e enviado para nossos servidores.</p></div>
+                        <div class="faq-answer"><p>Sim. Usamos DNS over HTTPS (DoH) do Cloudflare para consultar os registros DNS públicos do domínio diretamente do seu navegador. Nenhum dado é enviado para nossos servidores.</p></div>
                     </div>
                 </div>
 

@@ -42,7 +42,7 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e Base64 e para que serve?","acceptedAnswer":{"@type":"Answer","text":"Base64 e uma codificação que representa dados binários usando 64 caracteres ASCII imprimiveis (A-Z, a-z, 0-9, +, /). Serve para transmitir dados binários por canais que aceitam apenas texto, como emails (MIME), JSON, URLs (Base64URL) e tokens JWT. Não e criptografia - qualquer pessoa pode decodificar."}},{"@type":"Question","name":"Qual a diferença entre encodeURI e encodeURIComponent?","acceptedAnswer":{"@type":"Answer","text":"encodeURI preserva caracteres reservados de URL (como / ? # : &) porque assume que você esta codificando uma URL completa. encodeURIComponent codifica todos os caracteres especiais, ideal para codificar um valor individual de parâmetro (query string). Regra prática: use Componente para valores dentro de uma URL."}},{"@type":"Question","name":"Hex e seguro para transportar dados?","acceptedAnswer":{"@type":"Answer","text":"Hex (hexadecimal) e apenas uma representação textual de bytes - cada byte vira 2 caracteres (00-FF). Não oferece segurança alguma, apenas legibilidade. E comum em assinaturas, hashes, chaves criptográficas e análise forense de memória/rede."}},{"@type":"Question","name":"Os dados são enviados ao servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a codificação/decodificação acontece no seu navegador usando APIs nativas (TextEncoder, btoa/atob, encodeURI). Nenhum dado e transmitido, salvo ou registrado. Você pode desconectar da internet após carregar a página e a ferramenta continua funcionando."}},{"@type":"Question","name":"Por que Base64 aumenta o tamanho dos dados?","acceptedAnswer":{"@type":"Answer","text":"Base64 usa 6 bits por caractere para representar 8 bits de dado - logo o tamanho cresce cerca de 33% (4/3). Além disso, o comprimento e arredondado para multiplo de 4 com padding (=). Para 100 bytes binários, você obtém ~136 caracteres Base64."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que é Base64 e para que serve?","acceptedAnswer":{"@type":"Answer","text":"Base64 é uma codificação que representa dados binários usando 64 caracteres ASCII imprimiveis (A-Z, a-z, 0-9, +, /). Serve para transmitir dados binários por canais que aceitam apenas texto, como emails (MIME), JSON, URLs (Base64URL) e tokens JWT. Não é criptografia - qualquer pessoa pode decodificar."}},{"@type":"Question","name":"Qual a diferença entre encodeURI e encodeURIComponent?","acceptedAnswer":{"@type":"Answer","text":"encodeURI preserva caracteres reservados de URL (como / ? # : &) porque assume que você está codificando uma URL completa. encodeURIComponent codifica todos os caracteres especiais, ideal para codificar um valor individual de parâmetro (query string). Regra prática: use Componente para valores dentro de uma URL."}},{"@type":"Question","name":"Hex é seguro para transportar dados?","acceptedAnswer":{"@type":"Answer","text":"Hex (hexadecimal) é apenas uma representação textual de bytes - cada byte vira 2 caracteres (00-FF). Não oferece segurança alguma, apenas legibilidade. É comum em assinaturas, hashes, chaves criptográficas e análise forense de memória/rede."}},{"@type":"Question","name":"Os dados são enviados ao servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a codificação/decodificação acontece no seu navegador usando APIs nativas (TextEncoder, btoa/atob, encodeURI). Nenhum dado é transmitido, salvo ou registrado. Você pode desconectar da internet após carregar a página e a ferramenta continua funcionando."}},{"@type":"Question","name":"Por que Base64 aumenta o tamanho dos dados?","acceptedAnswer":{"@type":"Answer","text":"Base64 usa 6 bits por caractere para representar 8 bits de dado - logo o tamanho cresce cerca de 33% (4/3). Além disso, o comprimento é arredondado para multiplo de 4 com padding (=). Para 100 bytes binários, você obtém ~136 caracteres Base64."}}]}
     </script>
 
     <script type="application/ld+json">
@@ -127,7 +127,7 @@
         <div class="container">
             <span class="article-category">Ferramenta</span>
             <h1>Codificador Base64, URL e Hex</h1>
-            <p style="color:#94A3B8;font-size:1.1rem;max-width:720px;margin:1rem auto 0">Converta texto entre Base64, URL encoding e Hexadecimal. <strong>100% local</strong> - nenhum dado e enviado ao servidor.</p>
+            <p style="color:#94A3B8;font-size:1.1rem;max-width:720px;margin:1rem auto 0">Converta texto entre Base64, URL encoding e Hexadecimal. <strong>100% local</strong> - nenhum dado é enviado ao servidor.</p>
         </div>
     </header>
 
@@ -263,7 +263,7 @@
 
             <div class="highlight-box info" style="margin:2rem 0">
                 <div class="highlight-box-title"><i class="fas fa-shield-alt"></i> Sua privacidade</div>
-                <p>Esta ferramenta roda <strong>100% no seu navegador</strong> usando APIs nativas (<code>TextEncoder</code>, <code>btoa/atob</code>, <code>encodeURI</code>). Nenhum dado e enviado, salvo ou registrado. Abra o DevTools (F12) e audite o código JavaScript a qualquer momento.</p>
+                <p>Esta ferramenta roda <strong>100% no seu navegador</strong> usando APIs nativas (<code>TextEncoder</code>, <code>btoa/atob</code>, <code>encodeURI</code>). Nenhum dado é enviado, salvo ou registrado. Abra o DevTools (F12) e audite o código JavaScript a qualquer momento.</p>
             </div>
 
         </div>
@@ -273,10 +273,10 @@
         <div class="container">
             <div class="article-body">
 
-                <h2 id="base64">O Que e Base64?</h2>
-                <p>Base64 e uma codificação que representa dados binários usando apenas 64 caracteres ASCII imprimiveis: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>+</code> e <code>/</code>, com <code>=</code> como padding. Serve para transportar binários por canais que só aceitam texto.</p>
+                <h2 id="base64">O Que é Base64?</h2>
+                <p>Base64 é uma codificação que representa dados binários usando apenas 64 caracteres ASCII imprimiveis: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>+</code> e <code>/</code>, com <code>=</code> como padding. Serve para transportar binários por canais que só aceitam texto.</p>
 
-                <h3>Onde Base64 e usado em SegInfo?</h3>
+                <h3>Onde Base64 é usado em SegInfo?</h3>
                 <ul>
                     <li><strong>Tokens JWT</strong> - header e payload são Base64URL</li>
                     <li><strong>Certificados PEM</strong> - BEGIN CERTIFICATE ... END CERTIFICATE</li>
@@ -287,29 +287,29 @@
                 </ul>
 
                 <div class="highlight-box danger">
-                    <div class="highlight-box-title"><i class="fas fa-exclamation-triangle"></i> Base64 não e criptografia</div>
+                    <div class="highlight-box-title"><i class="fas fa-exclamation-triangle"></i> Base64 não é criptografia</div>
                     <p>Qualquer pessoa pode decodificar Base64 em milissegundos. Nunca use Base64 para "esconder" senhas ou dados sensíveis. Para proteger dados, use criptografia real (AES-256, TLS, bcrypt para senhas).</p>
                 </div>
 
                 <h3>Base64 vs Base64URL</h3>
-                <p>Base64 padrão usa <code>+</code> e <code>/</code>, que são caracteres reservados em URLs. Base64URL substitui por <code>-</code> e <code>_</code>, além de remover o padding <code>=</code>. E o formato usado em JWT, OAuth e cookies.</p>
+                <p>Base64 padrão usa <code>+</code> e <code>/</code>, que são caracteres reservados em URLs. Base64URL substitui por <code>-</code> e <code>_</code>, além de remover o padding <code>=</code>. É o formato usado em JWT, OAuth e cookies.</p>
 
                 <h2 id="url">URL Encoding (Percent Encoding)</h2>
-                <p>URL encoding, também chamado <em>percent encoding</em>, converte caracteres que tem significado especial em URLs (como espacos, <code>?</code>, <code>&amp;</code>, <code>=</code>) para a forma <code>%XX</code>, onde XX e o valor hexadecimal do byte UTF-8.</p>
+                <p>URL encoding, também chamado <em>percent encoding</em>, converte caracteres que tem significado especial em URLs (como espacos, <code>?</code>, <code>&amp;</code>, <code>=</code>) para a forma <code>%XX</code>, onde XX é o valor hexadecimal do byte UTF-8.</p>
 
                 <h3>encodeURI vs encodeURIComponent</h3>
                 <ul>
                     <li><strong>encodeURI</strong> - codifica uma URL completa, preserva <code>:/?#&amp;=</code> que tem função estrutural</li>
-                    <li><strong>encodeURIComponent</strong> - codifica um valor individual, escapa tudo que não e alfanumerico</li>
+                    <li><strong>encodeURIComponent</strong> - codifica um valor individual, escapa tudo que não é alfanumerico</li>
                 </ul>
 
                 <h4>Quando usar cada um?</h4>
-                <p>Use <strong>encodeURIComponent</strong> para codificar valores que você insere em uma URL (nome de usuário em query string, por exemplo). Use <strong>encodeURI</strong> apenas quando você esta codificando uma URL inteira que ainda precisa funcionar como URL.</p>
+                <p>Use <strong>encodeURIComponent</strong> para codificar valores que você insere em uma URL (nome de usuário em query string, por exemplo). Use <strong>encodeURI</strong> apenas quando você está codificando uma URL inteira que ainda precisa funcionar como URL.</p>
 
                 <h2 id="hex">Codificação Hexadecimal</h2>
-                <p>Hex representa cada byte (8 bits) como dois caracteres hexadecimais (0-9, a-f). E a representação textual padrão de dados binários em SegInfo.</p>
+                <p>Hex representa cada byte (8 bits) como dois caracteres hexadecimais (0-9, a-f). É a representação textual padrão de dados binários em SegInfo.</p>
 
-                <h3>Onde Hex e usado em SegInfo?</h3>
+                <h3>Onde Hex é usado em SegInfo?</h3>
                 <ul>
                     <li><strong>Hashes</strong> - MD5, SHA-1, SHA-256 são exibidos em hex</li>
                     <li><strong>Chaves criptográficas</strong> - chaves AES, HMAC</li>
@@ -335,7 +335,7 @@
 
                 <h2 id="erros-comuns">Erros Comuns</h2>
                 <ul>
-                    <li><strong>Achar que Base64 e segurança</strong> - não e criptografia, apenas codificação</li>
+                    <li><strong>Achar que Base64 é segurança</strong> - não é criptografia, apenas codificação</li>
                     <li><strong>Misturar Base64 e Base64URL</strong> - o decoder falha se o formato não bate com o encoder</li>
                     <li><strong>Esquecer UTF-8</strong> - caracteres acentuados viram bytes múltiplos; ignorar isso corrompe dados</li>
                     <li><strong>Double encoding</strong> - aplicar duas vezes por engano (<code>%2520</code> em vez de <code>%20</code>)</li>
@@ -346,24 +346,24 @@
 
                 <div class="faq-section">
                     <div class="faq-item">
-                        <div class="faq-question"><span>O que e Base64 e para que serve?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Base64 e uma codificação que representa dados binários usando 64 caracteres ASCII imprimiveis. Serve para transmitir dados binários por canais que aceitam apenas texto (email, JSON, URLs, JWT). Não e criptografia - qualquer um pode decodificar.</p></div>
+                        <div class="faq-question"><span>O que é Base64 e para que serve?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Base64 é uma codificação que representa dados binários usando 64 caracteres ASCII imprimiveis. Serve para transmitir dados binários por canais que aceitam apenas texto (email, JSON, URLs, JWT). Não é criptografia - qualquer um pode decodificar.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Qual a diferença entre encodeURI e encodeURIComponent?</span><i class="fas fa-chevron-down faq-icon"></i></div>
                         <div class="faq-answer"><p>encodeURI preserva caracteres reservados de URL (/ ? # : &amp;) pois assume URL completa. encodeURIComponent codifica todos os especiais, ideal para valores individuais de query string. Regra: use Componente para valores dentro de uma URL.</p></div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-question"><span>Hex e seguro para transportar dados?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Hex e apenas representação textual de bytes - cada byte vira 2 caracteres (00-FF). Não oferece segurança alguma, apenas legibilidade. Comum em assinaturas, hashes, chaves criptográficas e análise forense.</p></div>
+                        <div class="faq-question"><span>Hex é seguro para transportar dados?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Hex é apenas representação textual de bytes - cada byte vira 2 caracteres (00-FF). Não oferece segurança alguma, apenas legibilidade. Comum em assinaturas, hashes, chaves criptográficas e análise forense.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Os dados são enviados ao servidor?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Não. Toda codificação/decodificação acontece no seu navegador usando APIs nativas. Nenhum dado e transmitido, salvo ou registrado. Você pode desconectar da internet e a ferramenta continua funcionando.</p></div>
+                        <div class="faq-answer"><p>Não. Toda codificação/decodificação acontece no seu navegador usando APIs nativas. Nenhum dado é transmitido, salvo ou registrado. Você pode desconectar da internet e a ferramenta continua funcionando.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Por que Base64 aumenta o tamanho dos dados?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Base64 usa 6 bits por caractere para representar 8 bits de dado - tamanho cresce ~33% (4/3). Além disso, o comprimento e arredondado para multiplo de 4 com padding (=). 100 bytes binários viram ~136 caracteres Base64.</p></div>
+                        <div class="faq-answer"><p>Base64 usa 6 bits por caractere para representar 8 bits de dado - tamanho cresce ~33% (4/3). Além disso, o comprimento é arredondado para multiplo de 4 com padding (=). 100 bytes binários viram ~136 caracteres Base64.</p></div>
                     </div>
                 </div>
 
