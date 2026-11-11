@@ -42,7 +42,7 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e OWASP Risk Rating Methodology?","acceptedAnswer":{"@type":"Answer","text":"E uma metodologia publicada pela OWASP para avaliar o risco de vulnerabilidades combinando Probabilidade (Likelihood) e Impacto (Impact). Cada dimensão e calculada a partir de 8 fatores pontuados de 0 a 9, e o risco final resulta de uma matriz 3x3 entre ambas as dimensões."}},{"@type":"Question","name":"Qual a diferença entre OWASP Risk e CVSS?","acceptedAnswer":{"@type":"Answer","text":"CVSS avalia severidade técnica de uma vulnerabilidade isolada com foco em características do defeito. OWASP Risk Rating adiciona dimensões de negócio (dano financeiro, reputação, compliance, privacidade) e contexto do atacante, resultando em uma classificação mais próxima do risco real para a organização."}},{"@type":"Question","name":"Como a Probabilidade (Likelihood) e calculada?","acceptedAnswer":{"@type":"Answer","text":"Probabilidade e a media de 8 fatores: 4 do Agente de Ameaça (Skill Level, Motive, Opportunity, Size) e 4 da Vulnerabilidade (Ease of Discovery, Ease of Exploit, Awareness, Intrusion Detection). Cada fator recebe uma pontuacao de 0 a 9 e o resultado e classificado como Baixo (0-3), Médio (3-6) ou Alto (6-9)."}},{"@type":"Question","name":"Como o Impacto (Impact) e calculado?","acceptedAnswer":{"@type":"Answer","text":"Impacto e a media de 8 fatores: 4 de Impacto Técnico (confidencialidade, integridade, disponibilidade, accountability) e 4 de Impacto de Negócio (dano financeiro, reputação, compliance, privacidade). Mesmas faixas de severidade da Probabilidade."}},{"@type":"Question","name":"Como interpretar o resultado final?","acceptedAnswer":{"@type":"Answer","text":"A combinação de Probabilidade x Impacto define a severidade final pela matriz OWASP: Informativo, Baixo, Médio, Alto ou Crítico. Vulnerabilidades Alto e Crítico exigem ação prioritaria. O resultado deve complementar - não substituir - a avaliação de risco corporativo considerando controles compensatórios e exposição real."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e OWASP Risk Rating Methodology?","acceptedAnswer":{"@type":"Answer","text":"E uma metodologia publicada pela OWASP para avaliar o risco de vulnerabilidades combinando Probabilidade (Likelihood) e Impacto (Impact). Cada dimensão e calculada a partir de 8 fatores pontuados de 0 a 9, e o risco final resulta de uma matriz 3x3 entre ambas as dimensões."}},{"@type":"Question","name":"Qual a diferença entre OWASP Risk e CVSS?","acceptedAnswer":{"@type":"Answer","text":"CVSS avalia severidade técnica de uma vulnerabilidade isolada com foco em características do defeito. OWASP Risk Rating adiciona dimensões de negócio (dano financeiro, reputação, compliance, privacidade) e contexto do atacante, resultando em uma classificação mais próxima do risco real para a organização."}},{"@type":"Question","name":"Como a Probabilidade (Likelihood) e calculada?","acceptedAnswer":{"@type":"Answer","text":"Probabilidade e a media de 8 fatores: 4 do Agente de Ameaça (Skill Level, Motive, Opportunity, Size) e 4 da Vulnerabilidade (Ease of Discovery, Ease of Exploit, Awareness, Intrusion Detection). Cada fator recebe uma pontuação de 0 a 9 e o resultado e classificado como Baixo (0-3), Médio (3-6) ou Alto (6-9)."}},{"@type":"Question","name":"Como o Impacto (Impact) e calculado?","acceptedAnswer":{"@type":"Answer","text":"Impacto e a media de 8 fatores: 4 de Impacto Técnico (confidencialidade, integridade, disponibilidade, accountability) e 4 de Impacto de Negócio (dano financeiro, reputação, compliance, privacidade). Mesmas faixas de severidade da Probabilidade."}},{"@type":"Question","name":"Como interpretar o resultado final?","acceptedAnswer":{"@type":"Answer","text":"A combinação de Probabilidade x Impacto define a severidade final pela matriz OWASP: Informativo, Baixo, Médio, Alto ou Crítico. Vulnerabilidades Alto e Crítico exigem ação prioritaria. O resultado deve complementar - não substituir - a avaliação de risco corporativo considerando controles compensatórios e exposição real."}}]}
     </script>
 
     <script type="application/ld+json">
@@ -353,8 +353,8 @@
                             <label class="owasp-factor-label" for="f-lac">Loss of Accountability <span class="owasp-factor-code">LAC</span></label>
                             <select class="owasp-select" id="f-lac">
                                 <option value="">Selecione...</option>
-                                <option value="1">Totalmente rastreavel (1)</option>
-                                <option value="7">Possivelmente rastreavel (7)</option>
+                                <option value="1">Totalmente rastreável (1)</option>
+                                <option value="7">Possivelmente rastreável (7)</option>
                                 <option value="9">Totalmente anonimo (9)</option>
                             </select>
                         </div>
@@ -404,7 +404,7 @@
                             <label class="owasp-factor-label" for="f-pv">Privacy Violation <span class="owasp-factor-code">PV</span></label>
                             <select class="owasp-select" id="f-pv">
                                 <option value="">Selecione...</option>
-                                <option value="3">Um individuo (3)</option>
+                                <option value="3">Um indivíduo (3)</option>
                                 <option value="5">Centenas de pessoas (5)</option>
                                 <option value="7">Milhares de pessoas (7)</option>
                                 <option value="9">Milhões de pessoas (9)</option>
@@ -522,7 +522,7 @@
 
                 <h2 id="boas-praticas">Boas Práticas</h2>
                 <ul>
-                    <li><strong>Calibre com stakeholders:</strong> envolva o time de negócio na pontuacao do Impacto de Negócio — engenharia frequentemente subestima dano reputacional e de compliance.</li>
+                    <li><strong>Calibre com stakeholders:</strong> envolva o time de negócio na pontuação do Impacto de Negócio — engenharia frequentemente subestima dano reputacional e de compliance.</li>
                     <li><strong>Documente a justificativa:</strong> o score sozinho e opaco. Anote por que escolheu cada nível. Isso permite revisão posterior e consistência entre avaliações.</li>
                     <li><strong>Reavalie no retest:</strong> controles compensatórios (WAF, MFA, logs) podem reduzir a Probabilidade sem corrigir a vulnerabilidade em si.</li>
                     <li><strong>Integre com gestão de risco:</strong> OWASP Risk e insumo, não substituto. Combine com frameworks maiores como <a href="../../blog/frameworks-cybersecurity/">NIST RMF ou ISO 27005</a>.</li>

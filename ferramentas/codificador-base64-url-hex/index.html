@@ -42,7 +42,7 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e Base64 e para que serve?","acceptedAnswer":{"@type":"Answer","text":"Base64 e uma codificacao que representa dados binários usando 64 caracteres ASCII imprimiveis (A-Z, a-z, 0-9, +, /). Serve para transmitir dados binários por canais que aceitam apenas texto, como emails (MIME), JSON, URLs (Base64URL) e tokens JWT. Não e criptografia - qualquer pessoa pode decodificar."}},{"@type":"Question","name":"Qual a diferença entre encodeURI e encodeURIComponent?","acceptedAnswer":{"@type":"Answer","text":"encodeURI preserva caracteres reservados de URL (como / ? # : &) porque assume que você esta codificando uma URL completa. encodeURIComponent codifica todos os caracteres especiais, ideal para codificar um valor individual de parametro (query string). Regra pratica: use Componente para valores dentro de uma URL."}},{"@type":"Question","name":"Hex e seguro para transportar dados?","acceptedAnswer":{"@type":"Answer","text":"Hex (hexadecimal) e apenas uma representação textual de bytes - cada byte vira 2 caracteres (00-FF). Não oferece segurança alguma, apenas legibilidade. E comum em assinaturas, hashes, chaves criptográficas e analise forense de memória/rede."}},{"@type":"Question","name":"Os dados são enviados ao servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a codificacao/decodificacao acontece no seu navegador usando APIs nativas (TextEncoder, btoa/atob, encodeURI). Nenhum dado e transmitido, salvo ou registrado. Você pode desconectar da internet após carregar a página e a ferramenta continua funcionando."}},{"@type":"Question","name":"Por que Base64 aumenta o tamanho dos dados?","acceptedAnswer":{"@type":"Answer","text":"Base64 usa 6 bits por caractere para representar 8 bits de dado - logo o tamanho cresce cerca de 33% (4/3). Além disso, o comprimento e arredondado para multiplo de 4 com padding (=). Para 100 bytes binários, você obtem ~136 caracteres Base64."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e Base64 e para que serve?","acceptedAnswer":{"@type":"Answer","text":"Base64 e uma codificacao que representa dados binários usando 64 caracteres ASCII imprimiveis (A-Z, a-z, 0-9, +, /). Serve para transmitir dados binários por canais que aceitam apenas texto, como emails (MIME), JSON, URLs (Base64URL) e tokens JWT. Não e criptografia - qualquer pessoa pode decodificar."}},{"@type":"Question","name":"Qual a diferença entre encodeURI e encodeURIComponent?","acceptedAnswer":{"@type":"Answer","text":"encodeURI preserva caracteres reservados de URL (como / ? # : &) porque assume que você esta codificando uma URL completa. encodeURIComponent codifica todos os caracteres especiais, ideal para codificar um valor individual de parametro (query string). Regra pratica: use Componente para valores dentro de uma URL."}},{"@type":"Question","name":"Hex e seguro para transportar dados?","acceptedAnswer":{"@type":"Answer","text":"Hex (hexadecimal) e apenas uma representação textual de bytes - cada byte vira 2 caracteres (00-FF). Não oferece segurança alguma, apenas legibilidade. E comum em assinaturas, hashes, chaves criptográficas e analise forense de memória/rede."}},{"@type":"Question","name":"Os dados são enviados ao servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a codificacao/decodificacao acontece no seu navegador usando APIs nativas (TextEncoder, btoa/atob, encodeURI). Nenhum dado e transmitido, salvo ou registrado. Você pode desconectar da internet após carregar a página e a ferramenta continua funcionando."}},{"@type":"Question","name":"Por que Base64 aumenta o tamanho dos dados?","acceptedAnswer":{"@type":"Answer","text":"Base64 usa 6 bits por caractere para representar 8 bits de dado - logo o tamanho cresce cerca de 33% (4/3). Além disso, o comprimento e arredondado para multiplo de 4 com padding (=). Para 100 bytes binários, você obtém ~136 caracteres Base64."}}]}
     </script>
 
     <script type="application/ld+json">
@@ -227,7 +227,7 @@
                             <option value=" ">Espaço (de ad be ef)</option>
                             <option value=":">Dois pontos (de:ad:be:ef)</option>
                             <option value="-">Hifen (de-ad-be-ef)</option>
-                            <option value=",">Virgula (de,ad,be,ef)</option>
+                            <option value=",">Vírgula (de,ad,be,ef)</option>
                         </select>
                     </label>
                 </div>
@@ -320,7 +320,7 @@
                 </ul>
 
                 <h2 id="uso-seguranca">Uso em Cibersegurança</h2>
-                <p>Estas codificacoes são onipresentes em analise de tráfego, pentest de APIs, reverse engineering de malware e response a incidentes. Veja alguns cenários:</p>
+                <p>Estas codificações são onipresentes em analise de tráfego, pentest de APIs, reverse engineering de malware e response a incidentes. Veja alguns cenários:</p>
 
                 <h3>Analise de phishing</h3>
                 <p>URLs de phishing frequentemente escondem o destino real via URL encoding ou Base64. Decodifique para revelar o domino malicioso:</p>
