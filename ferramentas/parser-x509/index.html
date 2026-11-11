@@ -44,9 +44,9 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
         {"@type":"Question","name":"O que e um certificado X.509?","acceptedAnswer":{"@type":"Answer","text":"X.509 e o padrão de certificado digital usado em TLS/SSL, S/MIME, code signing e EAP-TLS. Carrega uma chave publica assinada por uma Autoridade Certificadora (CA), associada a uma identidade (domínio, CPF, organização). E o que estabelece confiança em HTTPS - seu navegador valida que a chave publica do servidor foi assinada por uma CA que ele confia."}},
-        {"@type":"Question","name":"Qual a diferença entre PEM e DER?","acceptedAnswer":{"@type":"Answer","text":"DER e o formato binário ASN.1 - bytes crus. PEM e o mesmo conteúdo, mas codificado em Base64 com cabecalhos -----BEGIN/END CERTIFICATE----- para ser texto-amigavel. Esta ferramenta aceita ambos: cole o PEM ou faça upload de um arquivo .crt/.cer/.pem (PEM) ou .der (DER)."}},
+        {"@type":"Question","name":"Qual a diferença entre PEM e DER?","acceptedAnswer":{"@type":"Answer","text":"DER e o formato binário ASN.1 - bytes crus. PEM e o mesmo conteúdo, mas codificado em Base64 com cabeçalhos -----BEGIN/END CERTIFICATE----- para ser texto-amigavel. Esta ferramenta aceita ambos: cole o PEM ou faça upload de um arquivo .crt/.cer/.pem (PEM) ou .der (DER)."}},
         {"@type":"Question","name":"O que e SAN?","acceptedAnswer":{"@type":"Answer","text":"SAN (Subject Alternative Name) lista os domínios, IPs ou URIs para os quais o certificado e valido. Desde 2017 navegadores ignoram o CN do subject - só SAN vale. Um certificado para *.empresa.com.br + empresa.com.br precisa ter ambos no SAN. Erro de SAN ausente ou desalinhado e a causa mais comum de NET::ERR_CERT_COMMON_NAME_INVALID."}},
-        {"@type":"Question","name":"O que e BasicConstraints CA:TRUE?","acceptedAnswer":{"@type":"Answer","text":"BasicConstraints e a extensão que indica se o certificado pode assinar outros certificados. CA:TRUE marca um certificado intermediario ou raiz; CA:FALSE marca um end-entity (servidor, cliente). Um end-entity com CA:TRUE seria uma falha crítica de segurança - permitiria emitir certificados arbitrarios."}},
+        {"@type":"Question","name":"O que e BasicConstraints CA:TRUE?","acceptedAnswer":{"@type":"Answer","text":"BasicConstraints e a extensão que indica se o certificado pode assinar outros certificados. CA:TRUE marca um certificado intermediário ou raiz; CA:FALSE marca um end-entity (servidor, cliente). Um end-entity com CA:TRUE seria uma falha crítica de segurança - permitiria emitir certificados arbitrários."}},
         {"@type":"Question","name":"Por que algumas extensões aparecem como não reconhecidas?","acceptedAnswer":{"@type":"Answer","text":"X.509 e extensivel - CAs adicionam OIDs próprios para Certificate Transparency (SCT), CABF EV, BRBR, etc. Esta ferramenta cobre as mais usadas em TLS público (SAN, BC, KU, EKU, AKI, SKI, AIA, CDP, certificate policies, SCT list). OIDs não reconhecidos são exibidos com seu número."}},
         {"@type":"Question","name":"Os certificados são enviados a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. O parser roda 100% local no navegador. ASN.1/DER e processado em JavaScript no cliente; fingerprints SHA-1/SHA-256 são calculados via WebCrypto na própria página. Nenhum byte sai do seu navegador."}}
     ]}
@@ -226,7 +226,7 @@
                 <h2 id="oque-x509">O Que e X.509?</h2>
                 <p>X.509 e o padrão do ITU-T para certificados de chave publica - usado em TLS/SSL (HTTPS), S/MIME (e-mail assinado), code signing, EAP-TLS (Wi-Fi corporativo), client authentication, ICP-Brasil e dezenas de outros cenários. Um certificado X.509 associa uma <strong>chave publica</strong> a uma <strong>identidade</strong> (domínio, CPF, organização) através da assinatura de uma <strong>Autoridade Certificadora (CA)</strong> em quem você já confia.</p>
 
-                <p>A estrutura interna e <strong>ASN.1 codificada em DER</strong> - um formato binário hierarquico. PEM e apenas DER em Base64 com cabecalhos <code>-----BEGIN CERTIFICATE-----</code> para ser texto-amigavel. Os campos principais de um X.509 v3:</p>
+                <p>A estrutura interna e <strong>ASN.1 codificada em DER</strong> - um formato binário hierárquico. PEM e apenas DER em Base64 com cabeçalhos <code>-----BEGIN CERTIFICATE-----</code> para ser texto-amigavel. Os campos principais de um X.509 v3:</p>
 
                 <h2 id="campos">Campos Principais</h2>
                 <ul>
@@ -271,7 +271,7 @@
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>PEM vs DER, qual usar?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>DER e binário, PEM e DER em Base64 com cabecalhos. Para configurar Apache/Nginx/HAProxy o padrão e PEM. Para clientes Windows/Java geralmente DER. Esta ferramenta aceita ambos.</p></div>
+                        <div class="faq-answer"><p>DER e binário, PEM e DER em Base64 com cabeçalhos. Para configurar Apache/Nginx/HAProxy o padrão e PEM. Para clientes Windows/Java geralmente DER. Esta ferramenta aceita ambos.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>O que e SAN?</span><i class="fas fa-chevron-down faq-icon"></i></div>

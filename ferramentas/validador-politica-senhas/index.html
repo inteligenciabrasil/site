@@ -42,7 +42,7 @@
     </script>
 
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e uma boa política de senhas?","acceptedAnswer":{"@type":"Answer","text":"Uma boa política de senhas foca em tamanho (12-16+ caracteres), diversidade de caracteres, bloqueio de senhas comuns/vazadas, permite TODOS os caracteres (incluindo espacos e Unicode) e NÃO força trocas periódicas sem motivo. Essa e a diretriz moderna do NIST SP 800-63B, que abandonou regras de complexidade rígida e expiração arbitrária."}},{"@type":"Question","name":"O que mudou no NIST SP 800-63B?","acceptedAnswer":{"@type":"Answer","text":"A nova diretriz (revisão 3 em 2017, atualizada em 2024) abandonou várias práticas tradicionais: não exige complexidade obrigatória (maiusculas+números+simbolos), não exige expiração periódica, mas exige mínimo 8 caracteres (recomendado 16+), bloqueio de senhas em listas de vazamentos, e permite todos os caracteres Unicode imprimiveis. O foco mudou de complexidade imposta para tamanho e aleatoriedade."}},{"@type":"Question","name":"Devo exigir troca de senha a cada 90 dias?","acceptedAnswer":{"@type":"Answer","text":"Não. Trocas periódicas arbitrarias diminuem a qualidade da senha (usuários incrementam número no final) sem aumentar segurança. Troque senha apenas se houver suspeita de comprometimento. Para mitigar risco, use MFA, detecte vazamentos, monitore logins suspeitos e bloqueie senhas comuns/reutilizadas."}},{"@type":"Question","name":"Quanto vale a entropia de uma senha?","acceptedAnswer":{"@type":"Answer","text":"Entropia (em bits) mede a imprevisibilidade. Calcula-se como comprimento * log2(tamanho do alfabeto). Uma senha de 8 caracteres minusculos tem ~38 bits (fraca); 12 caracteres mistos tem ~72 bits (boa); 16 caracteres mistos tem ~95 bits (forte). Abaixo de 60 bits, um atacante com GPU moderna quebra em menos de um ano. Mire em 80+ bits para contas comuns e 100+ para críticas."}},{"@type":"Question","name":"Esta ferramenta envia minha senha a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a validação acontece no seu navegador em JavaScript puro. Nenhuma senha e transmitida, salva ou registrada. A lista de senhas comuns esta embutida no código. Você pode desconectar da internet após carregar a página e continuar usando. Abra o DevTools (F12) para auditar o código fonte."}}]}
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que e uma boa política de senhas?","acceptedAnswer":{"@type":"Answer","text":"Uma boa política de senhas foca em tamanho (12-16+ caracteres), diversidade de caracteres, bloqueio de senhas comuns/vazadas, permite TODOS os caracteres (incluindo espacos e Unicode) e NÃO força trocas periódicas sem motivo. Essa e a diretriz moderna do NIST SP 800-63B, que abandonou regras de complexidade rígida e expiração arbitrária."}},{"@type":"Question","name":"O que mudou no NIST SP 800-63B?","acceptedAnswer":{"@type":"Answer","text":"A nova diretriz (revisão 3 em 2017, atualizada em 2024) abandonou várias práticas tradicionais: não exige complexidade obrigatória (maiúsculas+números+simbolos), não exige expiração periódica, mas exige mínimo 8 caracteres (recomendado 16+), bloqueio de senhas em listas de vazamentos, e permite todos os caracteres Unicode imprimiveis. O foco mudou de complexidade imposta para tamanho e aleatoriedade."}},{"@type":"Question","name":"Devo exigir troca de senha a cada 90 dias?","acceptedAnswer":{"@type":"Answer","text":"Não. Trocas periódicas arbitrárias diminuem a qualidade da senha (usuários incrementam número no final) sem aumentar segurança. Troque senha apenas se houver suspeita de comprometimento. Para mitigar risco, use MFA, detecte vazamentos, monitore logins suspeitos e bloqueie senhas comuns/reutilizadas."}},{"@type":"Question","name":"Quanto vale a entropia de uma senha?","acceptedAnswer":{"@type":"Answer","text":"Entropia (em bits) mede a imprevisibilidade. Calcula-se como comprimento * log2(tamanho do alfabeto). Uma senha de 8 caracteres minusculos tem ~38 bits (fraca); 12 caracteres mistos tem ~72 bits (boa); 16 caracteres mistos tem ~95 bits (forte). Abaixo de 60 bits, um atacante com GPU moderna quebra em menos de um ano. Mire em 80+ bits para contas comuns e 100+ para críticas."}},{"@type":"Question","name":"Esta ferramenta envia minha senha a algum servidor?","acceptedAnswer":{"@type":"Answer","text":"Não. Toda a validação acontece no seu navegador em JavaScript puro. Nenhuma senha e transmitida, salva ou registrada. A lista de senhas comuns esta embutida no código. Você pode desconectar da internet após carregar a página e continuar usando. Abra o DevTools (F12) para auditar o código fonte."}}]}
     </script>
 
     <script type="application/ld+json">
@@ -165,7 +165,7 @@
                         <input type="number" id="pol-min-unique" min="0" max="50" value="8">
                     </div>
                     <div class="pol-policy-row">
-                        <label for="pol-req-upper">Exigir letras maiusculas</label>
+                        <label for="pol-req-upper">Exigir letras maiúsculas</label>
                         <input type="checkbox" id="pol-req-upper" checked>
                     </div>
                     <div class="pol-policy-row">
@@ -185,7 +185,7 @@
                         <input type="checkbox" id="pol-block-common" checked>
                     </div>
                     <div class="pol-policy-row">
-                        <label for="pol-block-sequential">Bloquear sequencias (abc, 123, qwerty)</label>
+                        <label for="pol-block-sequential">Bloquear sequências (abc, 123, qwerty)</label>
                         <input type="checkbox" id="pol-block-sequential" checked>
                     </div>
                     <div class="pol-policy-row">
@@ -257,10 +257,10 @@
                 <ul>
                     <li><strong>Tamanho &gt; complexidade</strong> - 16 caracteres minusculos e mais seguro que 8 com tudo</li>
                     <li><strong>Permita tudo</strong> - aceite todos os caracteres Unicode imprimiveis (emojis, espacos, acentos)</li>
-                    <li><strong>Bloqueie senhas conhecidas</strong> - listas de vazamentos, dicionarios e variações comuns</li>
+                    <li><strong>Bloqueie senhas conhecidas</strong> - listas de vazamentos, dicionários e variações comuns</li>
                     <li><strong>Não force expiração</strong> - só exija troca se houver suspeita de comprometimento</li>
                     <li><strong>MFA como padrão</strong> - senha sozinha nunca e suficiente</li>
-                    <li><strong>Monitore autenticacoes anomalas</strong> - login de local novo, dispositivo novo</li>
+                    <li><strong>Monitore autenticacoes anômalas</strong> - login de local novo, dispositivo novo</li>
                 </ul>
 
                 <h2 id="padroes">Padrões de Referência</h2>
@@ -269,7 +269,7 @@
                 <p>A diretriz de autenticação digital do NIST (<em>National Institute of Standards and Technology</em>), revisão 3 de 2017 e atualizações de 2024. E considerada o padrão-ouro para políticas modernas.</p>
                 <ul>
                     <li>Mínimo 8 caracteres (recomendado 16+)</li>
-                    <li><strong>Não</strong> exija complexidade (misturar maiusculas/números/simbolos)</li>
+                    <li><strong>Não</strong> exija complexidade (misturar maiúsculas/números/simbolos)</li>
                     <li><strong>Não</strong> exija expiração periódica sem motivo</li>
                     <li>Bloqueie senhas em listas de vazamentos</li>
                     <li>Permita todos os caracteres imprimiveis, incluindo espacos e Unicode</li>
@@ -287,11 +287,11 @@
 
                 <div class="highlight-box gold">
                     <div class="highlight-box-title"><i class="fas fa-star"></i> Tamanho domina a matemática</div>
-                    <p>Cada caractere adicional multiplica o espaço de busca pelo tamanho do alfabeto. Em alfabeto de 62 chars (a-z,A-Z,0-9), cada char adicional multiplica por 62. De 8 para 9 chars: 62x mais combinacoes. Tamanho e de longe a variável mais importante.</p>
+                    <p>Cada caractere adicional multiplica o espaço de busca pelo tamanho do alfabeto. Em alfabeto de 62 chars (a-z,A-Z,0-9), cada char adicional multiplica por 62. De 8 para 9 chars: 62x mais combinações. Tamanho e de longe a variável mais importante.</p>
                 </div>
 
                 <h2 id="entropia">Entendendo Entropia</h2>
-                <p>Entropia (em bits) mede quanto uma senha e imprevisivel. Calcula-se como:</p>
+                <p>Entropia (em bits) mede quanto uma senha e imprevisível. Calcula-se como:</p>
                 <p><code>entropia = tamanho * log2(tamanho_do_alfabeto)</code></p>
 
                 <h3>Tabela de referência</h3>
@@ -304,7 +304,7 @@
                 </ul>
 
                 <h4>Pegadinha da entropia</h4>
-                <p>O cálculo acima assume senha <strong>aleatoria</strong>. Uma senha como <code>Empresa@2026</code> tem teoricamente ~66 bits, mas na prática tem &lt;25 bits de entropia real porque segue padrões humanos previsíveis. Atacantes usam dicionarios e regras que priorizam esses padrões.</p>
+                <p>O cálculo acima assume senha <strong>aleatoria</strong>. Uma senha como <code>Empresa@2026</code> tem teoricamente ~66 bits, mas na prática tem &lt;25 bits de entropia real porque segue padrões humanos previsíveis. Atacantes usam dicionários e regras que priorizam esses padrões.</p>
 
                 <h2 id="erros-politica">Erros Comuns em Políticas</h2>
                 <ul>
@@ -322,7 +322,7 @@
                 <ul>
                     <li>Use um <a href="../../blog/gerenciadores-senhas-seguros-gratuitos/">gerenciador de senhas</a> (Bitwarden, 1Password, KeePassXC)</li>
                     <li>Senha única para cada serviço - jamais reutilize</li>
-                    <li>Use passphrases (5-7 palavras aleatorias) para o que precisa decorar</li>
+                    <li>Use passphrases (5-7 palavras aleatórias) para o que precisa decorar</li>
                     <li>Ative MFA (preferir TOTP ou passkeys sobre SMS)</li>
                     <li>Troque senha apenas se suspeitar de vazamento</li>
                 </ul>
@@ -350,7 +350,7 @@
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Devo exigir troca de senha a cada 90 dias?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Não. Trocas arbitrarias diminuem qualidade (usuários incrementam número). Troque apenas se houver suspeita de comprometimento. Mitigue risco com MFA, detecção de vazamentos e monitoramento.</p></div>
+                        <div class="faq-answer"><p>Não. Trocas arbitrárias diminuem qualidade (usuários incrementam número). Troque apenas se houver suspeita de comprometimento. Mitigue risco com MFA, detecção de vazamentos e monitoramento.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Quanto vale a entropia de uma senha?</span><i class="fas fa-chevron-down faq-icon"></i></div>
@@ -366,7 +366,7 @@
                 <div class="comparison-grid">
                     <div class="comparison-card">
                         <h3><i class="fas fa-key" style="color:#10B981;margin-right:8px"></i> <a href="../gerador-de-senhas/" style="color:#60A5FA">Gerador de Senhas</a></h3>
-                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Gere senhas fortes ou passphrases com criptografia segura do navegador. Configuravel, 100% local.</p>
+                        <p style="color:#94A3B8;font-size:.9rem;margin:0">Gere senhas fortes ou passphrases com criptografia segura do navegador. Configurável, 100% local.</p>
                     </div>
                     <div class="comparison-card">
                         <h3><i class="fas fa-fingerprint" style="color:#F59E0B;margin-right:8px"></i> <a href="../calculadora-hash/" style="color:#60A5FA">Calculadora de Hash</a></h3>
