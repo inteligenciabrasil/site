@@ -46,7 +46,7 @@
         "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"},
         "publisher": {"@type": "Organization", "name": "Inteligência Brasil", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}},
         "datePublished": "2026-01-31T00:00:00-03:00",
-        "dateModified": "2026-01-31T00:00:00-03:00",
+        "dateModified": "2026-11-12T00:00:00-03:00",
         "mainEntityOfPage": {"@type": "WebPage", "@id": "https://inteligenciabrasil.seg.br/blog/seguranca-llm-genai-prompt-injection/"},"copyrightHolder":{"@type":"Organization","name":"Inteligência Brasil","url":"https://inteligenciabrasil.seg.br"},"copyrightYear":2026,"license":"https://creativecommons.org/licenses/by-nc-nd/4.0/",
         "inLanguage": "pt-BR"
     }
@@ -70,7 +70,7 @@
                 "name": "Quais são os principais riscos de LLMs em aplicações?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Principais riscos incluem: Prompt Injection (manipulação de instruções), Data Leakage (exposição de dados sensíveis do treinamento ou contexto), Insecure Output Handling (outputs do LLM usados sem sanitização), Excessive Agency (LLM com muitas permissões/ferramentas), Training Data Poisoning, e Model Denial of Service. O OWASP LLM Top 10 cataloga os 10 principais riscos."
+                    "text": "Pela edição de 2026 do OWASP LLM Top 10, os três primeiros são prompt injection, vazamento de informação sensível pela saída e excessive agency, que é o agente com permissão de agir além do necessário. Depois vêm cadeia de suprimentos, envenenamento de dado e de modelo, consumo sem limite, desinformação, exposição de contexto oculto, fraqueza em base vetorial e tratamento inadequado da saída."
                 }
             },
             {
@@ -86,7 +86,7 @@
                 "name": "O que é o OWASP LLM Top 10?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "OWASP LLM Top 10 é um guia que cataloga os 10 principais riscos de segurança em aplicações baseadas em Large Language Models. Inclui: LLM01 Prompt Injection, LLM02 Insecure Output Handling, LLM03 Training Data Poisoning, LLM04 Model Denial of Service, LLM05 Supply Chain Vulnerabilities, LLM06 Sensitive Information Disclosure, LLM07 Insecure Plugin Design, LLM08 Excessive Agency, LLM09 Overreliance, LLM10 Model Theft."
+                    "text": "OWASP LLM Top 10 é o guia que cataloga os dez principais riscos de segurança em aplicações baseadas em Large Language Models. A edição de 2026, publicada em agosto, traz: LLM01 Prompt Injection, LLM02 Sensitive Information Disclosure, LLM03 Excessive Agency, LLM04 Supply Chain, LLM05 Data and Model Poisoning, LLM06 Unbounded Consumption, LLM07 Misinformation, LLM08 Hidden Context Exposure, LLM09 Vector and Embedding Weaknesses e LLM10 Improper Output Handling."
                 }
             },
             {
@@ -338,18 +338,18 @@
                 <p>O OWASP publicou o LLM Top 10 para catalogar os principais riscos de segurança em aplicações de LLM.</p>
 
                 <div class="info-box">
-                    <h3>OWASP LLM Top 10 (2025)</h3>
+                    <h3>OWASP LLM Top 10 (2026)</h3>
                     <ol>
-                        <li><strong>LLM01: Prompt Injection</strong> - Manipulação de inputs para alterar comportamento do modelo</li>
-                        <li><strong>LLM02: Insecure Output Handling</strong> - Outputs do LLM usados sem sanitização</li>
-                        <li><strong>LLM03: Training Data Poisoning</strong> - Dados de treino manipulados para alterar comportamento</li>
-                        <li><strong>LLM04: Model Denial of Service</strong> - Consumo excessivo de recursos do modelo</li>
-                        <li><strong>LLM05: Supply Chain Vulnerabilities</strong> - Riscos em modelos, plugins ou dados de terceiros, o assunto de <a href="../seguranca-cadeia-suprimentos-ia/">segurança da cadeia de suprimentos de IA</a></li>
-                        <li><strong>LLM06: Sensitive Information Disclosure</strong> - Vazamento de dados sensíveis via outputs</li>
-                        <li><strong>LLM07: Insecure Plugin Design</strong> - Plugins/tools com permissões excessivas</li>
-                        <li><strong>LLM08: Excessive Agency</strong> - LLM com capacidade de tomar ações danosas, o risco central dos <a href="../mcp-agentic-ai-security/">agentes autônomos e do MCP</a></li>
-                        <li><strong>LLM09: Overreliance</strong> - Confiança excessiva em outputs do LLM</li>
-                        <li><strong>LLM10: Model Theft</strong> - Extração ou roubo do modelo</li>
+                        <li><strong>LLM01: Prompt Injection</strong> - entrada manipulada que faz o modelo ignorar a instrução de sistema</li>
+                        <li><strong>LLM02: Sensitive Information Disclosure</strong> - vazamento de dado sensível pela saída do modelo</li>
+                        <li><strong>LLM03: Excessive Agency</strong> - permissão de agir além do necessário, o risco central dos <a href="../mcp-agentic-ai-security/">agentes autônomos e do MCP</a></li>
+                        <li><strong>LLM04: Supply Chain</strong> - risco em modelo, dataset, plugin ou dependência de terceiro, o assunto de <a href="../seguranca-cadeia-suprimentos-ia/">segurança da cadeia de suprimentos de IA</a></li>
+                        <li><strong>LLM05: Data and Model Poisoning</strong> - dado de treino, de fine-tuning ou de embedding manipulado, inclusive com backdoor que só dispara no gatilho</li>
+                        <li><strong>LLM06: Unbounded Consumption</strong> - consumo sem limite de recurso e de custo, da negação de serviço clássica à fatura estourada</li>
+                        <li><strong>LLM07: Misinformation</strong> - saída errada entregue com confiança, e a dependência que se cria dela</li>
+                        <li><strong>LLM08: Hidden Context Exposure</strong> - exposição do que estava no contexto e não deveria aparecer, categoria nova em 2026</li>
+                        <li><strong>LLM09: Vector and Embedding Weaknesses</strong> - falha na base vetorial do RAG, do controle de acesso ao envenenamento do índice</li>
+                        <li><strong>LLM10: Improper Output Handling</strong> - saída do modelo usada sem validação por quem a recebe</li>
                     </ol>
                 </div>
 
@@ -685,7 +685,7 @@ def sanitize_input(user_input, max_length=1000):
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Principais riscos incluem: Prompt Injection (manipulação de instruções), Data Leakage (exposição de dados sensíveis do treinamento ou contexto), Insecure Output Handling (outputs do LLM usados sem sanitização), Excessive Agency (LLM com muitas permissões/ferramentas), Training Data Poisoning, e Model Denial of Service. O OWASP LLM Top 10 cataloga os 10 principais riscos.</p>
+                            <p>Pela edição de 2026 do OWASP LLM Top 10, os três primeiros são prompt injection, vazamento de informação sensível pela saída e excessive agency, que é o agente com permissão de agir além do necessário. Depois vêm cadeia de suprimentos, envenenamento de dado e de modelo, consumo sem limite, desinformação, exposição de contexto oculto, fraqueza em base vetorial e tratamento inadequado da saída.</p>
                         </div>
                     </div>
 
@@ -705,7 +705,7 @@ def sanitize_input(user_input, max_length=1000):
                             <i class="fas fa-chevron-down faq-icon"></i>
                         </div>
                         <div class="faq-answer">
-                            <p><a class="gloss-link" href="/glossario/#owasp" title="Ver no gloss&#225;rio">OWASP</a> LLM Top 10 é um guia que cataloga os 10 principais riscos de segurança em aplicações baseadas em Large Language Models. Inclui: LLM01 Prompt Injection, LLM02 Insecure Output Handling, LLM03 Training Data Poisoning, LLM04 Model Denial of Service, LLM05 Supply Chain Vulnerabilities, LLM06 Sensitive Information Disclosure, LLM07 Insecure Plugin Design, LLM08 Excessive Agency, LLM09 Overreliance, LLM10 Model Theft.</p>
+                            <p><a class="gloss-link" href="/glossario/#owasp" title="Ver no gloss&#225;rio">OWASP</a> LLM Top 10 é o guia que cataloga os dez principais riscos de segurança em aplicações baseadas em Large Language Models. A edição de 2026, publicada em agosto, traz: LLM01 Prompt Injection, LLM02 Sensitive Information Disclosure, LLM03 Excessive Agency, LLM04 Supply Chain, LLM05 Data and Model Poisoning, LLM06 Unbounded Consumption, LLM07 Misinformation, LLM08 Hidden Context Exposure, LLM09 Vector and Embedding Weaknesses e LLM10 Improper Output Handling.</p>
                         </div>
                     </div>
 
