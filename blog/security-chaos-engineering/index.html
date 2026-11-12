@@ -162,6 +162,46 @@
         ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O que é Security Chaos Engineering?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "É aplicar chaos engineering ao domínio da segurança: em vez de supor que o controle funciona, você injeta um evento de segurança controlado e observa se a detecção dispara, em quanto tempo e para quem. O experimento que falha é o mais útil, porque encontrou a lacuna antes do atacante."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como estruturar um experimento de segurança?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Comece pela hipótese, no formato “se X acontecer, Y detecta e Z responde em menos de N minutos”. Limite o raio de impacto, tenha plano de rollback e mecanismo para abortar, use simulação que pareça real sem causar dano real, e automatize para poder repetir."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "O que é um Security GameDay?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "É o exercício estruturado dessa prática: uma a duas semanas de planejamento com cenários, papéis e comunicação aos envolvidos; de duas a quatro horas de execução com observação em tempo real; uma hora de retrospectiva sobre o que funcionou, o que falhou e o que surpreendeu; e follow-up em duas semanas, com tickets abertos e a próxima data marcada."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Que ferramentas usar?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Para simular técnica de ataque, Atomic Red Team e MITRE Caldera, ambos mapeados ao ATT&CK, além do Infection Monkey e das plataformas comerciais de BAS. Para falha de infraestrutura, Chaos Monkey, Gremlin e LitmusChaos. Para medir a resposta humana, o próprio sistema de plantão, disparando um alerta e cronometrando o primeiro contato."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 
 <body><a class="skip-link" href="#main-content">Pular para conte&uacute;do</a>
@@ -239,6 +279,7 @@
                         <li><a href="#gamedays">Security GameDays</a></li>
                         <li><a href="#ferramentas">Ferramentas</a></li>
                         <li><a href="#implementacao">Implementação</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
                     </ul>
                 </div>
 
@@ -434,6 +475,27 @@
                 <div class="tip-box">
                     <h4><i class="fas fa-lightbulb"></i> Comece pequeno</h4>
                     <p>O primeiro experimento pode ser tão simples quanto: "Vou gerar um alerta falso no SIEM e ver quanto tempo o SOC leva para investigar." Não precisa de ferramentas sofisticadas para começar a praticar Security Chaos Engineering.</p>
+                </div>
+
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que é Security Chaos Engineering?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>É aplicar chaos engineering ao domínio da segurança: em vez de supor que o controle funciona, você injeta um evento de segurança controlado e observa se a detecção dispara, em quanto tempo e para quem. O experimento que falha é o mais útil, porque encontrou a lacuna antes do atacante.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Como estruturar um experimento de segurança?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Comece pela hipótese, no formato “se X acontecer, Y detecta e Z responde em menos de N minutos”. Limite o raio de impacto, tenha plano de rollback e mecanismo para abortar, use simulação que pareça real sem causar dano real, e automatize para poder repetir.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que é um Security GameDay?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>É o exercício estruturado dessa prática: uma a duas semanas de planejamento com cenários, papéis e comunicação aos envolvidos; de duas a quatro horas de execução com observação em tempo real; uma hora de retrospectiva sobre o que funcionou, o que falhou e o que surpreendeu; e follow-up em duas semanas, com tickets abertos e a próxima data marcada.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Que ferramentas usar?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Para simular técnica de ataque, Atomic Red Team e MITRE Caldera, ambos mapeados ao ATT&amp;CK, além do Infection Monkey e das plataformas comerciais de BAS. Para falha de infraestrutura, Chaos Monkey, Gremlin e LitmusChaos. Para medir a resposta humana, o próprio sistema de plantão, disparando um alerta e cronometrando o primeiro contato.</p></div>
+                    </div>
                 </div>
 
                 <h2>Conclusão</h2>
