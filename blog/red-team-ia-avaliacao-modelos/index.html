@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+<!-- CONSENT-MODE-V2 -->
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','analytics_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','personalization_storage':'denied','functionality_storage':'granted','security_storage':'granted','wait_for_update':500});</script>
+    <!-- Google Tag Manager --><!-- GTM-DEFERRED-V1 -->
+    <script>window.dataLayer=window.dataLayer||[];dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});function __gtmBoot(){var d=document,s='script',l='dataLayer',i='GTM-WCL38PDP',f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',__gtmBoot);}else{setTimeout(__gtmBoot,0);}</script>
+    <!-- CSP-V6 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://*.googletagmanager.com https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/ https://vlibras.gov.br https://challenges.cloudflare.com https://static.cloudflareinsights.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://tagassistant.google.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://tagassistant.google.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googletagmanager.com https://*.google-analytics.com https://vlibras.gov.br https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://www.gstatic.com https://ssl.gstatic.com https://ad.doubleclick.net; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cloudflareinsights.com https://fonts.googleapis.com https://cloudflare-dns.com https://dns.google https://vlibras.gov.br https://api.ipify.org https://challenges.cloudflare.com https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://analytics.google.com https://www.google.com https://www.google.com.br https://googleads.g.doubleclick.net https://www.googleadservices.com https://stats.g.doubleclick.net https://ad.doubleclick.net https://pagead2.googlesyndication.com; frame-src https://www.googletagmanager.com https://challenges.cloudflare.com https://td.doubleclick.net https://tagassistant.google.com; form-action 'self' https://script.google.com; base-uri 'self'; object-src 'none';">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Avaliação mede a qualidade esperada; red team procura o caso que quebra. Como montar o conjunto adversarial, calibrar o juiz e criar o portão de merge.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="keywords" content="red team de IA, AI red teaming, avaliação de modelos, eval de LLM, conjunto adversarial, LLM-as-a-judge, garak, PyRIT, promptfoo, Inspect AI, NIST AI 600-1, teste adversarial, segurança de IA">
+    <meta name="author" content="Roberto Lima">
+    <meta name="theme-color" content="#0D1E38">
+    <link rel="canonical" href="https://inteligenciabrasil.seg.br/blog/red-team-ia-avaliacao-modelos/">
+
+    <meta property="og:title" content="Red team de IA e avaliação de modelos: testar antes do incidente">
+    <meta property="og:description" content="O que sobra de um exercício de red team não é o relatório, é o conjunto adversarial versionado. Como montar, calibrar o juiz automático e fechar o portão.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://inteligenciabrasil.seg.br/blog/red-team-ia-avaliacao-modelos/">
+    <meta property="og:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Inteligência Brasil">
+    <meta property="article:published_time" content="2026-11-12T15:00:00-03:00">
+    <meta property="article:author" content="Roberto Lima">
+    <meta property="article:section" content="AI Security">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Red team de IA e avaliação de modelos: testar antes do incidente">
+    <meta name="twitter:description" content="O que sobra de um exercício de red team não é o relatório, é o conjunto adversarial versionado. Como montar, calibrar o juiz automático e fechar o portão.">
+    <meta name="twitter:image" content="https://inteligenciabrasil.seg.br/img/og-image.webp">
+
+    <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+
+    <title>Red team de IA e avaliação de modelos | Inteligência Brasil</title>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BlogPosting", "articleSection": "AI Security", "author": {"@type": "Person", "name": "Roberto Lima", "url": "https://inteligenciabrasil.seg.br/sobre/"}, "dateModified": "2026-11-12T15:00:00-03:00", "datePublished": "2026-11-12T15:00:00-03:00", "description": "Avaliação mede a qualidade esperada; red team procura o caso que quebra. Como montar o conjunto adversarial, calibrar o juiz e criar o portão de merge.", "headline": "Red team de IA e avaliação de modelos: testar antes do incidente", "image": "https://inteligenciabrasil.seg.br/img/og-image.webp", "inLanguage": "pt-BR", "mainEntityOfPage": {"@id": "https://inteligenciabrasil.seg.br/blog/red-team-ia-avaliacao-modelos/", "@type": "WebPage"}, "publisher": {"@type": "Organization", "logo": {"@type": "ImageObject", "url": "https://inteligenciabrasil.seg.br/img/logo-inteligencia-brasil-seguranca-da-informacao-cyber-security.webp"}, "name": "Inteligência Brasil"}}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Qual a diferença entre avaliação e red team de IA?", "acceptedAnswer": {"@type": "Answer", "text": "Avaliação mede se o sistema faz bem o que deveria, com entrada representativa do uso esperado. Red team procura a entrada que quebra o comportamento pretendido, e nela o que importa não é a média e sim o caso. As duas coexistem: a avaliação impede que a correção de segurança destrua a utilidade, e o red team impede que a busca por utilidade abra o sistema."}}, {"@type": "Question", "name": "Com que frequência testar?", "acceptedAnswer": {"@type": "Answer", "text": "Em três cadências. O subconjunto rápido roda a cada mudança de prompt de sistema, modelo, biblioteca, política de ferramenta ou base do RAG. O exercício profundo, com gente criativa buscando caminho novo, cabe em cadência trimestral. E a amostragem do tráfego real roda continuamente, porque o usuário produz entrada que ninguém imaginou."}}, {"@type": "Question", "name": "O que é um juiz automático e dá para confiar nele?", "acceptedAnswer": {"@type": "Answer", "text": "É um modelo que recebe a resposta, o caso e o critério e decide se houve falha. Funciona bem no que é objetivo, como presença de um segredo conhecido ou chamada de ferramenta indevida, e erra no que é sutil, como recusa parcial. A forma de usá-lo é calibrar: rotular um lote à mão, medir a concordância e deixar revisão humana obrigatória onde a concordância for baixa."}}, {"@type": "Question", "name": "Que ferramentas usar?", "acceptedAnswer": {"@type": "Answer", "text": "Elas se dividem por função. Catálogo de sondas conhecidas, como o garak, para regressão rápida e repetível. Orquestração de ataque, como o PyRIT, para exercício profundo e multimodal. Avaliação em pipeline, como o promptfoo, para comparar versões na integração contínua. E avaliação de agente, como o Giskard, além de arcabouços de eval como o Inspect AI."}}, {"@type": "Question", "name": "Isso é exigido por alguma norma?", "acceptedAnswer": {"@type": "Answer", "text": "O perfil de IA generativa do NIST, o AI 600-1, lista red team entre as ações sugeridas para avaliar resiliência a injeção e entrada adversarial. No regulamento europeu de IA, o provedor de modelo de propósito geral com risco sistêmico precisa avaliar o modelo, incluindo teste adversarial conduzido e documentado. Em ambos, o que satisfaz a exigência é evidência versionada, não um relatório avulso."}}]}
+    </script>
+
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/", "name": "Home", "position": 1}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/", "name": "Blog", "position": 2}, {"@type": "ListItem", "item": "https://inteligenciabrasil.seg.br/blog/red-team-ia-avaliacao-modelos/", "name": "Red team de IA e avaliação", "position": 3}]}
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../../css/styles.min.css" rel="stylesheet">
+    <link href="../../css/servico.min.css" rel="stylesheet">
+    <link href="../../css/blog-article.min.css" rel="stylesheet">
+    </head>
+
+<body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a class="navbar-brand logo-image" href="../../"><img src="../../img/logo.svg" alt="Logo Inteligência Brasil" width="196" height="113"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-awesome fas fa-bars"></span><span class="navbar-toggler-awesome fas fa-times"></span></button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="../../">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#servicos">SERVIÇOS</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navProdutos" role="button" aria-haspopup="true" aria-expanded="false">PRODUTOS</a>
+                    <div class="dropdown-menu" aria-labelledby="navProdutos">
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-envelope-open-text fa-fw"></i> <span class="item-text">Monitorar Emails</span></a>
+                        <div class="dropdown-items-divide-hr"></div>
+                        <a class="dropdown-item" href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" rel="noopener"><i class="fas fa-shield-alt fa-fw"></i> <span class="item-text">Anticibercrime</span></a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="../">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="../../#contato">CONTATO</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="article-header">
+        <div class="container">
+            <span class="article-category">AI Security</span>
+            <h1>Red team de IA e avaliação de modelos: testar antes do incidente</h1>
+            <div class="article-meta">
+                <span><i class="far fa-user"></i> Roberto Lima</span>
+                <span><i class="far fa-calendar"></i> 12 de novembro de 2026</span>
+                <span><i class="far fa-clock"></i> 11 min de leitura</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav"><div class="container"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../">Home</a></li><li class="breadcrumb-item"><a href="../">Blog</a></li><li class="breadcrumb-item active">Red team de IA e avaliação</li></ol></div></nav>
+
+    <main id="main-content">
+    <article class="article-content">
+        <div class="container">
+            <div class="article-body">
+                <figure class="article-hero">
+                    <img src="../../img/og-image.webp" alt="Painel de triagem de contrapartes e listas restritivas usado no controle de financiamento do terrorismo" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async">
+                </figure>
+
+                <div class="toc">
+                    <h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2>
+                    <ul>
+                        <li><a href="#avaliacao-x-red-team">Avaliação e red team respondem a perguntas diferentes</a></li>
+                        <li><a href="#o-que-testar">O que testar, pelas classes que aparecem em produção</a></li>
+                        <li><a href="#conjunto-adversarial">O conjunto adversarial versionado, o ativo que sobra</a></li>
+                        <li><a href="#juiz">O juiz automático e onde ele erra</a></li>
+                        <li><a href="#esteira">Onde isso entra na esteira de entrega</a></li>
+                        <li><a href="#ferramentas">Ferramentas, e para que serve cada uma</a></li>
+                        <li><a href="#evidencia">A evidência que sobra para auditoria e regulador</a></li>
+                        <li><a href="#limites">O que a automação não cobre</a></li>
+                        <li><a href="#faq">Perguntas frequentes</a></li>
+                        <li><a href="#conclusao">Conclusão</a></li>
+                    </ul>
+                </div>
+
+                <p>Quase toda empresa que colocou um assistente em produção fez algum teste antes de abrir para o usuário. Quase nenhuma consegue responder, três meses depois, se o sistema continua resistindo ao que resistia no dia do lançamento. O motivo é que o teste foi um evento, e não um ativo: alguém tentou alguns prompts maliciosos, o resultado foi um print no chat da equipe, e o modelo, o prompt de sistema e as ferramentas mudaram desde então.</p>
+
+                <p>Este artigo trata do que transforma esse esforço em controle: a diferença entre avaliar e atacar, o conjunto adversarial que fica versionado no repositório, o juiz que pontua sem pessoa no meio, e o portão que impede a regressão de chegar à produção. O pano de fundo, com as classes de risco, está em <a href="../seguranca-llm-genai-prompt-injection/">segurança de LLM e GenAI</a>.</p>
+
+                <h2 id="avaliacao-x-red-team">Avaliação e red team respondem a perguntas diferentes</h2>
+
+                <p>Avaliação, ou eval, mede se o sistema faz bem o que deveria fazer: responde ao que foi perguntado, cita a fonte certa, respeita o formato, erra pouco no conjunto de referência. É teste de qualidade, com entrada representativa do uso esperado.</p>
+
+                <p>Red team mede o oposto: procura a entrada que quebra o comportamento pretendido. Não interessa a média, interessa o caso. Um sistema com 98% de acerto na avaliação pode ser inaceitável se os 2% incluírem revelar o prompt de sistema ou executar uma ferramenta em nome de quem não deveria.</p>
+
+                <p>As duas práticas precisam coexistir, e por motivos diferentes. A avaliação impede que a correção de segurança destrua a utilidade; o red team impede que a busca por utilidade abra o sistema. Quem só faz avaliação entrega um produto bom que falha sob ataque; quem só faz red team endurece o sistema até ele parar de servir.</p>
+
+                <h2 id="o-que-testar">O que testar, pelas classes que aparecem em produção</h2>
+
+                <p>Teste adversarial sem taxonomia vira criatividade dispersa. A lista que organiza o esforço é a do OWASP, cuja edição vigente está comentada em <a href="../owasp-llm-top-10-2026-mudancas/">o que mudou no Top 10 de 2026</a>. Traduzida para casos de teste, ela gera cinco famílias:</p>
+
+                <ul>
+                    <li><strong>Injeção direta</strong>: o usuário instrui o modelo a ignorar a instrução de sistema, por pedido explícito, por troca de papel ou por formatação que confunde a fronteira entre instrução e conteúdo.</li>
+                    <li><strong>Injeção indireta</strong>: a instrução maliciosa chega escondida em material que o sistema lê sozinho, como página recuperada pelo RAG, documento anexado, campo de ticket ou descrição de ferramenta.</li>
+                    <li><strong>Exposição de contexto</strong>: o teste tenta extrair o que está na janela sem estar na resposta pretendida, do prompt de sistema ao trecho recuperado de outro usuário.</li>
+                    <li><strong>Excesso de ação</strong>: o teste verifica se dá para fazer o agente chamar ferramenta fora do escopo, encadear chamadas até um efeito não previsto ou agir com credencial de terceiro. É a área tratada em <a href="../mcp-agentic-ai-security/">MCP e agentic AI security</a>.</li>
+                    <li><strong>Saída perigosa</strong>: o teste força o modelo a produzir conteúdo que o sistema a jusante executa, como marcação que vira script, consulta que vira comando ou caminho que vira leitura de arquivo.</li>
+                </ul>
+
+                <p>Cada família vira um conjunto de casos com resultado esperado explícito. Sem o esperado escrito, não existe falha: existe conversa sobre se aquilo foi grave.</p>
+
+                <h2 id="conjunto-adversarial">O conjunto adversarial versionado, o ativo que sobra</h2>
+
+                <p>O que sobra de um exercício de red team não é o relatório, é o conjunto de casos. Ele fica no repositório, ao lado do código da aplicação, com uma linha por caso: a entrada, a condição que caracteriza falha, a família, a severidade e a data em que entrou.</p>
+
+                <p>Três regras mantêm esse conjunto útil ao longo do tempo. Todo incidente real vira caso, inclusive o quase incidente que alguém notou e corrigiu na conversa. Todo caso que passa a falhar depois de uma mudança fica marcado como regressão, que é a métrica que o portão observa. E o conjunto nunca é publicado inteiro, porque um conjunto adversarial divulgado deixa de medir o sistema e passa a medir quem decorou os casos.</p>
+
+                <p>O tamanho importa menos do que a cobertura. Um conjunto de 200 casos bem distribuídos entre as cinco famílias informa mais que 5.000 variações do mesmo pedido de jailbreak.</p>
+
+                <h2 id="juiz">O juiz automático e onde ele erra</h2>
+
+                <p>Avaliar centenas de respostas à mão não escala, e a saída usada no mercado é o juiz automático: um modelo recebe a resposta, o caso e o critério, e decide se houve falha. Funciona bem para o que é objetivo, como presença de um segredo conhecido no texto, chamada de ferramenta que não deveria ter ocorrido ou formato violado.</p>
+
+                <p>Ele erra onde o julgamento é sutil: recusa parcial, resposta que entrega metade do que foi pedido, conteúdo tecnicamente correto mas inadequado ao contexto do negócio. Por isso o juiz precisa ser calibrado: um lote de casos recebe rótulo humano, mede-se a concordância entre o juiz e a pessoa, e só então ele passa a rodar sozinho. Concordância baixa não invalida o método, mas define onde a revisão humana continua obrigatória, com o critério descrito em <a href="../human-in-the-loop-governanca-ia/">human-in-the-loop</a>.</p>
+
+                <h2 id="esteira">Onde isso entra na esteira de entrega</h2>
+
+                <p>Três cadências resolvem a maior parte do problema, e elas não competem:</p>
+
+                <ul>
+                    <li><strong>A cada mudança</strong>: o subconjunto rápido do catálogo roda no pipeline, junto dos testes da aplicação. Mudou prompt de sistema, modelo, versão de biblioteca, política de ferramenta ou base do RAG, roda.</li>
+                    <li><strong>Periodicamente, em profundidade</strong>: um exercício trimestral com gente criativa, que busca o caminho novo em vez de repetir o catálogo. O que ele achar vira caso e passa a rodar a cada mudança.</li>
+                    <li><strong>Em produção</strong>: amostragem contínua do tráfego real contra os mesmos critérios, porque o usuário produz entrada que ninguém imaginou.</li>
+                </ul>
+
+                <p>O portão de merge usa a métrica mais simples que existe: taxa de regressão no conjunto adversarial. Caso que passava e passou a falhar bloqueia a entrega, do mesmo jeito que um teste unitário quebrado bloqueia. É essa decisão, e não o relatório trimestral, que muda o comportamento da equipe.</p>
+
+                <h2 id="ferramentas">Ferramentas, e para que serve cada uma</h2>
+
+                <p>O ferramental amadureceu e se dividiu por função:</p>
+
+                <ul>
+                    <li><strong>Catálogo de sondas conhecidas</strong>, como o garak, que roda uma bateria fixa de ataques já documentados. É rápido e repetível, perfil certo para regressão diária.</li>
+                    <li><strong>Orquestração de ataque</strong>, como o PyRIT, que gera e encadeia tentativas em vez de só repetir um catálogo, inclusive em outras modalidades além de texto. Perfil de exercício profundo.</li>
+                    <li><strong>Avaliação em pipeline</strong>, como o promptfoo, voltado a rodar conjunto versionado e comparar versões dentro da integração contínua.</li>
+                    <li><strong>Avaliação de agente</strong>, como o Giskard, e arcabouços de eval como o Inspect AI, para quem precisa medir comportamento de sistema que usa ferramenta e mantém estado.</li>
+                </ul>
+
+                <p>Nenhuma delas decide o que é falha no seu contexto. Todas executam e pontuam contra o critério que você escreveu, e a qualidade do resultado é a qualidade desse critério.</p>
+
+                <h2 id="evidencia">A evidência que sobra para auditoria e regulador</h2>
+
+                <p>Teste adversarial deixou de ser boa prática opcional para quem opera em ambiente regulado. O perfil de IA generativa do NIST, o AI 600-1, que acompanha o AI Risk Management Framework, lista o red team entre as ações sugeridas para avaliar resiliência a injeção e a entrada adversarial. No regulamento europeu de IA, o provedor de modelo de propósito geral com risco sistêmico precisa avaliar o modelo, incluindo teste adversarial conduzido e documentado.</p>
+
+                <p>O que isso cobra na prática é previsível: qual conjunto rodou, em que versão do sistema, com que resultado, o que foi corrigido e em quanto tempo. Um conjunto versionado com histórico de execução responde a isso sozinho; um print de conversa não responde. A ponte dessa evidência para a instância que decide está em <a href="../governanca-ia-conselho-riscos-responsabilidades/">governança de IA no conselho</a>.</p>
+
+                <h2 id="limites">O que a automação não cobre</h2>
+
+                <p>Ferramenta encontra o que já foi descrito. Ela não inventa o ataque de cinco passos que combina uma página envenenada, uma ferramenta mal escopada e um comportamento específico do seu negócio. Esse caminho continua sendo trabalho humano, e é a mesma lógica da segurança ofensiva tradicional, discutida em <a href="../red-team-blue-team-purple-team/">red team, blue team e purple team</a> e na prática de <a href="../purple-teaming-pratica/">purple teaming</a>.</p>
+
+                <p>O segundo limite é de julgamento. Decidir se uma resposta causa dano exige contexto de negócio, de contrato e, às vezes, jurídico. O juiz automático classifica; a decisão sobre o que é aceitável pertence a quem responde pelo processo.</p>
+
+                <p>E há o limite de escopo: testar o modelo não testa a aplicação. Controle de acesso, isolamento de dado por usuário, limite de custo e registro de contexto são propriedades do sistema em volta, e falham mesmo com um modelo que resiste a tudo que o catálogo tentou.</p>
+                <h2 id="faq">Perguntas Frequentes</h2>
+
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Qual a diferença entre avaliação e red team de IA?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Avaliação mede se o sistema faz bem o que deveria, com entrada representativa do uso esperado. Red team procura a entrada que quebra o comportamento pretendido, e nela o que importa não é a média e sim o caso. As duas coexistem: a avaliação impede que a correção de segurança destrua a utilidade, e o red team impede que a busca por utilidade abra o sistema.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Com que frequência testar?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Em três cadências. O subconjunto rápido roda a cada mudança de prompt de sistema, modelo, biblioteca, política de ferramenta ou base do RAG. O exercício profundo, com gente criativa buscando caminho novo, cabe em cadência trimestral. E a amostragem do tráfego real roda continuamente, porque o usuário produz entrada que ninguém imaginou.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>O que é um juiz automático e dá para confiar nele?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>É um modelo que recebe a resposta, o caso e o critério e decide se houve falha. Funciona bem no que é objetivo, como presença de um segredo conhecido ou chamada de ferramenta indevida, e erra no que é sutil, como recusa parcial. A forma de usá-lo é calibrar: rotular um lote à mão, medir a concordância e deixar revisão humana obrigatória onde a concordância for baixa.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Que ferramentas usar?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>Elas se dividem por função. Catálogo de sondas conhecidas, como o garak, para regressão rápida e repetível. Orquestração de ataque, como o PyRIT, para exercício profundo e multimodal. Avaliação em pipeline, como o promptfoo, para comparar versões na integração contínua. E avaliação de agente, como o Giskard, além de arcabouços de eval como o Inspect AI.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question"><span>Isso é exigido por alguma norma?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+                        <div class="faq-answer"><p>O perfil de IA generativa do NIST, o AI 600-1, lista red team entre as ações sugeridas para avaliar resiliência a injeção e entrada adversarial. No regulamento europeu de IA, o provedor de modelo de propósito geral com risco sistêmico precisa avaliar o modelo, incluindo teste adversarial conduzido e documentado. Em ambos, o que satisfaz a exigência é evidência versionada, não um relatório avulso.</p></div>
+                    </div>
+                </div>
+
+                <h2 id="conclusao">Conclusão</h2>
+
+                <p>Testar modelo de IA não é um evento antes do lançamento, é uma rotina com ativo próprio. O ativo é o conjunto adversarial versionado, com resultado esperado por caso e histórico de execução; o resto, do juiz automático ao painel, existe para manter esse conjunto rodando barato e com frequência.</p>
+
+                <p>A pergunta que separa quem tem o controle de quem tem a intenção é simples, e vale fazer à equipe hoje: se o modelo for trocado de versão amanhã, quanto tempo leva para saber se alguma proteção regrediu? Se a resposta depender de alguém lembrar de testar, ainda não é controle.</p>
+
+                <p>E vale guardar o limite junto com a prática. Resistir ao catálogo não torna o sistema seguro, porque controle de acesso, isolamento de dado, limite de custo e registro de contexto são propriedades da aplicação em volta do modelo, não do modelo.</p>
+
+                <div style="margin:2.5rem 0;padding:1.25rem 1.5rem;background:rgba(96,165,250,.04);border-left:3px solid #60A5FA;border-radius:8px">
+                    <div style="font-weight:700;color:#60A5FA;margin-bottom:.75rem"><i class="fas fa-bookmark"></i> Fontes e referências técnicas</div>
+                    <ul style="margin:0;padding-left:1.2rem">
+                        <li><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noopener">NIST - AI Risk Management Framework e o perfil de IA generativa (AI 600-1)</a></li>
+                        <li><a href="https://artificialintelligenceact.eu/" target="_blank" rel="noopener">Regulamento europeu de IA - obrigações de avaliação para modelos de propósito geral</a></li>
+                        <li><a href="https://genai.owasp.org/" target="_blank" rel="noopener">OWASP GenAI Security Project - taxonomia de risco usada para organizar os casos</a></li>
+                        <li><a href="https://github.com/NVIDIA/garak" target="_blank" rel="noopener">garak - catálogo de sondas para varredura de vulnerabilidade em LLM</a></li>
+                        <li><a href="https://github.com/Azure/PyRIT" target="_blank" rel="noopener">PyRIT - arcabouço de orquestração para red team de IA generativa</a></li>
+                        <li><a href="https://github.com/promptfoo/promptfoo" target="_blank" rel="noopener">promptfoo - avaliação e teste adversarial em integração contínua</a></li>
+                        <li><a href="https://github.com/UKGovernmentBEIS/inspect_ai" target="_blank" rel="noopener">Inspect AI - arcabouço de avaliação de modelos</a></li>
+                    </ul>
+                </div>
+
+                <div class="share-buttons">
+                    <span style="color:#94A3B8">Compartilhe:</span>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://inteligenciabrasil.seg.br/blog/red-team-ia-avaliacao-modelos/" target="_blank" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?url=https://inteligenciabrasil.seg.br/blog/red-team-ia-avaliacao-modelos/" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://wa.me/?text=Red%20team%20de%20IA%20e%20avalia%C3%A7%C3%A3o%20de%20modelos%3A%20testar%20antes%20do%20incidente https://inteligenciabrasil.seg.br/blog/red-team-ia-avaliacao-modelos/" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+
+                <div class="author-box">
+                    <picture><source type="image/webp" srcset="../../img/logo-white-140x140.webp" width="80" height="80"><img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="80" height="80"></picture>
+                    <div class="author-info">
+                        <h3>Roberto Lima</h3>
+                        <p>Especialista em Segurança Ofensiva, Segurança de IA e Avaliação de Modelos na Inteligência Brasil.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    </main>
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6"><div class="footer-about"><img src="../../img/logo-white-140x140.png" alt="Inteligência Brasil" width="140" height="140" loading="lazy"><p>Consultoria especializada em Segurança, Estratégia e Tecnologia.</p><div class="footer-social"><a href="https://www.linkedin.com/company/inteligenciabrasil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div></div>
+                <div class="col-lg-2 col-md-6"><div class="footer-links"><h4>Navegação</h4><ul><li><a href="../../">Home</a></li><li><a href="../">Blog</a></li><li><a href="../../#contato">Contato</a></li></ul></div></div>
+                <div class="col-lg-4 col-md-6"><div class="footer-contact"><h4>Contato</h4><p><i class="fas fa-map-marker-alt"></i> Av. Paulista 807, SP</p><p><i class="fas fa-phone"></i> +55 (11) 99361-9947</p><p><i class="fas fa-envelope"></i> <a href="/contato/">Formul&aacute;rio de contato</a></p></div></div>
+            </div>
+            <div class="footer-bottom"><div class="row"><div class="col-md-6"><p>&copy; 2026 Inteligência Brasil.</p></div><div class="col-md-6 text-md-right"><a href="../../politica-de-privacidade.html">Privacidade</a></div></div></div>
+        </div>
+    </footer>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/message/WGB5ST6XRIOGH1" target="_blank" aria-label="Fale conosco no WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <script src="../../js/site-common.min.js"></script>
+    <script src="../../js/cookie-consent.min.js" defer></script>
+</body>
+
+</html>
