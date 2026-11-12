@@ -58,7 +58,7 @@
                 "name": "Qual a diferença entre assinatura tradicional e assinatura keyless do Sigstore?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Na tradicional, o desenvolvedor mantém uma chave privada de longa duração — risco operacional (rotação, vazamento, perda). No keyless do Sigstore, a identidade é provada via OIDC, o Fulcio emite um certificado X.509 de curta duração (~10 min), a assinatura é feita com chave efêmera e a entrada é gravada no Rekor. A verificação posterior usa apenas a identidade OIDC e a entrada no Rekor, sem gestão de chaves."
+                    "text": "Na tradicional, o desenvolvedor mantém uma chave privada de longa duração: risco operacional (rotação, vazamento, perda). No keyless do Sigstore, a identidade é provada via OIDC, o Fulcio emite um certificado X.509 de curta duração (~10 min), a assinatura é feita com chave efêmera e a entrada é gravada no Rekor. A verificação posterior usa apenas a identidade OIDC e a entrada no Rekor, sem gestão de chaves."
                 }
             },
             {
@@ -66,7 +66,7 @@
                 "name": "Cosign assina apenas imagens de container?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Não. Cosign começou com foco em imagens OCI mas hoje assina e atesta qualquer artefato — binários, arquivos, blobs, módulos. Para artefatos não-OCI, use cosign sign-blob e cosign attest-blob. SLSA provenance pode ser anexada a imagens, releases do GitHub e qualquer artefato com hash conhecido."
+                    "text": "Não. Cosign começou com foco em imagens OCI mas hoje assina e atesta qualquer artefato: binários, arquivos, blobs, módulos. Para artefatos não-OCI, use cosign sign-blob e cosign attest-blob. SLSA provenance pode ser anexada a imagens, releases do GitHub e qualquer artefato com hash conhecido."
                 }
             },
             {
@@ -82,7 +82,7 @@
                 "name": "Sigstore e SLSA são a mesma coisa?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Não. SLSA é um framework de requisitos sobre o processo de build e a proveniência produzida. Sigstore é a infraestrutura técnica (Cosign + Fulcio + Rekor) que operacionaliza assinatura e attestation sem gestão de chaves. Eles se complementam — Sigstore é hoje o caminho mais prático para assinar a proveniência exigida pelo SLSA."
+                    "text": "Não. SLSA é um framework de requisitos sobre o processo de build e a proveniência produzida. Sigstore é a infraestrutura técnica (Cosign + Fulcio + Rekor) que operacionaliza assinatura e attestation sem gestão de chaves. Eles se complementam: Sigstore é hoje o caminho mais prático para assinar a proveniência exigida pelo SLSA."
                 }
             },
             {
@@ -598,11 +598,11 @@ spec:
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Qual a diferença entre assinatura tradicional e assinatura keyless do Sigstore?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Na tradicional, o desenvolvedor mantém uma chave privada de longa duração — risco operacional (rotação, vazamento, perda). No keyless do Sigstore, a identidade é provada via OIDC, o Fulcio emite um certificado X.509 de curta duração (~10 min), a assinatura é feita com chave efêmera e a entrada é gravada no Rekor. A verificação posterior usa apenas a identidade OIDC e a entrada no Rekor, sem gestão de chaves.</p></div>
+                        <div class="faq-answer"><p>Na tradicional, o desenvolvedor mantém uma chave privada de longa duração: risco operacional (rotação, vazamento, perda). No keyless do Sigstore, a identidade é provada via OIDC, o Fulcio emite um certificado X.509 de curta duração (~10 min), a assinatura é feita com chave efêmera e a entrada é gravada no Rekor. A verificação posterior usa apenas a identidade OIDC e a entrada no Rekor, sem gestão de chaves.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Cosign assina apenas imagens de container?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Não. Cosign começou com foco em imagens OCI mas hoje assina e atesta qualquer artefato — binários, arquivos, blobs, módulos. Para artefatos não-OCI, use <code>cosign sign-blob</code> e <code>cosign attest-blob</code>. SLSA provenance pode ser anexada a imagens, releases do GitHub e qualquer artefato com hash conhecido.</p></div>
+                        <div class="faq-answer"><p>Não. Cosign começou com foco em imagens OCI mas hoje assina e atesta qualquer artefato: binários, arquivos, blobs, módulos. Para artefatos não-OCI, use <code>cosign sign-blob</code> e <code>cosign attest-blob</code>. SLSA provenance pode ser anexada a imagens, releases do GitHub e qualquer artefato com hash conhecido.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Como SLSA L3 é diferente de L2 na prática?</span><i class="fas fa-chevron-down faq-icon"></i></div>
@@ -610,7 +610,7 @@ spec:
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Sigstore e SLSA são a mesma coisa?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Não. SLSA é um framework de requisitos sobre o processo de build e a proveniência produzida. Sigstore é a infraestrutura técnica (Cosign + Fulcio + Rekor) que operacionaliza assinatura e attestation sem gestão de chaves. Eles se complementam — Sigstore é hoje o caminho mais prático para assinar a proveniência exigida pelo SLSA.</p></div>
+                        <div class="faq-answer"><p>Não. SLSA é um framework de requisitos sobre o processo de build e a proveniência produzida. Sigstore é a infraestrutura técnica (Cosign + Fulcio + Rekor) que operacionaliza assinatura e attestation sem gestão de chaves. Eles se complementam: Sigstore é hoje o caminho mais prático para assinar a proveniência exigida pelo SLSA.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Como começar com SLSA sem um big bang?</span><i class="fas fa-chevron-down faq-icon"></i></div>

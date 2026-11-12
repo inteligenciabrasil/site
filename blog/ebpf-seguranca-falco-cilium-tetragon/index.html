@@ -58,7 +58,7 @@
                 "name": "Falco ou Tetragon: qual escolher?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Falco é o caminho mais maduro para detecção genérica em hosts e containers, com regras YAML acessíveis e ecossistema amplo via falcosidekick. Tetragon é a melhor opção quando o objetivo inclui enforcement (matar processo, bloquear ação) com awareness nativa de Kubernetes e identidade Cilium. Muitas organizações rodam ambos — Falco como motor de detecção, Tetragon para enforcement seletivo em namespaces críticos."
+                    "text": "Falco é o caminho mais maduro para detecção genérica em hosts e containers, com regras YAML acessíveis e ecossistema amplo via falcosidekick. Tetragon é a melhor opção quando o objetivo inclui enforcement (matar processo, bloquear ação) com awareness nativa de Kubernetes e identidade Cilium. Muitas organizações rodam ambos: Falco como motor de detecção, Tetragon para enforcement seletivo em namespaces críticos."
                 }
             },
             {
@@ -66,7 +66,7 @@
                 "name": "eBPF substitui auditd e kernel modules?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Para a maioria dos casos de uso modernos, sim. eBPF traz visibilidade comparável ou superior ao auditd com overhead menor e estrutura mais flexível. Substitui kernel modules legados em ferramentas como Falco (que tem driver modern_bpf como padrão). Kernels muito antigos — RHEL 7 e similares — ainda podem demandar fallback para módulo de kernel ou driver eBPF legado."
+                    "text": "Para a maioria dos casos de uso modernos, sim. eBPF traz visibilidade comparável ou superior ao auditd com overhead menor e estrutura mais flexível. Substitui kernel modules legados em ferramentas como Falco (que tem driver modern_bpf como padrão). Kernels muito antigos (RHEL 7 e similares) ainda podem demandar fallback para módulo de kernel ou driver eBPF legado."
                 }
             },
             {
@@ -74,7 +74,7 @@
                 "name": "O que é BPF-LSM e por que muda o jogo?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "BPF-LSM é a integração de programas eBPF como hooks do Linux Security Module — disponível em kernels 5.7 ou superiores. Permite que ferramentas como Tetragon implementem decisões de autorização (allow/deny) em pontos canônicos do kernel, com a robustez que antes só estava acessível via SELinux ou AppArmor, mas com programabilidade muito maior."
+                    "text": "BPF-LSM é a integração de programas eBPF como hooks do Linux Security Module, disponível em kernels 5.7 ou superiores. Permite que ferramentas como Tetragon implementem decisões de autorização (allow/deny) em pontos canônicos do kernel, com a robustez que antes só estava acessível via SELinux ou AppArmor, mas com programabilidade muito maior."
                 }
             },
             {
@@ -82,7 +82,7 @@
                 "name": "Qual o overhead típico de uma ferramenta eBPF de runtime security?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Por instrumentar diretamente o kernel, o overhead é tipicamente baixo — em parte porque evita o custo de syscalls in userspace e cópia de buffers. O impacto real depende da quantidade de regras ativas, do volume de eventos no host e da política de filtragem. Workloads de altíssimo throughput de syscalls (bancos de dados intensivos, gateways de rede) merecem benchmarks específicos antes do rollout em produção."
+                    "text": "Por instrumentar diretamente o kernel, o overhead é tipicamente baixo, em parte porque evita o custo de syscalls in userspace e cópia de buffers. O impacto real depende da quantidade de regras ativas, do volume de eventos no host e da política de filtragem. Workloads de altíssimo throughput de syscalls (bancos de dados intensivos, gateways de rede) merecem benchmarks específicos antes do rollout em produção."
                 }
             },
             {
@@ -607,19 +607,19 @@ spec:
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Falco ou Tetragon: qual escolher?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Falco é o caminho mais maduro para detecção genérica em hosts e containers, com regras YAML acessíveis e ecossistema amplo via falcosidekick. Tetragon é a melhor opção quando o objetivo inclui enforcement (matar processo, bloquear ação) com awareness nativa de Kubernetes e identidade Cilium. Muitas organizações rodam ambos — Falco como motor de detecção, Tetragon para enforcement seletivo em namespaces críticos.</p></div>
+                        <div class="faq-answer"><p>Falco é o caminho mais maduro para detecção genérica em hosts e containers, com regras YAML acessíveis e ecossistema amplo via falcosidekick. Tetragon é a melhor opção quando o objetivo inclui enforcement (matar processo, bloquear ação) com awareness nativa de Kubernetes e identidade Cilium. Muitas organizações rodam ambos: Falco como motor de detecção, Tetragon para enforcement seletivo em namespaces críticos.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>eBPF substitui auditd e kernel modules?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Para a maioria dos casos de uso modernos, sim. eBPF traz visibilidade comparável ou superior ao auditd com overhead menor e estrutura mais flexível. Substitui kernel modules legados em ferramentas como Falco (que tem driver modern_bpf como padrão). Kernels muito antigos — RHEL 7 e similares — ainda podem demandar fallback para módulo de kernel ou driver eBPF legado.</p></div>
+                        <div class="faq-answer"><p>Para a maioria dos casos de uso modernos, sim. eBPF traz visibilidade comparável ou superior ao auditd com overhead menor e estrutura mais flexível. Substitui kernel modules legados em ferramentas como Falco (que tem driver modern_bpf como padrão). Kernels muito antigos (RHEL 7 e similares) ainda podem demandar fallback para módulo de kernel ou driver eBPF legado.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>O que é BPF-LSM e por que muda o jogo?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>BPF-LSM é a integração de programas eBPF como hooks do Linux Security Module — disponível em kernels 5.7 ou superiores. Permite que ferramentas como Tetragon implementem decisões de autorização (allow/deny) em pontos canônicos do kernel, com a robustez que antes só estava acessível via SELinux ou AppArmor, mas com programabilidade muito maior.</p></div>
+                        <div class="faq-answer"><p>BPF-LSM é a integração de programas eBPF como hooks do Linux Security Module, disponível em kernels 5.7 ou superiores. Permite que ferramentas como Tetragon implementem decisões de autorização (allow/deny) em pontos canônicos do kernel, com a robustez que antes só estava acessível via SELinux ou AppArmor, mas com programabilidade muito maior.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Qual o overhead típico de uma ferramenta eBPF de runtime security?</span><i class="fas fa-chevron-down faq-icon"></i></div>
-                        <div class="faq-answer"><p>Por instrumentar diretamente o kernel, o overhead é tipicamente baixo — em parte porque evita o custo de syscalls in userspace e cópia de buffers. O impacto real depende da quantidade de regras ativas, do volume de eventos no host e da política de filtragem. Workloads de altíssimo throughput de syscalls (bancos de dados intensivos, gateways de rede) merecem benchmarks específicos antes do rollout em produção.</p></div>
+                        <div class="faq-answer"><p>Por instrumentar diretamente o kernel, o overhead é tipicamente baixo, em parte porque evita o custo de syscalls in userspace e cópia de buffers. O impacto real depende da quantidade de regras ativas, do volume de eventos no host e da política de filtragem. Workloads de altíssimo throughput de syscalls (bancos de dados intensivos, gateways de rede) merecem benchmarks específicos antes do rollout em produção.</p></div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-question"><span>Como integrar Falco a um SIEM como Splunk ou Sentinel?</span><i class="fas fa-chevron-down faq-icon"></i></div>
