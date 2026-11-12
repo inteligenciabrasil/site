@@ -127,6 +127,46 @@
         ]
     }
     </script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Qual a vulnerabilidade de API mais comum?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "BOLA, Broken Object Level Authorization. O endpoint recebe o identificador de um objeto e devolve o dado sem checar se aquele usuário pode vê-lo, então trocar um número na URL expõe o registro de outra pessoa. A correção é autorizar por objeto, não apenas autenticar a sessão."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Qual a diferença entre BOLA e BFLA?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "BOLA é falha de autorização no nível do objeto: o usuário acessa um registro que não é dele. BFLA, Broken Function Level Authorization, é no nível da função: o usuário comum alcança endpoint administrativo apenas alterando a URL. Uma exige checar o dono do dado, a outra exige checar o papel de quem chama."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Como autenticar uma API corretamente?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "OAuth 2.0 com OIDC para autorização delegada e autenticação, JWT com validação correta de assinatura e claims quando a sessão precisa ser stateless, e mTLS na comunicação entre serviços. Chave de API serve para identificar, nunca como fator único. Complete com token de curta duração, MFA e rate limiting no login."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "O que é shadow API?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "É a API que continua exposta sem estar documentada nem inventariada, em geral uma versão antiga que ninguém desligou. Aparece no Top 10 como Improper Inventory Management e é perigosa justamente porque não recebe correção nem monitoramento. A defesa é inventário vivo, versionamento com política de depreciação e documentação atualizada."
+            }
+        }
+    ]
+}
+</script>
 </head>
 <body><a class="skip-link" href="#main-content">Pular para conteúdo</a>
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-WCL38PDP" style="display:none;visibility:hidden" width="0"></iframe></noscript>
@@ -161,7 +201,7 @@
 <div class="article-body">
 <div class="toc"><!-- REVIEWED-V1 -->
 <p class="article-review-seal"><i class="fas fa-shield-check" aria-hidden="true"></i> Revisado em <time datetime="2026-01-31">31/01/2026</time> por <a href="/sobre/">Roberto Lima</a></p>
-<h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2><ul><li><a href="#importancia">Por que APIs são alvo</a></li><li><a href="#top10">OWASP API Security Top 10</a></li><li><a href="#autenticacao">Autenticação e autorização</a></li><li><a href="#protecao">Melhores práticas</a></li><li><a href="#conclusao">Conclusão</a></li></ul></div>
+<h2><i class="fas fa-list" style="color:#60A5FA"></i> Neste artigo</h2><ul><li><a href="#importancia">Por que APIs são alvo</a></li><li><a href="#top10">OWASP API Security Top 10</a></li><li><a href="#autenticacao">Autenticação e autorização</a></li><li><a href="#protecao">Melhores práticas</a></li><li><a href="#faq">Perguntas frequentes</a></li><li><a href="#conclusao">Conclusão</a></li></ul></div>
 <h2 id="importancia">Por que APIs são Alvo de Ataques</h2>
 <p>APIs são a espinha dorsal das aplicações modernas - conectam frontends, mobile apps, parceiros e serviços. Essa onipresença as torna alvos atrativos: <strong>APIs frequentemente expõem dados e funcionalidades diretamente</strong>, com menos camadas de proteção que interfaces web tradicionais.</p>
 <div class="stat-highlight"><div class="number">91%</div><div class="label">das organizações tiveram incidente de segurança em API em 2024 (Salt Security)</div></div>
@@ -189,6 +229,27 @@
 </ul>
 <h2 id="protecao">Melhores Práticas de Proteção</h2>
 <div class="checklist"><h3><i class="fas fa-shield-alt"></i> Checklist de Segurança de APIs</h3><ul><li>Autenticação forte em todos os endpoints (OAuth 2.0/OIDC)</li><li>Autorização verificada por objeto E por função</li><li>Rate limiting e throttling implementados</li><li>Validação de input em todos os parâmetros</li><li>HTTPS obrigatório, TLS 1.2+</li><li>Headers de segurança configurados</li><li>Logging de todas as requisições para auditoria</li><li>Versionamento de API com deprecação de versões antigas</li><li>Documentação atualizada (OpenAPI/Swagger)</li><li><a href="../tipos-de-pentest-guia-completo/">Pentest</a> periódico de APIs</li></ul></div>
+<h2 id="faq">Perguntas Frequentes</h2>
+
+<div class="faq-section">
+    <div class="faq-item">
+        <div class="faq-question"><span>Qual a vulnerabilidade de API mais comum?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer"><p>BOLA, Broken Object Level Authorization. O endpoint recebe o identificador de um objeto e devolve o dado sem checar se aquele usuário pode vê-lo, então trocar um número na URL expõe o registro de outra pessoa. A correção é autorizar por objeto, não apenas autenticar a sessão.</p></div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question"><span>Qual a diferença entre BOLA e BFLA?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer"><p>BOLA é falha de autorização no nível do objeto: o usuário acessa um registro que não é dele. BFLA, Broken Function Level Authorization, é no nível da função: o usuário comum alcança endpoint administrativo apenas alterando a URL. Uma exige checar o dono do dado, a outra exige checar o papel de quem chama.</p></div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question"><span>Como autenticar uma API corretamente?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer"><p>OAuth 2.0 com OIDC para autorização delegada e autenticação, JWT com validação correta de assinatura e claims quando a sessão precisa ser stateless, e mTLS na comunicação entre serviços. Chave de API serve para identificar, nunca como fator único. Complete com token de curta duração, MFA e rate limiting no login.</p></div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-question"><span>O que é shadow API?</span><i class="fas fa-chevron-down faq-icon"></i></div>
+        <div class="faq-answer"><p>É a API que continua exposta sem estar documentada nem inventariada, em geral uma versão antiga que ninguém desligou. Aparece no Top 10 como Improper Inventory Management e é perigosa justamente porque não recebe correção nem monitoramento. A defesa é inventário vivo, versionamento com política de depreciação e documentação atualizada.</p></div>
+    </div>
+</div>
+
 <h2 id="conclusao">Conclusão</h2>
 <p>A <a href="../seguranca-integracao-pos-fusao-100-dias/">segurança</a> de APIs é um dos pilares críticos da cibersegurança moderna. Com a proliferação de arquiteturas baseadas em microsserviços e a exposição crescente de funcionalidades via API, proteger esses endpoints se tornou tão importante quanto proteger aplicações web tradicionais.</p>
 <p>O <strong>OWASP API Security Top 10</strong> fornece um roteiro claro das vulnerabilidades mais críticas. A maioria dos problemas - como BOLA, broken authentication e misconfiguration - pode ser evitada com boas práticas de desenvolvimento e revisão de código. Investir em <a href="../devsecops-seguranca-desenvolvimento/">DevSecOps</a> com ferramentas de análise estática e dinâmica, combinado com <a href="../tipos-de-pentest-guia-completo/">pentest</a> periódico de APIs, é a estratégia mais eficaz para manter suas APIs seguras.</p>
