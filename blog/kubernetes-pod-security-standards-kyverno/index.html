@@ -98,10 +98,10 @@
     {"@context":"https://schema.org","@type":"HowTo","name":"Como migrar de PSP para Pod Security Standards + Kyverno","description":"Procedimento prático para sair de PodSecurityPolicy descontinuada e adotar Pod Security Standards com Kyverno para regras custom.","step":[
         {"@type":"HowToStep","position":1,"name":"Inventário de workloads e PSPs existentes","text":"Liste todas as PodSecurityPolicies em uso e mapeie quais workloads casam com cada uma. Isso é a base para decidir quais namespaces vão para baseline e quais para restricted."},
         {"@type":"HowToStep","position":2,"name":"Habilite PSS em audit nos namespaces","text":"Adicione labels pod-security.kubernetes.io/audit=restricted e pod-security.kubernetes.io/warn=baseline. Apenas registra violações sem bloquear."},
-        {"@type":"HowToStep","position":3,"name":"Analise o audit log e ajuste manifests","text":"Por uma a duas semanas, observe quais workloads violariam. Corrija manifests (drop capabilities, runAsNonRoot, securityContext) — não relaxe a política."},
+        {"@type":"HowToStep","position":3,"name":"Analise o audit log e ajuste manifests","text":"Por uma a duas semanas, observe quais workloads violariam. Corrija manifests (drop capabilities, runAsNonRoot, securityContext). Não relaxe a política."},
         {"@type":"HowToStep","position":4,"name":"Promova baseline para enforce","text":"Mude o label para pod-security.kubernetes.io/enforce=baseline. Pods que violam baseline são rejeitados na criação."},
         {"@type":"HowToStep","position":5,"name":"Eleve restricted para enforce onde for possível","text":"Em namespaces de aplicações novas e workloads que já passam, mude para enforce=restricted. Workloads legados continuam em baseline com plano de migração."},
-        {"@type":"HowToStep","position":6,"name":"Instale Kyverno para regras custom","text":"PSS cobre o piso de segurança; instale Kyverno para regras específicas da organização — labels obrigatórios, registry corporativo, verificação Cosign, mutação de defaults."}
+        {"@type":"HowToStep","position":6,"name":"Instale Kyverno para regras custom","text":"PSS cobre o piso de segurança; instale Kyverno para regras específicas da organização: labels obrigatórios, registry corporativo, verificação Cosign, mutação de defaults."}
     ]}
     </script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
