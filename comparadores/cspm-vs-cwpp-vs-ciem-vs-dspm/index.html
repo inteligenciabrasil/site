@@ -378,6 +378,10 @@
         }
         search.addEventListener('input', apply);
         diffOnly.addEventListener('change', apply);
+        if (!rows.some(function(r){
+            var v = Array.prototype.slice.call(r.cells, 1).map(function(c){ return c.textContent.trim(); });
+            return v.every(function(x){ return x === v[0]; });
+        })) diffOnly.parentNode.style.display = 'none';
     })();
     </script>
 <script src="../../js/cookie-consent.min.js" defer></script>
